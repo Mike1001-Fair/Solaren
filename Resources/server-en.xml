@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Resources>
+	<Item id="Work">🕗Work</Item>
+	<Item id="Settings">🔧Settings</Item>
+	<Item id="Reports">📈Reports</Item>
+	<Item id="Directories">📗Directories</Item>
+	<Item id="Help">Help</Item>
+	<Item id="Branches">Branches</Item>
+	<Item id="Search">&#128270;Search</Item>
+	<Item id="New1">&#x2795;New</Item>
+	<Item id="New2">&#x2795;New</Item>
+	<Item id="New3">&#x2795;New</Item>
+	<Item id="Banks">Banks</Item>
+	<Item id="Streets">Streets</Item>
+	<Item id="NewStreet">New</Item>
+	<Item id="Localitys">Localitys</Item>
+	<Item id="Areas">Areas</Item>
+	<Item id="Regions">Regions</Item>
+	<Item id="Customers">Customers</Item>
+	<Item id="Contracts">Contracts</Item>
+	<Item id="Meters">Meters</Item>
+	<Item id="Tariffs">Tariffs</Item>
+	<Item id="Logout">Main</Item>
+	<Item id="Indicator">🕗Indicators</Item>
+	<Item id="Parameters">Parameters</Item>
+	<Item id="Reindexing">Reindexing</Item>
+	<Item id="ShrinkLog">Shrink Log</Item>
+	<Item id="Backup">Backup</Item>
+	<Item id="Statistic">Statistic</Item>
+	<Item id="Users">Users</Item>
+	<Item id="Positions">Positions</Item>
+	<Item id="Server">Server</Item>
+	<Item id="Company">Company</Item>
+	<Item id="Chiefs">Chiefs</Item>
+	<Item id="Documents">Documents</Item>
+	<Item id="DefaultTitle">Solar energy</Item>
+	<Item id="Authenticate">Authentication</Item>
+	<Item id="AuthenticationError">Authentication error</Item>
+	<Item id="AuthorizationError">Authorization error</Item>
+	<Item id="AccessDenied">Access denied</Item>
+	<Item id="ServiceSuspended">Service suspended</Item>
+	<Item id="Done">Done</Item>
+	<Item id="Attention">Attention</Item>
+	<Item id="Message">Message</Item>
+	<Item id="Error">Error</Item>
+	<Item id="WebAdminMessage">Contact the web server administrator!</Item>
+	<Item id="Author">© Mykola Chernov 2016</Item>
+	<Item id="User">User</Item>
+	<Item id="Password">Password</Item>
+	<Item id="UserTitle">Must contain one uppercase and one lowercase letter and at least 8 characters</Item>
+	<Item id="PasswordTitle">Must contain at least one number and one upper and lower case letter and 10 characters</Item>
+	<LocalityTypes>
+		<LocalityType id="0">city</LocalityType>
+		<LocalityType id="1">settlement</LocalityType>
+		<LocalityType id="2">village</LocalityType>
+	</LocalityTypes>
+</Resources>

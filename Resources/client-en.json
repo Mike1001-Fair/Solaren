@@ -1,0 +1,13 @@
+{
+"Items": {
+	"Confirm": "Are you sure❓",
+	"NoDataMsg": "Data not found"
+},
+
+"LocalityType": [
+	"City", "Settlement", "Village", "Village"
+],
+
+"StreetType": [
+	"Street", "Avenue", "Boulevard", "Lane", "Square", "Dead End", "Highway", "Passage"
+]}

@@ -1,0 +1,115 @@
+﻿/*для кнопок*/
+.Btn {
+	font-family: inherit;
+	font-size  : 1em;
+	cursor     : pointer;
+}
+
+.Btn:disabled {
+	cursor: not-allowed;
+}
+
+.DelBtn {
+	margin: auto 2px;
+	font-family: inherit;
+	font-size  : 1em;
+	cursor     : pointer;
+}
+
+.DelBtn:disabled {
+	cursor : not-allowed;
+}
+
+.DelBtn:hover:enabled {
+	background-color: #FF0000;
+	color           : #FFFFFF;
+}
+
+.RestoreBtn {
+	font-family: inherit;
+	font-size  : 1em;
+	cursor     : pointer;
+}
+
+.RestoreBtn:disabled {
+	cursor : not-allowed;
+}
+
+.RestoreBtn:hover:enabled {
+	background-color: #008000;
+	color           : #FFFFFF;
+}
+
+.LoginBtn {
+	font-family        : inherit;
+	font-size          : 1em;
+	width              : 5em;
+	margin-top         : 10px;
+/*	transition-duration: 0.2s;*/
+	cursor             : pointer;
+}
+
+.LoginBtn:hover:enabled {
+	background-color: #4682B4;
+	color           : #FFFFFF;
+}
+
+.SbmBtn {
+	margin     : auto;
+	width      : max-content;
+	font-family: inherit;
+	font-size  : 1em;
+	cursor     : pointer;
+	/*border-radius: 2px;
+	border: 1px solid;*/
+	padding: 2px 4px; 
+}
+
+.SbmBtn:hover:enabled {
+	background-color: #4682B4;
+	color           : #FFFFFF;
+}
+
+.SbmBtn:disabled {
+	cursor: not-allowed;
+}
+
+.FindBtn {
+	margin: auto;
+	cursor: pointer;
+}
+
+.FindBtn:disabled {
+	cursor: not-allowed;
+}
+
+.IconBtn {
+	font-family: inherit;
+	font-size  : 1em;
+	margin: auto;
+	cursor: pointer;
+}
+
+.IconBtn:disabled {
+	cursor: not-allowed;
+}
+
+.AddBtn {
+	font-family: inherit;
+	font-size  : inherit;
+	/*padding: 2px 8px; */
+	cursor: pointer;
+}
+
+.AddBtn:disabled {
+	cursor: not-allowed;
+}
+
+.RemoveBtn {
+	font-family: inherit;
+	cursor: pointer;
+}
+
+.RemoveBtn:disabled {
+	cursor: not-allowed;
+}

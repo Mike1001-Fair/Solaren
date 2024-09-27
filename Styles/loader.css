@@ -1,0 +1,41 @@
+﻿/* ----Loader -----------------------*/
+.overlay {
+	position        : fixed;
+	top             : 0;
+	left            : 0;
+	width           : 100vw;
+	height          : 100vh;
+	background-color: rgba(0, 0, 0, 0.1);
+	display         : flex;
+	justify-content : center;
+	align-items     : center;
+}
+
+.loader {
+	width        : 3em;
+	height       : 3em;
+	border-radius: 100%;
+	display      : flex;
+	border-top   : 4px solid #ffff00;
+	border-right : 4px solid transparent;
+	box-sizing   : border-box;
+	animation    : spin 1s linear infinite;
+}
+
+.loader::after {
+	content      : '';  
+	box-sizing   : border-box;
+	position     : absolute;
+	left         : 0;
+	top          : 0;
+	width        : 3em;
+	height       : 3em;
+	border-radius: 100%;
+	border-bottom: 4px solid #3498db;
+	border-left  : 4px solid transparent;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

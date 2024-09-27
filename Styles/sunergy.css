@@ -1,0 +1,618 @@
+.ActContainer {
+	display        : flex;
+	flex-direction : column;
+	justify-content: space-around;
+	min-height     : 99vh;
+	margin         : auto;
+	font-family    : Arial;
+	padding        : 0em 1em;
+}
+
+.InvoiceContainer {
+	display        : flex;
+	flex-direction : row;
+	justify-content: space-around;
+}
+
+.HeaderContainer {
+	display        : flex;
+	/*align-items: flex-end;
+	justify-content: center;*/
+	align-items: flex-start; 
+	/*height         : 100%;*/
+	width          : max-content;
+	margin         : auto;
+}
+
+
+.InvoiceText {
+	width  : 50%;
+	padding: 0em 1em;
+}
+
+.InvoiceFirst {
+	width  : 50%;
+	padding: 0em 1em;
+}
+
+.InvoiceSecond {
+	width      : 50%;
+	border-left: 1px dashed #A0A0A0;
+	padding    : 0em 1em;
+}
+
+/* Стиль для форм */
+.ValidForm {
+	display    : block;
+	font-family: inherit;
+	font-size  : 1em;
+	margin     : 0px auto;
+	width      : max-content;
+	text-align : center;
+}
+
+.ValidForm INPUT:valid {
+	border: 1px solid black;
+}
+
+.ValidForm INPUT:invalid {
+	border: 1px solid red;
+}
+
+.ValidForm TEXTAREA:valid {
+	border: 1px solid black;
+}
+
+.ValidForm TEXTAREA:invalid {
+	border: 1px solid red;
+}
+
+/* стиль для отображения блока */
+.HeaderDiv {
+	margin    : 0px auto;
+	width     : max-content;
+	text-align: center;
+}
+
+.HeaderDiv H3 {
+	color        : #FFD700;
+	/*text-shadow  : #FFFFFF -1px -1px 0, #0000F0 1px 1px 0;*/
+	margin       : 4px auto 10px;
+	border-bottom: 2px groove #FFD700;
+}
+
+.HeaderDiv HR {
+	color : #FFFFFF;
+	margin: auto;
+}
+
+.MainDiv {
+	font-size : 1em;
+	margin    : auto;
+	text-align: center;
+	width     : max-content;
+}
+
+.FooterDiv {
+	margin    : 0px auto 5px;
+	width     : max-content;
+	text-align: center;
+}
+
+.FooterDiv A {
+	color: #0000FF;
+	text-decoration: none;
+	padding: 2px;
+}
+
+.FooterDiv A:hover {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+.MenuDiv {
+	font-size    : 1em;
+	margin       : auto;
+	width        : max-content;
+	background   : rgba(224,224,224, 0.7);
+	border       : 2px ridge #F0F0F0;
+	border-radius: 4px;
+}
+
+.FormDiv {
+	font-size       : 1em;
+	font-family     : Arial;
+	text-align      : center;
+	width           : max-content;
+	background-color: #F0F0F0;
+	box-shadow      : 0px 2px 4px 0px rgba(0,0,0,.3);
+	border-radius   : 8px;
+	border          : 1px #808080 solid;
+	padding         : 10px 16px 16px;
+	margin          : 10px auto;
+}
+
+.FormDiv FIELDSET {
+	border : 2px groove #FFFFFF;
+	border-radius: 8px;
+	margin : auto;
+	width  : max-content;
+}
+
+.FormDiv FIELDSET:focus-within {
+	border       : 2px ridge #F0F0F0;
+	border-radius: 8px;
+	
+}
+
+.FormDiv FIELDSET LEGEND {
+	color     : #808080;
+	text-align: center;
+	margin    : auto;
+}
+
+.FormDiv IMG {
+	display: block;
+	margin : 0px auto 8px;
+	width  : 64px;
+	height : 64px;
+}
+
+.FormDiv INPUT {
+	display    : block;
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : 4px auto;
+}
+
+
+
+
+/* стиль для отображения ссылок */
+.mainmenu {
+	font-size   : 1em;
+	font-family : Arial;
+	font-weight : normal;
+	color       : #0000FF;
+	font-style  : normal;
+	text-decoration : none;
+}
+.mainmenu:hover {
+	font-family : Arial;
+	font-weight : normal;
+	font-style  : normal;
+	color       : #FF0000;
+	text-decoration : underline;
+}
+
+.BtnLink {
+	display        : inline-block;
+	outline        : none;
+	font-family    : inherit;
+	color          : #0000FF;
+	text-decoration: none;
+	border         : 1px solid #0000FF;
+	border-radius  : 4px;
+	padding        : 4px;
+	box-shadow     : 0px 2px 4px 0px rgba(0,0,0,0.3);
+}
+
+.BtnLink:hover {
+	border          : 1px solid #000000;
+	background-color: #4682B4;
+	color           : #FFFFFF;
+	box-shadow     : 0px 2px 4px 0px rgba(0,0,0,0.3);
+}
+
+
+/* стиль для отображения текста */
+.text {
+/*	font-size: calc((100vw - 480px)/(1280 - 480) * (24 - 16) + 16px);*/
+	font-size  : 1em;
+	font-family: Arial;
+	font-weight: normal;
+	font-style : normal;
+	overflow-wrap: break-word;
+}
+
+.ActText {
+	flex: 1;
+	white-space  : normal;
+	overflow-wrap: break-word;
+	/*border: 1px solid #000;
+	min-height  : 50%;
+	height      : 100%;*/
+	font-size   : 14px;
+	font-family : inherit;
+	font-weight : normal;
+	font-style  : normal;
+	margin      : auto;
+	padding     : 0em 1em;
+	text-align  : center;
+}
+
+.ActText P {
+	white-space  : normal;
+	overflow-wrap: break-word;
+	text-align: justify;
+	line-height: 1.3;
+	text-indent: 2em;
+	margin: auto;
+	width: auto;
+}
+
+.InvoiceFooter {
+	font-size  : 10px;
+	text-align : justify;
+	text-indent: 0px;
+	margin     : 0px;
+	padding    : 0px;
+}
+
+.InvoiceItem {
+	font-size     : 10px;
+	text-align    : center;
+	vertical-align: super;
+	margin        : auto;
+	padding       : 0px;
+}
+
+.InvoiceSet {
+	font-size  : 12px;
+	text-indent: 0px;
+	margin     : 0px 0px 0px 10px;
+	padding    : 0px;
+}
+
+.InvoiceAccount {
+	caption-side: top;
+	text-align  : left;
+	font-size   : 12px;
+	margin      : 0px 0px 2px;
+	vertical-align: sub;
+}
+
+.InvoiceTerm {
+	caption-side: bottom;
+	text-align  : left;
+	font-size   : 12px;
+	margin      : 2px 0px 0px;
+	vertical-align: sub;
+}
+
+
+/*для набора полей*/
+.FieldSet {
+	border : 2px groove #FFFFFF;
+	margin : auto;
+	width  : max-content;
+	padding: 0px 16px 10px 16px;
+}
+
+.FieldSet:focus-within {
+	border: 2px ridge #F0F0F0;
+	border-radius: 4px;
+}
+
+.FieldSet LEGEND {
+	color: #808080;
+	text-align: center;
+	margin : auto;
+}
+
+.FSInline {
+	display: inline;
+}
+
+
+
+
+/* стиль для отображения заголовков */
+.H3menu {
+	margin : 10px auto;
+	display: block;
+	width  : max-content;
+}
+
+.H3menu SPAN {
+	background-color: inherit;
+	font-weight     : normal; 
+	font-size       : inherit;
+}
+
+.H3PrnTable {
+	margin : auto;
+	display: block;
+	width  : max-content;
+}
+
+.H3PrnTable SPAN {
+	display       : block;
+	margin        : auto;
+	width         : max-content;
+	font-weight   : normal;
+	font-size     : 15px;
+	vertical-align: super;
+}
+
+.HeadText {
+	display        : flex;
+	align-items: flex-end;
+	/*align-items    : center;*/
+	align-self: center;
+	margin    : 4px auto 0px;
+	width     : max-content;
+	text-align: center;
+}
+
+.HeadText IMG {
+	display       : inline;
+	margin        : auto 4px ;
+	width         : 20px;
+	height        : 20px;
+}
+
+/*.HeadText SPAN {
+	background-color: inherit;
+	width           : max-content;
+	margin          : auto;
+	text-align      : center;
+	vertical-align  : text-bottom;
+	font-weight     : normal;
+	font-size       : inherit;
+}*/
+
+.HeadText TABLE {
+	background-color: #F1F1F1;
+	border          : groove 2px;
+	border-radius   : 4px;
+	padding         : 2px 4px;
+	font-size       : 16px;
+	font-weight     : normal;
+	text-align      : center;
+	border-collapse : separate;
+	margin          : 10px auto;
+	width           : max-content;
+}
+
+.H3Text {
+	display         : block;
+	background-color: #F1F1F1;
+	/*border          : 2px groove #FFFFFF;*/
+	border          : 2px ridge #F0F0F0;
+	border-radius   : 4px;
+	margin          : 10px auto;
+	padding         : 2px 4px;
+	width           : max-content;
+	text-align      : center;
+}
+
+.H3Text SPAN {
+	display         : block;
+	background-color: inherit;
+	/*width           : max-content;*/
+	margin          : auto;
+	text-align      : center;	
+	font-weight     : normal;
+	font-size       : 15px;
+	border-top      : 2px groove #FFFFFF;
+}
+
+.H3Text CAPTION {
+	white-space  : nowrap;
+	font-family  : inherit;
+	font-weight  : bold;
+	font-size    : 18px;
+	border-bottom: 2px groove #FFFFFF;
+	padding      : 1px;
+}
+
+.H3Text TD {
+	max-width     : 30vw;
+	white-space   : normal;
+	overflow-wrap : break-word;
+	vertical-align: super;
+	font-size     : 15px;
+}
+
+.H3Text HR {
+	margin: 1px;
+	color: #FFFFFF;
+}
+
+.H3Span {
+	display         : block;
+	background-color: #F1F1F1;
+	border          : groove 2px;
+	border-radius   : 4px;
+	padding         : 2px 4px;
+	width           : max-content;
+	text-align      : center;
+	margin          : auto;
+	font-size       : inherit;
+}
+
+.EmojiSpan {
+	background-color: inherit;
+	display: inline;
+	margin : auto;
+	width  : max-content;
+	font-weight     : bold;
+	font-size       : inherit;
+
+}
+
+/* стиль для отображения изображений */
+
+.HeadImg {
+	display       : block;
+	margin        : 0px auto 10px;
+	vertical-align: bottom;
+	width         : 96px;
+	height        : 96px;
+}
+
+.H3Img {
+	display       : inline;
+	margin        : auto;
+	vertical-align: bottom;
+	width         : 24px;
+	height        : 24px;
+}
+
+.LogoImg {
+	vertical-align: middle;
+	width : 57px;
+	height: 33px;
+	margin: 0px 2px 0px 0px;
+}
+
+/* стиль для отображения линии подчеркивания */
+.UnderLine {
+	display: inline-block;
+	border-bottom: 1px solid #808080;
+	width : 120px;
+	height: 25px;
+	margin: auto;
+}
+
+.CustomerUnderLine {
+	border-bottom: 1px solid #808080;
+	width: 240px;
+	height: 25px;
+	margin: auto;
+}
+
+/*------ Стиль для системных сообщений ------------------------------*/
+.SysMsg	{
+	display      : flex;
+	justify-content : center;
+	align-items     : center;
+	font-size    : inherit;
+	margin       : 10px auto;
+	text-align   : center;
+	width        : max-content;
+	max-width    : 40em;
+ 	background   : #F0F0F0;
+	box-shadow   : 0px 2px 2px 0px rgba(0,0,0,.3);
+	border-radius: 4px;
+	border       : 1px #808080 solid;
+	padding      : 8px 16px 16px 16px;
+}
+.SysMsg H4 {margin: 0px auto 8px; width: max-content; border-bottom: 2px groove #FFFFFF;}
+.SysMsg FIELDSET {border: 2px groove #FFFFFF; border-radius: 4px; width: max-content; min-width: 6em; margin: auto;}
+.SysMsg FIELDSET:focus-within {border: 2px ridge #F0F0F0; border-radius: 4px}
+.SysMsg LEGEND {color: #808080; text-align: center; margin: auto;}
+.SysMsg P {margin: auto;}
+.SysMsg UL {margin: auto; padding-left: 1em}
+.SysMsg LI {text-align: left; margin: auto;}
+.SysMsg FIGURE {margin: auto;}
+.SysMsg SPAN {margin: 0px auto 10px; font-size: 3em; display: flex; justify-content : center;}
+.SysMsg A {
+	color: #0000FF;
+	text-decoration: none;
+	margin: auto;
+}
+.SysMsg A:hover {
+	color: #FF0000;
+	/*text-decoration: underline;*/
+}
+
+/*----------------- стиль для блочного LABEL -----------------*/
+.BlockLabel {
+	display    : block;
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : auto; 
+	padding    : 1px 0px;
+/*	margin     : 4px 0px; */
+}
+
+/*----------------- стиль для блочного INPUT -----------------*/
+.BlockInput {
+	display    : block;
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : 4px auto;
+}
+
+.InlineInput {
+	display    : inline;
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : auto;
+}
+
+/*----------------- стиль для TEXTAREA -----------------*/
+.MsgArea {
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : auto;
+	resize     : none;
+	border     : none
+}
+
+.BlockTextArea {
+	display    : block;
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : 4px auto;
+	resize     : none;
+}
+
+/*----------- Строка заголовков --------------------------*/
+.TrHead {
+	text-align: center;
+	background-color: #C0C0C0;
+}
+
+/* стили для печати */
+.PageBreak {
+	page-break-before: always;
+}
+
+.BlockDivider {
+	flex: 1;
+	border-top: 1px dashed #A0A0A0;
+	margin: 10px 0px;
+}
+
+.EventInfo {
+	font-size: 10px;
+	margin: 10px;
+	text-align: center;
+	vertical-align: sub;
+}
+
+
+/*------- Icon ------------------*/
+.AttentionIcon {
+	color  : #FF0000;
+	padding: 0px 2px
+}
+
+.UserIcon {
+	font-size: 54px;
+	display  : block;
+	margin-bottom: 4px;
+	padding  : 0px;
+}
+
+.PrinterIcon {
+	font-size  : 1.1em;
+	font-weight: bold;
+	color      : #0000FF;
+	margin     : 0px 2px;
+}
+
+.SettingsIcon {
+	color      : #228B22;
+	font-weight: bold;
+	padding    : 0px 2px
+}
+
+.ReportTitle {
+	font-size : 10px;
+	text-align: justify;
+	width     : 50%;
+}

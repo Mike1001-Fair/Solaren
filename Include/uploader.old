@@ -1,0 +1,140 @@
+﻿<% //@ LANGUAGE="JScript"
+var Uploader = {
+	MaxSize: 5000000, // 5 MB
+	ErrorMsg: ["Nothing to upload", "You exceeded the maximum upload size", "Bad request method. Use the POST method", "Bad encoding type. Use a multipart/form-data enctype", "Zero length request"],
+	m_Request: null,
+	m_Files: null,
+	m_Error: "",
+
+	Run: function() {
+	    var Method      = Request.ServerVariables("REQUEST_METHOD"),
+		ContentType = String(Request.ServerVariables("HTTP_Content_Type")),
+		TotalBytes  = Request.TotalBytes,
+		BinaryData  = Request.BinaryRead(TotalBytes);
+
+
+
+		Response.Write("Method=" + Method + "<br>ContentType=" + ContentType + "<br>TotalBytes=" + TotalBytes);
+		
+		if (TotalBytes < this.MaxSize && Method == "POST") {
+			var Boundary = ContentType.split("boundary=")[1];    // Получаем границу (boundary) из заголовка Content-Type			
+			var StringData = this.BinaryToString(BinaryData);	// Конвертируем массив байт в строку
+			var parts = StringData.split("--" + Boundary);	    // Разбиваем данные по границе
+
+			Response.Write("<br>Boundary =" + Boundary + "<br>StringData=" + StringData + "<br>parts.length=" + parts.length);
+
+
+			for (var i = 1; i < parts.length - 1; i++) {    // Проходим по каждой части
+				Response.Write("<BR>parts[" + i + "]" + parts[i]);
+
+				if (parts[i].indexOf("filename") > -1) {        // Обработка каждой части (возможно, это файл)
+					var fileData = parts[i];            // Обработка файла
+					var fileNameMatch = /filename="(.+?)"/.exec(fileData);            // Извлекаем имя файла
+					var fileName = fileNameMatch ? fileNameMatch[1] : "unknown";
+					var fs = Server.CreateObject("Scripting.FileSystemObject");            // Сохраняем файл на сервере
+					var filePath = Server.MapPath("Uploads/"+ fileName);
+					var fileStream = fs.CreateTextFile(filePath, true);
+					fileStream.Write(fileData);
+					fileStream.Close();
+				}
+			}
+		} else {
+			this.m_Error = MSG_BAD_REQUEST_METHOD;
+			return;
+		}
+	},
+
+	ParseRequest: function(Binary, Boundary) {
+		var PosOpenBoundary, PosCloseBoundary, PosEndOfHeader, isLastBoundary;
+		Boundary = this.StringToBinary(Boundary);
+ 		PosOpenBoundary = Binary.indexOf(Boundary);
+		PosCloseBoundary = Binary.indexOf(Boundary, PosOpenBoundary + Boundary.length, 0);
+
+		var HeaderContent, FieldContent, bFieldContent;
+		var Content_Disposition, FormFieldName, SourceFileName, Content_Type;
+		var TwoCharsAfterEndBoundary, n = 0;
+
+		//while (PosOpenBoundary > 0 && PosCloseBoundary > 0 && !isLastBoundary) {
+		for (var i=0; PosOpenBoundary > 0 && PosCloseBoundary > 0 && !isLastBoundary; i++) {
+			PosEndOfHeader = Binary.indexOf(this.StringToBinary("\r\n\r\n"), PosOpenBoundary + Boundary.length);
+			HeaderContent = Binary.substr(PosOpenBoundary + Boundary.length + 2, PosEndOfHeader - PosOpenBoundary - Boundary.length - 2);
+			bFieldContent = Binary.substr(PosEndOfHeader + 4, PosCloseBoundary - (PosEndOfHeader + 4) - 2);
+
+			this.GetHeadFields(this.BinaryToString(HeaderContent), Content_Disposition, FormFieldName, SourceFileName, Content_Type);
+			var objFileData = new FileData();
+			objFileData.FileName = SourceFileName;
+			objFileData.ContentType = Content_Type;
+			objFileData.Contents = bFieldContent;
+			objFileData.FormFieldName = FormFieldName;
+			objFileData.ContentDisposition = Content_Disposition;
+			this.m_Files(i) = objFileData;
+
+			TwoCharsAfterEndBoundary = this.BinaryToString(Binary.substr(PosCloseBoundary + Boundary.length, 2));
+			isLastBoundary = TwoCharsAfterEndBoundary === "--";
+
+			if (!isLastBoundary) {
+				PosOpenBoundary = PosCloseBoundary;
+				PosCloseBoundary = Binary.indexOf(Boundary, PosOpenBoundary + Boundary.length);
+			}
+		}
+	},
+
+	GetHeadFields: function(Head, Content_Disposition, Name, FileName, Content_Type) {
+		Content_Disposition = this.SeparateField(Head, "content-disposition:", ";");
+		Name = this.SeparateField(Head, "name=", ";");
+        
+		if (Name.charAt(0) === "\"") Name = Name.substr(1, Name.length - 2);
+		FileName = this.SeparateField(Head, "filename=", ";");
+
+		if (FileName.charAt(0) === "\"") FileName = FileName.substr(1, FileName.length - 2);
+
+		Content_Type = this.SeparateField(Head, "content-type:", ";");
+	},
+
+	SeparateField: function(From, sStart, sEnd) {
+		var PosB, PosE, sFrom;
+		sFrom = From.toLowerCase();
+		PosB = sFrom.indexOf(sStart);
+
+		if (PosB > 0) {
+			PosB = PosB + sStart.length;
+			PosE = sFrom.indexOf(sEnd, PosB);
+
+			if (PosE === 0) PosE = sFrom.indexOf("\r\n", PosB);
+			if (PosE === 0) PosE = sFrom.length + 1;
+
+			return From.substr(PosB, PosE - PosB).trim();
+		}
+	},
+
+	BinaryToString: function(BinaryData) {
+		Response.Write("Run BinaryToString<br>");
+		var stream = Server.CreateObject("ADODB.Stream");
+		with (stream) {
+			Type = 1;	// adTypeBinary
+			Open();
+			Write(BinaryData);
+			Position = 0;
+			Type = 2;	// adTypeText
+			Charset = "UTF-8";	// Используйте соответствующую кодировку
+		}
+		var stringValue = stream.ReadText();
+		stream.Close();
+		Response.Write("Done BinaryToString<br>");
+		return stringValue;
+	},
+
+	StringToBinary: function(String) {
+		var stream = Server.CreateObject("ADODB.Stream");
+		stream.Type = 2;  // adTypeText
+		stream.Charset = "UTF-8";  // Используйте соответствующую кодировку
+		stream.Open();
+		stream.WriteText(String);
+		stream.Position = 0;
+		stream.Type = 1;  // adTypeBinary
+		var binaryData = stream.Read();
+		stream.Close();
+		return binaryData;
+	}
+};
+%>

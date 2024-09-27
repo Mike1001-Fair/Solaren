@@ -1,0 +1,385 @@
+﻿/* стиль для отображения таблиц */
+.InvoiceTable {
+	border-collapse: separate;
+	border-spacing : 10px 0px;
+	margin         : auto;
+	font-size      : 12px;
+	font-family    : inherit;
+}
+
+.MarkupTable {
+	table-layout   : fixed;
+	border-collapse: separate;
+	border-spacing : 10px 0px;
+	border         : 2px ridge #F0F0F0;
+	width          : max-content;
+	margin         : 10px auto;
+	/*text-align     : center;*/
+	background     : #F0F0F0;
+	border-radius  : 4px;
+	padding        : 0px 4px 5px 4px;
+}
+
+.MarkupTable TR {
+	text-align: left;
+}
+
+.MarkupTable TD {
+	vertical-align: top;
+	margin        : auto;
+}
+
+.MarkupTable FIELDSET {
+	border: 2px groove #FFFFFF;
+	border-radius: 4px;
+	margin: 8px 2px;
+}
+
+.MarkupTable FIELDSET:focus-within {
+	border       : 2px ridge #F0F0F0;
+	border-radius: 4px;
+}
+
+.MarkupTable FIELDSET LEGEND {
+	color     : #808080;
+	text-align: center;
+	margin    : auto;
+}
+
+.MarkupTable FIELDSET TABLE {
+	margin: auto;
+}
+
+.MarkupTable TABLE TD {
+	margin: auto;
+	vertical-align: baseline;
+}
+
+.MarkupTable SELECT, INPUT {
+	font-family: inherit;
+	font-size  : inherit;
+}
+
+.MarkupTable LABEL {
+	font-size  : inherit;
+	font-family: inherit;
+	margin     : auto; 
+}
+
+.InfoTable {
+	table-layout   : fixed;
+	border-collapse: separate;
+	border-spacing : 1px 1px;
+	border-left    : 1px solid #000000;
+	border-top     : 1px solid #000000;
+	font-size      : 1em;
+	font-family    : Arial;
+	margin         : auto;
+	max-width      : 100vw;
+}
+
+.InfoTable CAPTION {
+	caption-side    : top;
+	text-align      : left;
+	margin          : auto;
+	padding         : 2px 0px;
+	/*background-color: #F1F1F1;
+	border          : 2px groove #F0F0F0;*/
+}
+
+.InfoTable TR {
+	background: #BBD2BB;
+}
+
+.InfoTable TR:hover TD {
+	background-color: #F0F0FF;
+
+}
+
+.InfoTable TH {
+	background   : #C0C0C0;
+	border-right : 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	padding      : 1px;
+}
+
+.InfoTable TD {
+	max-width    : 50vw;
+	white-space  : normal;
+	overflow-wrap: break-word;
+	border-right : 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	padding      : 1px;
+}
+
+.InfoTable A {
+	display: block;
+	color: #0000FF;
+	text-decoration: none;
+}
+
+.InfoTable A:hover {
+	color: #FF0000;
+	/*text-decoration: underline;*/
+}
+
+.PrnTable {
+	margin         : 10px auto;
+	border-collapse: collapse;
+	border         : 1px solid #000000;
+	font-size      : 12px;
+	font-family    : Arial;
+	font-weight    : normal;
+	font-style     : normal;
+	white-space    : nowrap;
+}
+
+.PrnTable CAPTION {
+	caption-side: top;
+	text-align  : left;
+	margin      : auto;
+	font-size   : 12px;
+}
+
+.PrnTable TH, .PrnTable TD {
+	border: 1px solid #000000;
+}
+
+.PrnTable TR:hover TD{
+	background-color: #E6E6FA;
+}
+
+.ActHeadTable {
+	width: 100%;
+}
+
+.ActHeadTable TD {
+	width: 50%;
+}
+
+.ActFooterTable {
+	width: 100%;
+}
+
+.ActFooterTable TD {
+	width      : 50%;
+	padding-top: 10px;
+}
+
+.ActTable {
+	width          : auto;
+	margin         : 10px auto;
+	border-collapse: collapse;
+	border         : 1px solid #000000;
+	font-size      : 14px;
+	font-family    : Arial;
+	font-weight    : normal;
+	font-style     : normal;
+	white-space    : nowrap;
+}
+
+.ActTable CAPTION {
+	font-family : Arial;
+	font-size   : 14px;
+	font-weight : normal;
+	font-style  : normal;
+	padding     : 5px 0px;
+	text-align  : left;
+}
+
+.ActTable TH, .ActTable TD {
+	border: 1px solid #000000;
+}
+
+.ActTable TR:hover TD{
+	background-color: #E6E6FA;
+}
+
+
+.Invoice {
+	margin         : 10px auto;
+	border-collapse: collapse;
+	border         : 1px solid #000000;
+	font-size      : 12px;
+	font-family    : Arial;
+	font-weight    : normal;
+	font-style     : normal;
+	white-space    : nowrap;
+}
+
+.Invoice CAPTION {
+	caption-side: top;
+	text-align  : left;
+	font-size   : 12px;
+	margin      : 0px 0px 2px;
+}
+
+.Invoice TH, .Invoice TD {
+	border: 1px solid #000000;
+}
+
+.Invoice TR:hover TD {
+	background-color: #E6E6FA;
+}
+
+.PreInvoice {
+	margin         : 10px auto;
+	border-collapse: collapse;
+	border         : 1px solid #000000;
+	font-size      : 12px;
+	font-family    : Arial;
+	font-weight    : normal;
+	font-style     : normal;
+	white-space    : nowrap;
+}
+
+.PreInvoice TH, .PreInvoice TD {
+	border: 1px solid #000000;
+}
+
+.PreInvoice TR:hover TD {
+	background-color: #E6E6FA;
+}
+
+.NoBorderTable {
+	width       : 100%;
+	margin      : 10px auto;
+	font-size   : 14px;
+	border-collapse: collapse;
+	border      : none; 
+	font-family : Arial;
+	font-weight : normal;
+	font-style  : normal;
+}
+
+.NoBorderTable TH, .NoBorderTable TD {
+	border: none;
+	font-family : Arial;
+	font-weight : normal;
+	font-style  : normal;
+}
+
+
+.InvoiceHead {
+	font-size      : 12px;
+	border         : none; 
+/*	border-collapse: collapse;*/
+	border-collapse: separate;
+	border-spacing : 0px 0px;
+/*	margin         : 0px 0px 10px 0px;*/
+	margin         : 5px auto;
+}
+
+.InvoiceHead TD {
+	padding: 0px;
+	border: none;
+}
+
+.InvoiceHead H3 {
+	margin: 0px;
+}
+
+
+.InvoiceSign {
+	font-size      : 12px;
+	border         : none; 
+	border-collapse: collapse;
+	margin         : 10px auto;
+	white-space    : nowrap;
+}
+
+.InvoiceSign TD {
+	padding: 0px 2px;
+	border : none;
+	vertical-align: sub;
+}
+
+.Header {
+	background-color: #F1F1F1;
+	box-shadow      : 0 2px 2px rgba(0,0,0,.3);
+	border-radius   : 8px;
+	padding         : 4px;
+	border-collapse : separate;
+	border-spacing  : 0px;
+	margin          : auto;
+	width           : max-content;
+}
+
+.Header A {
+	color: #0000FF;
+	text-decoration: none;
+}
+
+.Header A:hover {
+	color: #FF0000;
+	text-decoration: underline;
+}
+
+.MenuTable {
+	margin         : auto;
+	border-collapse: collapse;
+	border-style   : hidden;
+}
+
+.MenuTable TD {
+	vertical-align: super;
+	padding       : 1px;
+	border        : 2px groove #FFFFFF;
+}
+
+.RulesAll {
+	margin         : auto;
+	border-collapse: collapse;
+	border-style   : hidden;
+	padding        : 0px;
+}
+
+.RulesAll TD {
+	vertical-align: super;
+	padding       : 5px;
+	border        : 2px groove #FFFFFF;
+}
+
+.RulesAll LABEL {
+	display: block;
+}
+
+.RulesAll INPUT {
+	margin: 2px auto;
+}
+
+.RulesAll CAPTION {
+	caption-side : bottom;
+	font-family  : inherit;
+	font-size    : inherit;
+	border-top   : 2px groove #FFFFFF;
+	padding-top  : 5px;
+}
+
+.RulesAllInfo {
+	margin         : auto;
+	border-collapse: collapse;
+	border-style   : hidden;
+}
+
+.RulesAllInfo TD {
+	max-width    : 40vw;
+	overflow-wrap: break-word;
+	padding      : 2px;
+	border       : 2px groove #FFFFFF;
+}
+
+.RulesAllInfo TR:hover TD {
+	background-color: #4682B4;
+	color           : #FFFFFF;
+}
+
+.Footer {
+	font-family: Arial;
+	font-size  : 14px;
+	margin     : 10px auto;
+}
+
+.Footer TD {
+	vertical-align: sub;
+}

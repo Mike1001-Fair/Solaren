@@ -1,0 +1,39 @@
+<%@ LANGUAGE = "JScript"%> 
+<!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/html.inc" -->
+<% var Authorized = Session("RoleId") < 2;
+if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+
+with (Request) {
+	var StreetId = Form("StreetId"),
+	Deleted      = Form("Deleted") == "on";	
+}
+
+try {
+	Solaren.SetCmd("ListStreet");
+	with (Cmd) {
+		with (Parameters) {
+			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
+			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
+		}
+	}
+	var rs = Cmd.Execute();
+	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+}
+
+with (Html) {
+	SetHead("Список вулиць");
+	WriteMenu(Session("RoleId"), 0);
+}
+Response.Write('<BODY CLASS="MainBody">\n' +
+	'<H3 CLASS="H3Text">Список ЦОС</H3>\n' +
+	'<TABLE CLASS="InfoTable">\n' +
+	'<TR><TH>Тип</TH><TH>Назва</TH></TR>\n');
+for (var i=0; !rs.EOF; i++) {
+	Response.Write('<TR><TD>' + Html.StreetType[rs.Fields("StreetType")] + 
+	Html.Write("TD","") + '<A href="editstreet.asp?StreetId=' + rs.Fields("Id") + '">' + rs.Fields("StreetName") + '</A></TD></TR>\n');
+	rs.MoveNext();
+} rs.Close(); Connect.Close();
+Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>

@@ -1,0 +1,30 @@
+﻿<%@ LANGUAGE = "JScript"%> 
+<!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% Resource.Load(User.ResourceFile());
+var ScriptName = Session("ScriptName") || "";
+if (ScriptName.indexOf("login.asp") == -1) {
+	if (!User.Validate(Session("RoleId"), Session("UserGUID"))) {
+		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
+	}
+
+}
+Html.SetHead(Dictionary.Item("Message")) %>
+<BODY CLASS="MainBody">
+<DIV CLASS="SysMsg">
+	<FIELDSET>
+		<LEGEND><%=Dictionary.Item("Error")%></LEGEND>
+		<H4><%=Dictionary.Item("WebAdminMessage")%></H4>
+		<FIGURE>
+			<IMG SRC="Images/tpattn.gif">
+			<FIGCAPTION>
+				<UL>
+					<LI><%=ScriptName%></LI>
+					<LI><%=Session("SysMsg")%></LI>
+				</UL>
+			</FIGCAPTION>
+		</FIGURE>
+	</FIELDSET>
+</DIV></BODY></HTML>

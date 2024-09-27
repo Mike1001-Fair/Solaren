@@ -1,0 +1,96 @@
+﻿/*----------menu--------------------*/
+.nav {
+	display   : block;
+	position  : sticky;
+	top       : 0px;
+	width     : 100%;
+	text-align: left;
+	margin    : auto;
+}
+
+.nav ul {
+	list-style: none;
+	margin    : auto;
+	padding   : 0px;
+}
+
+.nav li:hover > .submenu {
+	visibility: visible;
+}
+
+.topmenu {
+	font-size: 1em;
+}
+
+.topmenu a {
+	color: #000000;
+	text-decoration: none;
+	padding: 2px;
+}
+
+.topmenu a:hover {
+	color: #0000FF;
+	/*color: #FF0000;*/
+}
+
+.topmenu > li {
+	display : inline-block;
+	position: relative;
+	width   : max-content;
+	margin  : auto 4px;
+	color   : #000000;
+	white-space: nowrap; 
+}
+
+.topmenu > li:hover {
+	color: #0000FF;
+}
+
+.submenu {
+	display: block;
+	position        : absolute;
+	visibility      : hidden;
+	/*opacity         : 0;
+	transform       : translateY(10px);
+	transition      : 0.3s ease-in-out;*/
+	padding         : 8px;
+	background-color: #FFFFFF;
+	list-style-type : none;
+	width           : max-content;
+	box-shadow      : 0px 2px 2px 0px rgba(0,0,0,0.3);
+	border-radius   : 4px;
+	border          : 1px #808080 solid;
+}
+
+.submenu li {
+	position: relative;
+	margin  : auto;
+}
+
+.submenu li:hover {
+	background: #E0E0E0;
+}
+
+.submenu a {
+	display        : block;
+	color          : #0000FF;
+	text-decoration: none;
+	padding        : 5px 20px;
+}
+
+.submenu a[href="#"] {
+	cursor: default;
+}
+
+.submenu a:hover {
+}
+
+.submenu .submenu {
+	position: absolute;
+	top     : 0px;
+	left    : 100%;
+}
+
+.divider {
+	border-top: 2px groove #FFFFFF;
+}

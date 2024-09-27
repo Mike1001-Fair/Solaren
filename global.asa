@@ -1,0 +1,35 @@
+<!-- METADATA TYPE="typelib" FILE="c:\program files\common files\system\ado\msado60.tlb" -->
+<SCRIPT LANGUAGE="JScript" RUNAT="Server">
+function Application_OnStart() {
+	var dbConfig = [
+		"Provider=MSOLEDBSQL",
+		"Server=CNC",
+		"Database=Solaren",
+		"UID=Iis_User",
+		"PWD=vmzX3pc2th",
+		"Application Name=Solaren"
+	];
+	Application("ConnectString") = dbConfig.join(";");
+	Application("SesCount") = 0;
+}  
+
+function Session_OnStart() {
+	Session.Timeout = 20;
+	Session.CodePage = 65001;
+	if (0) {
+		Session.Abandon();
+		Server.Transfer("appsuspend.asp");
+	} else {
+		Application.Lock();
+		Application("SesCount")++;
+		Application.UnLock();
+	}
+}
+
+function Session_OnEnd() {
+	Application.Lock();
+	Application("SesCount")--;
+	Application.UnLock();
+	Session.Abandon();
+}
+</SCRIPT>

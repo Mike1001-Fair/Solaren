@@ -1,0 +1,49 @@
+﻿.StartBody {
+	/*background     : linear-gradient(to top, #87CEFA 0%, #F0FFFF 100%);*/
+	background     :  url(../Images/bg.svg);
+	background-size: cover;
+	font-family    : Arial;
+	cursor         : default;
+	margin         : auto;
+	display        : flex;
+	flex-direction : column;
+	justify-content: space-between;
+	min-height     : 100vh;
+}
+
+.MsgBody {
+	/*background     : linear-gradient(to top, #87CEFA 0%, #F0FFFF 100%);*/
+	background     :  url(../Images/bg.svg);
+	background-size: cover;
+	font-family    : Arial;
+	cursor         : default;
+	margin         : auto;
+	display        : flex;
+	justify-content: center;
+	align-items    : center;
+	min-height     : 100vh;
+}
+
+
+.MainBody {
+	display        : flex;
+	flex-direction : column;
+	justify-content: center;
+	background     : url(../Images/f06.jpg);
+	font-family    : Arial;
+	cursor         : default;
+}
+
+.PrnBody {
+	font-family    : Arial;
+	padding        : 0em 1em;
+}
+
+.ContainerStart {
+	display        : flex;
+	flex-direction : column;
+	justify-content: start;
+	margin         : auto;
+	font-family    : Arial;
+	padding        : 0em 1em;
+}
