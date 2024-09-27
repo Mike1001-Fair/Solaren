@@ -34,26 +34,26 @@ try {
 			Append(CreateParameter("ContractorName", adVarChar, adParamOutput, 20, ""));
 			Append(CreateParameter("Phone", adVarChar, adParamOutput, 10, ""));
 		} Execute(adExecuteNoRecords);
-	}
-	with (Cmd.Parameters) {
-		var ChiefId     = Item("ChiefId").value,
-		CompanyCode     = Item("CompanyCode").value,
-		CompanyName     = Item("CompanyName").value,
-		TopChiefTitle3  = Item("TopChiefTitle3").value,
-		TopChiefName3   = Item("TopChiefName3").value,
-		ChiefTitle      = Item("ChiefTitle").value,
-		ChiefName       = Item("ChiefName").value,
-		ChiefTitle2     = Item("ChiefTitle2").value,
-		ChiefName2      = Item("ChiefName2").value,
-		TreasuryName    = Item("TreasuryName").value,
-		TreasuryCode    = Item("TreasuryCode").value,
-		TreasuryAccount = Item("TreasuryAccount").value,
-		TreasuryName    = Item("TreasuryName").value,
-		TreasuryMfo     = Item("TreasuryMfo").value,
-		ContractorName  = Item("ContractorName").value,
-		Phone           = Item("Phone").value;
-	}
-	with (Cmd) {
+
+		with (Parameters) {
+			var ChiefId     = Item("ChiefId").value,
+			CompanyCode     = Item("CompanyCode").value,
+			CompanyName     = Item("CompanyName").value,
+			TopChiefTitle3  = Item("TopChiefTitle3").value,
+			TopChiefName3   = Item("TopChiefName3").value,
+			ChiefTitle      = Item("ChiefTitle").value,
+			ChiefName       = Item("ChiefName").value,
+			ChiefTitle2     = Item("ChiefTitle2").value,
+			ChiefName2      = Item("ChiefName2").value,
+			TreasuryName    = Item("TreasuryName").value,
+			TreasuryCode    = Item("TreasuryCode").value,
+			TreasuryAccount = Item("TreasuryAccount").value,
+			TreasuryName    = Item("TreasuryName").value,
+			TreasuryMfo     = Item("TreasuryMfo").value,
+			ContractorName  = Item("ContractorName").value,
+			Phone           = Item("Phone").value;
+		}
+
 		CommandText = "GetAllNote";
 		with (Parameters) {
 			while (Count > 0) { Delete(0) };
@@ -97,6 +97,7 @@ for (var n=1; !rs.EOF; n++) {
 		ResponseText += '<P CLASS="PageBreak"></P>\n';
 	}
 }
+rs.Close();
+Connect.Close();
 ResponseText += '</BODY></HTML>';
-Response.Write(ResponseText);
-rs.Close();Connect.Close()%>
+Response.Write(ResponseText)%>

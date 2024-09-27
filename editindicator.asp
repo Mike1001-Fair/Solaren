@@ -29,38 +29,37 @@ try {
 			Append(CreateParameter("PrevDate", adVarChar, adParamOutput, 10, ""));
 			Append(CreateParameter("Deleted", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
-	}
 
-	with (Cmd.Parameters) {
-	    var ContractId    = Item("ContractId").value,
-		ContractName  = Item("ContractName").value,
-		ContractPower = Item("ContractPower").value,
-		ReportDate    = Item("ReportDate").value,
-		MeterId       = Item("MeterId").value,
-		MeterCode     = Item("MeterCode").value,
-		Capacity      = Item("Capacity").value,
-		Ktf           = Item("Ktf").value,
-		RecVal        = Item("RecVal").value,
-		RetVal        = Item("RetVal").value,
-		RecValPrev    = Item("RecValPrev").value,
-		RetValPrev    = Item("RetValPrev").value,
-		PrevDate      = Item("PrevDate").value,
-		Deleted       = Item("Deleted").value,
-		Limit         = Math.pow(10, Capacity) - 1;
+		with (Parameters) {
+			var ContractId    = Item("ContractId").value,
+			ContractName  = Item("ContractName").value,
+			ContractPower = Item("ContractPower").value,
+			ReportDate    = Item("ReportDate").value,
+			MeterId       = Item("MeterId").value,
+			MeterCode     = Item("MeterCode").value,
+			Capacity      = Item("Capacity").value,
+			Ktf           = Item("Ktf").value,
+			RecVal        = Item("RecVal").value,
+			RetVal        = Item("RetVal").value,
+			RecValPrev    = Item("RecValPrev").value,
+			RetValPrev    = Item("RetValPrev").value,
+			PrevDate      = Item("PrevDate").value,
+			Deleted       = Item("Deleted").value,
+			Limit         = Math.pow(10, Capacity) - 1;
+		}
 	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {	
 	Connect.Close();
-}
+	var ViewOnly = !Month.isPeriod(Session("OperDate"), ReportDate),
+	HeadTitle    = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
 
-var ViewOnly = !Month.isPeriod(Session("OperDate"), ReportDate),
-HeadTitle    = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	with (Html) {
+		SetHead(HeadTitle);
+		WriteScript();
+		WriteMenu(Session("RoleId"), 0);
+	}
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
