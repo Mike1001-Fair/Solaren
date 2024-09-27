@@ -45,22 +45,22 @@ try {
 			Append(CreateParameter("BranchLocalityType", adTinyInt, adParamOutput, 10, 0));
 			Append(CreateParameter("BranchLocalityName", adVarChar, adParamOutput, 30, ""));
 		} Execute(adExecuteNoRecords);
-	}
 
-	with (Cmd.Parameters) {
-	    var CustomerName         = Item("CustomerName").value,
-		ContractLocalityType = Item("ContractLocalityType").value,
-		ContractLocalityName = Item("ContractLocalityName").value,
-		ContractStreetType   = Item("ContractStreetType").value,
-		ContractStreetName   = Item("ContractStreetName").value,
-		HouseId              = Item("HouseId").value,
-		ContractDate         = Item("ContractDate").value,
-		ContractPAN          = Item("ContractPAN").value,
-		BranchName           = Item("BranchName").value,
-		ChiefTitle           = Item("ChiefTitle").value,
-		ChiefName            = Item("ChiefName").value,
-		BranchLocalityType   = Item("BranchLocalityType").value,
-		BranchLocalityName   = Item("BranchLocalityName").value;
+		with (Parameters) {
+			var CustomerName         = Item("CustomerName").value,
+			ContractLocalityType = Item("ContractLocalityType").value,
+			ContractLocalityName = Item("ContractLocalityName").value,
+			ContractStreetType   = Item("ContractStreetType").value,
+			ContractStreetName   = Item("ContractStreetName").value,
+			HouseId              = Item("HouseId").value,
+			ContractDate         = Item("ContractDate").value,
+			ContractPAN          = Item("ContractPAN").value,
+			BranchName           = Item("BranchName").value,
+			ChiefTitle           = Item("ChiefTitle").value,
+			ChiefName            = Item("ChiefName").value,
+			BranchLocalityType   = Item("BranchLocalityType").value,
+			BranchLocalityName   = Item("BranchLocalityName").value;
+		}
 	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
