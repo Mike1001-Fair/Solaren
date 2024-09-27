@@ -47,7 +47,7 @@ try {
 		} Execute(adExecuteNoRecords);
 
 		with (Parameters) {
-			var CustomerName         = Item("CustomerName").value,
+			var CustomerName     = Item("CustomerName").value,
 			ContractLocalityType = Item("ContractLocalityType").value,
 			ContractLocalityName = Item("ContractLocalityName").value,
 			ContractStreetType   = Item("ContractStreetType").value,
@@ -139,4 +139,5 @@ for (var i=0; i<=DoubleReport; i++) {
 }
 RecordSet.Close();
 Connect.Close();
-Response.Write(ResponseText + '</BODY></HTML>')%>
+ResponseText += '</BODY></HTML>';
+Response.Write(ResponseText)%>
