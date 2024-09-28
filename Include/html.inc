@@ -42,7 +42,7 @@ Html = {
 	},
  
 	WriteStyleBlock: function() {
-		var Sheets = ["sunergy", "body", "table", "loader", "button", "menu"],
+		var Sheets = ["solaren", "body", "table", "loader", "button", "menu"],
 		StyleBlock = "",
 		StyleRow;
 		for (var i = 0; i < Sheets.length; i++) {
