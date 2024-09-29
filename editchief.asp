@@ -12,7 +12,6 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, 0));
 		}
 	}
 	var rsChiefTitle = Cmd.Execute();

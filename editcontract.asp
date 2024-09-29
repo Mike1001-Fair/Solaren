@@ -11,7 +11,6 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, 1));
 		}
 	}
 	var rsBank = Cmd.Execute();
