@@ -21,21 +21,14 @@ ContractName.addEventListener('input', function() {
 	Ajax.GetContractList(this);
 });
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		if (confirm("Ви впевненi\u2753")) {
-			Loader.Show();
-		} else event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		Loader.Show();
+	} else event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelPay);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelPay);
-}
+DelBtn?.addEventListener('click', DelPay);
+RestoreBtn?.addEventListener('click', DelPay);
 
 function DelPay() {
 	const MsgText = EditPay.Deleted.value == "True" ? "відновлено" : "видалено";

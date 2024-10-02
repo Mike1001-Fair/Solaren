@@ -37,23 +37,16 @@ StreetName.addEventListener('input', function() {
 	Ajax.GetStreetList(this)
 });
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', () => {
-		if (confirm("Ви впевненi\u2753")) {
-			const Elements = document.querySelectorAll("input[type='text']");
-			Elements.forEach(elm => elm.value = elm.value.trim());
-			Loader.Show();
-		} else event.preventDefault();
-	});
-} 
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelCompany);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelCompany);
-}
+DelBtn?.addEventListener('click', DelCompany);
+RestoreBtn?.addEventListener('click', DelCompany);
 
 function DelCompany() {
 	if (confirm("Ви впевненi\u2753")) {

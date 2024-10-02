@@ -55,7 +55,6 @@ with (Html) {
 <INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=UserId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <H3 CLASS="HeadText" ID="H3Id">&#128100;<%=HeadTitle%></H3>
-<SPAN CLASS="H3Span">користувача</SPAN>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="UserSet"><LEGEND>Параметри</LEGEND>

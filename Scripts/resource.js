@@ -13,23 +13,10 @@ const Resource = {
 	},
 
 	GetText(id) {
-		if (this.JsonData) {
-			return this.JsonData.Items[id] || this.ErrMsg[1]
-		} else {
-			console.warn(this.ErrMsg[0])
-		}
-
+		return this.JsonData?.Items?.[id] || console.warn(this.ErrMsg[this.JsonData ? 1 : 0]);
 	},
 
 	GetItem(key) {
-		if (this.JsonData) {
-			if (this.JsonData[key])
-				return this.JsonData[key]
-			else {
-				console.warn(this.ErrMsg[1]);
-			}
-		} else {
-			console.warn(this.ErrMsg[0]);
-		}
+		return this.JsonData?.[key] || console.warn(this.ErrMsg[this.JsonData ? 1 : 0]);
 	}
 };

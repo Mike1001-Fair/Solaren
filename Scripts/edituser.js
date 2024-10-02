@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (Deleted.value == "True") {
 			const Elements = document.querySelectorAll("fieldset");
 			Elements.forEach(elm => elm.disabled = true);
-			H3Id.textContent = H3Id.textContent.replace("Редагування", "Перегляд");
+			//H3Id.textContent = H3Id.textContent.replace("Редагування", "Перегляд");
 		}
 		SbmBtn.disabled = true;
 	}
@@ -34,24 +34,16 @@ ShowPswd.addEventListener('click', (event) => {
 	}
 });
 
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else event.preventDefault();
+});
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		if (confirm("Ви впевненi\u2753")) {
-			const Elements = document.querySelectorAll("input[type='text']");
-			Elements.forEach(elm => elm.value = elm.value.trim());
-			Loader.Show();
-		} else event.preventDefault();
-	});
-}
-
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelUser);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelUser);
-}
+DelBtn?.addEventListener('click', DelUser);
+RestoreBtn?.addEventListener('click', DelUser);
 
 function DelUser() {
 	if (confirm(`Ви впевненi\u2753`)) {

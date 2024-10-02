@@ -26,7 +26,7 @@ IbanBox.addEventListener('click', () => {
 	}
 });
 
-SbmBtn.addEventListener('click', () => {
+SbmBtn.addEventListener('click', (event) => {
 	if (confirm("Ви впевненi\u2753")) {
 		let Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());

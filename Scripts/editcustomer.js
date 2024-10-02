@@ -9,19 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 EditCustomer.addEventListener('input', ChkForm);
 
-CodeType.addEventListener('click', SetCustomerCode);
+CodeType.addEventListener('click', () => {
+	with (EditCustomer) {
+		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
+		CustomerCode.focus();
+	}
+});
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', SbmForm);
-} 
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelCustomer);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelCustomer);
-}
+DelBtn?.addEventListener('click', DelCustomer);
+RestoreBtn?.addEventListener('click', DelCustomer);
 
 AreaName.addEventListener('input', function() {
 	Ajax.GetAreaList(this)
@@ -48,13 +52,6 @@ function LoadForm() {
 	Ajax.GetLocalityInfo(EditCustomer.LocalityId.value);
 }
 
-function SetCustomerCode() {
-	with (EditCustomer) {
-		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
-		CustomerCode.focus();
-	}
-}
-
 function ChkForm() {
 	with (EditCustomer) {
 		if (CodeType.checked) {
@@ -76,18 +73,13 @@ function ChkForm() {
 	}
 }
 
-function SbmForm() {
-	if (confirm("Ви впевненi\u2753")) {
-		const Elements = document.querySelectorAll("input[type='text']");
-		Elements.forEach(elm => elm.value = elm.value.trim());
-	} else event.preventDefault();
-}
-
 function DelCustomer() {
 	const MsgText = EditCustomer.Deleted.value == "True" ? "відновлено" : "видалено";
 	if (confirm(`Анкету споживача та усі його договора буде ${MsgText}\u2757 Ви впевненi\u2753`)) {
 		with (EditCustomer) {
 			action = `delcustomer.asp?CustomerId=${CustomerId.value}&Deleted=${Deleted.value}`;
 		}
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }

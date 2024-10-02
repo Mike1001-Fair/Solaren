@@ -21,25 +21,22 @@ StreetName.addEventListener('input', function() {
 	Ajax.GetStreetList(this)
 });
 
-IbanBox.addEventListener('click', SetIban);
+IbanBox.addEventListener('click', () => {
+	with (EditContract) {
+		Iban.value = IbanBox.checked ? GetIban(BankAccount.value, MfoCode.value) : "";
+	}
+});
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', () => {
-		if (confirm("Ви впевненi\u2753")) {
-			const Elements = document.querySelectorAll("input[type='text']");
-			Elements.forEach(elm => elm.value = elm.value.trim());
-			Loader.Show();
-		} else event.preventDefault();
-	});
-} 
-
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelContract);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelContract);
-}
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else event.preventDefault();
+});
+ 
+DelBtn?.addEventListener('click', DelContract);
+RestoreBtn?.addEventListener('click', DelContract);
 
 function GetIban(acc, mfo) {
 	const UACode = "301000";
@@ -58,12 +55,6 @@ function mod97(string) {
 		checksum = parseInt(fragment, 10) % 97;
 	}
 	return checksum;
-}
-
-function SetIban() {
-	with (EditContract) {
-		Iban.value = IbanBox.checked ? GetIban(BankAccount.value, MfoCode.value) : "";
-	}
 }
 
 function LoadForm() {
