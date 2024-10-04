@@ -33,23 +33,16 @@ LocalityName.addEventListener('input', function() {
 	Ajax.GetLocalityList(this)
 });
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		if (confirm("Ви впевненi\u2753")) {
-			const Elements = document.querySelectorAll("input[type='text']");
-			Elements.forEach(elm => elm.value = elm.value.trim());
-			Loader.Show();
-		} else event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelBranch);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelBranch);
-}
+DelBtn?.addEventListener('click', DelBranch);
+RestoreBtn?.addEventListener('click', DelBranch);
 
 function DelBranch() {
 	if (confirm(`Ви впевненi\u2753`)) {

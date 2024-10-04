@@ -45,7 +45,8 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-var ReadOnly = Session("RoleId") > 0,
+var Admin = Session("RoleId") == 0,
+ReadOnly = !Admin,
 Title = Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 
 with (Html) {
@@ -70,7 +71,7 @@ with (Html) {
 	<TR><TD ALIGN="RIGHT">Назва</TD>
 	<TD><INPUT TYPE="TEXT" NAME="BranchName1" PLACEHOLDER="Коротка без лапок" VALUE="<%=BranchName1%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 
-	<TR><TD ALIGN="RIGHT">Кого?</TD>
+	<TR><TD ALIGN="RIGHT">Чого?</TD>
 	<TD><INPUT TYPE="TEXT" NAME="BranchName2" PLACEHOLDER="Коротка без лапок" VALUE="<%=BranchName2%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Район</TD>
@@ -92,7 +93,7 @@ with (Html) {
 	<% for (; !rsCompany.EOF; rsCompany.MoveNext()) {
 		if (rsCompany.Fields("CompanyId") == CompanyId) {
 			Response.Write('<OPTION VALUE="' + rsCompany.Fields("CompanyId") + '" SELECTED>' + rsCompany.Fields("CompanyName") + '</OPTION>')
-		} else if (Session("RoleId") == 0) {
+		} else if (Admin) {
 			Response.Write('<OPTION VALUE="' + rsCompany.Fields("CompanyId") + '">' + rsCompany.Fields("CompanyName") + '</OPTION>')
 		}
 	} rsCompany.Close();
