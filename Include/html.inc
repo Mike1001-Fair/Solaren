@@ -138,7 +138,8 @@ Html = {
 			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
 			ResponseText += option.join("");
 		}
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	/*WriteLocalityType: function(tagName, LocalityType) {
@@ -222,7 +223,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteBranch: function(rs, BranchId, BlankOption) {
@@ -234,7 +236,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteAen: function(rs, AenId) {
@@ -256,7 +259,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteChief: function(rs, ChiefId) {
@@ -267,7 +271,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteBank: function(rs, MfoCode) {
@@ -278,7 +283,8 @@ Html = {
 			ResponseText += option.join("")
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteRegion: function(rs, RegionId) {
@@ -289,7 +295,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WritePerformer: function(rs, PerformerId) {
@@ -300,7 +307,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteChiefDoc: function(rs, DocId) {
@@ -311,7 +319,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteChiefTitle: function(rs, TitleId) {
@@ -322,7 +331,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	WriteArea: function(rs, AreaId, BlankOption) {
@@ -334,7 +344,8 @@ Html = {
 			ResponseText += option.join("");
 		}
 		rs.Close();
-		Response.Write(ResponseText + '</SELECT>');
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText);
 	},
 
 	GetFooterRow: function(ColSpan, i) {

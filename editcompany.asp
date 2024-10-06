@@ -13,22 +13,18 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, "Довiдник керівників пустий!");
-	Cmd.CommandText = "SelectBank";
-	var rsBank = Cmd.Execute();
-	Solaren.EOF(rsBank, "Довiдник банкiв пустий!");
-	Cmd.CommandText = "SelectRegion";
-	var rsRegion = Cmd.Execute();
-	Solaren.EOF(rsRegion, "Довiдник областей пустий!");
+
+	var rsChief = Solaren.Execute("SelectChief", "Довiдник керівників пустий!"),
+	rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
+	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
+
 	with (Cmd) {
-		CommandText = "GetCompany";
 		with (Parameters) {
 			Append(Cmd.CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
 		}
 	}
-	var rsCompany = Cmd.Execute();
-	Solaren.EOF(rsCompany, 'Компанію не знайдено!');
+	var rsCompany = Solaren.Execute("GetCompany", "Компанію не знайдено!");
+
 	with (rsCompany) {
 		var ChiefId  = Fields("ChiefId").value,
 		CompanyName  = Fields("CompanyName").value,

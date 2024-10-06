@@ -28,17 +28,17 @@ try {
 	var rsBranch = Cmd.Execute();
 	Solaren.EOF(rsBranch, "Інформацію не знадено!");
 	with (rsBranch) {
-		var SortCode   = Fields("SortCode").value,
-		BranchName1    = Fields("BranchName1").value,
-		BranchName2    = Fields("BranchName2").value,
-		AreaId         = Fields("AreaId").value,
-		AreaName       = Fields("AreaName").value,
-		LocalityId     = Fields("LocalityId").value,
-		LocalityName   = Fields("LocalityName").value,
-		ChiefId        = Fields("ChiefId").value,
-		Accountant     = Fields("Accountant").value,
-		CompanyId      = Fields("CompanyId").value,
-		Deleted        = Fields("Deleted").value;
+		var SortCode = Fields("SortCode").value,
+		BranchName1  = Fields("BranchName1").value,
+		BranchName2  = Fields("BranchName2").value,
+		AreaId       = Fields("AreaId").value,
+		AreaName     = Fields("AreaName").value,
+		LocalityId   = Fields("LocalityId").value,
+		LocalityName = Fields("LocalityName").value,
+		ChiefId      = Fields("ChiefId").value,
+		Accountant   = Fields("Accountant").value,
+		CompanyId    = Fields("CompanyId").value,
+		Deleted      = Fields("Deleted").value;
 		Close();
 	}
 } catch (ex) {
@@ -89,16 +89,10 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="ПІБ" VALUE="<%=Accountant%>" SIZE="30" maxLength="30" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
-	<TD><SELECT NAME="CompanyId">
-	<% for (; !rsCompany.EOF; rsCompany.MoveNext()) {
-		if (rsCompany.Fields("CompanyId") == CompanyId) {
-			Response.Write('<OPTION VALUE="' + rsCompany.Fields("CompanyId") + '" SELECTED>' + rsCompany.Fields("CompanyName") + '</OPTION>')
-		} else if (Admin) {
-			Response.Write('<OPTION VALUE="' + rsCompany.Fields("CompanyId") + '">' + rsCompany.Fields("CompanyName") + '</OPTION>')
-		}
-	} rsCompany.Close();
-	Connect.Close()%></SELECT></TD></TR>
+	<TD><%Html.WriteCompany(rsCompany, CompanyId)%></TD></TR>
+
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Html.WriteEditButton(1)%>
+<% Html.WriteEditButton(1);
+Connect.Close() %>
 </FORM></BODY></HTML>

@@ -10,14 +10,9 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, "Довiдник керівників пустий!");
-	Cmd.CommandText = "SelectBank";
-	var rsBank = Cmd.Execute();
-	Solaren.EOF(rsBank, "Довiдник банкiв пустий!");
-	Cmd.CommandText = "SelectRegion";
-	var rsRegion = Cmd.Execute();
-	Solaren.EOF(rsRegion, "Довiдник областей пустий!");
+	var rsChief = Solaren.Execute("SelectChief", "Довiдник керівників пустий!"),
+	rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
+	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }

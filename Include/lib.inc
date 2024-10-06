@@ -19,10 +19,17 @@ Solaren = {
 		}
 	},
 
+	Execute: function(spName, msg) {
+		Cmd.CommandText = spName;
+		var rs = Cmd.Execute();
+		this.EOF(rs, msg);
+		return rs;
+	},
+
 	SetSessionVar: function(cfg) {
 		var SesVar = ["NewIndicator", "CheckCard"];
 		for (var i = 0; i < SesVar.length; i++) {
-			Session(SesVar[i]) =+ cfg[i];
+			Session(SesVar[i]) =+ cfg[i] || 0;
 		}
 	},
 

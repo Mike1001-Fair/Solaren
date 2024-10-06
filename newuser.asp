@@ -11,11 +11,8 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsCompany = Cmd.Execute();
-	Solaren.EOF(rsCompany, "Довiдник підприємств пустий!");
-	Cmd.CommandText = "SelectBranch";
-	var rsBranch = Cmd.Execute();
-	Solaren.EOF(rsBranch, "Довiдник ЦОС пустий!");
+	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
+	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 }
@@ -53,7 +50,7 @@ with (Html) {
 
 	<TR><TD ALIGN="RIGHT">ЦОС</TD>
 	<TD><%Html.WriteBranch(rsBranch, -1, 1);
-	Connect.Close()>%></TD></TR>
+	Connect.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

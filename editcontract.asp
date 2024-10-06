@@ -13,20 +13,11 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
 		}
 	}
-	var rsBank = Cmd.Execute();
-	Solaren.EOF(rsBank, 'Довідник банкiв пустий!');
-	Cmd.CommandText = "SelectBranch";
-	var rsBranch = Cmd.Execute();
-	Solaren.EOF(rsBranch, 'Довiдник ЦОС пустий!');
-	Cmd.CommandText = "SelectAen";
-	var rsAen = Cmd.Execute();
-	Solaren.EOF(rsAen, 'Довiдник РЕМ пустий !');
-	Cmd.CommandText = "SelectOperator";
-	var rsOperator = Cmd.Execute();
-	Solaren.EOF(rsOperator, 'Довiдник операторів пустий !');
-	Cmd.CommandText = "SelectPerformer";
-	var rsPerformer = Cmd.Execute();
-	Solaren.EOF(rsPerformer, 'Довiдник виконавців пустий !');
+	var rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
+	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!"),
+	rsAen =	Solaren.Execute("SelectAen", "Довiдник РЕМ пустий!"),
+	rsOperator = Solaren.Execute("SelectOperator", "Довiдник операторів пустий!"),
+	rsPerformer = Solaren.Execute("SelectPerformer", "Довiдник виконавців пустий!");
 
 	with (Cmd) {
 		CommandText = "GetContract";

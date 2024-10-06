@@ -30,6 +30,8 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
+Html.SetHead("Звiт");
+
 var Period = Month.GetPeriod(BegMonth, 0),
 totVol = totVolCost = totPdfo = totVz = totPurCost = 0,
 ResponseText = '<BODY CLASS="PrnBody">\n' +
@@ -38,10 +40,8 @@ ResponseText = '<BODY CLASS="PrnBody">\n' +
 '<CAPTION>ЦОС:' + BranchName + '</CAPTION>\n' +
 '<TR><TH ROWSPAN="2">З</TH><TH ROWSPAN="2">По</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">Рахунок</TH><TH>Тариф</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>\n' +
 '<TR><TH>коп</TH><TH>кВт&#183;год</TH><TH>Вартiсть</TH><TH>ПДФО</TH><TH>ВЗ</TH><TH>До сплати</TH></TR>\n';
-
 if (BegMonth != EndMonth) Period += " - " + Month.GetPeriod(EndMonth, 0);
 
-Html.SetHead("Звiт");
 for (var i=0; !rs.EOF; i++) {
 	ResponseText += '<TR><TD>' + rs.Fields("BegDate") +
 	Html.Write("TD","") + rs.Fields("EndDate") +

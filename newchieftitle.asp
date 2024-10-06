@@ -13,7 +13,6 @@ with (Html) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChiefTitle" ACTION="createchieftitle.asp" METHOD="post" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><%=Title%></H3>
-<SPAN CLASS="H3Span">керівника</SPAN>
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>

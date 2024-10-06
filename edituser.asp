@@ -16,17 +16,10 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsCompany = Cmd.Execute();
-	Solaren.EOF(rsCompany, "Довiдник підприємств пустий!");
-	Cmd.CommandText = "SelectBranch";
-	var rsBranch = Cmd.Execute();
-	Solaren.EOF(rsBranch, "Довiдник ЦОС пустий!");
-	with (Cmd) {
-		CommandText = "GetUser";
-		Parameters.Item("UserId").value = UserId;
-	}
-	var rsUser = Cmd.Execute();
-	Solaren.EOF(rsUser, "Інформацію не знадено");
+	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
+	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
+	Cmd.Parameters.Item("UserId").value = UserId;
+	var rsUser = Solaren.Execute("GetUser", "Користувача не знадено!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
