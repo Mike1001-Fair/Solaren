@@ -18,18 +18,15 @@ try {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
 		}
-	}
-	var rsAct = Cmd.Execute();
-	Solaren.EOF(rsAct, 'Параметри не знайдено');
+	}	
+	var rsAct = Solaren.Execute("GetInfoAct", "Параметри не знайдено");
 
 	with (Cmd) {
-		CommandText = "SelectAct";
 		with (Parameters) {
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("SelectAct", "Iнформацiю не знайдено");
 
 	with (rsAct) {
 		var LocalityName = Fields("LocalityName").value,

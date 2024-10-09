@@ -14,18 +14,16 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
 		}
 	}
-	var rsChiefTitle = Cmd.Execute();
-	Solaren.EOF(rsChiefTitle, "Довiдник посад пустий!");
-	Cmd.CommandText = "SelectChiefDoc";
-	var rsChiefDoc = Cmd.Execute();
-	Solaren.EOF(rsChiefTitle, "Довiдник документів керівника пустий!");
+	var rsChiefTitle = Solaren.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
+	rsChiefDoc = Solaren.Execute("SelectChiefDoc", "Довiдник документів керівника пустий!");
+
 	with (Cmd) {
-		CommandText = "GetChief";
 		with (Parameters) {
 			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, ChiefId));
 		}
 	}
-	var rsChief = Cmd.Execute();
+	var rsChief = Solaren.Execute("GetChief", "Керівника не знайдено!");
+
 	with (rsChief) {
 		var TitleId    = Fields("TitleId").value,
 		Name1          = Fields("Name1").value,

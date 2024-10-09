@@ -5,4 +5,5 @@ NewExport.addEventListener('submit', () => {
 		ReportCharSet.value = selectedOption.text;
 		action = Scripts[FileType.value] + ".asp";
 	}
+	if (NewExport.FileType.value == 2) Loader.Show();
 });

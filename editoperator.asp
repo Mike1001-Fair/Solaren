@@ -12,21 +12,23 @@ try {
 			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
 		}
 	}
-	var rsOperator = Cmd.Execute();
+	var rsOperator = Solaren.Execute("GetOperator", "Iнформацiю не знайдено");
 	with (rsOperator) {
 		var SortCode = Fields("SortCode").value,
 		EdrpoCode    = Fields("EdrpoCode").value,
 		OperatorName = Fields("OperatorName").value,
 		Deleted      = Fields("Deleted").value,
-		HeadTitle    = Deleted ? "Перегляд анкети" : "Редагування анкети";
+		Title        = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
-	} Connect.Close();
+	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {	
+	Connect.Close();
 }
 
 with (Html) {
-	SetHead(HeadTitle);
+	SetHead(Title);
 	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }%>
@@ -35,8 +37,7 @@ with (Html) {
 <INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=OperatorId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
-<H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=HeadTitle%></H3>
-<SPAN CLASS="H3Span">оператора</SPAN>
+<H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET NAME="OperatorSet"><LEGEND>Параметри</LEGEND>

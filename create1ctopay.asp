@@ -17,8 +17,7 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("List1Cexp", "Iнформацiю не знайдено");
 
 	with (Cmd) {
 		CommandText = "GetCompanyInfo";

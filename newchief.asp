@@ -1,7 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 || Session("RoleId") < 2;
+<% var Authorized = Session("RoleId") >= 0 || Session("RoleId") < 2,
+Title = "Новий керiвник";
+
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
 try {
@@ -11,23 +13,20 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsChiefTitle = Cmd.Execute();
-	Solaren.EOF(rsChiefTitle, "Довiдник посад пустий!");
-	Cmd.CommandText = "SelectChiefDoc";
-	var rsChiefDoc = Cmd.Execute();
-	Solaren.EOF(rsChiefTitle, "Довiдник документів керівника пустий!");
+	var rsChiefTitle = Solaren.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
+	rsChiefDoc = Solaren.Execute("SelectChiefDoc", "Довiдник документів керівника пустий!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
 with (Html) {
-	SetHead("Новий керiвник");
+	SetHead(Title);
 	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChief" METHOD="post" ACTION="createchief.asp" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><SPAN>&#128100;</SPAN>Новий керiвник</H3>
+<H3 CLASS="HeadText"><SPAN>&#128100;</SPAN><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD><FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>

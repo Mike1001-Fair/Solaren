@@ -14,6 +14,7 @@ try {
 		} Execute();
 	} 
 	var SortCode =++ Cmd.Parameters.Item("SortCode").value;
+
 	with (Cmd) {
 		CommandText = "SelectChiefBranch";
 		with (Parameters) {
@@ -21,14 +22,8 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, "Довiдник керівників пустий!");
-	Cmd.CommandText = "SelectCompany";
-	var rsCompany = Cmd.Execute();
-	Solaren.EOF(rsCompany, "Довiдник постачальникiв пустий!");
-	Cmd.CommandText = "SelectBank";
-	var rsBank = Cmd.Execute();
-	Solaren.EOF(rsBank, "Довiдник банкiв пустий!");
+	var rsChief = Solaren.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
+	rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }

@@ -23,7 +23,7 @@ Solaren = {
 		Cmd.CommandText = spName;
 		var rs = Cmd.Execute();
 		this.EOF(rs, msg);
-		return rs;
+		return rs
 	},
 
 	SetSessionVar: function(cfg) {

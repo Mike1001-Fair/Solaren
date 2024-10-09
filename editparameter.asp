@@ -10,12 +10,14 @@ function SysCfgWrite() {
 		NewIndicator: "Нові показники",
 		CheckCard   : "Перевіряти картку",
 		ShowDeleted : "Показувати видалене"
-	}
+	};
+
 	for (var key in SysCfg) {
 		var LabelRow = ['<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="', key, '">', SysCfg[key], '</LABEL>\n'];
 		ResponseText += LabelRow.join("");
 	}
-	Response.Write(ResponseText + '</FIELDSET>');
+	ResponseText +=	'</FIELDSET>';
+	Response.Write(ResponseText);
 }
 
 try {
@@ -34,7 +36,7 @@ try {
 		SysConfig        = Fields("SysConfig").value,
 		ShowMsg          = Fields("ShowMsg").value,
 		MsgText          = Fields("MsgText").value,
-		HeadTitle        = "Параметри";
+		Title            = "Параметри";
 		Close();
 	}
 } catch (ex) {
@@ -44,14 +46,14 @@ try {
 }
 
 with (Html) {
-	SetHead(HeadTitle);
+	SetHead(Title);
 	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditParameter" ACTION="updateparameter.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="SysConfig" VALUE="<%=SysConfig%>">
-<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="Images/gearGreen.svg"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="Images/gearGreen.svg"><%=Title%></H3>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD>

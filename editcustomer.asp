@@ -28,7 +28,7 @@ try {
 		HouseId          = Fields("HouseId").value,
 		Phone            = Fields("Phone").value,
 		Deleted          = Fields("Deleted").value,
-		HeadTitle        = Deleted ? "Перегляд анкети споживача" : "Редагування анкети споживача";
+		HeadTitle        = Deleted ? "Перегляд анкети" : "Редагування анкети";
 	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))

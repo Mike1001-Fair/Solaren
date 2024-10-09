@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+ReadOnly = Session("RoleId") > 0,
 BranchId = Request.QueryString("BranchId");
 
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
@@ -12,21 +13,17 @@ try {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
-	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, "Довiдник керівників пустий!");
-	Cmd.CommandText = "SelectCompany";
-	var rsCompany = Cmd.Execute();
-	Solaren.EOF(rsCompany, "Довiдник постачальникiв пустий!");
+	}	
+	var rsChief = Solaren.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
+	rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!");
+
 	with (Cmd) {
-		CommandText = "GetBranch";
 		with (Parameters) {
 			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, BranchId));
 		}
 	}
 
-	var rsBranch = Cmd.Execute();
-	Solaren.EOF(rsBranch, "Інформацію не знадено!");
+	var rsBranch = Solaren.Execute("GetBranch", "Інформацію не знадено!");
 	with (rsBranch) {
 		var SortCode = Fields("SortCode").value,
 		BranchName1  = Fields("BranchName1").value,
@@ -38,16 +35,13 @@ try {
 		ChiefId      = Fields("ChiefId").value,
 		Accountant   = Fields("Accountant").value,
 		CompanyId    = Fields("CompanyId").value,
-		Deleted      = Fields("Deleted").value;
+		Deleted      = Fields("Deleted").value,
+		Title        = Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 		Close();
 	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
-
-var Admin = Session("RoleId") == 0,
-ReadOnly = !Admin,
-Title = Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 
 with (Html) {
 	SetHead(Title);

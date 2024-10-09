@@ -12,14 +12,13 @@ try {
 			Append(CreateParameter("BankId", adInteger, adParamInput, 10, BankId));
 		}
 	}
-	var rsBank = Cmd.Execute();
-	Solaren.EOF(rsBank, 'Iнформацiю не знайдено');
+	var rsBank = Solaren.Execute("GetBank", "Iнформацiю не знайдено");
 	with (rsBank) {
 		var EdrpoCode = Fields("EdrpoCode").value,
 		MfoCode       = Fields("MfoCode").value,
 		BankName      = Fields("BankName").value,
 		Deleted       = Fields("Deleted").value,
-		HeadTitle     = Deleted ? "Перегляд анкети банку" : "Редагування анкети банку";
+		HeadTitle     = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}
 } catch (ex) {

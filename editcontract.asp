@@ -20,13 +20,13 @@ try {
 	rsPerformer = Solaren.Execute("SelectPerformer", "Довiдник виконавців пустий!");
 
 	with (Cmd) {
-		CommandText = "GetContract";
 		with (Parameters) {
 			while (Count > 0) { Delete(0) };
     			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 		}
 	}
-	var rsContract = Cmd.Execute();
+	var rsContract = Solaren.Execute("GetContract", "Договір не знайдено!");
+
 	with (rsContract) {
 		var CustomerId = Fields("CustomerId").value,
 		CustomerName   = Fields("CustomerName").value,

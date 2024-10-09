@@ -15,8 +15,7 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("List1Caccrual", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 } finally {

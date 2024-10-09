@@ -54,15 +54,13 @@ try {
 			Phone           = Item("Phone").value;
 		}
 
-		CommandText = "GetAllNote";
 		with (Parameters) {
 			while (Count > 0) { Delete(0) };
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Cmd.Execute(); 
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("GetAllNote", "Iнформацiю не знайдено"); 	
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 }

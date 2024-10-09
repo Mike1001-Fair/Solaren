@@ -52,14 +52,16 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {	
 	Connect.Close();
-	var ViewOnly = !Month.isPeriod(Session("OperDate"), ReportDate),
-	HeadTitle    = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
+}
 
-	with (Html) {
-		SetHead(HeadTitle);
-		WriteScript();
-		WriteMenu(Session("RoleId"), 0);
-	}
+var ViewOnly = !Month.isPeriod(Session("OperDate"), ReportDate),
+AllowDelBtn  = Session("RoleId") == 1,
+HeadTitle    = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
+
+with (Html) {
+	SetHead(HeadTitle);
+	WriteScript();
+	WriteMenu(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
@@ -110,5 +112,5 @@ try {
 	</FIELDSET>
 	</TD></TR>
 </TABLE>
-<% if (!ViewOnly) Html.WriteEditButton(Session("RoleId") == 2)%>
+<% if (!ViewOnly) Html.WriteEditButton(AllowDelBtn)%>
 </FORM></BODY></HTML>

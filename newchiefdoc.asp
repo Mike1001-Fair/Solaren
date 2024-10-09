@@ -11,12 +11,14 @@ try {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+		var SortCode =++ Parameters.Item("SortCode").value;
+	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Connect.Close();
 }
 
-var SortCode =++ Cmd.Parameters.Item("SortCode").value;
 with (Html) {
 	SetHead(Title);
 	WriteScript();
