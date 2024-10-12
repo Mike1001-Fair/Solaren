@@ -57,16 +57,18 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="FirstName" VALUE="<%=FirstName%>" SIZE="20" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">По батьковi</TD>
 	<TD><INPUT TYPE="TEXT" NAME="MiddleName" VALUE="<%=MiddleName%>" SIZE="20" REQUIRED></TD></TR>
-	<TR><TD ALIGN="RIGHT">Телефон</TD>
-	<TD><INPUT TYPE="Tel" NAME="Phone" VALUE="<%=Phone%>" PATTERN="\d{3,10}" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Логiн</TD>
-	<TD><INPUT TYPE="TEXT" NAME="LoginId" VALUE="<%=LoginId%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="LoginId" VALUE="<%=LoginId%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="20" MAXLENGTH="10" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Пароль</TD>
-	<TD><INPUT TYPE="password" NAME="Pswd" VALUE="" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" SIZE="10" MAXLENGTH="10" REQUIRED AUTOCOMPLETE="new-password">
+	<TD><INPUT TYPE="password" NAME="Pswd" VALUE="" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" SIZE="20" MAXLENGTH="10" REQUIRED AUTOCOMPLETE="new-password">
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="SetPswd" ID="SetPswd" TITLE="Сгенерувати">&#128273;</BUTTON>
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="ShowPswd" ID="ShowPswd" TITLE="Показати">&#128065;</BUTTON></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>
 	<TD><%Html.WriteRole("RoleId", RoleId)%></TD></TR>
+
+	<TR><TD ALIGN="RIGHT">Телефон</TD>
+	<TD><INPUT TYPE="Tel" NAME="Phone" VALUE="<%=Phone%>" PATTERN="\d{3,10}" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>
+
 
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
 	<TD><%Html.WriteCompany(rsCompany, CompanyId)%></TD></TR>

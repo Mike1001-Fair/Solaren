@@ -25,8 +25,7 @@ try {
 			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListPay", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }

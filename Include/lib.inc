@@ -71,12 +71,6 @@ Solaren = {
 
 	HTTPMethod: function(method, paramCount) {
 		var totalParams = Request.QueryString.Count + Request.Form.Count;
-		/*Response.Write("RequestMethod = " + this.RequestMethod +
-			"<br>Request.QueryString.Count = " + Request.QueryString.Count + 
-			"<br>Request.Form.Count = " + Request.Form.Count +
-			"<br>totalParams = " + totalParams +
-			"<br>" + (String(this.RequestMethod) === method)
-		);*/
 		return this.RequestMethod == method && totalParams == paramCount
 	},
 

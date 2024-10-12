@@ -17,8 +17,11 @@ try {
 			Append(CreateParameter("RegionName", adVarChar, adParamInput, 20, RegionName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
-	Cmd.Parameters.Item("Done").value ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Область з таким номером вже є");
+		var Done = Parameters.Item("Done").value;
+	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Connect.Close();
+	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Такий область вже є");
 }%>

@@ -21,8 +21,7 @@ try {
 			Append(CreateParameter("Filter", adBoolean, adParamInput, 1, Filter));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListSov", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
@@ -50,7 +49,8 @@ for (var i=0; !rs.EOF; i++) {
 	tot_ob_ct  += rs.Fields("ob_ct").value;
 	tot_s_end  += rs.Fields("s_end").value;
 	rs.MoveNext()
-} rs.Close();Connect.Close();
+} rs.Close();
+Connect.Close();
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i +
 Html.Write("TH","RIGHT") + tot_s.toDelimited(2) +
 Html.Write("TH","RIGHT") + tot_PurVol.toDelimited(0) +
