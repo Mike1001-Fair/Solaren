@@ -6,11 +6,9 @@ FXRate = {
 			open("GET", url, false);
 			send();
 		}
-
-		if (XmlHttp.status == 200) {
-			Response.Write("Server response: " + XmlHttp.responseText);
-		} else {
-			Response.Write("An error occurred: " + XmlHttp.status + " - " + XmlHttp.statusText);
-		}
+		var OkText = "Server response: " + XmlHttp.responseText,
+		ErrText = "An error occurred: " + XmlHttp.status + " - " + XmlHttp.statusText,
+		ResponseText = XmlHttp.status == 200 ? OkText : ErrText;
+		Response.Write(ResponseText);
 	}
 }%>

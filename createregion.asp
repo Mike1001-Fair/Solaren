@@ -23,5 +23,5 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
 	Connect.Close();
-	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Такий область вже є");
+	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Така область вже є");
 }%>
