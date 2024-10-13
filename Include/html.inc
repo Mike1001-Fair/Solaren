@@ -172,8 +172,9 @@ Html = {
 			this.Write("TD","LEFT") + rs.Fields("FilesName") +
 			this.Write("TD","") + rs.Fields("FileState") +
 			this.Write("TD","RIGHT") + rs.Fields("FileSize") + '</TD></TR>\n';
-		} rs.Close();Connect.Close();
-		Response.Write(ResponseText + '</TABLE></FIELDSET></DIV>')
+		} rs.Close();
+		ResponseText += '</TABLE></FIELDSET></DIV>';
+		Response.Write(ResponseText)
 	},
 
 	WriteEditButton: function(AllowDelBtn) {

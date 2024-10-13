@@ -23,8 +23,7 @@ try {
 			Append(CreateParameter("OperatorId", adVarChar, adParamInput, 10, OperatorId));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListBalance", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
@@ -34,6 +33,7 @@ totRetVol = totPurVol = totNeedVol = 0;
 if (BegMonth != EndMonth) Period += " - " + Month.GetPeriod(EndMonth, 0);
 
 Html.SetHead("Баланс");
+
 var ResponseText = '<BODY CLASS="PrnBody">\n' +
 	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>\n' +
 	'<TABLE CLASS="PrnTable">\n' +
@@ -45,15 +45,17 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","RIGHT") + rs.Fields("RetVol").value.toDelimited(0) +
 	Html.Write("TD","RIGHT") + rs.Fields("PurVol").value.toDelimited(0) +
 	Html.Write("TD","RIGHT") + rs.Fields("NeedVol").value.toDelimited(0) + '</TD></TR>\n';
-
 	totRetVol += rs.Fields("RetVol");
 	totPurVol += rs.Fields("PurVol");
 	totNeedVol += rs.Fields("NeedVol");
 	rs.MoveNext();
-} rs.Close();Connect.Close()
+}
+rs.Close();
+Connect.Close();
 
 ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i +
 	Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
 	Html.Write("TH","RIGHT") + totPurVol.toDelimited(0) +
-	Html.Write("TH","RIGHT") + totNeedVol.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
+	Html.Write("TH","RIGHT") + totNeedVol.toDelimited(0) + 
+	'</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>

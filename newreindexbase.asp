@@ -8,8 +8,7 @@ if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
 try {
 	Solaren.SetCmd("GetBaseInfo");
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("GetBaseInfo", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
@@ -22,6 +21,7 @@ with (Html) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="ReindexBase" ACTION="runreindexbase.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Title%></H3>
-<% Html.WriteBaseInfo(rs) %>
+<% Html.WriteBaseInfo(rs);
+Connect.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>

@@ -2,21 +2,22 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <% var Authorized = Session("RoleId") == 1,
-Title = "Події";
+Title = "Події",
+Event = {
+	Name: ["Завантаження показників", "Завантаження оплат", "Апдейт договору"],
+	Write: function() {
+		var ResponseText = '<FIELDSET><LEGEND>Подія</LEGEND>\n<SELECT NAME="EventType">',
+		option;
+		for (var i = 0; i < this.Name.length; i++) {
+			option = ['<OPTION VALUE="', i, '">', this.Name[i], '</OPTION>\n'];
+			ResponseText += option.join("");
+		}
+		ResponseText += '</SELECT></FIELDSET>';
+		Response.Write(ResponseText)
+	}
+};
 
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-function WriteEventType() {
-	var EventName = ["Завантаження показників", "Завантаження оплат", "Апдейт договору"],
-	ResponseText = '<FIELDSET><LEGEND>Подія</LEGEND>\n<SELECT NAME="EventType">',
-	option;
-	for (var k in EventName) {
-		option = ['<OPTION VALUE="', k, '">', EventName[k], '</OPTION>\n'];
-		ResponseText += option.join("");
-	}
-	ResponseText += '</SELECT></FIELDSET>';
-	Response.Write(ResponseText)
-}
 
 with (Html) {
 	SetHead(Title);
@@ -30,7 +31,7 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDatePeriod("Період", Session("OperDate"), Session("EndDate"), Html.MinDate, Html.MaxDate);
-	WriteEventType() %>
+	Event.Write()%>
 	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>
