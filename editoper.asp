@@ -1,109 +1,60 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = Session("RoleId") == 1,
+FactVolId = Request.QueryString("FactVolId");
+
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
-with (Request) {
-	var FactVolId = QueryString("FactVolId");
-}
-
 try {
-	Solaren.SetCmd("SelectContract");
+	Solaren.SetCmd("GetOper");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, 1));
-		}
-	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Довідник договорів пустий!');
-
-	with (Cmd) {
-		CommandText = "GetOper";
-		with (Parameters) {
-			while (Count > 0) { Delete(0) };
 			Append(CreateParameter("FactVolId", adInteger, adParamInput, 10, FactVolId));
 		}
 	}
-	var rsVol = Cmd.Execute();
-
-	with (rsVol) {
+	var rs = Solaren.Execute("GetOper", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	with (rs) {
 		var ContractId = Fields("ContractId").value,
+		ContractName   = Fields("ContractName").value,
 		BegDate        = Fields("BegDate").value,
 		EndDate        = Fields("EndDate").value,
 		RetVol         = Fields("RetVol").value,
 		VolCost        = Fields("VolCost").value,
+		IndicatorId    = Fields("IndicatorId").value,
 		Deleted        = Fields("Deleted").value;
 		Close();
 	}
+	Connect.Close();
+}
 
-	with (Html) {
-		SetHead("Редагування операції");
-		WriteMenu(Session("RoleId"), 0);
-	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+var ViewOnly = !Month.isPeriod(Session("OperDate"), EndDate) || IndicatorId != "",
+Title = Deleted || ViewOnly  ? "Перегляд операції" : "Редагування операції";
+
+with (Html) {
+	SetHead(Title);
+	WriteScript();
+	WriteMenu(Session("RoleId"), 0);
 }%>
-<SCRIPT>
-function LoadForm() {
-	with (EditOper) {
-		let BegDate = new Date("<%=BegDate%>"),
-		OperDate = new Date("<%=Session("OperDate")%>"),
-		elm = document.getElementById("H3Id");
-
-		if (Deleted.value == "True") {
-			elm.textContent = "Перегляд операції";
-			OperSet.disabled = true;
-		} else if (BegDate < OperDate) {
-			elm.textContent = "Перегляд операції";
-			OperSet.disabled = true;
-			SbmBtn.disabled = true;
-			DelBtn.disabled = true;
-		}		
-	}
-}
-
-function ChkForm() {
-	with (EditOper) {
-		if (Deleted.value != "True") {
-			EndDate.min = BegDate.value;
-			SbmBtn.disabled = !BegDate.validity.valid || !EndDate.validity.valid || !VolCost.validity.valid || !RetVol.validity.valid;
-		}
-	}
-
-}
-
-function DelOper() {
-	if (confirm("Ви впевненнi ?")) {
-		EditOper.action = "delfactvol.asp?FactVolId=<%=FactVolId%>&Deleted=<%=Deleted%>"
-	} else return false
-
-}
-</SCRIPT>
-
-<BODY CLASS="MainBody" ONLOAD="LoadForm()">
-<FORM CLASS="ValidForm" NAME="EditOper" ACTION="updateoper.asp" METHOD="POST" ONINPUT="ChkForm()">
+<BODY CLASS="MainBody">
+<FORM CLASS="ValidForm" NAME="EditOper" ACTION="updateoper.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="FactVolId" VALUE="<%=FactVolId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 
-<H3 CLASS="HeadText" ID="H3Id"><%=Deleted ? "Перегляд" : "Редагування"%> операції</H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
-       	<TR><TD>
+       	<TR><TD ALIGN="CENTER">
+	<% Html.WriteContractName(ContractName, "REQUIRED");
+	Html.WriteDatePeriod("Період", BegDate, EndDate, Html.MinDate, Html.MaxDate) %>
+
 	<FIELDSET NAME="OperSet"><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
-	<TR><TD ALIGN="RIGHT">Перioд</TD>
-	<TD><INPUT TYPE="date" NAME="BegDate" VALUE="<%=BegDate%>" MIN="<%=Html.MinDate%>" MAX="<%=Html.MaxDate%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="EndDate" VALUE="<%=EndDate%>" MIN="<%=Html.MinDate%>" MAX="<%=Html.MaxDate%>" REQUIRED>
-
-	<TR><TD ALIGN="RIGHT">Договiр</TD>
-	<TD><SELECT NAME="ContractId">
-	<% for (var selected; !rs.EOF; rs.MoveNext()) {
-		selected = rs.Fields("ContractId") == ContractId ? '" SELECTED>' : '">';
-		Response.Write('<OPTION VALUE="' + rs.Fields("ContractId") + selected + rs.Fields("ContractName") + '</OPTION>');
-	} rs.Close(); Connect.Close()%>
-	</SELECT></TD></TR>
-
 	<TR><TD ALIGN="RIGHT">Видача</TD>
 	<TD><INPUT TYPE="Number" NAME="RetVol" VALUE="<%=RetVol%>" STEP="1" MIN="0" MAX="999999" REQUIRED></TD></TR>
 
@@ -111,6 +62,5 @@ function DelOper() {
 	<TD><INPUT TYPE="Number" NAME="VolCost" VALUE="<%=VolCost%>" STEP="0.01" MIN="0" MAX="99999999" REQUIRED></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% if (Deleted) {%><BUTTON CLASS="RestoreBtn" NAME="DelBtn" onclick="return DelOper()">&#9851;Вiдновити</BUTTON>
-<%} else {%><BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="return SbmForm()">&#128190;Зберегти</BUTTON>
-<BUTTON CLASS="DelBtn" NAME="DelBtn" onclick="return DelOper()">&#128465;Видалити</BUTTON><%}%></FORM></BODY></HTML>
+<% if (!ViewOnly) Html.WriteEditButton(1) %>
+</FORM></BODY></HTML>

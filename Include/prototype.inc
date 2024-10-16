@@ -63,14 +63,4 @@ with (Array) {
 			if (this[i] < 10) this[i] = "0" + this[i];
 		}		
 	}
-}
-	/*prototype.includes = function(target) {
-		var found = i = 0;
-		while (!found && i < this.length) {
-			found = this[i] == target;
-			i++;
-		}
-		return found
-	}
-}*/
-%>
+}%>

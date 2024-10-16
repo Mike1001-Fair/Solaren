@@ -5,7 +5,7 @@ var CodePage = {
 },
 
 Html = {
-	Version     : "v=3.1",
+	Version     : "v=3.3",
 	ScriptPath  : "Scripts/",
 	StylePath   : "Styles/",
 	ImagePath   : "Images/",
@@ -103,14 +103,12 @@ Html = {
 	},
 
 	WriteTarifGroup: function() {
-		var ResponseText = '<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">',
-		option;
+		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'];
 		for (var i = 0; i < this.TarifGroup.length; i++) {
-			option = ['<OPTION VALUE="', i, '">', this.TarifGroup[i], '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push('<OPTION VALUE="' + i + '">' + this.TarifGroup[i] + '</OPTION>');
 		}
-		ResponseText += '</SELECT>\n</FIELDSET>\n';
-		Response.Write(ResponseText)
+		ResponseText.push('</SELECT>\n</FIELDSET>\n');
+		Response.Write(ResponseText.join(""));
 	},
 
 	WriteStreetType: function(tagName, StreetType) {
@@ -367,8 +365,12 @@ Html = {
 					option = ['<OPTION VALUE="', fileName, '">', fileName, '</OPTION>'];
 					ResponseText += option.join("");
 				}
-			} else ResponseText += '<OPTION>Folder is empty</OPTION>';
-		} else ResponseText += '<OPTION>Folder not exists</OPTION>';
+			} else {
+				ResponseText += '<OPTION>Folder is empty</OPTION>';
+			}
+		} else {
+			ResponseText += '<OPTION>Folder not exists</OPTION>';
+		}
 		Response.Write(ResponseText + '</SELECT>');
 	},
 
@@ -384,8 +386,9 @@ Html = {
 	},
 
 	WriteDate: function() {
-		Response.Write('<FIELDSET>\n<LEGEND>Дата</LEGEND>\n' + 
-		'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + Session("OperDate") + '" MIN="' + this.MinDate + '" MAX="' + this.MaxDate + '" REQUIRED></LABEL>\n' +
-		'</FIELDSET>\n')
+		var ResponseText = ['<FIELDSET>\n<LEGEND>Дата</LEGEND>\n',
+		'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="', Session("OperDate"), '" MIN="', this.MinDate, '" MAX="', this.MaxDate, '" REQUIRED></LABEL>\n',
+		'</FIELDSET>\n'];
+		Response.Write(ResponseText.join(""));
 	}
-};%>
+}%>

@@ -25,22 +25,22 @@ try {
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListVol", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
 with (Html) {
 	SetHead(Title);
+	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }
 
 var nVol = totRetVol = totRecVol = totSaldo = totnVol = 0,
 ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">' + Title + '<SPAN>Договор: ' + ContractName + '</SPAN></H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>З</TH><TH>По</TH><TH>Прийом</TH><TH>Видача</TH><TH>Покупка</TH><TH>Потреби</TH></TR>\n';
+'<H3 CLASS="H3Text">' + Title + '<SPAN>Договор: ' + ContractName + '</SPAN></H3>\n' +
+'<TABLE CLASS="InfoTable">\n' +
+'<TR><TH>З</TH><TH>По</TH><TH>Прийом</TH><TH>Видача</TH><TH>Покупка</TH><TH>Потреби</TH></TR>\n';
 
 for (var i=0; !rs.EOF; i++) {
 	nVol = rs.Fields("RetVol") - rs.Fields("PurVol");
@@ -55,11 +55,12 @@ for (var i=0; !rs.EOF; i++) {
 	totSaldo  += rs.Fields("PurVol");
 	totnVol   += nVol;
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();
+Connect.Close();
 
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i +
-	Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +
-	Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
-	Html.Write("TH","RIGHT") + totSaldo.toDelimited(0) +
-	Html.Write("TH","RIGHT") + totnVol.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
+Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +
+Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
+Html.Write("TH","RIGHT") + totSaldo.toDelimited(0) +
+Html.Write("TH","RIGHT") + totnVol.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>

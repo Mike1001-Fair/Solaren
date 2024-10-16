@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% var Authorized = Session("RoleId") == 1,
 Title = "Тариф";
 
@@ -19,8 +20,7 @@ with (Html) {
 	<% with (Html) {
 		WriteDate();
 		WriteTarifGroup();
-	}%>
-	</TD></TR>
+	}%></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
