@@ -12,8 +12,9 @@ const Ajax = {
 	},
 
 	get errLenMsg() {
-		let template = Resource.GetText("ErrLenMsg");
-		return template.replace("{min}", Ajax.minQueryLen).replace("{max}", Ajax.maxQueryLen);
+		const template = Resource.GetText("ErrLenMsg"),
+		result = template.replace("{min}", this.minQueryLen);
+		return result.replace("{max}", this.maxQueryLen)
 	},
 
 	get noDataMsg() {
