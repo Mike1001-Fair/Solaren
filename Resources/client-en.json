@@ -1,7 +1,8 @@
 {
 "Items": {
 	"Confirm": "Are you sure❓",
-	"NoDataMsg": "Data not found"
+	"NoDataMsg": "Data not found",
+	"ErrLenMsg": "The number of characters must be between {min} and {max}"
 },
 
 "LocalityType": [

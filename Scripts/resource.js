@@ -1,6 +1,6 @@
 ﻿"use strict";
 const Resource = {
-	Version: "v=2.1",
+	Version: "v=2.2",
 	Path: "Resources/",
 	JsonData: null,
 	ErrMsg: ["JSON data is not loaded", "Item not found"], 

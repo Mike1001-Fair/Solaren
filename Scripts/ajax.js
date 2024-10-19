@@ -11,8 +11,9 @@ const Ajax = {
 		return Resource.GetItem("LocalityType")
 	},
 
-	get errLenMsg() {	
-		return `Кількість символів повинна бути від ${this.minQueryLen} до ${this.maxQueryLen}`
+	get errLenMsg() {
+		let template = Resource.GetText("ErrLenMsg");
+		return template.replace("{min}", Ajax.minQueryLen).replace("{max}", Ajax.maxQueryLen);
 	},
 
 	get noDataMsg() {
