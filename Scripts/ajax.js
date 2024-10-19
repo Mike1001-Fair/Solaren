@@ -31,8 +31,8 @@ const Ajax = {
 		fetch(`getfilelist.asp?FolderName=${FolderName}`)
 		.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 		.then(data => data.files[0] == "0" ? location.href="accessdenied.asp" : this.SetFileList(data))
-		.catch((error) => this.errFetchMsg(error));
-		document.body.style.cursor = "auto";
+		.catch((error) => this.errFetchMsg(error))
+		.finally(() => document.body.style.cursor="auto");
 	},
 
 	SetFileList(data) {
@@ -74,8 +74,8 @@ const Ajax = {
 			fetch(`getcustomerdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].CustomerId == 0 ? location.href="accessdenied.asp" : this.SetCustomerList(data))
-			.catch((error) => this.errFetchMsg(error));
-			CustomerName.style.cursor = "auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => CustomerName.style.cursor = "auto");
 		}
 		return false
 	},
@@ -120,8 +120,8 @@ const Ajax = {
 			fetch(`getcontractdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].ContractId == 0 ? location.href="accessdenied.asp" : this.SetContractList(data))
-			.catch((error) => this.errFetchMsg(error));
-			ContractName.style.cursor = "auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => ContractName.style.cursor = "auto");
 		}
 		return false
 	},
@@ -167,8 +167,8 @@ const Ajax = {
 			fetch(`getareadata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].AreaId == 0 ? location.href="accessdenied.asp" : this.SetAreaList(data))
-			.catch((error) => this.errFetchMsg(error));
-			AreaName.style.cursor = "auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => AreaName.style.cursor = "auto");
 		}
 		return false
 	},
@@ -212,8 +212,8 @@ const Ajax = {
 			fetch(`getlocalitydata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].LocalityId == 0 ? location.href="accessdenied.asp" : this.SetLocalityList(data))
-			.catch((error) => this.errFetchMsg(error));
-			LocalityName.style.cursor = "auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => LocalityName.style.cursor = "auto");
 		}
 		return false
 	},
@@ -295,8 +295,8 @@ const Ajax = {
 			fetch(`getstreetdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].StreetId == 0 ? location.href="accessdenied.asp" : this.SetStreetList(data))
-			.catch((error) => this.errFetchMsg(error));
-			StreetName.style.cursor = "auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => StreetName.style.cursor = "auto");			
 		}
 		return false
 	},
@@ -378,8 +378,8 @@ const Ajax = {
 					data[0].MeterId > 0 ? SetMeterList(data) : location.href="accessdenied.asp"
 				}
 			})
-			.catch((error) => this.errFetchMsg(error));
-			document.body.style.cursor="auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => document.body.style.cursor="auto");
 		} else {
 			ResetMeterList();
 		}
@@ -391,8 +391,8 @@ const Ajax = {
 			fetch(`getmeterinfo.asp?ReportDate=${ReportDate}&MeterId=${MeterId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data.length > 0 ? SetMeterInfo(data) : location.href="accessdenied.asp")
-			.catch((error) => this.errFetchMsg(error));
-			document.body.style.cursor="auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => document.body.style.cursor="auto");
 		} else {
 			ResetMeterInfo()
 		}

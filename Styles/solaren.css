@@ -524,8 +524,7 @@
 	font-size  : inherit;
 	font-family: inherit;
 	margin     : auto; 
-	padding    : 1px 0px;
-/*	margin     : 4px 0px; */
+	padding    : 2px 0px;
 }
 
 /*----------------- стиль для блочного INPUT -----------------*/

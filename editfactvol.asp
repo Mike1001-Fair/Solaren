@@ -42,6 +42,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditFactVol" ACTION="updatefactvol.asp" METHOD="POST">
+<INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="FactVolId" VALUE="<%=FactVolId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="IndicatorId" VALUE="<%=IndicatorId%>">
@@ -50,8 +51,8 @@ with (Html) {
 <H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% Html.WriteContractName(ContractName, "REQUIRED");
-	Html.WriteDatePeriod("Період", BegDate, EndDate, Html.MinDate, Html.MaxDate) %>
+	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Html.MinDate, Html.MaxDate);
+	Html.WriteContractName(ContractName, "REQUIRED") %>
 
 	<FIELDSET NAME="VolSet"><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>

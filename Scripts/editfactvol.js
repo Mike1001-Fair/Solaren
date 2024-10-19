@@ -45,7 +45,8 @@ function ChkForm() {
 		Saldo.value = isNaN(saldo) ? "" : Math.abs(saldo);
 		elm.textContent = (notsaldo || !saldo) ? "Сальдо" : saldo > 0 ? "Продаж" : "Покупка";
 		if (SbmBtn) {
-			SbmBtn.disabled = !BegDate.validity.valid || !EndDate.validity.valid || !RecVol.validity.valid || !RetVol.validity.valid || notsaldo;
+			SbmBtn.disabled = !BegDate.validity.valid || !EndDate.validity.valid || !RecVol.validity.valid
+				|| !RetVol.validity.valid || notsaldo || ContractId.value == -1;
 		}
 	}
 }

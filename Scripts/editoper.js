@@ -15,7 +15,7 @@ EditOper.addEventListener('input', () => {
 	with (EditOper) {
 		if (SbmBtn) {
 			SbmBtn.disabled = !BegDate.validity.valid || !EndDate.validity.valid ||
-				!VolCost.validity.valid || !RetVol.validity.valid;
+				!VolCost.validity.valid || !RetVol.validity.valid || ContractId.value == -1;
 		}
 	}
 });
