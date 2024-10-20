@@ -29,7 +29,7 @@ const Ajax = {
 
 	GetFileList(FolderName) {
 		//console.log(`FolderName: ${FolderName}`);
-		document.body.style.cursor = "wait";
+		document.body.style.cursor = "progress";
 		fetch(`getfilelist.asp?FolderName=${FolderName}`)
 		.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 		.then(data => data.files[0] == "0" ? location.href="accessdenied.asp" : this.SetFileList(data))
@@ -72,7 +72,7 @@ const Ajax = {
 		} else {		
 			CustomerList.textContent = "";
 			CustomerName.title = "";
-			CustomerName.style.cursor = "wait";
+			CustomerName.style.cursor = "progress";
 			fetch(`getcustomerdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].CustomerId == 0 ? location.href="accessdenied.asp" : this.SetCustomerList(data))
@@ -118,7 +118,7 @@ const Ajax = {
 		} else {		
 			ContractList.textContent = "";
 			ContractName.title = "";
-			ContractName.style.cursor = "wait";
+			ContractName.style.cursor = "progress";
 			fetch(`getcontractdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].ContractId == 0 ? location.href="accessdenied.asp" : this.SetContractList(data))
@@ -165,7 +165,7 @@ const Ajax = {
 		} else {		
 			AreaList.textContent = "";
 			AreaName.title = "";
-			AreaName.style.cursor = "wait";
+			AreaName.style.cursor = "progress";
 			fetch(`getareadata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].AreaId == 0 ? location.href="accessdenied.asp" : this.SetAreaList(data))
@@ -210,7 +210,7 @@ const Ajax = {
 			LocalityName.title = this.errLenMsg;
 		} else {		
 			LocalityList.textContent = "";
-			LocalityName.style.cursor = "wait";
+			LocalityName.style.cursor = "progress";
 			fetch(`getlocalitydata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].LocalityId == 0 ? location.href="accessdenied.asp" : this.SetLocalityList(data))
@@ -293,7 +293,7 @@ const Ajax = {
 			StreetName.title = this.errLenMsg;
 		} else {		
 			StreetList.textContent = "";
-			StreetName.style.cursor = "wait";
+			StreetName.style.cursor = "progress";
 			fetch(`getstreetdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].StreetId == 0 ? location.href="accessdenied.asp" : this.SetStreetList(data))
@@ -370,7 +370,7 @@ const Ajax = {
 
 	GetMeterList(ContractId) {
 		if (isDigit(ContractId)) {
-			document.body.style.cursor="wait";
+			document.body.style.cursor="progress";
 			fetch(`getmeterlist.asp?ContractId=${ContractId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
@@ -389,7 +389,7 @@ const Ajax = {
 
 	GetMeterInfo(MeterId, ReportDate) {
 		if (isDigit(MeterId)) {
-			document.body.style.cursor="wait";
+			document.body.style.cursor="progress";
 			fetch(`getmeterinfo.asp?ReportDate=${ReportDate}&MeterId=${MeterId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data.length > 0 ? SetMeterInfo(data) : location.href="accessdenied.asp")

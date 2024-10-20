@@ -22,7 +22,10 @@ function SysCfgWrite() {
 
 try {
 	Solaren.SetCmd("GetParameter");
-	var rs = Cmd.Execute();
+	var rs = Solaren.Execute("GetParameter", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+} finally {
 	with (rs) {
 		var StartSysDate = Fields("StartSysDate").value,
 		OperMonth        = Fields("OperMonth").value,
@@ -39,9 +42,6 @@ try {
 		Title            = "Параметри";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
-} finally {	
 	Connect.Close();
 }
 

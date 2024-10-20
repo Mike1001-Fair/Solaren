@@ -6,10 +6,12 @@ const Resource = {
 	ErrMsg: ["JSON data is not loaded", "Item not found"], 
 
 	Load(fileName) {
+		document.body.style.cursor = "progress";
 		fetch(`${this.Path}${fileName}?${this.Version}`)
 		.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 		.then(jsondata => this.JsonData = jsondata)
-		.catch(error => console.warn(`Fetch request error: ${error.message}`));
+		.catch(error => console.warn(`Fetch request error: ${error.message}`))
+		.finally(() => document.body.style.cursor="auto");
 	},
 
 	GetText(id) {
