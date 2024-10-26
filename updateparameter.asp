@@ -44,7 +44,6 @@ try {
 	Connect.Close();
 	var ym = OperMonth.split("-"),
 	EndDate = new Date(ym[0], ym[1], 0);
-	Session("StartSysDate") = StartSysDate;
 	Session("OperDate")     = OperMonth + "-01";
 	Session("OperMonth")    = OperMonth;
 	Session("EndDate")      = OperMonth + "-" + EndDate.getDate();

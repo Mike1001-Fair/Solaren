@@ -1,7 +1,8 @@
 <%@LANGUAGE="JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 0;
+<% var Authorized = Session("RoleId") == 0,
+Title = "Нова компанія";
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 try {
 	Solaren.SetCmd("SelectChief");
@@ -18,7 +19,7 @@ try {
 }
 
 with (Html) {
-	SetHead("Нова компанія");
+	SetHead(Title);
 	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }%>
@@ -26,7 +27,7 @@ with (Html) {
 <FORM CLASS="ValidForm" NAME="NewCompany" ACTION="createcompany.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
-<H3 CLASS="HeadText"><IMG SRC="Images/office.svg">Нова компанія</H3>
+<H3 CLASS="HeadText"><IMG SRC="Images/office.svg"><%=Title%></H3>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">

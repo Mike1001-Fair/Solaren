@@ -28,15 +28,14 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
 	with (rs) {
-		var RoleId              = Fields("RoleId").value,
-		SysConfig               = Fields("SysConfig").value;
-		Session("UserGUID")     = Fields("UserGUID").value;
-		Session("UserId")       = Fields("UserId").value;
-		Session("Token")        = Fields("Token").value;
-		Session("StartSysDate") = Fields("StartSysDate").value;
-		Session("OperDate")     = Fields("OperDate").value;
-		Session("HoursLimit")   = Fields("HoursLimit").value;
-		Session("MsgText")      = Fields("MsgText").value;
+		var RoleId            = Fields("RoleId").value,
+		SysConfig             = Fields("SysConfig").value;
+		Session("UserGUID")   = Fields("UserGUID").value;
+		Session("UserId")     = Fields("UserId").value;
+		Session("Token")      = Fields("Token").value;
+		Session("OperDate")   = Fields("OperDate").value;
+		Session("HoursLimit") = Fields("HoursLimit").value;
+		Session("MsgText")    = Fields("MsgText").value;
        		Close();
 	}
 	var ymd  = Session("OperDate").split("-"),

@@ -8,61 +8,51 @@ if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
 try {
 	Solaren.SetCmd("SelectChief");
-	with (Cmd) {
-		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-		}
-	}
-
+	Cmd.Parameters.Append(Cmd.CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 	var rsChief = Solaren.Execute("SelectChief", "Довiдник керівників пустий!"),
 	rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
 	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
-
-	with (Cmd) {
-		with (Parameters) {
-			Append(Cmd.CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
-		}
-	}
+	Cmd.Parameters.Append(Cmd.CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
 	var rsCompany = Solaren.Execute("GetCompany", "Компанію не знайдено!");
-
-	with (rsCompany) {
-		var ChiefId  = Fields("ChiefId").value,
-		CompanyName  = Fields("CompanyName").value,
-		CompanyCode  = Fields("CompanyCode").value,
-		Accountant   = Fields("Accountant").value,
-		LogoType     = Fields("LogoType").value,
-
-		PostIndex    = Fields("PostIndex").value,
-		HouseId      = Fields("HouseId").value,
-		StreetId     = Fields("StreetId").value,
-		StreetName   = Fields("StreetName").value,
-		LocalityId   = Fields("LocalityId").value,
-		LocalityName = Fields("LocalityName").value,
-		RegionId     = Fields("RegionId").value,
-
-		MfoCode      = Fields("MfoCode").value,
-		BankAccount  = Fields("BankAccount").value,
-
-		LicenseCode  = Fields("LicenseCode").value,
-		LicenseDate  = Fields("LicenseDate").value,
-
-		AccountantTaxCode = Fields("AccountantTaxCode").value,
-		TaxCode           = Fields("TaxCode").value,
-		TaxAdminCode      = Fields("TaxAdminCode").value,
-		TaxStatus	  = Fields("TaxStatus").value,
-
-		Phone   = Fields("Phone").value,
-		Email   = Fields("Email").value,
-		WebSite = Fields("WebSite").value,
-
-		PerformerTitle = Fields("PerformerTitle").value,
-		PerformerName  = Fields("PerformerName").value,
-		Deleted        = Fields("Deleted").value,
-		HeadTitle      = Deleted ? "Перегляд компанії" : "Редагування компанії";
-		Close();
-	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+}
+
+with (rsCompany) {
+	var ChiefId  = Fields("ChiefId").value,
+	CompanyName  = Fields("CompanyName").value,
+	CompanyCode  = Fields("CompanyCode").value,
+	Accountant   = Fields("Accountant").value,
+	LogoType     = Fields("LogoType").value,
+
+	PostIndex    = Fields("PostIndex").value,
+	HouseId      = Fields("HouseId").value,
+	StreetId     = Fields("StreetId").value,
+	StreetName   = Fields("StreetName").value,
+	LocalityId   = Fields("LocalityId").value,
+	LocalityName = Fields("LocalityName").value,
+	RegionId     = Fields("RegionId").value,
+
+	MfoCode      = Fields("MfoCode").value,
+	BankAccount  = Fields("BankAccount").value,
+
+	LicenseCode  = Fields("LicenseCode").value,
+	LicenseDate  = Fields("LicenseDate").value,
+
+	AccountantTaxCode = Fields("AccountantTaxCode").value,
+	TaxCode           = Fields("TaxCode").value,
+	TaxAdminCode      = Fields("TaxAdminCode").value,
+	TaxStatus	  = Fields("TaxStatus").value,
+
+	Phone   = Fields("Phone").value,
+	Email   = Fields("Email").value,
+	WebSite = Fields("WebSite").value,
+
+	PerformerTitle = Fields("PerformerTitle").value,
+	PerformerName  = Fields("PerformerName").value,
+	Deleted        = Fields("Deleted").value,
+	HeadTitle      = Deleted ? "Перегляд компанії" : "Редагування компанії";
+	Close();
 }
 
 with (Html) {

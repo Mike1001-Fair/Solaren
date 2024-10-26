@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
 	const Inputs = document.querySelectorAll("fieldset[name='SysCfgSet'] > label > input");
 	SetSysCfg(Inputs, EditParameter.SysConfig.value);
-	HideMsg();
+	SetMsgVisibility();
 });
 
 EditParameter.addEventListener('input', () => {
@@ -16,19 +16,21 @@ EditParameter.addEventListener('input', () => {
 	}
 });
 
-EditParameter.addEventListener('submit', () => {
+EditParameter.addEventListener('submit', (event) => {
 	if (confirm("Ви впевненi\u2753")) {
 		const Inputs = document.querySelectorAll("fieldset[name='SysCfgSet'] > label > input");
 		with (EditParameter) {
 			MsgText.value = MsgText.value.trim();
 			SysConfig.value = GetSysCfg(Inputs);
 		}
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
-ShowMsg.addEventListener('click', HideMsg);
+ShowMsg.addEventListener('click', SetMsgVisibility);
 
-function HideMsg() {
+function SetMsgVisibility() {
 	with (EditParameter) {
 		MsgText.hidden = !ShowMsg.checked;
 		MsgText.hidden ? MsgText.value = null : MsgText.focus();

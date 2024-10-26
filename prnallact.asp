@@ -86,5 +86,7 @@ for (var j=0; !rs.EOF; j++) {
 			ResponseText += '<SPAN CLASS="PageBreak"></SPAN>\n';
 		}
 	}
-} Response.Write(ResponseText + '</BODY></HTML>');
-rs.Close();Connect.Close()%>
+}
+Response.Write(ResponseText + '</BODY></HTML>');
+rs.Close();
+Connect.Close()%>
