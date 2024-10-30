@@ -55,6 +55,6 @@ try {
 		Solaren.SetSessionVar(SysCfg);
 		Html.SetHead(Dictionary.Item("DefaultTitle"));
 		Html.WriteMenu(RoleId, 1);
-		Connect.Close();
 	}
+	Connect.Close();
 }%>
