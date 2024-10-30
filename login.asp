@@ -31,28 +31,29 @@ try {
 	if (rs.EOF) {
 		Solaren.SysMsg(2, AuthenticationError);
 	} else {
-		with (rs) {
-			var RoleId            = Fields("RoleId").value,
-			SysConfig             = Fields("SysConfig").value;
-			Session("UserGUID")   = Fields("UserGUID").value;
-			Session("UserId")     = Fields("UserId").value;
-			Session("Token")      = Fields("Token").value;
-			Session("OperDate")   = Fields("OperDate").value;
-			Session("HoursLimit") = Fields("HoursLimit").value;
-			Session("MsgText")    = Fields("MsgText").value;
-	       		Close();
-		}
-		var ymd  = Session("OperDate").split("-"),
-		Today    = new Date(),
-		EndDate  = new Date(ymd[0], ymd[1], 0),
-		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
-		SysCfg   = SysConfig.toString(2).padStart(2).split('');
-		Session("RoleId")    = RoleId;
-		Session("OperMonth") = Session("OperDate").slice(0, 7);
-		Session("Today")     = Today.toStr();
-		Session("EndDate")   = EndDate.toStr();
-		Session("NextDate")  = NextDate.toStr();
+		var RoleId = rs.Fields("RoleId").value,
+		SysConfig  = rs.Fields("SysConfig").value,
+		OperDate   = rs.Fields("OperDate").value,
+		ymd        = OperDate.split("-"),
+		Today      = new Date(),
+		EndDate    = new Date(ymd[0], ymd[1], 0),
+		NextDate   = new Date(ymd[0], +ymd[1] + 1, 0),
+		SysCfg     = SysConfig.toString(2).padStart(2).split('');
+
+		Session("UserGUID")   = rs.Fields("UserGUID").value;
+		Session("UserId")     = rs.Fields("UserId").value;
+		Session("Token")      = rs.Fields("Token").value;
+		Session("HoursLimit") = rs.Fields("HoursLimit").value;
+		Session("MsgText")    = rs.Fields("MsgText").value;
+		Session("RoleId")     = RoleId;
+		Session("OperDate")   = OperDate;
+		Session("OperMonth")  = OperDate.slice(0, 7);
+		Session("Today")      = Today.toStr();
+		Session("EndDate")    = EndDate.toStr();
+		Session("NextDate")   = NextDate.toStr();
 		Solaren.SetSessionVar(SysCfg);
+		rs.Close();
+
 		Html.SetHead(Dictionary.Item("DefaultTitle"));
 		Html.WriteMenu(RoleId, 1);
 	}
