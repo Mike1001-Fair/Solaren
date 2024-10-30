@@ -9,7 +9,9 @@ var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd"),
 AuthenticationError = Dictionary.Item("AuthenticationError");
 
-if (!Solaren.HTTPMethod("POST", 3)) Solaren.SysMsg(2, AuthenticationError);
+if (!Solaren.HTTPMethod("POST", 3)) {
+	Solaren.SysMsg(2, AuthenticationError);
+}
 
 try {
 	Solaren.SetCmd("Login");
@@ -23,33 +25,36 @@ try {
 		}
 	}
 	var rs = Cmd.Execute();
-	if (rs.EOF) Solaren.SysMsg(2, AuthenticationError);
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
-	with (rs) {
-		var RoleId            = Fields("RoleId").value,
-		SysConfig             = Fields("SysConfig").value;
-		Session("UserGUID")   = Fields("UserGUID").value;
-		Session("UserId")     = Fields("UserId").value;
-		Session("Token")      = Fields("Token").value;
-		Session("OperDate")   = Fields("OperDate").value;
-		Session("HoursLimit") = Fields("HoursLimit").value;
-		Session("MsgText")    = Fields("MsgText").value;
-       		Close();
+	if (rs.EOF) {
+		Solaren.SysMsg(2, AuthenticationError);
+	} else {
+		with (rs) {
+			var RoleId            = Fields("RoleId").value,
+			SysConfig             = Fields("SysConfig").value;
+			Session("UserGUID")   = Fields("UserGUID").value;
+			Session("UserId")     = Fields("UserId").value;
+			Session("Token")      = Fields("Token").value;
+			Session("OperDate")   = Fields("OperDate").value;
+			Session("HoursLimit") = Fields("HoursLimit").value;
+			Session("MsgText")    = Fields("MsgText").value;
+	       		Close();
+		}
+		var ymd  = Session("OperDate").split("-"),
+		Today    = new Date(),
+		EndDate  = new Date(ymd[0], ymd[1], 0),
+		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
+		SysCfg   = SysConfig.toString(2).padStart(2).split('');
+		Session("RoleId")    = RoleId;
+		Session("OperMonth") = Session("OperDate").slice(0, 7);
+		Session("Today")     = Today.toStr();
+		Session("EndDate")   = EndDate.toStr();
+		Session("NextDate")  = NextDate.toStr();
+		Solaren.SetSessionVar(SysCfg);
+		Html.SetHead(Dictionary.Item("DefaultTitle"));
+		Html.WriteMenu(RoleId, 1);
+		Connect.Close();
 	}
-	var ymd  = Session("OperDate").split("-"),
-	Today    = new Date(),
-	EndDate  = new Date(ymd[0], ymd[1], 0),
-	NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
-	SysCfg   = SysConfig.toString(2).padStart(2).split('');
-	Session("RoleId")    = RoleId;
-	Session("OperMonth") = Session("OperDate").slice(0, 7);
-	Session("Today")     = Today.toStr();
-	Session("EndDate")   = EndDate.toStr();
-	Session("NextDate")  = NextDate.toStr();
-	Solaren.SetSessionVar(SysCfg);
-	Html.SetHead(Dictionary.Item("DefaultTitle"));
-	Html.WriteMenu(RoleId, 1);
-	Connect.Close();
 }%>
