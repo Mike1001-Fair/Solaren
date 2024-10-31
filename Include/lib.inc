@@ -26,11 +26,32 @@ Solaren = {
 		return rs
 	},
 
-	SetSessionVar: function(cfg) {
-		var SesVar = ["NewIndicator", "CheckCard"];
+	SetSessionVar: function(rs) {
+		var OperDate = rs.Fields("OperDate").value,
+		SysConfig    = rs.Fields("SysConfig").value,
+		ymd          = OperDate.split("-"),
+		Today        = new Date(),
+		EndDate      = new Date(ymd[0], ymd[1], 0),
+		NextDate     = new Date(ymd[0], +ymd[1] + 1, 0),
+		SysCfg       = SysConfig.toString(2).padStart(2).split(''),
+		SesVar       = ["NewIndicator", "CheckCard"];
+
+		Session("UserGUID")   = rs.Fields("UserGUID").value;
+		Session("UserId")     = rs.Fields("UserId").value;
+		Session("Token")      = rs.Fields("Token").value;
+		Session("HoursLimit") = rs.Fields("HoursLimit").value;
+		Session("MsgText")    = rs.Fields("MsgText").value;
+		Session("RoleId")     = RoleId;
+		Session("OperDate")   = OperDate;
+		Session("OperMonth")  = OperDate.slice(0, 7);
+		Session("Today")      = Today.toStr();
+		Session("EndDate")    = EndDate.toStr();
+		Session("NextDate")   = NextDate.toStr();
+
 		for (var i = 0; i < SesVar.length; i++) {
-			Session(SesVar[i]) =+ cfg[i] || 0;
+			Session(SesVar[i]) =+ SysCfg[i] || 0;
 		}
+		rs.Close();
 	},
 
 	GetRandInt: function(intMin, intMax) {
