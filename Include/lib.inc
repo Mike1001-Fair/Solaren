@@ -27,14 +27,14 @@ Solaren = {
 	},
 
 	SetSessionVar: function(rs) {
-		var OperDate = rs.Fields("OperDate").value,
-		SysConfig    = rs.Fields("SysConfig").value,
-		ymd          = OperDate.split("-"),
-		Today        = new Date(),
-		EndDate      = new Date(ymd[0], ymd[1], 0),
-		NextDate     = new Date(ymd[0], +ymd[1] + 1, 0),
-		SysCfg       = SysConfig.toString(2).padStart(2).split(''),
-		SesVar       = ["NewIndicator", "CheckCard"];
+		var cfg  = rs.Fields("SysConfig").value,
+		OperDate = rs.Fields("OperDate").value,		
+		ymd      = OperDate.split("-"),
+		Today    = new Date(),
+		EndDate  = new Date(ymd[0], ymd[1], 0),
+		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
+		SysCfg   = cfg.toString(2).padStart(2).split(''),
+		SesVar   = ["NewIndicator", "CheckCard"];
 
 		Session("UserGUID")   = rs.Fields("UserGUID").value;
 		Session("UserId")     = rs.Fields("UserId").value;
