@@ -49,7 +49,7 @@ Solaren = {
 		Session("NextDate")   = NextDate.toStr();
 
 		for (var i = 0; i < SesVar.length; i++) {
-			Session(SesVar[i]) =+ SysCfg[i] || 0;
+			Session(SesVar[i]) = +SysCfg[i] || 0;
 		}
 		rs.Close();
 	},
