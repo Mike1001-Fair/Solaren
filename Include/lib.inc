@@ -34,7 +34,7 @@ Solaren = {
 		Today    = new Date(),
 		EndDate  = new Date(ymd[0], ymd[1], 0),
 		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
-		SysCfg   = cfg.toString(2).padStart(2).split(''),
+		SysCfg   = cfg.toString(2).padStart(3, "0").split(''),
 		SesVar   = ["NewIndicator", "CheckCard"];
 
 		Session("UserGUID")   = rs.Fields("UserGUID").value;

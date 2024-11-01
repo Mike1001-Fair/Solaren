@@ -26,9 +26,14 @@ with (String) {
 		return DateOnly ? new Date(ymd[0], ymd[1] - 1, ymd[2]) : new Date(ymd[0], ymd[1]-1, ymd[2], hms[0], hms[1], hms[2])
 	}
 
-	prototype.padStart = function(targetLen) {
+	/*prototype.padStart = function(targetLen) {
 		return targetLen > this.length ? new Array(targetLen - this.length + 1).join("0") + String(this) : String(this)
+	}*/
+
+	prototype.padStart = function(targetLen, padChar) {
+		return targetLen > this.length ? new Array(targetLen - this.length + 1).join(padChar) + String(this) : String(this)
 	}
+
 
 	prototype.flUpperCase = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1)
