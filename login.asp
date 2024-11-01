@@ -37,5 +37,6 @@ try {
 		Html.SetHead(Title);
 		Html.WriteMenu(RoleId, 1);
 	}
+	rs.Close();
 	Connect.Close();
 }%>

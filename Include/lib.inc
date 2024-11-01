@@ -6,6 +6,7 @@ Solaren = {
 	ConnectionTimeout: 10,
 	CommandTimeout: 20,
 	RequestMethod: Request.ServerVariables("REQUEST_METHOD"),
+	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")),
 
 	SetCmd: function(spName) {
 		Connect.Mode = this.ConnectMode;
@@ -51,7 +52,6 @@ Solaren = {
 		for (var i = 0; i < SesVar.length; i++) {
 			Session(SesVar[i]) = +SysCfg[i] || 0;
 		}
-		rs.Close();
 	},
 
 	GetRandInt: function(intMin, intMax) {
@@ -78,7 +78,7 @@ Solaren = {
 			msgText = "Runtime Error: out of range";			
 		}
 		Session("SysMsg") = msgText;
-		Session("ScriptName") = String(Request.ServerVariables("SCRIPT_NAME"));
+		Session("ScriptName") = this.ScriptName;
 		Response.Redirect(Page[msgType] + ".asp");
 	},
 
