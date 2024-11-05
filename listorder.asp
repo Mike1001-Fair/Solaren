@@ -30,8 +30,8 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-var Period = BegDate.toDMY(),
-EndDate    = EndDate.toDMY();
+var Period = BegDate.formatDate("-"),
+EndDate    = EndDate.formatDate("-");
 
 if (Period != EndDate) Period += ' &ndash; ' + EndDate;
 

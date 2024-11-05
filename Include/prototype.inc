@@ -8,10 +8,17 @@ with (Date) {
 }
 
 with (String) {
-	prototype.toDMY = function() {
-		return this.split("-").reverse().join(".")
+	prototype.formatDate = function(delimiter) {
+		var dateParts = this.split(delimiter).reverse();
+		result = this;
+		if (delimiter == ".") {
+			result = dateParts.join("-")
+		} else if (delimiter == "-") {
+			result = dateParts.join(".")
+		}
+		return result
 	}
-
+		
 	prototype.isDate = function () {
 		return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2})?$/.test(this)
 	}
@@ -25,10 +32,6 @@ with (String) {
 		}
 		return DateOnly ? new Date(ymd[0], ymd[1] - 1, ymd[2]) : new Date(ymd[0], ymd[1]-1, ymd[2], hms[0], hms[1], hms[2])
 	}
-
-	/*prototype.padStart = function(targetLen) {
-		return targetLen > this.length ? new Array(targetLen - this.length + 1).join("0") + String(this) : String(this)
-	}*/
 
 	prototype.padStart = function(targetLen, padChar) {
 		return targetLen > this.length ? new Array(targetLen - this.length + 1).join(padChar) + String(this) : String(this)

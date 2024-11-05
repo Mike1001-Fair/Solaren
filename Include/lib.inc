@@ -27,15 +27,19 @@ Solaren = {
 		return rs
 	},
 
+	toYMD: function(rsDate) {
+		var result = new Date(rsDate);
+		return result.toStr()
+	},
+
 	SetSessionVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
-		OperDate = rs.Fields("OperDate").value,		
+		OperDate = this.toYMD(rs.Fields("OperDate").value);
 		ymd      = OperDate.split("-"),
 		Today    = new Date(),
 		EndDate  = new Date(ymd[0], ymd[1], 0),
 		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
-		SysCfg   = cfg.toString(2).padStart(3, "0").split(''),
-		SesVar   = ["NewIndicator", "CheckCard"];
+		SysCfg   = cfg.toString(2).padStart(3, "0").split('');
 
 		Session("UserGUID")   = rs.Fields("UserGUID").value;
 		Session("UserId")     = rs.Fields("UserId").value;
@@ -49,8 +53,13 @@ Solaren = {
 		Session("EndDate")    = EndDate.toStr();
 		Session("NextDate")   = NextDate.toStr();
 
-		for (var i = 0; i < SesVar.length; i++) {
-			Session(SesVar[i]) = +SysCfg[i] || 0;
+		this.SetSessionFlags(SysCfg);
+	},
+
+	SetSessionFlags: function(SysCfg) {
+		var FlagName = ["NewIndicator", "CheckCard"];
+		for (var i = 0; i < FlagName.length; i++) {
+			Session(FlagName[i]) = +SysCfg[i] || 0;
 		}
 	},
 

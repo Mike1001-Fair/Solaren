@@ -28,7 +28,7 @@ try {
 Html.SetHead("Звiт");
 var totContractNumber = totContractPower = 0,
 ResponseText = '<BODY CLASS="PrnBody">\n' +
-	'<H3 CLASS="H3PrnTable">Кiлькiсть договорiв</H3><SPAN CLASS="H3PrnTable">станом на: ' + ReportDate.toDMY() + '</SPAN>\n' +
+	'<H3 CLASS="H3PrnTable">Кiлькiсть договорiв</H3><SPAN CLASS="H3PrnTable">станом на: ' + ReportDate.formatDate("-") + '</SPAN>\n' +
 	'<TABLE CLASS="PrnTable">\n' +
 	'<TR><TH>ЦОС</TH><TH>Кiлькiсть</TH></TH><TH>Потужнiсть</TH></TR>\n';
 

@@ -36,8 +36,8 @@ with (Html) {
 	WriteMenu(Session("RoleId"), 0);
 }
 
-var Period = BegDate.toDMY(),
-EndDate    = EndDate.toDMY(),
+var Period = BegDate.formatDate("-"),
+EndDate    = EndDate.formatDate("-"),
 totalPay   = 0;
 if (Period != EndDate) Period += ' &ndash; ' + EndDate;
 

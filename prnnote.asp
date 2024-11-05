@@ -100,7 +100,8 @@ try {
 		Solaren.SysMsg(0, "Інформацію не знайдено");
 	} else {
 		var Period = Month.GetPeriod(ReportMonth, 1),
-		Today = new Date();
+		Today = new Date(),
+		ReportDate = Today.toStr().formatDate("-");
 		Html.SetHead("Службовий лист");
 	}
 }%>
@@ -136,5 +137,5 @@ OL { margin-top: 1 }</STYLE>
 </UL></OL>
 <TABLE CLASS="acttext" STYLE="margin-top:60" WIDTH="100%">
 <TR><TD VALIGN="BOTTOM" ALIGN="LEFT"><SUB>вик: <%=ContractorName%>, &#9990;<%=Phone%></SUB></TD>
-<TD VALIGN="TOP" ALIGN="RIGHT"><SUP><%=Today.toStr().toDMY()%></SUP>&nbsp;<DIV CLASS="UnderLine"></DIV></TD></TR>
+<TD VALIGN="TOP" ALIGN="RIGHT"><SUP><%=ReportDate%></SUP>&nbsp;<DIV CLASS="UnderLine"></DIV></TD></TR>
 </TABLE></BODY></HTML>

@@ -10,8 +10,8 @@ with (Request) {
 	EndDate     = String(Form("EndDate")),
 	EventType   = Form("EventType"),
 	EventName   = Form("EventName"),
-	Period      = BegDate.toDMY(),
-	FinalDate   = EndDate.toDMY();
+	Period      = BegDate.formatDate("-"),
+	FinalDate   = EndDate.formatDate("-");
 }
 
 if (Period != FinalDate) Period += ' &ndash; ' + FinalDate;

@@ -29,7 +29,8 @@ with (rs) {
 	Close();
 } Connect.Close();
 
-var Today = new Date();
+var Today = new Date(),
+ReportDate = Today.toStr().formatDate("-");
 Html.SetHead("Бюджетний код")%>
 
 <BODY CLASS="PrnBody">
@@ -37,8 +38,8 @@ Html.SetHead("Бюджетний код")%>
 <H4 STYLE="margin: 0 0 10 0">Код статтi видаткiв: <%=BudgetItem%>, прiоритет: П-1</H4>
 <TABLE CLASS="PrnTable">
 <TR ALIGN="CENTER"><TD>Дата</TD><TD>ПIБ</TD><TD>Пiдпис</TD></TR>
-<TR ALIGN="CENTER"><TD><%=Today.toStr().toDMY()%></TD><TD><%=ChiefName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
-<TR ALIGN="CENTER"><TD><%=Today.toStr().toDMY()%></TD><TD><%=ContractorName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
+<TR ALIGN="CENTER"><TD><%=ReportDate%></TD><TD><%=ChiefName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
+<TR ALIGN="CENTER"><TD><%=ReportDate%></TD><TD><%=ContractorName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
 <TR><TD COLSPAN="3" ALIGN="CENTER">Вiддiл бюджетного планування i контролю</TD></TR>
 <TR><TD ALIGN="CENTER">&nbsp</TD><TD STYLE="width: 200">&nbsp</TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
 </TABLE></DIV></BODY></HTML>
