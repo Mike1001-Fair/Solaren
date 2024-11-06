@@ -27,14 +27,15 @@ Solaren = {
 		return rs
 	},
 
-	toYMD: function(rsDate) {
-		var result = new Date(rsDate);
+	toYMD: function(dbDate) {
+		var result = new Date(dbDate);
 		return result.toStr()
 	},
 
 	SetSessionVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
-		OperDate = this.toYMD(rs.Fields("OperDate").value);
+		dbDate   = rs.Fields("OperDate").value,
+		OperDate = this.toYMD(dbDate),
 		ymd      = OperDate.split("-"),
 		Today    = new Date(),
 		EndDate  = new Date(ymd[0], ymd[1], 0),
