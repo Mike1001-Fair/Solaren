@@ -18,6 +18,7 @@ with (Html) {
 
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
+	<% Html.WriteContractName("", "REQUIRED") %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD><LABEL CLASS="BlockLabel" FOR="ReportMonth">Перioд:</LABEL>
@@ -26,7 +27,6 @@ with (Html) {
 	<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="AllContract">Всi договора</LABEL></TD></TR>
 	</TABLE>
 	</FIELDSET>
-	<% Html.WriteContractName("", "REQUIRED") %>
 	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>

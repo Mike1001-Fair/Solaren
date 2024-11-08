@@ -83,7 +83,7 @@ for (var i=0; i<=DoubleReport; i++) {
 	'</TABLE>\n' +
 	'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>\n' +
 	'<TABLE CLASS="ActTable">\n' +
-	'<CAPTION>Споживач: ' + CustomerName + '<BR>Рахунок: ' + ContractPAN + '<BR>Адреса: '+ ContractAddress + '</CAPTION>\n' +
+	'<CAPTION>Споживач: ' + CustomerName + '<BR>Рахунок: ' + ContractPAN + '<BR>Адреса: ' + ContractAddress + '</CAPTION>\n' +
 	'<TR ALIGN="CENTER"><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>' +
 	'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>\n' +
 	'<TR ALIGN="CENTER"><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>';
@@ -91,6 +91,8 @@ for (var i=0; i<=DoubleReport; i++) {
 	for (; !RecordSet.EOF; RecordSet.MoveNext()) {
 		var k = RecordSet.Fields("kTransForm"),
 		c = RecordSet.Fields("Capacity"),
+		PrevDate = Solaren.GetYMD(RecordSet.Fields("PrevDate")),
+		ReportDate = Solaren.GetYMD(RecordSet.Fields("ReportDate")),
 		recsaldo = RecordSet.Fields("RecVal") - RecordSet.Fields("RecValPrev"),
 		retsaldo = RecordSet.Fields("RetVal") - RecordSet.Fields("RetValPrev"),
 		periodSaldo;
@@ -114,7 +116,7 @@ for (var i=0; i<=DoubleReport; i++) {
 		Html.Write("TD","RIGHT") + retsaldo +
 		Html.Write("TD","CENTER") + k +
 		Html.Write("TD","RIGHT") + retsaldo*k + '</TD></TR>' +
-		'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + RecordSet.Fields("PrevDate") + ' по ' + RecordSet.Fields("ReportDate") + '</TD>' +
+		'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>' +
 		'<TD ALIGN="RIGHT">' + periodSaldo + '</TD></TR>\n';
 	}
 	if (totSaldo != 0) {

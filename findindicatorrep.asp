@@ -15,14 +15,13 @@ with (Html) {
 <FORM CLASS="ValidForm" NAME="FindIndicatorRep" ACTION="prnindicatorrep.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
 <H3 CLASS="HeadText"><IMG CLASS="H3Img" SRC="Images/printer.svg"><%=Title%></H3>
-<!--H3 CLASS="HeadText"><SPAN CLASS="PrinterIcon">&#128424;</SPAN>Звiт про показники лiчильника</H3-->
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
+	<% Html.WriteContractName("", "REQUIRED") %>
 	<FIELDSET ALIGN="CENTER"><LEGEND>Параметри</LEGEND>
 	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Session("OperMonth")%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Session("OperMonth")%>" REQUIRED>
 	<LABEL><INPUT TYPE="CheckBox" NAME="DoubleReport" CHECKED>2 копії</LABEL>
 	</FIELDSET>
-	<% Html.WriteContractName("", "REQUIRED") %>
 	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON></DIV>
