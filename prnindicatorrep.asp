@@ -93,8 +93,8 @@ for (var i=0; i<=DoubleReport; i++) {
 		c = RecordSet.Fields("Capacity"),
 		PrevDate = Solaren.GetYMD(RecordSet.Fields("PrevDate")),
 		ReportDate = Solaren.GetYMD(RecordSet.Fields("ReportDate")),
-		recsaldo = RecordSet.Fields("RecVal") - RecordSet.Fields("RecValPrev"),
-		retsaldo = RecordSet.Fields("RetVal") - RecordSet.Fields("RetValPrev"),
+		recsaldo = RecordSet.Fields("RecVal") - RecordSet.Fields("PrevRecVal"),
+		retsaldo = RecordSet.Fields("RetVal") - RecordSet.Fields("PrevRetVal"),
 		periodSaldo;
 
 		if (recsaldo < 0) recsaldo += Math.pow(10, c);
@@ -106,13 +106,13 @@ for (var i=0; i<=DoubleReport; i++) {
 		ResponseText += '<TR><TD ALIGN="CENTER">' + RecordSet.Fields("MeterCode") +
 		Html.Write("TD","CENTER") + 'Прийом А+' +
 		Html.Write("TD","RIGHT") + RecordSet.Fields("RecVal") +
-		Html.Write("TD","RIGHT") + RecordSet.Fields("RecValPrev") +
+		Html.Write("TD","RIGHT") + RecordSet.Fields("PrevRecVal") +
 		Html.Write("TD","RIGHT") + recsaldo +
 		Html.Write("TD","CENTER") + k +
 		Html.Write("TD","RIGHT") + recsaldo*k + '</TD></TR><TR><TD ALIGN="CENTER">' + RecordSet.Fields("MeterCode") +
 		Html.Write("TD","CENTER") + 'Видача А-' +
 		Html.Write("TD","RIGHT") + RecordSet.Fields("RetVal") +
-		Html.Write("TD","RIGHT") + RecordSet.Fields("RetValPrev") +
+		Html.Write("TD","RIGHT") + RecordSet.Fields("PrevRetVal") +
 		Html.Write("TD","RIGHT") + retsaldo +
 		Html.Write("TD","CENTER") + k +
 		Html.Write("TD","RIGHT") + retsaldo*k + '</TD></TR>' +
