@@ -1,4 +1,4 @@
-﻿const SbmBtn = document.getElementById('SbmBtn');
+﻿//const SbmBtn = document.getElementById('SbmBtn');
 
 EditPerformer.addEventListener('input', () => {
 	with (EditPerformer) {

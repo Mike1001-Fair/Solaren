@@ -13,28 +13,29 @@ try {
 			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, PerformerId));
 		}
 	}
-	var rs = Cmd.Execute();
+	var rs = Solaren.Execute("GetPerformer", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	with (rs) {
+		var LastName = Fields("LastName").value,
+		FirstName    = Fields("FirstName").value,
+		MiddleName   = Fields("MiddleName").value,
+		Phone        = Fields("Phone").value,
+		Title        = "Редагування анкети виконавця";
+		Close();
+	}
+	Connect.Close();
 }
 
-with (rs) {
-    var LastName   = Fields("LastName").value,
-	FirstName  = Fields("FirstName").value,
-	MiddleName = Fields("MiddleName").value,
-	Phone      = Fields("Phone").value,
-	HeadTitle  = "Редагування анкети виконавця";
-	Close();
-} Connect.Close();
-
 with (Html) {
-	SetHead(HeadTitle);
+	SetHead(Title);
 	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditPerformer" ACTION="updateperformer.asp" METHOD="POST">
-<H3 CLASS="HeadText"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="PerformerId" VALUE="<%=PerformerId%>">
 <TABLE CLASS="MarkupTable">
 	<TR><TD>

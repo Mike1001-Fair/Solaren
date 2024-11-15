@@ -162,11 +162,8 @@
 	display    : block;
 	font-size  : inherit;
 	font-family: inherit;
-	margin     : 4px auto;
+	margin     : 6px auto;
 }
-
-
-
 
 /* стиль для отображения ссылок */
 .mainmenu {

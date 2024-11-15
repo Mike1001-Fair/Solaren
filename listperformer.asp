@@ -17,14 +17,14 @@ try {
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListPerformer", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
 with (Html) {
 	SetHead("Виконавці");
+	WriteScript();
 	WriteMenu(Session("RoleId"), 0);
 }
 

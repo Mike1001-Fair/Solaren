@@ -99,10 +99,11 @@ try {
 	if (Solaren.Empty(PurCost)) {
 		Solaren.SysMsg(0, "Інформацію не знайдено");
 	} else {
-		var Period = Month.GetPeriod(ReportMonth, 1),
+		var Title = "Службовий лист",
+		Period = Month.GetPeriod(ReportMonth, 1),
 		Today = new Date(),
 		ReportDate = Today.toStr();
-		Html.SetHead("Службовий лист");
+		Html.SetHead(Title);
 	}
 }%>
 
@@ -115,7 +116,7 @@ OL { margin-top: 1 }</STYLE>
 <TABLE CLASS="NoBorderTable" WIDTH="100%">
 <TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%"><%=TopChiefTitle3%>&nbsp<%=CompanyName%><BR><%=TopChiefName3%><BR><%=ChiefTitle2%><BR><%=ChiefName2%></TD></TR>
 </TABLE>
-<H3 CLASS="H3PrnTable">Службовий лист</H3>
+<H3 CLASS="H3PrnTable"><%=Title%></H3>
 <P CLASS="acttext">Прошу здiйснити оплату по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, особовий рахунок №<%=ContractPAN%>,
 згiдно акту приймання-передачi електричної енергiї в <%=Period%>:</P>
 <OL CLASS="acttext"><LI><%=CustomerName%>

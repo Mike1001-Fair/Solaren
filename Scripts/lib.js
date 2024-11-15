@@ -36,11 +36,11 @@ function isCreditCard(CardNumber) {   // Luhn algorithm
 	let ChkSum = 0;
 	if (/^\d{16}$/.test(ccNumber)) {
 		for (let i = ccNumber.length; i > 0; i--) {
-			let d =+ ccNumber[i-1];
+			let d = +ccNumber[i-1];
 			ChkSum += i%2 ? d*2 > 9 ? d*2 - 9 : d*2 : d;
 		}
 	}
-	return ChkSum ? !(ChkSum%10) : false
+	return ChkSum%10 == 0
 }
 
 function isAccount(acc, mfo) {
@@ -57,7 +57,7 @@ function isAccount(acc, mfo) {
 		});
 
 	}
-	return ChkSum ? ChkSum % 10 * 7 % 10 == AccArr[9] : false
+	return ChkSum % 10 * 7 % 10 == AccArr[9]
 }
 
 function isIban(iban, mfo) {	
