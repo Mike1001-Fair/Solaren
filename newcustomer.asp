@@ -1,19 +1,18 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-with (Html) {
-	SetHead("Новий споживач");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId == 1,
+Title = "Новий споживач";
+
+Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка авторизації")%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCustomer" ACTION="createcustomer.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="AreaId" ID="AreaId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
-<H3 CLASS="HeadText"><BIG>&#128100;</BIG>Новий споживач</H3>
+<H3 CLASS="HeadText"><BIG>&#128100;</BIG><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="CustomerSet"><LEGEND>Загальні</LEGEND>

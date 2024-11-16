@@ -14,33 +14,18 @@ Html = {
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
+	Author      : "Mykola Chernov",
 
 	LimitMonth: function(Index) {
 		var Limit = [this.MinDate.slice(0, 7), this.MaxDate.slice(0, 7)];
 		return Limit[Index]
 	},
 
-	SetHead: function(TitleText) {
-		with (Response) {
-			CacheControl = "no-cache, no-store;";
-			AddHeader("X-Content-Type-Options", "nosniff");
-			//Expires = -9;
-			Charset = "utf-8";
-			Write('<!DOCTYPE html>\n' +
-			'<HTML LANG="en">\n' +
-			'<HEAD>\n' + 
-			'<META charset="utf-8">\n' +
-			'<META NAME="author" CONTENT="Mykola Chernov">\n' +
-			'<META NAME="copyright" CONTENT="Mykola Chernov">\n' +
-			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n' +
-			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n' +
-			'<TITLE>' + TitleText + '</TITLE>\n' +
-			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="Images/sun.svg">\n' +
-			this.WriteStyleBlock() +
-			this.WriteScriptBlock() + '</HEAD>\n');
-		}
+	GetImage: function(fileName) {
+		var fullFileName = [this.ImagePath, fileName];
+		return fullFileName.join("");
 	},
- 
+
 	WriteStyleBlock: function() {
 		var Sheets = ["solaren", "body", "table", "loader", "button", "menu"],
 		StyleBlock = "",
@@ -63,9 +48,29 @@ Html = {
 		return ScriptBlock
 	},
 
+	SetHead: function(TitleText) {
+		with (Response) {
+			CacheControl = "no-cache, no-store;";
+			AddHeader("X-Content-Type-Options", "nosniff");
+			//Expires = -9;
+			Charset = "utf-8";
+			Write('<!DOCTYPE html>\n' +
+			'<HTML LANG="en">\n' +
+			'<HEAD>\n' + 
+			'<META charset="utf-8">\n' +
+			'<META NAME="author" CONTENT="' + this.Author + '">\n' +
+			'<META NAME="copyright" CONTENT="' + this.Author + '">\n' +
+			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n' +
+			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n' +
+			'<TITLE>' + TitleText + '</TITLE>\n' +
+			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n' +
+			this.WriteStyleBlock() +
+			this.WriteScriptBlock() + '</HEAD>\n');
+		}
+	},
+
 	WriteScript: function() {
-		var ScriptName = String(Request.ServerVariables("SCRIPT_NAME")),
-		ScriptArr      = ScriptName.split("/"),
+		var ScriptArr  = Solaren.ScriptName.split("/"),
 		FileArr        = ScriptArr[ScriptArr.length - 1].split('.'),
 		FileName       = [this.ScriptPath, FileArr[0].toLowerCase(), ".js?", this.Version],
 		ResponseText   = ['<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
@@ -82,6 +87,12 @@ Html = {
 		} else {
 			Server.Execute(ScriptName);
 		}
+	},
+
+	SetPage: function(Title, RoleId) {
+		this.SetHead(Title);
+		this.WriteScript();
+		this.WriteMenu(RoleId, 0);
 	},
 
 	Write: function(tag, align) {
@@ -353,8 +364,8 @@ Html = {
 	},
 
 	WriteFileList: function(FolderName) {
-		var Fso = Server.CreateObject("Scripting.FileSystemObject"),
-		FolderPath = Server.MapPath(FolderName),
+		//var Fso = Server.CreateObject("Scripting.FileSystemObject"),
+		var FolderPath = Server.MapPath(FolderName),
 		ResponseText = '<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">\n';
 		if (Fso.FolderExists(FolderPath)) {
 			var Folder = Fso.GetFolder(FolderPath),

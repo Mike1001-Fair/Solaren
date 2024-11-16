@@ -6,8 +6,13 @@
 ValidRequest = Solaren.HTTPMethod("GET", 1),
 UserId = Request.QueryString("UserId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-if (!ValidRequest) Solaren.SysMsg(0, "Помилка запиту");
+if (!Authorized) {
+	Solaren.SysMsg(2, "Помилка авторизації")
+}
+
+if (!ValidRequest) {
+	Solaren.SysMsg(0, "Помилка запиту")
+}
 
 try {
 	Solaren.SetCmd("SelectCompany");
@@ -34,20 +39,16 @@ with (rsUser) {
 	Phone      = Fields("Phone").value,
 	BranchId   = Fields("BranchId").value,
 	Deleted    = Fields("Deleted").value,
-	HeadTitle  = Deleted ? "Перегляд анкети" : "Редагування анкети";
+	Title      = Deleted ? "Перегляд анкети" : "Редагування анкети";
 	Close();
 }
 
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditUser" ACTION="updateuser.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=UserId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
-<H3 CLASS="HeadText" ID="H3Id">&#128100;<%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id">&#128100;<%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="UserSet"><LEGEND>Параметри</LEGEND>

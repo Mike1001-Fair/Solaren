@@ -4,65 +4,50 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") > 0 && Session("RoleId") < 3,
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId > 0 && RoleId < 3,
 IndicatorId = Request.QueryString("IndicatorId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) {
+	Solaren.SysMsg(2, "Помилка авторизації")
+}
 
 try {
 	Solaren.SetCmd("GetIndicator");
 	with (Cmd) {
 		with (Parameters) {
- 			Append(CreateParameter("IndicatorId", adInteger, adParamInput, 10, IndicatorId)),
-			Append(CreateParameter("ContractId", adInteger, adParamOutput, 10, 0)),
-			Append(CreateParameter("ContractName", adVarChar, adParamOutput, 50, "")),
-			Append(CreateParameter("ContractPower", adVarChar, adParamOutput, 10, "")),
-			Append(CreateParameter("ReportDate", adVarChar, adParamOutput, 10, "")),
-			Append(CreateParameter("MeterId", adInteger, adParamOutput, 10, 0)),
-			Append(CreateParameter("MeterCode", adVarChar, adParamOutput, 10, "")),
-			Append(CreateParameter("Capacity", adTinyInt, adParamOutput, 10, 0)),
-			Append(CreateParameter("Ktf", adTinyInt, adParamOutput, 10, 0)),
-			Append(CreateParameter("RecVal", adInteger, adParamOutput, 10, 0)),
-			Append(CreateParameter("RetVal", adInteger, adParamOutput, 10, 0)),
-			Append(CreateParameter("RecValPrev", adInteger, adParamOutput, 10, 0)),
-			Append(CreateParameter("RetValPrev", adInteger, adParamOutput, 10, 0)),
-			Append(CreateParameter("PrevDate", adVarChar, adParamOutput, 10, ""));
-			Append(CreateParameter("Deleted", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
-
-		with (Parameters) {
-			var ContractId    = Item("ContractId").value,
-			ContractName  = Item("ContractName").value,
-			ContractPower = Item("ContractPower").value,
-			ReportDate    = Item("ReportDate").value,
-			MeterId       = Item("MeterId").value,
-			MeterCode     = Item("MeterCode").value,
-			Capacity      = Item("Capacity").value,
-			Ktf           = Item("Ktf").value,
-			RecVal        = Item("RecVal").value,
-			RetVal        = Item("RetVal").value,
-			RecValPrev    = Item("RecValPrev").value,
-			RetValPrev    = Item("RetValPrev").value,
-			PrevDate      = Item("PrevDate").value,
-			Deleted       = Item("Deleted").value,
-			Limit         = Math.pow(10, Capacity) - 1;
-		}
+ 			Append(CreateParameter("IndicatorId", adInteger, adParamInput, 10, IndicatorId))
+		} 
 	}
+	var rs = Solaren.Execute("GetIndicator", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {	
+	with (rs) {
+		var ContractId = Fields("ContractId").value,
+		ContractName   = Fields("ContractName").value,
+		ContractPower  = Fields("ContractPower").value,
+		ReportDate     = Solaren.GetYMD(Fields("ReportDate").value),
+		MeterId        = Fields("MeterId").value,
+		MeterCode      = Fields("MeterCode").value,
+		Capacity       = Fields("Capacity").value,
+		Ktf            = Fields("Ktf").value,
+		RecVal         = Fields("RecVal").value,
+		RetVal         = Fields("RetVal").value,
+		PrevRecVal     = Fields("PrevRecVal").value,
+		PrevRetVal     = Fields("PrevRetVal").value,
+		PrevDate       = Solaren.GetYMD(Fields("PrevDate").value),
+		Deleted        = Fields("Deleted").value,
+		Limit          = Math.pow(10, Capacity) - 1;
+		Close();
+	}
 	Connect.Close();
 }
 
 var ViewOnly = !Month.isPeriod(Session("OperDate"), ReportDate),
-AllowDelBtn  = Session("RoleId") == 1,
-HeadTitle    = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+AllowDelBtn  = RoleId == 1,
+Title        = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
+Html.SetPage(Title, RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
@@ -76,7 +61,7 @@ with (Html) {
 <INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Session("EndDate")%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 <H3 CLASS="HeadText" ID="H3Id">
-	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=HeadTitle%>
+	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=Title%>
 </H3>
 
 <TABLE CLASS="MarkupTable">
@@ -96,13 +81,13 @@ with (Html) {
 
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="RecVal">Прийом</LABEL></TD>
 	<TD><INPUT TYPE="Number" NAME="RecVal" ID="RecVal" VALUE="<%=RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
-	<TD><INPUT TYPE="text" NAME="RecValPrev" VALUE="<%=RecValPrev%>" SIZE="7" READONLY TABINDEX="-1"></TD>
+	<TD><INPUT TYPE="text" NAME="RecValPrev" VALUE="<%=PrevRecVal%>" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="text" NAME="RecSaldo" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="CheckBox" NAME="ZeroRec" TITLE="Перехiд через нуль"></TD></TR>
 
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="RetVal">Видача</LABEL></TD>
 	<TD><INPUT TYPE="Number" NAME="RetVal" ID="RetVal" VALUE="<%=RetVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
-	<TD><INPUT TYPE="text" NAME="RetValPrev" VALUE="<%=RetValPrev%>" SIZE="7" READONLY TABINDEX="-1"></TD>
+	<TD><INPUT TYPE="text" NAME="RetValPrev" VALUE="<%=PrevRetVal%>" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="text" NAME="RetSaldo" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="CheckBox" NAME="ZeroRet" TITLE="Перехiд через нуль"></TD></TR>
 	</TABLE></FIELDSET>

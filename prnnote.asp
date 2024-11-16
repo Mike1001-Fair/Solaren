@@ -96,15 +96,17 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 } finally {	
 	Connect.Close();
-	if (Solaren.Empty(PurCost)) {
-		Solaren.SysMsg(0, "Інформацію не знайдено");
-	} else {
-		var Title = "Службовий лист",
-		Period = Month.GetPeriod(ReportMonth, 1),
-		Today = new Date(),
-		ReportDate = Today.toStr();
-		Html.SetHead(Title);
-	}
+
+}
+
+if (Solaren.Empty(PurCost)) {
+	Solaren.SysMsg(0, "Інформацію не знайдено");
+} else {
+	var Title = "Службовий лист",
+	Period = Month.GetPeriod(ReportMonth, 1),
+	Today = new Date(),
+	ReportDate = Today.toStr();
+	Html.SetHead(Title);
 }%>
 
 <STYLE>P { text-align: justify; line-height: 1.5; text-indent: 1cm; margin-bottom: 1}

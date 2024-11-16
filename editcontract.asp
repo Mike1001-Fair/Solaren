@@ -1,16 +1,19 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId == 1,
 ContractId = Request.QueryString("ContractId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) {
+	Solaren.SysMsg(2, "Помилка авторизації");
+}
 
 try {
 	Solaren.SetCmd("SelectBank");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
 	var rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
@@ -21,12 +24,13 @@ try {
 
 	with (Cmd) {
 		with (Parameters) {
-			while (Count > 0) { Delete(0) };
     			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 		}
 	}
 	var rsContract = Solaren.Execute("GetContract", "Договір не знайдено!");
-
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsContract) {
 		var CustomerId = Fields("CustomerId").value,
 		CustomerName   = Fields("CustomerName").value,
@@ -54,14 +58,7 @@ try {
 		Title          = Deleted ? "Перегляд договору" : "Редагування договору";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-}
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">

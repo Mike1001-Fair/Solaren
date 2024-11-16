@@ -1,10 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId == 1,
 Title = "Новий договір";
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) {
+	Solaren.SysMsg(2, "Помилка авторизації");
+}
 
 try {
 	Solaren.SetCmd("SelectBank");
@@ -22,11 +25,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewContract" ACTION="createcontract.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="CustomerId" ID="CustomerId" VALUE="-1">

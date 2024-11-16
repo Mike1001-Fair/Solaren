@@ -1,15 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 2,
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId == 2,
 Title = "Нові показники";
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка авторизації")%>
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewIndicator" ACTION="createindicator.asp" METHOD="post" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText" ID="H3Id"><IMG CLASS="H3Img" SRC="Images/MeterIcon.svg" NAME="myImg"><%=Title%></H3>

@@ -2,8 +2,14 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
-<% var Authorized = Session("RoleId") == 0;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId == 0,
+Title = "Новий користувач";
+
+if (!Authorized) {
+	Solaren.SysMsg(2, "Помилка авторизації");
+}
+
 try {
 	Solaren.SetCmd("SelectCompany");
 	with (Cmd) {
@@ -17,14 +23,10 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 }
 
-with (Html) {
-	SetHead("Новий користувач");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewUser" ACTION="createuser.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText">&#128100;Новий користувач</H3>
+<H3 CLASS="HeadText">&#128100;<%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
