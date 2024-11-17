@@ -1,8 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-QueryName = Request.QueryString("QueryName"),
-JsonResponse = Authorized ? "" : '[{"CustomerId":0}]';
+<% var RoleId = Session("RoleId"),
+Authorized    = RoleId > 0 && RoleId < 3,
+QueryName     = Request.QueryString("QueryName"),
+JsonResponse  = '[{"CustomerId":0}]';
 
 if (Authorized) {
 	try {
@@ -19,8 +20,6 @@ if (Authorized) {
 	} finally {
 		Connect.Close();
 	}
-} else {
-	Session("SysMsg") = "Помилка авторизації";
 }
 
 with (Response) {

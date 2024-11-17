@@ -1,8 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-QueryName = Request.QueryString("QueryName"),
-JsonResponse = Authorized ? "" : '[{"AreaId":0}]';
+<% var RoleId = Session("RoleId"),
+Authorized    = RoleId > 0 && RoleId < 2,
+QueryName     = Request.QueryString("QueryName"),
+JsonResponse  = '[{"AreaId":0}]';
 
 if (Authorized) {
 	try {

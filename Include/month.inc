@@ -6,7 +6,7 @@ var Month = {
 	Quarter: [{1:"Сiчень",2:"Лютий",3:"Березень"}, {4:"Квiтень",5:"Травень",6:"Червень"}, {7:"Липень",8:"Серпень",9:"Вересень"}, {10:"Жовтень",11:"Листопад",12:"Грудень"}],
 	YearItem: "року",
 
-	isPeriod: function(StartDate, EndDate) {
+	isPeriod: function(StartDate, EndDate) {	// StartDate, EndDate is string type yyyy-mm-dd
 		return StartDate.isDate() && EndDate.isDate() ? StartDate.toDate() <= EndDate.toDate() : 0
 	},
 
