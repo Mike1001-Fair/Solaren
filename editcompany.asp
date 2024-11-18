@@ -1,7 +1,8 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") < 2,
+<% var RoleId = Session("RoleId"),
+Authorized = RoleId < 2,
 CompanyId = Request.QueryString("CompanyId");
 
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");

@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <% var RoleId = Session("RoleId"),
-Authorized    = RoleId > 0 && RoleId < 2,
+Authorized    = RoleId < 2,
 JsonResponse  = '[{"StreetId":0}]',
 StreetId      = Request.QueryString("StreetId");
 
