@@ -5,7 +5,7 @@ var CodePage = {
 },
 
 Html = {
-	Version     : "v=3.7",
+	Version     : "v=3.2",
 	ScriptPath  : "Scripts/",
 	StylePath   : "Styles/",
 	ImagePath   : "Images/",

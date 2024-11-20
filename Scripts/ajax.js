@@ -296,7 +296,15 @@ const Ajax = {
 			StreetName.style.cursor = "progress";
 			fetch(`getstreetdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data[0].StreetId == 0 ? location.href="accessdenied.asp" : this.SetStreetList(data))
+			.then(data => {
+				if (data[0].StreetId == -2) {
+					location.href="error.asp"
+				} else if (data[0].StreetId == 0) {
+					location.href="accessdenied.asp"
+				} else {
+					this.SetStreetList(data)
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => StreetName.style.cursor = "auto");			
 		}

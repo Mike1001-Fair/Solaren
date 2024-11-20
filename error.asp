@@ -9,7 +9,6 @@ if (ScriptName.indexOf("login.asp") == -1) {
 	if (!User.Validate(Session("RoleId"), Session("UserGUID"))) {
 		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
 	}
-
 }
 Html.SetHead(Dictionary.Item("Message")) %>
 <BODY CLASS="MainBody">

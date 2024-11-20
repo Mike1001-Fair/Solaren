@@ -16,12 +16,12 @@ if (Authorized) {
 		}
 		JsonResponse = Cmd.Parameters.Item("StreetData").value;
 	} catch (ex) {
-		Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+		JsonResponse = '[{"StreetId":-2}]';
+		Session("ScriptName") = String(Request.ServerVariables("SCRIPT_NAME"));
+		Session("SysMsg") = Solaren.GetErrMsg(ex);
 	} finally {
 		Connect.Close();
 	}
-} else {
-	Session("SysMsg") = "Помилка авторизації";
 }
 
 with (Response) {
