@@ -1,19 +1,16 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 ContractId = Request.QueryString("ContractId");
-
-if (!Authorized) {
-	Solaren.SysMsg(2, "Помилка авторизації");
-}
+User.CheckAuthorization(Authorized);
 
 try {
 	Solaren.SetCmd("SelectBank");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
@@ -58,7 +55,7 @@ try {
 		Title          = Deleted ? "Перегляд договору" : "Редагування договору";
 		Close();
 	}
-	Html.SetPage(Title, RoleId)
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">

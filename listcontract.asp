@@ -2,8 +2,11 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+Title = "Список договорiв";
+
+User.CheckAuthorization(Authorized);
 
 with (Request) {
     var CustomerId = String(Form("CustomerId")),
@@ -14,7 +17,7 @@ try {
 	Solaren.SetCmd("ListContract");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("CustomerId", adVarChar, adParamInput, 10, CustomerId));
 			Append(CreateParameter("PAN", adVarChar, adParamInput, 10, PAN));
 		}
@@ -24,11 +27,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead("Список договорiв");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}
+Html.SetPage(Title, User.RoleId)
 
 var ResponseText = '\n<BODY CLASS="MainBody">\n' +
 	'<H3 CLASS="H3Text">Список договорiв</H3>\n' +

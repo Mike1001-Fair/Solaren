@@ -8,11 +8,10 @@ try {
 	Solaren.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, 'Довiдник керiвникiв пустий');
+	var rsChief = Solaren.Execute("SelectChief", "Довiдник керiвникiв пустий");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))	
 }

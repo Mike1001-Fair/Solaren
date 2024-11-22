@@ -2,19 +2,16 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId == 0,
+<% var Authorized = User.RoleId == 0,
 Title = "Новий користувач";
 
-if (!Authorized) {
-	Solaren.SysMsg(2, "Помилка авторизації");
-}
+User.CheckAuthorization(Authorized);
 
 try {
 	Solaren.SetCmd("SelectCompany");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
@@ -23,7 +20,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 }
 
-Html.SetPage(Title, RoleId)%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewUser" ACTION="createuser.asp" METHOD="post" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText">&#128100;<%=Title%></H3>

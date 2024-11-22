@@ -14,7 +14,7 @@ function Application_OnStart() {
 }  
 
 function Session_OnStart() {
-	Session.Timeout = 1;
+	Session.Timeout = 20;
 	Session.CodePage = 65001;
 	if (0) {
 		Session.Abandon();

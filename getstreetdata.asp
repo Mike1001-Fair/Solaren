@@ -1,9 +1,10 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized    = RoleId < 2,
-JsonResponse  = '[{"StreetId":0}]',
-QueryName     = Request.QueryString("QueryName");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<%
+var Authorized = User.RoleId < 2,
+JsonResponse   = '[{"StreetId":0}]',
+QueryName      = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {

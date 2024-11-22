@@ -1,4 +1,5 @@
-<%@LANGUAGE="JavaScript"%> 
+<%@LANGUAGE="JavaScript"%>
+<!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");

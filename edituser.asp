@@ -2,13 +2,11 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
-<% var Authorized = Session("RoleId") == 0,
+<% var Authorized = User.RoleId == 0,
 ValidRequest = Solaren.HTTPMethod("GET", 1),
 UserId = Request.QueryString("UserId");
 
-if (!Authorized) {
-	Solaren.SysMsg(2, "Помилка авторизації")
-}
+User.CheckAuthorization(Authorized);
 
 if (!ValidRequest) {
 	Solaren.SysMsg(0, "Помилка запиту")
@@ -18,7 +16,7 @@ try {
 	Solaren.SetCmd("SelectCompany");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
@@ -43,7 +41,7 @@ with (rsUser) {
 	Close();
 }
 
-Html.SetPage(Title, RoleId)%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditUser" ACTION="updateuser.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=UserId%>">
