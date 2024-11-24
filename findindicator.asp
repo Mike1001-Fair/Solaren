@@ -1,16 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") > 0 && Session("RoleId") < 3,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Title = "Показники";
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+User.ValidateAccess(Authorized);
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicator" ID="FindIndicator" ACTION="listindicator.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
@@ -19,8 +15,8 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% with (Html) {
-		WriteDatePeriod("Період", Session("OperDate"), Session("EndDate"), MinDate, Session("NextDate"));
-		WriteContractName("", "REQUIRED")
+		WriteDatePeriod("Період", OperDate, EndDate, MinDate, NextDate);
+		WriteSearchSet("Договір", "Contract", "", 1);
 	}%>
 	</TD></TR>
 </TABLE>

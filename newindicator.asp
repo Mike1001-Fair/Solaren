@@ -19,7 +19,7 @@ Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка а�
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER"> 
-	<% Html.WriteContractName("", "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Лiчильник</LABEL></TD><TD>

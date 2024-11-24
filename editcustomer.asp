@@ -44,6 +44,7 @@ try {
 <INPUT TYPE="HIDDEN" NAME="CustomerId" VALUE="<%=CustomerId%>">
 <INPUT TYPE="HIDDEN" NAME="AreaId" ID="AreaId" VALUE="<%=AreaId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=LocalityId%>">
+<INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
 <H3 CLASS="HeadText"><BIG>&#128100;</BIG><%=Title%></H3>
@@ -65,17 +66,13 @@ try {
 
 	<TD><FIELDSET NAME="AddressSet"><LEGEND>Адреса</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Район</TD>
-	<TD><INPUT TYPE="search" NAME="AreaName" ID="AreaName" VALUE="<%=AreaName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="AreaList" REQUIRED>
-	<DATALIST ID="AreaList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Area", AreaName, 30) %></TD></TR>
 
 	<TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" VALUE="<%=LocalityName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Locality", LocalityName, 30) %></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><INPUT TYPE="search" NAME="StreetName" ID="StreetName" VALUE="<%=StreetName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="StreetList" REQUIRED>
-	<DATALIST ID="StreetList"></DATALIST>
-	<INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="<%=StreetId%>"></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", StreetName, 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Будинок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="HouseId" VALUE="<%=HouseId%>" SIZE="20" MAXLENGTH="15"></TD></TR>

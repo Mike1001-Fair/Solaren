@@ -69,12 +69,10 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="BranchName2" PLACEHOLDER="Коротка без лапок" VALUE="<%=BranchName2%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Район</TD>
-	<TD><INPUT TYPE="search" NAME="AreaName" ID="AreaName" VALUE="<%=AreaName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="AreaList" REQUIRED>
-	<DATALIST ID="AreaList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Area", AreaName, 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT" ID="LocalityType">Пункт</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" VALUE="<%=LocalityName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Locality", LocalityName, 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
 	<TD><%Html.WriteChief(rsChief, ChiefId)%></TD></TR>

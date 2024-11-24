@@ -67,7 +67,7 @@ Html.SetPage(Title, RoleId)%>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteContractName(ContractName, "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Лiчильник</LABEL></TD>

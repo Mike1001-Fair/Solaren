@@ -1,24 +1,21 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-TitleHead = "Оплата";
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(TitleHead);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+Title = "Оплата";
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPay" ACTION="listpay.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText"><%=TitleHead%></H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% with (Html) {	
-		WriteDatePeriod("Перioд", Session("OperDate"), Session("EndDate"), MinDate, Session("EndDate"));
-		WriteContractName("", "REQUIRED");
+	<% with (Html) {
+		WriteDatePeriod("Період", OperDate, EndDate, MinDate, EndDate);
+		WriteSearchSet("Договір", "Contract", "", 1);
 	}%>
 	</TD></TR>
 </TABLE>

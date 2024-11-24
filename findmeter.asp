@@ -16,7 +16,7 @@ with (Html) {
 <H3 CLASS="HeadText"><IMG SRC="Images/MeterIcon.svg"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteContractName("", "") %>
+	<% Html.WriteSearchSet("Договір", "Contract", "", 0) %>
 	<FIELDSET><LEGEND>Номер</LEGEND>
 	<INPUT TYPE="search" NAME="MeterCode" SIZE="15" MAXLENGTH="10">
 	</FIELDSET>

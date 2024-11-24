@@ -48,7 +48,7 @@ try {
 </H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteContractName(ContractName, "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Номер</TD>
 	<TD><INPUT TYPE="text" NAME="MeterCode" VALUE="<%=MeterCode%>" SIZE="12" PATTERN="^\d{8,10}$" maxLength="10" REQUIRED></TD></TR>

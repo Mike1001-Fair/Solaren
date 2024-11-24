@@ -1,21 +1,19 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 Title = "Cпоживачі";
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindCustomer" ID="FindCustomer" ACTION="listcustomer.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="CustomerId" ID="CustomerId" VALUE="-1">
 <H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
-	<TR><TD ALIGN="CENTER"><% Html.WriteCustomerName("REQUIRED")%></TD></TR>
+	<TR><TD ALIGN="CENTER"><% Html.WriteSearchSet("Споживач", "Customer", "", 1)%></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>

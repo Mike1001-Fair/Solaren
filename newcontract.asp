@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <% var Authorized = User.RoleId == 1,
 Title = "Новий договір";
-User.CheckAuthorization(Authorized);
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("SelectBank");
@@ -35,8 +35,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<TR><TD>
 	<FIELDSET><LEGEND>Загальні</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Споживач</TD>
-	<TD><INPUT TYPE="search" NAME="CustomerName" ID="CustomerName" PLACEHOLDER="Пошук по літерам" SIZE="35" LIST="CustomerList" REQUIRED AUTOFOCUS>
-	<DATALIST ID="CustomerList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Customer", "", 35) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Рахунок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="PAN" SIZE="9" MAXLENGTH="9" REQUIRED PATTERN="\d{9}"></TD></TR>
@@ -69,12 +68,10 @@ Html.SetPage(Title, User.RoleId)%>
 
 	<TD><FIELDSET><LEGEND>Адреса</LEGEND>
 	<TABLE><TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Locality", "", 30) %></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><INPUT TYPE="search" NAME="StreetName" ID="StreetName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="StreetList" REQUIRED>
-	<DATALIST ID="StreetList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", "", 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Будинок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="HouseId" SIZE="20" MAXLENGTH="15" REQUIRED></TD></TR>

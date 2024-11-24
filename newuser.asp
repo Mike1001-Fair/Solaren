@@ -5,7 +5,7 @@
 <% var Authorized = User.RoleId == 0,
 Title = "Новий користувач";
 
-User.CheckAuthorization(Authorized);
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("SelectCompany");

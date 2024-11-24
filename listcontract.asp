@@ -6,7 +6,7 @@
 <% var Authorized = User.RoleId == 1,
 Title = "Список договорiв";
 
-User.CheckAuthorization(Authorized);
+User.ValidateAccess(Authorized);
 
 with (Request) {
     var CustomerId = String(Form("CustomerId")),

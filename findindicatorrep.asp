@@ -1,25 +1,20 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 2,
 Title = "Звiт про показники";
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+User.ValidateAccess(Authorized);
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicatorRep" ACTION="prnindicatorrep.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
 <H3 CLASS="HeadText"><IMG CLASS="H3Img" SRC="Images/printer.svg"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
-	<% Html.WriteContractName("", "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	<FIELDSET ALIGN="CENTER"><LEGEND>Параметри</LEGEND>
-	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Session("OperMonth")%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Session("OperMonth")%>" REQUIRED>
+	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.OperMonth()%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Html.OperMonth()%>" REQUIRED>
 	<LABEL><INPUT TYPE="CheckBox" NAME="DoubleReport" CHECKED>2 копії</LABEL>
 	</FIELDSET>
 	</TD></TR>

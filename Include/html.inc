@@ -11,6 +11,9 @@ Html = {
 	ImagePath   : "Images/",
 	MinDate     : "2015-01-01",
 	MaxDate     : "9999-12-31",
+	OperDate    : Session("OperDate"),
+	EndDate     : Session("EndDate"),
+	NextDate    : Session("NextDate"),
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
@@ -19,6 +22,10 @@ Html = {
 	LimitMonth: function(Index) {
 		var Limit = [this.MinDate.slice(0, 7), this.MaxDate.slice(0, 7)];
 		return Limit[Index]
+	},
+
+	OperMonth: function() {
+		return this.OperDate.slice(0, 7);
 	},
 
 	GetImage: function(fileName) {
@@ -198,31 +205,61 @@ Html = {
 
 	WriteDatePeriod: function(legend, begDate, endDate, minDate, maxDate) {
 		var ResponseText = ['<FIELDSET><LEGEND>', legend, '</LEGEND>\n',
-		'<INPUT TYPE="date" NAME="BegDate" VALUE="', begDate, '" MIN="', minDate, '" MAX="', maxDate, '" REQUIRED> &#8722;\n',
-		'<INPUT TYPE="date" NAME="EndDate" VALUE="', endDate, '" MIN="', minDate, '" MAX="', maxDate, '" REQUIRED>\n', '</FIELDSET>\n'];
+			'<INPUT TYPE="date" NAME="BegDate" VALUE="' + begDate,
+			'" MIN="' + minDate,
+			'" MAX="' + maxDate,
+			'" REQUIRED> &#8722;\n',
+			'<INPUT TYPE="date" NAME="EndDate" VALUE="' + endDate,
+			'" MIN="' + minDate,
+			'" MAX="' + maxDate,
+			'" REQUIRED>\n</FIELDSET>\n'];
 		Response.Write(ResponseText.join(""));
 	},
 
 	WriteMonthPeriod: function() {
-		var ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>\n',
-		'<INPUT TYPE="Month" NAME="BegMonth" VALUE="', Session("OperMonth"), '" MIN="', this.LimitMonth(0), '" MAX="', Session("OperMonth"), '" REQUIRED> &#8722;\n',
-		'<INPUT TYPE="Month" NAME="EndMonth" VALUE="', Session("OperMonth"), '" MIN="', this.LimitMonth(0), '" MAX="', Session("OperMonth"), '" REQUIRED>\n', '</FIELDSET>\n'];
+		var OperMonth = this.OperMonth(),
+		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>\n',
+			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth,
+			'" MIN="' + this.LimitMonth(0),
+			'" MAX="' + OperMonth,
+			'" REQUIRED> &#8722;\n',
+			'<INPUT TYPE="Month" NAME="EndMonth" VALUE="' + OperMonth,
+			'" MIN="' + this.LimitMonth(0),
+			'" MAX="' + OperMonth,
+			'" REQUIRED>\n</FIELDSET>\n'
+		];
 		Response.Write(ResponseText.join(""));
 	},
 
-	WriteCustomerName: function(Required) {
-		if (Required) Required = " " + Required;
-		Response.Write('<FIELDSET><LEGEND>Споживач</LEGEND>\n' +
-		'<INPUT TYPE="search" NAME="CustomerName" ID="CustomerName" PLACEHOLDER="Пошук по літерам" SIZE="35" LIST="CustomerList" AUTOFOCUS' + Required + '>\n' +
-		'<DATALIST ID="CustomerList"></DATALIST>\n' +
-		'</FIELDSET>')
+	WriteInputDataList : function(tagName, tagValue, tagSize) {
+		var inputName = tagName + "Name",
+		listName = tagName + "List",
+		ResponseText = ['<INPUT TYPE="search" NAME="' + inputName,
+			'" ID="' + inputName,
+			'" VALUE="' + tagValue,
+			'" PLACEHOLDER="Пошук по літерам" SIZE="' + tagSize,
+			'" LIST="' + listName,
+			'" REQUIRED>\n',
+			'<DATALIST ID="' + listName + '"></DATALIST>'
+		];
+		Response.Write(ResponseText.join(""));
 	},
 
-	WriteContractName: function(ContractName, Required) {
-		if (Required) Required = " " + Required;
-		Response.Write('<FIELDSET><LEGEND>Договір</LEGEND>\n' +
-		'<INPUT TYPE="search" NAME="ContractName" ID="ContractName" PLACEHOLDER="Пошук по літерам" VALUE="' + ContractName + '" SIZE="35" LIST="ContractList" AUTOFOCUS' + Required + '>\n' +
-		'<DATALIST ID="ContractList"></DATALIST></FIELDSET>');
+	WriteSearchSet: function(title, tagName, tagValue, tagRequired) {
+		var inputName = tagName + "Name",
+		listName = tagName + "List",
+		required = tagRequired ? " REQUIRED" : "",
+		ResponseText = [
+			'<FIELDSET><LEGEND>' + title + '</LEGEND>\n',
+			'<INPUT TYPE="search" NAME="' + inputName,
+			'" ID="' + inputName,
+			'" VALUE="' + tagValue,
+			'" PLACEHOLDER="Пошук по літерам" SIZE=35"',
+			'" LIST="' + listName + '"',
+			required + ' AUTOFOCUS>\n',
+			'<DATALIST ID="' + listName + '"></DATALIST>\n</FIELDSET>'
+		];
+		Response.Write(ResponseText.join(""));
 	},
 
 	WriteOperator: function(rs, OperatorId) {
@@ -398,8 +435,11 @@ Html = {
 
 	WriteDate: function() {
 		var ResponseText = ['<FIELDSET>\n<LEGEND>Дата</LEGEND>\n',
-		'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="', Session("OperDate"), '" MIN="', this.MinDate, '" MAX="', this.MaxDate, '" REQUIRED></LABEL>\n',
-		'</FIELDSET>\n'];
+			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + this.OperDate,
+			'" MIN="' + this.MinDate,
+			'" MAX="' + this.MaxDate,
+			'" REQUIRED></LABEL>\n</FIELDSET>\n'
+		];
 		Response.Write(ResponseText.join(""));
-	}
+	}	
 }%>

@@ -16,7 +16,7 @@ with (Html) {
 <H3 CLASS="HeadText"><BIG>&#128214;</BIG><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteCustomerName("")%>
+	<% Html.WriteSearchSet("Споживач", "Customer", "", 1)%>
 	<FIELDSET><LEGEND>Рахунок</LEGEND>
 	<INPUT TYPE="TEXT" TYPE="search" NAME="PAN" SIZE="10" MAXLENGTH="9">	
 	</FIELDSET>

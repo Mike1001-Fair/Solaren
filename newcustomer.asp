@@ -30,16 +30,13 @@ Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка а�
 
 	<TD><FIELDSET NAME="AddressSet"><LEGEND>Адреса</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Район</TD>
-	<TD><INPUT TYPE="search" NAME="AreaName" ID="AreaName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="AreaList" REQUIRED>
-	<DATALIST ID="AreaList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Area", "", 30) %></TD></TR>
 
 	<TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Locality", "", 30) %></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><INPUT TYPE="search" NAME="StreetName" ID="StreetName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="StreetList" REQUIRED>
-	<DATALIST ID="StreetList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", "", 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Будинок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="HouseId" SIZE="20" MAXLENGTH="15"></TD></TR>

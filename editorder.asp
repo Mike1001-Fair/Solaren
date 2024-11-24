@@ -3,12 +3,10 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Request) {
-	var OrderId = QueryString("OrderId");
-}
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+OrderId = Request.QueryString("OrderId");
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("GetOrder");
@@ -31,16 +29,11 @@ try {
 }
 
 var ViewOnly = !Month.isPeriod(Session("OperDate"), OrderDate),
-HeadTitle    = Deleted || ViewOnly ? "Перегляд замовлення" : "Редагування замовлення";
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Title = Deleted || ViewOnly ? "Перегляд замовлення" : "Редагування замовлення";
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOrder" ACTION="updateorder.asp" METHOD="post">
-<H3 CLASS="HeadText" ID="H3Id">🛒<%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id">🛒<%=Title%></H3>
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="OrderId" VALUE="<%=OrderId%>">
 <INPUT TYPE="HIDDEN" NAME="JsonData" VALUE='<%=JsonData%>'>
@@ -48,11 +41,11 @@ with (Html) {
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% Html.WriteContractName(ContractName, "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %> 
 	<FIELDSET NAME="OrderSet"><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="OrderDate" VALUE="<%=OrderDate%>" MIN="<%=Session("OperDate")%>" MAX="<%=Session("EndDate")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="OrderDate" VALUE="<%=OrderDate%>" MIN="<%=Html.OperDate%>" MAX="<%=Html.EndDate%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 	<FIELDSET><LEGEND><BUTTON TYPE="button" CLASS="AddBtn" ID="AddBtn" TITLE="Додати">&#x2795;Список</BUTTON></LEGEND>
 	<TABLE ID="OrderItemsTable">

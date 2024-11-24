@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <% var Authorized = User.RoleId == 1,
 ContractId = Request.QueryString("ContractId");
-User.CheckAuthorization(Authorized);
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("SelectBank");
@@ -71,8 +71,7 @@ try {
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Загальні</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Споживач</TD>
-	<TD><INPUT TYPE="search" NAME="CustomerName" ID="CustomerName" VALUE="<%=CustomerName%>" PLACEHOLDER="Пошук по літерам" SIZE="35" LIST="CustomerList" REQUIRED>
-	<DATALIST ID="CustomerList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Customer", CustomerName, 35) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Рахунок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="PAN" VALUE="<%=PAN%>" SIZE="9" MAXLENGTH="9" REQUIRED></TD></TR>
@@ -100,20 +99,16 @@ try {
 	<TD><INPUT TYPE="TEXT" NAME="Iban" SIZE="29" VALUE="<%=Iban%>" MAXLENGTH="29" PATTERN="[A-Z0-9]{29}" REQUIRED>
 	<INPUT TYPE="CheckBox" NAME="IbanBox" ID="IbanBox" TITLE="Сгенерувати"></TD></TR></TABLE></FIELDSET></TD>
 
-
 	<TD><FIELDSET><LEGEND>Адреса</LEGEND>
 	<TABLE><TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" VALUE="<%=LocalityName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Locality", LocalityName, 30) %></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><INPUT TYPE="search" NAME="StreetName" ID="StreetName" VALUE="<%=StreetName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="StreetList" REQUIRED>
-	<DATALIST ID="StreetList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", StreetName, 30) %></TD></TR>
 	
 	<TR><TD ALIGN="RIGHT">Будинок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="HouseId" VALUE="<%=HouseId%>" SIZE="20" MAXLENGTH="15" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
-
 
 	<FIELDSET><LEGEND ALIGN="CENTER">Електроустановка</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Потужнiсть</TD>

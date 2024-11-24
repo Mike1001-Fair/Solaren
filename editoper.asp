@@ -3,10 +3,11 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 FactVolId = Request.QueryString("FactVolId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("GetOper");
@@ -36,11 +37,7 @@ try {
 var ViewOnly = !Month.isPeriod(Session("OperDate"), EndDate) || IndicatorId != "",
 Title = Deleted || ViewOnly  ? "Перегляд операції" : "Редагування операції";
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOper" ACTION="updateoper.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="FactVolId" VALUE="<%=FactVolId%>">
@@ -51,7 +48,7 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Html.MinDate, Html.MaxDate);
-	Html.WriteContractName(ContractName, "REQUIRED") %>
+	Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %> 
 
 	<FIELDSET NAME="OperSet"><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>

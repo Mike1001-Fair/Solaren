@@ -24,14 +24,14 @@ var User = {
 		return FileName.join("")
 	},
 
-	Validate: function(RoleId, UserGUID) {
+	ValidateRole: function(RoleId, UserGUID) {
 		//Response.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + UserGUID + "<BR>ValidUser=" + ValidUser + "<BR>Token=" + Session("Token"));
 		return RoleId == this.RoleId && this.Role[RoleId] && this.GuidRe.test(UserGUID) 
 	},
 
 	Authorize: function(RoleId) {
 		var Done  = false,
-		ValidUser = this.Validate(RoleId, this.GUID);
+		ValidUser = this.ValidateRole(RoleId, this.GUID);
 
 		if (ValidUser) {
 			try {
@@ -68,9 +68,10 @@ var User = {
 		} return Pswd;
 	},
 
-	CheckAuthorization: function(Authorized) {
+	ValidateAccess: function(Authorized) {
 		if (!Authorized) {
 			Solaren.SysMsg(2, "Помилка авторизації");
 		}
+		return Authorized
 	}
 }%>

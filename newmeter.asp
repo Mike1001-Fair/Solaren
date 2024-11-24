@@ -1,10 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 Title = "Новий лiчильник";
-Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка авторизації")%>
+
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
+}%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMeter" ACTION="createmeter.asp" METHOD="post" AUTOCOMPLETE="off">
@@ -13,7 +16,7 @@ Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка а�
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteContractName("", "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Номер</TD>
 	<TD><INPUT TYPE="text" NAME="MeterCode" SIZE="12" maxLength="10" PATTERN="^\d{8,10}$" REQUIRED></TD></TR>

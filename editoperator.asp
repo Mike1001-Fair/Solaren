@@ -1,9 +1,10 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 OperatorId = Request.QueryString("OperatorId");
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("GetOperator");
@@ -27,11 +28,7 @@ try {
 	Connect.Close();
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOperator" ACTION="updateoperator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=OperatorId%>">

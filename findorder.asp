@@ -1,25 +1,22 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead("Пошук замовлень");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+Title = "Пошук замовлень";
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindOrder" ACTION="listorder.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText">Пошук замовлень</H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<FIELDSET><LEGEND><LABEL><INPUT TYPE="CheckBox" NAME="Deleted" TITLE="Видаленi">Перioд</LABEL></LEGEND>
-	<INPUT TYPE="date" NAME="BegDate" VALUE="<%=Session("OperDate")%>" MIN="<%=Html.MinDate%>" MAX="<%=Session("EndDate")%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="EndDate" VALUE="<%=Session("EndDate")%>" MIN="<%=Html.MinDate%>"  REQUIRED>
-	</FIELDSET>
-	<% Html.WriteContractName("", "REQUIRED") %>
+	<% with (Html) {
+		WriteDatePeriod("Період", OperDate, EndDate, MinDate, NextDate);
+		WriteSearchSet("Договір", "Contract", "", 1);
+	}%>
 	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>

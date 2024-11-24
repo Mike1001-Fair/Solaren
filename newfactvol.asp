@@ -1,14 +1,11 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 Title = "Новий обсяг";
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewFactVol" ACTION="createfactvol.asp" METHOD="post">
@@ -16,9 +13,10 @@ with (Html) {
 <H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Session("OperDate"), Session("EndDate"), Html.MinDate, Html.MaxDate);
-	Html.WriteContractName("", "REQUIRED"); %>
-
+	<% with (Html) {
+		WriteDatePeriod("Період", OperDate, EndDate, OperDate, EndDate);
+		WriteSearchSet("Договір", "Contract", "", 1);
+	}%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="RecVol">Прийом</LABEL></TD>

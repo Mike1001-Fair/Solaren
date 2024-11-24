@@ -1,12 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-with (Html) {
-	SetHead("Нове замовлення");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+Title = "Нове замовлення";
+
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOrder" ID="NewOrder" ACTION="createorder.asp" METHOD="post" AUTOCOMPLETE="off">
@@ -16,9 +16,9 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Дата</LEGEND>
-		<INPUT TYPE="date" NAME="OrderDate" VALUE="<%=Session("OperDate")%>" MIN="<%=Session("OperDate")%>" MAX="<%=Session("EndDate")%>" REQUIRED>
+		<INPUT TYPE="date" NAME="OrderDate" VALUE="<%=Html.OperDate%>" MIN="<%=Html.OperDate%>" MAX="<%=Html.EndDate%>" REQUIRED>
 	</FIELDSET>
-	<% Html.WriteContractName("", "REQUIRED") %>
+	<% Html.WriteSearchSet("Договір", "Contract", "", 1); %>
 	<FIELDSET><LEGEND><BUTTON TYPE="button" CLASS="AddBtn" ID="AddBtn" TITLE="Додати">&#x2795;Список</BUTTON></LEGEND>
 	<TABLE ID="OrderItemsTable">
 		<TBODY></TBODY>

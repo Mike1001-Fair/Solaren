@@ -1,23 +1,23 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+Title = "Нова операція";
 
-with (Html) {
-	SetHead("Нова операція");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOper" ACTION="createoper.asp" METHOD="post">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText">Нова операція</H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Session("OperDate"), Session("EndDate"), Html.MinDate, Html.MaxDate);
-	Html.WriteContractName("", "REQUIRED"); %>
-
+	<% with (Html) {
+		WriteDatePeriod("Період", OperDate, EndDate, OperDate, EndDate);
+		WriteSearchSet("Договір", "Contract", "", 1);
+	}%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Видача</TD>
