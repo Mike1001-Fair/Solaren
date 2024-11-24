@@ -45,10 +45,10 @@ Html.SetPage(Title, User.RoleId)%>
 	<TD><%Html.WriteRole("RoleId", -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
-	<TD><%Html.WriteCompany(rsCompany, -1)%></TD></TR>
+	<TD><% Html.WriteSelect(rsCompany, "Company", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">ЦОС</TD>
-	<TD><%Html.WriteBranch(rsBranch, -1, 1);
+	<TD><% Html.WriteSelect(rsBranch, "Branch", 1, -1);
 	Connect.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>

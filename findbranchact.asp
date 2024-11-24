@@ -31,7 +31,7 @@ with (Html) {
 	<% Html.WriteMonthPeriod() %>	
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>ЦОС
-	<%Html.WriteBranch(rsBranch, -1, 0);
+	<% Html.WriteSelect(rsBranch, "Branch", 0, -1);
 	Connect.Close()%>
 	</LABEL></FIELDSET>	
 	</TD></TR>

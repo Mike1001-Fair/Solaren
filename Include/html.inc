@@ -262,47 +262,14 @@ Html = {
 		Response.Write(ResponseText.join(""));
 	},
 
-	WriteOperator: function(rs, OperatorId) {
-		var ResponseText = '<SELECT NAME="OperatorId" ID="OperatorId">\n';
+	WriteSelect: function(rs, objName, blankOption, elementId) {
+		var tagId = objName + "Id",
+		tagName  = objName + "Name",
+		ResponseText = '<SELECT NAME="' + tagId + '" ID="' + tagId + '">\n';
+		if (blankOption) ResponseText += '<OPTION VALUE="0"></OPTION>';
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = OperatorId == rs.Fields("OperatorId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("OperatorId"), selected, rs.Fields("OperatorName"), '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
-	},
-
-	WriteBranch: function(rs, BranchId, BlankOption) {
-		var ResponseText = '<SELECT NAME="BranchId" ID="BranchId">\n';
-		if (BlankOption) ResponseText += '<OPTION VALUE="0"></OPTION>';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = BranchId == rs.Fields("BranchId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("BranchId"), selected, rs.Fields("BranchName"), '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
-	},
-
-	WriteAen: function(rs, AenId) {
-		var ResponseText = '<SELECT NAME="AenId">\n';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = rs.Fields("AenId") == AenId ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("AenId"), selected, rs.Fields("AenName"), '</OPTION>'];
-			ResponseText += option.join("");
-		} rs.Close()
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText );
-	},
-
-	WriteCompany: function(rs, CompanyId) {
-		var ResponseText = '<SELECT NAME="CompanyId" ID="CompanyId">\n';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = CompanyId == rs.Fields("CompanyId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("CompanyId"), selected, rs.Fields("CompanyName"), '</OPTION>'];
+			selected = elementId == rs.Fields(tagId) ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', rs.Fields(tagId), selected, rs.Fields(tagName), '</OPTION>'];
 			ResponseText += option.join("");
 		}
 		rs.Close();
@@ -334,30 +301,6 @@ Html = {
 		Response.Write(ResponseText);
 	},
 
-	WriteRegion: function(rs, RegionId) {
-		var ResponseText = '<SELECT NAME="RegionId" ID="RegionId">\n';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = RegionId == rs.Fields("RegionId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("RegionId"), selected, rs.Fields("RegionName"), '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
-	},
-
-	WritePerformer: function(rs, PerformerId) {
-		var ResponseText = '<SELECT NAME="PerformerId" ID="PerformerId">\n';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = PerformerId == rs.Fields("PerformerId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("PerformerId"), selected, rs.Fields("PerformerName"), '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
-	},
-
 	WriteChiefDoc: function(rs, DocId) {
 		var ResponseText = '<SELECT NAME="ChiefDocId" ID="ChiefDocId">\n';
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
@@ -375,19 +318,6 @@ Html = {
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = TitleId == rs.Fields("TitleId") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("TitleId"), selected, rs.Fields("Title1"), '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
-	},
-
-	WriteArea: function(rs, AreaId, BlankOption) {
-		var ResponseText = '<SELECT NAME="AreaId" ID="AreaId">\n';
-		if (BlankOption) ResponseText += '<OPTION></OPTION>';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = AreaId == rs.Fields("AreaId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("AreaId"), selected, rs.Fields("AreaName"), '</OPTION>'];
 			ResponseText += option.join("");
 		}
 		rs.Close();

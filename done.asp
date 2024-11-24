@@ -4,19 +4,15 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-if (!User.Validate(Session("RoleId"), Session("UserGUID"))) {
+if (!User.ValidateRole(User.RoleId, User.GUID)) {
 	Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
 }
-var Msg = Dictionary.Item("Message");
-with (Html) {
-	SetHead(Msg);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+var Title = Dictionary.Item("Message");
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>		
-		<LEGEND><%=Msg%></LEGEND>
+		<LEGEND><%=Title%></LEGEND>
 		<H4><%=Session("SysMsg")%></H4>
 		<A HREF="javascript:window.history.go(-1)" ID="BackLink">
 		<FIGURE>

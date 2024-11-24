@@ -91,7 +91,7 @@ try {
 
 	<FIELDSET><LEGEND>Договір</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">ЦОС</TD>
-	<TD><%Html.WriteBranch(rsBranch, BranchId, 0)%></TD></TR>
+	<TD><% Html.WriteSelect(rsBranch, "Branch", 0, BranchId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата</TD>
 	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=ContractDate%>" MIN="<%=Html.MinDate%>" MAX="<%=Session("EndDate")%>" REQUIRED></TD></TR>
@@ -122,13 +122,13 @@ try {
 
 	<FIELDSET><LEGEND>Інше</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">РЕМ</TD>
-	<TD><%Html.WriteAen(rsAen, AenId)%></TD></TR>
+	<TD><%Html.WriteSelect(rsAen, "Aen", 0, AenId)%></TD></TR>
 	
 	<TR><TD ALIGN="RIGHT">Оператор</TD>
-	<TD><%Html.WriteOperator(rsOperator, OperatorId)%></TD></TR>
+	<TD><%Html.WriteSelect(rsOperator, "Operator", 0, OperatorId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Виконавець</TD>
-	<TD><%Html.WritePerformer(rsPerformer, PerformerId)%></TD></TR>
+	<TD><%Html.WriteSelect(rsPerformer, "Performer", 0, PerformerId)%></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <% Html.WriteEditButton(1);

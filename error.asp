@@ -6,7 +6,7 @@
 <% Resource.Load(User.ResourceFile());
 var ScriptName = Session("ScriptName") || "";
 if (ScriptName.indexOf("login.asp") == -1) {
-	if (!User.Validate(Session("RoleId"), Session("UserGUID"))) {
+	if (!User.ValidateRole(User.RoleId, User.GUID)) {
 		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
 	}
 }

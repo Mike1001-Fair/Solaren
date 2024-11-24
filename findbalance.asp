@@ -1,38 +1,34 @@
 <%@LANGUAGE="JavaScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+Title = "Баланс";
+User.ValidateAccess(Authorized)
 
 try {
 	Solaren.SetCmd("SelectOperator");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Довідник операторiв пустий!');
+	var rs = Solaren.Execute("SelectOperator", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))	
 }
 
-with (Html) {
-	SetHead("Баланс");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBalance" ACTION="listbalance.asp" METHOD="post" TARGET="_blank">
 <INPUT TYPE="HIDDEN" NAME="OperatorName">
-<H3 CLASS="HeadText">Баланс</H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteMonthPeriod() %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL FOR="OperatorId">Оператор</LABEL>
-	<% Html.WriteOperator(rs, -1);
+	<% Html.WriteSelect(rs, "Operator", 0, -1);
 	Connect.Close(); %>
 	</FIELDSET></TD></TR>
 </TABLE>

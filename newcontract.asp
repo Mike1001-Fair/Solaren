@@ -57,7 +57,7 @@ Html.SetPage(Title, User.RoleId)%>
 
 	<FIELDSET><LEGEND ALIGN="CENTER">Договір</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">ЦОС</TD>
-	<TD><%Html.WriteBranch(rsBranch, -1, 0)%></TD></TR>
+	<TD><% Html.WriteSelect(rsBranch, "Branch", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата</TD>
 	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=Session("OperDate")%>" MIN="<%=Html.MinDate%>" MAX="<%=Session("EndDate")%>" REQUIRED></TD></TR>
@@ -88,13 +88,13 @@ Html.SetPage(Title, User.RoleId)%>
 
 	<FIELDSET><LEGEND ALIGN="CENTER">Інше</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">РЕМ</TD>
-	<TD><%Html.WriteAen(rsAen, -1)%></TD></TR>
+	<TD><%Html.WriteSelect(rsAen, "Aen", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Оператор</TD>
-	<TD><%Html.WriteOperator(rsOperator, -1)%></TD></TR>
+	<TD><%Html.WriteSelect(rsOperator, "Operator", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Виконавець</TD>
-	<TD><%Html.WritePerformer(rsPerformer, -1);
+	<TD><%Html.WriteSelect(rsPerformer, "Performer", 0, -1);
 	Connect.Close() %></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

@@ -68,12 +68,11 @@ Html.SetPage(Title, User.RoleId)%>
 	<TR><TD ALIGN="RIGHT">Телефон</TD>
 	<TD><INPUT TYPE="Tel" NAME="Phone" VALUE="<%=Phone%>" PATTERN="\d{3,10}" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>
 
-
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
-	<TD><%Html.WriteCompany(rsCompany, CompanyId)%></TD></TR>
+	<TD><% Html.WriteSelect(rsCompany, "Company", 0, CompanyId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">ЦОС</TD>
-	<TD><%Html.WriteBranch(rsBranch, BranchId, 1)%></TD></TR>	
+	<TD><% Html.WriteSelect(rsBranch, "Branch", 1, BranchId)%></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <% Html.WriteEditButton(1);

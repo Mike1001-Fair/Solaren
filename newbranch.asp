@@ -62,7 +62,7 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="&#128100;ПІБ" SIZE="30" maxLength="20" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
-	<TD><%Html.WriteCompany(rsCompany, -1)%></TD></TR>
+	<TD><% Html.WriteSelect(rsCompany, "Company", 0, -1)%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

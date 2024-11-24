@@ -81,7 +81,7 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="ПІБ" VALUE="<%=Accountant%>" SIZE="30" maxLength="30" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
-	<TD><%Html.WriteCompany(rsCompany, CompanyId)%></TD></TR>
+	<TD><% Html.WriteSelect(rsCompany, "Company", 0, CompanyId)%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

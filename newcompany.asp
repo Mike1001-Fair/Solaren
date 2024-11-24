@@ -86,7 +86,7 @@ with (Html) {
 	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Область</TD>
-	<TD><%Html.WriteRegion(rsRegion, -1)%></TD></TR>
+	<TD><% Html.WriteSelect(rsRegion, "Region", 0, -1)%></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET><LEGEND>Лiцензiя</LEGEND>
