@@ -31,7 +31,7 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
-	<LABEL>Керівник	<%Html.WriteChief(rsChief, -1)%></LABEL>
+	<LABEL>Керівник	<%Html.WriteSelect(rsChief, "Chief", 0, -1)%></LABEL>
 	</FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>

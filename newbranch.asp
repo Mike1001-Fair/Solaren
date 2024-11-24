@@ -56,7 +56,7 @@ with (Html) {
 	<TD><% Html.WriteInputDataList("Locality", "", 30) %></TD></TR>
 	
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
-	<TD><%Html.WriteChief(rsChief, -1)%></TD></TR>
+	<TD><% Html.WriteSelect(rsChief, "Chief", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Бухгалтер</TD>
 	<TD><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="&#128100;ПІБ" SIZE="30" maxLength="20" REQUIRED></TD></TR>

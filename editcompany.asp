@@ -77,7 +77,7 @@ with (Html) {
 	<TR><TD ALIGN="RIGHT">Код</TD>
 	<TD ALIGN="LEFT"><INPUT TYPE="TEXT" NAME="CompanyCode" PLACEHOLDER="ЄДРПОУ" VALUE="<%=CompanyCode%>" SIZE="10" MAXLENGTH="8" PATTERN="\d{8}" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
-	<TD><%Html.WriteChief(rsChief, ChiefId)%></TD></TR>
+	<TD><% Html.WriteSelect(rsChief, "Chief", 0, ChiefId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Бухгалтер</TD>
 	<TD ALIGN="LEFT"><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="ПІБ" VALUE="<%=Accountant%>" SIZE="30" maxLength="30" REQUIRED></TD></TR>

@@ -33,7 +33,7 @@ with (Html) {
 	<TR><TD ALIGN="RIGHT">Кiлькicть</TD>
 	<TD><INPUT TYPE="number" NAME="CustomerCount" VALUE="90" STEP="1" MIN="30" MAX="999" REQUIRED>
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
-	<TD><%Html.WriteChief(rsChief, -1)%></TD></TR>
+	<TD><%Html.WriteSelect(rsChief, "Chief", 0, -1)%></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>

@@ -32,7 +32,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.OperMonth()%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Html.OperMonth()%>" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Керівник</TD>
-	<TD><%Html.WriteChief(rs, -1)%></TD></TR>	
+	<TD><%Html.WriteSelect(rs, "Chief", 0, -1)%></TD></TR>	
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>

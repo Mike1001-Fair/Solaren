@@ -35,7 +35,8 @@ try {
 	<TR><TD ALIGN="RIGHT">Ціна</TD>
 	<TD><INPUT TYPE="Number" NAME="AveragePrice" VALUE="1" STEP="0.000001" MIN="0" MAX="99999" REQUIRED AUTOFOCUS PLACEHOLDER="коп">
 	<TR><TD ALIGN="RIGHT">Керівник</TD>
-	<TD><%Html.WriteChief(rsChief, -1); Connect.Close()%></TD></TR>
+	<TD><%Html.WriteSelect(rsChief, "Chief", 0, -1);
+	Connect.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

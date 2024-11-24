@@ -75,7 +75,7 @@ with (Html) {
 	<TD><% Html.WriteInputDataList("Locality", LocalityName, 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
-	<TD><%Html.WriteChief(rsChief, ChiefId)%></TD></TR>
+	<TD><% Html.WriteSelect(rsChief, "Chief", 0, ChiefId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Бухгалтер</TD>
 	<TD><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="ПІБ" VALUE="<%=Accountant%>" SIZE="30" maxLength="30" REQUIRED></TD></TR>

@@ -277,18 +277,6 @@ Html = {
 		Response.Write(ResponseText);
 	},
 
-	WriteChief: function(rs, ChiefId) {
-		var ResponseText = '<SELECT NAME="ChiefId" ID="ChiefId">\n';
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = ChiefId == rs.Fields("ChiefId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("ChiefId"), selected, rs.Fields("ChiefName"), '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
-	},
-
 	WriteBank: function(rs, MfoCode) {
 		var ResponseText = '<SELECT NAME="MfoCode" ID="MfoCode">\n';
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {

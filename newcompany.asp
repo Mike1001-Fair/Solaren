@@ -38,7 +38,7 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="CompanyCode" PLACEHOLDER="ЄДРПОУ" SIZE="10" maxLength="8" PATTERN="\d{8}" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
-	<TD><%Html.WriteChief(rsChief, -1)%></TD></TR>
+	<TD><% Html.WriteSelect(rsChief, "Chief", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Бухгалтер</TD>
 	<TD><INPUT TYPE="TEXT" NAME="Accountant" PLACEHOLDER="ПІБ" SIZE="30" maxLength="30" REQUIRED></TD></TR>
