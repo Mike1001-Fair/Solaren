@@ -34,7 +34,7 @@ catch (ex) {
 	Connect.Close();
 }
 
-var ViewOnly = !Month.isPeriod(Session("OperDate"), EndDate),
+var ViewOnly = !Month.isPeriod(Html.Date[0], EndDate),
 HeadTitle    = Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
 with (Html) {
 	SetHead(HeadTitle);
@@ -49,10 +49,10 @@ with (Html) {
 <H3 CLASS="HeadText"><%=HeadTitle%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Дiє", BegDate, EndDate, Html.MinDate, Html.MaxDate) %>
+	<% Html.WriteDatePeriod("Дiє", BegDate, EndDate, Html.Date[3], Html.Date[4]) %>
 	<FIELDSET><LEGEND>Ввод в експлуатацію</LEGEND>
-	<INPUT TYPE="date" NAME="ExpDateBeg" VALUE="<%=ExpDateBeg%>" MIN="<%=Html.MinDate%>" MAX="<%=Html.MaxDate%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="ExpDateEnd" VALUE="<%=ExpDateEnd%>" MIN="<%=Html.MinDate%>" MAX="<%=Html.MaxDate%>" REQUIRED>
+	<INPUT TYPE="date" NAME="ExpDateBeg" VALUE="<%=ExpDateBeg%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[4]%>" REQUIRED> &#8722;
+	<INPUT TYPE="date" NAME="ExpDateEnd" VALUE="<%=ExpDateEnd%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[4]%>" REQUIRED>
 	</FIELDSET>
 
 	<FIELDSET><LEGEND>Параметри</LEGEND>

@@ -1,30 +1,29 @@
 <%@LANGUAGE="JavaScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-TitleHead = "Сальдо-оборотна вiдомость";
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
+OperMonth = Html.GetMonth(1),
+MinMonth  = Html.GetMonth(0),
+Title = "Сальдо-оборотна вiдомость";
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(TitleHead);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+if (User.ValidateAccess(Authorized)) {
+	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindSov" ACTION="listsov.asp" METHOD="post" TARGET="_blank">
 
-<H3 CLASS="HeadText"><%=TitleHead%></H3>
+<H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET>
 	<LEGEND>Перiод</LEGEND>
-	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Session("OperMonth")%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Session("OperMonth")%>" REQUIRED>
+	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=OperMonth%>" MIN="<%=MinMonth%>" MAX="<%=OperMonth%>" REQUIRED>
 	</FIELDSET>
 	<FIELDSET>
 	<LEGEND>Параметри</LEGEND>
 	<LABEL><INPUT TYPE="CheckBox" NAME="Filter">Часткова оплата</LABEL>
 	</FIELDSET>
-</TD></TR>
+	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>

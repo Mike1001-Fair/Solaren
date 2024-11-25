@@ -28,7 +28,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-var ViewOnly = !Month.isPeriod(Session("OperDate"), OrderDate),
+var ViewOnly = !Month.isPeriod(Html.Date[0], OrderDate),
 Title = Deleted || ViewOnly ? "Перегляд замовлення" : "Редагування замовлення";
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">

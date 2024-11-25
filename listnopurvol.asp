@@ -12,7 +12,7 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Session("Operdate")));
+			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Html.Date[1]));
 		}
 	}
 	var rs = Cmd.Execute();
@@ -23,7 +23,7 @@ try {
 if (rs.EOF) {
 	Solaren.SysMsg(1, "Помилок не виявлено");
 } else {
-	var Period = Session("OperMonth").split("-").reverse().join("-"),
+	var Period = Html.GetMonth(1).split("-").reverse().join("-"),
 	ResponseText = '<BODY CLASS="MainBody">\n' +
 	'<H3 CLASS="H3Text">Перевiрка обсягiв<SPAN>перiод:' + Period + '</SPAN></H3>\n' +
 	'<TABLE CLASS="InfoTable">\n' +

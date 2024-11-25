@@ -44,7 +44,8 @@ try {
 	Connect.Close();
 }
 
-var OperDate = Session("OperDate"),
+var OperDate = Html.Date[1],
+NextDate     = Html.Date[3],
 ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
 AllowDelBtn  = RoleId == 1,
 Title        = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
@@ -59,7 +60,7 @@ Html.SetPage(Title, RoleId)%>
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=OperDate%>">
-<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Session("EndDate")%>">
+<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[1]%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 <H3 CLASS="HeadText" ID="H3Id">
 	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=Title%>
@@ -74,7 +75,7 @@ Html.SetPage(Title, RoleId)%>
 	<TD><SELECT NAME="MeterId" ID="MeterId" ID="MeterId" STYLE="width: 8em">
 	<OPTION></OPTION><OPTION VALUE="<%=MeterId%>" SELECTED><%=MeterCode%></OPTION></SELECT></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="ReportDate">Дата</LABEL></TD>
-	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=ReportDate%>" MIN="<%=OperDate%>" MAX="<%=Session("NextDate")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=ReportDate%>" MIN="<%=OperDate%>" MAX="<%=NextDate%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET NAME="IndicatorSet"><LEGEND>Показники</LEGEND>

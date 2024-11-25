@@ -30,7 +30,7 @@ try {
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Перiод</TD>
-	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Session("OperMonth")%>" MIN="2015-01" MAX="<%=Session("OperMonth")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="2015-01" MAX="<%=Html.GetMonth(1)%>" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Ціна</TD>
 	<TD><INPUT TYPE="Number" NAME="AveragePrice" VALUE="1" STEP="0.000001" MIN="0" MAX="99999" REQUIRED AUTOFOCUS PLACEHOLDER="коп">

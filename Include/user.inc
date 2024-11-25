@@ -9,6 +9,7 @@ var User = {
 	Id     : Session("UserId"),
 	GUID   : Session("UserGUID"),
 	RoleId : Session("RoleId"),
+	Token  : Session("Token"),
 
 	Language: function() {
 		var hal = String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")),
@@ -31,9 +32,9 @@ var User = {
 
 	Authorize: function(RoleId) {
 		var Done  = false,
-		ValidUser = this.ValidateRole(RoleId, this.GUID);
+		ValidRole = this.ValidateRole(RoleId, this.GUID);
 
-		if (ValidUser) {
+		if (ValidRole) {
 			try {
 				Solaren.SetCmd("UserAuthorize");
 				with (Cmd) {
@@ -43,7 +44,7 @@ var User = {
 						Append(CreateParameter("RoleId", adTinyInt, adParamInput, 10, RoleId));
 						Append(CreateParameter("UserIp", adVarChar, adParamInput, 15, this.Ip));
 						Append(CreateParameter("UserGUID", adGUID, adParamInput, 40, this.GUID));
-						Append(CreateParameter("Token", adChar, adParamInput, 32, Session("Token")));
+						Append(CreateParameter("Token", adChar, adParamInput, 32, this.Token));
 						Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 					} Execute(adExecuteNoRecords);
 					Done = Parameters.Item("Done").value;

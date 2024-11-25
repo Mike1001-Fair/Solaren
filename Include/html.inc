@@ -9,23 +9,14 @@ Html = {
 	ScriptPath  : "Scripts/",
 	StylePath   : "Styles/",
 	ImagePath   : "Images/",
-	MinDate     : "2015-01-01",
-	MaxDate     : "9999-12-31",
-	OperDate    : Session("OperDate"),
-	EndDate     : Session("EndDate"),
-	NextDate    : Session("NextDate"),
+	Date        : ["2015-01-01", Session("OperDate"), Session("EndDate"), Session("NextDate"), "9999-12-31"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
 	Author      : "Mykola Chernov",
 
-	LimitMonth: function(Index) {
-		var Limit = [this.MinDate.slice(0, 7), this.MaxDate.slice(0, 7)];
-		return Limit[Index]
-	},
-
-	OperMonth: function() {
-		return this.OperDate.slice(0, 7);
+	GetMonth: function(index) {
+		return this.Date[index].slice(0, 7)
 	},
 
 	GetImage: function(fileName) {
@@ -217,14 +208,15 @@ Html = {
 	},
 
 	WriteMonthPeriod: function() {
-		var OperMonth = this.OperMonth(),
+		var OperMonth = this.GetMonth(1),
+		MinMonth = this.GetMonth(0),
 		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>\n',
 			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth,
-			'" MIN="' + this.LimitMonth(0),
+			'" MIN="' + MinMonth,
 			'" MAX="' + OperMonth,
 			'" REQUIRED> &#8722;\n',
 			'<INPUT TYPE="Month" NAME="EndMonth" VALUE="' + OperMonth,
-			'" MIN="' + this.LimitMonth(0),
+			'" MIN="' + MinMonth,
 			'" MAX="' + OperMonth,
 			'" REQUIRED>\n</FIELDSET>\n'
 		];
@@ -353,9 +345,9 @@ Html = {
 
 	WriteDate: function() {
 		var ResponseText = ['<FIELDSET>\n<LEGEND>Дата</LEGEND>\n',
-			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + this.OperDate,
-			'" MIN="' + this.MinDate,
-			'" MAX="' + this.MaxDate,
+			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + this.Date[1],
+			'" MIN="' + this.Date[0],
+			'" MAX="' + this.Date[3],
 			'" REQUIRED></LABEL>\n</FIELDSET>\n'
 		];
 		Response.Write(ResponseText.join(""));

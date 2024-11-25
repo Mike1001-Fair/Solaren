@@ -10,9 +10,9 @@ function SetSessionVar() {
 	Today        = new Date(),
 	EndDate      = new Date(ym[0], ym[1], 0),
 	NextDate     = new Date(ym[0], +ym[1]+1, 0);
-	Session("OperDate")  = OperDate
+	Html.Date[0]  = OperDate
 	Session("OperMonth") = OperMonth;
-	Session("EndDate")   = OperMonth + "-" + EndDate.getDate();
+	Html.Date[1]   = OperMonth + "-" + EndDate.getDate();
 }
 
 try {

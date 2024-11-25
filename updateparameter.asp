@@ -44,9 +44,9 @@ try {
 	Connect.Close();
 	var ym = OperMonth.split("-"),
 	EndDate = new Date(ym[0], ym[1], 0);
-	Session("OperDate")     = OperMonth + "-01";
+	Html.Date[0]     = OperMonth + "-01";
 	Session("OperMonth")    = OperMonth;
-	Session("EndDate")      = OperMonth + "-" + EndDate.getDate();
+	Html.Date[1]      = OperMonth + "-" + EndDate.getDate();
 	Session("HoursLimit")   = HoursLimit;
 	Session("CheckCard")    = CheckCard;
 	Session("NewIndicator") = NewIndicator;

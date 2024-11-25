@@ -16,8 +16,8 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Період</LEGEND>
-	<INPUT TYPE="Month" NAME="BegMonth" VALUE="<%=Session("OperMonth")%>" MIN="2015-01" MAX="9999-12" REQUIRED> &#8722;
-	<INPUT TYPE="Month" NAME="EndMonth" VALUE="<%=Session("OperMonth")%>" MIN="2015-01" MAX="9999-12" REQUIRED>
+	<INPUT TYPE="Month" NAME="BegMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED> &#8722;
+	<INPUT TYPE="Month" NAME="EndMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED>
 	</FIELDSET>
 
 	<FIELDSET><LEGEND>Договiр</LEGEND>

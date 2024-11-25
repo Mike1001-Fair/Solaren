@@ -10,7 +10,7 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Session("Operdate")));
+			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Html.Date[1]));
 		}
 	}
 	var rs = Cmd.Execute();
@@ -25,7 +25,7 @@ with (Html) {
 }
 
 var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Договора без обсягiв<SPAN>' + Month.GetPeriod(Session("OperMonth"), 0) + '</SPAN></H3>\n' +
+	'<H3 CLASS="H3Text">Договора без обсягiв<SPAN>' + Month.GetPeriod(Html.GetMonth(1), 0) + '</SPAN></H3>\n' +
 	'<TABLE CLASS="InfoTable">\n' +
 	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>ЦОС</TH></TR>\n';
 for (var i=0; !rs.EOF; i++) {

@@ -14,7 +14,7 @@ if (User.ValidateAccess(Authorized)) {
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<% with (Html) {
-		WriteDatePeriod("Період", OperDate, EndDate, MinDate, EndDate);
+		WriteDatePeriod("Період", Date[1], Date[2], Date[0], Date[2]);
 		WriteSearchSet("Договір", "Contract", "", 1);
 	}%>
 	</TD></TR>

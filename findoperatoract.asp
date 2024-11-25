@@ -46,7 +46,7 @@ function SetOperatorName() {
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Період</TD>
-	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Session("OperMonth")%>" MIN="2015-01" MAX="9999-12"  REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>"  REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Оператор</TD>
 	<TD><SELECT NAME="OperatorId">
 	<% for (; !rs.EOF; rs.MoveNext()) {

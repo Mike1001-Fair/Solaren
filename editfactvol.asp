@@ -34,7 +34,7 @@ try {
 	Connect.Close();
 }
 
-var ViewOnly = !Month.isPeriod(Session("OperDate"), EndDate) || IndicatorId != "",
+var ViewOnly = !Month.isPeriod(Html.Date[0], EndDate) || IndicatorId != "",
 Title = Deleted || ViewOnly  ? "Перегляд операції" : "Редагування операції";
 
 Html.SetPage(Title, User.RoleId)%>
@@ -49,7 +49,7 @@ Html.SetPage(Title, User.RoleId)%>
 <H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Html.MinDate, Html.MaxDate);
+	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Html.Date[3], Html.Date[4]);
 	Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %> 
 
 	<FIELDSET NAME="VolSet"><LEGEND ALIGN="CENTER">Параметри</LEGEND>

@@ -21,7 +21,7 @@ if (User.ValidateAccess(Authorized)) {
 	<TABLE><TR><TD ALIGN="RIGHT">Номер</TD>
 	<TD><INPUT TYPE="text" NAME="MeterCode" SIZE="12" maxLength="10" PATTERN="^\d{8,10}$" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Монтаж</TD>
-	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=Session("OperDate")%>" MIN="<%=Html.MinDate%>" MAX="<%=Session("EndDate")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=Html.Date[0]%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[1]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Розряднiсть</TD>
 	<TD><INPUT TYPE="Number" NAME="Capacity" VALUE="7" STEP="1" MIN="5" MAX="9" REQUIRED></TD></TR>
 

@@ -14,7 +14,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<TR><TD>
 	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	<FIELDSET ALIGN="CENTER"><LEGEND>Параметри</LEGEND>
-	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.OperMonth()%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Html.OperMonth()%>" REQUIRED>
+	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED>
 	<LABEL><INPUT TYPE="CheckBox" NAME="DoubleReport" CHECKED>2 копії</LABEL>
 	</FIELDSET>
 	</TD></TR>

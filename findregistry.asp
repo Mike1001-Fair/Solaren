@@ -29,7 +29,7 @@ with (Html) {
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Перiод</TD>
-	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Session("OperMonth")%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Session("OperMonth")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Кiлькicть</TD>
 	<TD><INPUT TYPE="number" NAME="CustomerCount" VALUE="90" STEP="1" MIN="30" MAX="999" REQUIRED>
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>

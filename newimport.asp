@@ -2,7 +2,9 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
+<% var Authorized = Session("RoleId") == 1,
+OperMonth = Html.GetMonth(1);
+
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
 with (Html) {
@@ -19,7 +21,7 @@ with (Html) {
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Перioд</TD>
-	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=Session("OperMonth")%>" MAX="<%=Session("OperMonth")%>" READONLY></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MAX="<%=OperMonth%>" READONLY></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Тип</TD>
 	<TD><SELECT NAME="FileType" ID="FileType">

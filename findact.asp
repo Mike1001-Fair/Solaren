@@ -17,7 +17,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD><LABEL CLASS="BlockLabel" FOR="ReportMonth">Перioд:</LABEL>
-	<INPUT TYPE="Month" NAME="ReportMonth" ID="ReportMonth" VALUE="<%=Html.OperMonth()%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Html.OperMonth()%>" REQUIRED></TD>
+	<INPUT TYPE="Month" NAME="ReportMonth" ID="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED></TD>
 	<TD><LABEL><INPUT TYPE="CheckBox" NAME="DoubleAct" CHECKED>2 копії</LABEL>	
 	<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="AllContract">Всi договора</LABEL></TD></TR>
 	</TABLE>

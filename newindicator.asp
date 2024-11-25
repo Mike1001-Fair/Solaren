@@ -13,8 +13,8 @@ Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка а�
 <INPUT TYPE="HIDDEN" NAME="PrevDate">
 <INPUT TYPE="HIDDEN" NAME="Ktf">
 <INPUT TYPE="HIDDEN" NAME="ContractPower">
-<INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=Session("OperDate")%>">
-<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Session("EndDate")%>">
+<INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=Html.Date[0]%>">
+<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[1]%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 
 <TABLE CLASS="MarkupTable">
@@ -25,7 +25,7 @@ Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка а�
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Лiчильник</LABEL></TD><TD>
 	<SELECT STYLE="width: 8em" NAME="MeterId" ID="MeterId" DISABLED><OPTION></OPTION></SELECT></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="ReportDate">Дата</LABEL></TD>
-	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=Session("EndDate")%>" MIN="<%=Session("OperDate")%>" MAX="<%=Session("EndDate")%>" REQUIRED DISABLED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[1]%>" REQUIRED DISABLED></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET NAME="IndicatorSet" DISABLED><LEGEND>Показники</LEGEND>

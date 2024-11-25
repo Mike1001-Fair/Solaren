@@ -14,7 +14,7 @@ with (Html) {
 <H3 CLASS="HeadText">Нова ставка ВЗ</H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Session("OperDate"), Session("EndDate"), Html.MinDate, Html.MaxDate) %>
+	<% Html.WriteDatePeriod("Період", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[4]) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>Ставка
 	<INPUT TYPE="Number" NAME="VzTax" STEP="0.1" MIN="0" MAX="99" PLACEHOLDER="%" REQUIRED></LABEL>

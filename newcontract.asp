@@ -2,7 +2,6 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
 Title = "Новий договір";
 User.ValidateAccess(Authorized);
@@ -61,7 +60,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<TD><% Html.WriteSelect(rsBranch, "Branch", 0, -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=Session("OperDate")%>" MIN="<%=Html.MinDate%>" MAX="<%=Session("EndDate")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=Html.Date[0]%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[1]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">IBAN</TD>
 	<TD><INPUT TYPE="TEXT" NAME="Iban" SIZE="29" MAXLENGTH="29" REQUIRED>
 	<INPUT TYPE="CheckBox" NAME="IbanBox" ID="IbanBox" TITLE="Сгенерувати"></TD></TR>
@@ -82,7 +81,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<TABLE><TR><TD ALIGN="RIGHT">Потужнiсть</TD>
 	<TD><INPUT TYPE="Number" NAME="ContractPower" STEP="0.01" MIN="0" MAX="50" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
-	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Session("OperDate")%>" MIN="<%=Html.MinDate%>" MAX="<%=Session("EndDate")%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Html.Date[0]%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[1]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
 	<TD><%Html.WriteTarif("TarifGroupId", -1)%></TD></TR>
 	</TABLE></FIELDSET>

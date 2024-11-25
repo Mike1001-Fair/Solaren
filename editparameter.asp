@@ -60,9 +60,9 @@ with (Html) {
 	<FIELDSET><LEGEND>Загальні</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Старт</TD>
-	<TD><INPUT TYPE="date" NAME="StartSysDate" VALUE="<%=StartSysDate%>" MIN="<%=Html.MinDate%>" MAX="<%=Html.MaxDate%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="StartSysDate" VALUE="<%=StartSysDate%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[4]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Місяць</TD>
-	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MIN="<%=Html.LimitMonth(0)%>" MAX="<%=Session("NextDate").slice(0, 7)%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(2)%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Лiмiт годин доби</TD>
 	<TD><INPUT TYPE="Number" NAME="HoursLimit" VALUE="<%=HoursLimit%>" STEP="1" MIN="5" MAX="12" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Довжина рахунку</TD>
