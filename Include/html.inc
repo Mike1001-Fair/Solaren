@@ -6,9 +6,7 @@ var CodePage = {
 
 Html = {
 	Version     : "v=3.2",
-	ScriptPath  : "Scripts/",
-	StylePath   : "Styles/",
-	ImagePath   : "Images/",
+	Path        : ["Scripts/", "Styles/", "Images/"],
 	Date        : ["2015-01-01", Session("OperDate"), Session("EndDate"), Session("NextDate"), "9999-12-31"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
@@ -20,7 +18,7 @@ Html = {
 	},
 
 	GetImage: function(fileName) {
-		var fullFileName = [this.ImagePath, fileName];
+		var fullFileName = [this.Path[2], fileName];
 		return fullFileName.join("");
 	},
 
@@ -29,7 +27,7 @@ Html = {
 		StyleBlock = "",
 		StyleRow;
 		for (var i = 0; i < Sheets.length; i++) {
-			StyleRow = ['<LINK REL="stylesheet" HREF="', this.StylePath, Sheets[i], '.css?', this.Version, '">\n'];
+			StyleRow = ['<LINK REL="stylesheet" HREF="', this.Path[1], Sheets[i], '.css?', this.Version, '">\n'];
 			StyleBlock += StyleRow.join("");
 		}
 		return StyleBlock
@@ -40,7 +38,7 @@ Html = {
 		ScriptBlock = "",
 		ScriptRow;
 		for (var i = 0; i < Scripts.length; i++) {
-			ScriptRow = ['<SCRIPT DEFER SRC="', this.ScriptPath, Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
+			ScriptRow = ['<SCRIPT DEFER SRC="', this.Path[0], Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
 			ScriptBlock += ScriptRow.join("");
 		}
 		return ScriptBlock
