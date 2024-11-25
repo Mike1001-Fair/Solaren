@@ -1,9 +1,11 @@
 <%@LANGUAGE="JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 0,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 0,
 Title = "Нова компанія";
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized);
+
 try {
 	Solaren.SetCmd("SelectChief");
 	with (Cmd) {

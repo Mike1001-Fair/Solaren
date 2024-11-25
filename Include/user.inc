@@ -70,7 +70,8 @@ var User = {
 
 	ValidateAccess: function(Authorized) {
 		if (!Authorized) {
-			Solaren.SysMsg(2, "Помилка авторизації");
+			Resource.Load(User.ResourceFile());
+			Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"));
 		}
 		return Authorized
 	}
