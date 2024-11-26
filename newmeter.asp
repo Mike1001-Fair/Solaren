@@ -8,7 +8,6 @@ Title = "Новий лiчильник";
 if (User.ValidateAccess(Authorized)) {
 	Html.SetPage(Title, User.RoleId)
 }%>
-
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMeter" ACTION="createmeter.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">

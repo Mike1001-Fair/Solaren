@@ -1,13 +1,10 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1,
 MeterId = Request.QueryString("MeterId");
-
-if (!Authorized) {
-	Solaren.SysMsg(2, "Помилка авторизації");
-}
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("GetMeter");
@@ -35,7 +32,7 @@ try {
 		Close();
 	}
 	Connect.Close();
-	Html.SetPage(Title, RoleId);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditMeter" ACTION="updatemeter.asp" METHOD="POST" AUTOCOMPLETE="off">

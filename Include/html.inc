@@ -45,23 +45,26 @@ Html = {
 	},
 
 	SetHead: function(TitleText) {
+		var ResponseText = [
+			'<!DOCTYPE html>\n',
+			'<HTML LANG="en">\n',
+			'<HEAD>\n',
+			'<META charset="utf-8">\n',
+			'<META NAME="author" CONTENT="' + this.Author + '">\n',
+			'<META NAME="copyright" CONTENT="' + this.Author + '">\n',
+			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n',
+			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
+			'<TITLE>' + TitleText + '</TITLE>\n',
+			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n',
+			this.WriteStyleBlock(),
+			this.WriteScriptBlock(),
+			'</HEAD>\n'
+		];
 		with (Response) {
 			CacheControl = "no-cache, no-store;";
 			AddHeader("X-Content-Type-Options", "nosniff");
-			//Expires = -9;
 			Charset = "utf-8";
-			Write('<!DOCTYPE html>\n' +
-			'<HTML LANG="en">\n' +
-			'<HEAD>\n' + 
-			'<META charset="utf-8">\n' +
-			'<META NAME="author" CONTENT="' + this.Author + '">\n' +
-			'<META NAME="copyright" CONTENT="' + this.Author + '">\n' +
-			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n' +
-			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n' +
-			'<TITLE>' + TitleText + '</TITLE>\n' +
-			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n' +
-			this.WriteStyleBlock() +
-			this.WriteScriptBlock() + '</HEAD>\n');
+			Write(ResponseText.join(""));
 		}
 	},
 
