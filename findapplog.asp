@@ -30,7 +30,7 @@ with (Html) {
 <H3 CLASS="HeadText"><%=Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Html.Date[0], Html.Date[1], Html.Date[3], Html.Date[4]);
+	<% Html.WriteDatePeriod("Період", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[2]);
 	Event.Write()%>
 	</TD></TR>
 </TABLE>

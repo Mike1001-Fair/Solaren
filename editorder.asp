@@ -45,7 +45,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<FIELDSET NAME="OrderSet"><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="OrderDate" VALUE="<%=OrderDate%>" MIN="<%=Html.OperDate%>" MAX="<%=Html.EndDate%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="OrderDate" VALUE="<%=OrderDate%>" MIN="<%=Html.Date[1]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 	<FIELDSET><LEGEND><BUTTON TYPE="button" CLASS="AddBtn" ID="AddBtn" TITLE="Додати">&#x2795;Список</BUTTON></LEGEND>
 	<TABLE ID="OrderItemsTable">

@@ -17,10 +17,10 @@ with (Html) {
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
-	<% Html.WriteDatePeriod("Дiє", Html.Date[0], Html.Date[1], Html.Date[3], Html.Date[4]) %>
+	<% Html.WriteDatePeriod("Дiє", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[4]) %>
 	<FIELDSET><LEGEND>Ввод в експлуатацію</LEGEND>
-	<INPUT TYPE="date" NAME="ExpDateBeg" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[4]%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="ExpDateEnd" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[4]%>" REQUIRED>
+	<INPUT TYPE="date" NAME="ExpDateBeg" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[4]%>" REQUIRED> &#8722;
+	<INPUT TYPE="date" NAME="ExpDateEnd" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[4]%>" REQUIRED>
 	</FIELDSET>
 
 	<FIELDSET><LEGEND>Параметри</LEGEND>

@@ -15,8 +15,8 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Перioд</LEGEND>
-	<INPUT TYPE="date" NAME="BegDate" VALUE="<%=Html.Date[0]%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[1]%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="EndDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[1]%>" REQUIRED>
+	<INPUT TYPE="date" NAME="BegDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED> &#8722;
+	<INPUT TYPE="date" NAME="EndDate" VALUE="<%=Html.Date[2]%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED>
 	</FIELDSET>
 	</TD></TR>
 </TABLE>

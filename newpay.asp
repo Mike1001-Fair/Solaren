@@ -17,7 +17,7 @@ if (User.ValidateAccess(Authorized)) {
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="PayDate" VALUE="<%=Html.OperDate%>" MIN="<%=Html.OperDate%>" MAX="<%=Html.EndDate%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="PayDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[1]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
 	
 	<TR><TD ALIGN="RIGHT">Сума</TD>
 	<TD><INPUT TYPE="Number" NAME="PaySum" STEP="0.01" MIN="0" MAX="999999999" REQUIRED></TD></TR>

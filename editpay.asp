@@ -46,7 +46,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<FIELDSET NAME="PaySet"><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="PayDate" VALUE="<%=PayDate%>" MIN="<%=Html.OperDate%>" MAX="<%=Html.EndDate%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="PayDate" VALUE="<%=PayDate%>" MIN="<%=Html.Date[1]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Сума</TD>
 	<TD><INPUT TYPE="Number" NAME="PaySum" VALUE="<%=PaySum%>" STEP="0.01" MIN="0" MAX="999999999" REQUIRED AUTOFOCUS></TD></TR>

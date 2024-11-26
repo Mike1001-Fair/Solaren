@@ -15,7 +15,7 @@ with (Html) {
 	<TR><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>Станом на
-		<INPUT TYPE="date" NAME="ReportDate" VALUE="<%=Html.Date[0]%>" MIN="<%=Html.Date[3]%>" MAX="<%=Html.Date[1]%>" REQUIRED>
+		<INPUT TYPE="date" NAME="ReportDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED>
 	</LABEL>
 	</FIELDSET>
 	</TD></TR>
