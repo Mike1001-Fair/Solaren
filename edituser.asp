@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
 ValidRequest = Solaren.HTTPMethod("GET", 1),
 UserId = Request.QueryString("UserId");

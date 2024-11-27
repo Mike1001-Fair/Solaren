@@ -2,15 +2,14 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId > 0 && RoleId < 3,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 IndicatorId = Request.QueryString("IndicatorId");
-
-if (!Authorized) {
-	Solaren.SysMsg(2, "Помилка авторизації")
-}
+User.ValidateAccess(Authorized);
 
 try {
 	Solaren.SetCmd("GetIndicator");
@@ -47,9 +46,9 @@ try {
 var OperDate = Html.Date[1],
 NextDate     = Html.Date[3],
 ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
-AllowDelBtn  = RoleId == 1,
+AllowDelBtn  = User.RoleId == 1,
 Title        = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
-Html.SetPage(Title, RoleId)%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
@@ -60,7 +59,7 @@ Html.SetPage(Title, RoleId)%>
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=OperDate%>">
-<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[1]%>">
+<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[2]%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 <H3 CLASS="HeadText" ID="H3Id">
 	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=Title%>
