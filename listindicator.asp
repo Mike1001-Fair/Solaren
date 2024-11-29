@@ -2,10 +2,11 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = Session("RoleId") > 0 && Session("RoleId") < 3,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Title = "Показники лiчильника";
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized);
 
 with (Request) {
     var ContractId   = Form("ContractId"),
@@ -18,23 +19,19 @@ try {
 	Solaren.SetCmd("ListIndicator");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListIndicator", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"));
-}
+Html.SetPage(Title, User.RoleId);
+
 var ResponseText = '<BODY CLASS="MainBody">\n' +
 	'<TABLE CLASS="H3Text">\n' +
 	'<CAPTION>' + Title + '</CAPTION>\n' +

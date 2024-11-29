@@ -5,8 +5,6 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 IndicatorId = Request.QueryString("IndicatorId");
 User.ValidateAccess(Authorized);
