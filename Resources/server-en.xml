@@ -37,6 +37,7 @@
 	<Item id="Authenticate">Authentication</Item>
 	<Item id="AuthenticationError">Authentication error</Item>
 	<Item id="AuthorizationError">Authorization error</Item>
+	<Item id="RequestError">Request error</Item>
 	<Item id="AccessDenied">Access denied</Item>
 	<Item id="ServiceSuspended">Service suspended</Item>
 	<Item id="Done">Done</Item>

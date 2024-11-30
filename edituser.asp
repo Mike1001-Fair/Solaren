@@ -8,10 +8,7 @@ ValidRequest = Solaren.HTTPMethod("GET", 1),
 UserId = Request.QueryString("UserId");
 
 User.ValidateAccess(Authorized);
-
-if (!ValidRequest) {
-	Solaren.SysMsg(0, "Помилка запиту")
-}
+User.ValidateRequest(ValidRequest);
 
 try {
 	Solaren.SetCmd("SelectCompany");
