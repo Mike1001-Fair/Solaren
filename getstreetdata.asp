@@ -3,7 +3,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <%
-var Authorized = User.RoleId < 2,
+var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 JsonResponse   = '[{"StreetId":0}]',
 QueryName      = Request.QueryString("QueryName");
 

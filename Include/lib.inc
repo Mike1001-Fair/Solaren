@@ -71,13 +71,17 @@ Solaren = {
 
 	GetErrMsg: function(ex) {
 		var ErrMsg = "Runtime Error ";
-		if (typeof ex == 'object' && ex != null) {
+		if (this.ValidObject(ex)) {
 			if (ex instanceof Error) {
 				for (var i = 0; i < Connect.Errors.Count; i++) {
 					ErrMsg += Connect.Errors(i).number + ": " + Connect.Errors(i).description + "\n";				
 				}
-			} else ErrMsg += ex.name + ": " + ex.message;
-		} else throw ex;
+			} else {
+				ErrMsg += ex.name + ": " + ex.message;
+			}
+		} else {
+			throw ex;
+		}
 		return ErrMsg
 	},
 
@@ -107,5 +111,9 @@ Solaren = {
 
 	Empty: function(testvar) {
 		return testvar == undefined || testvar == null;
+	},
+
+	ValidObject: function(obj) {
+		return obj && typeof obj === 'object'
 	}
 }%>
