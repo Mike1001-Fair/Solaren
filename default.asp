@@ -26,6 +26,6 @@ with (Html) {
 </MAIN>
 
 <FOOTER CLASS="FooterDiv">
-	<A HREF="mailto:Nickolay.Chernov@kresc.com.ua" TITLE="Лист автору для вiдгукiв, зауважень та пропозицiй"><%=Dictionary.Item("Author")%></A>
+	<A HREF="mailto:Nickolay.nickchernov@gmail.com" TITLE="Лист автору для вiдгукiв, зауважень та пропозицiй"><%=Dictionary.Item("Author")%></A>
 </FOOTER>
 </BODY></HTML>
