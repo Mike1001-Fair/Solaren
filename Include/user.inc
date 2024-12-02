@@ -75,13 +75,5 @@ var User = {
 			Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"));
 		}
 		return Authorized
-	},
-	
-	ValidateRequest: function(ValidRequest) {
-		if (!ValidRequest) {
-			Resource.Load(User.ResourceFile());
-			Solaren.SysMsg(0, Dictionary.Item("RequestError"));
-		}
-		return ValidRequest
 	}
 }%>

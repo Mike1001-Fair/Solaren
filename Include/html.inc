@@ -5,7 +5,7 @@ var CodePage = {
 },
 
 Html = {
-	Version     : "v=3.2",
+	Version     : "v=3.3",
 	Path        : ["Scripts/", "Styles/", "Images/"],
 	Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), String(Session("NextDate")), "9999-12-31"],
 	LocalityType: ["місто","селище","село","смт"],

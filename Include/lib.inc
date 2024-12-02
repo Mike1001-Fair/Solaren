@@ -104,9 +104,23 @@ Solaren = {
 		}
 	},	
 
-	HTTPMethod: function(method, paramCount) {
-		var totalParams = Request.QueryString.Count + Request.Form.Count;
-		return this.RequestMethod == method && totalParams == paramCount
+	ValidateMethod: function(method, paramCount) {
+		var prmCount,
+		validMethod = false;
+
+		if (method == "POST") {
+			prmCount = Request.Form.Count;
+		} else if (method == "GET") {
+			prmCount = Request.QueryString.Count;
+		}
+		validMethod = this.RequestMethod == method && prmCount == paramCount;
+		//Response.Write("Request.QueryString.Count = " + Request.QueryString.Count + "<br>Request.Form.Count = " + Request.Form.Count + "<br>prmCount = " + prmCount);
+		//Response.End();
+		if (!validMethod) {
+			Resource.Load(User.ResourceFile());
+			this.SysMsg(2, Dictionary.Item("RequestError"));
+		}
+		return validMethod
 	},
 
 	Empty: function(testvar) {

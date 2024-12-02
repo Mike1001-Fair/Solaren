@@ -1,8 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-if (!Solaren.HTTPMethod("POST", 2)) Solaren.SysMsg(0, "Помилка запиту");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2
+
+//Solaren.ValidateMethod("POST", 13);
+User.ValidateAccess(Authorized);
 
 with (Request) {
 	var BranchId = QueryString("BranchId"),

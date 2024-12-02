@@ -4,11 +4,10 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
-ValidRequest = Solaren.HTTPMethod("GET", 1),
 UserId = Request.QueryString("UserId");
 
+Solaren.ValidateMethod("GET", 1);
 User.ValidateAccess(Authorized);
-User.ValidateRequest(ValidRequest);
 
 try {
 	Solaren.SetCmd("SelectCompany");

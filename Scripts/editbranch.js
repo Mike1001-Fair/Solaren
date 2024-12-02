@@ -47,7 +47,7 @@ RestoreBtn?.addEventListener('click', DelBranch);
 function DelBranch() {
 	if (confirm(`Ви впевненi\u2753`)) {
 		with (EditBranch) {
-			action = `delbranch.asp?BranchId=${BranchId.value}&Deleted=${Deleted.value}`
+			action = `delbranch.asp?BranchId=${BranchId.value}&Deleted=${Deleted.value}`;
 		}
 	} else event.preventDefault();
 }

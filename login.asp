@@ -6,12 +6,8 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
 var LoginId = Request.Form("LoginId"),
-Pswd = Request.Form("Pswd"),
-AuthenticationError = Dictionary.Item("AuthenticationError");
-
-if (!Solaren.HTTPMethod("POST", 3)) {
-	Solaren.SysMsg(2, AuthenticationError);
-}
+Pswd = Request.Form("Pswd");
+Solaren.ValidateMethod("POST", 3);
 
 try {
 	Solaren.SetCmd("Login");
