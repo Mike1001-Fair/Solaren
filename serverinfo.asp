@@ -1,19 +1,25 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% if (Session("RoleId") != 0) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 0,
+Title = "Сервер";
+User.ValidateAccess(Authorized);
 
 var ServerInfo = {
-	Text: '\n<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="HeadText">&#128187;Сервер</H3>\n' +
-	'<DIV CLASS="FormDiv">\n' +
-	'<FIELDSET CLASS="FieldSet">\n' +
-	'<LEGEND>Параметри</LEGEND><TABLE CLASS="RulesAllInfo">\n' +
-	'<TR><TH>Ключ</TH><TH>Значення</TH></TR>\n',
+	Text: ['\n<BODY CLASS="MainBody">\n',
+	'<H3 CLASS="HeadText">&#128187;' + Title + '</H3>\n',
+	'<DIV CLASS="FormDiv">\n',
+	'<FIELDSET CLASS="FieldSet">\n',
+	'<LEGEND>Параметри</LEGEND><TABLE CLASS="RulesAllInfo">\n',
+	'<TR><TH>Ключ</TH><TH>Значення</TH></TR>\n'],
 
 	AddRow: function(Key, Value) {
 		if (Value != "") {
-			this.Text += '<TR><TD ALIGN="RIGHT">' + Key + Html.Write("TD","LEFT") + Value + '</TD></TR>\n';
+			var td = Html.Write("TD","LEFT"),
+			row = ['<TR><TD ALIGN="RIGHT">', Key, td, Value, '</TD></TR>\n'];
+			this.Text.push(row.join(""));
 		}
 	},
 
@@ -41,14 +47,14 @@ SessionInfo = {
 };
 
 with (Html) {
-	SetHead("Сервер");
-	WriteMenu(Session("RoleId"), 0);
+	SetHead(Title);
+	WriteMenu(User.RoleId, 0);
 }
 
 with (ServerInfo) {
 	AddSessionInfo(SessionInfo);
 	AddInfo();
-	Text += '</TABLE></FIELDSET></DIV></BODY></HTML>';
+	Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 }
 
-Response.Write(ServerInfo.Text)%>
+Response.Write(ServerInfo.Text.join(""))%>
