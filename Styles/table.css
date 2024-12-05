@@ -1,5 +1,4 @@
-﻿/* стиль для отображения таблиц */
-.InvoiceTable {
+﻿.InvoiceTable {
 	border-collapse: separate;
 	border-spacing : 10px 0px;
 	margin         : auto;

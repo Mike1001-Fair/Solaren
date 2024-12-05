@@ -1,5 +1,4 @@
-﻿/*для кнопок*/
-.Btn {
+﻿.Btn {
 	font-family: inherit;
 	font-size  : 1em;
 	cursor     : pointer;
@@ -85,7 +84,8 @@
 
 .IconBtn {
 	font-family: inherit;
-	font-size  : 1em;
+	font-size  : 0.8em;
+	width: 4em;
 	margin: auto;
 	cursor: pointer;
 }

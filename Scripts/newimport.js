@@ -1,7 +1,7 @@
 ﻿const FileList = document.getElementById('FileList');
 
 document.addEventListener('DOMContentLoaded', () => {
-	if (typeof FileList === 'object' && FileList !== null) {
+	if (FileList) {
 		//console.log(`FileList.dataset.foldername: ${FileList.dataset.foldername}`);
 		Ajax.GetFileList(FileList.dataset.foldername);
 	}
