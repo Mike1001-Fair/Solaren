@@ -14,9 +14,10 @@ if (Authorized) {
 			with (Parameters) {
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
 				Append(CreateParameter("StreetData", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
+			JsonResponse = Parameters.Item("StreetData").value;
 		}
-		JsonResponse = Cmd.Parameters.Item("StreetData").value;
 	} catch (ex) {
 		JsonResponse = '[{"StreetId":-2}]';
 		Session("ScriptName") = String(Request.ServerVariables("SCRIPT_NAME"));

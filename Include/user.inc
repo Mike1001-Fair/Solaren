@@ -6,6 +6,7 @@ var User = {
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
 	Ip     : Request.ServerVariables("REMOTE_ADDR"),
 	Agent  : Request.ServerVariables("HTTP_USER_AGENT"),
+	Method : Request.ServerVariables("REQUEST_METHOD"),
 	Id     : Session("UserId"),
 	GUID   : Session("UserGUID"),
 	RoleId : Session("RoleId"),
@@ -69,11 +70,12 @@ var User = {
 		} return Pswd;
 	},
 
-	ValidateAccess: function(Authorized) {
-		if (!Authorized) {
+	ValidateAccess: function(Authorized, method) {
+		var validMethod = this.Method == method;
+		if (!Authorized || !validMethod) {
 			Resource.Load(User.ResourceFile());
 			Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"));
 		}
-		return Authorized
+		return Authorized && validMethod
 	}
 }%>

@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
 OrderId = Request.QueryString("OrderId");
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetOrder");

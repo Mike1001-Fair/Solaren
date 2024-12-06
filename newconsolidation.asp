@@ -7,7 +7,7 @@
 OperMonth = Html.GetMonth(1),
 Title = "Консолiдацiя";
 
-if (User.ValidateAccess(Authorized)) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">

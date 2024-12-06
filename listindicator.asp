@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Title = "Показники лiчильника";
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
     var ContractId   = Form("ContractId"),

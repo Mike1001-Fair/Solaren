@@ -5,7 +5,6 @@ Solaren = {
 	ConnectMode: 1,
 	ConnectionTimeout: 10,
 	CommandTimeout: 20,
-	RequestMethod: Request.ServerVariables("REQUEST_METHOD"),
 	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")),
 
 	SetCmd: function(spName) {
@@ -103,25 +102,6 @@ Solaren = {
 			this.SysMsg(0, msg);
 		}
 	},	
-
-	ValidateMethod: function(method, paramCount) {
-		var prmCount,
-		validMethod = false;
-
-		if (method == "POST") {
-			prmCount = Request.Form.Count;
-		} else if (method == "GET") {
-			prmCount = Request.QueryString.Count;
-		}
-		validMethod = this.RequestMethod == method && prmCount == paramCount;
-		//Response.Write("Request.QueryString.Count = " + Request.QueryString.Count + "<br>Request.Form.Count = " + Request.Form.Count + "<br>prmCount = " + prmCount);
-		//Response.End();
-		if (!validMethod) {
-			Resource.Load(User.ResourceFile());
-			this.SysMsg(2, Dictionary.Item("RequestError"));
-		}
-		return validMethod
-	},
 
 	Empty: function(testvar) {
 		return testvar == undefined || testvar == null;

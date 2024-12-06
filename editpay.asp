@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId == 1,
 PayId = Request.QueryString("PayId");
 
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 try {
 	Solaren.SetCmd("GetPay");
 	with (Cmd) {

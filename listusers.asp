@@ -5,9 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
 Title = "Користувачi";
-
-Solaren.ValidateMethod("POST", 4);
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 with (Request) {
 	var LoginId = Form("LoginId"),

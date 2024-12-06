@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId == 1,
 FactVolId = Request.QueryString("FactVolId");
 
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetFactVol");

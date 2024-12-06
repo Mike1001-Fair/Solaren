@@ -1,7 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized    = RoleId < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<%
+var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 JsonResponse  = '[{"LocalityId":0}]',
 QueryName     = Request.QueryString("QueryName");
 
@@ -12,16 +14,17 @@ if (Authorized) {
 			with (Parameters) {
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
 				Append(CreateParameter("LocalityData", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
+			JsonResponse = Parameters.Item("LocalityData").value;
 		}
-		JsonResponse = Cmd.Parameters.Item("LocalityData").value;
 	} catch (ex) {
-		Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+		JsonResponse = '[{"LocalityId":-2}]';
+		Session("ScriptName") = String(Request.ServerVariables("SCRIPT_NAME"));
+		Session("SysMsg") = Solaren.GetErrMsg(ex);
 	} finally {
 		Connect.Close();
 	}
-} else {
-	Session("SysMsg") = "Помилка авторизації";
 }
 
 with (Response) {

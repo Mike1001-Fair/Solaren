@@ -3,9 +3,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2
-
-//Solaren.ValidateMethod("POST", 13);
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 with (Request) {
 	var BranchId = QueryString("BranchId"),

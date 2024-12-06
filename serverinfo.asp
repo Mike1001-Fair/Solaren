@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
 Title = "Сервер";
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 var ServerInfo = {
 	Text: ['\n<BODY CLASS="MainBody">\n',

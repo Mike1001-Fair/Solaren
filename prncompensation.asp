@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var ReportMonth = String(Form("ReportMonth")),

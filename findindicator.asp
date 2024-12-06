@@ -6,7 +6,7 @@
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Title = "Показники";
 
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicator" ID="FindIndicator" ACTION="listindicator.asp" METHOD="post" AUTOCOMPLETE="off">

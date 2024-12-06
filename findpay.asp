@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
 Title = "Оплата";
-if (User.ValidateAccess(Authorized)) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">

@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
 Title = "Нова компанія";
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("SelectChief");

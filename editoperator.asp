@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
 OperatorId = Request.QueryString("OperatorId");
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetOperator");
@@ -15,6 +15,9 @@ try {
 		}
 	}
 	var rsOperator = Solaren.Execute("GetOperator", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsOperator) {
 		var SortCode = Fields("SortCode").value,
 		EdrpoCode    = Fields("EdrpoCode").value,
@@ -23,9 +26,6 @@ try {
 		Title        = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-} finally {	
 	Connect.Close();
 }
 

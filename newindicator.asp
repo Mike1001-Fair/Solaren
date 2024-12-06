@@ -6,7 +6,7 @@
 <% var Authorized = User.RoleId == 2,
 Title = "Нові показники";
 
-if (User.ValidateAccess(Authorized)) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage(Title, User.RoleId)
 }%>
 <BODY CLASS="MainBody">

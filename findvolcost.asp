@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Title = "Вартicть по споживачу";
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindVolCost" ACTION="listvolcost.asp" METHOD="post" TARGET="_blank" AUTOCOMPLETE="off">

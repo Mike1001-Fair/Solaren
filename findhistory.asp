@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
 Title = "Iсторiя розрахункiв";
-User.ValidateAccess(Authorized);
+User.ValidateAccess(Authorized, "GET");
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindHistory" ACTION="listhistory.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">

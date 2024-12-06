@@ -9,7 +9,7 @@ with (Date) {
 
 with (String) {
 	prototype.formatDate = function(delimiter) {
-		var dateParts = this.split(delimiter).reverse();
+		var dateParts = this.split(delimiter).reverse(),
 		result = this;
 		if (delimiter == ".") {
 			result = dateParts.join("-")
