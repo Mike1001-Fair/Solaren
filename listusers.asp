@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
 Title = "Користувачi";
-User.ValidateAccess(Authorized, "GET");
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var LoginId = Form("LoginId"),
