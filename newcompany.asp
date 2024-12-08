@@ -11,7 +11,7 @@ try {
 	Solaren.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rsChief = Solaren.Execute("SelectChief", "Довiдник керівників пустий!"),

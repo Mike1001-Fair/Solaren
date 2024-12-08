@@ -1,7 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized    = RoleId > 0 && RoleId < 3,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<%
+var Authorized = User.RoleId > 0 && User.RoleId < 3,
 JsonResponse  = '[{"MeterId":0}]',
 ReportDate    = Request.QueryString("ReportDate"),
 MeterId       = Request.QueryString("MeterId");

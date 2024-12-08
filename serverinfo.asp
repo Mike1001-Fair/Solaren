@@ -52,7 +52,7 @@ with (Html) {
 }
 
 with (ServerInfo) {
-	AddSessionInfo(SessionInfo);
+	AddSessionInfo();
 	AddInfo();
 	Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 }
