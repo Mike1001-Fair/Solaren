@@ -14,7 +14,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindSov" ACTION="listsov.asp" METHOD="post" TARGET="_blank">
 
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET>

@@ -12,7 +12,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOper" ACTION="createoper.asp" METHOD="post">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<% with (Html) {

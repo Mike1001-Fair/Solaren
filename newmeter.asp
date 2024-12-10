@@ -12,7 +12,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMeter" ACTION="createmeter.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText"><IMG SRC="Images/MeterIcon.svg"><%=Title%></H3>
+<H3 CLASS="HeadText"><IMG SRC="Images/MeterIcon.svg"><%=Html.Title%></H3>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">

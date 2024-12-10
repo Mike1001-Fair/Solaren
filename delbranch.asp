@@ -2,8 +2,8 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2
-User.ValidateAccess(Authorized, "GET");
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var BranchId = QueryString("BranchId"),

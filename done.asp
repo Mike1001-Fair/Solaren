@@ -7,12 +7,11 @@
 if (!User.ValidateRole(User.RoleId, User.GUID)) {
 	Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
 }
-var Title = Dictionary.Item("Message");
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Dictionary.Item("Message"), User.RoleId)%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>		
-		<LEGEND><%=Title%></LEGEND>
+		<LEGEND><%=Html.Title%></LEGEND>
 		<H4><%=Session("SysMsg")%></H4>
 		<A HREF="javascript:window.history.go(-1)" ID="BackLink">
 		<FIGURE>

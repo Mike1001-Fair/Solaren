@@ -11,7 +11,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindOrder" ACTION="listorder.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<% with (Html) {

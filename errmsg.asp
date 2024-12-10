@@ -14,7 +14,7 @@ Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>		
-		<LEGEND><%=Title%></LEGEND>
+		<LEGEND><%=Html.Title%></LEGEND>
 		<H4><%=Session("SysMsg")%></H4>
 		<A HREF="javascript:window.history.go(-1)" ID="BackLink">
 		<FIGURE>

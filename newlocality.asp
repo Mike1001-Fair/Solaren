@@ -3,15 +3,14 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId >= 0 && RoleId < 2,
-Title = "Новий пункт";
-Resource.Load(User.ResourceFile());
-Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"))%>
-
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+if (User.ValidateAccess(Authorized, "GET")) {
+	Resource.Load(User.ResourceFile());
+	Html.SetPage("Новий пункт", User.RoleId)
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewLocality" ACTION="createlocality.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText">&#127969;<%=Title%></H3>
+<H3 CLASS="HeadText">&#127969;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>

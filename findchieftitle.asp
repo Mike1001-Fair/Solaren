@@ -13,7 +13,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindChiefTitle" ACTION="listchieftitle.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Назва</LEGEND>

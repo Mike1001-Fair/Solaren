@@ -11,7 +11,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewPay" ACTION="createpay.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
-<H3 CLASS="HeadText"><BIG>&#128182;</BIG><%=Title%></H3>
+<H3 CLASS="HeadText"><BIG>&#128182;</BIG><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>

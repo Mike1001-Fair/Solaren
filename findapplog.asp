@@ -27,7 +27,7 @@ with (Html) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindAppLog" ACTION="listapplog.asp" METHOD="post">
 <INPUT TYPE="HIDDEN" NAME="EventName">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDatePeriod("Період", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[2]);

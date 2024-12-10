@@ -3,8 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 0,
-Title = "Нова компанія";
+<% var Authorized = User.RoleId == 0;
 User.ValidateAccess(Authorized, "GET");
 
 try {
@@ -21,12 +20,12 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage("Нова компанія", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCompany" ACTION="createcompany.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
-<H3 CLASS="HeadText"><IMG SRC="Images/office.svg"><%=Title%></H3>
+<H3 CLASS="HeadText"><IMG SRC="Images/office.svg"><%=Html.Title%></H3>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">

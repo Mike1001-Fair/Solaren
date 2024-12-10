@@ -41,7 +41,7 @@ Html.SetPage(Title, User.RoleId)%>
 <FORM CLASS="ValidForm" NAME="EditUser" ACTION="updateuser.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=UserId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
-<H3 CLASS="HeadText" ID="H3Id">&#128100;<%=Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id">&#128100;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="UserSet"><LEGEND>Параметри</LEGEND>

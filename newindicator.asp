@@ -11,7 +11,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewIndicator" ACTION="createindicator.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText" ID="H3Id"><IMG CLASS="H3Img" SRC="Images/MeterIcon.svg" NAME="myImg"><%=Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><IMG CLASS="H3Img" SRC="Images/MeterIcon.svg" NAME="myImg"><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="-1">
 <INPUT TYPE="HIDDEN" NAME="PrevDate">
 <INPUT TYPE="HIDDEN" NAME="Ktf">

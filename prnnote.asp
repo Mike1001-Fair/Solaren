@@ -118,7 +118,7 @@ OL { margin-top: 1 }</STYLE>
 <TABLE CLASS="NoBorderTable" WIDTH="100%">
 <TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%"><%=TopChiefTitle3%>&nbsp<%=CompanyName%><BR><%=TopChiefName3%><BR><%=ChiefTitle2%><BR><%=ChiefName2%></TD></TR>
 </TABLE>
-<H3 CLASS="H3PrnTable"><%=Title%></H3>
+<H3 CLASS="H3PrnTable"><%=Html.Title%></H3>
 <P CLASS="acttext">Прошу здiйснити оплату по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, особовий рахунок №<%=ContractPAN%>,
 згiдно акту приймання-передачi електричної енергiї в <%=Period%>:</P>
 <OL CLASS="acttext"><LI><%=CustomerName%>

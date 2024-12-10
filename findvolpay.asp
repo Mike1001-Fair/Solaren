@@ -12,7 +12,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindVolPay" ACTION="listvolpay.asp" METHOD="post" TARGET="_blank">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 <TR><TD><%Html.WriteMonthPeriod()%></TD></TR>
 </TABLE>

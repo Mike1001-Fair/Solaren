@@ -14,7 +14,7 @@ with (Html) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindTarif" ACTION="listtarif.asp" METHOD="post">
 <INPUT TYPE="HIDDEN" NAME="GroupName">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% with (Html) {

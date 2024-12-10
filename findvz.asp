@@ -12,7 +12,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPdfo" ACTION="listvz.asp" METHOD="post">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDate() %>

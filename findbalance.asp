@@ -23,7 +23,7 @@ Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBalance" ACTION="listbalance.asp" METHOD="post" TARGET="_blank">
 <INPUT TYPE="HIDDEN" NAME="OperatorName">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteMonthPeriod() %>

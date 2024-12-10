@@ -12,7 +12,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindContract" ID="FindContract" ACTION="listcontract.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="CustomerId" ID="CustomerId" VALUE="-1">
-<H3 CLASS="HeadText"><BIG>&#128214;</BIG><%=Title%></H3>
+<H3 CLASS="HeadText"><BIG>&#128214;</BIG><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteSearchSet("Споживач", "Customer", "", 0)%>

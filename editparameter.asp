@@ -40,17 +40,16 @@ try {
 		TreasuryMfo	 = Fields("TreasuryMfo").value,
 		SysConfig        = Fields("SysConfig").value,
 		ShowMsg          = Fields("ShowMsg").value,
-		MsgText          = Fields("MsgText").value,
-		Title            = "Параметри";
+		MsgText          = Fields("MsgText").value;
 		Close();
 	}
 	Connect.Close();
 }
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage("Параметри", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditParameter" ACTION="updateparameter.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="SysConfig" VALUE="<%=SysConfig%>">
-<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="Images/gearGreen.svg"><%=Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="Images/gearGreen.svg"><%=Html.Title%></H3>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD>

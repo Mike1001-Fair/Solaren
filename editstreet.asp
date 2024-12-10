@@ -1,10 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 StreetId = Request.QueryString("StreetId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetStreet");
@@ -13,28 +15,23 @@ try {
 			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
 		}
 	}
-	var rsStreet = Cmd.Execute();
+	var rsStreet = Solaren.Execute("GetStreet", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsStreet) {
 		var StreetType = Fields("StreetType").value,
 		StreetName     = Fields("StreetName").value,
 		Deleted        = Fields("Deleted").value,
-		HeadTitle      = Deleted ? "Перегляд вулицi" : "Редагування вулицi";
+		Title      = Deleted ? "Перегляд вулицi" : "Редагування вулицi";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-} finally {
 	Connect.Close();
-}
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditStreet" ACTION="updatestreet.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><SPAN>&#128678;</SPAN><%=HeadTitle%></H3>
+<H3 CLASS="HeadText"><SPAN>&#128678;</SPAN><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="StreetId" VALUE="<%=StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">

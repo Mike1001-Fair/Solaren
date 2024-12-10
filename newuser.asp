@@ -3,9 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 0,
-Title = "Новий користувач";
-
+<% var Authorized = User.RoleId == 0;
 User.ValidateAccess(Authorized, "GET");
 
 try {
@@ -21,10 +19,10 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 }
 
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage("Новий користувач", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewUser" ACTION="createuser.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText">&#128100;<%=Title%></H3>
+<H3 CLASS="HeadText">&#128100;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>

@@ -20,7 +20,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="ShrinkLog" ACTION="runshrinklog.asp" METHOD="post">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <% Html.WriteBaseInfo(rs);
 Connect.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>

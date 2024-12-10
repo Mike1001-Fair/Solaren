@@ -36,7 +36,7 @@ Title = Deleted || ViewOnly ? "Перегляд оплати" : "Редагув�
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditPay" ACTION="updatepay.asp" METHOD="post">
-<H3 CLASS="HeadText" ID="H3Id"><BIG>&#128182;</BIG><%=Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><BIG>&#128182;</BIG><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="PayId" VALUE="<%=PayId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">

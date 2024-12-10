@@ -5,13 +5,14 @@ var CodePage = {
 },
 
 Html = {
-	Version     : "v=3.5",
+	Version     : "v=3.6",
 	Path        : ["Scripts/", "Styles/", "Images/"],
 	Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), String(Session("NextDate")), "9999-12-31"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
 	Author      : "Mykola Chernov",
+	Title       : "",
 
 	GetMonth: function(index) {
 		return this.Date[index].slice(0, 7)
@@ -44,7 +45,8 @@ Html = {
 		return ScriptBlock
 	},
 
-	SetHead: function(TitleText) {
+	SetHead: function(Title) {
+		this.Title = Title;
 		var ResponseText = [
 			'<!DOCTYPE html>\n',
 			'<HTML LANG="en">\n',
@@ -54,7 +56,7 @@ Html = {
 			'<META NAME="copyright" CONTENT="' + this.Author + '">\n',
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n',
 			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
-			'<TITLE>' + TitleText + '</TITLE>\n',
+			'<TITLE>' + Title + '</TITLE>\n',
 			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n',
 			this.WriteStyleBlock(),
 			this.WriteScriptBlock(),

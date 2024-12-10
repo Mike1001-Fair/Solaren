@@ -1,9 +1,12 @@
 <%@ LANGUAGE="JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 BankId = Request.QueryString("BankId");
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetBank");
@@ -13,31 +16,26 @@ try {
 		}
 	}
 	var rsBank = Solaren.Execute("GetBank", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsBank) {
 		var EdrpoCode = Fields("EdrpoCode").value,
 		MfoCode       = Fields("MfoCode").value,
 		BankName      = Fields("BankName").value,
 		Deleted       = Fields("Deleted").value,
-		HeadTitle     = Deleted ? "Перегляд анкети" : "Редагування анкети";
+		Title         = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-} finally {
 	Connect.Close();
-}
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditBank" ACTION="updatebank.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="BankId" VALUE="<%=BankId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
-<H3 CLASS="HeadText" ID="H3Id"><SPAN>&#127974;</SPAN><%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><SPAN>&#127974;</SPAN><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="BankSet"><LEGEND>Параметри</LEGEND>

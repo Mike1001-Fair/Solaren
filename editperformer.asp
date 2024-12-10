@@ -35,7 +35,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditPerformer" ACTION="updateperformer.asp" METHOD="POST">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="PerformerId" VALUE="<%=PerformerId%>">
 <TABLE CLASS="MarkupTable">
 	<TR><TD>

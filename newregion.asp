@@ -1,10 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-Title = "Нова область";
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "GET");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 try {
 	Solaren.SetCmd("GetRegionSortCode");
 	with (Cmd) {
@@ -17,14 +18,10 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Нова область", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewRegion" ACTION="createregion.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><SPAN>&#128315;</SPAN><%=Title%></H3>
+<H3 CLASS="HeadText"><SPAN>&#128315;</SPAN><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>

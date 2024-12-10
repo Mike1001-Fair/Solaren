@@ -3,19 +3,14 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = Session("RoleId") == 0,
-Title = "Користувачi";
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%> 
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
+<% var Authorized = User.RoleId == 0,
+Today = new Date();
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Користувачi", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindUser" ACTION="listusers.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Параметри</LEGEND>
@@ -24,7 +19,7 @@ with (Html) {
 	<TR><TD ALIGN="RIGHT">Роль</TD>
 	<TD><%Html.WriteRole("RoleId", -1)%></TD></TR>	
 	<TR><TD ALIGN="RIGHT">Підключився</TD>
-	<TD><INPUT TYPE="datetime-local" NAME="ConnectDate" MAX="<%=Session("Today")+'T24:00'%>" TITLE="Підключився"></TD></TR>
+	<TD><INPUT TYPE="datetime-local" NAME="ConnectDate" MAX="<%=Today.toStr(1)%>" TITLE="Підключився"></TD></TR>
 	</TABLE></FIELDSET>
 </TD></TR>
 </TABLE>

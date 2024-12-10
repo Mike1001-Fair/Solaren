@@ -35,7 +35,7 @@ Html.SetPage(Title, User.RoleId)%>
 <INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=OperatorId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
-<H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=Title%></H3>
+<H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET NAME="OperatorSet"><LEGEND>Параметри</LEGEND>

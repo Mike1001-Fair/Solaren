@@ -12,7 +12,7 @@ Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка а�
 <INPUT TYPE="hidden" NAME="AreaId" ID="AreaId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
-<H3 CLASS="HeadText"><BIG>&#128100;</BIG><%=Title%></H3>
+<H3 CLASS="HeadText"><BIG>&#128100;</BIG><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="CustomerSet"><LEGEND>Загальні</LEGEND>

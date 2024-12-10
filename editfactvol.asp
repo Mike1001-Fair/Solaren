@@ -47,7 +47,7 @@ Html.SetPage(Title, User.RoleId)%>
 <INPUT TYPE="HIDDEN" NAME="IndicatorId" VALUE="<%=IndicatorId%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Html.Date[3], Html.Date[4]);

@@ -31,7 +31,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditChiefDoc" ACTION="updatechiefdoc.asp" METHOD="POST">
-<H3 CLASS="HeadText"><SPAN>&#128216;</SPAN><%=Title%></H3>
+<H3 CLASS="HeadText"><SPAN>&#128216;</SPAN><%=Html.Title%></H3>
 
 <INPUT TYPE="HIDDEN" NAME="DocId" VALUE="<%=DocId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">

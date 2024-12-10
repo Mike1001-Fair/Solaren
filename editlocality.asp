@@ -34,7 +34,7 @@ try {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditLocality" ACTION="updatelocality.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><SPAN>&#127969;</SPAN><%=Title%></H3>
+<H3 CLASS="HeadText"><SPAN>&#127969;</SPAN><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="LocalityId" VALUE="<%=LocalityId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">

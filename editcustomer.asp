@@ -47,7 +47,7 @@ try {
 <INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
-<H3 CLASS="HeadText"><BIG>&#128100;</BIG><%=Title%></H3>
+<H3 CLASS="HeadText"><BIG>&#128100;</BIG><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="CustomerSet"><LEGEND ALIGN="CENTER">Загальні</LEGEND>

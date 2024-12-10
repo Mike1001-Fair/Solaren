@@ -42,7 +42,7 @@ try {
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
 <H3 CLASS="HeadText">
-	<IMG SRC="Images/MeterIcon.svg"><%=Title%>
+	<IMG SRC="Images/MeterIcon.svg"><%=Html.Title%>
 </H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">

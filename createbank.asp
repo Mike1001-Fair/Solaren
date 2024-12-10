@@ -1,7 +1,9 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" --> 
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var EdrpoCode = Form("EdrpoCode"),

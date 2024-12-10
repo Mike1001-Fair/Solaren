@@ -26,7 +26,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChiefDoc" ACTION="createchiefdoc.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><SPAN>&#128216;</SPAN><%=Title%></H3>
+<H3 CLASS="HeadText"><SPAN>&#128216;</SPAN><%=Html.Title%></H3>
 <SPAN CLASS="H3Span">керівника</SPAN>
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>

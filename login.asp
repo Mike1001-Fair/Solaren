@@ -8,6 +8,8 @@
 var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd");
 
+User.ValidateAccess(1, "POST");
+
 try {
 	Solaren.SetCmd("Login");
 	with (Cmd) {
@@ -24,12 +26,11 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
 	if (rs.EOF) {
-		Solaren.SysMsg(2, AuthenticationError);
+		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"));
 	} else {
-		var RoleId = rs.Fields("RoleId").value,
-		Title = Dictionary.Item("DefaultTitle");
+		var RoleId = rs.Fields("RoleId").value;
 		Solaren.SetSessionVar(rs);
-		Html.SetHead(Title);
+		Html.SetHead(Dictionary.Item("DefaultTitle"));
 		Html.WriteMenu(RoleId, 1);
 	}
 	rs.Close();

@@ -60,7 +60,7 @@ Html.SetPage(Title, User.RoleId)%>
 <INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[2]%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 <H3 CLASS="HeadText" ID="H3Id">
-	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=Title%>
+	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=Html.Title%>
 </H3>
 
 <TABLE CLASS="MarkupTable">

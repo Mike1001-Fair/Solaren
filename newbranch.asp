@@ -1,10 +1,10 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 0,
-Title = "Новий ЦОС";
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 0;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetBranchSortCode");
@@ -28,16 +28,12 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Новий ЦОС", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewBranch" ACTION="createbranch.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="AreaId" ID="AreaId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
-<H3 CLASS="HeadText">&#127980;<%=Title%></H3>
+<H3 CLASS="HeadText">&#127980;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Параметри</LEGEND>

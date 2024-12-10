@@ -34,7 +34,7 @@ with (Html) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditChiefTitle" ACTION="updatechieftitle.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <SPAN CLASS="H3Span">керівника</SPAN>
 <INPUT TYPE="HIDDEN" NAME="ChiefTitleId" VALUE="<%=ChiefTitleId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">

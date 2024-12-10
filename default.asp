@@ -4,19 +4,18 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-var Title = Dictionary.Item("DefaultTitle"),
-phUser = Dictionary.Item("User"),
+var phUser = Dictionary.Item("User"),
 phPswd = Dictionary.Item("Password"),
 titleUser = Dictionary.Item("UserTitle"),
 titlePswd = Dictionary.Item("PasswordTitle");
 
 with (Html) {
-	SetHead(Title);
+	SetHead(Dictionary.Item("DefaultTitle"));
 	WriteScript();
 }%>
 <BODY CLASS="StartBody">
 <HEADER CLASS="HeaderDiv">
-	<H3>&#127774;<%=Title%></H3>
+	<H3>&#127774;<%=Html.Title%></H3>
 </HEADER>
 
 <MAIN>

@@ -34,7 +34,7 @@ Title = Deleted || ViewOnly ? "Перегляд замовлення" : "Ред�
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOrder" ACTION="updateorder.asp" METHOD="post">
-<H3 CLASS="HeadText" ID="H3Id">🛒<%=Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id">🛒<%=Html.Title%></H3>
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="OrderId" VALUE="<%=OrderId%>">
 <INPUT TYPE="HIDDEN" NAME="JsonData" VALUE='<%=JsonData%>'>

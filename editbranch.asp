@@ -1,17 +1,19 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-ReadOnly = Session("RoleId") > 0,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+ReadOnly = User.RoleId > 0,
 BranchId = Request.QueryString("BranchId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("SelectChiefBranch");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}	
 	var rsChief = Solaren.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
@@ -24,6 +26,9 @@ try {
 	}
 
 	var rsBranch = Solaren.Execute("GetBranch", "Інформацію не знадено!");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsBranch) {
 		var SortCode = Fields("SortCode").value,
 		BranchName1  = Fields("BranchName1").value,
@@ -39,15 +44,9 @@ try {
 		Title        = Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-}
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditBranch" ACTION="updatebranch.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="BranchId" VALUE="<%=BranchId%>">
@@ -56,7 +55,7 @@ with (Html) {
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ReadOnly" VALUE="<%=ReadOnly%>">
 
-<H3 CLASS="HeadText" ID="H3Id">&#127980;<%=Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id">&#127980;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Параметри</LEGEND>

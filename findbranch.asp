@@ -1,19 +1,17 @@
 <%@LANGUAGE="JavaScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (Authorized) {
-	with (Html) {
-		SetHead("Пошук ЦОС");
-		WriteScript();
-		WriteMenu(Session("RoleId"), 0);
-	}
-} else {
-	Solaren.SysMsg(2, "Помилка авторизації")
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "GET");
+
+if (User.ValidateAccess(Authorized, "GET")) {
+	Html.SetPage("Пошук ЦОС", User.RoleId)
 }%>
 <BODY CLASS="MainBody" >
 <FORM CLASS="ValidForm" NAME="FindBranch" ACTION="listbranch.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText">ЦОС</H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Назва</LEGEND>

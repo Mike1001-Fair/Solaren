@@ -1,10 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 AreaId = Request.QueryString("AreaId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "POST");
+
 try {
 	Solaren.SetCmd("GetArea");
 	with (Cmd) {
@@ -13,27 +16,22 @@ try {
 		}
 	} 
 	var rsArea = Cmd.Execute();
-	with (rsArea) {
-	    var SortCode  = Fields("SortCode").value,
-		AreaName  = Fields("AreaName").value,
-		Deleted   = Fields("Deleted").value,
-		HeadTitle = Deleted ? "Перегляд анкети району" : "Редагування анкети району";
-		Close();
-	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
+	with (rsArea) {
+		var SortCode = Fields("SortCode").value,
+		AreaName     = Fields("AreaName").value,
+		Deleted      = Fields("Deleted").value,
+		Title        = Deleted ? "Перегляд анкети району" : "Редагування анкети району";
+		Close();
+	}
 	Connect.Close();
-}
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditArea" ACTION="updatearea.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText" ID="H3Id"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><%=Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="AreaId" VALUE="<%=AreaId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">

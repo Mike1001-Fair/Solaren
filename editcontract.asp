@@ -67,7 +67,7 @@ try {
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="CheckCard" VALUE="<%=Session("CheckCard")%>">
 
-<H3 CLASS="HeadText"><BIG>&#128214;</BIG><%=Title%></H3>
+<H3 CLASS="HeadText"><BIG>&#128214;</BIG><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Загальні</LEGEND>

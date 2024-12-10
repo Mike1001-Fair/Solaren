@@ -12,7 +12,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="Consolidation" ACTION="runconsolidation.asp" METHOD="post">
-<H3 CLASS="HeadText"><%=Title%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <DIV CLASS="SysMsg">
 	<FIELDSET>
 	<LEGEND>Перioд</LEGEND>

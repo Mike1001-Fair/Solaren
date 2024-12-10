@@ -1,9 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 RegionId = Request.QueryString("RegionId");
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetRegion");
@@ -12,28 +15,23 @@ try {
 			Append(CreateParameter("RegionId", adInteger, adParamInput, 10, RegionId));
 		}
 	}
-	var rs = Cmd.Execute();
-	with (rs) {
-	    var SortCode   = Fields("SortCode").value,
-		RegionName = Fields("RegionName").value,
-		Deleted    = Fields("Deleted").value,
-		HeadTitle  = Deleted ? "Перегляд області" : "Редагування області";
-		Close();
-	}
+	var rs = Solaren.Execute("GetRegion", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
+	with (rs) {
+		var SortCode = Fields("SortCode").value,
+		RegionName   = Fields("RegionName").value,
+		Deleted      = Fields("Deleted").value,
+		Title        = Deleted ? "Перегляд області" : "Редагування області";
+		Close();
+	}
 	Connect.Close();
-}
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditRegion" ACTION="updateregion.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText" ID="H3Id"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="RegionId" VALUE="<%=RegionId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">

@@ -28,7 +28,7 @@ Solaren = {
 
 	GetYMD: function(dbDate) {
 		var result = new Date(dbDate);
-		return result.toStr()
+		return result.toStr(0)
 	},
 
 	SetSessionVar: function(rs) {
@@ -49,9 +49,9 @@ Solaren = {
 		Session("RoleId")     = RoleId;
 		Session("OperDate")   = OperDate;
 		Session("OperMonth")  = OperDate.slice(0, 7);
-		Session("Today")      = Today.toStr();
-		Session("EndDate")    = EndDate.toStr();
-		Session("NextDate")   = NextDate.toStr();
+		Session("Today")      = Today.toStr(0);
+		Session("EndDate")    = EndDate.toStr(0);
+		Session("NextDate")   = NextDate.toStr(0);
 
 		this.SetSessionFlags(SysCfg);
 	},
