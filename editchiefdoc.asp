@@ -1,9 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 DocId = Request.QueryString("DocId");
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetChiefDoc");
@@ -12,7 +14,10 @@ try {
 			Parameters.Append(CreateParameter("DocId", adInteger, adParamInput, 10, DocId));
 		}
 	} 
-	var rs = Cmd.Execute();
+	var rs = Solaren.Execute("GetChiefDoc", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rs) {
 		var SortCode = Fields("SortCode").value,
 		DocName      = Fields("DocName").value,
@@ -20,14 +25,7 @@ try {
 		Title        = Deleted ? "Перегляд документу" : "Редагування документу";
 		Close();
 	} Connect.Close();
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-}
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditChiefDoc" ACTION="updatechiefdoc.asp" METHOD="POST">

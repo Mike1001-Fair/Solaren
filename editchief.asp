@@ -1,17 +1,17 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 ChiefId = Request.QueryString("ChiefId");
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("SelectChiefTitle");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, User.Id));
 		}
 	}
 	var rsChiefTitle = Solaren.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
@@ -23,7 +23,9 @@ try {
 		}
 	}
 	var rsChief = Solaren.Execute("GetChief", "Керівника не знайдено!");
-
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsChief) {
 		var TitleId    = Fields("TitleId").value,
 		Name1          = Fields("Name1").value,
@@ -33,22 +35,15 @@ try {
 		TrustedDocId   = Fields("TrustedDocId").value,
 		TrustedDocDate = Fields("TrustedDocDate").value,
 		Deleted        = Fields("Deleted").value,
-		HeadTitle      = Deleted ? "Перегляд анкети" : "Редагування анкети";
+		Title          = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-}
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditChief" ACTION="updatechief.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><SPAN>&#128100;</SPAN><%=HeadTitle%></H3>
-<SPAN CLASS="H3Span">керiвника</SPAN>
+<H3 CLASS="HeadText"><%=Title%></H3>
+
 <INPUT TYPE="HIDDEN" NAME="ChiefId" VALUE="<%=ChiefId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">
@@ -65,7 +60,7 @@ with (Html) {
 	<TD><INPUT TYPE="TEXT" NAME="Name3" PLACEHOLDER="ПІБ" VALUE="<%=Name3%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Документ</TD>
-	<TD><%Html.WriteChiefDoc(rsChiefDoc, ChiefDocId); Connect.Close()%></TD></TR>
+	<TD><%Html.WriteChiefDoc(rsChiefDoc, ChiefDocId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Довiренiсть</TD>
 	<TD><INPUT TYPE="TEXT" NAME="TrustedDocId" VALUE="<%=TrustedDocId%>" SIZE="10"></TD></TR>
@@ -73,5 +68,6 @@ with (Html) {
 	<TD><INPUT TYPE="date" NAME="TrustedDocDate" VALUE="<%=TrustedDocDate%>"></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Html.WriteEditButton(1)%>
+<% Connect.Close();
+Html.WriteEditButton(1)%>
 </FORM></BODY></HTML>

@@ -1,17 +1,21 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 ChiefTitleId = Request.QueryString("ChiefTitleId");
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetChiefTitle");
 	with (Cmd) {      
 		Parameters.Append(CreateParameter("ChiefTitleId", adInteger, adParamInput, 10, ChiefTitleId));
 	}
-	var rs = Cmd.Execute();
+	var rs = Solaren.Execute("GetChiefTitle", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rs) {
 		var Title1 = Fields("Title1").value,
 		Title2     = Fields("Title2").value,
@@ -21,21 +25,12 @@ try {
 		Title      = Deleted ? "Перегляд посади" : "Редагування посади";
 		Close();
 	}
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-} finally {
 	Connect.Close();
-}
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditChiefTitle" ACTION="updatechieftitle.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
-<SPAN CLASS="H3Span">керівника</SPAN>
 <INPUT TYPE="HIDDEN" NAME="ChiefTitleId" VALUE="<%=ChiefTitleId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">

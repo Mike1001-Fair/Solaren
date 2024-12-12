@@ -2,8 +2,10 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
     var GroupId   = Form("GroupId"),
@@ -19,17 +21,12 @@ try {
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListTarif", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead("Список тарифiв");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}
+Html.SetPage("Список тарифiв", User.RoleId)
 
 var ResponseText = '<BODY CLASS="MainBody">\n' +
 	'<H3 CLASS="H3Text">Список тарифiв<SPAN>Група: ' + GroupName + '</SPAN></H3>\n' +

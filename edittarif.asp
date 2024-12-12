@@ -3,10 +3,11 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
 TarifId = Request.QueryString("TarifId");
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetTarif");
@@ -15,8 +16,10 @@ try {
 			Append(CreateParameter("TarifId", adVarChar, adParamInput, 10, TarifId));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Тариф не знайдено!');
+	var rs = Solaren.Execute("GetTarif", "Iнформацiю не знайдено");
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rs) {
 		var GroupId = Fields("GroupId").value,
 		BegDate     = Fields("BegDate").value,
@@ -27,26 +30,18 @@ try {
 		Deleted     = Fields("Deleted").value;
 		Close();
 	}
-}
-catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-} finally {
 	Connect.Close();
 }
 
 var ViewOnly = !Month.isPeriod(Html.Date[0], EndDate),
-HeadTitle    = Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Title = Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditTarif" ACTION="updatetarif.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="TarifId" VALUE="<%=TarifId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
-<H3 CLASS="HeadText"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDatePeriod("Дiє", BegDate, EndDate, Html.Date[0], Html.Date[4]) %>

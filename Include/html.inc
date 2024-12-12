@@ -12,7 +12,7 @@ Html = {
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
 	Author      : "Mykola Chernov",
-	Title       : "",
+	Title       : "Title",
 
 	GetMonth: function(index) {
 		return this.Date[index].slice(0, 7)
@@ -46,7 +46,6 @@ Html = {
 	},
 
 	SetHead: function(Title) {
-		this.Title = Title;
 		var ResponseText = [
 			'<!DOCTYPE html>\n',
 			'<HTML LANG="en">\n',
@@ -91,6 +90,7 @@ Html = {
 	},
 
 	SetPage: function(Title, RoleId) {
+		this.Title = Title;
 		this.SetHead(Title);
 		this.WriteScript();
 		this.WriteMenu(RoleId, 0);

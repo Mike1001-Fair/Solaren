@@ -3,10 +3,9 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Оплата";
+<% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Оплата", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPay" ACTION="listpay.asp" METHOD="post" AUTOCOMPLETE="off">

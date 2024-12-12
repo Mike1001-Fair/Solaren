@@ -1,11 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-Title = "Документи керівника",
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 DocName = Request.Form("DocName");
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListChiefDoc");
@@ -14,19 +14,15 @@ try {
 			Append(CreateParameter("DocName", adVarChar, adParamInput, 10, DocName));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListChiefDoc", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteMenu(Session("RoleId"), 0);
-}
+Html.SetPage("Документи керівника", User.RoleId)
 
 var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">' + Title + '</H3>\n' +
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n' +
 	'<TABLE CLASS="InfoTable">\n' +
 	'<TR><TH>№</TH><TH>Назва</TH></TR>\n';
 

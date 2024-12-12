@@ -3,8 +3,10 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/money.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-Title = "Список оплат";
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
@@ -30,11 +32,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}
+Html.SetPage("Список оплат", User.RoleId)
 
 var Period = BegDate.formatDate("-"),
 EndDate    = EndDate.formatDate("-"),
@@ -43,7 +41,7 @@ if (Period != EndDate) Period += ' &ndash; ' + EndDate;
 
 var ResponseText = '<BODY CLASS="MainBody">\n' +
 	'<TABLE CLASS="H3Text">\n' +
-	'<CAPTION>' + Title + '</CAPTION>\n' +
+	'<CAPTION>' + Html.Title + '</CAPTION>\n' +
 	'<TR><TD ALIGN="RIGHT">Споживач:</TD><TD ALIGN="LEFT">' + ContractName + '</TD></TR>\n' + 
 	'<TR><TD ALIGN="RIGHT">Період:</TD><TD ALIGN="LEFT">' + Period + '</TD></TR>\n' +
 	'</TABLE>\n' + 

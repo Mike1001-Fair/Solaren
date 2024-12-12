@@ -1,10 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 ChiefName = Request.Form("ChiefName");
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListChief");
@@ -13,26 +14,27 @@ try {
 			Append(CreateParameter("ChiefName", adVarChar, adParamInput, 10, ChiefName));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListChief", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead("Керiвники");
-	WriteMenu(Session("RoleId"), 0);
-}
+Html.SetPage("Керiвники", User.RoleId)
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Керiвники</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>Посада</TH><TH>ПIБ</TH></TR>\n';
+var ResponseText = ['<BODY CLASS="MainBody">\n',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n',
+	'<TABLE CLASS="InfoTable">\n',
+	'<TR><TH>Посада</TH><TH>ПIБ</TH></TR>\n'
+];
 
-for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("Title1") + '</TD>' +
-	Html.Write("TD","") + '<A href="editchief.asp?ChiefId=' + rs.Fields("Id") + '">' + rs.Fields("Name1") + '</A></TD></TR>\n';
+for (var i=0, row; !rs.EOF; i++) {
+	row = ['<TR><TD>', rs.Fields("Title1"), '</TD>',
+		Html.Write("TD",""),
+		'<A href="editchief.asp?ChiefId=', rs.Fields("Id"), '">', rs.Fields("Name1"), '</A>',
+		'</TD></TR>\n'
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
 } rs.Close();Connect.Close();
-ResponseText += Html.GetFooterRow(2, i);
-Response.Write(ResponseText)%>
+ResponseText.push(Html.GetFooterRow(2, i));
+Response.Write(ResponseText.join(""))%>
