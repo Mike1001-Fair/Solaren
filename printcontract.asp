@@ -3,10 +3,9 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Друк договору";
+<% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage("Друк договору", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="PrintContract" TARGET="_blank" ACTION="prncontract.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">

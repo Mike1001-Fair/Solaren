@@ -32,7 +32,7 @@ try {
 	CompanyCode = Cmd.Parameters.Item("CompanyCode").value,
 	BudgetItem  = "\t" + Cmd.Parameters.Item("BudgetItem").value + "\t",	
 	Today       = new Date(),
-	dmy         = Today.toStr().formatDate("-"),
+	dmy         = Today.toStr(0).formatDate("-"),
 	Stream      = Server.CreateObject("ADODB.Stream"),
 	fn          = Server.MapPath(Session("FileName"));
 

@@ -4,8 +4,10 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/money.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var ReportMonth = String(Form("ReportMonth")),
@@ -17,7 +19,7 @@ try {
 	Solaren.SetCmd("GetNote");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 
@@ -102,11 +104,10 @@ try {
 if (Solaren.Empty(PurCost)) {
 	Solaren.SysMsg(0, "Інформацію не знайдено");
 } else {
-	var Title = "Службовий лист",
-	Period = Month.GetPeriod(ReportMonth, 1),
+	var Period = Month.GetPeriod(ReportMonth, 1),
 	Today = new Date(),
-	ReportDate = Today.toStr();
-	Html.SetHead(Title);
+	ReportDate = Today.toStr(0);
+	Html.SetHead("Службовий лист");
 }%>
 
 <STYLE>P { text-align: justify; line-height: 1.5; text-indent: 1cm; margin-bottom: 1}

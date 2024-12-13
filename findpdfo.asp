@@ -1,14 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-Title = "Cтавка ПДФО";
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteMenu(Session("RoleId"), 0);
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+if (User.ValidateAccess(Authorized, "GET")) {
+	Html.SetPage("Cтавка ПДФО", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPdfo" ACTION="listpdfo.asp" METHOD="post">

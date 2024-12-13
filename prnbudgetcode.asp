@@ -30,7 +30,7 @@ with (rs) {
 } Connect.Close();
 
 var Today = new Date(),
-ReportDate = Today.toStr().formatDate("-");
+ReportDate = Today.toStr(0).formatDate("-");
 Html.SetHead("Бюджетний код")%>
 
 <BODY CLASS="PrnBody">

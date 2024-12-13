@@ -46,6 +46,7 @@ Html = {
 	},
 
 	SetHead: function(Title) {
+		this.Title = Title;
 		var ResponseText = [
 			'<!DOCTYPE html>\n',
 			'<HTML LANG="en">\n',
@@ -90,7 +91,6 @@ Html = {
 	},
 
 	SetPage: function(Title, RoleId) {
-		this.Title = Title;
 		this.SetHead(Title);
 		this.WriteScript();
 		this.WriteMenu(RoleId, 0);

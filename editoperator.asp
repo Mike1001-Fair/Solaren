@@ -27,9 +27,8 @@ try {
 		Close();
 	}
 	Connect.Close();
-}
-
-Html.SetPage(Title, User.RoleId)%>
+	Html.SetPage(Title, User.RoleId)
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOperator" ACTION="updateoperator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=OperatorId%>">
