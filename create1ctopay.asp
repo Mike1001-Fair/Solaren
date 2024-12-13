@@ -30,8 +30,6 @@ try {
 	Stream      = Server.CreateObject("ADODB.Stream"),
 	fn          = Server.MapPath(Session("FileName"));
 
-	rsCompanyInfo.Close();
-
 	with (Stream) {
 		//Type    = 2;
 		CharSet = ReportCharSet;
@@ -52,15 +50,15 @@ try {
 		BegText + "*;101;" + CompanyCode + ";вiйськовий збiр з " + rs.Fields("CustomerName") + " (" + rs.Fields("CustomerCode") + ")" + EndText + Vz + "\n"
 	    ];
 	    Stream.WriteText(InfoLine.join("\n"));
-	} rs.Close();
-
-	with (Stream) {
-		SaveToFile(fn, 2);
-		Close();
 	}
+
+	Stream.SaveToFile(fn, 2);
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 } finally {
+	rsCompanyInfo.Close();
+	rs.Close();
+	Stream.Close();
 	Connect.Close();
 	Server.Execute("download.asp");
 }%>
