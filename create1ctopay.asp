@@ -2,8 +2,9 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
     var ReportCharSet  = Form("ReportCharSet"),
@@ -14,27 +15,22 @@ try {
 	Solaren.SetCmd("List1Cexp");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("List1Cexp", "Iнформацiю не знайдено");
-
-	with (Cmd) {
-		CommandText = "GetCompanyInfo";
-		with (Parameters) {
-			Append(CreateParameter("CompanyCode", adVarChar, adParamOutput, 10, ""));
-			Append(CreateParameter("BudgetItem", adVarChar, adParamOutput, 10, ""));
-		} Execute(adExecuteNoRecords);
-	}
+	var rs = Solaren.Execute("List1Cexp", "Iнформацiю не знайдено"),
+	rsCompanyInfo = Solaren.Execute("GetCompanyInfo", "Iнформацiю не знайдено");
 
 	Session("FileName") = "Export/1ctopay.tsv";
 	var Period  = Month.GetPeriod(Session("OperMonth"), 1),
-	CompanyCode = Cmd.Parameters.Item("CompanyCode").value,
-	BudgetItem  = "\t" + Cmd.Parameters.Item("BudgetItem").value + "\t",	
+	CompanyCode = rsCompanyInfo.Fields("CompanyCode").value,	
+	BudgetItem  = "\t" + rsCompanyInfo.Fields("BudgetItem").value + "\t",	
 	Today       = new Date(),
 	dmy         = Today.toStr(0).formatDate("-"),
 	Stream      = Server.CreateObject("ADODB.Stream"),
 	fn          = Server.MapPath(Session("FileName"));
+
+	rsCompanyInfo.Close();
 
 	with (Stream) {
 		//Type    = 2;
