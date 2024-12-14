@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/datastream.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "POST");
 
@@ -22,36 +23,39 @@ try {
 	rsCompanyInfo = Solaren.Execute("GetCompanyInfo", "Iнформацiю не знайдено");
 
 	Session("FileName") = "Export/1ctopay.tsv";
+
 	var Period  = Month.GetPeriod(Session("OperMonth"), 1),
 	CompanyCode = rsCompanyInfo.Fields("CompanyCode").value,	
 	BudgetItem  = "\t" + rsCompanyInfo.Fields("BudgetItem").value + "\t",	
 	Today       = new Date(),
 	dmy         = Today.toStr(0).formatDate("-"),
-	Stream      = Server.CreateObject("ADODB.Stream"),
 	fn          = Server.MapPath(Session("FileName"));
 
-	with (Stream) {
-		//Type    = 2;
-		CharSet = ReportCharSet;
-		Open();
-	}
+	DataStream.Open(ReportCharSet, 2);
 	
 	for (; !rs.EOF; rs.MoveNext()) {
-	    var CardText = rs.Fields("CardId").value.length > 0 ? ". Для поп КР " + rs.Fields("CardId").value + " " : " ",
-		BegText  = rs.Fields("CustomerCode") + "\t" + rs.Fields("ContractPAN") + "\t" + dmy + "\t" ,
-		EndText  = "\tкод-11011000" + BudgetItem,
-		PurCost  = rs.Fields("PurCost").value.toFixed(2).replace(/\D/,","),
-		Pdfo     = rs.Fields("Pdfo").value.toFixed(2).replace(/\D/,","),
-		Vz       = rs.Fields("Vz").value.toFixed(2).replace(/\D/,",");
-	    CardText += rs.Fields("CustomerName") + ", згiдно с.л. вiд " + dmy + ". Без ПДВ.";
-	    var InfoLine = [
-		BegText + "За вироблену е.е. в " + Period + CardText + BudgetItem + PurCost,
-		BegText + "*;101;" + rs.Fields("CustomerCode") + ";прибутковий податок з " + rs.Fields("CustomerName") + EndText + Pdfo,
-		BegText + "*;101;" + CompanyCode + ";вiйськовий збiр з " + rs.Fields("CustomerName") + " (" + rs.Fields("CustomerCode") + ")" + EndText + Vz + "\n"
-	    ];
-	    Stream.WriteText(InfoLine.join("\n"));
-	}
+		var Block = [],
+		CardText  = rs.Fields("CardId").value.length > 0 ? ". Для поп КР " + rs.Fields("CardId").value + " " : " ",
+		BegText   = rs.Fields("CustomerCode") + "\t" + rs.Fields("ContractPAN") + "\t" + dmy + "\t" ,
+		EndText   = "\tкод-11011000" + BudgetItem,
+		PurCost   = rs.Fields("PurCost").value.toFixed(2).replace(/\D/,","),
+		Pdfo      = rs.Fields("Pdfo").value.toFixed(2).replace(/\D/,","),
+		Vz        = rs.Fields("Vz").value.toFixed(2).replace(/\D/,",");
 
+		CardText += rs.Fields("CustomerName") + ", згiдно с.л. вiд " + dmy + ". Без ПДВ.";
+
+		var Line = [
+			["За вироблену е.е. в ", Period, CardText, BudgetItem, PurCost],
+			["*;101;", rs.Fields("CustomerCode"), ";прибутковий податок з ", rs.Fields("CustomerName"), EndText, Pdfo],
+			["*;101;", CompanyCode, ";вiйськовий збiр з ", rs.Fields("CustomerName"), " (", rs.Fields("CustomerCode"), ")", EndText, Vz]
+		];
+		
+		for (var i = 0; i < Line.length; i++) {
+			Block.push(BegText + Line[i].join("") + "\n");
+		}
+
+		Stream.WriteText(Block.join(""));
+	}
 	Stream.SaveToFile(fn, 2);
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
