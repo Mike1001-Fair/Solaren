@@ -3,7 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/money.inc" -->
-
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
@@ -12,7 +12,7 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Html.Date[1]));
+			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Month.Date[1]));
 		}
 	}
 	var rs = Cmd.Execute();
@@ -23,7 +23,7 @@ try {
 if (rs.EOF) {
 	Solaren.SysMsg(1, "Помилок не виявлено");
 } else {
-	var Period = Html.GetMonth(1).split("-").reverse().join("-"),
+	var Period = Month.GetMonth(1).split("-").reverse().join("-"),
 	ResponseText = '<BODY CLASS="MainBody">\n' +
 	'<H3 CLASS="H3Text">Перевiрка обсягiв<SPAN>перiод:' + Period + '</SPAN></H3>\n' +
 	'<TABLE CLASS="InfoTable">\n' +

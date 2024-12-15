@@ -41,8 +41,8 @@ try {
 	Connect.Close();
 }
 
-var OperDate = Html.Date[1],
-NextDate     = Html.Date[3],
+var OperDate = Month.Date[1],
+NextDate     = Month.Date[3],
 ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
 AllowDelBtn  = User.RoleId == 1,
 Title        = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
@@ -57,7 +57,7 @@ Html.SetPage(Title, User.RoleId)%>
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=OperDate%>">
-<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[2]%>">
+<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Month.Date[2]%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 <H3 CLASS="HeadText" ID="H3Id">
 	<IMG CLASS="H3Img" SRC="images/MeterIcon.svg" NAME="myImg"><%=Html.Title%>

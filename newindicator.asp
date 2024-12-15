@@ -3,11 +3,10 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 2,
-Title = "Нові показники";
-
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Нові показники", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewIndicator" ACTION="createindicator.asp" METHOD="post" AUTOCOMPLETE="off">
@@ -16,8 +15,8 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <INPUT TYPE="HIDDEN" NAME="PrevDate">
 <INPUT TYPE="HIDDEN" NAME="Ktf">
 <INPUT TYPE="HIDDEN" NAME="ContractPower">
-<INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=Html.Date[1]%>">
-<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Html.Date[2]%>">
+<INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=Month.Date[1]%>">
+<INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Month.Date[2]%>">
 <INPUT TYPE="HIDDEN" NAME="HoursLimit" VALUE="<%=Session("HoursLimit")%>">
 
 <TABLE CLASS="MarkupTable">
@@ -28,7 +27,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Лiчильник</LABEL></TD><TD>
 	<SELECT STYLE="width: 8em" NAME="MeterId" ID="MeterId" DISABLED><OPTION></OPTION></SELECT></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="ReportDate">Дата</LABEL></TD>
-	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[1]%>" MAX="<%=Html.Date[2]%>" REQUIRED DISABLED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=Month.Date[1]%>" MIN="<%=Month.Date[1]%>" MAX="<%=Month.Date[2]%>" REQUIRED DISABLED></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET NAME="IndicatorSet" DISABLED><LEGEND>Показники</LEGEND>

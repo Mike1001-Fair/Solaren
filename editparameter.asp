@@ -1,8 +1,10 @@
 <%@ LANGUAGE = "JavaScript"%> 
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 User.ValidateAccess(Authorized, "GET");
 
@@ -56,9 +58,9 @@ Html.SetPage("Параметри", User.RoleId)%>
 	<FIELDSET><LEGEND>Загальні</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Старт</TD>
-	<TD><INPUT TYPE="date" NAME="StartSysDate" VALUE="<%=StartSysDate%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[4]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="StartSysDate" VALUE="<%=StartSysDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Місяць</TD>
-	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MIN="<%=Html.GetMonth(0)%>" MAX="<%=Html.GetMonth(3)%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MIN="<%=Month.GetMonth(0)%>" MAX="<%=Month.GetMonth(3)%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Лiмiт годин доби</TD>
 	<TD><INPUT TYPE="Number" NAME="HoursLimit" VALUE="<%=HoursLimit%>" STEP="1" MIN="5" MAX="12" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Довжина рахунку</TD>

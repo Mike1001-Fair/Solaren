@@ -3,11 +3,11 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Нове замовлення";
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 1;
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Нове замовлення", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOrder" ID="NewOrder" ACTION="createorder.asp" METHOD="post" AUTOCOMPLETE="off">
@@ -17,7 +17,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Дата</LEGEND>
-		<INPUT TYPE="date" NAME="OrderDate" VALUE="<%=Html.OperDate%>" MIN="<%=Html.OperDate%>" MAX="<%=Html.EndDate%>" REQUIRED>
+		<INPUT TYPE="date" NAME="OrderDate" VALUE="<%=Month.Date[1]%>" MIN="<%=Month.Date[1]%>" MAX="<%=Month.Date[2]%>" REQUIRED>
 	</FIELDSET>
 	<% Html.WriteSearchSet("Договір", "Contract", "", 1); %>
 	<FIELDSET><LEGEND><BUTTON TYPE="button" CLASS="AddBtn" ID="AddBtn" TITLE="Додати">&#x2795;Список</BUTTON></LEGEND>

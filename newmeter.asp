@@ -3,11 +3,10 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Новий лiчильник";
-
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Новий лiчильник", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMeter" ACTION="createmeter.asp" METHOD="post" AUTOCOMPLETE="off">
@@ -21,7 +20,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<TABLE><TR><TD ALIGN="RIGHT">Номер</TD>
 	<TD><INPUT TYPE="text" NAME="MeterCode" SIZE="12" maxLength="10" PATTERN="^\d{8,10}$" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Монтаж</TD>
-	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=Html.Date[1]%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=Month.Date[1]%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Розряднiсть</TD>
 	<TD><INPUT TYPE="Number" NAME="Capacity" VALUE="7" STEP="1" MIN="5" MAX="9" REQUIRED></TD></TR>
 

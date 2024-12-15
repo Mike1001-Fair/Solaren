@@ -1,6 +1,7 @@
 <%@LANGUAGE="JavaScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації")
 
@@ -29,7 +30,7 @@ with (Html) {
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Перiод</TD>
-	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Month.GetMonth(1)%>" MIN="<%=Month.GetMonth(1)%>" MAX="<%=Month.GetMonth(1)%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Кiлькicть</TD>
 	<TD><INPUT TYPE="number" NAME="CustomerCount" VALUE="90" STEP="1" MIN="30" MAX="999" REQUIRED>
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>

@@ -1,8 +1,10 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-Title = "Події",
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 1,
 Event = {
 	Name: ["Завантаження показників", "Завантаження оплат", "Апдейт договору"],
 	Write: function() {
@@ -17,12 +19,8 @@ Event = {
 	}
 };
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+if (User.ValidateAccess(Authorized, "GET")) {
+	Html.SetPage("Події", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindAppLog" ACTION="listapplog.asp" METHOD="post">
@@ -30,7 +28,7 @@ with (Html) {
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[2]);
+	<% Html.WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[2]);
 	Event.Write()%>
 	</TD></TR>
 </TABLE>

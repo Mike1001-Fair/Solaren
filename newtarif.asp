@@ -3,11 +3,11 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Новий тариф";
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 1;
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Новий тариф", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewTarif" ACTION="createtarif.asp" METHOD="post" AUTOCOMPLETE="off">
@@ -15,10 +15,10 @@ if (User.ValidateAccess(Authorized, "GET")) {
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
-	<% Html.WriteDatePeriod("Дiє", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[4]) %>
+	<% Html.WriteDatePeriod("Дiє", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[4]) %>
 	<FIELDSET><LEGEND>Ввод в експлуатацію</LEGEND>
-	<INPUT TYPE="date" NAME="ExpDateBeg" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[4]%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="ExpDateEnd" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[4]%>" REQUIRED>
+	<INPUT TYPE="date" NAME="ExpDateBeg" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED> &#8722;
+	<INPUT TYPE="date" NAME="ExpDateEnd" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED>
 	</FIELDSET>
 
 	<FIELDSET><LEGEND>Параметри</LEGEND>
@@ -31,4 +31,3 @@ if (User.ValidateAccess(Authorized, "GET")) {
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
 </FORM></BODY></HTML>
-

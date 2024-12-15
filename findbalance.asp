@@ -3,8 +3,8 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Баланс";
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "GET")
 
 try {
@@ -19,7 +19,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))	
 }
 
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage("Баланс", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBalance" ACTION="listbalance.asp" METHOD="post" TARGET="_blank">
 <INPUT TYPE="HIDDEN" NAME="OperatorName">

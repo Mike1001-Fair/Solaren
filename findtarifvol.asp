@@ -1,14 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-Title = "Обсяги по тарифам";
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Обсяги по тарифам", User.RoleId)%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindTarifVol" ACTION="listtarifvol.asp" METHOD="post" TARGET = "_blank">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

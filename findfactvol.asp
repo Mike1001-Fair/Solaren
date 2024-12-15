@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
@@ -16,8 +17,8 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Період</LEGEND>
-	<INPUT TYPE="Month" NAME="BegMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED> &#8722;
-	<INPUT TYPE="Month" NAME="EndMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED>
+	<INPUT TYPE="Month" NAME="BegMonth" VALUE="<%=Month.GetMonth(1)%>" MIN="<%=Month.GetMonth(1)%>" MAX="<%=Month.GetMonth(1)%>" REQUIRED> &#8722;
+	<INPUT TYPE="Month" NAME="EndMonth" VALUE="<%=Month.GetMonth(1)%>" MIN="<%=Month.GetMonth(1)%>" MAX="<%=Month.GetMonth(1)%>" REQUIRED>
 	</FIELDSET>
 
 	<FIELDSET><LEGEND>Договiр</LEGEND>

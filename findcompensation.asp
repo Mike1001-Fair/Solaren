@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
@@ -30,7 +31,7 @@ try {
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Перiод</TD>
-	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="2015-01" MAX="<%=Html.GetMonth(1)%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Month.GetMonth(1)%>" MIN="2015-01" MAX="<%=Month.GetMonth(1)%>" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Ціна</TD>
 	<TD><INPUT TYPE="Number" NAME="AveragePrice" VALUE="1" STEP="0.000001" MIN="0" MAX="99999" REQUIRED AUTOFOCUS PLACEHOLDER="коп">

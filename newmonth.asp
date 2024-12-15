@@ -1,17 +1,14 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-OperMonth = Html.GetMonth(1),
-Title = "Закриття мicяця";
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
+OperMonth = Month.GetMonth(1);
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Закриття мicяця", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMonth" ACTION="runmonthclosing.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

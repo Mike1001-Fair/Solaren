@@ -1,7 +1,7 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var RecordSet = Server.CreateObject("ADODB.Recordset"),
 DataSet = {
-	GetRecord: function() {
+	Open: function(Cmd) {
 		with (RecordSet) {
 			ActiveConnection = Connect;
 			CursorLocation   = adUseClient;

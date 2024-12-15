@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 MeterId = Request.QueryString("MeterId");
 User.ValidateAccess(Authorized, "GET");
@@ -51,7 +52,7 @@ try {
 	<TABLE><TR><TD ALIGN="RIGHT">Номер</TD>
 	<TD><INPUT TYPE="text" NAME="MeterCode" VALUE="<%=MeterCode%>" SIZE="12" PATTERN="^\d{8,10}$" maxLength="10" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Монтаж</TD>
-	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=SetDate%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=SetDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Розряднiсть</TD>
 	<TD><INPUT TYPE="Number" NAME="Capacity" VALUE="<%=Capacity%>" MIN="5" MAX="9"  REQUIRED></TD></TR>
 

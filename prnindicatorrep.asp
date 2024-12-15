@@ -24,7 +24,7 @@ try {
 		}
 	}
 
-	DataSet.GetRecord();
+	DataSet.Open(Cmd);
 	Solaren.EOF(RecordSet, 'Iнформацiю не знайдено');
 
 	with (Cmd) {

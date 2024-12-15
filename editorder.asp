@@ -29,7 +29,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-var ViewOnly = !Month.isPeriod(Html.Date[0], OrderDate),
+var ViewOnly = !Month.isPeriod(Month.Date[0], OrderDate),
 Title = Deleted || ViewOnly ? "Перегляд замовлення" : "Редагування замовлення";
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
@@ -46,7 +46,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<FIELDSET NAME="OrderSet"><LEGEND>Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="OrderDate" VALUE="<%=OrderDate%>" MIN="<%=Html.Date[1]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="OrderDate" VALUE="<%=OrderDate%>" MIN="<%=Month.Date[1]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 	<FIELDSET><LEGEND><BUTTON TYPE="button" CLASS="AddBtn" ID="AddBtn" TITLE="Додати">&#x2795;Список</BUTTON></LEGEND>
 	<TABLE ID="OrderItemsTable">

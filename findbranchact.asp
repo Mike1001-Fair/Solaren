@@ -1,31 +1,30 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET")
 
 try {
 	Solaren.SetCmd("SelectBranch");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsBranch = Cmd.Execute();
-	Solaren.EOF(rsBranch, 'Довiдник ЦОС пустий');
+	var rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead("Перевірка актів");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Перевірка актів", User.RoleId)%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBranchAct" ACTION="listbranchact.asp" METHOD="post" TARGET="_blank">
 <INPUT TYPE="HIDDEN" NAME="BranchName">
-<H3 CLASS="HeadText">Перевірка актів</H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteMonthPeriod() %>	

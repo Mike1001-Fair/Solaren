@@ -3,11 +3,10 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId > 0 && User.RoleId < 3,
-Title = "Показники";
-
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId > 0 && User.RoleId < 3;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage("Показники", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicator" ID="FindIndicator" ACTION="listindicator.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
@@ -16,7 +15,7 @@ Html.SetPage(Title, User.RoleId)%>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% with (Html) {
-		WriteDatePeriod("Період", Date[1], Date[2], Date[0], Date[3]);
+		WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[3]);
 		WriteSearchSet("Договір", "Contract", "", 1);
 	}%>
 	</TD></TR>

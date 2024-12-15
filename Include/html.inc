@@ -7,16 +7,13 @@ var CodePage = {
 Html = {
 	Version     : "v=3.6",
 	Path        : ["Scripts/", "Styles/", "Images/"],
-	Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), String(Session("NextDate")), "9999-12-31"],
+	//Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), Solaren.NextDate(Session("OperDate")), "9999-12-31"],
+	//Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), String(Session("NextDate")), "9999-12-31"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
 	Author      : "Mykola Chernov",
 	Title       : "Title",
-
-	GetMonth: function(index) {
-		return this.Date[index].slice(0, 7)
-	},
 
 	GetImage: function(fileName) {
 		var fullFileName = [this.Path[2], fileName];
@@ -211,8 +208,8 @@ Html = {
 	},
 
 	WriteMonthPeriod: function() {
-		var OperMonth = this.GetMonth(1),
-		MinMonth = this.GetMonth(0),
+		var OperMonth = Month.GetMonth(1),
+		MinMonth = Month.GetMonth(0),
 		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>\n',
 			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth,
 			'" MIN="' + MinMonth,
@@ -348,9 +345,9 @@ Html = {
 
 	WriteDate: function() {
 		var ResponseText = ['<FIELDSET>\n<LEGEND>Дата</LEGEND>\n',
-			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + this.Date[1],
-			'" MIN="' + this.Date[0],
-			'" MAX="' + this.Date[3],
+			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + Month.Date[1],
+			'" MIN="' + Month.Date[0],
+			'" MAX="' + Month.Date[3],
 			'" REQUIRED></LABEL>\n</FIELDSET>\n'
 		];
 		Response.Write(ResponseText.join(""));

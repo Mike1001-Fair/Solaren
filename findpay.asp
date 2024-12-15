@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage("Оплата", User.RoleId)
@@ -14,7 +15,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
 	<% with (Html) {
-		WriteDatePeriod("Період", Date[1], Date[2], Date[0], Date[2]);
+		WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[2]);
 		WriteSearchSet("Договір", "Contract", "", 1);
 	}%>
 	</TD></TR>

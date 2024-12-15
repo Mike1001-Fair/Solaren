@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 ContractId = Request.QueryString("ContractId");
 User.ValidateAccess(Authorized, "GET");
@@ -95,7 +96,7 @@ try {
 	<TD><% Html.WriteSelect(rsBranch, "Branch", 0, BranchId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=ContractDate%>" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=ContractDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">IBAN</TD>
 	<TD><INPUT TYPE="TEXT" NAME="Iban" SIZE="29" VALUE="<%=Iban%>" MAXLENGTH="29" PATTERN="[A-Z0-9]{29}" REQUIRED>
 	<INPUT TYPE="CheckBox" NAME="IbanBox" ID="IbanBox" TITLE="Сгенерувати"></TD></TR></TABLE></FIELDSET></TD>
@@ -116,7 +117,7 @@ try {
 	<TD><INPUT TYPE="Number" NAME="ContractPower" VALUE="<%=ContractPower%>" STEP="0.01" MIN="0" MAX="50" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
-	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=ExpDate%>" SIZE="10" MIN="<%=Html.Date[0]%>" MAX="<%=Html.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=ExpDate%>" SIZE="10" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
 	<TD><%Html.WriteTarif("TarifGroupId", TarifGroupId)%></TD></TR>
 	</TABLE></FIELDSET>

@@ -3,9 +3,10 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
-OperMonth = Html.GetMonth(1),
-MinMonth  = Html.GetMonth(0),
+OperMonth = Month.GetMonth(1),
+MinMonth  = Month.GetMonth(0),
 Title = "Сальдо-оборотна вiдомость";
 
 if (User.ValidateAccess(Authorized, "GET")) {

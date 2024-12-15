@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
 Title = "Звiт про показники";
 User.ValidateAccess(Authorized, "GET");
@@ -15,7 +16,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<TR><TD>
 	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	<FIELDSET ALIGN="CENTER"><LEGEND>Параметри</LEGEND>
-	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Html.GetMonth(1)%>" MIN="<%=Html.GetMonth(1)%>" MAX="<%=Html.GetMonth(1)%>" REQUIRED>
+	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Month.GetMonth(1)%>" MIN="<%=Month.GetMonth(1)%>" MAX="<%=Month.GetMonth(1)%>" REQUIRED>
 	<LABEL><INPUT TYPE="CheckBox" NAME="DoubleReport" CHECKED>2 копії</LABEL>
 	</FIELDSET>
 	</TD></TR>

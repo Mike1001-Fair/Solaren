@@ -1,8 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1,
-OperMonth = Html.GetMonth(1);
+OperMonth = Month.GetMonth(1);
 
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 

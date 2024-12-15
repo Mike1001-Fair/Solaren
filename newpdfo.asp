@@ -14,7 +14,7 @@ with (Html) {
 <H3 CLASS="HeadText">Нова ставка ПДФО</H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Html.Date[1], Html.Date[2], Html.Date[0], Html.Date[4]) %>
+	<% Html.WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[4]) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>Ставка
 	<INPUT TYPE="Number" NAME="PdfoTax" STEP="0.1" MIN="0" MAX="99" PLACEHOLDER="%" REQUIRED></LABEL>

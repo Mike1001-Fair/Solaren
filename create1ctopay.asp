@@ -8,7 +8,7 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var ReportCharSet  = Form("ReportCharSet"),
+	var ReportCharSet = Form("ReportCharSet"),
 	ReportCodePage = Form("ReportCodePage");
 }
 
@@ -38,9 +38,9 @@ try {
 		CardText  = rs.Fields("CardId").value.length > 0 ? ". Для поп КР " + rs.Fields("CardId").value + " " : " ",
 		BegText   = rs.Fields("CustomerCode") + "\t" + rs.Fields("ContractPAN") + "\t" + dmy + "\t" ,
 		EndText   = "\tкод-11011000" + BudgetItem,
-		PurCost   = rs.Fields("PurCost").value.toFixed(2).replace(/\D/,","),
-		Pdfo      = rs.Fields("Pdfo").value.toFixed(2).replace(/\D/,","),
-		Vz        = rs.Fields("Vz").value.toFixed(2).replace(/\D/,",");
+		PurCost   = rs.Fields("PurCost").value.toFixed(2).replace(/\D/, ","),
+		Pdfo      = rs.Fields("Pdfo").value.toFixed(2).replace(/\D/, ","),
+		Vz        = rs.Fields("Vz").value.toFixed(2).replace(/\D/, ",");
 
 		CardText += rs.Fields("CustomerName") + ", згiдно с.л. вiд " + dmy + ". Без ПДВ.";
 
