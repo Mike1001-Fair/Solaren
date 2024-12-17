@@ -1,16 +1,17 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 || Session("RoleId") < 2,
-Title = "Новий керiвник";
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("SelectChiefTitle");
 	with (Cmd) {
 		with (Parameters) {	
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rsChiefTitle = Solaren.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
@@ -19,11 +20,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Новий керiвник", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChief" METHOD="post" ACTION="createchief.asp" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><SPAN>&#128100;</SPAN><%=Html.Title%></H3>

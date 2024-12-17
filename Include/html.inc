@@ -7,8 +7,6 @@ var CodePage = {
 Html = {
 	Version     : "v=3.6",
 	Path        : ["Scripts/", "Styles/", "Images/"],
-	//Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), Solaren.NextDate(Session("OperDate")), "9999-12-31"],
-	//Date        : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), String(Session("NextDate")), "9999-12-31"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],

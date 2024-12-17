@@ -36,7 +36,6 @@ Solaren = {
 		dbDate   = rs.Fields("OperDate").value,
 		OperDate = this.GetYMD(dbDate),
 		ymd      = OperDate.split("-"),
-		Today    = new Date(),
 		EndDate  = new Date(ymd[0], ymd[1], 0),
 		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
 		SysCfg   = cfg.toString(2).padStart(3, "0").split('');
@@ -49,7 +48,6 @@ Solaren = {
 		Session("RoleId")     = RoleId;
 		Session("OperDate")   = OperDate;
 		Session("OperMonth")  = OperDate.slice(0, 7);
-		//Session("Today")      = Today.toStr(0);
 		Session("EndDate")    = EndDate.toStr(0);
 		Session("NextDate")   = NextDate.toStr(0);
 

@@ -1,9 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% Resource.Load(User.ResourceFile());
 var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd");

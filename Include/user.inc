@@ -56,7 +56,7 @@ var User = {
 				Connect.Close();
 			}
 		}
-		//Response.Write("<BR>Authorize: RoleId=" + SesRoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + UserGUID + "<BR>Token=" + Session("Token") + "<BR>ValidUser=" + ValidUser);
+		//Response.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token + "<BR>ValidRole = " + ValidRole);
 		return Done;
 	},
 
