@@ -11,8 +11,7 @@ var Month = {
 		{7:"Липень",8:"Серпень",9:"Вересень"},
 		{10:"Жовтень",11:"Листопад",12:"Грудень"}
 	],
-	/*Solaren.NextDate(Session("OperDate"))*/
-	Date    : ["2015-01-01", String(Session("OperDate")), String(Session("EndDate")), String(Session("NextDate")), "9999-12-31"],
+	Date    : ["2015-01-01", Session("OperDate"), Session("EndDate"), Session("NextDate"), "9999-12-31"],
 	YearItem: "року",
 
 	GetMonth: function(index) {

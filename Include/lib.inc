@@ -47,6 +47,7 @@ Solaren = {
 		Session("MsgText")    = rs.Fields("MsgText").value;
 		Session("RoleId")     = RoleId;
 		Session("OperDate")   = OperDate;
+		Session("ymdDate")    = ymd;
 		Session("OperMonth")  = OperDate.slice(0, 7);
 		Session("EndDate")    = EndDate.toStr(0);
 		Session("NextDate")   = NextDate.toStr(0);
@@ -107,22 +108,5 @@ Solaren = {
 
 	ValidObject: function(obj) {
 		return obj && typeof obj === 'object'
-	},
-
-	NextDate: function(OperDate) {
-		Response.Write("NextDate: " + typeof OperDate);
-		var nextDate;
-		if (OperDate) {
-			Response.Write("<br>OperDate = " + OperDate);
-			//Response.End();
-			var operDate = String(OperDate),
-			ymd = operDate.split("-"),
-			nextDate = new Date(ymd[0], +ymd[1] + 1, 0);
-		} else {
-			var now = new Date();
-			nextDate = new Date(now.getFullYear(), now.getMonth(), 1);
-		}
-		Response.Write("<br>nextDate = " + nextDate.toStr(0));
-		return nextDate.toStr(0)
 	}
 }%>
