@@ -47,7 +47,6 @@ Solaren = {
 		Session("MsgText")    = rs.Fields("MsgText").value;
 		Session("RoleId")     = RoleId;
 		Session("OperDate")   = OperDate;
-		Session("ymdDate")    = ymd;
 		Session("OperMonth")  = OperDate.slice(0, 7);
 		Session("EndDate")    = EndDate.toStr(0);
 		Session("NextDate")   = NextDate.toStr(0);
