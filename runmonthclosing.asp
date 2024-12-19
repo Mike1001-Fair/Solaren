@@ -1,18 +1,21 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
+
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
 
 function SetSessionVar() {
 	var OperDate = Cmd.Parameters.Item("OperDate").value,
-	OperMonth    = OperDate.slice(0, 7),
-	ym           = OperMonth.split("-"),
+	ymd          = OperDate.split("-"),
 	Today        = new Date(),
-	EndDate      = new Date(ym[0], ym[1], 0),
-	NextDate     = new Date(ym[0], +ym[1]+1, 0);
-	Month.Date[0]  = OperDate
-	Session("OperMonth") = OperMonth;
-	Month.Date[1]   = OperMonth + "-" + EndDate.getDate();
+	EndDate      = new Date(ymd[0], ymd[1], 0),
+	NextDate     = new Date(ymd[0], +ymd[1] + 1, 0);
+	Session("OperDate") = OperDate;
+	Session("EndDate")  = EndDate.toStr(0);
+	Session("NextDate") = NextDate.toStr(0);
 }
 
 try {

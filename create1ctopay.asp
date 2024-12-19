@@ -24,7 +24,7 @@ try {
 
 	Session("FileName") = "Export/1ctopay.tsv";
 
-	var Period  = Month.GetPeriod(Session("OperMonth"), 1),
+	var Period  = Month.GetPeriod(Month.GetMonth(1), 1),
 	CompanyCode = rsCompanyInfo.Fields("CompanyCode").value,	
 	BudgetItem  = "\t" + rsCompanyInfo.Fields("BudgetItem").value + "\t",	
 	Today       = new Date(),

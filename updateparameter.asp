@@ -1,7 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
+
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
     var StartSysDate    = String(Form("StartSysDate")),
@@ -43,10 +47,11 @@ try {
 } finally {
 	Connect.Close();
 	var ym = OperMonth.split("-"),
-	EndDate = new Date(ym[0], ym[1], 0);
+	EndDate = new Date(ym[0], ym[1], 0),
+	NextDate = new Date(ym[0], +ym[1] + 1, 0);
 	Session("OperDate")     = OperMonth + "-01";
-	Session("OperMonth")    = OperMonth;
-	Session("EndDate")      = OperMonth + "-" + EndDate.getDate();
+	Session("EndDate")      = EndDate.toStr(0);
+	Session("NextDate")     = NextDate.toStr(0);
 	Session("HoursLimit")   = HoursLimit;
 	Session("CheckCard")    = CheckCard;
 	Session("NewIndicator") = NewIndicator;
