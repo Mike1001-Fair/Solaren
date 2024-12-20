@@ -46,14 +46,10 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 } finally {
 	Connect.Close();
-	var ym = OperMonth.split("-"),
-	EndDate = new Date(ym[0], ym[1], 0),
-	NextDate = new Date(ym[0], +ym[1] + 1, 0);
-	Session("OperDate")     = OperMonth + "-01";
-	Session("EndDate")      = EndDate.toStr(0);
-	Session("NextDate")     = NextDate.toStr(0);
+	var OperDate = OperMonth + "-01";
 	Session("HoursLimit")   = HoursLimit;
 	Session("CheckCard")    = CheckCard;
 	Session("NewIndicator") = NewIndicator;
+	Solaren.SetSessionDate(OperDate);
 	Solaren.SysMsg(1, "");
 }%>

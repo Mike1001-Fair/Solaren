@@ -35,9 +35,6 @@ Solaren = {
 		var cfg  = rs.Fields("SysConfig").value,
 		dbDate   = rs.Fields("OperDate").value,
 		OperDate = this.GetYMD(dbDate),
-		ymd      = OperDate.split("-"),
-		EndDate  = new Date(ymd[0], ymd[1], 0),
-		NextDate = new Date(ymd[0], +ymd[1] + 1, 0),
 		SysCfg   = cfg.toString(2).padStart(3, "0").split('');
 
 		Session("UserGUID")   = rs.Fields("UserGUID").value;
@@ -46,11 +43,18 @@ Solaren = {
 		Session("HoursLimit") = rs.Fields("HoursLimit").value;
 		Session("MsgText")    = rs.Fields("MsgText").value;
 		Session("RoleId")     = RoleId;
-		Session("OperDate")   = OperDate;
-		Session("EndDate")    = EndDate.toStr(0);
-		Session("NextDate")   = NextDate.toStr(0);
 
+		this.SetSessionDate(OperDate);
 		this.SetSessionFlags(SysCfg);
+	},
+
+	SetSessionDate: function(OperDate) {
+		var ymd  = OperDate.split("-"),
+		EndDate  = new Date(ymd[0], ymd[1], 0),
+		NextDate = new Date(ymd[0], +ymd[1] + 1, 0);
+		Session("OperDate") = OperDate;
+		Session("EndDate")  = EndDate.toStr(0);
+		Session("NextDate") = NextDate.toStr(0);
 	},
 
 	SetSessionFlags: function(SysCfg) {
