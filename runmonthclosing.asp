@@ -10,7 +10,6 @@ User.ValidateAccess(Authorized, "GET");
 function SetSessionVar() {
 	var OperDate = Cmd.Parameters.Item("OperDate").value,
 	ymd          = OperDate.split("-"),
-	Today        = new Date(),
 	EndDate      = new Date(ymd[0], ymd[1], 0),
 	NextDate     = new Date(ymd[0], +ymd[1] + 1, 0);
 	Session("OperDate") = OperDate;
