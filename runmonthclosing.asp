@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET");
+User.ValidateAccess(Authorized, "POST");
 
 function SetSessionVar() {
 	var OperDate = Cmd.Parameters.Item("OperDate").value,

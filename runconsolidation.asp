@@ -1,12 +1,15 @@
-<%@ LANGUAGE = "JScript"%>
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
+
 try {
 	Solaren.SetCmd("RunConsolidation");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		} Execute(adExecuteNoRecords);
 	}
 	Solaren.SysMsg(1, "");
