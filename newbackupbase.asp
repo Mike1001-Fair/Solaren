@@ -1,8 +1,10 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 0;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 0;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetBaseInfo");
@@ -11,11 +13,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead("Резервна копія");
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Резервна копія", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="BackupBase" ACTION="runbackupbase.asp" METHOD="post">
 <H3 CLASS="HeadText">Резервна копія</H3>

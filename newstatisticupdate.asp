@@ -1,10 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 0,
-Title = "Оновлення статистики";
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 0;
+User.ValidateAccess(Authorized, "GET");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 try {
 	Solaren.SetCmd("GetBaseInfo");
 	var rs = Solaren.Execute("GetBaseInfo", "Iнформацiю не знайдено");
@@ -12,11 +13,7 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Оновлення статистики", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="StatisticUpdate" ACTION="runstatisticupdate.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

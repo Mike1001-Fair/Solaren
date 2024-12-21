@@ -170,16 +170,23 @@ Html = {
 	},
 	
 	WriteBaseInfo: function(rs) {
-		var ResponseText = '<DIV CLASS="FormDiv">\n<FIELDSET CLASS="FieldSet">\n<LEGEND>Параметри</LEGEND>\n<TABLE CLASS="RulesAllInfo">\n' +
-		'<TR><TH>Назва</TH><TH>Файл</TH><TH>Стан</TH><TH>Розмір</TH></TR>\n';
-		for (; !rs.EOF; rs.MoveNext()) {
-			ResponseText += '<TR><TD ALIGN="LEFT">' + rs.Fields("BaseName") +
-			this.Write("TD","LEFT") + rs.Fields("FilesName") +
-			this.Write("TD","") + rs.Fields("FileState") +
-			this.Write("TD","RIGHT") + rs.Fields("FileSize") + '</TD></TR>\n';
+		var ResponseText = ['<DIV CLASS="FormDiv">\n',
+			'<FIELDSET CLASS="FieldSet">\n',
+			'<LEGEND>Параметри</LEGEND>\n',
+			'<TABLE CLASS="RulesAllInfo">\n',
+			'<TR><TH>Назва</TH><TH>Файл</TH><TH>Стан</TH><TH>Розмір</TH></TR>\n'
+		];
+		for (var row; !rs.EOF; rs.MoveNext()) {
+			row = ['<TR><TD ALIGN="LEFT">' + rs.Fields("BaseName"),
+				this.Write("TD","LEFT") + rs.Fields("FilesName"),
+				this.Write("TD","") + rs.Fields("FileState"),
+				this.Write("TD","RIGHT") + rs.Fields("FileSize"),
+				'</TD></TR>\n'
+			];
+			ResponseText.push(row.join(""));
 		} rs.Close();
-		ResponseText += '</TABLE></FIELDSET></DIV>';
-		Response.Write(ResponseText)
+		ResponseText.push('</TABLE></FIELDSET></DIV>');
+		Response.Write(ResponseText.join(""))
 	},
 
 	WriteEditButton: function(AllowDelBtn) {
