@@ -20,24 +20,24 @@ Html = {
 
 	WriteStyleBlock: function() {
 		var Sheets = ["solaren", "body", "table", "loader", "button", "menu"],
-		StyleBlock = "",
-		StyleRow;
+		Block = [],
+		Row;
 		for (var i = 0; i < Sheets.length; i++) {
-			StyleRow = ['<LINK REL="stylesheet" HREF="', this.Path[1], Sheets[i], '.css?', this.Version, '">\n'];
-			StyleBlock += StyleRow.join("");
+			Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Sheets[i], '.css?', this.Version, '">\n'];
+			Block.push(Row.join(""));
 		}
-		return StyleBlock
+		return Block.join("")
 	},
 
 	WriteScriptBlock: function() {
 		var Scripts = ["lib", "loader", "user", "resource", "menu", "ajax"],
-		ScriptBlock = "",
-		ScriptRow;
+		Block = [],
+		Row;
 		for (var i = 0; i < Scripts.length; i++) {
-			ScriptRow = ['<SCRIPT DEFER SRC="', this.Path[0], Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
-			ScriptBlock += ScriptRow.join("");
+			Row = ['<SCRIPT DEFER SRC="', this.Path[0], Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
+			Block.push(Row.join(""));
 		}
-		return ScriptBlock
+		return Block.join("")
 	},
 
 	SetHead: function(Title) {
@@ -311,7 +311,11 @@ Html = {
 	},
 
 	GetFooterRow: function(ColSpan, i) {
-		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="', ColSpan, '">Всього: ', i, '</TH></TR>\n</TABLE></BODY></HTML>'];
+		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan,
+			'">Всього: ' + i,
+			'</TH></TR>\n',
+			'</TABLE></BODY></HTML>'
+		];
 		return ResponseText.join("")
 	},
 
