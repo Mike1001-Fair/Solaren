@@ -382,3 +382,8 @@
 .Footer TD {
 	vertical-align: sub;
 }
+
+.Centered TD {
+	text-align: center;
+}
+

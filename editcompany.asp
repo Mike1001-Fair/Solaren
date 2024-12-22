@@ -1,19 +1,27 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 CompanyId = Request.QueryString("CompanyId");
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("SelectChief");
-	Cmd.Parameters.Append(Cmd.CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+	with (Cmd) {
+		with (Parameters) {
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
+		}
+	}
 	var rsChief = Solaren.Execute("SelectChief", "Довiдник керівників пустий!"),
 	rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
 	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
-	Cmd.Parameters.Append(Cmd.CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
+	with (Cmd) {
+		with (Parameters) {
+			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
+		}
+	}
 	var rsCompany = Solaren.Execute("GetCompany", "Компанію не знайдено!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
@@ -52,18 +60,14 @@ with (rsCompany) {
 	PerformerTitle = Fields("PerformerTitle").value,
 	PerformerName  = Fields("PerformerName").value,
 	Deleted        = Fields("Deleted").value,
-	HeadTitle      = Deleted ? "Перегляд компанії" : "Редагування компанії";
+	Title          = Deleted ? "Перегляд компанії" : "Редагування компанії";
 	Close();
 }
 
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCompany" ACTION="updatecompany.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="CompanyId" VALUE="<%=CompanyId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=LocalityId%>">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="<%=StreetId%>">

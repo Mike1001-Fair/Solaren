@@ -76,7 +76,7 @@ Html.SetPage(Title, User.RoleId)%>
 	</TABLE></FIELDSET>
 
 	<FIELDSET NAME="IndicatorSet"><LEGEND>Показники</LEGEND>
-	<TABLE><TR><TD>&nbsp</TD><TD ALIGN="CENTER">Останнi</TD><TD ALIGN="CENTER">Попереднi</TD><TD ALIGN="CENTER">Рiзниця</TD><TD>&nbsp</TD></TR>
+	<TABLE CLASS="Centered"><TR><TD>&nbsp</TD><TD>Останнi</TD><TD>Попереднi</TD><TD>Рiзниця</TD><TD>&nbsp</TD></TR>
 
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="RecVal">Прийом</LABEL></TD>
 	<TD><INPUT TYPE="Number" NAME="RecVal" ID="RecVal" VALUE="<%=RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
