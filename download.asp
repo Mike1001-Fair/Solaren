@@ -1,9 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
+<!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% with (Html) {
-	SetHead("Файл експорту");
-	WriteMenu(Session("RoleId"), 0);
-}%>
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% Resource.Load(User.ResourceFile());
+if (!User.ValidateRole(User.RoleId, User.GUID)) {
+	Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
+}
+Html.SetPage("Файл", User.RoleId)%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>		

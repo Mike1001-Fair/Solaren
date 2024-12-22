@@ -262,28 +262,30 @@ Html = {
 	WriteSelect: function(rs, objName, blankOption, elementId) {
 		var tagId = objName + "Id",
 		tagName  = objName + "Name",
-		ResponseText = '<SELECT NAME="' + tagId + '" ID="' + tagId + '">\n';
-		if (blankOption) ResponseText += '<OPTION VALUE="0"></OPTION>';
+		ResponseText = ['<SELECT NAME="', tagId, '" ID="', tagId, '">\n'];
+		if (blankOption) {
+			ResponseText.push('<OPTION VALUE="0"></OPTION>');
+		}
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = elementId == rs.Fields(tagId) ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields(tagId), selected, rs.Fields(tagName), '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""));
 	},
 
 	WriteBank: function(rs, MfoCode) {
-		var ResponseText = '<SELECT NAME="MfoCode" ID="MfoCode">\n';
+		var ResponseText = ['<SELECT NAME="MfoCode" ID="MfoCode">\n'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = MfoCode == rs.Fields("MfoCode") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("MfoCode"), selected, rs.Fields("BankName"), '</OPTION>'];
-			ResponseText += option.join("")
+			ResponseText.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""));
 	},
 
 	WriteChiefDoc: function(rs, DocId) {

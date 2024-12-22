@@ -22,9 +22,9 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER"> 
 	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
-	<FIELDSET><LEGEND>Параметри</LEGEND>
+	<FIELDSET><LEGEND>Лiчильник</LEGEND>
 	<TABLE>
-	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Лiчильник</LABEL></TD><TD>
+	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Номер</LABEL></TD><TD>
 	<SELECT STYLE="width: 8em" NAME="MeterId" ID="MeterId" DISABLED><OPTION></OPTION></SELECT></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="ReportDate">Дата</LABEL></TD>
 	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=Month.Date[1]%>" MIN="<%=Month.Date[1]%>" MAX="<%=Month.Date[2]%>" REQUIRED DISABLED></TD></TR>
