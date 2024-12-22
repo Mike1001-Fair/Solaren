@@ -7,6 +7,8 @@ var CodePage = {
 Html = {
 	Version     : "v=3.7",
 	Path        : ["Scripts/", "Styles/", "Images/"],
+	Scripts     : ["lib", "loader", "user", "resource", "menu", "ajax"],
+	Sheets      : ["solaren", "body", "table", "loader", "button", "menu"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
@@ -19,22 +21,20 @@ Html = {
 	},
 
 	WriteStyleBlock: function() {
-		var Sheets = ["solaren", "body", "table", "loader", "button", "menu"],
-		Block = [],
+		var Block = [],
 		Row;
-		for (var i = 0; i < Sheets.length; i++) {
-			Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Sheets[i], '.css?', this.Version, '">\n'];
+		for (var i = 0; i < this.Sheets.length; i++) {
+			Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], this.Sheets[i], '.css?', this.Version, '">\n'];
 			Block.push(Row.join(""));
 		}
 		return Block.join("")
 	},
 
 	WriteScriptBlock: function() {
-		var Scripts = ["lib", "loader", "user", "resource", "menu", "ajax"],
-		Block = [],
+		var Block = [],
 		Row;
-		for (var i = 0; i < Scripts.length; i++) {
-			Row = ['<SCRIPT DEFER SRC="', this.Path[0], Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
+		for (var i = 0; i < this.Scripts.length; i++) {
+			Row = ['<SCRIPT DEFER SRC="', this.Path[0], this.Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
 			Block.push(Row.join(""));
 		}
 		return Block.join("")
