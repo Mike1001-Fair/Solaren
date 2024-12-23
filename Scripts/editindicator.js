@@ -67,7 +67,7 @@ function LoadForm() {
 
 function ChkForm() {
 	with (EditIndicator) {
-	  const msecday    = 86400000,
+	  const msecday    = 864e5,
 	   	reportDate = new Date(ReportDate.value),
 		prevDate   = new Date(PrevDate.value),
 		OperDate   = new Date(EditIndicator.OperDate.value),

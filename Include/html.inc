@@ -5,10 +5,10 @@ var CodePage = {
 },
 
 Html = {
-	Version     : "v=3.7",
+	Version     : "v=3.9",
 	Path        : ["Scripts/", "Styles/", "Images/"],
-	Scripts     : ["lib", "loader", "user", "resource", "menu", "ajax"],
 	Sheets      : ["solaren", "body", "table", "loader", "button", "menu"],
+	Scripts     : ["lib", "loader", "user", "resource", "menu", "ajax"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
@@ -20,24 +20,19 @@ Html = {
 		return fullFileName.join("");
 	},
 
-	WriteStyleBlock: function() {
-		var Block = [],
+	WriteBlock: function(type) {
+		var Items = type ? this.Scripts : this.Sheets,
+		Block = [],
 		Row;
-		for (var i = 0; i < this.Sheets.length; i++) {
-			Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], this.Sheets[i], '.css?', this.Version, '">\n'];
+		for (var i = 0; i < Items.length; i++) {
+			if (type) {
+				Row = ['<SCRIPT DEFER SRC="', this.Path[0], Items[i], '.js?', this.Version, '"></SCRIPT>\n'];
+			} else {
+				Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Items[i], '.css?', this.Version, '">\n'];
+			}
 			Block.push(Row.join(""));
 		}
-		return Block.join("")
-	},
-
-	WriteScriptBlock: function() {
-		var Block = [],
-		Row;
-		for (var i = 0; i < this.Scripts.length; i++) {
-			Row = ['<SCRIPT DEFER SRC="', this.Path[0], this.Scripts[i], '.js?', this.Version, '"></SCRIPT>\n'];
-			Block.push(Row.join(""));
-		}
-		return Block.join("")
+		return Block.join("");
 	},
 
 	SetHead: function(Title) {
@@ -53,8 +48,8 @@ Html = {
 			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
 			'<TITLE>' + Title + '</TITLE>\n',
 			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n',
-			this.WriteStyleBlock(),
-			this.WriteScriptBlock(),
+			this.WriteBlock(0),
+			this.WriteBlock(1),
 			'</HEAD>\n'
 		];
 		with (Response) {
