@@ -69,7 +69,7 @@ Html.SetPage(Title, User.RoleId)%>
 	<FIELDSET><LEGEND>Лiчильник</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Номер</LABEL></TD>
-	<TD><SELECT NAME="MeterId" ID="MeterId" ID="MeterId" STYLE="width: 8em">
+	<TD><SELECT NAME="MeterId" ID="MeterId" STYLE="width: 8em">
 	<OPTION></OPTION><OPTION VALUE="<%=MeterId%>" SELECTED><%=MeterCode%></OPTION></SELECT></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="ReportDate">Дата</LABEL></TD>
 	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=ReportDate%>" MIN="<%=OperDate%>" MAX="<%=NextDate%>" REQUIRED></TD></TR>

@@ -20,12 +20,12 @@ Html = {
 		return fullFileName.join("");
 	},
 
-	WriteBlock: function(type) {
-		var Items = type ? this.Scripts : this.Sheets,
+	WriteBlock: function(isScript) {
+		var Items = isScript ? this.Scripts : this.Sheets,
 		Block = [],
 		Row;
 		for (var i = 0; i < Items.length; i++) {
-			if (type) {
+			if (isScript) {
 				Row = ['<SCRIPT DEFER SRC="', this.Path[0], Items[i], '.js?', this.Version, '"></SCRIPT>\n'];
 			} else {
 				Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Items[i], '.css?', this.Version, '">\n'];
@@ -126,7 +126,7 @@ Html = {
 	},
 
 	WriteLocalityType: function(tagName, LocalityType) {
-		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',
+		var ResponseText = ['<SELECT NAME="', tagName, '" ID="', tagName, '">'],
 		itemNodes = new Enumerator(XmlDoc.selectNodes("//LocalityType")),
 		itemId,
 		option,
@@ -136,10 +136,10 @@ Html = {
 			itemId = node.getAttribute("id");
 			selected = itemId == LocalityType ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push(option.join(""));
 		}
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""));
 	},
 
 	/*WriteLocalityType: function(tagName, LocalityType) {
