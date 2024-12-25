@@ -59,14 +59,16 @@ Tarif = {
 			option = ['<OPTION VALUE="', i, selected, this.Group[i], '</OPTION>'];
 			ResponseText.push(option.join(""));
 		}
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText)
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""))
 	},
 
 	WriteGroup: function() {
-		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'];
+		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'],
+		option;
 		for (var i = 0; i < this.Group.length; i++) {
-			ResponseText.push('<OPTION VALUE="' + i + '">' + this.Group[i] + '</OPTION>');
+			option = ['<OPTION VALUE="', i, '">', this.Group[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>\n</FIELDSET>\n');
 		Response.Write(ResponseText.join(""));
@@ -184,14 +186,15 @@ Html = {
 	},
 
 	WriteRole: function(tagName, RoleId) {
-		var ResponseText = '<SELECT NAME="' + tagName + '">',
+		var ResponseText = ['<SELECT NAME="', tagName, '">'],
 		selected, option;
-			for (var i = 0; i < User.Role.length; i++) {
+		for (var i = 0; i < User.Role.length; i++) {
 			selected = i == RoleId ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', i, selected, User.Role[i], '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push(option.join(""));
 		}
-		Response.Write(ResponseText + '</SELECT>')
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""))
 	},
 	
 	WriteBaseInfo: function(rs) {
