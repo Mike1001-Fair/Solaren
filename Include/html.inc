@@ -4,38 +4,53 @@ var CodePage = {
 	1251 : "windows-1251"
 },
 
+Styles = {
+	Path: "Styles/",
+	Files: ["solaren", "body", "table", "loader", "button", "menu"],
+
+	Write: function() {
+		var Block = [],
+		Row;
+		for (var i = 0; i < this.Files.length; i++) {
+			Row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">\n'];
+			Block.push(Row.join(""));
+		}
+		return Block.join("");
+	}
+},
+
+Scripts = {
+	Path: "Scripts/",
+	Files: ["lib", "loader", "user", "resource", "menu", "ajax"],
+
+	Write: function() {
+		var Block = [],
+		Row;
+		for (var i = 0; i < this.Files.length; i++) {
+			Row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>\n'];
+			Block.push(Row.join(""));
+		}
+		return Block.join("");
+	}
+},
+
+Image = {
+	Path: "Images/",
+
+	MapFile: function(fileName) {
+		var fullFileName = [this.Path, fileName];
+		return fullFileName.join("");
+	}
+},
+
 Html = {
 	Version     : "v=3.9",
-	Path        : ["Styles/", "Scripts/", "Images/"],
-	Sheets      : ["solaren", "body", "table", "loader", "button", "menu"],
-	Scripts     : ["lib", "loader", "user", "resource", "menu", "ajax"],
 	LocalityType: ["місто","селище","село","смт"],
 	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
 	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
 	Author      : "Mykola Chernov",
 	Title       : "Title",
 
-	GetImage: function(fileName) {
-		var fullFileName = [this.Path[2], fileName];
-		return fullFileName.join("");
-	},
-
-	WriteBlock: function() {
-		var Items = [this.Sheets, this.Scripts],
-		Block = [],
-		Row;
-		for (var k = 0; k < Items.length; k++) {
-			for (var i = 0; i < Items[k].length; i++) {
-				if (k == 0) {
-					Row = ['<LINK REL="stylesheet" HREF="', this.Path[k], Items[k][i], '.css?', this.Version, '">\n'];
-				} else {
-					Row = ['<SCRIPT DEFER SRC="', this.Path[k], Items[k][i], '.js?', this.Version, '"></SCRIPT>\n'];
-				}
-				Block.push(Row.join(""));
-			}
-		}
-		return Block.join("");
-	},
 
 	SetHead: function(Title) {
 		this.Title = Title;
@@ -49,8 +64,9 @@ Html = {
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n',
 			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
 			'<TITLE>' + Title + '</TITLE>\n',
-			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n',
-			this.WriteBlock(),
+			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + Image.MapFile("sun.svg") + '">\n',
+			Styles.Write(),
+			Scripts.Write(),			
 			'</HEAD>\n'
 		];
 		with (Response) {
@@ -64,7 +80,7 @@ Html = {
 	WriteScript: function() {
 		var ScriptArr  = Solaren.ScriptName.split("/"),
 		FileArr        = ScriptArr[ScriptArr.length - 1].split('.'),
-		FileName       = [this.Path[1], FileArr[0].toLowerCase(), ".js?", this.Version],
+		FileName       = [Scripts.Path, FileArr[0].toLowerCase(), ".js?", this.Version],
 		ResponseText   = ['<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
 		Response.Write(ResponseText.join(""));
 	},
