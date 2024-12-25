@@ -9,7 +9,7 @@
 User.ValidateAccess(Authorized, "GET");
 
 function SysCfgWrite() {	
-	var ResponseText = '<FIELDSET NAME="SysCfgSet"><LEGEND>Додаткові</LEGEND>\n',
+	var ResponseText = ['<FIELDSET NAME="SysCfgSet"><LEGEND>Додаткові</LEGEND>\n'],
 	SysCfg = {
 		NewIndicator: "Нові показники",
 		CheckCard   : "Перевіряти картку",
@@ -17,11 +17,11 @@ function SysCfgWrite() {
 	};
 
 	for (var key in SysCfg) {
-		var LabelRow = ['<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="', key, '">', SysCfg[key], '</LABEL>\n'];
-		ResponseText += LabelRow.join("");
+		var row = ['<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="', key, '">', SysCfg[key], '</LABEL>\n'];
+		ResponseText.push(row.join(""));
 	}
-	ResponseText +=	'</FIELDSET>';
-	Response.Write(ResponseText);
+	ResponseText.push('</FIELDSET>');
+	Response.Write(ResponseText.join(""));
 }
 
 try {

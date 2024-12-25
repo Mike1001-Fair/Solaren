@@ -20,17 +20,19 @@ Html = {
 		return fullFileName.join("");
 	},
 
-	WriteBlock: function(isScript) {
-		var Items = isScript ? this.Scripts : this.Sheets,
+	WriteBlock: function() {
+		var Items = [this.Sheets, this.Scripts],
 		Block = [],
 		Row;
-		for (var i = 0; i < Items.length; i++) {
-			if (isScript) {
-				Row = ['<SCRIPT DEFER SRC="', this.Path[0], Items[i], '.js?', this.Version, '"></SCRIPT>\n'];
-			} else {
-				Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Items[i], '.css?', this.Version, '">\n'];
+		for (var k = 0; k < Items.length; k++) {
+			for (var i = 0; i < Items[k].length; i++) {
+				if (k == 0) {
+					Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Items[k][i], '.css?', this.Version, '">\n'];
+				} else {
+					Row = ['<SCRIPT DEFER SRC="', this.Path[0], Items[k][i], '.js?', this.Version, '"></SCRIPT>\n'];
+				}
+				Block.push(Row.join(""));
 			}
-			Block.push(Row.join(""));
 		}
 		return Block.join("");
 	},
@@ -48,8 +50,7 @@ Html = {
 			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
 			'<TITLE>' + Title + '</TITLE>\n',
 			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + this.GetImage("sun.svg") + '">\n',
-			this.WriteBlock(0),
-			this.WriteBlock(1),
+			this.WriteBlock(),
 			'</HEAD>\n'
 		];
 		with (Response) {
