@@ -14,7 +14,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<TR ALIGN="CENTER"><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Тип</TD>
-	<TD><%Html.WriteStreetType("StreetType", -1)%></TD></TR>
+	<TD><%Street.WriteType("StreetType", -1)%></TD></TR>
 	<TR><TD ALIGN="RIGHT">Назва</TD>
 	<TD><INPUT TYPE="TEXT" NAME="StreetName" SIZE="30" MAXLENGTH="30" REQUIRED AUTOFOCUS></TD></TR>
 	</TABLE></FIELDSET></TD></TR>

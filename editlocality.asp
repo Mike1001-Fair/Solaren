@@ -41,7 +41,7 @@ try {
 	<TR ALIGN="CENTER"><TD>
 	<FIELDSET NAME="LocalitySet"><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Тип</TD>
-	<TD><%Html.WriteLocalityType("LocalityType", LocalityType)%></TD></TR>
+	<TD><%Locality.WriteType("LocalityType", LocalityType)%></TD></TR>
 	<TR><TD ALIGN="RIGHT">Назва</TD>
 	<TD><INPUT TYPE="TEXT" NAME="LocalityName" VALUE="<%=LocalityName%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 	</TABLE></FIELDSET></TD></TR>

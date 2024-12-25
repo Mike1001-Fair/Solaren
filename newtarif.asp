@@ -23,7 +23,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Група</TD>
-	<TD><%Html.WriteTarif("GroupId", -1)%></TD></TR>
+	<TD><%Tarif.Write("GroupId", -1)%></TD></TR>
 	<TR><TD ALIGN="RIGHT">Тариф</TD>
 	<TD><INPUT TYPE="Number" NAME="Tarif" STEP="0.01" MIN="0" MAX="999999" REQUIRED PLACEHOLDER="коп"></TD></TR>
 	</TABLE></FIELDSET>

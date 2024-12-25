@@ -37,20 +37,94 @@ Scripts = {
 Image = {
 	Path: "Images/",
 
-	MapFile: function(fileName) {
+	Map: function(fileName) {
 		var fullFileName = [this.Path, fileName];
 		return fullFileName.join("");
+	},
+
+	Link: function(fileName) {
+		var Row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
+		return Row.join("");
+	}
+},
+
+Tarif = {
+	Group: ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
+
+	Write: function(tagName, GroupId) {
+		var ResponseText = ['<SELECT NAME="', tagName, '">'],
+		selected, option;
+		for (var i = 0; i < this.Group.length; i++) {
+			selected = i == GroupId ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', i, selected, this.Group[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText += '</SELECT>';
+		Response.Write(ResponseText)
+	},
+
+	WriteGroup: function() {
+		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'];
+		for (var i = 0; i < this.Group.length; i++) {
+			ResponseText.push('<OPTION VALUE="' + i + '">' + this.Group[i] + '</OPTION>');
+		}
+		ResponseText.push('</SELECT>\n</FIELDSET>\n');
+		Response.Write(ResponseText.join(""));
+	}
+},
+
+Locality = {
+	Type: ["місто","селище","село","смт"],
+
+	/*WriteLocalityType: function(tagName, LocalityType) {
+		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',
+		selected, option;
+		for (var k in this.LocalityType) {
+			selected = k == LocalityType ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', k, selected, this.LocalityType[k], '</OPTION>'];
+			ResponseText += option.join("");
+		}
+		Response.Write(ResponseText + '</SELECT>')
+	},*/
+
+	WriteType: function(tagName, LocalityType) {
+		var ResponseText = ['<SELECT NAME="', tagName, '" ID="', tagName, '">'],
+		itemNodes = new Enumerator(XmlDoc.selectNodes("//LocalityType")),
+		itemId,
+		option,
+		selected;
+		for (var node; !itemNodes.atEnd(); itemNodes.moveNext()) {
+			node = itemNodes.item();
+			itemId = node.getAttribute("id");
+			selected = itemId == LocalityType ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""));
+	}
+},
+
+Street = {
+	Type: ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
+
+	WriteType: function(tagName, StreetType) {
+		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
+		selected, option;
+		for (var i = 0; i < this.Type.length; i++) {
+			selected = i == StreetType ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""))
 	}
 },
 
 Html = {
-	Version     : "v=3.9",
-	LocalityType: ["місто","селище","село","смт"],
-	StreetType  : ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
-	TarifGroup  : ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
-	Author      : "Mykola Chernov",
-	Title       : "Title",
-
+	Version: "v=3.9",
+	Author : "Mykola Chernov",
+	Title  : "Title",
 
 	SetHead: function(Title) {
 		this.Title = Title;
@@ -64,7 +138,7 @@ Html = {
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n',
 			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
 			'<TITLE>' + Title + '</TITLE>\n',
-			'<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="' + Image.MapFile("sun.svg") + '">\n',
+			Image.Link("sun.svg"),
 			Styles.Write(),
 			Scripts.Write(),			
 			'</HEAD>\n'
@@ -108,67 +182,6 @@ Html = {
 		result = ['</', tag, '><', tag, align];
 		return result.join("")
 	},
-
-	WriteTarif: function(tagName, GroupId) {
-		var ResponseText = '<SELECT NAME="' + tagName + '">',
-		selected, option;
-		for (var i = 0; i < this.TarifGroup.length; i++) {
-			selected = i == GroupId ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.TarifGroup[i], '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText)
-	},
-
-	WriteTarifGroup: function() {
-		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'];
-		for (var i = 0; i < this.TarifGroup.length; i++) {
-			ResponseText.push('<OPTION VALUE="' + i + '">' + this.TarifGroup[i] + '</OPTION>');
-		}
-		ResponseText.push('</SELECT>\n</FIELDSET>\n');
-		Response.Write(ResponseText.join(""));
-	},
-
-	WriteStreetType: function(tagName, StreetType) {
-		var ResponseText = '<SELECT NAME="' + tagName + '">',
-		selected, option;
-		for (var i = 0; i < this.StreetType.length; i++) {
-			selected = i == StreetType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.StreetType[i], '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText)
-	},
-
-	WriteLocalityType: function(tagName, LocalityType) {
-		var ResponseText = ['<SELECT NAME="', tagName, '" ID="', tagName, '">'],
-		itemNodes = new Enumerator(XmlDoc.selectNodes("//LocalityType")),
-		itemId,
-		option,
-		selected;
-		for (var node; !itemNodes.atEnd(); itemNodes.moveNext()) {
-			node = itemNodes.item();
-			itemId = node.getAttribute("id");
-			selected = itemId == LocalityType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""));
-	},
-
-	/*WriteLocalityType: function(tagName, LocalityType) {
-		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',
-		selected, option;
-		for (var k in this.LocalityType) {
-			selected = k == LocalityType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', k, selected, this.LocalityType[k], '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		Response.Write(ResponseText + '</SELECT>')
-	},*/
 
 	WriteRole: function(tagName, RoleId) {
 		var ResponseText = '<SELECT NAME="' + tagName + '">',

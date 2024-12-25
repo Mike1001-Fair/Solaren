@@ -84,7 +84,7 @@ Html.SetPage("Новий договір", User.RoleId)%>
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
 	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Month.Date[1]%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
-	<TD><%Html.WriteTarif("TarifGroupId", -1)%></TD></TR>
+	<TD><%Tarif.Write("TarifGroupId", -1)%></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET><LEGEND ALIGN="CENTER">Інше</LEGEND>

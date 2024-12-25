@@ -14,10 +14,9 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% with (Html) {
-		WriteDate();
-		WriteTarifGroup();
-	}%></TD></TR>
+	<% Html.WriteDate();
+	Tarif.WriteGroup();
+	%></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>

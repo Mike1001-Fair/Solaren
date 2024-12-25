@@ -26,7 +26,7 @@ try {
 		EndDate     = Fields("EndDate").value,
 		ExpDateBeg  = Fields("ExpDateBeg").value,
 		ExpDateEnd  = Fields("ExpDateEnd").value,
-		Tarif       = Fields("Tarif").value,
+		TarifVal    = Fields("Tarif").value,
 		Deleted     = Fields("Deleted").value;
 		Close();
 	}
@@ -52,11 +52,11 @@ Html.SetPage(Title, User.RoleId)%>
 
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Група</TD>
-	<TD><%Html.WriteTarif("GroupId", GroupId)%></TD></TR>
+	<TD><%Tarif.Write("GroupId", GroupId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Тариф</TD>
-	<TD><INPUT TYPE="Number" NAME="Tarif" VALUE="<%=Tarif%>" STEP="0.01" MIN="0" MAX="999999" REQUIRED TITLE="коп"></TD></TR>
-	</TABLE></FIELDSET>
+	<TD><INPUT TYPE="Number" NAME="Tarif" VALUE="<%=TarifVal%>" STEP="0.01" MIN="0" MAX="999999" REQUIRED TITLE="коп"></TD></TR>
+	</TABLE></FIELDSET>                                                
 	</TD></TR>
 </TABLE>
 <% if (!ViewOnly) Html.WriteEditButton(1) %>

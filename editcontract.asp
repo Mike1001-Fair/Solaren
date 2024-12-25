@@ -119,7 +119,7 @@ try {
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
 	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=ExpDate%>" SIZE="10" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
-	<TD><%Html.WriteTarif("TarifGroupId", TarifGroupId)%></TD></TR>
+	<TD><%Tarif.Write("TarifGroupId", TarifGroupId)%></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET><LEGEND>Інше</LEGEND>

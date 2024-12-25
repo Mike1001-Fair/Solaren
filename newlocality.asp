@@ -15,7 +15,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<TR ALIGN="CENTER"><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT"><LABEL FOR="LocalityType">Тип</LABEL></TD>
-	<TD><%Html.WriteLocalityType("LocalityType", -1)%></TD></TR>
+	<TD><%Locality.WriteType("LocalityType", -1)%></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="LocalityName">Назва</LABEL></TD>
 	<TD><INPUT TYPE="TEXT" NAME="LocalityName" ID="LocalityName" SIZE="30" MAXLENGTH="30" REQUIRED AUTOFOCUS></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
