@@ -6,7 +6,7 @@ var CodePage = {
 
 Html = {
 	Version     : "v=3.9",
-	Path        : ["Scripts/", "Styles/", "Images/"],
+	Path        : ["Styles/", "Scripts/", "Images/"],
 	Sheets      : ["solaren", "body", "table", "loader", "button", "menu"],
 	Scripts     : ["lib", "loader", "user", "resource", "menu", "ajax"],
 	LocalityType: ["місто","селище","село","смт"],
@@ -27,9 +27,9 @@ Html = {
 		for (var k = 0; k < Items.length; k++) {
 			for (var i = 0; i < Items[k].length; i++) {
 				if (k == 0) {
-					Row = ['<LINK REL="stylesheet" HREF="', this.Path[1], Items[k][i], '.css?', this.Version, '">\n'];
+					Row = ['<LINK REL="stylesheet" HREF="', this.Path[k], Items[k][i], '.css?', this.Version, '">\n'];
 				} else {
-					Row = ['<SCRIPT DEFER SRC="', this.Path[0], Items[k][i], '.js?', this.Version, '"></SCRIPT>\n'];
+					Row = ['<SCRIPT DEFER SRC="', this.Path[k], Items[k][i], '.js?', this.Version, '"></SCRIPT>\n'];
 				}
 				Block.push(Row.join(""));
 			}
@@ -64,7 +64,7 @@ Html = {
 	WriteScript: function() {
 		var ScriptArr  = Solaren.ScriptName.split("/"),
 		FileArr        = ScriptArr[ScriptArr.length - 1].split('.'),
-		FileName       = [this.Path[0], FileArr[0].toLowerCase(), ".js?", this.Version],
+		FileName       = [this.Path[1], FileArr[0].toLowerCase(), ".js?", this.Version],
 		ResponseText   = ['<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
 		Response.Write(ResponseText.join(""));
 	},
