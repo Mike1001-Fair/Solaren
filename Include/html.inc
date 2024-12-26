@@ -372,14 +372,14 @@ Html = {
 	},
 
 	WriteCodePage: function() {
-		var ResponseText = '<SELECT NAME="ReportCodePage">',
+		var ResponseText = ['<SELECT NAME="ReportCodePage">'],
 		option;
 		for (var k in CodePage) {
 			option = ['<OPTION VALUE="', k, '">', CodePage[k], '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push(option.join(""));
 		}
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""));
 	},
 
 	WriteDate: function() {

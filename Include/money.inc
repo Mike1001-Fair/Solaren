@@ -4,7 +4,7 @@ var Money = {
 	Hundreds: ["сто","двiстi","триста","чотириста","п'ятсот","шiстсот","сiмсот","вiсiмсот","дев'ятсот"],
 	milion  : ["трильйон","мiльярд","мiльйон","тисяч"],
 	anDan   : ["","","","сорок","","","","","дев'яносто"],
-	Сurrency: "грн. ",
+	Сurrency: " грн. ",
 	Penny   : " коп.",
 	Zero    : "нуль ",
 	Limit   : 999999999999999,
@@ -17,13 +17,9 @@ var Money = {
 			yy, delen, sot, des, ed, forDes, forEd, ffD, forTys, oprSot, oprDes, oprEd, oprTys,
 			cifR = result = "",
 			cycle = 4,
-			oboR = [];
+			word = [];
 			do { 
-				numParts[0] = numParts[0]/1000;
-				yy          = Math.floor(numParts[0]);
-				delen       = Math.round((numParts[0] - yy)*1000);
-				numParts[0] = yy;
-				//------------------------------------------------------------------------
+				delen = numParts[0] % 1000;
 				sot = Math.floor(delen/100)*100;
 				des = Math.floor(delen-sot) > 9 ? Math.floor((delen-sot)/10)*10 : 0;
 				ed  = Math.floor(delen-sot) - Math.floor((delen-sot)/10)*10;
@@ -39,16 +35,13 @@ var Money = {
 				oprTys = (this.milion[cycle]  != null && delen > 0  ? this.milion[cycle] + forTys : "");
 				//------------------------------------------------------------------------
 				cifR = oprSot + (oprDes.length > 1 ? " " + oprDes : "") + (oprEd.length > 1 ? " " + oprEd : "") + (oprTys.length > 1 ? " " + oprTys : "");
-				oboR[oboR.length] = cifR;
+				if (cifR != "") word.push(cifR);
 				cycle--;
-			} while (numParts[0] >= 1);  
-			for (var i = oboR.length - 1; i >= 0; i--) {
-				if (oboR[i] != "") {
-					result += oboR[i] + " ";
-				}
-			}
-			if (result.length < 3) result = this.Zero;
+				numParts[0] = Math.floor(numParts[0] / 1000);
+			} while (numParts[0] > 0);  
+			result = word.length > 0 ? word.reverse().join(" ").trim() : this.Zero;
 			result += this.Сurrency + numParts[1] + this.Penny;
-		} return inRange ? result.replace(/  /g," ").replace(/^\s/, "") : this.errMsg
+		}
+		return inRange ? result : this.errMsg
 	}
 }%>
