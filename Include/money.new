@@ -1,0 +1,78 @@
+﻿<% //@ LANGUAGE = "JScript"
+var Money = {
+    ones: ["од", "дв", "три", "чотир", "п'ят", "шiст", "сiм", "вiсiм", "дев'ят"],
+    hundreds: ["сто", "двiстi", "триста", "чотириста", "п'ятсот", "шiстсот", "сiмсот", "вiсiмсот", "дев'ятсот"],
+    milion: ["трильйон", "мiльярд", "мiльйон", "тисяч"],
+    currency: " грн. ",
+    penny: " коп.",
+    zero: "нуль ",
+    limit: 999999999999999,
+    errMsg: "Поза діапазоном або не є числом",
+
+    toWord: function (num) {
+        if (isNaN(num) || num < 0 || num > this.limit) return this.errMsg;
+
+        var numParts = num.toFixed(2).split("."),
+            result = [],
+            cycle = 4;
+
+        do {
+            var chunk = this.processChunk(numParts[0] % 1000, cycle);
+            if (chunk !== "") result.push(chunk);
+            numParts[0] = Math.floor(numParts[0] / 1000);
+            cycle--;
+        } while (numParts[0] > 0);
+
+        return result.reverse().join(" ") + " " + this.currency + numParts[1] + this.penny;
+    },
+
+    processChunk: function (chunkValue, cycle) {
+        var sot = Math.floor(chunkValue / 100) * 100;
+        var des = chunkValue % 100 - (chunkValue % 10);
+        var ed = chunkValue % 10;
+
+        var hundreds = this.hundreds[sot / 100 - 1] || "";
+        var tens = this.getTens(des, ed);
+        var units = this.getUnits(ed, des, cycle);
+        var group = this.getGroupName(chunkValue, cycle);
+
+        var parts = [];
+        if (hundreds) parts.push(hundreds);
+        if (tens) parts.push(tens);
+        if (units) parts.push(units);
+        if (group) parts.push(group);
+
+        return parts.join(" ");
+    },
+
+    getTens: function (des, ed) {
+        if (des === 10) return "десять";
+        if (des === 20) return "двадцять";
+        if (des > 10 && des < 20) return this.ones[ed - 1] + "надцять";
+        if (des >= 30 && des <= 90 && des % 10 === 0) {
+            var base = this.ones[Math.floor(des / 10) - 1];
+            return des === 40 || des === 90 ? base + "десят" : base + "десят";
+        }
+        return "";
+    },
+
+    getUnits: function (ed, des, cycle) {
+        if (des >= 10 && des < 20) return ""; // В числах от 10 до 19 единицы уже включены
+        if (ed === 1) return cycle === 3 ? "одна" : "один";
+        if (ed === 2) return cycle === 3 ? "двi" : "два";
+        return this.ones[ed - 1] || "";
+    },
+
+    getGroupName: function (chunkValue, cycle) {
+        if (!this.milion[cycle] || chunkValue === 0) return "";
+
+        var ed = chunkValue % 10;
+        var des = chunkValue % 100;
+
+        if (des >= 10 && des < 20) return this.milion[cycle] + "iв";
+        if (ed === 1) return this.milion[cycle];
+        if (ed >= 2 && ed <= 4) return this.milion[cycle] + (cycle === 3 ? "i" : "а");
+        return this.milion[cycle] + "iв";
+    }
+};
+%>
