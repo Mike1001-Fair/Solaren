@@ -32,7 +32,7 @@ Response.Write('<BODY CLASS="MainBody">\n' +
 	'<TABLE CLASS="InfoTable">\n' +
 	'<TR><TH>Тип</TH><TH>Назва</TH></TR>\n');
 for (var i=0; !rs.EOF; i++) {
-	Response.Write('<TR><TD>' + Html.StreetType[rs.Fields("StreetType")] + 
+	Response.Write('<TR><TD>' + Street.Type[rs.Fields("StreetType")] + 
 	Html.Write("TD","") + '<A href="editstreet.asp?StreetId=' + rs.Fields("Id") + '">' + rs.Fields("StreetName") + '</A></TD></TR>\n');
 	rs.MoveNext();
 } rs.Close(); Connect.Close();

@@ -15,7 +15,7 @@ var Money = {
 		if (inRange) {
 			var numParts = num.toFixed(2).split("."),
 			yy, delen, sot, des, ed, forDes, forEd, ffD, forTys, oprSot, oprDes, oprEd, oprTys,
-			result = "",
+			result,
 			cycle = 4,
 			chunk,
 			word = [];
@@ -39,10 +39,9 @@ var Money = {
 				if (chunk != "") word.push(chunk);
 				cycle--;
 				numParts[0] = Math.floor(numParts[0] / 1000);
-			} while (numParts[0] > 0);  
-			result = word.length > 0 ? word.reverse().join(" ") : this.Zero;
-			result += this.Сurrency + numParts[1] + this.Penny;
+			} while (numParts[0] > 0); 
+			result = [word.length > 0 ? word.reverse().join(" ") : this.Zero, this.Сurrency, numParts[1], this.Penny];
 		}
-		return inRange ? result : this.errMsg
+		return inRange ? result.join(" ") : this.errMsg
 	}
 }%>
