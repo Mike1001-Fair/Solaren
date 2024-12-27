@@ -123,8 +123,8 @@ try {
 	LocalityName += ",";
 	CompanyRegion += " область";
 
-	var CustomerAddress = [Html.StreetType[StreetType], StreetName, HouseId, Html.LocalityType[LocalityType], LocalityName, AreaName, CompanyRegion],
-	ContrtactAddress = [Html.StreetType[ContractStreetType], ContractStreetName, ContractHouseId, ContractLocalityName, ContractAreaName, CompanyRegion];
+	var CustomerAddress = [Street.Type[StreetType], StreetName, HouseId, Locality.Type[LocalityType], LocalityName, AreaName, CompanyRegion],
+	ContrtactAddress = [Street.Type[ContractStreetType], ContractStreetName, ContractHouseId, ContractLocalityName, ContractAreaName, CompanyRegion];
 
 }%>
 <STYLE>P {text-align: justify; line-height: 1.2; text-indent: 40px; margin: 5px 0px 0px 0px}

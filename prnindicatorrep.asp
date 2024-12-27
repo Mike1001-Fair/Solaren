@@ -68,10 +68,10 @@ try {
 
 var Period      = Month.GetPeriod(ReportMonth, 1),
 EndDate         = Month.GetLastDay(ReportMonth),
-LocalityType    = Html.LocalityType[ContractLocalityType],
-StreetType      = Html.StreetType[ContractStreetType],
+LocalityType    = Locality.Type[ContractLocalityType],
+StreetType      = Street.Type[ContractStreetType],
 ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, ContractStreetName, HouseId].join(" "),
-BranchLocality  = [Html.LocalityType[BranchLocalityType],  BranchLocalityName].join(" "),
+BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName].join(" "),
 ResponseText    = '<BODY CLASS="ActContainer">\n';
 
 Html.SetHead("Звіт про показники");

@@ -36,9 +36,9 @@ var ResponseText = '\n<BODY CLASS="MainBody">\n' +
 	'<TR><TH>Рахунок</TH><TH>Споживач</TH><TH>Адреса</TH><TH>Дата</TH><TH>ЦОС</TH><TH>Потужнiсть</TH></TR>\n';
 
 for (var i=totPwr=0; !rs.EOF; i++) {
-	var ContractAddress = [Html.LocalityType[rs.Fields("LocalityType")],
+	var ContractAddress = [Locality.Type[rs.Fields("LocalityType")],
 	rs.Fields("LocalityName") + ",",
-	Html.StreetType[rs.Fields("StreetType")],
+	Street.Type[rs.Fields("StreetType")],
 	rs.Fields("StreetName"),
 	rs.Fields("HouseId")];
 
