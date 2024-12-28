@@ -43,7 +43,6 @@ var Money = {
 		oprDes = this.getTensText(des, forDes),
 		oprEd  = this.ones[ed - 1] ? this.ones[ed-1] + (des == 1 ? forEd + "надцять" : ffD) : (des == 1 ? "десять" : ""),
 		oprTys = this.milion[cycle] && currentPart > 0  ? this.milion[cycle] + forTys : "";
-		//Response.Write('chunk = ' + chunk + '<br>');
 		return [oprSot, oprDes, oprEd, oprTys].join(" ").trim();
 	},
 	
