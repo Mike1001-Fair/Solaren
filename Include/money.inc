@@ -64,7 +64,7 @@ var Money = {
 	},
 
 	getTensText: function(des, forDes) {
-		return this.ones[des-1] ? (des == 1 ? "" :
+		return this.ones[des - 1] ? (des == 1 ? "" :
 			(des == 4 || des == 9 ? this.anDan[des - 1] :
 			(des == 2 || des == 3 ? this.ones[des - 1] + forDes + "дцять" :
 			this.ones[des - 1] + "десят"))) : ""
