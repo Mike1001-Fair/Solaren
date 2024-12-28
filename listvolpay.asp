@@ -3,7 +3,6 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<!-- #INCLUDE FILE="Include/money.inc" -->
 <% var Authorized = Session("RoleId") == 1,
 Title = "Звіт";
 
