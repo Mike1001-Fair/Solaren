@@ -1,129 +1,5 @@
 ﻿<% //@ LANGUAGE = "JScript"
-var CodePage = {
-	65001: "utf-8",
-	1251 : "windows-1251"
-},
-
-Styles = {
-	Path: "Styles/",
-	Files: ["solaren", "body", "table", "loader", "button", "menu"],
-
-	Write: function() {
-		var Block = [],
-		Row;
-		for (var i = 0; i < this.Files.length; i++) {
-			Row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">\n'];
-			Block.push(Row.join(""));
-		}
-		return Block.join("");
-	}
-},
-
-Scripts = {
-	Path: "Scripts/",
-	Files: ["lib", "loader", "user", "resource", "menu", "ajax"],
-
-	Write: function() {
-		var Block = [],
-		Row;
-		for (var i = 0; i < this.Files.length; i++) {
-			Row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>\n'];
-			Block.push(Row.join(""));
-		}
-		return Block.join("");
-	}
-},
-
-Image = {
-	Path: "Images/",
-
-	Map: function(fileName) {
-		var fullFileName = [this.Path, fileName];
-		return fullFileName.join("");
-	},
-
-	Link: function(fileName) {
-		var Row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
-		return Row.join("");
-	}
-},
-
-Tarif = {
-	Group: ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
-
-	Write: function(tagName, GroupId) {
-		var ResponseText = ['<SELECT NAME="', tagName, '">'],
-		selected, option;
-		for (var i = 0; i < this.Group.length; i++) {
-			selected = i == GroupId ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.Group[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""))
-	},
-
-	WriteGroup: function() {
-		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'],
-		option;
-		for (var i = 0; i < this.Group.length; i++) {
-			option = ['<OPTION VALUE="', i, '">', this.Group[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>\n</FIELDSET>\n');
-		Response.Write(ResponseText.join(""));
-	}
-},
-
-Locality = {
-	Type: ["місто","селище","село","смт"],
-
-	/*WriteLocalityType: function(tagName, LocalityType) {
-		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',
-		selected, option;
-		for (var k in this.LocalityType) {
-			selected = k == LocalityType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', k, selected, this.LocalityType[k], '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		Response.Write(ResponseText + '</SELECT>')
-	},*/
-
-	WriteType: function(tagName, LocalityType) {
-		var ResponseText = ['<SELECT NAME="', tagName, '" ID="', tagName, '">'],
-		itemNodes = new Enumerator(XmlDoc.selectNodes("//LocalityType")),
-		itemId,
-		option,
-		selected;
-		for (var node; !itemNodes.atEnd(); itemNodes.moveNext()) {
-			node = itemNodes.item();
-			itemId = node.getAttribute("id");
-			selected = itemId == LocalityType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""));
-	}
-},
-
-Street = {
-	Type: ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
-
-	WriteType: function(tagName, StreetType) {
-		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
-		selected, option;
-		for (var i = 0; i < this.Type.length; i++) {
-			selected = i == StreetType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""))
-	}
-},
-
-Html = {
+var Html = {
 	Version: "v=4.0",
 	Author : "Mykola Chernov",
 	Title  : "Title",
@@ -391,4 +267,128 @@ Html = {
 		];
 		Response.Write(ResponseText.join(""));
 	}	
+},
+
+CodePage = {
+	65001: "utf-8",
+	1251 : "windows-1251"
+},
+
+Styles = {
+	Path: "Styles/",
+	Files: ["solaren", "body", "table", "loader", "button", "menu"],
+
+	Write: function() {
+		var Block = [],
+		Row;
+		for (var i = 0; i < this.Files.length; i++) {
+			Row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">\n'];
+			Block.push(Row.join(""));
+		}
+		return Block.join("");
+	}
+},
+
+Scripts = {
+	Path: "Scripts/",
+	Files: ["lib", "loader", "user", "resource", "menu", "ajax"],
+
+	Write: function() {
+		var Block = [],
+		Row;
+		for (var i = 0; i < this.Files.length; i++) {
+			Row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>\n'];
+			Block.push(Row.join(""));
+		}
+		return Block.join("");
+	}
+},
+
+Image = {
+	Path: "Images/",
+
+	Map: function(fileName) {
+		var fullFileName = [this.Path, fileName];
+		return fullFileName.join("");
+	},
+
+	Link: function(fileName) {
+		var Row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
+		return Row.join("");
+	}
+},
+
+Tarif = {
+	Group: ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
+
+	Write: function(tagName, GroupId) {
+		var ResponseText = ['<SELECT NAME="', tagName, '">'],
+		selected, option;
+		for (var i = 0; i < this.Group.length; i++) {
+			selected = i == GroupId ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', i, selected, this.Group[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""))
+	},
+
+	WriteGroup: function() {
+		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'],
+		option;
+		for (var i = 0; i < this.Group.length; i++) {
+			option = ['<OPTION VALUE="', i, '">', this.Group[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>\n</FIELDSET>\n');
+		Response.Write(ResponseText.join(""));
+	}
+},
+
+Locality = {
+	Type: ["місто","селище","село","смт"],
+
+	/*WriteLocalityType: function(tagName, LocalityType) {
+		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',
+		selected, option;
+		for (var k in this.LocalityType) {
+			selected = k == LocalityType ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', k, selected, this.LocalityType[k], '</OPTION>'];
+			ResponseText += option.join("");
+		}
+		Response.Write(ResponseText + '</SELECT>')
+	},*/
+
+	WriteType: function(tagName, LocalityType) {
+		var ResponseText = ['<SELECT NAME="', tagName, '" ID="', tagName, '">'],
+		itemNodes = new Enumerator(XmlDoc.selectNodes("//LocalityType")),
+		itemId,
+		option,
+		selected;
+		for (var node; !itemNodes.atEnd(); itemNodes.moveNext()) {
+			node = itemNodes.item();
+			itemId = node.getAttribute("id");
+			selected = itemId == LocalityType ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""));
+	}
+},
+
+Street = {
+	Type: ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
+
+	WriteType: function(tagName, StreetType) {
+		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
+		selected, option;
+		for (var i = 0; i < this.Type.length; i++) {
+			selected = i == StreetType ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join(""))
+	}
 }%>
