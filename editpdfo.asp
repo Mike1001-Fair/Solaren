@@ -1,10 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-PdfoId = Request.QueryString("PdfoId");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1,
+PdfoId = Request.QueryString("PdfoId");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetPdfo");
@@ -14,29 +17,27 @@ try {
 		}
 	}
 	var rs = Cmd.Execute();
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rs) {
 		var BegDate = Fields("BegDate").value,
 		EndDate     = Fields("EndDate").value,
 		PdfoTax     = Fields("PdfoTax").value,
 		Deleted     = Fields("Deleted").value,
-		HeadTitle   = Deleted ? "Перегляд ставки пдфо" : "Редагування ставки пдфо";
+		Title       = Deleted ? "Перегляд ставки пдфо" : "Редагування ставки пдфо";
 		Close();
-	} Connect.Close();
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-}
-
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	} 
+	Connect.Close();
+	Html.SetPage(Title, User.RoleId)
 }%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditPdfo" ACTION="updatepdfo.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="PdfoId" VALUE="<%=PdfoId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 
-<H3 CLASS="HeadText"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Month.Date[0], Month.Date[4]) %>

@@ -5,7 +5,7 @@
 if (Authorized) {
 	with (Html) {
 		SetHead("Пошук РЕМ");
-		WriteMenu(Session("RoleId"), 0);
+		Menu.Write(Session("RoleId"), 0);
 	}
 } else {
 	Solaren.SysMsg(2, "Помилка авторизації")

@@ -1,10 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 
-var AenId = Request.QueryString("AenId");
+<% var Authorized = User.RoleId == 1,
+AenId = Request.QueryString("AenId");
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetAen");
@@ -18,23 +20,19 @@ try {
 		var SortCode = Fields("SortCode").value,
 		AenName      = Fields("AenName").value,
 		Deleted      = Fields("Deleted").value,
-		HeadTitle    = Deleted ? "Перегляд анкети РЕМ" : "Редагування анкети РЕМ";
+		Title        = Deleted ? "Перегляд анкети РЕМ" : "Редагування анкети РЕМ";
 		Close();
 	} Connect.Close();
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(HeadTitle);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditAen" ACTION="updateaen.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="AenId" VALUE="<%=AenId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
-<H3 CLASS="HeadText"><%=HeadTitle%></H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>

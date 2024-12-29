@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/locality.inc" -->
 <% Resource.Load(User.ResourceFile());
 
 var RoleId = Session("RoleId"),

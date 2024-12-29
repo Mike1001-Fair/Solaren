@@ -42,7 +42,7 @@ var ResponseText = '<BODY CLASS="MainBody" ONLOAD="Loader.SetClick(`td > a`)">\n
 
 with (Html) {
 	SetHead("Список замовлень");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 for (var i=0; !rs.EOF; i++) {

@@ -33,7 +33,7 @@ try {
 with (Html) {
 	SetHead("Операції");
 	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 var totRetVol = totVolCost = 0,

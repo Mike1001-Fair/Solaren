@@ -1,11 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId == 1,
-Title = "Новий споживач";
-
-Authorized ? Html.SetPage(Title, RoleId) : Solaren.SysMsg(2, "Помилка авторизації")%>
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Новий споживач", User.RoleId)%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCustomer" ACTION="createcustomer.asp" METHOD="post" AUTOCOMPLETE="off">

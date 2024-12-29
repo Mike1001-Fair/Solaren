@@ -32,7 +32,7 @@ try {
 with (Html) {
 	SetHead(Title);
 	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 var nVol = totRetVol = totRecVol = totSaldo = totnVol = 0,

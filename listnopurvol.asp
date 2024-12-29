@@ -31,7 +31,7 @@ if (rs.EOF) {
 
 	with (Html) {
 		SetHead("Обсяги");
-		WriteMenu(Session("RoleId"), 0);
+		Menu.Write(Session("RoleId"), 0);
 	}
 
 	for (var i=0; !rs.EOF; i++) {

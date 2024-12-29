@@ -13,7 +13,7 @@ try {
 	var SortCode =++ Cmd.Parameters.Item("SortCode").value;
 	with (Html) {
 		SetHead("Новий РЕМ");
-		WriteMenu(Session("RoleId"), 0);
+		Menu.Write(Session("RoleId"), 0);
 	}
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))

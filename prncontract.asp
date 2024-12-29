@@ -2,6 +2,8 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE FILE="Include/locality.inc" -->
+<!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = Session("RoleId") == 1,
 ContractId = Request.Form("ContractId");
 

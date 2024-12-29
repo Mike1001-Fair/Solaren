@@ -4,6 +4,8 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/locality.inc" -->
+<!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId == 1,
 Title = "Список договорiв";
 

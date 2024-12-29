@@ -21,7 +21,7 @@ try {
 	Solaren.EOF(rs, 'Iнформацiю не знайдено');
 	with (Html) {
 		SetHead("Список РЕМ");
-		WriteMenu(Session("RoleId"), 0);
+		Menu.Write(Session("RoleId"), 0);
 	}
 	Response.Write('<BODY CLASS="MainBody">\n' +
 		'<H3 CLASS="H3Text">Список РЕМ</H3>\n' +

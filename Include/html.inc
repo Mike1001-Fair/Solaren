@@ -30,29 +30,17 @@ var Html = {
 	},
 
 	WriteScript: function() {
-		var ScriptArr  = Solaren.ScriptName.split("/"),
-		FileArr        = ScriptArr[ScriptArr.length - 1].split('.'),
+		var ScriptName = Solaren.ScriptName.split("/").pop();
+		FileArr        = ScriptName.split('.'),
 		FileName       = [Scripts.Path, FileArr[0].toLowerCase(), ".js?", this.Version],
 		ResponseText   = ['<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
 		Response.Write(ResponseText.join(""));
 	},
 
-	WriteMenu: function(RoleId, BodyTag) {
-		var RoleName = ["admin", "officeuser", "branchuser"],
-		ScriptName = "menu-" + RoleName[RoleId] + ".asp";
-		if (BodyTag) {
-			Response.Write('<BODY CLASS="MainBody" ID="MainBody">');
-			Server.Execute(ScriptName);
-			Response.Write('</BODY></HTML>');
-		} else {
-			Server.Execute(ScriptName);
-		}
-	},
-
 	SetPage: function(Title, RoleId) {
 		this.SetHead(Title);
 		this.WriteScript();
-		this.WriteMenu(RoleId, 0);
+		Menu.Write(RoleId, 0);
 	},
 
 	Write: function(tag, align) {
@@ -318,77 +306,17 @@ Image = {
 	}
 },
 
-Tarif = {
-	Group: ["Сонце до 30 кВт", "Сонце до 50 кВт", "Комбінована до 50 кВт"],
+Menu = {
+	Type: ["admin", "officeuser", "branchuser"],
 
-	Write: function(tagName, GroupId) {
-		var ResponseText = ['<SELECT NAME="', tagName, '">'],
-		selected, option;
-		for (var i = 0; i < this.Group.length; i++) {
-			selected = i == GroupId ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.Group[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
+	Write: function(RoleId, BodyTag) {
+		var ScriptName = "menu-" + this.Type[RoleId] + ".asp";
+		if (BodyTag) {
+			Response.Write('<BODY CLASS="MainBody" ID="MainBody">');
+			Server.Execute(ScriptName);
+			Response.Write('</BODY></HTML>');
+		} else {
+			Server.Execute(ScriptName);
 		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""))
-	},
-
-	WriteGroup: function() {
-		var ResponseText = ['<FIELDSET>\n<LEGEND>Група</LEGEND>\n<SELECT NAME="GroupId">'],
-		option;
-		for (var i = 0; i < this.Group.length; i++) {
-			option = ['<OPTION VALUE="', i, '">', this.Group[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>\n</FIELDSET>\n');
-		Response.Write(ResponseText.join(""));
-	}
-},
-
-Locality = {
-	Type: ["місто","селище","село","смт"],
-
-	/*WriteLocalityType: function(tagName, LocalityType) {
-		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',
-		selected, option;
-		for (var k in this.LocalityType) {
-			selected = k == LocalityType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', k, selected, this.LocalityType[k], '</OPTION>'];
-			ResponseText += option.join("");
-		}
-		Response.Write(ResponseText + '</SELECT>')
-	},*/
-
-	WriteType: function(tagName, LocalityType) {
-		var ResponseText = ['<SELECT NAME="', tagName, '" ID="', tagName, '">'],
-		itemNodes = new Enumerator(XmlDoc.selectNodes("//LocalityType")),
-		itemId,
-		option,
-		selected;
-		for (var node; !itemNodes.atEnd(); itemNodes.moveNext()) {
-			node = itemNodes.item();
-			itemId = node.getAttribute("id");
-			selected = itemId == LocalityType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""));
-	}
-},
-
-Street = {
-	Type: ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
-
-	WriteType: function(tagName, StreetType) {
-		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
-		selected, option;
-		for (var i = 0; i < this.Type.length; i++) {
-			selected = i == StreetType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""))
 	}
 }%>

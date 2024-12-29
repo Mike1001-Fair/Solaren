@@ -4,6 +4,8 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/dataset.inc" -->
+<!-- #INCLUDE FILE="Include/locality.inc" -->
+<!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = Session("RoleId") == 2;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 

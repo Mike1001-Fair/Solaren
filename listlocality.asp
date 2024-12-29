@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/locality.inc" -->
 <% var Authorized = Session("RoleId") >= 0 || Session("RoleId") < 2;
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
@@ -25,7 +26,7 @@ try {
 
 with (Html) {
 	SetHead("Населені пункти");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 Response.Write('<BODY CLASS="MainBody">\n' +
 	'<H3 CLASS="H3Text">Населені пункти</H3>\n' +

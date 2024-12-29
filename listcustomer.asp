@@ -22,7 +22,7 @@ try {
 
 with (Html) {
 	SetHead("Список споживачiв");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 Response.Write('<BODY CLASS="MainBody" ONLOAD="Loader.SetClick(`td > a`)">\n' +

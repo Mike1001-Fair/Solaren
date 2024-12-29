@@ -10,7 +10,7 @@ if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 with (Html) {
 	SetHead("Файл експорту");
 	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewExport" ACTION="create1cagent.asp" METHOD="post">

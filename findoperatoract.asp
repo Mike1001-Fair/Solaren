@@ -20,7 +20,7 @@ try {
 
 with (Html) {
 	SetHead("Акт звірки ОСР");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }%>
 <SCRIPT>
 function ChkForm() {

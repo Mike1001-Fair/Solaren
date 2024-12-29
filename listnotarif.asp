@@ -23,7 +23,7 @@ if (rs.EOF) {
 } else {
 	with (Html) {
 		SetHead("Обсяги");
-		WriteMenu(Session("RoleId"), 0);
+		Menu.Write(Session("RoleId"), 0);
 	}
 	Response.Write('<BODY CLASS="MainBody">\n' +
 	'<H3 CLASS="H3Text">Перевiрка тарифу</H3>\n' +

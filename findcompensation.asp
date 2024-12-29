@@ -2,26 +2,24 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET")
 
 try {
 	Solaren.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, 'Довiдник керiвникiв пустий');
+	var rs = Solaren.Execute("SelectChief", "Довiдник керiвникiв пустий");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
-	with (Html) {
-		SetHead("Компенсація");
-		WriteScript();
-		WriteMenu(Session("RoleId"), 0);
-	}
+	Html.SetPage("Компенсація", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindCompensation" ACTION="prncompensation.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">
@@ -36,7 +34,7 @@ try {
 	<TR><TD ALIGN="RIGHT">Ціна</TD>
 	<TD><INPUT TYPE="Number" NAME="AveragePrice" VALUE="1" STEP="0.000001" MIN="0" MAX="99999" REQUIRED AUTOFOCUS PLACEHOLDER="коп">
 	<TR><TD ALIGN="RIGHT">Керівник</TD>
-	<TD><%Html.WriteSelect(rsChief, "Chief", 0, -1);
+	<TD><%Html.WriteSelect(rs, "Chief", 0, -1);
 	Connect.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>

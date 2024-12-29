@@ -20,7 +20,7 @@ try {
 
 with (Html) {
 	SetHead("Ставка ПДФО");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 var ResponseText = '<BODY CLASS="MainBody">\n' +

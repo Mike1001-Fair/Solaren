@@ -39,7 +39,7 @@ var ResponseText = '<BODY CLASS="MainBody">\n' +
 
 with (Html) {
 	SetHead("Звіт");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 for (var i=0; !rs.EOF; i++) {

@@ -1,29 +1,25 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-Title = "Бюджетний код";
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET")
 
 try {
 	Solaren.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsChief = Cmd.Execute();
-	Solaren.EOF(rsChief, 'Довiдник керiвникiв пустий');
+	var rs = Solaren.Execute("SelectChief", "Довiдник керiвникiв пустий");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
-with (Html) {
-	SetHead(Title);
-	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
-}%>
+Html.SetPage("Бюджетний код", User.RoleId)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBudgetCode" TARGET="_blank" ACTION="prnbudgetcode.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ChiefName">
@@ -31,7 +27,7 @@ with (Html) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
-	<LABEL>Керівник	<%Html.WriteSelect(rsChief, "Chief", 0, -1)%></LABEL>
+	<LABEL>Керівник	<%Html.WriteSelect(rs, "Chief", 0, -1)%></LABEL>
 	</FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>

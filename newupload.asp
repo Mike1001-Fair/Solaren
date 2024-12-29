@@ -7,7 +7,7 @@ if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 
 with (Html) {
 	SetHead("Завантажити файл");
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }%>
 
 <!DOCTYPE HTML>

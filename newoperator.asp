@@ -20,7 +20,7 @@ try {
 with (Html) {
 	SetHead("Новий оператор");
 	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOperator" ACTION="createoperator.asp" METHOD="post" AUTOCOMPLETE="off">

@@ -7,7 +7,7 @@ if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
 with (Html) {
 	SetHead("Нова ставка ВЗ");
 	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewVz" ACTION="createvz.asp" METHOD="POST">

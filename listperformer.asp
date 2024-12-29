@@ -25,7 +25,7 @@ try {
 with (Html) {
 	SetHead("Виконавці");
 	WriteScript();
-	WriteMenu(Session("RoleId"), 0);
+	Menu.Write(Session("RoleId"), 0);
 }
 
 Response.Write('<BODY CLASS="MainBody">\n' +

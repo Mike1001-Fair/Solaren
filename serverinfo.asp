@@ -46,10 +46,8 @@ SessionInfo = {
 	"SESSION_CODEPAGE": Session.CodePage
 };
 
-with (Html) {
-	SetHead(Title);
-	WriteMenu(User.RoleId, 0);
-}
+Html.SetHead(Title);
+Menu.Write(User.RoleId, 0);
 
 with (ServerInfo) {
 	AddSessionInfo();
