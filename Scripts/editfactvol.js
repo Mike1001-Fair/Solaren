@@ -30,7 +30,7 @@ RestoreBtn?.addEventListener('click', DelFactVol);
 function DelFactVol() {
 	if (confirm("Ви впевненнi ?")) {
 		with (EditFactVol) {
-			action = `delfactvol.asp?PayId=${FactVolId.value}&Deleted=${Deleted.value}`
+			action = `delfactvol.asp?FactVolId=${FactVolId.value}&Deleted=${Deleted.value}`
 		}
 	} else event.preventDefault();
 }

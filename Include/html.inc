@@ -124,7 +124,7 @@ Street = {
 },
 
 Html = {
-	Version: "v=3.9",
+	Version: "v=4.0",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
