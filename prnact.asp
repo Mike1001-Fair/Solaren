@@ -3,9 +3,11 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/money.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 2;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var ReportMonth = String(Form("ReportMonth")),
@@ -17,7 +19,7 @@ try {
 	Solaren.SetCmd("GetAct");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 
@@ -70,6 +72,8 @@ try {
 	Connect.Close();
 	if (Solaren.Empty(VolCost)) {
 		Solaren.SysMsg(0, "Інформацію не знайдено")
+	} else {
+		Html.SetHead("Акт приймання-передачi");
 	}
 }
 
@@ -77,23 +81,32 @@ var Period = Month.GetPeriod(ReportMonth, 1),
 ActDate    = Month.GetLastDay(ReportMonth), 
 ActSum     = VolCost - Pdfo - Vz,
 WordSum    = Money.toWord(ActSum),
-ResponseText = '<BODY CLASS="ActContainer">\n';
-Html.SetHead("Акт приймання-передачi");
+ResponseText = ['<BODY CLASS="ActContainer">\n'];
 
-for (var i=0; i<=DoubleAct; i++) {
-	ResponseText += '<DIV CLASS="ActText">\n' +
-	'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>\n' +
-	'<TABLE CLASS="NoBorderTable">\n' +
-	'<TR><TD ALIGN="LEFT" WIDTH="50%">' + LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>\n' +
-	'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px"><P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' + ContractDate + ' року, особовий рахунок №' + ContractPAN + ': ' +
-	CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2.replace(/ /g,"&nbsp") + ', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + CustomerName.replace(/ /g,"&nbsp") +
-	' (Споживач), з iншої сторони склали даний акт про наступне.<P>\nУ ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol.toDelimited(0) + '</B> кВт&#183;год ' +
-	'на суму <B>' + VolCost.toDelimited(2) + '</B> грн., ПДФО <B>' + Pdfo.toDelimited(2) + '</B> грн., вiйськовий збiр <B>' + Vz.toDelimited(2) + '</B> грн., всього <B>' + ActSum.toDelimited(2) + '</B> грн. (' + WordSum + '). ' +
-	'Постачальник не має жодних претензiй до прийнятого ним товару.<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>' +
-	'<TR ALIGN="CENTER"><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n' +
-	'<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n' +
-	'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n';
-	if (i==0 && DoubleAct) ResponseText += '<DIV CLASS="BlockDivider"></DIV>\n';
+for (var i=0, block; i<=DoubleAct; i++) {
+	if (i == 0) {
+		block = ['<DIV CLASS="ActText">\n',
+			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>\n',
+			'<TABLE CLASS="NoBorderTable">\n',
+			'<TR><TD ALIGN="LEFT" WIDTH="50%">' + LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>\n',
+			'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
+			'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' + ContractDate + ' року, особовий рахунок №' + ContractPAN + ': ',
+			CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2.replace(/ /g,"&nbsp") + ', що дiє на пiдставi довiреностi, з однiєї сторони, та ',
+			CustomerName.replace(/ /g,"&nbsp") + ' (Споживач), з iншої сторони склали даний акт про наступне.',
+			'<P>\nУ ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol.toDelimited(0) + '</B> кВт&#183;год ',
+			'на суму <B>' + VolCost.toDelimited(2) + '</B> грн., ПДФО <B>' + Pdfo.toDelimited(2) + '</B> грн., вiйськовий збiр <B>' + Vz.toDelimited(2) + '</B> грн., всього <B>' + ActSum.toDelimited(2) + '</B> грн. (' + WordSum + '). ',
+			'Постачальник не має жодних претензiй до прийнятого ним товару.',
+			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
+			'<TR ALIGN="CENTER"><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
+			'<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n',
+			'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'
+		];
+	}
+	ResponseText.push(block.join(""));
+
+	if (i==0 && DoubleAct) {
+		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');
+	}
 }
-ResponseText += '</BODY></HTML>';
-Response.Write(ResponseText)%>
+ResponseText.push('</BODY></HTML>');
+Response.Write(ResponseText.join(""))%>

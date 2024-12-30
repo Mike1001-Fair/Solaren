@@ -2,7 +2,6 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<!-- #INCLUDE FILE="Include/dataset.inc" -->
 <!-- #INCLUDE FILE="Include/locality.inc" -->
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
@@ -27,8 +26,7 @@ try {
 		}
 	}
 
-	DataSet.Open(Cmd);
-	Solaren.EOF(RecordSet, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("GetIndicatorReport", "Iнформацiю не знайдено");
 
 	with (Cmd) {
 		CommandText = "GetReportInfo";
@@ -79,72 +77,81 @@ ResponseText    = ['<BODY CLASS="ActContainer">\n'];
 
 Html.SetHead("Звіт про показники");
 
-for (var i=0; i<=DoubleReport; i++) {
-	var totSaldo = 0;
-	ResponseText.push('<DIV CLASS="ActText">\n<TABLE CLASS="NoBorderTable">\n' +
-	'<TR><TD></TD><TD CLASS="ReportTitle">Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд 01.01.2019 р.</TD></TR>\n' +
-	'</TABLE>\n' +
-	'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>\n' +
-	'<TABLE CLASS="ActTable">\n' +
-	'<CAPTION>Споживач: ' + CustomerName + '<BR>Рахунок: ' + ContractPAN + '<BR>Адреса: ' + ContractAddress + '</CAPTION>\n' +
-	'<TR ALIGN="CENTER"><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>' +
-	'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>\n' +
-	'<TR ALIGN="CENTER"><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>');
+for (var i=0, block; i<=DoubleReport; i++) {
+	if (i==0) {
+		var totSaldo = 0,
+		block = ['<DIV CLASS="ActText">\n<TABLE CLASS="NoBorderTable">\n',
+			'<TR><TD></TD><TD CLASS="ReportTitle">Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд 01.01.2019 р.</TD></TR>\n',
+			'</TABLE>\n',
+			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>\n',
+			'<TABLE CLASS="ActTable">\n',
+			'<CAPTION>Споживач: ' + CustomerName + '<BR>Рахунок: ' + ContractPAN + '<BR>Адреса: ' + ContractAddress + '</CAPTION>\n',
+			'<TR ALIGN="CENTER"><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>',
+			'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>\n',
+			'<TR ALIGN="CENTER"><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
+		];
 				
-	for (; !RecordSet.EOF; RecordSet.MoveNext()) {
-		var k = RecordSet.Fields("kTransForm"),
-		c = RecordSet.Fields("Capacity"),
-		PrevDate = Solaren.GetYMD(RecordSet.Fields("PrevDate")),
-		ReportDate = Solaren.GetYMD(RecordSet.Fields("ReportDate")),
-		recsaldo = RecordSet.Fields("RecVal") - RecordSet.Fields("PrevRecVal"),
-		retsaldo = RecordSet.Fields("RetVal") - RecordSet.Fields("PrevRetVal"),
-		periodSaldo;
+		for (var row; !rs.EOF; rs.MoveNext()) {
+			var k = rs.Fields("kTransForm"),
+			c = rs.Fields("Capacity"),
+			PrevDate = Solaren.GetYMD(rs.Fields("PrevDate")),
+			ReportDate = Solaren.GetYMD(rs.Fields("ReportDate")),
+			recsaldo = rs.Fields("RecVal") - rs.Fields("PrevRecVal"),
+			retsaldo = rs.Fields("RetVal") - rs.Fields("PrevRetVal"),
+			periodSaldo;
 
-		if (recsaldo < 0) recsaldo += Math.pow(10, c);
-		if (retsaldo < 0) retsaldo += Math.pow(10, c);
+			if (recsaldo < 0) recsaldo += Math.pow(10, c);
+			if (retsaldo < 0) retsaldo += Math.pow(10, c);
 
-		periodSaldo = (recsaldo - retsaldo) * k;
-		totSaldo += periodSaldo;
+			periodSaldo = (recsaldo - retsaldo) * k;
+			totSaldo += periodSaldo;
 
-		ResponseText.push('<TR><TD ALIGN="CENTER">' + RecordSet.Fields("MeterCode") +
-		Html.Write("TD","CENTER") + 'Прийом А+' +
-		Html.Write("TD","RIGHT") + RecordSet.Fields("RecVal") +
-		Html.Write("TD","RIGHT") + RecordSet.Fields("PrevRecVal") +
-		Html.Write("TD","RIGHT") + recsaldo +
-		Html.Write("TD","CENTER") + k +
-		Html.Write("TD","RIGHT") + recsaldo*k + '</TD></TR><TR><TD ALIGN="CENTER">' + RecordSet.Fields("MeterCode") +
-		Html.Write("TD","CENTER") + 'Видача А-' +
-		Html.Write("TD","RIGHT") + RecordSet.Fields("RetVal") +
-		Html.Write("TD","RIGHT") + RecordSet.Fields("PrevRetVal") +
-		Html.Write("TD","RIGHT") + retsaldo +
-		Html.Write("TD","CENTER") + k +
-		Html.Write("TD","RIGHT") + retsaldo*k + '</TD></TR>' +
-		'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>' +
-		'<TD ALIGN="RIGHT">' + periodSaldo + '</TD></TR>\n');
+			row = ['<TR><TD ALIGN="CENTER">' + rs.Fields("MeterCode"),
+				Html.Write("TD","CENTER") + 'Прийом А+',
+				Html.Write("TD","RIGHT") + rs.Fields("RecVal"),
+				Html.Write("TD","RIGHT") + rs.Fields("PrevRecVal"),
+				Html.Write("TD","RIGHT") + recsaldo,
+				Html.Write("TD","CENTER") + k,
+				Html.Write("TD","RIGHT") + recsaldo * k + '</TD></TR><TR><TD ALIGN="CENTER">' + rs.Fields("MeterCode"),
+				Html.Write("TD","CENTER") + 'Видача А-',
+				Html.Write("TD","RIGHT") + rs.Fields("RetVal"),
+				Html.Write("TD","RIGHT") + rs.Fields("PrevRetVal"),
+				Html.Write("TD","RIGHT") + retsaldo,
+				Html.Write("TD","CENTER") + k,
+				Html.Write("TD","RIGHT") + retsaldo * k + '</TD></TR>',
+				'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
+				'<TD ALIGN="RIGHT">' + periodSaldo + '</TD></TR>\n'
+			];
+			block.push(row.join(""));
+		}
+
+		if (totSaldo != 0) {
+			var resultText = "За результатами знятих показникiв: ",
+			s = " електроенергiю, згiдно умов договору ";
+			if (totSaldo < 0) {
+				totSaldo = -totSaldo;
+				resultText += "Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї"
+			} else resultText += "Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї";
+			resultText += ", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год."
+		}
+
+		var footer = ['</TABLE>\n<P>'+ resultText + '</P>',
+			'<TABLE CLASS="NoBorderTable">\n',
+			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>\n',
+			'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>\n',
+			'<TR><TD>' + ChiefTitle + ' ' + ChiefName + '</TD><TD></TD></TR>\n',
+			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD>\n',
+			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>\n</TABLE>\n',
+			'<DIV CLASS="EventInfo">' + BranchLocality + ', ' + EndDate + '</DIV></DIV>\n'
+		];
+		block.push(footer.join(""));
 	}
-	if (totSaldo != 0) {
-		var resultText = "За результатами знятих показникiв: ",
-		s = " електроенергiю, згiдно умов договору ";
-		if (totSaldo < 0) {
-			totSaldo = -totSaldo;
-			resultText += "Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї"
-		} else resultText += "Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї";
-		resultText += ", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год."
-	}
-	ResponseText.push('</TABLE>\n<P>'+ resultText + '</P><TABLE CLASS="NoBorderTable">\n' + 
-	'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>\n' +
-	'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>\n' +
-	'<TR><TD>' + ChiefTitle + ' ' + ChiefName + '</TD><TD></TD></TR>\n' +
-	'<TR><TD><DIV CLASS="UnderLine"></DIV></TD>\n' +
-	'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>\n</TABLE>\n' +
-	'<DIV CLASS="EventInfo">' + BranchLocality + ', ' + EndDate + '</DIV></DIV>\n');
-
+	ResponseText.push(block.join(""));
 	if (i==0 && DoubleReport) {
 		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');
 	}
-	RecordSet.MoveFirst();
 }
-RecordSet.Close();
+rs.Close();
 Connect.Close();
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join(""))%>
