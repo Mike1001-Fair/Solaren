@@ -100,9 +100,9 @@ for (var i=0, block; i<=DoubleAct; i++) {
 			'<TR ALIGN="CENTER"><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
 			'<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n',
 			'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'
-		];
+		].join("");
 	}
-	ResponseText.push(block.join(""));
+	ResponseText.push(block);
 
 	if (i==0 && DoubleAct) {
 		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');

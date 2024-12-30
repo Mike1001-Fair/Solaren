@@ -145,8 +145,9 @@ for (var i=0, block; i<=DoubleReport; i++) {
 			'<DIV CLASS="EventInfo">' + BranchLocality + ', ' + EndDate + '</DIV></DIV>\n'
 		];
 		block.push(footer.join(""));
+		var blockText = block.join("");
 	}
-	ResponseText.push(block.join(""));
+	ResponseText.push(blockText);
 	if (i==0 && DoubleReport) {
 		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');
 	}
