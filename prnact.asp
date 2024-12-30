@@ -77,11 +77,13 @@ try {
 	}
 }
 
-var Period = Month.GetPeriod(ReportMonth, 1),
-ActDate    = Month.GetLastDay(ReportMonth), 
-ActSum     = VolCost - Pdfo - Vz,
-WordSum    = Money.toWord(ActSum),
-ResponseText = ['<BODY CLASS="ActContainer">\n'];
+var Period   = Month.GetPeriod(ReportMonth, 1),
+ActDate      = Month.GetLastDay(ReportMonth), 
+ActSum       = VolCost - Pdfo - Vz,
+WordSum      = Money.toWord(ActSum),
+Body         = [],
+Divider      = DoubleAct ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
+ResponseText = ['<BODY CLASS="ActContainer">\n']; 
 
 for (var i=0; i<=DoubleAct; i++) {
 	if (i == 0) {
@@ -102,10 +104,8 @@ for (var i=0; i<=DoubleAct; i++) {
 			'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'			
 		].join("");
 	}
-	ResponseText.push(block);
-	if (i==0 && DoubleAct) {
-		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');
-	}
+	Body.push(block);
 }
+ResponseText.push(Body.join(Divider));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join(""))%>
