@@ -83,9 +83,9 @@ ActSum     = VolCost - Pdfo - Vz,
 WordSum    = Money.toWord(ActSum),
 ResponseText = ['<BODY CLASS="ActContainer">\n'];
 
-for (var i=0, block; i<=DoubleAct; i++) {
+for (var i=0; i<=DoubleAct; i++) {
 	if (i == 0) {
-		block = ['<DIV CLASS="ActText">\n',
+		var block = ['<DIV CLASS="ActText">\n',
 			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>\n',
 			'<TABLE CLASS="NoBorderTable">\n',
 			'<TR><TD ALIGN="LEFT" WIDTH="50%">' + LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>\n',
@@ -99,11 +99,10 @@ for (var i=0, block; i<=DoubleAct; i++) {
 			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
 			'<TR ALIGN="CENTER"><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
 			'<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n',
-			'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'
+			'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'			
 		].join("");
 	}
 	ResponseText.push(block);
-
 	if (i==0 && DoubleAct) {
 		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');
 	}

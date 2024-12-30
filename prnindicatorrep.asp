@@ -77,7 +77,7 @@ ResponseText    = ['<BODY CLASS="ActContainer">\n'];
 
 Html.SetHead("Звіт про показники");
 
-for (var i=0, block; i<=DoubleReport; i++) {
+for (var i=0; i<=DoubleReport; i++) {
 	if (i==0) {
 		var totSaldo = 0,
 		block = ['<DIV CLASS="ActText">\n<TABLE CLASS="NoBorderTable">\n',
@@ -126,16 +126,18 @@ for (var i=0, block; i<=DoubleReport; i++) {
 		}
 
 		if (totSaldo != 0) {
-			var resultText = "За результатами знятих показникiв: ",
+			var resultText = ["За результатами знятих показникiв: "],
 			s = " електроенергiю, згiдно умов договору ";
 			if (totSaldo < 0) {
 				totSaldo = -totSaldo;
-				resultText += "Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї"
-			} else resultText += "Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї";
-			resultText += ", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год."
+				resultText.push("Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї")
+			} else {
+				resultText.push("Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї");
+			}
+			resultText.push(", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год.")
 		}
 
-		var footer = ['</TABLE>\n<P>'+ resultText + '</P>',
+		var footer = ['</TABLE>\n<P>'+ resultText.join("") + '</P>',
 			'<TABLE CLASS="NoBorderTable">\n',
 			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>\n',
 			'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>\n',
