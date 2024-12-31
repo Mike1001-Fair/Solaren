@@ -99,9 +99,9 @@ for (var i=0; i<=DoubleAct; i++) {
 			'на суму <B>' + VolCost.toDelimited(2) + '</B> грн., ПДФО <B>' + Pdfo.toDelimited(2) + '</B> грн., вiйськовий збiр <B>' + Vz.toDelimited(2) + '</B> грн., всього <B>' + ActSum.toDelimited(2) + '</B> грн. (' + WordSum + '). ',
 			'Постачальник не має жодних претензiй до прийнятого ним товару.',
 			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
-			'<TR ALIGN="CENTER"><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
-			'<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n',
-			'<TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'			
+			'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
+			'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n',
+			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'			
 		].join("");
 	}
 	Body.push(block);

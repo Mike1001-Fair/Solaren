@@ -49,6 +49,13 @@ var Html = {
 		return result.join("")
 	},
 
+	WriteTag: function(tagName, align, tagValue) {
+		var align = align ? ' ALIGN="' + align + '">' : '>',
+		result = ['<', tagName, align, tagValue, '</', tagName, '>'];
+		return result.join("")
+	},
+
+
 	WriteRole: function(tagName, RoleId) {
 		var ResponseText = ['<SELECT NAME="', tagName, '">'],
 		selected, option;
@@ -205,11 +212,7 @@ var Html = {
 	},
 
 	GetFooterRow: function(ColSpan, i) {
-		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan,
-			'">Всього: ' + i,
-			'</TH></TR>\n',
-			'</TABLE></BODY></HTML>'
-		];
+		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="', ColSpan,'">Всього: ', i, '</TH></TR>\n', '</TABLE></BODY></HTML>'];
 		return ResponseText.join("")
 	},
 

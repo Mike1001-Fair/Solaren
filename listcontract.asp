@@ -30,9 +30,9 @@ try {
 	Html.SetPage("Список договорiв", User.RoleId)
 }
 
-var ResponseText = ['\n<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Список договорiв</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
+var ResponseText = ['\n<BODY CLASS="MainBody">\n',
+	'<H3 CLASS="H3Text">Список договорiв</H3>\n',
+	'<TABLE CLASS="InfoTable">\n',
 	'<TR><TH>Рахунок</TH><TH>Споживач</TH><TH>Адреса</TH><TH>Дата</TH><TH>ЦОС</TH><TH>Потужнiсть</TH></TR>\n'
 ];
 
@@ -43,20 +43,18 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("StreetName"),
 		rs.Fields("HouseId")
 	],
-	row = ['<TR><TD>' + '<A href="editcontract.asp?ContractId=' + rs.Fields("ContractId") + '">' + rs.Fields("PAN") + '</A></TD>',
-		Html.Write("TD","LEFT") + rs.Fields("CustomerName"),
-		Html.Write("TD","") + ContractAddress.join(" "),
-		Html.Write("TD","") + rs.Fields("ContractDate"),
-		Html.Write("TD","") + rs.Fields("BranchName"),
-		Html.Write("TD","RIGHT") + rs.Fields("ContractPower").value.toDelimited(1) + '</TD></TR>\n'
+	url = ['<A href="editcontract.asp?ContractId=', rs.Fields("ContractId"), '">', rs.Fields("PAN"), '</A>'],
+	row = ['<TR>', Html.WriteTag("TD", "", url.join("")),
+		Html.WriteTag("TD", "LEFT", rs.Fields("CustomerName")),
+		Html.WriteTag("TD", "", ContractAddress.join(" ")),
+		Html.WriteTag("TD", "", rs.Fields("ContractDate")),
+		Html.WriteTag("TD", "", rs.Fields("BranchName")),
+		Html.WriteTag("TD", "RIGHT", rs.Fields("ContractPower").value.toDelimited(1)), '</TR>\n'
 	];
 	ResponseText.push(row.join(""));
 	totPwr += rs.Fields("ContractPower");
 	rs.MoveNext();
 } rs.Close(); Connect.Close();
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ' + i,
-	Html.Write("TH","RIGHT") + totPwr.toDelimited(1),
-	'</TH></TR>\n</TABLE></BODY></HTML>'
-];
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>', Html.WriteTag("TH", "RIGHT", totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join(""))%>
