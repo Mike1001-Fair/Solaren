@@ -50,7 +50,7 @@ try {
 			BranchName   = Item("BranchName").value,
 			BranchName2  = Item("BranchName2").value,
 
-			CustomerName = Item("CustomerName").value,
+			CustomerName = Item("CustomerName").value.replace(/ /g,"&nbsp"),
 			ContractDate = Item("ContractDate").value,
 			ContractPAN  = Item("ContractPAN").value,
 
@@ -62,7 +62,7 @@ try {
 			ChiefTitle   = Item("ChiefTitle").value,
 			ChiefName    = Item("ChiefName").value,
 			ChiefTitle2  = Item("ChiefTitle2").value,
-			ChiefName2   = Item("ChiefName2").value,
+			ChiefName2   = Item("ChiefName2").value.replace(/ /g,"&nbsp"),
 			Accountant   = Item("Accountant").value;
 		}
 	}
@@ -93,15 +93,15 @@ for (var i=0; i<=DoubleAct; i++) {
 			'<TR><TD ALIGN="LEFT" WIDTH="50%">' + LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>\n',
 			'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
 			'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' + ContractDate + ' року, особовий рахунок №' + ContractPAN + ': ',
-			CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2.replace(/ /g,"&nbsp") + ', що дiє на пiдставi довiреностi, з однiєї сторони, та ',
-			CustomerName.replace(/ /g,"&nbsp") + ' (Споживач), з iншої сторони склали даний акт про наступне.',
+			CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2 + ', що дiє на пiдставi довiреностi, з однiєї сторони, та ',
+			CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.',
 			'<P>\nУ ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol.toDelimited(0) + '</B> кВт&#183;год ',
 			'на суму <B>' + VolCost.toDelimited(2) + '</B> грн., ПДФО <B>' + Pdfo.toDelimited(2) + '</B> грн., вiйськовий збiр <B>' + Vz.toDelimited(2) + '</B> грн., всього <B>' + ActSum.toDelimited(2) + '</B> грн. (' + WordSum + '). ',
 			'Постачальник не має жодних претензiй до прийнятого ним товару.',
 			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
 			'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
 			'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>\n',
-			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'			
+			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'
 		].join("");
 	}
 	Body.push(block);

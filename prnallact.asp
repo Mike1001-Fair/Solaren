@@ -64,7 +64,9 @@ for (; !rs.EOF; rs.MoveNext()) {
 	VolCost = rs.Fields("VolCost").value.toDelimited(2),
 	Pdfo    = rs.Fields("Pdfo").value.toDelimited(2),
 	ActSum  = rs.Fields("ActSum").value.toDelimited(2),
-	WordSum = Money.toWord(rs.Fields("ActSum").value);
+	WordSum = Money.toWord(rs.Fields("ActSum").value),
+	ChiefName2 = ChiefName2.replace(/ /g,"&nbsp"),
+	CustomerName = rs.Fields("CustomerName").value.replace(/ /g,"&nbsp");
 
 	for (var i=0; i<=DoubleAct; i++) {
 		if (i == 0) {
@@ -72,9 +74,10 @@ for (; !rs.EOF; rs.MoveNext()) {
 				'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>\n',
 				'<TABLE CLASS="NoBorderTable">\n',
 				'<TR><TD ALIGN="LEFT" WIDTH="50%">' + LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>\n',
-				'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px"><P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' + rs.Fields("ContractDate") + ' року, особовий рахунок №' + rs.Fields("ContractPAN") + ': ',
-				CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2.replace(/ /g,"&nbsp") + ', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + rs.Fields("CustomerName").value.replace(/ /g,"&nbsp"),
-				'(Споживач), з iншої сторони склали даний акт про наступне.<P>\nУ '+ Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol + '</B> кВт&#183;год на суму ',
+				'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
+				'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' + rs.Fields("ContractDate") + ' року, особовий рахунок №' + rs.Fields("ContractPAN") + ': ',
+				CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2 + ', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + CustomerName,
+				' (Споживач), з iншої сторони склали даний акт про наступне.<P>\nУ '+ Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol + '</B> кВт&#183;год на суму ',
 				'<B>' + VolCost + '</B> грн., ПДФО <B>' + Pdfo + '</B> грн., вiйськовий збiр <B>' + Vz + '</B> грн., всього <B>' + ActSum + '</B> грн. (' + WordSum + ').\n',
 				'Постачальник не має жодних претензiй до прийнятого ним товару.<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>\n',
 				'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',

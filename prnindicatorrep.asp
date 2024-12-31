@@ -10,6 +10,21 @@
 <% var Authorized = User.RoleId == 2;
 User.ValidateAccess(Authorized, "POST");
 
+function getText(totSaldo) {
+	if (totSaldo != 0) {
+		var resultText = ["За результатами знятих показникiв: "],
+		s = " електроенергiю, згiдно умов договору ";
+		if (totSaldo < 0) {
+			totSaldo = -totSaldo;
+			resultText.push("Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї")
+		} else {
+			resultText.push("Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї");
+		}
+		resultText.push(", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год.")
+	}
+	return resultText.join("")
+}
+
 with (Request) {
     var ReportMonth  = String(Form("ReportMonth")),
 	ContractId   = Form("ContractId"),
@@ -73,6 +88,8 @@ LocalityType    = Locality.Type[ContractLocalityType],
 StreetType      = Street.Type[ContractStreetType],
 ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, ContractStreetName, HouseId].join(" "),
 BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName].join(" "),
+Divider         = DoubleReport ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
+Body            = [],
 ResponseText    = ['<BODY CLASS="ActContainer">\n'];
 
 Html.SetHead("Звіт про показники");
@@ -86,9 +103,9 @@ for (var i=0; i<=DoubleReport; i++) {
 			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>\n',
 			'<TABLE CLASS="ActTable">\n',
 			'<CAPTION>Споживач: ' + CustomerName + '<BR>Рахунок: ' + ContractPAN + '<BR>Адреса: ' + ContractAddress + '</CAPTION>\n',
-			'<TR ALIGN="CENTER"><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>',
+			'<TR><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>',
 			'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>\n',
-			'<TR ALIGN="CENTER"><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
+			'<TR><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
 		];
 				
 		for (var row; !rs.EOF; rs.MoveNext()) {
@@ -106,38 +123,27 @@ for (var i=0; i<=DoubleReport; i++) {
 			periodSaldo = (recsaldo - retsaldo) * k;
 			totSaldo += periodSaldo;
 
-			row = ['<TR><TD ALIGN="CENTER">' + rs.Fields("MeterCode"),
-				Html.Write("TD","CENTER") + 'Прийом А+',
-				Html.Write("TD","RIGHT") + rs.Fields("RecVal"),
-				Html.Write("TD","RIGHT") + rs.Fields("PrevRecVal"),
-				Html.Write("TD","RIGHT") + recsaldo,
-				Html.Write("TD","CENTER") + k,
-				Html.Write("TD","RIGHT") + recsaldo * k + '</TD></TR><TR><TD ALIGN="CENTER">' + rs.Fields("MeterCode"),
-				Html.Write("TD","CENTER") + 'Видача А-',
-				Html.Write("TD","RIGHT") + rs.Fields("RetVal"),
-				Html.Write("TD","RIGHT") + rs.Fields("PrevRetVal"),
-				Html.Write("TD","RIGHT") + retsaldo,
-				Html.Write("TD","CENTER") + k,
-				Html.Write("TD","RIGHT") + retsaldo * k + '</TD></TR>',
+			row = ['<TR>', Html.WriteTag("TD", "CENTER", rs.Fields("MeterCode")),
+				Html.WriteTag("TD", "CENTER", "Прийом А+"),
+				Html.WriteTag("TD", "RIGHT", rs.Fields("RecVal")),
+				Html.WriteTag("TD", "RIGHT", rs.Fields("PrevRecVal")),
+				Html.WriteTag("TD", "RIGHT", recsaldo),
+				Html.WriteTag("TD", "CENTER", k),
+				Html.WriteTag("TD", "RIGHT", recsaldo * k), '</TR>',
+				'<TR>', Html.WriteTag("TD", "CENTER", rs.Fields("MeterCode")),
+				Html.WriteTag("TD", "CENTER", "Видача А-"),
+				Html.WriteTag("TD", "RIGHT", rs.Fields("RetVal")),
+				Html.WriteTag("TD", "RIGHT", rs.Fields("PrevRetVal")),
+				Html.WriteTag("TD", "RIGHT", retsaldo),
+				Html.WriteTag("TD", "CENTER",  k),
+				Html.WriteTag("TD", "RIGHT",  retsaldo * k), '</TR>',
 				'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
-				'<TD ALIGN="RIGHT">' + periodSaldo + '</TD></TR>\n'
+				Html.WriteTag("TD", "RIGHT", periodSaldo), '</TR>\n'
 			];
 			block.push(row.join(""));
 		}
 
-		if (totSaldo != 0) {
-			var resultText = ["За результатами знятих показникiв: "],
-			s = " електроенергiю, згiдно умов договору ";
-			if (totSaldo < 0) {
-				totSaldo = -totSaldo;
-				resultText.push("Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї")
-			} else {
-				resultText.push("Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї");
-			}
-			resultText.push(", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год.")
-		}
-
-		var footer = ['</TABLE>\n<P>'+ resultText.join("") + '</P>',
+		var footer = ['</TABLE>\n<P>'+ getText(totSaldo) + '</P>',
 			'<TABLE CLASS="NoBorderTable">\n',
 			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>\n',
 			'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>\n',
@@ -147,14 +153,11 @@ for (var i=0; i<=DoubleReport; i++) {
 			'<DIV CLASS="EventInfo">' + BranchLocality + ', ' + EndDate + '</DIV></DIV>\n'
 		];
 		block.push(footer.join(""));
-		var blockText = block.join("");
 	}
-	ResponseText.push(blockText);
-	if (i==0 && DoubleReport) {
-		ResponseText.push('<DIV CLASS="BlockDivider"></DIV>\n');
-	}
+	Body.push(block.join(""));
 }
 rs.Close();
 Connect.Close();
+ResponseText.push(Body.join(Divider));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join(""))%>
