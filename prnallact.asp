@@ -30,7 +30,9 @@ try {
 		}
 	}
 	var rs = Solaren.Execute("SelectAct", "Iнформацiю не знайдено");
-
+} catch (ex) {
+	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
 	with (rsAct) {
 		var LocalityName = Fields("LocalityName").value,
 		CompanyName      = Fields("CompanyName").value,
@@ -43,9 +45,6 @@ try {
 		Accountant       = Fields("Accountant").value;
 		Close();
 	}
-
-} catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 }
 
 var Period   = Month.GetPeriod(ReportMonth, 1),

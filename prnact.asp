@@ -25,10 +25,9 @@ try {
 		}
 	}
 	var rs = Solaren.Execute("GetAct", "Iнформацiю не знайдено");
-
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
-} finally {	
+} finally {
 	with (rs) {
 		var LocalityName = Fields("LocalityName").value,
 		CompanyName  = Fields("CompanyName").value,
