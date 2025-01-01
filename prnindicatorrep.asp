@@ -32,20 +32,18 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("GetIndicatorReport");
+	Solaren.SetCmd("GetReportInfo");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 		}
 	}
-
-	var rs = Solaren.Execute("GetIndicatorReport", "Iнформацiю не знайдено");
-	
-	Cmd.Parameters.Delete("ReportMonth");
 	var rsInfo = Solaren.Execute("GetReportInfo", "Iнформацiю не знайдено");
 
+	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
+	var rs = Solaren.Execute("GetIndicatorReport", "Iнформацiю не знайдено");
+	
 	with (rsInfo) {
 		var CustomerName     = Fields("CustomerName").value,
 		ContractLocalityType = Fields("ContractLocalityType").value,
@@ -53,7 +51,7 @@ try {
 		ContractStreetType   = Fields("ContractStreetType").value,
 		ContractStreetName   = Fields("ContractStreetName").value,
 		HouseId              = Fields("HouseId").value,
-		ContractDate         = Fields("ContractDate").value,
+		ContractDate         = Solaren.GetYMD(Fields("ContractDate").value),
 		ContractPAN          = Fields("ContractPAN").value,
 		BranchName           = Fields("BranchName").value,
 		ChiefTitle           = Fields("ChiefTitle").value,
@@ -72,17 +70,18 @@ LocalityType    = Locality.Type[ContractLocalityType],
 StreetType      = Street.Type[ContractStreetType],
 ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, ContractStreetName, HouseId].join(" "),
 BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName].join(" "),
-Divider         = DoubleReport ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
+DocRef          = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
 Body            = [],
+Divider         = DoubleReport ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
 ResponseText    = ['<BODY CLASS="ActContainer">\n'];
 
 Html.SetHead("Звіт про показники");
 
 for (var i=0; i<=DoubleReport; i++) {
 	if (i==0) {
-		var totSaldo = 0,
+		var totSaldo = 0,		
 		block = ['<DIV CLASS="ActText">\n<TABLE CLASS="NoBorderTable">\n',
-			'<TR><TD></TD><TD CLASS="ReportTitle">Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд 01.01.2019 р.</TD></TR>\n',
+			'<TR><TD></TD><TD CLASS="ReportTitle">', DocRef.join(""), '</TD></TR>\n',
 			'</TABLE>\n',
 			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>\n',
 			'<TABLE CLASS="ActTable">\n',
@@ -105,7 +104,7 @@ for (var i=0; i<=DoubleReport; i++) {
 			if (retsaldo < 0) retsaldo += Math.pow(10, c);
 
 			periodSaldo = (recsaldo - retsaldo) * k;
-				totSaldo += periodSaldo;
+			totSaldo += periodSaldo;
 
 			row = ['<TR>', Html.WriteTag("TD", "CENTER", rs.Fields("MeterCode")),
 				Html.WriteTag("TD", "CENTER", "Прийом А+"),

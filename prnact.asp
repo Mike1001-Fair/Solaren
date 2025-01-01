@@ -22,59 +22,37 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
-
-			Append(CreateParameter("LocalityName", adVarChar, adParamOutput, 30, ""));
-			Append(CreateParameter("CompanyName", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("BranchName", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("BranchName2", adVarChar, adParamOutput, 50, ""));
-
-			Append(CreateParameter("CustomerName", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("ContractDate", adVarChar, adParamOutput, 10, ""));
-			Append(CreateParameter("ContractPAN", adVarChar, adParamOutput, 10, ""));
-
-			Append(CreateParameter("FactVol", adInteger, adParamOutput, 16, 0));
-			Append(CreateParameter("VolCost", adCurrency, adParamOutput, 16, 0));
-			Append(CreateParameter("Pdfo", adCurrency, adParamOutput, 16, 0));
-			Append(CreateParameter("Vz", adCurrency, adParamOutput, 16, 0));
-
-			Append(CreateParameter("ChiefTitle", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("ChiefName", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("ChiefTitle2", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("ChiefName2", adVarChar, adParamOutput, 50, ""));
-			Append(CreateParameter("Accountant", adVarChar, adParamOutput, 50, ""));
-		} Execute(adExecuteNoRecords);
-
-		with (Parameters) {
-			var LocalityName = Item("LocalityName").value,
-			CompanyName  = Item("CompanyName").value,
-			BranchName   = Item("BranchName").value,
-			BranchName2  = Item("BranchName2").value,
-
-			CustomerName = Item("CustomerName").value.replace(/ /g,"&nbsp"),
-			ContractDate = Item("ContractDate").value,
-			ContractPAN  = Item("ContractPAN").value,
-
-			FactVol      = Item("FactVol").value,
-			VolCost      = Item("VolCost").value,
-			Pdfo         = Item("Pdfo").value,
-			Vz           = Item("Vz").value,
-
-			ChiefTitle   = Item("ChiefTitle").value,
-			ChiefName    = Item("ChiefName").value,
-			ChiefTitle2  = Item("ChiefTitle2").value,
-			ChiefName2   = Item("ChiefName2").value.replace(/ /g,"&nbsp"),
-			Accountant   = Item("Accountant").value;
 		}
 	}
+	var rs = Solaren.Execute("GetAct", "Iнформацiю не знайдено");
+
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
 } finally {	
-	Connect.Close();
-	if (Solaren.Empty(VolCost)) {
-		Solaren.SysMsg(0, "Інформацію не знайдено")
-	} else {
-		Html.SetHead("Акт приймання-передачi");
+	with (rs) {
+		var LocalityName = Fields("LocalityName").value,
+		CompanyName  = Fields("CompanyName").value,
+		BranchName   = Fields("BranchName").value,
+		BranchName2  = Fields("BranchName2").value,
+
+		CustomerName = Fields("CustomerName").value.replace(/ /g,"&nbsp"),
+		ContractDate = Fields("ContractDate").value,
+		ContractPAN  = Fields("ContractPAN").value,
+
+		FactVol      = Fields("FactVol").value,
+		VolCost      = Fields("VolCost").value,
+		Pdfo         = Fields("Pdfo").value,
+		Vz           = Fields("Vz").value,
+
+		ChiefTitle   = Fields("ChiefTitle").value,
+		ChiefName    = Fields("ChiefName").value,
+		ChiefTitle2  = Fields("ChiefTitle2").value,
+		ChiefName2   = Fields("ChiefName2").value.replace(/ /g,"&nbsp"),
+		Accountant   = Fields("Accountant").value;
+		Close();
 	}
+	Connect.Close();
+	Html.SetHead("Акт приймання-передачi");
 }
 
 var Period   = Month.GetPeriod(ReportMonth, 1),
@@ -83,7 +61,7 @@ ActSum       = VolCost - Pdfo - Vz,
 WordSum      = Money.toWord(ActSum),
 Body         = [],
 Divider      = DoubleAct ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
-ResponseText = ['<BODY CLASS="ActContainer">\n']; 
+ResponseText = ['<BODY CLASS="ActContainer">\n'];
 
 for (var i=0; i<=DoubleAct; i++) {
 	if (i == 0) {
