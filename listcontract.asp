@@ -45,7 +45,7 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("HouseId")
 	],
 	url = ['<A href="editcontract.asp?ContractId=', rs.Fields("ContractId"), '">', rs.Fields("PAN"), '</A>'],
-	row = ['<TR>', Tag.Write("TD", "", url.join("")),
+	row = ['<TR>', Tag.Write("TD", -1, url.join("")),
 		Tag.Write("TD", 0, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, ContractAddress.join(" ")),
 		Tag.Write("TD", -1, rs.Fields("ContractDate")),
@@ -55,7 +55,9 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 	ResponseText.push(row.join(""));
 	totPwr += rs.Fields("ContractPower");
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
+}
+rs.Close();
+Connect.Close();
 var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>', Tag.Write("TH", 2, totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join(""))%>
