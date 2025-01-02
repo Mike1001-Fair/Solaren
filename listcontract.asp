@@ -30,10 +30,11 @@ try {
 	Html.SetPage("Список договорiв", User.RoleId)
 }
 
-var ResponseText = ['\n<BODY CLASS="MainBody">\n',
+var Header = ['Рахунок', 'Споживач', 'Адреса', 'Дата', 'ЦОС', 'Потужнiсть'],
+ResponseText = ['\n<BODY CLASS="MainBody">\n',
 	'<H3 CLASS="H3Text">Список договорiв</H3>\n',
 	'<TABLE CLASS="InfoTable">\n',
-	'<TR><TH>Рахунок</TH><TH>Споживач</TH><TH>Адреса</TH><TH>Дата</TH><TH>ЦОС</TH><TH>Потужнiсть</TH></TR>\n'
+	Html.GetHeadRow(Header)
 ];
 
 for (var i=totPwr=0; !rs.EOF; i++) {
@@ -44,17 +45,17 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("HouseId")
 	],
 	url = ['<A href="editcontract.asp?ContractId=', rs.Fields("ContractId"), '">', rs.Fields("PAN"), '</A>'],
-	row = ['<TR>', Html.WriteTag("TD", "", url.join("")),
-		Html.WriteTag("TD", "LEFT", rs.Fields("CustomerName")),
-		Html.WriteTag("TD", "", ContractAddress.join(" ")),
-		Html.WriteTag("TD", "", rs.Fields("ContractDate")),
-		Html.WriteTag("TD", "", rs.Fields("BranchName")),
-		Html.WriteTag("TD", "RIGHT", rs.Fields("ContractPower").value.toDelimited(1)), '</TR>\n'
+	row = ['<TR>', Tag.Write("TD", "", url.join("")),
+		Tag.Write("TD", 0, rs.Fields("CustomerName")),
+		Tag.Write("TD", -1, ContractAddress.join(" ")),
+		Tag.Write("TD", -1, rs.Fields("ContractDate")),
+		Tag.Write("TD", -1, rs.Fields("BranchName")),
+		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1)), '</TR>\n'
 	];
 	ResponseText.push(row.join(""));
 	totPwr += rs.Fields("ContractPower");
 	rs.MoveNext();
 } rs.Close(); Connect.Close();
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>', Html.WriteTag("TH", "RIGHT", totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'];
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>', Tag.Write("TH", 2, totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join(""))%>

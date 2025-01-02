@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Locality = {
-	Type: ["місто","селище","село","смт"],
+	Type: ["місто", "селище", "село", "смт"],
 
 	/*WriteLocalityType: function(tagName, LocalityType) {
 		var ResponseText = '<SELECT NAME="' + tagName + '" ID="' + tagName + '">',

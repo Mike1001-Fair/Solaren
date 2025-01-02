@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Street = {
-	Type: ["вулиця","проспект","бульвар","провулок","площа","тупік","шоссе","проїзд"],
+	Type: ["вулиця", "проспект", "бульвар", "провулок", "площа", "тупік", "шоссе", "проїзд"],
 
 	WriteType: function(tagName, StreetType) {
 		var ResponseText = ['<SELECT NAME="' + tagName + '">'],

@@ -49,13 +49,6 @@ var Html = {
 		return result.join("")
 	},
 
-	WriteTag: function(tagName, align, tagValue) {
-		var align = align ? ' ALIGN="' + align + '">' : '>',
-		result = ['<', tagName, align, tagValue, '</', tagName, '>'];
-		return result.join("")
-	},
-
-
 	WriteRole: function(tagName, RoleId) {
 		var ResponseText = ['<SELECT NAME="', tagName, '">'],
 		selected, option;
@@ -211,6 +204,19 @@ var Html = {
 		Response.Write(ResponseText);
 	},
 
+	GetHeadRow: function(header) {
+		var Row = ['<TR>'];
+		if (header && header instanceof Array && header.length > 0) {
+			for (var i = 0; i < header.length; i++) {
+				Row.push('<TH>' + header[i] + '</TH>');
+			}
+		} else {
+			Row.push('<TH>Invalid header array</TH>');
+		}
+		Row.push('</TR>\n');
+		return Row.join("");
+	},
+
 	GetFooterRow: function(ColSpan, i) {
 		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="', ColSpan,'">Всього: ', i, '</TH></TR>\n', '</TABLE></BODY></HTML>'];
 		return ResponseText.join("")
@@ -306,6 +312,16 @@ Image = {
 	Link: function(fileName) {
 		var Row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
 		return Row.join("");
+	}
+},
+
+Tag = {
+	Align: ["LEFT", "CENTER", "RIGHT"],
+
+	Write: function(tagName, index, tagValue) {
+		var alignText = this.Align[index] ? ' ALIGN="' + this.Align[index] + '">' : '>',
+		result = ['<', tagName, alignText, tagValue, '</', tagName, '>'];
+		return result.join("")
 	}
 },
 

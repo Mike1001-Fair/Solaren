@@ -106,22 +106,22 @@ for (var i=0; i<=DoubleReport; i++) {
 			periodSaldo = (recsaldo - retsaldo) * k;
 			totSaldo += periodSaldo;
 
-			row = ['<TR>', Html.WriteTag("TD", "CENTER", rs.Fields("MeterCode")),
-				Html.WriteTag("TD", "CENTER", "Прийом А+"),
-				Html.WriteTag("TD", "RIGHT", rs.Fields("RecVal")),
-				Html.WriteTag("TD", "RIGHT", rs.Fields("PrevRecVal")),
-				Html.WriteTag("TD", "RIGHT", recsaldo),
-				Html.WriteTag("TD", "CENTER", k),
-				Html.WriteTag("TD", "RIGHT", recsaldo * k), '</TR>',
-				'<TR>', Html.WriteTag("TD", "CENTER", rs.Fields("MeterCode")),
-				Html.WriteTag("TD", "CENTER", "Видача А-"),
-				Html.WriteTag("TD", "RIGHT", rs.Fields("RetVal")),
-				Html.WriteTag("TD", "RIGHT", rs.Fields("PrevRetVal")),
-				Html.WriteTag("TD", "RIGHT", retsaldo),
-				Html.WriteTag("TD", "CENTER",  k),
-				Html.WriteTag("TD", "RIGHT",  retsaldo * k), '</TR>',
+			row = ['<TR>', Tag.Write("TD", 1, rs.Fields("MeterCode")),
+				Tag.Write("TD", 1, "Прийом А+"),
+				Tag.Write("TD", 2, rs.Fields("RecVal")),
+				Tag.Write("TD", 2, rs.Fields("PrevRecVal")),
+				Tag.Write("TD", 2, recsaldo),
+				Tag.Write("TD", 1, k),
+				Tag.Write("TD", 2, recsaldo * k), '</TR>',
+				'<TR>', Tag.Write("TD", 1, rs.Fields("MeterCode")),
+				Tag.Write("TD", 1, "Видача А-"),
+				Tag.Write("TD", 2, rs.Fields("RetVal")),
+				Tag.Write("TD", 2, rs.Fields("PrevRetVal")),
+				Tag.Write("TD", 2, retsaldo),
+				Tag.Write("TD", 1,  k),
+				Tag.Write("TD", 2,  retsaldo * k), '</TR>',
 				'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
-				Html.WriteTag("TD", "RIGHT", periodSaldo), '</TR>\n'
+				Tag.Write("TD", 2, periodSaldo), '</TR>\n'
 			];
 			block.push(row.join(""));
 		}
