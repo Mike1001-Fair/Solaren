@@ -9,7 +9,7 @@ User.ValidateAccess(Authorized, "GET");
 
 var ServerInfo = {
 	Text: ['\n<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="HeadText">&#128187;' + Title + '</H3>\n',
+	'<H3 CLASS="HeadText">&#128187;', Title, '</H3>\n',
 	'<DIV CLASS="FormDiv">\n',
 	'<FIELDSET CLASS="FieldSet">\n',
 	'<LEGEND>Параметри</LEGEND><TABLE CLASS="RulesAllInfo">\n',
@@ -17,8 +17,7 @@ var ServerInfo = {
 
 	AddRow: function(Key, Value) {
 		if (Value != "") {
-			var td = Html.Write("TD","LEFT"),
-			row = ['<TR><TD ALIGN="RIGHT">', Key, td, Value, '</TD></TR>\n'];
+			var row = ['<TR>', Tag.Write("TD", 2, Key), Tag.Write("TD", 0, Value), '</TR>'];
 			this.Text.push(row.join(""));
 		}
 	},

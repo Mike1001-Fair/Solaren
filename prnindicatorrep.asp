@@ -72,7 +72,7 @@ ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, Contra
 BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName].join(" "),
 DocRef          = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
 Body            = [],
-Divider         = DoubleReport ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
+Divider         = '<DIV CLASS="BlockDivider"></DIV>\n',
 ResponseText    = ['<BODY CLASS="ActContainer">\n'];
 
 Html.SetHead("Звіт про показники");

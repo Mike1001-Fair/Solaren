@@ -2,11 +2,11 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1,
-Title = "Звіт";
-
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
     var BegMonth = String(Form("BegMonth")),
@@ -17,46 +17,56 @@ try {
 	Solaren.SetCmd("ListVolPay");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegMonth", adVarChar, adParamInput, 10, BegMonth));
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListVolPay", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Html.SetHead("Енергозбереження");
 }
 
 var Period = Month.GetPeriod(BegMonth, 0),
 pwr = totRetVol = totPurVol = totPaySum = 0;
-if (BegMonth != EndMonth) Period += " - " + Month.GetPeriod(EndMonth, 0);
 
-Html.SetHead(Title);
-var ResponseText = '<BODY CLASS="PrnBody">\n' +
-	'<H3 CLASS="H3PrnTable">Енергозбереження</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>\n' +
-	'<TABLE CLASS="PrnTable">\n' +
-	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>Адреса</TH><TH>Дата</TH><TH>Потужнiсть<BR>кВт</TH><TH>Видача<BR>кВт&#183;год</TH><TH>Покупка<BR>кВт&#183;год</TH><TH>Оплата<BR>&#8372;</TH></TR>\n';
+if (BegMonth != EndMonth) {
+	Period += " - " + Month.GetPeriod(EndMonth, 0);
+}
+
+var Header = ['Споживач', 'Рахунок', 'Адреса', 'Дата', 'Потужнiсть<BR>кВт', 'Видача<BR>кВт&#183;год', 'Покупка<BR>кВт&#183;год', 'Оплата<BR>&#8372;'],
+ResponseText = ['<BODY CLASS="PrnBody">\n',
+	'<H3 CLASS="H3PrnTable">', Html.Title, '</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>\n',
+	'<TABLE CLASS="PrnTable">\n',
+	Html.GetHeadRow(Header)
+];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("CustomerName") +
-	Html.Write("TD","") + rs.Fields("ContractPAN") +
-	Html.Write("TD","") + rs.Fields("CustomerAddress") +
-	Html.Write("TD","") + rs.Fields("ContractDate") +
-	Html.Write("TD","RIGHT") + rs.Fields("ContractPower").value.toDelimited(2) +
-	Html.Write("TD","RIGHT") + rs.Fields("RetVol").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("PurVol").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("PaySum").value.toDelimited(2) + '</TD></TR>\n';
+	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CustomerName")),
+		Tag.Write("TD", -1, rs.Fields("ContractPAN")),
+		Tag.Write("TD", -1, rs.Fields("CustomerAddress")),
+		Tag.Write("TD", -1, rs.Fields("ContractDate")),
+		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("PaySum").value.toDelimited(2)), '</TR>\n'
+	];
+	ResponseText.push(row.join(""));
 	pwr += rs.Fields("ContractPower");
-	totRetVol  += rs.Fields("RetVol");
-	totPurVol  += rs.Fields("PurVol");
-	totPaySum  += rs.Fields("PaySum");
+	totRetVol += rs.Fields("RetVol");
+	totPurVol += rs.Fields("PurVol");
+	totPaySum += rs.Fields("PaySum");
 	rs.MoveNext();
 } rs.Close();Connect.Close();
 
-ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i +
-	Html.Write("TH","RIGHT") + pwr.toDelimited(2) +
-	Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
-	Html.Write("TH","RIGHT") + totPurVol.toDelimited(0) +
-	Html.Write("TH","RIGHT") + totPaySum.toDelimited(2) + '</TH></TR>\n</TABLE></BODY></HTML>';
-Response.Write(ResponseText)%>
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ', i,
+	Tag.Write("TH", 2, pwr.toDelimited(2)),
+	Tag.Write("TH", 2, totRetVol.toDelimited(0)),
+	Tag.Write("TH", 2, totPurVol.toDelimited(0)),
+	Tag.Write("TH", 2, totPaySum.toDelimited(2)),
+	'</TR>\n</TABLE></BODY></HTML>'
+];
+ResponseText.push(footer.join(""));
+Response.Write(ResponseText.join(""))%>

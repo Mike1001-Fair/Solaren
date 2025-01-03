@@ -59,7 +59,7 @@ ActDate      = Month.GetLastDay(ReportMonth),
 ActSum       = VolCost - Pdfo - Vz,
 WordSum      = Money.toWord(ActSum),
 Body         = [],
-Divider      = DoubleAct ? '<DIV CLASS="BlockDivider"></DIV>\n' : '',
+Divider      = '<DIV CLASS="BlockDivider"></DIV>\n',
 ResponseText = ['<BODY CLASS="ActContainer">\n'];
 
 for (var i=0; i<=DoubleAct; i++) {

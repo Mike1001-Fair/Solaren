@@ -3,8 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 0,
-Title = "Користувачi";
+<% var Authorized = User.RoleId == 0;
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
@@ -27,24 +26,29 @@ try {
 	var rs = Solaren.Execute("ListUsers", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Html.SetPage("Користувачi", User.RoleId);
 }
 
-Html.SetPage(Title, User.RoleId);
-
-var ResponseText = ['<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">' + Title + '</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>Логiн</TH><TH>Роль</TH><TH>Ip</TH><TH>Пiдключився</TH><TH>Агент</TH></TR>\n'
+var Header = ['Логiн', 'Роль', 'Ip', 'Пiдключився', 'Агент'],
+ResponseText = ['<BODY CLASS="MainBody">\n',
+	'<H3 CLASS="H3Text">', Html.Title, '</H3>\n',
+	'<TABLE CLASS="InfoTable">\n',
+	Html.GetHeadRow(Header)
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText.push('<TR ALIGN="LEFT"><TD><A HREF="edituser.asp?UserId=' + rs.Fields("Id") + '">' + rs.Fields("LoginId") + '</A></TD>' +
-		Html.Write("TD","") + User.Role[rs.Fields("RoleId")] +
-		Html.Write("TD","CENTER") + rs.Fields("UserIP") +
-		Html.Write("TD","") + rs.Fields("LastLogin") +
-		Html.Write("TD","") + rs.Fields("UserAgent") + '</TD></TR>\n');
+	var url = ['<A HREF="edituser.asp?UserId=', rs.Fields("Id"), '">', rs.Fields("LoginId"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", -1, url.join("")),
+		Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
+		Tag.Write("TD", 1, rs.Fields("UserIP")),
+		Tag.Write("TD", -1, rs.Fields("LastLogin")),
+		Tag.Write("TD", -1, rs.Fields("UserAgent"), '</TR>\n')
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close();Connect.Close();
-
+}
+rs.Close();
+Connect.Close();
 ResponseText.push(Html.GetFooterRow(5, i));
 Response.Write(ResponseText.join(""))%>
