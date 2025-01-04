@@ -12,24 +12,36 @@
 		retvalprev =+ RetValPrev.value,
 		k          = Ktf.value;
 
-	    let recsaldo   = (recval - recvalprev)*k,
-		retsaldo   = (retval - retvalprev)*k,
+	    let recsaldo   = (recval - recvalprev) * k,
+		retsaldo   = (retval - retvalprev) * k,
 		totsaldo   = recsaldo - retsaldo,
 		limitsaldo = ContractPower.value * Period * HoursLimit.value,
-		notsaldo   = isNaN(totsaldo) || recsaldo < 0 || retsaldo < 0 || (!retsaldo && !recsaldo) || retsaldo > limitsaldo || recval > RecVal.max || retval > RetVal.max;
+		notsaldo   = isNaN(totsaldo) || recsaldo < 0 || retsaldo < 0 || (!retsaldo && !recsaldo) 
+				|| retsaldo > limitsaldo || recval > RecVal.max || retval > RetVal.max;
 
-		if (recsaldo < 0 && ZeroRec.checked) recsaldo += (RecVal.max + 1)*k;
-		if (retsaldo < 0 && ZeroRet.checked) retsaldo += (RetVal.max + 1)*k;
+		if (recsaldo < 0 && ZeroRec.checked) {
+			recsaldo += (RecVal.max + 1) * k;
+		}
+
+		if (retsaldo < 0 && ZeroRet.checked) {
+			retsaldo += (RetVal.max + 1) * k;
+		}
 
 		RecSaldo.value = isNaN(recsaldo) ? "" : recsaldo;
 		RecSaldo.style.color = recsaldo < 0 ? "#FF0000" : "#000000";
 		ZeroRec.disabled = recval >= recvalprev || isNaN(recsaldo);
-		if (recval >= recvalprev) ZeroRec.checked = false;
+		if (recval >= recvalprev) {
+			ZeroRec.checked = false;
+		}
+
 		RetSaldo.value = isNaN(retsaldo) ? "" : retsaldo;
 		RetSaldo.style.color = (retsaldo < 0 || retsaldo > limitsaldo) ? "#FF0000" : "#000000";
 		RetSaldo.title = isNaN(limitsaldo) ? "" : "Максимум: " + limitsaldo.toFixed(0);
 		ZeroRet.disabled = retval >= retvalprev || isNaN(retsaldo);
-		if (retval >= retvalprev) ZeroRet.checked = false;
+		if (retval >= retvalprev) {
+			ZeroRet.checked = false;
+		}
+
 		TotSaldo.value = isNaN(totsaldo) ? "" : Math.abs(totsaldo);
 		TotSaldo.style.color = notsaldo ? "#FF0000" : "#000000";
 		SbmBtn.disabled = !ReportDate.validity.valid || MeterId.value == "" || notsaldo;		

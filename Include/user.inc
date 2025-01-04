@@ -1,7 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var User = {
 	Role   : ["Адмiнiстратор","Виконавець","Технік ЦОС"],
-	MaxAttempts: 10,
 	PswdLen: 10,
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
@@ -28,7 +27,7 @@ var User = {
 	},
 
 	ValidateRole: function(RoleId, UserGUID) {
-		//Response.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + UserGUID + "<BR>ValidUser=" + ValidUser + "<BR>Token=" + Session("Token"));
+		//Response.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return RoleId == this.RoleId && this.Role[RoleId] && this.GuidRe.test(UserGUID) 
 	},
 
@@ -62,8 +61,9 @@ var User = {
 	},
 
 	GetPswd: function() {
-		var Pswd = "";
-		for (var i = 0; i < this.MaxAttempts && Pswd == ""; i++) {
+		var maxAttempts = 10,
+		Pswd = "";
+		for (var i = 0; i < maxAttempts && Pswd == ""; i++) {
 			for (var j = 0; j < this.PswdLen; j++) {
 				Pswd += String.fromCharCode(Solaren.GetRandInt(33, 126));
 			}

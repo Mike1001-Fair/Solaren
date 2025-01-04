@@ -38,7 +38,7 @@ if (BegMonth != EndMonth) {
 
 var Header = ['Споживач', 'Рахунок', 'Адреса', 'Дата', 'Потужнiсть<BR>кВт', 'Видача<BR>кВт&#183;год', 'Покупка<BR>кВт&#183;год', 'Оплата<BR>&#8372;'],
 ResponseText = ['<BODY CLASS="PrnBody">\n',
-	'<H3 CLASS="H3PrnTable">', Html.Title, '</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>\n',
+	'<H3 CLASS="H3PrnTable">', Html.Title, '</H3><SPAN CLASS="H3PrnTable">перiод: ', Period, '</SPAN>\n',
 	'<TABLE CLASS="PrnTable">\n',
 	Html.GetHeadRow(Header)
 ];

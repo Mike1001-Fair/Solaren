@@ -2,11 +2,11 @@
 const User = {
 	PswdLen: 10,
 	PswdRe: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
-	MaxAttempts: 10,
 
 	get Pswd() {
+		const maxAttempts = 10;
 		let Pswd = "";
-		for (let i = 0; i < this.MaxAttempts && Pswd == ""; i++) {
+		for (let i = 0; i < maxAttempts && Pswd == ""; i++) {
 			for (let j = 0; j < this.PswdLen; j++) {
 				Pswd += String.fromCharCode(randInt(33, 126))
 			}
