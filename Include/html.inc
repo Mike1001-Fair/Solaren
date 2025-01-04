@@ -30,9 +30,9 @@ var Html = {
 	},
 
 	WriteScript: function() {
-		var ScriptName = Solaren.ScriptName.split("/").pop();
-		FileArr        = ScriptName.split('.'),
-		FileName       = [Scripts.Path, FileArr[0].toLowerCase(), ".js?", this.Version],
+		var ScriptName = Solaren.ScriptName.split("/").pop(),
+		FileParts      = ScriptName.split('.'),
+		FileName       = [Scripts.Path, FileParts[0].toLowerCase(), ".js?", this.Version],
 		ResponseText   = ['<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
 		Response.Write(ResponseText.join(""));
 	},
@@ -276,11 +276,10 @@ Styles = {
 	Files: ["solaren", "body", "table", "loader", "button", "menu"],
 
 	Write: function() {
-		var Block = [],
-		Row;
+		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			Row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">\n'];
-			Block.push(Row.join(""));
+			var row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">\n'];
+			Block.push(row.join(""));
 		}
 		return Block.join("");
 	}
@@ -291,11 +290,10 @@ Scripts = {
 	Files: ["lib", "loader", "user", "resource", "menu", "ajax"],
 
 	Write: function() {
-		var Block = [],
-		Row;
+		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			Row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>\n'];
-			Block.push(Row.join(""));
+			var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>\n'];
+			Block.push(row.join(""));
 		}
 		return Block.join("");
 	}
@@ -310,8 +308,8 @@ Image = {
 	},
 
 	Link: function(fileName) {
-		var Row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
-		return Row.join("");
+		var row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
+		return row.join("");
 	}
 },
 

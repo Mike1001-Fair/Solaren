@@ -61,7 +61,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 } rs.Close();Connect.Close();
 
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ', i,
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, pwr.toDelimited(2)),
 	Tag.Write("TH", 2, totRetVol.toDelimited(0)),
 	Tag.Write("TH", 2, totPurVol.toDelimited(0)),
