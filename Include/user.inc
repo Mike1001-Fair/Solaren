@@ -1,20 +1,21 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var User = {
 	Role   : ["Адмiнiстратор","Виконавець","Технік ЦОС"],
+	MaxAttempts: 10,
 	PswdLen: 10,
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
-	Ip     : Request.ServerVariables("REMOTE_ADDR"),
-	Agent  : Request.ServerVariables("HTTP_USER_AGENT"),
-	Method : Request.ServerVariables("REQUEST_METHOD"),
-	Id     : Session("UserId"),
-	GUID   : Session("UserGUID"),
-	RoleId : Session("RoleId"),
-	Token  : Session("Token"),
+	Ip     : Server.HTMLEncode(Request.ServerVariables("REMOTE_ADDR")),
+	Agent  : Server.HTMLEncode(Request.ServerVariables("HTTP_USER_AGENT")),
+	Method : Server.HTMLEncode(Request.ServerVariables("REQUEST_METHOD")),
+	Hal    : Server.HTMLEncode(String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE"))),
+	Id     : Server.HTMLEncode(Session("UserId")),
+	GUID   : Server.HTMLEncode(Session("UserGUID")),
+	RoleId : Server.HTMLEncode(Session("RoleId")),
+	Token  : Server.HTMLEncode(Session("Token")),
 
 	Language: function() {
-		var hal = String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")),
-		regionSet = hal.split(",")[0];
+		var regionSet = this.Hal.split(",")[0];
 		return regionSet.split("-")[0]
 	},
 
@@ -62,12 +63,15 @@ var User = {
 
 	GetPswd: function() {
 		var Pswd = "";
-		while (Pswd == "") {
-			for (var i=0; i < this.PswdLen; i++) {
-				Pswd += String.fromCharCode(Solaren.GetRandInt(33, 126))
-			};
-			if (!this.PswdRe.test(Pswd)) Pswd = "";
-		} return Pswd;
+		for (var i = 0; i < this.MaxAttempts && Pswd == ""; i++) {
+			for (var j = 0; j < this.PswdLen; j++) {
+				Pswd += String.fromCharCode(Solaren.GetRandInt(33, 126));
+			}
+			if (!this.PswdRe.test(Pswd)) {
+				Pswd = "";
+			}
+		}
+		return Pswd;
 	},
 
 	ValidateAccess: function(Authorized, method) {
