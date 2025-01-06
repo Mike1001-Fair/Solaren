@@ -33,7 +33,7 @@ try {
 	<TR><TD ALIGN="RIGHT">Перiод</TD>
 	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=OperMonth%>" MIN="<%=OperMonth%>" MAX="<%=OperMonth%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Кiлькicть</TD>
-	<TD><INPUT TYPE="number" NAME="CustomerCount" VALUE="90" STEP="1" MIN="30" MAX="999" REQUIRED>
+	<TD><INPUT TYPE="number" NAME="CustomerCount" VALUE="80" STEP="1" MIN="30" MAX="999" REQUIRED>
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>
 	<TD><%Html.WriteSelect(rs, "Chief", 0, -1)%></TD></TR>
 	</TABLE></FIELDSET></TD></TR>

@@ -5,16 +5,18 @@ const User = {
 
 	get Pswd() {
 		const maxAttempts = 10;
-		let Pswd = "";
-		for (let i = 0; i < maxAttempts && Pswd == ""; i++) {
+		let pswd = "";
+		for (let i = 0; i < maxAttempts && pswd == ""; i++) {
+			let chars = [];
 			for (let j = 0; j < this.PswdLen; j++) {
-				Pswd += String.fromCharCode(randInt(33, 126))
+				chars.push(String.fromCharCode(randInt(33, 126)))
 			}
-			if (!this.PswdRe.test(Pswd)) {
-				Pswd = "";
+			pswd = chars.join("");
+			if (!this.PswdRe.test(pswd)) {
+				pswd = "";
 			}
 		}
-		return Pswd;
+		return pswd;
 	},
 
 	get FileName() {
