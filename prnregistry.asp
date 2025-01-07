@@ -43,11 +43,6 @@ try {
 		ChiefName       = Fields("ChiefName").value,
 		ChiefTitle2     = Fields("ChiefTitle2").value,
 		ChiefName2      = Fields("ChiefName2").value,
-		TreasuryName    = Fields("TreasuryName").value,
-		TreasuryCode    = Fields("TreasuryCode").value,
-		TreasuryAccount = Fields("TreasuryAccount").value,
-		TreasuryName    = Fields("TreasuryName").value,
-		TreasuryMfo     = Fields("TreasuryMfo").value,
 		ContractorName  = Fields("ContractorName").value,
 		Phone           = Fields("Phone").value;
 		Close();
@@ -55,19 +50,21 @@ try {
 	Html.SetHead("Реєстр");
 }
 
-var Period = Month.GetPeriod(ReportMonth, 1),
-PageBreak    = '<P CLASS="PageBreak"></P>\n',
-Note         = [],
+var Note = [],
+Header   = ['Контрагент', 'Реквiзити', 'Призначення', 'Сума &#8372;'],
+TopTitle = [TopChiefTitle3, CompanyName, TopChiefName3, ChiefTitle2, ChiefName2],
+Period   = Month.GetPeriod(ReportMonth, 1),
+PageBreak = '<P CLASS="PageBreak"></P>\n',
 ResponseText = ['<BODY CLASS="PrnBody">\n'];
 
 for (var n = 1; !rs.EOF; n++) {
-	var totPurCost = 0, totVz = 0;
+	var totPurCost = 0;
 	block = ['<TABLE CLASS="NoBorderTable">\n',
-		'<TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%">' + TopChiefTitle3 + ' ' + CompanyName + '<BR>' + TopChiefName3 + '<BR>' + ChiefTitle2 + '<BR>' + ChiefName2 + '</TD></TR></TABLE>\n',
-		'<H3 CLASS="H3PrnTable">Службовий лист №' + n + '</H3>\n',
-		'<P>Прошу здiйснити оплату по договорам купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, згiдно актiв приймання-передачi електричної енергiї в ' + Period + '</P>\n',
+		'<TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%">', TopTitle.join('<BR>'), '</TD></TR></TABLE>\n',
+		'<H3 CLASS="H3PrnTable">Службовий лист №', n, '</H3>\n',
+		'<P>Прошу здiйснити оплату по договорам купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, згiдно актiв приймання-передачi електричної енергiї в ', Period, '</P>\n',
 		'<TABLE CLASS="PrnTable" WIDTH="100%">\n',
-		'<TR><TH>Контрагент</TH><TH>Реквiзити</TH><TH>Призначення</TH><TH>Сума &#8372;</TH></TR>\n'
+		Html.GetHeadRow(Header)
 	];
 
 	for (var i = 0; i < CustomerCount && !rs.EOF; i++) {
