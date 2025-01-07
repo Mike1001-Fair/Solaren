@@ -58,7 +58,7 @@ PageBreak = '<P CLASS="PageBreak"></P>\n',
 ResponseText = ['<BODY CLASS="PrnBody">\n'];
 
 for (var n = 1; !rs.EOF; n++) {
-	var totPurCost = 0;
+	var totPurCost = 0,
 	block = ['<TABLE CLASS="NoBorderTable">\n',
 		'<TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%">', TopTitle.join('<BR>'), '</TD></TR></TABLE>\n',
 		'<H3 CLASS="H3PrnTable">Службовий лист №', n, '</H3>\n',
