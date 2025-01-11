@@ -68,10 +68,11 @@ var Period      = Month.GetPeriod(ReportMonth, 1),
 EndDate         = Month.GetLastDay(ReportMonth),
 LocalityType    = Locality.Type[ContractLocalityType],
 StreetType      = Street.Type[ContractStreetType],
-ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, ContractStreetName, HouseId].join(" "),
-BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName].join(" "),
+ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, ContractStreetName, HouseId],
+BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName],
 DocRef          = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
 Body            = [],
+Caption         = ['Споживач: ' + CustomerName, 'Рахунок: ' + ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
 Divider         = '<DIV CLASS="BlockDivider"></DIV>\n',
 ResponseText    = ['<BODY CLASS="ActContainer">\n'];
 
@@ -83,9 +84,9 @@ for (var i=0; i<=DoubleReport; i++) {
 		block = ['<DIV CLASS="ActText">\n<TABLE CLASS="NoBorderTable">\n',
 			'<TR><TD></TD><TD CLASS="ReportTitle">', DocRef.join(""), '</TD></TR>\n',
 			'</TABLE>\n',
-			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>\n',
+			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ', Period, '</SPAN>\n',
 			'<TABLE CLASS="ActTable">\n',
-			'<CAPTION>Споживач: ' + CustomerName + '<BR>Рахунок: ' + ContractPAN + '<BR>Адреса: ' + ContractAddress + '</CAPTION>\n',
+			'<CAPTION>', Caption.join('<BR>'), '</CAPTION>\n',
 			'<TR><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>',
 			'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>\n',
 			'<TR><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
@@ -133,7 +134,7 @@ for (var i=0; i<=DoubleReport; i++) {
 			'<TR><TD>' + ChiefTitle + ' ' + ChiefName + '</TD><TD></TD></TR>\n',
 			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD>\n',
 			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>\n</TABLE>\n',
-			'<DIV CLASS="EventInfo">' + BranchLocality + ', ' + EndDate + '</DIV></DIV>\n'
+			'<DIV CLASS="EventInfo">' + BranchLocality.join(" ") + ', ' + EndDate + '</DIV></DIV>\n'
 		];
 		block.push(footer.join(""));
 	}

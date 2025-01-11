@@ -19,22 +19,23 @@ try {
 	var rs = Solaren.Execute("ListCompany", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Html.SetPage("Список компаній", User.RoleId);
 }
 
-Html.SetPage("Список компаній", User.RoleId);
-
-var ResponseText = ['<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n',
+var Header = ['ЄДРПОУ', 'ІПН', 'Назва', 'Телефон'],
+ResponseText = ['<BODY CLASS="MainBody">\n',
+	'<H3 CLASS="H3Text">', Html.Title, '</H3>\n',
 	'<TABLE CLASS="InfoTable">\n',
-	'<TR><TH>ЄДРПОУ</TH><TH>ІПН</TH><TH>Назва</TH><TH>Телефон</TH></TR>\n'
+	Html.GetHeadRow(Header)
 ];
 
-for (var i=0, row; !rs.EOF; i++) {
-	row = ['<TR><TD>' + rs.Fields("CompanyCode"),
-		Html.Write("TD","") + rs.Fields("TaxCode"),
-		Html.Write("TD","") + '<A href="editcompany.asp?CompanyId=' + rs.Fields("Id") + '">' + rs.Fields("CompanyName") + '</A></TD>',
-		Html.Write("TD","") + rs.Fields("Phone"),
-		'</TD></TR>\n'
+for (var i=0; !rs.EOF; i++) {
+	var url = ['<A href="editcompany.asp?CompanyId=', rs.Fields("Id"), '">', rs.Fields("CompanyName"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CompanyCode")),
+		Tag.Write("TD", -1, rs.Fields("TaxCode")),
+		Tag.Write("TD", -1, url.join("")),
+		Tag.Write("TD", -1, rs.Fields("Phone")), '</TR>\n'
 	];
 	ResponseText.push(row.join(""));
 	rs.MoveNext();
