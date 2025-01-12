@@ -37,9 +37,10 @@ if (BegMonth != EndMonth) {
 }
 
 var Header = ['Споживач', 'Рахунок', 'Адреса', 'Дата', 'Потужнiсть<BR>кВт', 'Видача<BR>кВт&#183;год', 'Покупка<BR>кВт&#183;год', 'Оплата<BR>&#8372;'],
-ResponseText = ['<BODY CLASS="PrnBody">\n',
-	'<H3 CLASS="H3PrnTable">', Html.Title, '</H3><SPAN CLASS="H3PrnTable">перiод: ', Period, '</SPAN>\n',
-	'<TABLE CLASS="PrnTable">\n',
+ResponseText = ['<BODY CLASS="PrnBody">',
+	'<H3 CLASS="H3PrnTable">' + Html.Title + '</H3>',
+	'<SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+	'<TABLE CLASS="PrnTable">',
 	Html.GetHeadRow(Header)
 ];
 
@@ -51,7 +52,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("PaySum").value.toDelimited(2)), '</TR>\n'
+		Tag.Write("TD", 2, rs.Fields("PaySum").value.toDelimited(2)), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	pwr += rs.Fields("ContractPower");
@@ -69,4 +70,4 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ', i, '</TH>',
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
 ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>

@@ -54,16 +54,16 @@ var Note = [],
 Header   = ['Контрагент', 'Реквiзити', 'Призначення', 'Сума &#8372;'],
 TopTitle = [TopChiefTitle3, CompanyName, TopChiefName3, ChiefTitle2, ChiefName2],
 Period   = Month.GetPeriod(ReportMonth, 1),
-PageBreak = '<P CLASS="PageBreak"></P>\n',
-ResponseText = ['<BODY CLASS="PrnBody">\n'];
+PageBreak = '<P CLASS="PageBreak"></P>',
+ResponseText = ['<BODY CLASS="PrnBody">'];
 
 for (var n = 1; !rs.EOF; n++) {
 	var totPurCost = 0,
-	block = ['<TABLE CLASS="NoBorderTable">\n',
-		'<TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%">', TopTitle.join('<BR>'), '</TD></TR></TABLE>\n',
-		'<H3 CLASS="H3PrnTable">Службовий лист №', n, '</H3>\n',
-		'<P>Прошу здiйснити оплату по договорам купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, згiдно актiв приймання-передачi електричної енергiї в ', Period, '</P>\n',
-		'<TABLE CLASS="PrnTable" WIDTH="100%">\n',
+	block = ['\n<TABLE CLASS="NoBorderTable">',
+		'<TR><TD>&nbsp</TD><TD ALIGN="LEFT" WIDTH="55%">' + TopTitle.join('<BR>') + '</TD></TR></TABLE>',
+		'<H3 CLASS="H3PrnTable">Службовий лист №' + n + '</H3>',
+		'<P>Прошу здiйснити оплату по договорам купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, згiдно актiв приймання-передачi електричної енергiї в ' + Period + '</P>',
+		'<TABLE CLASS="PrnTable" WIDTH="100%">',
 		Html.GetHeadRow(Header)
 	];
 
@@ -75,24 +75,24 @@ for (var n = 1; !rs.EOF; n++) {
 		row = ['<TR>', Tag.Write("TD", -1,  customerInfo.join('<BR>')),
 			Tag.Write("TD", -1, 'ІПН: ' + details.join('<BR>')),
 			Tag.Write("TD", -1, noteText.join('')),
-			Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2)), '</TR>\n'
+			Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2)), '</TR>'
 		];
 		block.push(row.join(""));
 		totPurCost += rs.Fields("PurCost").value;
 		rs.MoveNext();		
 	}
 
-	var footer = ['</TABLE>\n',
-		'<TABLE CLASS="NoBorderTable">\n' +
-		'<TR><TD><B>Всього: ', totPurCost.toDelimited(2), '</B></TD>',
-		'<TD ALIGN="RIGHT"><SUP>вик: ', ContractorName, ', 📞', Phone, '</SUP><DIV CLASS="UnderLine"></DIV></TD>',
-		'</TR></TABLE>\n'
+	var footer = ['</TABLE>',
+		'<TABLE CLASS="NoBorderTable">',
+		'<TR><TD><B>Всього: ' + totPurCost.toDelimited(2) + '</B></TD>',
+		'<TD ALIGN="RIGHT"><SUP>вик: ' + ContractorName + ', 📞' + Phone + '</SUP><DIV CLASS="UnderLine"></DIV></TD>',
+		'</TR></TABLE>'
 	];
-	block.push(footer.join(""));
-	Note.push(block.join(""));
+	block.push(footer.join("\n"));
+	Note.push(block.join("\n"));
 }
 rs.Close();
 Connect.Close();
 ResponseText.push(Note.join(PageBreak));
 ResponseText.push('</BODY></HTML>');
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>
