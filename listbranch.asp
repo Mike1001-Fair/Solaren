@@ -1,12 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 
-with (Request) {
-	var BranchName = Form("BranchName");
-}
+<% var Authorized = User.RoleId < 2,
+BranchName = Request.Form("BranchName");
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListBranch");
@@ -15,27 +15,32 @@ try {
 			Append(CreateParameter("BranchName", adVarChar, adParamInput, 10, BranchName));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListBranch", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
-	with (Html) {
-		SetHead("Список ЦОС");
-		WriteScript();
-		Menu.Write(Session("RoleId"), 0);
-	}
+	Html.SetPage("Список ЦОС", User.RoleId);
+}
 
-	Response.Write('<BODY CLASS="MainBody">\n' +
-		'<H3 CLASS="H3Text">Список ЦОС</H3>\n' +
-		'<TABLE CLASS="InfoTable">\n' +
-		'<TR><TH>№</TH><TH>Назва</TH><TH>Керiвник</TH><TH>Бухгалтер</TH></TR>\n');
-	for (var i=0; !rs.EOF; i++) {
-		Response.Write('<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
-		Html.Write("TD","") + '<A href="editbranch.asp?BranchId=' + rs.Fields("BranchId") + '">' + rs.Fields("BranchName") + '</A></TD>' +
-		Html.Write("TD","") + rs.Fields("ChiefName") +
-		Html.Write("TD","") + rs.Fields("Accountant") + '</TD></TR>\n');
-		rs.MoveNext();
-	} rs.Close();Connect.Close();
-	Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')
-}%>
+var Header = ['№', 'Назва', 'Керiвник', 'Бухгалтер'],
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	Html.GetHeadRow(Header)
+];
+
+for (var i=0; !rs.EOF; i++) {
+	var url = ['<A href="editbranch.asp?BranchId=', rs.Fields("BranchId"), '">', rs.Fields("BranchName"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", 2, rs.Fields("SortCode")),
+		Tag.Write("TD", -1, url.join("")),
+		Tag.Write("TD", -1, rs.Fields("ChiefName")),
+		Tag.Write("TD", -1, rs.Fields("Accountant")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
+	rs.MoveNext();
+}
+rs.Close();
+Connect.Close();
+ResponseText.push(Html.GetFooterRow(4, i));
+Response.Write(ResponseText.join("\n"));
+%>

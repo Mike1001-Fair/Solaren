@@ -31,9 +31,9 @@ try {
 }
 
 var Header = ['Рахунок', 'Споживач', 'Адреса', 'Дата', 'ЦОС', 'Потужнiсть'],
-ResponseText = ['\n<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="H3Text">Список договорiв</H3>\n',
-	'<TABLE CLASS="InfoTable">\n',
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">Список договорiв</H3>',
+	'<TABLE CLASS="InfoTable">',
 	Html.GetHeadRow(Header)
 ];
 
@@ -50,7 +50,7 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		Tag.Write("TD", -1, ContractAddress.join(" ")),
 		Tag.Write("TD", -1, rs.Fields("ContractDate")),
 		Tag.Write("TD", -1, rs.Fields("BranchName")),
-		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1)), '</TR>\n'
+		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1)), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	totPwr += rs.Fields("ContractPower");
@@ -60,4 +60,4 @@ rs.Close();
 Connect.Close();
 var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>', Tag.Write("TH", 2, totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'];
 ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>

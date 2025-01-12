@@ -6,7 +6,7 @@
 
 <% var Authorized = User.RoleId < 2,
 CompanyName = Request.Form("CompanyName");
-User.ValidateAccess(Authorized, "POST")
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListCompany");
@@ -24,9 +24,9 @@ try {
 }
 
 var Header = ['ЄДРПОУ', 'ІПН', 'Назва', 'Телефон'],
-ResponseText = ['<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="H3Text">', Html.Title, '</H3>\n',
-	'<TABLE CLASS="InfoTable">\n',
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
 	Html.GetHeadRow(Header)
 ];
 
@@ -35,7 +35,7 @@ for (var i=0; !rs.EOF; i++) {
 	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CompanyCode")),
 		Tag.Write("TD", -1, rs.Fields("TaxCode")),
 		Tag.Write("TD", -1, url.join("")),
-		Tag.Write("TD", -1, rs.Fields("Phone")), '</TR>\n'
+		Tag.Write("TD", -1, rs.Fields("Phone")), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	rs.MoveNext();
@@ -44,4 +44,4 @@ for (var i=0; !rs.EOF; i++) {
 rs.Close();
 Connect.Close();
 ResponseText.push(Html.GetFooterRow(4, i));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>

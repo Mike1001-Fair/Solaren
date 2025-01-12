@@ -217,7 +217,7 @@ var Html = {
 		} else {
 			Row.push('<TH>Invalid header array</TH>');
 		}
-		Row.push('</TR>\n');
+		Row.push('</TR>');
 		return Row.join("");
 	},
 
