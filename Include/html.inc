@@ -6,26 +6,26 @@ var Html = {
 
 	SetHead: function(Title) {
 		this.Title = Title;
-		var ResponseText = [
-			'<!DOCTYPE html>\n',
-			'<HTML LANG="en">\n',
-			'<HEAD>\n',
-			'<META charset="utf-8">\n',
-			'<META NAME="author" CONTENT="' + this.Author + '">\n',
-			'<META NAME="copyright" CONTENT="' + this.Author + '">\n',
-			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">\n',
-			//'<META HTTP-EQUIV="Content-Security-Policy" CONTENT="default-src \'self\'; SCRIPT-SRC \'self\'">\n',
-			'<TITLE>' + Title + '</TITLE>\n',
+		var Head = [
+			'<META charset="utf-8">',
+			'<META NAME="author" CONTENT="' + this.Author + '">',
+			'<META NAME="copyright" CONTENT="' + this.Author + '">',
+			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
+			'<TITLE>' + Title + '</TITLE>',
 			Image.Link("sun.svg"),
 			Styles.Write(),
-			Scripts.Write(),			
-			'</HEAD>\n'
-		];
+			Scripts.Write(),
+		],
+		ResponseText = [
+			'<!DOCTYPE html>',
+			'<HTML LANG="en">',
+			Tag.Write('HEAD', -1, Head.join("\n"))
+		];				
 		with (Response) {
 			CacheControl = "no-cache, no-store;";
 			AddHeader("X-Content-Type-Options", "nosniff");
 			Charset = "utf-8";
-			Write(ResponseText.join(""));
+			Write(ResponseText.join("\n"));
 		}
 	},
 
@@ -33,7 +33,7 @@ var Html = {
 		var ScriptName = Solaren.ScriptName.split("/").pop(),
 		FileParts      = ScriptName.split('.'),
 		FileName       = [Scripts.Path, FileParts[0].toLowerCase(), ".js?", this.Version],
-		ResponseText   = ['<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
+		ResponseText   = ['\n<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
 		Response.Write(ResponseText.join(""));
 	},
 
@@ -62,18 +62,18 @@ var Html = {
 	},
 	
 	WriteBaseInfo: function(rs) {
-		var ResponseText = ['<DIV CLASS="FormDiv">\n',
+		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
+		ResponseText = ['<DIV CLASS="FormDiv">\n',
 			'<FIELDSET CLASS="FieldSet">\n',
 			'<LEGEND>Параметри</LEGEND>\n',
 			'<TABLE CLASS="RulesAllInfo">\n',
-			'<TR><TH>Назва</TH><TH>Файл</TH><TH>Стан</TH><TH>Розмір</TH></TR>\n'
+			this.GetHeadRow(Header)
 		];
 		for (var row; !rs.EOF; rs.MoveNext()) {
-			row = ['<TR><TD ALIGN="LEFT">' + rs.Fields("BaseName"),
-				this.Write("TD","LEFT") + rs.Fields("FilesName"),
-				this.Write("TD","") + rs.Fields("FileState"),
-				this.Write("TD","RIGHT") + rs.Fields("FileSize"),
-				'</TD></TR>\n'
+			row = ['<TR>', Tag.Write("TD", 0, rs.Fields("BaseName")),
+				Tag.Write("TD", 0, rs.Fields("FilesName")),
+				Tag.Write("TD", -1, rs.Fields("FileState")),
+				Tag.Write("TD", 2, rs.Fields("FileSize")), '</TR>\n'
 			];
 			ResponseText.push(row.join(""));
 		} rs.Close();
@@ -82,13 +82,16 @@ var Html = {
 	},
 
 	WriteEditButton: function(AllowDelBtn) {
-		var ResponseText = '<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>\n';
+		var ResponseText = [];
 		if (typeof Deleted != "undefined" && Deleted) {
-			ResponseText = '<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>';
-		} else if (AllowDelBtn) {
-			ResponseText += '<BUTTON CLASS="DelBtn" ID="DelBtn">&#128465;Видалити</BUTTON>';
+			ResponseText.push('<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>');
+		} else {
+			ResponseText.push('<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>\n');
+			if (AllowDelBtn) {
+				ResponseText.push('<BUTTON CLASS="DelBtn" ID="DelBtn">&#128465;Видалити</BUTTON>');
+			}
 		}
-		Response.Write(ResponseText);
+		Response.Write(ResponseText.join(""));
 	},
 
 	WriteDatePeriod: function(legend, begDate, endDate, minDate, maxDate) {
@@ -100,7 +103,8 @@ var Html = {
 			'<INPUT TYPE="date" NAME="EndDate" VALUE="' + endDate,
 			'" MIN="' + minDate,
 			'" MAX="' + maxDate,
-			'" REQUIRED>\n</FIELDSET>\n'];
+			'" REQUIRED>\n</FIELDSET>\n'
+		];
 		Response.Write(ResponseText.join(""));
 	},
 
@@ -278,10 +282,10 @@ Styles = {
 	Write: function() {
 		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			var row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">\n'];
+			var row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">'];
 			Block.push(row.join(""));
 		}
-		return Block.join("");
+		return Block.join("\n");
 	}
 },
 
@@ -292,10 +296,10 @@ Scripts = {
 	Write: function() {
 		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>\n'];
+			var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>'];
 			Block.push(row.join(""));
 		}
-		return Block.join("");
+		return Block.join("\n");
 	}
 },
 
@@ -308,7 +312,7 @@ Image = {
 	},
 
 	Link: function(fileName) {
-		var row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">\n'];
+		var row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">'];
 		return row.join("");
 	}
 },
