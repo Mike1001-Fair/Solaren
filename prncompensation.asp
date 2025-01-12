@@ -33,11 +33,11 @@ var Period = Month.GetPeriod(ReportMonth, 0),
 Compensation = totRetVol = totRecVol = totPurVol = totCompensation = 0,
 Caption = ['Середньозважена ціна: ', AveragePrice.replace(".", ","), ' коп.'],
 Header   = ['З', 'По', 'коп', 'Видача', 'Потреби', 'Покупка', '&#8372;'],
-ResponseText = ['<BODY CLASS="PrnBody">\n',
-		'<H3 CLASS="H3PrnTable">Компенсація</H3><SPAN CLASS="H3PrnTable">перiод: ', Period, '</SPAN>\n',
-		'<TABLE CLASS="PrnTable">\n',
+ResponseText = ['\n<BODY CLASS="PrnBody">',
+		'<H3 CLASS="H3PrnTable">Компенсація</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+		'<TABLE CLASS="PrnTable">',
 		Tag.Write("CAPTION", -1, Caption.join("")),
-		'<TR><TH ROWSPAN="2">Рахунок</TH><TH COLSPAN="2">Період</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">EIC</TH><TH>Тариф</TH>	<TH COLSPAN="3">кВт&#183;год</TH><TH>Компенсація</TH></TR>\n',
+		'<TR><TH ROWSPAN="2">Рахунок</TH><TH COLSPAN="2">Період</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">EIC</TH><TH>Тариф</TH>	<TH COLSPAN="3">кВт&#183;год</TH><TH>Компенсація</TH></TR>',
 		Html.GetHeadRow(Header)
 ];
 
@@ -53,7 +53,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("RecVol").value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, Compensation.toDelimited(2)), '</TR>\n'
+		Tag.Write("TD", 2, Compensation.toDelimited(2)), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	totRetVol += rs.Fields("RetVol");
@@ -65,7 +65,7 @@ for (var i=0; !rs.EOF; i++) {
 rs.Close();
 Connect.Close();
 
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="6">Всього: ', i,
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="6">Всього: ' + i,
 	Tag.Write("TH", 2, totRetVol.toDelimited(0)),
 	Tag.Write("TH", 2, totRecVol.toDelimited(0)),
 	Tag.Write("TH", 2, totPurVol.toDelimited(0)),
@@ -73,4 +73,4 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="6">Всього: ', i,
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
 ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>
