@@ -31,7 +31,7 @@ try {
 	Connect.Close();
 }
 
-var ViewOnly = !Month.isPeriod(Month.Date[0], PayDate),
+var ViewOnly = !Month.isPeriod(Month.Date[1], PayDate),
 Title = Deleted || ViewOnly ? "Перегляд оплати" : "Редагування оплати";
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">

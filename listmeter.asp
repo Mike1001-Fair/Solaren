@@ -21,19 +21,19 @@ try {
 			Append(CreateParameter("MeterCode", adVarChar, adParamInput, 10, MeterCode));
 		}
 	}
-	var rs = Cmd.Execute();
+	var rs = Solaren.Execute("ListMeter", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
 	Html.SetPage("Список лiчильникiв", User.RoleId)
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="H3Text">Список лiчильникiв</H3>\n',
-	'<TABLE CLASS="InfoTable">\n',
-	'<TR><TH ROWSPAN="2">Рахунок</TH><TH ROWSPAN="2">Споживач</TH><TH COLSPAN="6">Лічильник</TH></TR>\n',
-	'<TR><TH>Номер</TH><TH>Монтаж</TH><TH>Р</TH><TH>К</TH><TH>Прийом</TH><TH>Видача</TH></TR>\n'
+var Header = ['Номер', 'Монтаж', 'Р', 'К', 'Прийом', 'Видача'],
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH ROWSPAN="2">Рахунок</TH><TH ROWSPAN="2">Споживач</TH><TH COLSPAN="6">Лічильник</TH></TR>',
+	Html.GetHeadRow(Header)
 ];
 
 for (var i=0; !rs.EOF; i++) {
@@ -45,11 +45,11 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", -1, rs.Fields("Capacity")),
 		Tag.Write("TD", -1, rs.Fields("kTransForm")),
 		Tag.Write("TD", -1, rs.Fields("RecVal")),
-		Tag.Write("TD", -1, rs.Fields("RetVal")), '</TR>\n'
+		Tag.Write("TD", -1, rs.Fields("RetVal")), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	rs.MoveNext();
 } rs.Close();
 Connect.Close();
 ResponseText.push(Html.GetFooterRow(8, i));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>

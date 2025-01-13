@@ -7,8 +7,6 @@
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "POST");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
 with (Request) {
     var BegDate      = String(Form("BegDate")),
 	EndDate      = String(Form("EndDate")),
@@ -20,39 +18,50 @@ try {
 	Solaren.SetCmd("ListPay");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
-			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
+			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 		}
 	}
 	var rs = Solaren.Execute("ListPay", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Html.SetPage("Список оплат", User.RoleId)
 }
 
-Html.SetPage("Список оплат", User.RoleId)
-
-var Period = BegDate.formatDate("-"),
+var Period = [BegDate.formatDate("-")],
 EndDate    = EndDate.formatDate("-"),
 totalPay   = 0;
-if (Period != EndDate) Period += ' &ndash; ' + EndDate;
+if (Period[0] != EndDate) Period.push(EndDate);  
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<TABLE CLASS="H3Text">\n' +
-	'<CAPTION>' + Html.Title + '</CAPTION>\n' +
-	'<TR><TD ALIGN="RIGHT">Споживач:</TD><TD ALIGN="LEFT">' + ContractName + '</TD></TR>\n' + 
-	'<TR><TD ALIGN="RIGHT">Період:</TD><TD ALIGN="LEFT">' + Period + '</TD></TR>\n' +
-	'</TABLE>\n' + 
-	'<TABLE CLASS="InfoTable">\n' + 
-	'<TR><TH>Дaта</TH><TH>Сума</TH></TR>\n';
+var Header = ['Дaта', 'Сума'],
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<TABLE CLASS="H3Text">',
+	Tag.Write("CAPTION", -1, Html.Title),
+	'<TR>' + Tag.Write("TD", 2, 'Споживач:') + Tag.Write("TD", 0, ContractName) + '</TR>',
+	'<TR>' + Tag.Write("TD", 2, 'Період:') + Tag.Write("TD", 0, Period.join(' &ndash; ')) + '</TR>',
+	'</TABLE>',
+	'<TABLE CLASS="InfoTable">',
+	Html.GetHeadRow(Header)
+];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("CharPayDate") +
-	Html.Write("TD","RIGHT") + '<A href="editpay.asp?PayId=' + rs.Fields("PayId") + '">' + rs.Fields("PaySum").value.toDelimited(2) + '</A></TD></TR>\n';
+	var url = ['<A href="editpay.asp?PayId=', rs.Fields("PayId"), '">', rs.Fields("PaySum").value.toDelimited(2), '</A>'],
+	PayDate = Solaren.GetYMD(rs.Fields("PayDate").value),
+	row = ['<TR>', Tag.Write("TD", -1, PayDate.formatDate("-")),
+		Tag.Write("TD", 2, url.join("")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
 	totalPay += rs.Fields("PaySum").value;
 	rs.MoveNext();
-} rs.Close();Connect.Close();
-ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i + 
-Html.Write("TH","RIGHT") + totalPay.toDelimited(2) + '</TH></TR>\n</TABLE></BODY></HTML>';
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Connect.Close();
+var footer = ['<TR><TH ALIGN="LEFT">Всього: ' + i,
+	Tag.Write("TH", 2, totalPay.toDelimited(2)) + '</TR>\n',
+	'</TABLE></BODY></HTML>'
+];
+ResponseText.push(footer.join(""));
+Response.Write(ResponseText.join("\n"))%>
