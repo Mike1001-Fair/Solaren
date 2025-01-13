@@ -8,12 +8,13 @@ Title = "Сервер";
 User.ValidateAccess(Authorized, "GET");
 
 var ServerInfo = {
-	Text: ['\n<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="HeadText">&#128187;', Title, '</H3>\n',
-	'<DIV CLASS="FormDiv">\n',
-	'<FIELDSET CLASS="FieldSet">\n',
-	'<LEGEND>Параметри</LEGEND><TABLE CLASS="RulesAllInfo">\n',
-	'<TR><TH>Ключ</TH><TH>Значення</TH></TR>\n'],
+	Text: ['\n<BODY CLASS="MainBody">',
+		'<H3 CLASS="HeadText">&#128187;' + Title + '</H3>',
+		'<DIV CLASS="FormDiv">',
+		'<FIELDSET CLASS="FieldSet">',
+		'<LEGEND>Параметри</LEGEND><TABLE CLASS="RulesAllInfo">',
+		'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'	
+	],
 
 	AddRow: function(Key, Value) {
 		if (Value != "") {
@@ -54,4 +55,4 @@ with (ServerInfo) {
 	Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 }
 
-Response.Write(ServerInfo.Text.join(""))%>
+Response.Write(ServerInfo.Text.join("\n"))%>
