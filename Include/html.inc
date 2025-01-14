@@ -50,7 +50,7 @@ var Html = {
 	},
 
 	WriteRole: function(tagName, RoleId) {
-		var ResponseText = ['<SELECT NAME="', tagName, '">'],
+		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
 		selected, option;
 		for (var i = 0; i < User.Role.length; i++) {
 			selected = i == RoleId ? '" SELECTED>' : '">';
@@ -58,27 +58,27 @@ var Html = {
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""))
+		Response.Write(ResponseText.join("\n"))
 	},
 	
 	WriteBaseInfo: function(rs) {
 		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
-		ResponseText = ['<DIV CLASS="FormDiv">\n',
-			'<FIELDSET CLASS="FieldSet">\n',
-			'<LEGEND>Параметри</LEGEND>\n',
-			'<TABLE CLASS="RulesAllInfo">\n',
+		ResponseText = ['<DIV CLASS="FormDiv">',
+			'<FIELDSET CLASS="FieldSet">',
+			'<LEGEND>Параметри</LEGEND>',
+			'<TABLE CLASS="RulesAllInfo">',
 			this.GetHeadRow(Header)
 		];
 		for (var row; !rs.EOF; rs.MoveNext()) {
 			row = ['<TR>', Tag.Write("TD", 0, rs.Fields("BaseName")),
 				Tag.Write("TD", 0, rs.Fields("FilesName")),
 				Tag.Write("TD", -1, rs.Fields("FileState")),
-				Tag.Write("TD", 2, rs.Fields("FileSize")), '</TR>\n'
+				Tag.Write("TD", 2, rs.Fields("FileSize")), '</TR>'
 			];
 			ResponseText.push(row.join(""));
 		} rs.Close();
 		ResponseText.push('</TABLE></FIELDSET></DIV>');
-		Response.Write(ResponseText.join(""))
+		Response.Write(ResponseText.join("\n"))
 	},
 
 	WriteEditButton: function(AllowDelBtn) {
@@ -86,56 +86,48 @@ var Html = {
 		if (typeof Deleted != "undefined" && Deleted) {
 			ResponseText.push('<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>');
 		} else {
-			ResponseText.push('<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>\n');
+			ResponseText.push('<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>');
 			if (AllowDelBtn) {
 				ResponseText.push('<BUTTON CLASS="DelBtn" ID="DelBtn">&#128465;Видалити</BUTTON>');
 			}
 		}
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteDatePeriod: function(legend, begDate, endDate, minDate, maxDate) {
-		var ResponseText = ['<FIELDSET><LEGEND>', legend, '</LEGEND>\n',
-			'<INPUT TYPE="date" NAME="BegDate" VALUE="' + begDate,
-			'" MIN="' + minDate,
-			'" MAX="' + maxDate,
-			'" REQUIRED> &#8722;\n',
-			'<INPUT TYPE="date" NAME="EndDate" VALUE="' + endDate,
-			'" MIN="' + minDate,
-			'" MAX="' + maxDate,
-			'" REQUIRED>\n</FIELDSET>\n'
+		var ResponseText = ['<FIELDSET>', '<LEGEND>' + legend + '</LEGEND>',
+			'<INPUT TYPE="date" NAME="BegDate" VALUE="' + begDate +
+			'" MIN="' + minDate + '" MAX="' + maxDate + '" REQUIRED> &#8722;',
+			'<INPUT TYPE="date" NAME="EndDate" VALUE="' + endDate +
+			'" MIN="' + minDate + '" MAX="' + maxDate + '" REQUIRED>',
+			'</FIELDSET>\n'
 		];
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteMonthPeriod: function() {
 		var OperMonth = Month.GetMonth(1),
 		MinMonth = Month.GetMonth(0),
-		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>\n',
-			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth,
-			'" MIN="' + MinMonth,
-			'" MAX="' + OperMonth,
-			'" REQUIRED> &#8722;\n',
-			'<INPUT TYPE="Month" NAME="EndMonth" VALUE="' + OperMonth,
-			'" MIN="' + MinMonth,
-			'" MAX="' + OperMonth,
-			'" REQUIRED>\n</FIELDSET>\n'
+		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>',
+			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth +
+			'" MIN="' + MinMonth + '" MAX="' + OperMonth + '" REQUIRED> &#8722;',
+			'<INPUT TYPE="Month" NAME="EndMonth" VALUE="' + OperMonth +
+			'" MIN="' + MinMonth  +	'" MAX="' + OperMonth +	'" REQUIRED>',
+			'</FIELDSET>\n'
 		];
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteInputDataList : function(tagName, tagValue, tagSize) {
 		var inputName = tagName + "Name",
 		listName = tagName + "List",
-		ResponseText = ['<INPUT TYPE="search" NAME="' + inputName,
-			'" ID="' + inputName,
-			'" VALUE="' + tagValue,
-			'" PLACEHOLDER="Пошук по літерам" SIZE="' + tagSize,
-			'" LIST="' + listName,
-			'" REQUIRED>\n',
+		ResponseText = ['<INPUT TYPE="search" NAME="' + inputName +
+			'" ID="' + inputName + '" VALUE="' + tagValue +
+			'" PLACEHOLDER="Пошук по літерам" SIZE="' + tagSize +
+			'" LIST="' + listName + '" REQUIRED>',
 			'<DATALIST ID="' + listName + '"></DATALIST>'
 		];
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteSearchSet: function(title, tagName, tagValue, tagRequired) {
@@ -143,22 +135,20 @@ var Html = {
 		listName = tagName + "List",
 		required = tagRequired ? " REQUIRED" : "",
 		ResponseText = [
-			'<FIELDSET><LEGEND>' + title + '</LEGEND>\n',
-			'<INPUT TYPE="search" NAME="' + inputName,
-			'" ID="' + inputName,
-			'" VALUE="' + tagValue,
-			'" PLACEHOLDER="Пошук по літерам" SIZE=35"',
-			'" LIST="' + listName + '"',
-			required + ' AUTOFOCUS>\n',
-			'<DATALIST ID="' + listName + '"></DATALIST>\n</FIELDSET>'
+			'<FIELDSET><LEGEND>' + title + '</LEGEND>',
+			'<INPUT TYPE="search" NAME="' + inputName + '" ID="' + inputName +
+			'" VALUE="' + tagValue + '" PLACEHOLDER="Пошук по літерам" SIZE=35"' +
+			'" LIST="' + listName + '"' + required + ' AUTOFOCUS>',
+			'<DATALIST ID="' + listName + '"></DATALIST>',
+			'</FIELDSET>'
 		];
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteSelect: function(rs, objName, blankOption, elementId) {
 		var tagId = objName + "Id",
 		tagName  = objName + "Name",
-		ResponseText = ['<SELECT NAME="', tagId, '" ID="', tagId, '">\n'];
+		ResponseText = ['<SELECT NAME="' + tagId + '" ID="' + tagId + '">'];
 		if (blankOption) {
 			ResponseText.push('<OPTION VALUE="0"></OPTION>');
 		}
@@ -169,11 +159,11 @@ var Html = {
 		}
 		rs.Close();
 		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteBank: function(rs, MfoCode) {
-		var ResponseText = ['<SELECT NAME="MfoCode" ID="MfoCode">\n'];
+		var ResponseText = ['<SELECT NAME="MfoCode" ID="MfoCode">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = MfoCode == rs.Fields("MfoCode") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("MfoCode"), selected, rs.Fields("BankName"), '</OPTION>'];
@@ -181,7 +171,7 @@ var Html = {
 		}
 		rs.Close();
 		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteChiefDoc: function(rs, DocId) {
@@ -256,17 +246,16 @@ var Html = {
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteDate: function() {
-		var ResponseText = ['<FIELDSET>\n<LEGEND>Дата</LEGEND>\n',
-			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + Month.Date[1],
-			'" MIN="' + Month.Date[0],
-			'" MAX="' + Month.Date[3],
-			'" REQUIRED></LABEL>\n</FIELDSET>\n'
+		var ResponseText = ['<FIELDSET><LEGEND>Дата</LEGEND>',
+			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + Month.Date[1] +
+			'" MIN="' + Month.Date[0] + '" MAX="' + Month.Date[3] +	'" REQUIRED></LABEL>',
+			'</FIELDSET>\n'
 		];
-		Response.Write(ResponseText.join(""));
+		Response.Write(ResponseText.join("\n"));
 	}	
 },
 

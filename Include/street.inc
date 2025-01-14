@@ -11,6 +11,6 @@ var Street = {
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join(""))
+		Response.Write(ResponseText.join("\n"))
 	}
 }%>
