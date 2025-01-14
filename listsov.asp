@@ -32,9 +32,10 @@ try {
 var Header = ["Споживач", "Рахунок", "Сальдо<BR>на початок", "Обсяг<BR>кВт&#183;год", "Вартiсть", "Оплата", "Сальдо<BR>на кiнець"],
 Period = Month.GetPeriod(ReportMonth, 0),
 tot_s = tot_PurVol = tot_ob_dt = tot_ob_ct = tot_s_end = 0,
-ResponseText = ['<BODY CLASS="PrnBody">\n',
-	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ', Period, '</SPAN>\n',
-	'<TABLE CLASS="PrnTable">\n',
+ResponseText = ['<BODY CLASS="PrnBody">',
+	'<H3 CLASS="H3PrnTable">' + Html.Title + '</H3>',
+	'<SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+	'<TABLE CLASS="PrnTable">',
 	Html.GetHeadRow(Header)
 ];
 	
@@ -45,7 +46,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("ob_dt").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("ob_ct").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("s_end").value.toDelimited(2)), '</TR>\n'
+		Tag.Write("TD", 2, rs.Fields("s_end").value.toDelimited(2)), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 
@@ -67,4 +68,4 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ', i, '</TH>',
 	'</TH></TR>\n</TABLE></BODY></HTML>'
 ];
 ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>

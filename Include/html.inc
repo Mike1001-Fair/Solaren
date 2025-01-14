@@ -321,8 +321,8 @@ Tag = {
 	Align: ["LEFT", "CENTER", "RIGHT"],
 
 	Write: function(tagName, index, tagValue) {
-		var alignText = this.Align[index] ? ' ALIGN="' + this.Align[index] + '">' : '>',
-		result = ['<', tagName, alignText, tagValue, '</', tagName, '>'];
+		var tagAttribute = this.Align[index] ? ' ALIGN="' + this.Align[index] + '">' : '>',
+		result = ['<', tagName, tagAttribute, tagValue, '</', tagName, '>'];
 		return result.join("")
 	}
 },

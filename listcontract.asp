@@ -32,7 +32,7 @@ try {
 
 var Header = ['Рахунок', 'Споживач', 'Адреса', 'Дата', 'ЦОС', 'Потужнiсть'],
 ResponseText = ['<BODY CLASS="MainBody">',
-	'<H3 CLASS="H3Text">Список договорiв</H3>',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
 	'<TABLE CLASS="InfoTable">',
 	Html.GetHeadRow(Header)
 ];

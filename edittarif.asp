@@ -34,7 +34,7 @@ try {
 	Connect.Close();
 }
 
-var ViewOnly = !Month.isPeriod(Month.Date[0], EndDate),
+var ViewOnly = !Month.isPeriod(Month.Date[1], EndDate),
 Title = Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
 Html.SetPage(Title, User.RoleId)%>
 <BODY CLASS="MainBody">
