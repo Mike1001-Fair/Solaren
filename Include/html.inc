@@ -212,8 +212,10 @@ var Html = {
 	},
 
 	GetFooterRow: function(ColSpan, i) {
-		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="', ColSpan,'">Всього: ', i, '</TH></TR>\n', '</TABLE></BODY></HTML>'];
-		return ResponseText.join("")
+		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan + '">Всього: ' + i + '</TH></TR>',
+			'</TABLE></BODY></HTML>'
+		];
+		return ResponseText.join("\n")
 	},
 
 	WriteFileList: function(FolderName) {

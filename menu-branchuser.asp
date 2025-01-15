@@ -6,7 +6,6 @@
 if (!User.Authorize(2)) {
 	Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"))
 }%>
-
 <INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="<%=Session('MsgText')%>">
 <NAV class="nav">
 	<UL class="topmenu">
