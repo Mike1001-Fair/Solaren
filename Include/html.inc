@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=3.6",
+	Version: "v=3.8",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
@@ -12,7 +12,7 @@ var Html = {
 			'<META NAME="copyright" CONTENT="' + this.Author + '">',
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
 			'<TITLE>' + Title + '</TITLE>',
-			Image.Link("sun.svg"),
+			Icon.Link("sun.svg"),
 			Styles.Write(),
 			Scripts.Write(),
 		],
@@ -294,7 +294,7 @@ Scripts = {
 	}
 },
 
-Image = {
+Icon = {
 	Path: "Images/",
 
 	Map: function(fileName) {

@@ -24,21 +24,30 @@ try {
 	var rs = Solaren.Execute("ListTarif", "Iнформацiю не знайдено");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+} finally {
+	Html.SetPage("Список тарифiв", User.RoleId)
 }
 
-Html.SetPage("Список тарифiв", User.RoleId)
+var Header = ['з', 'по', 'коп'],
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">Список тарифiв<SPAN>Група: ' + GroupName + '</SPAN></H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH COLSPAN="2">Дiє</TH><TH ROWSPAN="2">Дата вводу в<BR>експлуатацiю</TH><TH>Тариф</TH></TR>',
+	Html.GetHeadRow(Header)
+];
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Список тарифiв<SPAN>Група: ' + GroupName + '</SPAN></H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH COLSPAN="2">Дiє</TH><TH ROWSPAN="2">Дата вводу в<BR>експлуатацiю</TH><TH>Тариф</TH></TR>\n' +
-	'<TR><TH>з</TH><TH>по</TH><TH>коп</TH>\n';
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("BegDate") + '</TD>' +
-	Html.Write("TD","") + rs.Fields("EndDate") + 
-	Html.Write("TD","") + rs.Fields("ExpDateBeg") + '-' + rs.Fields("ExpDateEnd") +
-	Html.Write("TD","RIGHT") + '<A href="edittarif.asp?TarifId=' + rs.Fields("Id") + '">' + rs.Fields("Tarif").value.toDelimited(2) + '</A></TD></TR>\n';
+	var url = ['<A href="edittarif.asp?TarifId=', rs.Fields("Id"), '">', rs.Fields("Tarif").value.toDelimited(2), '</A>'],
+	period = [rs.Fields("ExpDateBeg"), rs.Fields("ExpDateEnd")],
+	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("BegDate")),
+		Tag.Write("TD", -1, rs.Fields("EndDate")),
+		Tag.Write("TD", -1, period.join(' &ndash; ')),
+		Tag.Write("TD", 2, url.join("")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
-ResponseText += Html.GetFooterRow(4, i);
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Connect.Close();
+ResponseText.push(Html.GetFooterRow(4, i));
+Response.Write(ResponseText.join("\n"))%>
