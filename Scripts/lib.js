@@ -138,8 +138,6 @@ function randInt(intMin, intMax) {
 	return Math.floor(rand);
 }
 
-
-
 function utf8_to_b64(str) {
 	return window.btoa(unescape(encodeURIComponent(str)));
 }
@@ -181,7 +179,13 @@ function deleteCookie(name) {
 }
 
 function SetDisabledOptions(Options, Disabled) {
-	if (Disabled) Options.selectedIndex = 0;
-	const options = Array.from(Options);
-	options.forEach(option => option.disabled = Disabled);
-}
+	if (Options) {
+		const options = Array.from(Options);
+		options.forEach(option => option.disabled = Disabled);
+		if (Disabled && Options instanceof HTMLOptionsCollection) {
+			Options.selectedIndex = 0;
+		}
+	} else {
+		throw new Error('Options must be an array or a collection of elements.');
+	}
+}                                                                     	

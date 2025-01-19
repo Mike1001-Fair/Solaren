@@ -5,18 +5,15 @@ const User = {
 
 	get Pswd() {
 		const maxAttempts = 10;
-		let pswd = "";
-		for (let i = 0; i < maxAttempts && pswd == ""; i++) {
-			let chars = [];
-			for (let j = 0; j < this.PswdLen; j++) {
-				chars.push(String.fromCharCode(randInt(33, 126)))
-			}
+		let pswd = "",
+		valid = false;
+
+		for (let i = 0; i < maxAttempts && !valid; i++) {
+			const chars = new Array(this.PswdLen).fill().map(() => String.fromCharCode(randInt(33, 126)));
 			pswd = chars.join("");
-			if (!this.PswdRe.test(pswd)) {
-				pswd = "";
-			}
+			valid = this.PswdRe.test(pswd);
 		}
-		return pswd;
+		return valid ? pswd : "";
 	},
 
 	get FileName() {
