@@ -59,31 +59,31 @@ var Period   = Month.GetPeriod(ReportMonth, 1),
 ActDate      = Month.GetLastDay(ReportMonth), 
 WordSum      = Money.toWord(ActSum),
 Body         = [],
-Divider      = '<DIV CLASS="BlockDivider"></DIV>\n',
-ResponseText = ['<BODY CLASS="ActContainer">\n'];
+Divider      = '\n<DIV CLASS="BlockDivider"></DIV>\n',
+ResponseText = ['<BODY CLASS="ActContainer">'];
 
 for (var i = 0; i <= DoubleAct; i++) {
 	if (i == 0) {
-		var block = ['<DIV CLASS="ActText">\n',
-			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>\n',
-			'<TABLE CLASS="NoBorderTable">\n',
-			'<TR><TD ALIGN="LEFT" WIDTH="50%">', LocalityName, '</TD><TD ALIGN="RIGHT" WIDTH="50%">', ActDate,'</TD></TR>\n',
+		var block = ['<DIV CLASS="ActText">',
+			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
+			'<TABLE CLASS="NoBorderTable">',
+			'<TR><TD ALIGN="LEFT" WIDTH="50%">' + LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
 			'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
-			'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ',
-			ContractDate.formatDate("-"), ' року, особовий рахунок №', ContractPAN, ': ',
-			CompanyName, ' (Постачальник) в особi ', ChiefTitle2, ' ', BranchName2, ' ЦОС ', ChiefName2,
-			', що дiє на пiдставi довiреностi, з однiєї сторони, та ', CustomerName, ' (Споживач), з iншої сторони склали даний акт про наступне.\n',
-			'<P>У ', Period, ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>', FactVol, '</B> кВт&#183;год ',
-			'на суму <B>', VolCost, '</B> грн., ПДФО <B>', Pdfo, '</B> грн., вiйськовий збiр <B>', Vz,
-			'</B> грн., всього <B>', ActSum.toDelimited(2), '</B> грн. (', WordSum, '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>\n',
-			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>\n',
-			'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>\n',
-			'<TR><TD STYLE="padding: 10px 0px 0px 0px">', ChiefTitle, ' ', ChiefName, '</TD><TD>', CustomerName, '</TD></TR>\n',
-			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>\n'
-		].join("");
+			'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' +
+			ContractDate.formatDate("-") + ' року, особовий рахунок №' + ContractPAN + ': ' +
+			CompanyName + ' (Постачальник) в особi ' + ChiefTitle2 + ' ' + BranchName2 + ' ЦОС ' + ChiefName2 +
+			', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
+			'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol + '</B> кВт&#183;год ' +
+			'на суму <B>' + VolCost + '</B> грн., ПДФО <B>' + Pdfo + '</B> грн., вiйськовий збiр <B>' + Vz + '</B> грн., всього <B>' + ActSum.toDelimited(2) +
+			'</B> грн. (' +	WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
+			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
+			'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
+			'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + ChiefTitle + ' ' + ChiefName + '</TD><TD>' + CustomerName + '</TD></TR>',
+			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
+		].join("\n");
 	}
 	Body.push(block);
 }
 ResponseText.push(Body.join(Divider));
 ResponseText.push('</BODY></HTML>');
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>
