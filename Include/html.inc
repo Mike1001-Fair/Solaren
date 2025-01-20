@@ -123,7 +123,7 @@ var Html = {
 		listName = tagName + "List",
 		ResponseText = ['<INPUT TYPE="search" NAME="' + inputName +
 			'" ID="' + inputName + '" VALUE="' + tagValue +
-			'" PLACEHOLDER="Пошук по літерам" SIZE="' + tagSize +
+			'" PLACEHOLDER="Пошук" SIZE="' + tagSize +
 			'" LIST="' + listName + '" REQUIRED>',
 			'<DATALIST ID="' + listName + '"></DATALIST>'
 		];
@@ -137,7 +137,7 @@ var Html = {
 		ResponseText = [
 			'<FIELDSET><LEGEND>' + title + '</LEGEND>',
 			'<INPUT TYPE="search" NAME="' + inputName + '" ID="' + inputName +
-			'" VALUE="' + tagValue + '" PLACEHOLDER="Пошук по літерам" SIZE=35"' +
+			'" VALUE="' + tagValue + '" PLACEHOLDER="Пошук" SIZE=35"' +
 			'" LIST="' + listName + '"' + required + ' AUTOFOCUS>',
 			'<DATALIST ID="' + listName + '"></DATALIST>',
 			'</FIELDSET>'

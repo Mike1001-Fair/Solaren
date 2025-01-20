@@ -49,7 +49,6 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("s_end").value.toDelimited(2)), '</TR>'
 	];
 	ResponseText.push(row.join(""));
-
 	tot_s      += rs.Fields("s").value;
 	tot_PurVol += rs.Fields("PurVol").value;
 	tot_ob_dt  += rs.Fields("ob_dt").value;
@@ -65,7 +64,7 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, tot_ob_dt.toDelimited(2)),
 	Tag.Write("TH", 2, tot_ob_ct.toDelimited(2)),
 	Tag.Write("TH", 2, tot_s_end.toDelimited(2)),
-	'</TH></TR>\n</TABLE></BODY></HTML>'
+	'</TR>\n</TABLE></BODY></HTML>'
 ];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join("\n"))%>

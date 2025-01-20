@@ -188,4 +188,4 @@ function SetDisabledOptions(Options, Disabled) {
 	} else {
 		throw new Error('Options must be an array or a collection of elements.');
 	}
-}                                                                     	
+}

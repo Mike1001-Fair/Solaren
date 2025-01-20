@@ -32,9 +32,10 @@ try {
 }
 
 var Period = [BegDate.formatDate("-")],
-EndDate    = EndDate.formatDate("-"),
 totalPay   = 0;
-if (Period[0] != EndDate) Period.push(EndDate);  
+if (BegDate != EndDate) {
+	Period.push(EndDate.formatDate("-"));
+}
 
 var Header = ['Дaта', 'Сума'],
 ResponseText = ['<BODY CLASS="MainBody">',
