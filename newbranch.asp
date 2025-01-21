@@ -19,16 +19,16 @@ try {
 		CommandText = "SelectChiefBranch";
 		with (Parameters) {
 			Delete("SortCode");
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rsChief = Solaren.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
 	rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
-}
-
-Html.SetPage("Новий ЦОС", User.RoleId)%>
+} finally {
+	Html.SetPage("Новий ЦОС", User.RoleId)
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewBranch" ACTION="createbranch.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="AreaId" ID="AreaId" VALUE="-1">
