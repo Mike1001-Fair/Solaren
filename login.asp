@@ -8,7 +8,7 @@
 var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd");
 
-User.ValidateAccess(1, "POST");
+User.ValidateAccess(User.PswdRe.test(Pswd), "POST");
 
 try {
 	Solaren.SetCmd("Login");

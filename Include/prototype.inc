@@ -2,15 +2,15 @@
 with (Date) {
 	prototype.toStr = function(includeTime) {
 		var ymd = [this.getFullYear(), this.getMonth() + 1, this.getDate()],
-		hms = [this.getHours(), this.getMinutes(), this.getSeconds()],
-		result;
+		result = [];
 		ymd.padZero();
-		result = ymd.join("-");
+		result.push(ymd.join("-"));
 		if (includeTime) {
+			var hms = [this.getHours(), this.getMinutes(), this.getSeconds()];
  			hms.padZero();
-			result += "T" + hms.join(":");
+			result.push(hms.join(":"));
 		}
-		return result
+		return result.join('T')
 	}
 }
 

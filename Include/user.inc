@@ -4,14 +4,14 @@ var User = {
 	PswdLen: 10,
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
-	Ip     : Server.HTMLEncode(Request.ServerVariables("REMOTE_ADDR")),
+	Ip     : Server.HTMLEncode(Request.ServerVariables("REMOTE_ADDR")) || -1,
 	Agent  : Server.HTMLEncode(Request.ServerVariables("HTTP_USER_AGENT")),
 	Method : Server.HTMLEncode(Request.ServerVariables("REQUEST_METHOD")),
 	Hal    : Server.HTMLEncode(String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE"))),
-	Id     : Server.HTMLEncode(Session("UserId")),
-	GUID   : Server.HTMLEncode(Session("UserGUID")),
-	RoleId : Server.HTMLEncode(Session("RoleId")),
-	Token  : Server.HTMLEncode(Session("Token")),
+	Id     : Server.HTMLEncode(Session("UserId")) || -1,
+	GUID   : Server.HTMLEncode(Session("UserGUID")) || -1,
+	RoleId : Server.HTMLEncode(Session("RoleId")) || -1,
+	Token  : Server.HTMLEncode(Session("Token")) || -1,
 
 	Language: function() {
 		var regionSet = this.Hal.split(",")[0];
@@ -62,16 +62,18 @@ var User = {
 
 	GetPswd: function() {
 		var maxAttempts = 10,
-		Pswd = "";
-		for (var i = 0; i < maxAttempts && Pswd == ""; i++) {
+		Chars = [],
+		Pswd  = "",
+		valid = false;
+		for (var i = 0; i < maxAttempts && !valid; i++) {
+			Chars.length = 0;
 			for (var j = 0; j < this.PswdLen; j++) {
-				Pswd += String.fromCharCode(Solaren.GetRandInt(33, 126));
+				Chars.push(String.fromCharCode(Solaren.GetRandInt(33, 126)))
 			}
-			if (!this.PswdRe.test(Pswd)) {
-				Pswd = "";
-			}
+			Pswd = Chars.join("");
+			valid = this.PswdRe.test(Pswd);
 		}
-		return Pswd;
+		return valid ? Pswd : ""
 	},
 
 	ValidateAccess: function(Authorized, method) {

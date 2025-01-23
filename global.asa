@@ -14,12 +14,12 @@ function Application_OnStart() {
 }  
 
 function Session_OnStart() {
-	Session.Timeout = 20;
-	Session.CodePage = 65001;
 	if (0) {
 		Session.Abandon();
 		Server.Transfer("appsuspend.asp");
 	} else {
+		Session.CodePage = 65001;
+		Session.Timeout = 20;
 		Application.Lock();
 		Application("SesCount")++;
 		Application.UnLock();
