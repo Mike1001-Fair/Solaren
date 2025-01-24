@@ -20,7 +20,9 @@ var Money = {
 			result;
 			do {
 				chunk = this.processChunk(numParts[0] % 1000, cycle);
-				if (chunk != "") word.push(chunk);
+				if (chunk) {
+					word.push(chunk);
+				}
 				numParts[0] = Math.floor(numParts[0] / 1000);
 				cycle--;
 			} while (numParts[0] > 0); 
