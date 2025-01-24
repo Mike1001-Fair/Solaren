@@ -81,14 +81,15 @@ Html.SetHead("Звіт про показники");
 for (var i=0; i<=DoubleReport; i++) {
 	if (i==0) {
 		var totSaldo = 0,		
-		block = ['<DIV CLASS="ActText">\n<TABLE CLASS="NoBorderTable">\n',
-			'<TR><TD></TD><TD CLASS="ReportTitle">', DocRef.join(""), '</TD></TR>\n',
-			'</TABLE>\n',
-			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ', Period, '</SPAN>\n',
-			'<TABLE CLASS="ActTable">\n',
-			'<CAPTION>', Caption.join('<BR>'), '</CAPTION>\n',
-			'<TR><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>',
-			'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>\n',
+		block = ['<DIV CLASS="ActText">',
+			'<TABLE CLASS="NoBorderTable">',
+			'<TR><TD></TD><TD CLASS="ReportTitle">' + DocRef.join("") + '</TD></TR>',
+			'</TABLE>',
+			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>',
+			'<TABLE CLASS="ActTable">',
+			Tag.Write('CAPTION', -1, Caption.join('<BR>')),
+			'<TR><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>' +
+			'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>',
 			'<TR><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
 		];
 				
@@ -122,23 +123,25 @@ for (var i=0; i<=DoubleReport; i++) {
 				Tag.Write("TD", 1,  k),
 				Tag.Write("TD", 2,  retsaldo * k), '</TR>',
 				'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
-				Tag.Write("TD", 2, periodSaldo), '</TR>\n'
+				Tag.Write("TD", 2, periodSaldo), '</TR>'
 			];
-			block.push(row.join(""));
+			block.push(row.join("\n"));
 		}
 
-		var footer = ['</TABLE>\n<P>'+ getText(totSaldo) + '</P>',
-			'<TABLE CLASS="NoBorderTable">\n',
-			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>\n',
-			'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>\n',
-			'<TR><TD>' + ChiefTitle + ' ' + ChiefName + '</TD><TD></TD></TR>\n',
-			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD>\n',
-			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>\n</TABLE>\n',
-			'<DIV CLASS="EventInfo">' + BranchLocality.join(" ") + ', ' + EndDate + '</DIV></DIV>\n'
+		var footer = ['</TABLE>', 
+			Tag.Write('P', -1, getText(totSaldo)),
+			'<TABLE CLASS="NoBorderTable">',
+			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>',
+			'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>',
+			'<TR><TD>' + ChiefTitle + ' ' + ChiefName + '</TD><TD></TD></TR>',
+			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD>',
+			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>',
+			'</TABLE>',
+			'<DIV CLASS="EventInfo">' + BranchLocality.join(" ") + ', ' + EndDate + '</DIV></DIV>'
 		];
-		block.push(footer.join(""));
+		block.push(footer.join("\n"));
 	}
-	Body.push(block.join(""));
+	Body.push(block.join("\n"));
 }
 rs.Close();
 Connect.Close();
