@@ -73,15 +73,15 @@ BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName],
 DocRef          = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
 Body            = [],
 Caption         = ['Споживач: ' + CustomerName, 'Рахунок: ' + ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
-Divider         = '<DIV CLASS="BlockDivider"></DIV>\n',
-ResponseText    = ['<BODY CLASS="ActContainer">\n'];
+Divider         = '<DIV CLASS="BlockDivider"></DIV>',
+ResponseText    = ['\n<BODY CLASS="ActContainer">'];
 
 Html.SetHead("Звіт про показники");
 
 for (var i=0; i<=DoubleReport; i++) {
 	if (i==0) {
 		var totSaldo = 0,		
-		block = ['<DIV CLASS="ActText">',
+		block = ['\n<DIV CLASS="ActText">',
 			'<TABLE CLASS="NoBorderTable">',
 			'<TR><TD></TD><TD CLASS="ReportTitle">' + DocRef.join("") + '</TD></TR>',
 			'</TABLE>',
@@ -108,22 +108,22 @@ for (var i=0; i<=DoubleReport; i++) {
 			periodSaldo = (recsaldo - retsaldo) * k;
 			totSaldo += periodSaldo;
 
-			row = ['<TR>', Tag.Write("TD", 1, rs.Fields("MeterCode")),
+			row = ['<TR>' + Tag.Write("TD", 1, rs.Fields("MeterCode")),
 				Tag.Write("TD", 1, "Прийом А+"),
 				Tag.Write("TD", 2, rs.Fields("RecVal")),
 				Tag.Write("TD", 2, rs.Fields("PrevRecVal")),
 				Tag.Write("TD", 2, recsaldo),
 				Tag.Write("TD", 1, k),
-				Tag.Write("TD", 2, recsaldo * k), '</TR>',
-				'<TR>', Tag.Write("TD", 1, rs.Fields("MeterCode")),
+				Tag.Write("TD", 2, recsaldo * k) + '</TR>',
+				'<TR>' + Tag.Write("TD", 1, rs.Fields("MeterCode")),
 				Tag.Write("TD", 1, "Видача А-"),
 				Tag.Write("TD", 2, rs.Fields("RetVal")),
 				Tag.Write("TD", 2, rs.Fields("PrevRetVal")),
 				Tag.Write("TD", 2, retsaldo),
 				Tag.Write("TD", 1,  k),
-				Tag.Write("TD", 2,  retsaldo * k), '</TR>',
+				Tag.Write("TD", 2,  retsaldo * k) + '</TR>',
 				'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
-				Tag.Write("TD", 2, periodSaldo), '</TR>'
+				Tag.Write("TD", 2, periodSaldo) + '</TR>'
 			];
 			block.push(row.join("\n"));
 		}
