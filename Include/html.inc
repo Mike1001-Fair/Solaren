@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=4.0",
+	Version: "v=4.1",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
@@ -118,13 +118,14 @@ var Html = {
 		Response.Write(ResponseText.join("\n"));
 	},
 
-	WriteInputDataList : function(tagName, tagValue, tagSize) {
+	WriteInputDataList : function(tagName, tagValue, tagSize, autoFocus) {
 		var inputName = tagName + "Name",
 		listName = tagName + "List",
+		tagAttribute = autoFocus ? ' AUTOFOCUS>' : '>',
 		ResponseText = ['<INPUT TYPE="search" NAME="' + inputName +
 			'" ID="' + inputName + '" VALUE="' + tagValue +
 			'" PLACEHOLDER="Пошук" SIZE="' + tagSize +
-			'" LIST="' + listName + '" REQUIRED>',
+			'" LIST="' + listName + '" REQUIRED' + tagAttribute,
 			'<DATALIST ID="' + listName + '"></DATALIST>'
 		];
 		Response.Write(ResponseText.join("\n"));

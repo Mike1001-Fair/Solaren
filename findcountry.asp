@@ -10,12 +10,11 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindCountry" ACTION="listcountry.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="CountryId" ID="CountryId" VALUE="-1">
-<H3 CLASS="HeadText"><%=Html.Title%></H3>
+<H3 CLASS="HeadText">&#127757;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Назва</LEGEND>
-	<INPUT TYPE="search" NAME="CountryName" ID="CountryName" PLACEHOLDER="Пошук по літерам" SIZE="30" MAXLENGTH="30" LIST="CountryList" REQUIRED AUTOFOCUS>
-	<DATALIST ID="CountryList"></DATALIST>
+	<% Html.WriteInputDataList("Country", "", 30, 1) %>
 	</FIELDSET>
 	</TD></TR>
 </TABLE>

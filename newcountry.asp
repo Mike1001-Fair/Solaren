@@ -10,7 +10,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCountry" ACTION="createcountry.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><%=Html.Title%></H3>
+<H3 CLASS="HeadText">&#127757;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET NAME="CountrySet"><LEGEND>Параметри</LEGEND>

@@ -342,19 +342,19 @@ const Ajax = {
 		}
 	},
 
-	GetCountryList(QueryName, Deleted) {
+	GetCountryList(QueryName) {
 		const queryValue = QueryName.value.trim();
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			CountryId.value = -1;
 			CountryName.title = this.errLenMsg;
 		} else {		
 			CountryList.textContent = "";
-			CountryName.style.cursor = "wait";
+			CountryName.style.cursor = "progress";
 			fetch(`getcountrydata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => data[0].CountryId == 0 ? location.href="accessdenied.asp" : this.SetCountryList(data))
-			.catch((error) => this.errFetchMsg(error));
-			CountryName.style.cursor = "auto";
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => CountryName.style.cursor = "auto");
 		}
 		return false
 	},
@@ -375,9 +375,9 @@ const Ajax = {
 				});
 
 				if (selectedElement) {
-					CountryId.value         = selectedElement.CountryId;
-					CountryName.value       = selectedElement.CountryName;
-					CountryName.title       = "";
+					CountryId.value   = selectedElement.CountryId;
+					CountryName.value = selectedElement.CountryName;
+					CountryName.title = "";
 				}
 			});
 		} else {
