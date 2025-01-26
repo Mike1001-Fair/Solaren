@@ -58,6 +58,11 @@ if (!User.Authorize(0)) {
 					<LI><A href="newregion.asp"><%=Dictionary.Item("New2")%></A></LI>
 				</UL>
 			</LI>
+			<LI><A href="#"><%=Dictionary.Item("Countries")%></A>
+			<UL class="submenu">
+				<LI><A href="findcountry.asp"><%=Dictionary.Item("Search")%></A></LI>
+				<LI><A href="newcountry.asp"><%=Dictionary.Item("New2")%></A></LI>
+			</UL></LI>
 
 			<LI CLASS="divider"><A href="#"><%=Dictionary.Item("Positions")%></A>
 				<UL class="submenu">

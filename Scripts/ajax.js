@@ -342,6 +342,51 @@ const Ajax = {
 		}
 	},
 
+	GetCountryList(QueryName, Deleted) {
+		const queryValue = QueryName.value.trim();
+		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
+			CountryId.value = -1;
+			CountryName.title = this.errLenMsg;
+		} else {		
+			CountryList.textContent = "";
+			CountryName.style.cursor = "wait";
+			fetch(`getcountrydata.asp?QueryName=${queryValue}`)
+			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
+			.then(data => data[0].CountryId == 0 ? location.href="accessdenied.asp" : this.SetCountryList(data))
+			.catch((error) => this.errFetchMsg(error));
+			CountryName.style.cursor = "auto";
+		}
+		return false
+	},
+
+	SetCountryList(data) {
+		const found = data[0].CountryId > 0;
+		if (found) {
+			data.forEach(element => {
+				let option = document.createElement("option");
+				option.value = element.CountryName;
+				CountryList.appendChild(option);
+			});
+
+			CountryName.addEventListener("input", function() {
+				const selectedValue = this.value,
+				selectedElement = data.find(element => {
+					return element.CountryName == selectedValue;
+				});
+
+				if (selectedElement) {
+					CountryId.value         = selectedElement.CountryId;
+					CountryName.value       = selectedElement.CountryName;
+					CountryName.title       = "";
+				}
+			});
+		} else {
+			CountryList.textContent = "";
+			CountryId.value = -1;
+			CountryName.title = this.noDataMsg;
+		}
+	},
+
 	GetCustomerInfo(CustomerCode) {
 		try {
 			fetch(`getcustomerinfo.asp?CustomerCode=${CustomerCode}`)
