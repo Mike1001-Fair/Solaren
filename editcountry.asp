@@ -6,7 +6,6 @@
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 CountryId = Request.QueryString("CountryId");
-
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -22,11 +21,11 @@ try {
 } finally {
 	with (rsCountry) {
 		var CountryName = Fields("CountryName").value,
-		TldCode        = Fields("TldCode").value,
-		IsoCode        = Fields("IsoCode").value,
-		ItuCode        = Fields("ItuCode").value,
-		Deleted        = Fields("Deleted").value,
-		Title          = Deleted ? "Перегляд країни" : "Редагування країни";
+		TldCode         = Fields("TldCode").value,
+		IsoCode         = Fields("IsoCode").value,
+		ItuCode         = Fields("ItuCode").value,
+		Deleted         = Fields("Deleted").value,
+		Title           = Deleted ? "Перегляд країни" : "Редагування країни";
 		Close();
 	} 
 	Connect.Close();

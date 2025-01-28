@@ -61,7 +61,7 @@ var User = {
 	},
 
 	GetPswd: function() {
-		var maxAttempts = 10,
+		var maxAttempts = 9,
 		Chars = [],
 		Pswd  = "",
 		valid = false;

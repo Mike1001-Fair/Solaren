@@ -4,7 +4,7 @@ const User = {
 	PswdRe: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
 
 	get Pswd() {
-		const maxAttempts = 10;
+		const maxAttempts = 9;
 		let pswd = "",
 		valid = false;
 

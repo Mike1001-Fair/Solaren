@@ -15,8 +15,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Назва</LEGEND>
-	<INPUT TYPE="search" NAME="StreetName" ID="StreetName" PLACEHOLDER="Пошук" SIZE="30" LIST="StreetList" REQUIRED AUTOFOCUS>
-	<DATALIST ID="StreetList"></DATALIST>
+	<% Html.WriteInputDataList("Street", "", 30, 1) %>
 	</FIELDSET>
 	</TD></TR>
 </TABLE>
