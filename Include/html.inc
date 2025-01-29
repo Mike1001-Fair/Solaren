@@ -14,7 +14,7 @@ var Html = {
 			'<TITLE>' + Title + '</TITLE>',
 			Icon.Link("sun.svg"),
 			Styles.Write(),
-			UseScripts ? Scripts.Write(UseScripts) : '',
+			UseScripts ? Scripts.Write() : '',
 		],
 		ResponseText = [
 			'<!DOCTYPE html>',
@@ -325,7 +325,7 @@ Menu = {
 	Write: function(RoleId, BodyTag) {
 		var ScriptName = "menu-" + this.Type[RoleId] + ".asp";
 		if (BodyTag) {
-			Response.Write('<BODY CLASS="MainBody" ID="MainBody">');
+			Response.Write('\n<BODY CLASS="MainBody" ID="MainBody">');
 			Server.Execute(ScriptName);
 			Response.Write('</BODY></HTML>');
 		} else {
