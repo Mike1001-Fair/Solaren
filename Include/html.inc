@@ -288,8 +288,8 @@ Scripts = {
 	Write: function() {
 		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-				var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>'];
-				Block.push(row.join(""));
+			var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>'];
+			Block.push(row.join(""));
 		}
 		return Block.join("\n");
 	}

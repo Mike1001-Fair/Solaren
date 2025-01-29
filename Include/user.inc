@@ -77,11 +77,12 @@ var User = {
 	},
 
 	ValidateAccess: function(Authorized, method) {
-		var validMethod = this.Method == method;
-		if (!Authorized || !validMethod) {
+		var validMethod = this.Method == method,
+		validAccess = Authorized && validMethod;
+		if (!validAccess) {
 			Resource.Load(User.ResourceFile());
 			Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"));
 		}
-		return Authorized && validMethod
+		return validAccess
 	}
 }%>
