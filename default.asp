@@ -10,7 +10,7 @@ titleUser  = Dictionary.Item("UserTitle"),
 titlePswd  = Dictionary.Item("PasswordTitle");
 
 with (Html) {
-	SetHead(Dictionary.Item("DefaultTitle"));
+	SetHead(Dictionary.Item("DefaultTitle"), 1);
 	WriteScript();
 }%>
 <BODY CLASS="StartBody">

@@ -4,7 +4,7 @@ var Html = {
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
-	SetHead: function(Title) {
+	SetHead: function(Title, UseScripts) {
 		this.Title = Title;
 		var Head = [
 			'<META charset="utf-8">',
@@ -14,7 +14,7 @@ var Html = {
 			'<TITLE>' + Title + '</TITLE>',
 			Icon.Link("sun.svg"),
 			Styles.Write(),
-			Scripts.Write(),
+			UseScripts ? Scripts.Write(UseScripts) : '',
 		],
 		ResponseText = [
 			'<!DOCTYPE html>',
@@ -38,7 +38,7 @@ var Html = {
 	},
 
 	SetPage: function(Title, RoleId) {
-		this.SetHead(Title);
+		this.SetHead(Title, 1);
 		this.WriteScript();
 		Menu.Write(RoleId, 0);
 	},
@@ -288,8 +288,8 @@ Scripts = {
 	Write: function() {
 		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>'];
-			Block.push(row.join(""));
+				var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>'];
+				Block.push(row.join(""));
 		}
 		return Block.join("\n");
 	}

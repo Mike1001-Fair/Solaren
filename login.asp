@@ -30,7 +30,7 @@ try {
 	} else {
 		var RoleId = rs.Fields("RoleId").value;
 		Solaren.SetSessionVar(rs);
-		Html.SetHead(Dictionary.Item("DefaultTitle"));
+		Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
 		Menu.Write(RoleId, 1);
 	}
 	rs.Close();
