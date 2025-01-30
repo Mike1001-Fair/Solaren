@@ -17,7 +17,6 @@ with (Html) {
 <HEADER CLASS="HeaderDiv">
 	<H3>&#127774;<%=Html.Title%></H3>
 </HEADER>
-
 <MAIN>
 	<FORM CLASS="FormDiv" NAME="Login" ID="Login" ACTION="login.asp" METHOD="post">
 	<FIELDSET><LEGEND>&#128274;<%=Dictionary.Item("Authenticate")%></LEGEND>	
@@ -28,7 +27,6 @@ with (Html) {
 	<BUTTON TYPE="submit" CLASS="LoginBtn" NAME="SbmBtn">Ok</BUTTON>
 	</FORM>
 </MAIN>
-
 <FOOTER CLASS="FooterDiv">
 	<A HREF="mailto:Nickolay.nickchernov@gmail.com" TITLE="Лист автору для вiдгукiв, зауважень та пропозицiй"><%=Dictionary.Item("Author")%></A>
 </FOOTER>
