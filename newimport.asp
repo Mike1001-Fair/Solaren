@@ -6,6 +6,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1),
+Items = ["Показників", "Оплат"],
 Title = "Iмпорт";
 if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage(Title, User.RoleId)
@@ -22,9 +23,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MAX="<%=OperMonth%>" READONLY></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Тип</TD>
-	<TD><SELECT NAME="FileType" ID="FileType">
-	<OPTION VALUE="0">Показників</OPTION>
-	<OPTION VALUE="1">Оплат</OPTION></SELECT></TD></TR>
+	<TD><%=Html.WriteList("FileType", Items)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Файл</TD>
 	<TD><INPUT TYPE="TEXT" NAME="SourceFile" VALUE="Import\indicatorimport.txt" SIZE="30" READONLY></TD></TR>

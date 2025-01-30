@@ -4,6 +4,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/codepage.inc" -->
 <% var Authorized = Session("RoleId") == 1,
+Items = ["Контрагенти", "Нарахування", "До сплати"],
 OperMonth = Month.GetMonth(1);
 
 if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
@@ -25,11 +26,7 @@ with (Html) {
 	<TD><INPUT TYPE="Month" NAME="OperMonth" VALUE="<%=OperMonth%>" MAX="<%=OperMonth%>" READONLY></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Файл</TD>
-	<TD><SELECT NAME="FileType">
-	<OPTION VALUE="0">Контрагенти</OPTION>
-	<OPTION VALUE="1">Нарахування</OPTION>
-	<OPTION VALUE="2">До сплати</OPTION>
-	</SELECT></TD></TR>
+	<TD><%=Html.WriteList("FileType", Items)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Кодування</TD>
 	<TD><%=CodePage.Write()%></TD></TR>

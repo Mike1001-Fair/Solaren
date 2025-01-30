@@ -165,6 +165,21 @@ var Html = {
 		Response.Write(ResponseText.join("\n"));
 	},
 
+	WriteList: function(tagName, list) {
+		var ResponseText = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
+		if (list && list instanceof Array && list.length > 0) {
+			for (var i = 0; i < list.length; i++) {
+				var option = ['<OPTION VALUE="', i, '">', list[i], '</OPTION>'];
+				ResponseText.push(option.join(""));
+			}
+		} else {
+			var option = ['<OPTION VALUE="', 0, '">', 'Invalid array', '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join("\n"));
+	},
+
 	WriteBank: function(rs, MfoCode) {
 		var ResponseText = ['<SELECT NAME="MfoCode" ID="MfoCode">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
