@@ -31,7 +31,7 @@ with (Html) {
 	</SELECT></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Кодування</TD>
-	<TD><%=Html.WriteCodePage()%></TD></TR>
+	<TD><%=CodePage.Write()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
