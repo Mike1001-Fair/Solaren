@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE FILE="Include/codepage.inc" -->
 <% var Authorized = Session("RoleId") == 1,
 OperMonth = Month.GetMonth(1);
 
