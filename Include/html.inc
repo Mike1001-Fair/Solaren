@@ -13,10 +13,12 @@ var Html = {
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
 			'<TITLE>' + Title + '</TITLE>',
 			Icon.Link("sun.svg"),
-			Styles.Write(),
-			UseScripts ? Scripts.Write() : '',
-		],
-		ResponseText = [
+			Styles.Write()
+		];
+		if (UseScripts) {
+			Head.push(Scripts.Write());
+		}
+		var ResponseText = [
 			'<!DOCTYPE html>',
 			'<HTML LANG="en">',
 			Tag.Write('HEAD', -1, Head.join("\n"))

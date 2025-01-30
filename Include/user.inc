@@ -53,7 +53,9 @@ var User = {
 			} catch (ex) {
 				Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 			} finally {
-				Connect.Close();
+				if (Connect.State) {
+					Connect.Close();
+				}
 			}
 		}
 		//Response.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token + "<BR>ValidRole = " + ValidRole);

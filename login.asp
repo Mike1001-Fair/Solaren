@@ -28,6 +28,8 @@ try {
 	if (rs.EOF) {
 		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"));
 	} else {
+	//Response.Write("Error" + rs.Fields("RoleId").value);
+	//Response.End();
 		var RoleId = rs.Fields("RoleId").value;
 		Solaren.SetSessionVar(rs);
 		Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
