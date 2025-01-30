@@ -6,9 +6,9 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% Resource.Load(User.ResourceFile());
 var LoginId = Request.Form("LoginId"),
-Pswd = Request.Form("Pswd");
-
-User.ValidateAccess(User.PswdRe.test(Pswd), "POST");
+Pswd = Request.Form("Pswd"),
+ValidParam = User.LoginRe.test(LoginId) && User.PswdRe.test(Pswd);
+User.ValidateAccess(ValidParam, "POST");
 
 try {
 	Solaren.SetCmd("Login");
@@ -28,8 +28,6 @@ try {
 	if (rs.EOF) {
 		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"));
 	} else {
-	//Response.Write("Error" + rs.Fields("RoleId").value);
-	//Response.End();
 		var RoleId = rs.Fields("RoleId").value;
 		Solaren.SetSessionVar(rs);
 		Html.SetHead(Dictionary.Item("DefaultTitle"), 1);

@@ -1,8 +1,9 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var User = {
 	Role   : ["Адмiнiстратор","Виконавець","Технік ЦОС"],
+	LoginRe: /(?=.*[a-z])(?=.*[A-Z]).{8,10}/,
 	PswdLen: 10,
-	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/,
+	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}/,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
 	Ip     : Server.HTMLEncode(Request.ServerVariables("REMOTE_ADDR")) || -1,
 	Agent  : Server.HTMLEncode(Request.ServerVariables("HTTP_USER_AGENT")),
