@@ -173,7 +173,7 @@ var Html = {
 				ResponseText.push(option.join(""));
 			}
 		} else {
-			var option = ['<OPTION VALUE="', 0, '">', 'Invalid array', '</OPTION>'];
+			var option = ['<OPTION VALUE="', -1, '">', 'Invalid array', '</OPTION>'];
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>');
