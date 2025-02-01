@@ -3,17 +3,16 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/codepage.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
 Items = ["Контрагенти", "Нарахування", "До сплати"],
 OperMonth = Month.GetMonth(1);
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead("Файл експорту");
-	WriteScript();
-	Menu.Write(Session("RoleId"), 0);
+if (User.ValidateAccess(Authorized, "GET")) {
+	Html.SetPage("Файл експорту", User.RoleId)
 }%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewExport" ACTION="create1cagent.asp" METHOD="post">
 <INPUT TYPE="HIDDEN" NAME="ReportCharSet">

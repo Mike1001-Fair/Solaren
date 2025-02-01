@@ -6,10 +6,9 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1),
-Items = ["Показників", "Оплат"],
-Title = "Iмпорт";
+Items = ["Показників", "Оплат"];
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Iмпорт", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewImport" ACTION="loadindicator.asp" METHOD="post">
