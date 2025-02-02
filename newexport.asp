@@ -12,7 +12,6 @@ OperMonth = Month.GetMonth(1);
 if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage("Eкспорт", User.RoleId)
 }%>
-
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewExport" ACTION="create1cagent.asp" METHOD="post">
 <INPUT TYPE="HIDDEN" NAME="ReportCharSet">
