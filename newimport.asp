@@ -13,7 +13,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewImport" ACTION="loadindicator.asp" METHOD="post">
 
-<H3 CLASS="HeadText"><IMG SRC="Images/importdb.png" NAME="ImportImg" ID="ImportImg" WIDTH="32" HEIGHT="32">Iмпорт</H3>
+<H3 CLASS="HeadText"><IMG SRC="Images/importdb.png" NAME="ImportImg" ID="ImportImg" WIDTH="32" HEIGHT="32"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
