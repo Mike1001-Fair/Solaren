@@ -1,10 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Month = {
-	Name: [
-		["сiчень", "лютий", "березень", "квiтень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень"],
-		["сiчнi", "лютому", "березнi", "квiтнi", "травнi", "червнi", "липнi", "серпнi", "вереснi", "жовтнi", "листопадi", "груднi"],
-		["сiчня", "лютого", "березня", "квiтня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"]
-	],
+	Name: ["сiч", "лют", "берез", "квiт", "трав", "черв", "лип", "серп", "верес", "жовт", "листопад", "груд"],
 
 	Quarter: [
 		{1 : "Сiчень", 2 : "Лютий", 3 : "Березень"},
@@ -17,6 +13,20 @@ var Month = {
 
 	YearItem: "року",
 
+	GetName: function(monthNum, caseType) {
+		var suffix = "";
+		if (caseType == 0) {
+			suffix = monthNum == 1 ? "ий" : monthNum == 10 ? "" : "ень";
+		} else if (caseType == 1) {
+			suffix = monthNum == 1 ? "ому" : monthNum == 10 ? "і" : "ні";
+		} else if (caseType == 2) {
+			suffix = monthNum == 1 ? "ого" : monthNum == 10 ? "а" : "ня";
+		} else {
+			suffix = "";
+		}
+		return this.Name[monthNum] + suffix
+	},
+
 	GetMonth: function(index) {
 		return this.Date[index].slice(0, 7)
 	},
@@ -27,8 +37,10 @@ var Month = {
 
 	GetLastDay: function(mstr) {
 		var ym = mstr.split("-"),
+		monthNum = +ym[1] - 1,
+		monthName = this.GetName(monthNum, 2),
 		d = new Date(ym[0], ym[1], 0),
-		result = [d.getDate(), this.Name[2][ym[1]-1], ym[0], this.YearItem];
+		result = [d.getDate(), monthName, ym[0], this.YearItem];
 		return result.join(" ");
 	},
 
@@ -42,19 +54,25 @@ var Month = {
 
 	GetFirstDay: function(mstr) {
 		var ym = mstr.split("-"),
-		result = ["1 ", this.Name[2][ym[1]-1], ym[0], this.YearItem];
+		monthNum = +ym[1] - 1,
+		monthName = this.GetName(monthNum, 2),
+		result = ["1 ", monthName, ym[0], this.YearItem];
 		return result.join(" ");
 	},
 
-	GetPeriod: function(mstr, index) {
+	GetPeriod: function(mstr, caseType) {
 		var ym = mstr.split("-"),
-		result = [this.Name[index][ym[1]-1], ym[0], this.YearItem];
+		monthNum = +ym[1] - 1,
+		monthName = this.GetName(monthNum, caseType),
+		result = [this.GetName(monthNum, caseType), ym[0], this.YearItem];		
 		return result.join(" ");
 	},
 	
-	GetDate: function(dstr, index) {
-		var ymd = dstr.split("-");
-		result = [ymd[2], this.Name[index][ymd[1]-1], ymd[0], this.YearItem];
+	GetDate: function(dstr, caseType) {
+		var ymd = dstr.split("-"),
+		monthNum = +ymd[1] - 1,
+		monthName = this.GetName(monthNum, caseType);
+		result = [ymd[2], monthName, ymd[0], this.YearItem];
 		return result.join(" ");
 	}
 }%>
