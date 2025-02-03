@@ -21,8 +21,6 @@ var Month = {
 			suffix = monthNum == 1 ? "ому" : monthNum == 10 ? "і" : "ні";
 		} else if (caseType == 2) {
 			suffix = monthNum == 1 ? "ого" : monthNum == 10 ? "а" : "ня";
-		} else {
-			suffix = "";
 		}
 		return this.Name[monthNum] + suffix
 	},
