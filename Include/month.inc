@@ -1,17 +1,20 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Month = {
 	Name: ["сiч", "лют", "берез", "квiт", "трав", "черв", "лип", "серп", "верес", "жовт", "листопад", "груд"],
-
-	Quarter: [
-		{1 : "Сiчень", 2 : "Лютий", 3 : "Березень"},
-		{4 : "Квiтень", 5 : "Травень", 6 : "Червень"},
-		{7 : "Липень", 8 : "Серпень", 9 : "Вересень"},
-		{10 : "Жовтень", 11 : "Листопад", 12 : "Грудень"}
-	],
-
 	Date: ["2015-01-01", Session("OperDate"), Session("EndDate"), Session("NextDate"), "9999-12-31"],
-
 	YearItem: "року",
+
+	GetQuarter: function() {
+		var Quarter = [];
+		for (var i = 0; i < this.Name.length; i += 3) {
+			var Item = {};
+			for (var j = 0; j < 3; j++) {
+				Item[i + j + 1] = this.GetName(i + j, 0);
+			}
+			Quarter.push(Item);
+		}
+		return Quarter;
+	},
 
 	GetName: function(monthNum, caseType) {
 		var suffix = "";
