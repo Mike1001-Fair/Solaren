@@ -50,5 +50,5 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<SPAN ID="Saldo">Сальдо </SPAN><INPUT TYPE="text" NAME="TotSaldo" SIZE="7" READONLY TABINDEX="-1">
 	</FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>Створити</BUTTON>
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>✅Створити</BUTTON>
 </FORM></BODY></HTML>

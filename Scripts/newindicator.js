@@ -44,7 +44,8 @@
 
 		TotSaldo.value = isNaN(totsaldo) ? "" : Math.abs(totsaldo);
 		TotSaldo.style.color = notsaldo ? "#FF0000" : "#000000";
-		SbmBtn.disabled = !ReportDate.validity.valid || MeterId.value == "" || notsaldo;		
+		SbmBtn.disabled = !ReportDate.validity.valid || MeterId.value == "" || notsaldo;
+		//SbmBtn.textContent = SbmBtn.disabled ? "Створити" : "✅Створити";
 		Saldo.textContent = (notsaldo || !totsaldo) ? "Сальдо " : totsaldo > 0 ? "Продаж " : "Покупка ";
 	}
 });
