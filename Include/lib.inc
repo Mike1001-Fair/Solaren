@@ -81,7 +81,7 @@ Solaren = {
 				ErrMsg.push(ex.name + ": " + ex.message);
 			}
 		} else {
-			throw new Error("Unknown exception");
+			ErrMsg.push("Unknown exception");
 		}
 		return ErrMsg.join("\n")
 	},
