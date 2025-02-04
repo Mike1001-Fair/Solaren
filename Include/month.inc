@@ -17,12 +17,15 @@ var Month = {
 	},
 
 	GetName: function(monthNum, caseType) {
-		var suffix = {
-			0: monthNum == 1 ? "ий"  : monthNum == 10 ? ""  : "ень",
-			1: monthNum == 1 ? "ому" : monthNum == 10 ? "і" : "ні",
-			2: monthNum == 1 ? "ого" : monthNum == 10 ? "а" : "ня"
-		};
-		return this.Name[monthNum] + (suffix[caseType] || "");
+		var suffixes = [
+			["ий", "", "ень"],
+			["ому", "і", "ні"],
+			["ого", "а", "ня"]
+		],
+		suffix = monthNum == 1 ? suffixes[caseType][0] :
+			 monthNum == 10 ? suffixes[caseType][1] :
+			 suffixes[caseType][2];
+		return this.Name[monthNum] + (suffix || "");
 	},
 
 	GetMonth: function(index) {

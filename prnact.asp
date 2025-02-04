@@ -39,9 +39,9 @@ try {
 		ContractPAN  = Fields("ContractPAN").value,
 
 		FactVol      = Fields("FactVol").value.toDelimited(0),
-		VolCost      = Fields("VolCost").value.toDelimited(0),
-		Pdfo         = Fields("Pdfo").value.toDelimited(0),
-		Vz           = Fields("Vz").value.toDelimited(0),
+		VolCost      = Fields("VolCost").value.toDelimited(2),
+		Pdfo         = Fields("Pdfo").value.toDelimited(2),
+		Vz           = Fields("Vz").value.toDelimited(2),
 		ActSum       = rs.Fields("ActSum").value,
 
 		ChiefTitle   = Fields("ChiefTitle").value,
