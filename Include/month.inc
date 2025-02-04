@@ -38,8 +38,8 @@ var Month = {
 
 	GetLastDay: function(mstr) {
 		var ym = mstr.split("-"),
-		monthNum = +ym[1] - 1,
-		monthName = this.GetName(monthNum, 2),
+		index = +ym[1] - 1,
+		monthName = this.GetName(index, 2),
 		d = new Date(ym[0], ym[1], 0),
 		result = [d.getDate(), monthName, ym[0], this.YearItem];
 		return result.join(" ");
