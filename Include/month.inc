@@ -62,14 +62,14 @@ var Month = {
 		var ym = mstr.split("-"),
 		monthNum = +ym[1] - 1,
 		monthName = this.GetName(monthNum, caseType),
-		result = [this.GetName(monthNum, caseType), ym[0], this.YearItem];		
+		result = [monthName, ym[0], this.YearItem];		
 		return result.join(" ");
 	},
 	
 	GetDate: function(dstr, caseType) {
 		var ymd = dstr.split("-"),
 		monthNum = +ymd[1] - 1,
-		monthName = this.GetName(monthNum, caseType);
+		monthName = this.GetName(monthNum, caseType),
 		result = [ymd[2], monthName, ymd[0], this.YearItem];
 		return result.join(" ");
 	}
