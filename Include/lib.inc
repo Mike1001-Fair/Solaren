@@ -70,19 +70,20 @@ Solaren = {
 	},
 
 	GetErrMsg: function(ex) {
-		var ErrMsg = "Runtime Error ";
+		var ErrMsg = [];
 		if (this.ValidObject(ex)) {
-			if (ex instanceof Error) {
+			if (Connect.Errors.Count) {
 				for (var i = 0; i < Connect.Errors.Count; i++) {
-					ErrMsg += Connect.Errors(i).number + ": " + Connect.Errors(i).description + "\n";				
+					var row = [Connect.Errors(i).number, Connect.Errors(i).description];
+					ErrMsg.push(row.join(": "));
 				}
 			} else {
-				ErrMsg += ex.name + ": " + ex.message;
+				ErrMsg.push(ex.name + ": " + ex.message);
 			}
 		} else {
-			throw ex;
+			throw new Error("Unknown exception");
 		}
-		return ErrMsg
+		return ErrMsg.join("\n")
 	},
 
 	SysMsg: function(msgType, msgText) {
