@@ -16,16 +16,16 @@ var Month = {
 		return Quarter;
 	},
 
-	GetName: function(monthNum, caseType) {
+	GetName: function(index, caseType) {
 		var suffixes = [
 			["ий", "", "ень"],
 			["ому", "і", "ні"],
 			["ого", "а", "ня"]
 		],
-		suffix = monthNum == 1 ? suffixes[caseType][0] :
-			 monthNum == 10 ? suffixes[caseType][1] :
+		suffix = index == 1 ? suffixes[caseType][0] :
+			 index == 10 ? suffixes[caseType][1] :
 			 suffixes[caseType][2];
-		return this.Name[monthNum] + (suffix || "");
+		return this.Name[index] + (suffix || "");
 	},
 
 	GetMonth: function(index) {
@@ -55,24 +55,24 @@ var Month = {
 
 	GetFirstDay: function(mstr) {
 		var ym = mstr.split("-"),
-		monthNum = +ym[1] - 1,
-		monthName = this.GetName(monthNum, 2),
+		index = +ym[1] - 1,
+		monthName = this.GetName(index, 2),
 		result = ["1 ", monthName, ym[0], this.YearItem];
 		return result.join(" ");
 	},
 
 	GetPeriod: function(mstr, caseType) {
 		var ym = mstr.split("-"),
-		monthNum = +ym[1] - 1,
-		monthName = this.GetName(monthNum, caseType),
+		index = +ym[1] - 1,
+		monthName = this.GetName(index, caseType),
 		result = [monthName, ym[0], this.YearItem];		
 		return result.join(" ");
 	},
 	
 	GetDate: function(dstr, caseType) {
 		var ymd = dstr.split("-"),
-		monthNum = +ymd[1] - 1,
-		monthName = this.GetName(monthNum, caseType),
+		index = +ymd[1] - 1,
+		monthName = this.GetName(index, caseType),
 		result = [ymd[2], monthName, ymd[0], this.YearItem];
 		return result.join(" ");
 	}
