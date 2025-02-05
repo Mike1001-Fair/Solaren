@@ -89,7 +89,7 @@ Solaren = {
 	SysMsg: function(msgType, msgText) {
 		var Page = ["errmsg", "done", "accessdenied", "error"];
 		if (!Page[msgType]) {
-			msgType = Page.length - 1 // if out of range - default last page
+			msgType = Page.length - 1 // if out of range - default error page
 			msgText = "Runtime Error: out of range";			
 		}
 		Session("SysMsg") = msgText;
