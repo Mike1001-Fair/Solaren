@@ -55,7 +55,7 @@ var Month = {
 
 	GetFirstDay: function(mstr) {
 		var ym = mstr.split("-"),
-		index = +ym[1] - 1,
+		index = ym[1] - 1,
 		monthName = this.GetName(index, 2),
 		result = ["1 ", monthName, ym[0], this.YearItem];
 		return result.join(" ");
@@ -63,7 +63,7 @@ var Month = {
 
 	GetPeriod: function(mstr, caseType) {
 		var ym = mstr.split("-"),
-		index = +ym[1] - 1,
+		index = ym[1] - 1,
 		monthName = this.GetName(index, caseType),
 		result = [monthName, ym[0], this.YearItem];		
 		return result.join(" ");
@@ -71,7 +71,7 @@ var Month = {
 	
 	GetDate: function(dstr, caseType) {
 		var ymd = dstr.split("-"),
-		index = +ymd[1] - 1,
+		index = ymd[1] - 1,
 		monthName = this.GetName(index, caseType),
 		result = [ymd[2], monthName, ymd[0], this.YearItem];
 		return result.join(" ");
