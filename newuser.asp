@@ -17,9 +17,9 @@ try {
 	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
 } catch (ex) {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
-}
-
-Html.SetPage("Новий користувач", User.RoleId)%>
+} finally {
+	Html.SetPage("Новий користувач", User.RoleId)
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewUser" ACTION="createuser.asp" METHOD="post" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText">&#128100;<%=Html.Title%></H3>

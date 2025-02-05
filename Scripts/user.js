@@ -1,7 +1,8 @@
 ﻿"use strict";
 const User = {
+	LoginRe: /(?=.*[a-z])(?=.*[A-Z]).{8,10}/,
 	PswdLen: 10,
-	PswdRe: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
+	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}/,
 
 	get Pswd() {
 		const maxAttempts = 9;
