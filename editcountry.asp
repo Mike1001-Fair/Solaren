@@ -3,7 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/street.inc" -->
+
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 CountryId = Request.QueryString("CountryId");
 User.ValidateAccess(Authorized, "POST");
