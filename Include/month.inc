@@ -22,7 +22,7 @@ var Month = {
 			["ому", "і", "ні"],
 			["ого", "а", "ня"]
 		],
-		sufIndex = (index == 1) ? 0 : index == 10 ? 1 : 2;
+		sufIndex = index == 1 ? 0 : index == 10 ? 1 : 2;
 		return this.Name[index] + suffix[caseType][sufIndex]
 	},
 
