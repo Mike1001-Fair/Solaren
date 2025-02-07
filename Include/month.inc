@@ -17,17 +17,18 @@ var Month = {
 	},
 
 	GetName: function(index, caseType) {
-		var suffixes = {
+		var suffix = {
 			1:  ["ий", "ому", "ого"],
 			10: ["", "і", "а"],
 			def: ["ень", "ні", "ня"]
 		},
-		suffixList = suffixes[index] || suffixes.def;
+		suffixList = suffix[index] || suffix.def;
 		return this.Name[index] + suffixList[caseType];
 	},
 
 	GetMonth: function(index) {
-		return this.Date[index] ? this.Date[index].slice(0, 7) : "";
+		var dateItem = this.Date[index];
+		return dateItem ? dateItem.slice(0, 7) : "";
 	},
 
 	isPeriod: function(StartDate, EndDate) {	// StartDate, EndDate is string type yyyy-mm-dd
@@ -36,7 +37,7 @@ var Month = {
 
 	GetLastDay: function(mstr) {
 		var ym = mstr.split("-"),
-		index = +ym[1] - 1,
+		index = ym[1] - 1,
 		monthName = this.GetName(index, 2),
 		d = new Date(ym[0], ym[1], 0),
 		result = [d.getDate(), monthName, ym[0], this.YearItem];
