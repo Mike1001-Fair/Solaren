@@ -39,16 +39,19 @@ SbmBtn?.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 DelBtn?.addEventListener('click', DelUser);
 RestoreBtn?.addEventListener('click', DelUser);
 
 function DelUser() {
-	if (confirm(`Ви впевненi\u2753`)) {
-		with (EditUser) {
-			action = `deluser.asp?UserId=${UserId.value}&Deleted=${Deleted.value}`
-		}
-	} else event.preventDefault();
+	if (confirm("Ви впевненi\u2753")) {
+		EditUser.action = `deluser.asp`;
+		Loader.Show();
+	} else {
+		event.preventDefault();
+	}
 }

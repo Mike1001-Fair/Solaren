@@ -24,19 +24,21 @@ ContractName.addEventListener('input', function() {
 });
 
 SbmBtn?.addEventListener('click', (event) => {
-		if (confirm("Ви впевненi\u2753")) {
-			const Elements = document.querySelectorAll("input[type='text']");
-			Elements.forEach(elm => elm.value = elm.value.trim());
-			Loader.Show();
-		} else event.preventDefault();
-	});
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else event.preventDefault();
+});
+
 DelBtn?.addEventListener('click', DelMeter);
 RestoreBtn?.addEventListener('click', DelMeter);
 
 function DelMeter() {
 	if (confirm("Ви впевненi\u2753")) {
-		with (EditMeter) {
-			action = `delmeter.asp?MeterId=${MeterId.value}&Deleted=${Deleted.value}`;
-		}
-	} else event.preventDefault();
+		EditMeter.action = `delmeter.asp`;
+		Loader.Show();
+	} else {
+		event.preventDefault();
+	}
 }

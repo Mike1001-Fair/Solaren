@@ -17,29 +17,24 @@ EditCountry.addEventListener('input', () => {
 	}
 })
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		if (confirm("Ви впевненi\u2753")) {
-			const Elements = document.querySelectorAll("input[type='text']");
-			Elements.forEach(elm => elm.value = elm.value.trim());
-			Loader.Show();
-		} else event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else {
+		event.preventDefault();
+	}
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelCountry);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelCountry);
-}
+DelBtn?.addEventListener('click', DelCountry);
+RestoreBtn?.addEventListener('click', DelCountry);
 
 function DelCountry() {
 	if (confirm(`Ви впевненi\u2753`)) {
-		with (EditCountry) {
-			action = `delcountry.asp?CountryId=${CountryId.value}&Deleted=${Deleted.value}`
-		}
+		EditCountry.action = `delcountry.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }
