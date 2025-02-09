@@ -6,8 +6,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var ContractId = QueryString("ContractId"),
-	Deleted = QueryString("Deleted");
+	var ContractId = Form("ContractId"),
+	Deleted = Form("Deleted");
 }
 
 try {
@@ -24,5 +24,5 @@ try {
 	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
 } finally {	
 	Connect.Close();
-	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Існує заборгованість по договору!");
+	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Некоректний баланс по договору");
 }%>

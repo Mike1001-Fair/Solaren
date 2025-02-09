@@ -95,11 +95,11 @@ function ChkForm() {
 }
 
 function DelContract() {
-	const Msg = EditContract.Deleted.value == "False" ? "видалено, а історію розрахунків припинено" : "відновлено";
+	const Msg = EditContract.Deleted.value == "False" ? "видалено та історію розрахунків припинено" : "відновлено";
 	if (confirm(`Договiр буде ${Msg}\u2757 Ви впевненi\u2753`)) {
-		with (EditContract) {		
-			action = `delcontract.asp?ContractId=${ContractId.value}&Deleted=${Deleted.value}`
-		}
+		EditContract.action = `delcontract.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }
