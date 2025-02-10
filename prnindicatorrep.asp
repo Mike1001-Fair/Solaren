@@ -11,11 +11,11 @@
 User.ValidateAccess(Authorized, "POST");
 
 function getText(totSaldo) {
-	if (totSaldo != 0) {
-		var resultText = ["За результатами знятих показникiв: "],
-		s = " електроенергiю, згiдно умов договору ";
+	var resultText = ["За результатами знятих показникiв: "],
+	s = " електроенергiю, згiдно умов договору ";
+	if (totSaldo) {
 		if (totSaldo < 0) {
-			totSaldo = -totSaldo;
+			totSaldo = Math.abs(totSaldo);
 			resultText.push("Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї")
 		} else {
 			resultText.push("Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї");

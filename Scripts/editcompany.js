@@ -50,8 +50,9 @@ RestoreBtn?.addEventListener('click', DelCompany);
 
 function DelCompany() {
 	if (confirm("Ви впевненi\u2753")) {
-		with (EditCompany) {
-			action = `delcompany.asp?CompanyId=${CompanyId.value}&Deleted=${Deleted.value}`;
-		}
-	} else event.preventDefault();
+		EditCompany.action = `delcompany.asp`;
+		Loader.Show();
+	} else {
+		event.preventDefault();
+	}
 }

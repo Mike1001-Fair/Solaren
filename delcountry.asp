@@ -7,7 +7,7 @@ User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var CountryId = Form("CountryId"),
-	Deleted      = Form("Deleted");
+	Deleted       = Form("Deleted");
 }
 
 try {
