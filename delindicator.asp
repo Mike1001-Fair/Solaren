@@ -1,11 +1,13 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var IndicatorId = QueryString("IndicatorId"),
-	Deleted         = QueryString("Deleted");
+	var IndicatorId = Form("IndicatorId"),
+	Deleted         = Form("Deleted");
 }
 
 try {

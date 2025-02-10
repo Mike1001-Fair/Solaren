@@ -21,7 +21,9 @@ SbmBtn?.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 DelBtn?.addEventListener('click', DelCustomer);
@@ -76,9 +78,8 @@ function ChkForm() {
 function DelCustomer() {
 	const MsgText = EditCustomer.Deleted.value == "True" ? "відновлено" : "видалено";
 	if (confirm(`Анкету споживача та усі його договора буде ${MsgText}\u2757 Ви впевненi\u2753`)) {
-		with (EditCustomer) {
-			action = `delcustomer.asp?CustomerId=${CustomerId.value}&Deleted=${Deleted.value}`;
-		}
+		EditCustomer.action = `delcustomer.asp`;
+		Loader.Show();
 	} else {
 		event.preventDefault();
 	}

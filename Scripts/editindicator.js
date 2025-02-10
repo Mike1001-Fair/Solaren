@@ -26,19 +26,12 @@ ReportDate.addEventListener('change', function() {
 	Ajax.GetMeterInfo(EditIndicator.MeterId.value, this.value);
 });
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', () => {
-		confirm("Ви впевненi\u2753") ? Loader.Show() : event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', () => {
+	confirm("Ви впевненi\u2753") ? Loader.Show() : event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelIndicator);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelIndicator);
-}
+DelBtn?.addEventListener('click', DelIndicator);
+RestoreBtn?.addEventListener('click', DelIndicator);
 
 function LoadForm() {
 	with (EditIndicator) {
@@ -173,9 +166,9 @@ function ResetMeterList() {
 
 function DelIndicator() {
 	if (confirm("Ви впевненi\u2753")) {
-		with (EditIndicator) {
-			action = `delindicator.asp?IndicatorId=${IndicatorId.value}&Deleted=${Deleted.value}`;
-		}
+		EditIndicator.action = `delindicator.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }
