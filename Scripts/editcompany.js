@@ -6,28 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (EditCompany.Deleted.value=="True") {
 		const Elements = document.querySelectorAll("fieldset");
 		Elements.forEach(elm => elm.disabled = true);
+	} else {
+		ChkForm();
 	}
 	Ajax.GetStreetInfo(EditCompany.StreetId.value);
 	Ajax.GetLocalityInfo(EditCompany.LocalityId.value);
 });
 
-EditCompany.addEventListener('input', () => {
-	with (EditCompany) {
-		const isValidEdrpo = isEdrpoCode(CompanyCode.value),
-		isValidIban = isIban(BankAccount.value, MfoCode.value),
-		isValidTaxCode = isTaxCode(TaxCode.value),
-		isValidPersonTaxCode = isPersonTaxCode(AccountantTaxCode.value),
-		valid = CompanyName.validity.valid && isValidEdrpo && isValidIban && isValidTaxCode && Accountant.validity.valid
-			&& PostIndex.validity.valid && HouseId.validity.valid && LogoType.validity.valid && Phone.validity.valid
-			&& Email.validity.valid	&& WebSite.validity.valid && PerformerTitle.validity.valid && PerformerName.validity.valid
-			&& LocalityId.value != -1 && LocalityName.validity.valid && StreetId.value != -1 && StreetName.validity.valid;
-		CompanyCode.style.color = isValidEdrpo ? "#000000" : "#FF0000";
-		BankAccount.style.color = isValidIban ? "#000000" : "#FF0000";
-		TaxCode.style.color = isValidTaxCode ? "#000000" : "#FF0000";
-		AccountantTaxCode.style.color = isValidPersonTaxCode ? "#000000" : "#FF0000";
-		[SbmBtn, DelBtn].forEach(btn => btn && (btn.disabled = !valid));
-	}
-});
+EditCompany.addEventListener('input', ChkForm);
 
 LocalityName.addEventListener('input', function() {
 	Ajax.GetLocalityList(this)
@@ -49,6 +35,24 @@ SbmBtn?.addEventListener('click', (event) => {
 
 DelBtn?.addEventListener('click', DelCompany);
 RestoreBtn?.addEventListener('click', DelCompany);
+
+function ChkForm() {
+	with (EditCompany) {
+		const isValidEdrpo = isEdrpoCode(CompanyCode.value),
+		isValidIban = isIban(BankAccount.value, MfoCode.value),
+		isValidTaxCode = isTaxCode(TaxCode.value),
+		isValidPersonTaxCode = isPersonTaxCode(AccountantTaxCode.value),
+		valid = CompanyName.validity.valid && isValidEdrpo && isValidIban && isValidTaxCode && Accountant.validity.valid
+			&& PostIndex.validity.valid && HouseId.validity.valid && LogoType.validity.valid && Phone.validity.valid
+			&& Email.validity.valid	&& WebSite.validity.valid && PerformerTitle.validity.valid && PerformerName.validity.valid
+			&& LocalityId.value != -1 && LocalityName.validity.valid && StreetId.value != -1 && StreetName.validity.valid;
+		CompanyCode.style.color = isValidEdrpo ? "#000000" : "#FF0000";
+		BankAccount.style.color = isValidIban ? "#000000" : "#FF0000";
+		TaxCode.style.color = isValidTaxCode ? "#000000" : "#FF0000";
+		AccountantTaxCode.style.color = isValidPersonTaxCode ? "#000000" : "#FF0000";
+		[SbmBtn, DelBtn].forEach(btn => btn && (btn.disabled = !valid));
+	}
+}
 
 function DelCompany() {
 	if (confirm("Ви впевненi\u2753")) {
