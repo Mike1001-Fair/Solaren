@@ -6,8 +6,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var BankId = QueryString("BankId"),
-	Deleted    = QueryString("Deleted");
+	var BankId = Form("BankId"),
+	Deleted    = Form("Deleted");
 }
 
 try {

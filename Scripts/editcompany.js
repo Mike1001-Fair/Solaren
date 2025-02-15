@@ -13,19 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 EditCompany.addEventListener('input', () => {
 	with (EditCompany) {
-		CompanyCode.style.color = isEdrpoCode(CompanyCode.value) ? "#000000" : "#FF0000";
-		BankAccount.style.color = isIban(BankAccount.value, MfoCode.value) ? "#000000" : "#FF0000";
-		TaxCode.style.color = isTaxCode(TaxCode.value) ? "#000000" : "#FF0000";
-		AccountantTaxCode.style.color = isPersonTaxCode(AccountantTaxCode.value) ? "#000000" : "#FF0000";
-		SbmBtn.disabled = !CompanyName.validity.valid || CompanyCode.style.color == "rgb(255, 0, 0)"
-			|| BankAccount.style.color == "rgb(255, 0, 0)" || !Accountant.validity.valid
-			|| !PostIndex.validity.valid || !HouseId.validity.valid || !LogoType.validity.valid
-			|| AccountantTaxCode.style.color == "rgb(255, 0, 0)" || TaxCode.style.color == "rgb(255, 0, 0)"
-			|| !TaxStatus.validity.valid || !LicenseDate.validity.valid || !LicenseCode.validity.valid
-			|| !Phone.validity.valid || !Email.validity.valid || !WebSite.validity.valid
-			|| !PerformerTitle.validity.valid || !PerformerName.validity.valid
-			|| LocalityId.value == -1 || !LocalityName.validity.valid
-			|| StreetId.value == "-1" || !StreetName.validity.valid;
+		const isValidEdrpo = isEdrpoCode(CompanyCode.value),
+		isValidIban = isIban(BankAccount.value, MfoCode.value),
+		isValidTaxCode = isTaxCode(TaxCode.value),
+		isValidPersonTaxCode = isPersonTaxCode(AccountantTaxCode.value),
+		valid = CompanyName.validity.valid && isValidEdrpo && isValidIban && isValidTaxCode && Accountant.validity.valid
+			&& PostIndex.validity.valid && HouseId.validity.valid && LogoType.validity.valid && Phone.validity.valid
+			&& Email.validity.valid	&& WebSite.validity.valid && PerformerTitle.validity.valid && PerformerName.validity.valid
+			&& LocalityId.value != -1 && LocalityName.validity.valid && StreetId.value != -1 && StreetName.validity.valid;
+		CompanyCode.style.color = isValidEdrpo ? "#000000" : "#FF0000";
+		BankAccount.style.color = isValidIban ? "#000000" : "#FF0000";
+		TaxCode.style.color = isValidTaxCode ? "#000000" : "#FF0000";
+		AccountantTaxCode.style.color = isValidPersonTaxCode ? "#000000" : "#FF0000";
+		[SbmBtn, DelBtn].forEach(btn => btn && (btn.disabled = !valid));
 	}
 });
 
@@ -42,7 +42,9 @@ SbmBtn?.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 DelBtn?.addEventListener('click', DelCompany);
