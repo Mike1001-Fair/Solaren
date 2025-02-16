@@ -5,7 +5,6 @@ function GetNextDate(d) {
 	return NextDate.toISOString().slice(0, 10);
 }
 
-//let DigitOnly = () => event.keyCode > 47 && event.keyCode < 58;
 function FormateDate(strDate) {
 	 return strDate.split("-").reverse().join(".");
 }
@@ -99,19 +98,17 @@ function isPersonTaxCode(code) {
 }
 
 function isTaxCode(ipn) {
-	const k = [11,13,17,19,23,29,31,37,41,43,47],
-	m = [17,19,23,29,31,37,41,43,47,53,59],
+	const k = [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47],
+	m = [17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59],
 	IpnArr = ipn.split('');
 	let ChkSum = 0;
 	if (isDigit(ipn) && ipn.length == 12 && ipn != '000000000000') {
-		for (let i = 0; i < k.length; i++) {ChkSum += IpnArr[i] * k[i]};
-		ChkSum = ChkSum % 11;
-		if (ChkSum > 9) {
-			ChkSum = 0;
-			for (let i = 0; i < m.length; i++) {ChkSum += IpnArr[i] * m[i]};
-			ChkSum = ChkSum % 11;
+		ChkSum = k.reduce((acc, multiplier, idx) => acc + IpnArr[idx] * multiplier, 0);
+		if (ChkSum % 11 > 9) {
+			ChkSum = m.reduce((acc, multiplier, idx) => acc + IpnArr[idx] * multiplier, 0);
 		}
-	} return ChkSum ? ChkSum == IpnArr[11] : false
+	}
+	return ChkSum % 11 == IpnArr[11]
 }
 
 function isEICode(eic) {
@@ -186,6 +183,14 @@ function SetDisabledOptions(Options, Disabled) {
 			Options.selectedIndex = 0;
 		}
 	} else {
-		throw new Error('Options must be an array or a collection of elements.');
+		throw new TypeError('Options must be an array or a collection of elements.');
+	}
+}
+
+function SetDisabledButton(buttonList, valid) {
+	if (Array.isArray(buttonList)) {
+		buttonList.forEach(btn => btn && (btn.disabled = !valid));
+	} else {
+		throw new TypeError("buttonList  must be an array");
 	}
 }

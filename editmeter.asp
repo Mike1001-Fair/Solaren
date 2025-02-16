@@ -62,10 +62,10 @@ try {
 	
 	<FIELDSET><LEGEND>Показники</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Прийом</TD>
-	<TD><INPUT TYPE="Number" NAME="RecVal" VALUE="<%=RecVal%>" MIN="0" MAX="<%=Limit%>"></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="RecVal" VALUE="<%=RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Видача</TD>
-	<TD><INPUT TYPE="Number" NAME="RetVal" VALUE="<%=RetVal%>" MIN="0" MAX="<%=Limit%>"></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="RetVal" VALUE="<%=RetVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 	</TD></TR>
 </TABLE>

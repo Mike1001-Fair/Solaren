@@ -1,6 +1,7 @@
 ﻿const SbmBtn = document.getElementById('SbmBtn'),
 DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+RestoreBtn   = document.getElementById('RestoreBtn'),
+button       = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	LoadForm();
@@ -56,22 +57,13 @@ function LoadForm() {
 
 function ChkForm() {
 	with (EditCustomer) {
-		if (CodeType.checked) {
-			CustomerCode.style.color = CustomerCode.value.trim().length == 8 ? "#000000" : "#FF0000";
-		} else {
-			CustomerCode.style.color = isPersonTaxCode(CustomerCode.value) ? "#000000" : "#FF0000";
-		}
+		const isValidPersonTaxCode = CodeType.checked ? CustomerCode.value.trim().length == 8 : isPersonTaxCode(CustomerCode.value),
+		valid = LastName.validity.valid && FirstName.validity.valid && ThirdName.validity.valid && StreetName.validity.valid &&
+			StreetId.value != -1 && isValidPersonTaxCode && AreaName.validity.valid && AreaId.value != -1 && LocalityId.value != -1 &&
+			LocalityName.validity.valid && CustomerCode.value.trim().length > 7 && Phone.validity.valid;
 
-		if (SbmBtn) {
-			SbmBtn.disabled = !LastName.validity.valid || !FirstName.validity.valid || StreetId.value == -1
-			|| !ThirdName.validity.valid || (!CodeType.checked && !isPersonTaxCode(CustomerCode.value))
-			|| !AreaName.validity.valid || AreaId.value == -1
-			|| LocalityId.value == -1 || !LocalityName.validity.valid
-			|| !(CustomerCode.value.trim().length > 7) || !Phone.validity.valid
-		}
-		if (DelBtn) {
-			DelBtn.disabled = SbmBtn.disabled;
-		}
+		CustomerCode.style.color = isValidPersonTaxCode ? "#000000" : "#FF0000";
+		SetDisabledButton(button, valid);
 	}
 }
 

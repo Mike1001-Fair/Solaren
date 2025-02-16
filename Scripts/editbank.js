@@ -1,6 +1,7 @@
 ﻿const SbmBtn = document.getElementById('SbmBtn'),
 DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+RestoreBtn   = document.getElementById('RestoreBtn'),
+button       = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditBank) {
@@ -44,6 +45,6 @@ function ChkForm() {
 		valid = isValidMfo && isValidEdrpo && BankName.validity.valid;
 		MfoCode.style.color = isValidMfo ? "#000000" : "#FF0000";
 		EdrpoCode.style.color = isValidEdrpo ? "#000000" : "#FF0000";
-		[SbmBtn, DelBtn].forEach(btn => btn && (btn.disabled = !valid));
+		SetDisabledButton(button, valid);
 	}
 }
