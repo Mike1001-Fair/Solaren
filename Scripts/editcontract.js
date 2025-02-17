@@ -4,8 +4,16 @@ RestoreBtn   = document.getElementById('RestoreBtn'),
 button       = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
-	LoadForm();
-	ChkForm();
+	with (EditContract) {
+		if (Deleted.value == "True") {
+			let Elements = document.querySelectorAll("fieldset");
+			Elements.forEach(elm => elm.disabled = true);
+		} else {
+			ChkForm();
+		}
+		Ajax.GetLocalityInfo(LocalityId.value);
+		Ajax.GetStreetInfo(StreetId.value);	
+	}
 });
 
 EditContract.addEventListener('input', ChkForm);
@@ -61,44 +69,29 @@ function mod97(string) {
 	return checksum;
 }
 
-function LoadForm() {
-	with (EditContract) {
-		Ajax.GetLocalityInfo(LocalityId.value);
-		Ajax.GetStreetInfo(StreetId.value);
-		if (Deleted.value == "True") {
-			let Elements = document.querySelectorAll("fieldset");
-			Elements.forEach(elm => elm.disabled = true);
-		} else 	{
-			ContractDate.min = ExpDate.value;
-		}
-	}
-}
-
 function ChkForm() {
 	with (EditContract) {
-		if (Deleted.value != "True") {
-			const isValidPAN = isDigit(PAN.value),
-			isValidEICode = isEICode(EICode.value),
-			isValidAccount = isAccount(BankAccount.value, MfoCode.value),
-			valid = HouseId.validity.valid && PAN.validity.valid && isValidEICode &&
-				isValidAccount && StreetId.value != -1 && LocalityId.value != -1 &&
-				LocalityName.validity.valid && Iban.validity.valid &&
-				ExpDate.validity.valid && ContractDate.validity.valid &&
-				ContractPower.validity.valid && CustomerId.value != -1;
+		const isValidPAN = isDigit(PAN.value),
+		isValidEICode = isEICode(EICode.value),
+		isValidAccount = isAccount(BankAccount.value, MfoCode.value),
+		valid = HouseId.validity.valid && PAN.validity.valid && isValidEICode &&
+			isValidAccount && StreetId.value != -1 && LocalityId.value != -1 &&
+			LocalityName.validity.valid && Iban.validity.valid &&
+			ExpDate.validity.valid && ContractDate.validity.valid &&
+			ContractPower.validity.valid && CustomerId.value != -1;
 				//(CheckCard.value == 'True' && Account.checked && isCreditCard(CardId.value)) &&
 				//(CheckCard.value == 'True' && Account.checked  && !isAccount(CardId.value, MfoCode.value)
 
-			ContractPower.max = TarifGroupId.value == 0 ? "30" : "50";
-			ContractPower.style.color = +ContractPower.value > ContractPower.max ? "#FF0000" : "#000000";
+		ContractPower.max = TarifGroupId.value == 0 ? "30" : "50";
+		ContractPower.style.color = +ContractPower.value > ContractPower.max ? "#FF0000" : "#000000";
 
-			PAN.style.color = isValidPAN ? "#000000" : "#FF0000";
-			EICode.style.color = isValidEICode ? "#000000" : "#FF0000";
-			ContractDate.min = ExpDate.value;
+		PAN.style.color = isValidPAN ? "#000000" : "#FF0000";
+		EICode.style.color = isValidEICode ? "#000000" : "#FF0000";
+		ContractDate.min = ExpDate.value;
 
-			Iban.style.color = Iban.value.trim().length == 29 ? "#000000" : "#FF0000";
-			BankAccount.style.color = isValidAccount ? "#000000" : "#FF0000";
-			SetDisabledButton(button, valid);
-		}
+		Iban.style.color = Iban.value.trim().length == 29 ? "#000000" : "#FF0000";
+		BankAccount.style.color = isValidAccount ? "#000000" : "#FF0000";
+		SetDisabledButton(button, valid);
 	}
 }
 
