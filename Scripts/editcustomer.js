@@ -59,8 +59,8 @@ function ChkForm() {
 	with (EditCustomer) {
 		const isValidPersonTaxCode = CodeType.checked ? CustomerCode.value.trim().length == 8 : isPersonTaxCode(CustomerCode.value),
 		valid = LastName.validity.valid && FirstName.validity.valid && ThirdName.validity.valid && StreetName.validity.valid &&
-			StreetId.value != -1 && isValidPersonTaxCode && AreaName.validity.valid && AreaId.value != -1 && LocalityId.value != -1 &&
-			LocalityName.validity.valid && CustomerCode.value.trim().length > 7 && Phone.validity.valid;
+			StreetId.value != -1 && isValidPersonTaxCode && AreaName.validity.valid && AreaId.value != -1 &&
+			LocalityId.value != -1 && LocalityName.validity.valid && Phone.validity.valid;
 
 		CustomerCode.style.color = isValidPersonTaxCode ? "#000000" : "#FF0000";
 		SetDisabledButton(button, valid);

@@ -1,6 +1,7 @@
 ﻿const SbmBtn = document.getElementById('SbmBtn'),
 DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+RestoreBtn   = document.getElementById('RestoreBtn'),
+button       = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	LoadForm();
@@ -32,7 +33,9 @@ SbmBtn?.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
  
 DelBtn?.addEventListener('click', DelContract);
@@ -42,7 +45,8 @@ function GetIban(acc, mfo) {
 	const UACode = "301000";
 	let iban = "";
 	if (isAccount(acc, mfo)) {
-		let bban = mfo + acc.padStart(19, "0"), ChkDigit = 98 - mod97(bban + UACode);
+		let bban = mfo + acc.padStart(19, "0"),
+		ChkDigit = 98 - mod97(bban + UACode);
   		iban = "UA" + ChkDigit + bban;
 	}
 	return iban
@@ -73,23 +77,27 @@ function LoadForm() {
 function ChkForm() {
 	with (EditContract) {
 		if (Deleted.value != "True") {
+			const isValidPAN = isDigit(PAN.value),
+			isValidEICode = isEICode(EICode.value),
+			isValidAccount = isAccount(BankAccount.value, MfoCode.value),
+			valid = HouseId.validity.valid && PAN.validity.valid && isValidEICode &&
+				isValidAccount && StreetId.value != -1 && LocalityId.value != -1 &&
+				LocalityName.validity.valid && Iban.validity.valid &&
+				ExpDate.validity.valid && ContractDate.validity.valid &&
+				ContractPower.validity.valid && CustomerId.value != -1;
+				//(CheckCard.value == 'True' && Account.checked && isCreditCard(CardId.value)) &&
+				//(CheckCard.value == 'True' && Account.checked  && !isAccount(CardId.value, MfoCode.value)
+
 			ContractPower.max = TarifGroupId.value == 0 ? "30" : "50";
 			ContractPower.style.color = +ContractPower.value > ContractPower.max ? "#FF0000" : "#000000";
 
-			PAN.style.color = isDigit(PAN.value, 8) ?  "#000000" : "#FF0000";
-			EICode.style.color = isEICode(EICode.value) ? "#000000" : "#FF0000";
+			PAN.style.color = isValidPAN ? "#000000" : "#FF0000";
+			EICode.style.color = isValidEICode ? "#000000" : "#FF0000";
 			ContractDate.min = ExpDate.value;
 
 			Iban.style.color = Iban.value.trim().length == 29 ? "#000000" : "#FF0000";
-			BankAccount.style.color = isAccount(BankAccount.value, MfoCode.value) ? "#000000" : "#FF0000";
-
-			SbmBtn.disabled = !HouseId.validity.valid || !PAN.validity.valid || !isEICode(EICode.value)
-				|| !isAccount(BankAccount.value, MfoCode.value) || StreetId.value == -1
-				|| LocalityId.value == -1 || !LocalityName.validity.valid
-				|| (CheckCard.value == 'True' & !Account.checked && !isCreditCard(CardId.value))
-				|| (CheckCard.value == 'True' & Account.checked  && !isAccount(CardId.value, MfoCode.value))
-				|| !Iban.validity.valid || !ExpDate.validity.valid || !ContractDate.validity.valid
-				|| !ContractPower.validity.valid || CustomerId.value == -1;
+			BankAccount.style.color = isValidAccount ? "#000000" : "#FF0000";
+			SetDisabledButton(button, valid);
 		}
 	}
 }
