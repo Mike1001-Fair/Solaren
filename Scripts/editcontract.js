@@ -6,7 +6,7 @@ button       = [SbmBtn, DelBtn];
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditContract) {
 		if (Deleted.value == "True") {
-			let Elements = document.querySelectorAll("fieldset");
+			const Elements = document.querySelectorAll("fieldset");
 			Elements.forEach(elm => elm.disabled = true);
 		} else {
 			ChkForm();

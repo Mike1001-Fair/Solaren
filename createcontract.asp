@@ -1,7 +1,9 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var CustomerId = Form("CustomerId"),
@@ -29,7 +31,7 @@ try {
 	Solaren.SetCmd("NewCustomer");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adSmallInt, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adSmallInt, adParamInput, 10, User.Id));
 			Append(CreateParameter("CustomerId", adInteger, adParamInput, 10, CustomerId));
 			Append(CreateParameter("PAN", adVarChar, adParamInput, 20, PAN));
 			Append(CreateParameter("EICode", adVarChar, adParamInput, 20, EICode));
