@@ -1,31 +1,24 @@
 ﻿const SbmBtn = document.getElementById('SbmBtn'),
 DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+RestoreBtn   = document.getElementById('RestoreBtn'),
+button       = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditUser) {
 		if (Deleted.value == "True") {
 			const Elements = document.querySelectorAll("fieldset");
 			Elements.forEach(elm => elm.disabled = true);
-			//H3Id.textContent = H3Id.textContent.replace("Редагування", "Перегляд");
+		} else {
+			ChkForm()
 		}
-		SbmBtn.disabled = true;
 	}
 });
 
-EditUser.addEventListener('input', () => {
-	with (EditUser) {
-		SbmBtn.disabled = !LastName.validity.valid || !FirstName.validity.valid || !MiddleName.validity.valid
-		|| !LoginId.validity.valid || !Pswd.validity.valid;
-	}
-});
+EditUser.addEventListener('input', ChkForm);
 
 SetPswd.addEventListener('click', (event) => {
-	with (EditUser) {
-		Pswd.value = User.Pswd;
-		SbmBtn.disabled = !LastName.validity.valid || !FirstName.validity.valid || !MiddleName.validity.valid
-		|| !LoginId.validity.valid || !Pswd.validity.valid;
-	}
+	EditUser.Pswd.value = User.Pswd;
+	ChkForm();
 });
 
 ShowPswd.addEventListener('click', (event) => {
@@ -46,6 +39,14 @@ SbmBtn?.addEventListener('click', (event) => {
 
 DelBtn?.addEventListener('click', DelUser);
 RestoreBtn?.addEventListener('click', DelUser);
+
+function ChkForm() {
+	with (EditUser) {
+		const valid = LastName.validity.valid && FirstName.validity.valid && MiddleName.validity.valid
+			&& LoginId.validity.valid && Pswd.validity.valid;
+		SetDisabledButton(button, valid);
+	}
+}
 
 function DelUser() {
 	if (confirm("Ви впевненi\u2753")) {

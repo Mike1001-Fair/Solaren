@@ -1,23 +1,23 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Money = {
-	ones    : ["од","дв","три","чотир","п'ят","шiст","сiм","вiсiм","дев'ят"],
-	Hundreds: ["сто","двiстi","триста","чотириста","п'ятсот","шiстсот","сiмсот","вiсiмсот","дев'ятсот"],
-	milion  : ["трильйон","мiльярд","мiльйон","тисяч"],
-	anDan   : ["","","","сорок","","","","","дев'яносто"],
-	Сurrency: " грн. ",
-	Penny   : " коп.",
-	Zero    : "нуль ",
+	ones    : ["од", "дв", "три", "чотир", "п'ят", "шiст", "сiм", "вiсiм", "дев'ят"],
+	Hundreds: ["сто", "двiстi", "триста", "чотириста", "п'ятсот", "шiстсот", "сiмсот", "вiсiмсот", "дев'ятсот"],
+	milion  : ["трильйон", "мiльярд", "мiльйон", "тисяч"],
+	anDan   : ["", "", "", "сорок", "", "", "", "", "дев'яносто"],
+	Сurrency: "грн.",
+	Penny   : "коп.",
+	Zero    : "нуль",
 	Limit   : 999999999999999,
 	errMsg  : "Поза діапазоном або не є числом",
 
 	toWord: function(num) {
-		var inRange = !isNaN(num) && num >= 0 && num <= this.Limit;
+		var inRange = !isNaN(num) && num >= 0 && num <= this.Limit,
+		result;
 		if (inRange) {
-			var numParts = num.toFixed(2).split("."),
-			cycle = 4,
+			var numParts = typeof(num) == "number" ? num.toFixed(2).split(".") : num.split("."),
+			cycle = this.milion.length,
 			chunk,
-			word = [],
-			result;
+			word = [];
 			do {
 				chunk = this.processChunk(numParts[0] % 1000, cycle);
 				if (chunk) {
