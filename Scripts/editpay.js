@@ -1,21 +1,20 @@
 ﻿const SbmBtn = document.getElementById('SbmBtn'),
 DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+RestoreBtn   = document.getElementById('RestoreBtn'),
+button       = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditPay) {
 		if (Deleted.value == "True" || ViewOnly.value == "True") {
 			const Elements = document.querySelectorAll("fieldset");
 			Elements.forEach(elm => elm.disabled = true);
+		} else {
+			ChkForm()
 		}
 	}
 });
 
-EditPay.addEventListener('input', () => {
-	with (EditPay) {
-		SbmBtn.disabled = !PayDate.validity.valid || !PaySum.validity.valid || ContractId.value == -1;
-	}
-})
+EditPay.addEventListener('input', ChkForm);
 
 ContractName.addEventListener('input', function() {
 	Ajax.GetContractList(this);
@@ -24,11 +23,20 @@ ContractName.addEventListener('input', function() {
 SbmBtn?.addEventListener('click', (event) => {
 	if (confirm("Ви впевненi\u2753")) {
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 DelBtn?.addEventListener('click', DelPay);
 RestoreBtn?.addEventListener('click', DelPay);
+
+function ChkForm() {
+	with (EditPay) {
+		const valid = PayDate.validity.valid && PaySum.validity.valid && ContractId.value != -1;
+		SetDisabledButton(button, valid);
+	}
+}
 
 function DelPay() {
 	const MsgText = EditPay.Deleted.value == "True" ? "відновлено" : "видалено";
@@ -36,5 +44,7 @@ function DelPay() {
 		with (EditPay) {
 			action = `delpay.asp?PayId=${PayId.value}&Deleted=${Deleted.value}`
 		}
-	} else event.preventDefault();
+	} else {
+		event.preventDefault()
+	}
 }
