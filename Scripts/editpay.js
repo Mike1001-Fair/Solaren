@@ -1,16 +1,12 @@
-﻿const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn'),
-button       = [SbmBtn, DelBtn];
+﻿const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
-	with (EditPay) {
-		if (Deleted.value == "True" || ViewOnly.value == "True") {
-			const Elements = document.querySelectorAll("fieldset");
-			Elements.forEach(elm => elm.disabled = true);
-		} else {
-			ChkForm()
-		}
+	if (EditPay.Deleted.value == "True" || EditPay.ViewOnly.value == "True") {
+		const Elements = document.querySelectorAll("fieldset");
+		Elements.forEach(elm => elm.disabled = true);
+	} else {
+		ChkForm()
 	}
 });
 

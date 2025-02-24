@@ -1,17 +1,18 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Json = {
 	toString: function (obj) {
-		var JsonString ='[';
+		var JsonString = ['['];		
 		if (Solaren.ValidObject(obj)) {
 			var Items = new Enumerator(obj);
 			for (var itemSet = []; !Items.atEnd(); Items.moveNext()) {
-				itemSet.push('"' + Items.item().Name + '"');
+				var itemName = ['"', Items.item().Name, '"'];
+				itemSet.push(itemName.join(""));
 			}
-			JsonString += itemSet.join(",");
+			JsonString.push(itemSet.join(","));
 		} else {
-			JsonString += '-1';
+			JsonString.push('-1');
 		}
-		JsonString += ']'; 
-		return JsonString;
+		JsonString.push(']');
+		return JsonString.join("");
 	}
 }%>

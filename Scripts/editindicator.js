@@ -1,6 +1,5 @@
-﻿const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+﻿const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	ChkForm();
@@ -75,7 +74,7 @@ function ChkForm() {
 		retsaldo   = (retval - retvalprev)*k,
 		totsaldo   = recsaldo - retsaldo,
 		limitsaldo = ContractPower.value * Period * HoursLimit.value,
-		notsaldo   = isNaN(totsaldo) || recsaldo < 0 || retsaldo < 0 || (!retsaldo && !recsaldo) || retsaldo > limitsaldo || recval > RecVal.max || retval > RetVal.max;
+		isSaldo    = !isNaN(totsaldo) && (recsaldo > 0 || retsaldo > 0) && retsaldo < limitsaldo;
 
 		if (recsaldo < 0 && ZeroRec.checked) recsaldo += (RecVal.max+1)*k;
 		if (retsaldo < 0 && ZeroRet.checked) retsaldo += (RetVal.max+1)*k;
@@ -90,13 +89,14 @@ function ChkForm() {
 		RetSaldo.title = isNaN(limitsaldo) ? "" : "Максимум: " + limitsaldo.toFixed(0);
 		ZeroRet.disabled = retval >= retvalprev || isNaN(retsaldo);
 		if (retval >= retvalprev) ZeroRet.checked = false;
-		TotSaldo.value = (ReportDate < OperDate || !notsaldo) ? Math.abs(totsaldo) : "";
-		TotSaldo.style.color = notsaldo ? "#FF0000" : "";
-		if (Deleted.value != "True" && ViewOnly.value != "True") {
-			SbmBtn.disabled = !ReportDate.validity.valid || ContractName.value == '' || ContractId.value == '-1' || notsaldo;
-			if (DelBtn) DelBtn.disabled = SbmBtn.disabled;
-		}
-		Saldo.textContent = (notsaldo || !totsaldo) ? "Сальдо " : totsaldo > 0 ? "Продаж " : "Покупка ";
+
+		TotSaldo.value =  isSaldo ? Math.abs(totsaldo) : "";
+		TotSaldo.style.color = isSaldo ? "" : "#FF0000";
+
+		const valid = ReportDate.validity.valid && ContractName.value != '' && ContractId.value != -1 && isSaldo
+				&& RecVal.validity.valid && RetVal.validity.valid;
+		SetDisabledButton(button, valid);
+		Saldo.textContent = isSaldo && totsaldo ? totsaldo < 0 ? "Продаж " : "Покупка " : "Сальдо ";
 	}
 }
 
