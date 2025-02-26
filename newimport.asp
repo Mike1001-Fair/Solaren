@@ -31,9 +31,9 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	<!--TR><TD ALIGN="RIGHT">Файл</TD>
 	<TD><% //Html.WriteFileList("Import/")%></TD></TR-->
 
-	<!--TR><TD ALIGN="RIGHT">Файл</TD>
+	<TR><TD ALIGN="RIGHT">Файл</TD>
 	<TD><INPUT TYPE="search" NAME="DataFile" ID="DataFile" SIZE="30" LIST="FileList" REQUIRED>
-	<DATALIST ID="FileList" data-foldername="Import/"></DATALIST></TD></TR-->
+	<DATALIST ID="FileList" data-foldername="Import/"></DATALIST></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

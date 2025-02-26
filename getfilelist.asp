@@ -11,7 +11,7 @@ if (Authorized) {
 	try {
 		//var Fso = Server.CreateObject("Scripting.FileSystemObject"),
 		FolderPath = Server.MapPath(FolderName);
-		if (Fso.FolderExists(FolderPath)) {
+		if (Fso.FolderExists(FolderPath)) {			
 			var Folder = Fso.GetFolder(FolderPath);
 			JsonResponse +=	Json.toString(Folder.Files);
 		} else {

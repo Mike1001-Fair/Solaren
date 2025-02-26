@@ -16,7 +16,7 @@ if (!User.Authorize(0)) {
 			<LI><A href="newreindexbase.asp"><%=Dictionary.Item("Reindexing")%></A></LI>
 			<LI><A href="newshrinklog.asp"><%=Dictionary.Item("ShrinkLog")%></A></LI>
 			<LI><A href="newbackupbase.asp"><%=Dictionary.Item("Backup")%></A></LI>
-			<!--LI><A href="newupload.asp">Надіслати файл</A></LI-->
+			<LI><A href="newupload.asp">Надіслати файл</A></LI>
 			<LI><A href="newstatisticupdate.asp"><%=Dictionary.Item("Statistic")%></A></LI>
 		</UL></LI>
 
