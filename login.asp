@@ -4,6 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% Resource.Load(User.ResourceFile());
 var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd"),

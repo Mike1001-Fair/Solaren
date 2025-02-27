@@ -4,6 +4,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "POST");
 
@@ -50,7 +51,7 @@ ResponseText = ['<BODY CLASS="MainBody">',
 
 for (var i=0; !rs.EOF; i++) {
 	var url = ['<A href="editpay.asp?PayId=', rs.Fields("PayId"), '">', rs.Fields("PaySum").value.toDelimited(2), '</A>'],
-	PayDate = Solaren.GetYMD(rs.Fields("PayDate").value),
+	PayDate = Month.GetYMD(rs.Fields("PayDate").value),
 	row = ['<TR>', Tag.Write("TD", -1, PayDate.formatDate("-")),
 		Tag.Write("TD", 2, url.join("")), '</TR>'
 	];

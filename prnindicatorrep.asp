@@ -51,7 +51,7 @@ try {
 		ContractStreetType   = Fields("ContractStreetType").value,
 		ContractStreetName   = Fields("ContractStreetName").value,
 		HouseId              = Fields("HouseId").value,
-		ContractDate         = Solaren.GetYMD(Fields("ContractDate").value),
+		ContractDate         = Month.GetYMD(Fields("ContractDate").value),
 		ContractPAN          = Fields("ContractPAN").value,
 		BranchName           = Fields("BranchName").value,
 		ChiefTitle           = Fields("ChiefTitle").value,
@@ -96,8 +96,8 @@ for (var i=0; i<=DoubleReport; i++) {
 		for (var row; !rs.EOF; rs.MoveNext()) {
 			var k = rs.Fields("kTransForm"),
 			c = rs.Fields("Capacity"),
-			PrevDate = Solaren.GetYMD(rs.Fields("PrevDate")),
-			ReportDate = Solaren.GetYMD(rs.Fields("ReportDate")),
+			PrevDate = Month.GetYMD(rs.Fields("PrevDate")),
+			ReportDate = Month.GetYMD(rs.Fields("ReportDate")),
 			recsaldo = rs.Fields("RecVal") - rs.Fields("PrevRecVal"),
 			retsaldo = rs.Fields("RetVal") - rs.Fields("PrevRetVal"),
 			periodSaldo;

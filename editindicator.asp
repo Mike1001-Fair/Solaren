@@ -24,7 +24,7 @@ try {
 		var ContractId = Fields("ContractId").value,
 		ContractName   = Fields("ContractName").value,
 		ContractPower  = Fields("ContractPower").value,
-		ReportDate     = Solaren.GetYMD(Fields("ReportDate").value),
+		ReportDate     = Month.GetYMD(Fields("ReportDate").value),
 		MeterId        = Fields("MeterId").value,
 		MeterCode      = Fields("MeterCode").value,
 		Capacity       = Fields("Capacity").value,
@@ -33,7 +33,7 @@ try {
 		RetVal         = Fields("RetVal").value,
 		PrevRecVal     = Fields("PrevRecVal").value,
 		PrevRetVal     = Fields("PrevRetVal").value,
-		PrevDate       = Solaren.GetYMD(Fields("PrevDate").value),
+		PrevDate       = Month.GetYMD(Fields("PrevDate").value),
 		Deleted        = Fields("Deleted").value,
 		Limit          = Math.pow(10, Capacity) - 1;
 		Close();

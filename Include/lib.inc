@@ -2,7 +2,7 @@
 var Cmd = Server.CreateObject("ADODB.Command"),
 Connect = Server.CreateObject("ADODB.Connection"),
 Solaren = {
-	ConnectMode: 1,
+	ConnectMode: adModeRead,
 	ConnectionTimeout: 10,
 	CommandTimeout: 20,
 	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")),
@@ -26,15 +26,10 @@ Solaren = {
 		return rs
 	},
 
-	GetYMD: function(dbDate) {
-		var result = new Date(dbDate);
-		return result.toStr(0)
-	},
-
 	SetSessionVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
 		dbDate   = rs.Fields("OperDate").value,
-		OperDate = this.GetYMD(dbDate),
+		OperDate = Month.GetYMD(dbDate),
 		SysCfg   = cfg.toString(2).padStart(3, "0").split('');
 
 		Session("UserGUID")   = rs.Fields("UserGUID").value;

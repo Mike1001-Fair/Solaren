@@ -58,7 +58,7 @@ ResponseText = ['<BODY CLASS="ActContainer">'];
 Html.SetHead("Акт приймання-передачi");
 
 for (; !rs.EOF; rs.MoveNext()) {
-	var ContractDate = Solaren.GetYMD(rs.Fields("ContractDate").value),
+	var ContractDate = Month.GetYMD(rs.Fields("ContractDate").value),
 	ContractPAN = rs.Fields("ContractPAN"),
 	CustomerName = rs.Fields("CustomerName").value.replace(/ /g,"&nbsp"),
 	ChiefName2 = ChiefName2.replace(/ /g,"&nbsp"),

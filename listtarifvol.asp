@@ -46,8 +46,8 @@ var ResponseText = ['<BODY CLASS="PrnBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var ExpDateBeg = Solaren.GetYMD(rs.Fields("ExpDateBeg")),
-	ExpDateEnd = Solaren.GetYMD(rs.Fields("ExpDateEnd")),
+	var ExpDateBeg = Month.GetYMD(rs.Fields("ExpDateBeg")),
+	ExpDateEnd = Month.GetYMD(rs.Fields("ExpDateEnd")),
 	ExpPeriod = [ExpDateBeg.formatDate("-"), ExpDateEnd.formatDate("-")],
 	row = ['<TR>', Tag.Write("TD", -1, ExpPeriod.join(' &ndash; ')),
 		Tag.Write("TD", 1, Tarif.Group[rs.Fields("GroupId").value]),

@@ -74,5 +74,10 @@ var Month = {
 		monthName = this.GetName(index, caseType),
 		result = [ymd[2], monthName, ymd[0], this.YearItem];
 		return result.join(" ");
+	},
+
+	GetYMD: function(dbDate) {
+		var result = new Date(dbDate);
+		return result.toStr(0)
 	}
 }%>

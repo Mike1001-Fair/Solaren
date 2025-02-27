@@ -35,7 +35,7 @@ try {
 		BranchName2  = Fields("BranchName2").value,
 
 		CustomerName = Fields("CustomerName").value.replace(/ /g,"&nbsp"),
-		ContractDate = Solaren.GetYMD(rs.Fields("ContractDate").value),
+		ContractDate = Month.GetYMD(rs.Fields("ContractDate").value),
 		ContractPAN  = Fields("ContractPAN").value,
 
 		FactVol      = Fields("FactVol").value.toDelimited(0),
