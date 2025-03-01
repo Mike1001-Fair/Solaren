@@ -14,6 +14,7 @@ if (Authorized) {
 		if (Fso.FolderExists(FolderPath)) {			
 			var Folder = Fso.GetFolder(FolderPath);
 			JsonResponse +=	Json.toString(Folder.Files);
+			//JsonResponse = Json.stringify(Folder.Files);
 		} else {
 			JsonResponse += '[-1]';
 		}
