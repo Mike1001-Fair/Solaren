@@ -1,24 +1,28 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
-	const Inputs = document.querySelectorAll("fieldset[name='SysCfgSet'] > label > input");
+﻿const Inputs = document.querySelectorAll("fieldset[name='SysCfgSet'] > label > input");
+
+document.addEventListener('DOMContentLoaded', () => {
 	SetSysCfg(Inputs, EditParameter.SysConfig.value);
 	SetMsgVisibility();
 });
 
 EditParameter.addEventListener('input', () => {
 	with (EditParameter) {
-		TreasuryAccount.style.color = isIban(TreasuryAccount.value, TreasuryMfo.value) ? "#000000" : "#FF0000";
-		TreasuryCode.style.color = isEdrpoCode(TreasuryCode.value) ? "#000000" : "#FF0000";
-		TreasuryMfo.style.color = isMfoCode(TreasuryMfo.value) ? "#000000" : "#FF0000";
-		SbmBtn.disabled = !isEdrpoCode(TreasuryCode.value) || !isMfoCode(TreasuryMfo.value)
-		|| MsgText.value.search(/\n/) > 0 || !StartSysDate.validity.valid || !HoursLimit.validity.valid
-		|| !OperMonth.validity.valid || !isIban(TreasuryAccount.value, TreasuryMfo.value)
-		|| !BudgetItem.validity.valid || (ShowMsg.checked && MsgText.value.length == 0);
+		const isValidIban = isIban(TreasuryAccount.value, TreasuryMfo.value),
+		isValidEdrpo = isEdrpoCode(TreasuryCode.value),
+		isValidMfo = isMfoCode(TreasuryMfo.value),
+		valid = isValidIban && isValidEdrpo && isValidMfo && MsgText.value.search(/\n/) == -1
+			&& StartSysDate.validity.valid && HoursLimit.validity.valid
+			&& OperMonth.validity.valid && BudgetItem.validity.valid
+			&& (!ShowMsg.checked || MsgText.value.length > 0);
+		TreasuryAccount.style.color = isValidIban ? "#000000" : "#FF0000";
+		TreasuryMfo.style.color = isValidMfo ? "#000000" : "#FF0000";
+		TreasuryCode.style.color = isValidEdrpo ? "#000000" : "#FF0000";
+		SbmBtn.disabled = !valid;
 	}
 });
 
 EditParameter.addEventListener('submit', (event) => {
 	if (confirm("Ви впевненi\u2753")) {
-		const Inputs = document.querySelectorAll("fieldset[name='SysCfgSet'] > label > input");
 		with (EditParameter) {
 			MsgText.value = MsgText.value.trim();
 			SysConfig.value = GetSysCfg(Inputs);
