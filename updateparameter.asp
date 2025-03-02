@@ -37,7 +37,7 @@ try {
 			Append(CreateParameter("TreasuryCode", adVarChar, adParamInput, 10, TreasuryCode));
 			Append(CreateParameter("TreasuryAccount", adVarChar, adParamInput, 30, TreasuryAccount));
 			Append(CreateParameter("TreasuryMfo", adVarChar, adParamInput, 10, TreasuryMfo));
-			Append(CreateParameter("SysConfig", adVarChar, adParamInput, 10, SysConfig));
+			Append(CreateParameter("SysConfig", adTinyInt, adParamInput, 10, SysConfig));
 			Append(CreateParameter("ShowMsg", adBoolean, adParamInput, 1, ShowMsg));
 			Append(CreateParameter("MsgText", adVarChar, adParamInput, 800, MsgText)); 
 		} Execute(adExecuteNoRecords);
