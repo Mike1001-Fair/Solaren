@@ -39,11 +39,9 @@ function SetMsgVisibility() {
 
 function SetSysCfg(NodeList, cfg) {
 	const index = NodeList.length - 1;
-	NodeList.forEach((elm, i) => elm.checked = cfg & Math.pow(2, index - i));
+	NodeList.forEach((elm, i) => elm.checked = (cfg >> (index - i)) & 1);
 }
 
 function GetSysCfg(NodeList) {
-	let cfgStr = '';
-	NodeList.forEach(elm => cfgStr += +elm.checked);
-	return parseInt(cfgStr, 2)
+	return Array.from(NodeList).reduce((cfg, elm) => (cfg << 1) | elm.checked, 0);
 }
