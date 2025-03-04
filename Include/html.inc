@@ -34,8 +34,8 @@ var Html = {
 	WriteScript: function() {
 		var ScriptName = Solaren.ScriptName.split("/").pop(),
 		FileParts      = ScriptName.split('.'),
-		FileName       = [Scripts.Path, FileParts[0].toLowerCase(), ".js?", this.Version],
-		ResponseText   = ['\n<SCRIPT DEFER SRC="', FileName.join(""), '"></SCRIPT>'];
+		FileName       = Scripts.Map(FileParts[0].toLowerCase()),
+		ResponseText   = ['\n<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
 		Response.Write(ResponseText.join(""));
 	},
 
@@ -286,10 +286,16 @@ Scripts = {
 	Path: "Scripts/",
 	Files: ["lib", "loader", "user", "resource", "menu", "ajax"],
 
+	Map: function(fileName) {
+		var fullFileName = [this.Path, fileName, '.js?', Html.Version];
+		return fullFileName.join("")
+	},
+
 	Write: function() {
 		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			var row = ['<SCRIPT DEFER SRC="', this.Path, this.Files[i], '.js?', Html.Version, '"></SCRIPT>'];
+			var FileName = this.Map(this.Files[i]),
+			row = ['<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
 			Block.push(row.join(""));
 		}
 		return Block.join("\n");
