@@ -330,13 +330,17 @@ Menu = {
 	Type: ["admin", "officeuser", "branchuser"],
 
 	Write: function(RoleId, BodyTag) {
-		var ScriptName = "menu-" + this.Type[RoleId] + ".asp";
-		if (BodyTag) {
-			Response.Write('\n<BODY CLASS="MainBody" ID="MainBody">');
-			Server.Execute(ScriptName);
-			Response.Write('</BODY></HTML>');
+		if (this.Type[RoleId]) {
+			var ScriptName = "menu-" + this.Type[RoleId] + ".asp";
+			if (BodyTag) {
+				Response.Write('\n<BODY CLASS="MainBody" ID="MainBody">');
+				Server.Execute(ScriptName);
+				Response.Write('</BODY></HTML>');
+			} else {
+				Server.Execute(ScriptName);
+			}
 		} else {
-			Server.Execute(ScriptName);
+			Solaren.SysMsg(3, "Out of range Menu.Type: RoleId = " + RoleId)
 		}
 	}
 }%>
