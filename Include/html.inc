@@ -11,7 +11,7 @@ var Html = {
 			'<META NAME="author" CONTENT="' + this.Author + '">',
 			'<META NAME="copyright" CONTENT="' + this.Author + '">',
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
-			'<TITLE>' + Title + '</TITLE>',
+			Tag.Write('TITLE', -1, Title),
 			Icon.Link("sun.svg"),
 			Styles.Write()
 		];
