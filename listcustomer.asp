@@ -4,7 +4,7 @@
 <% var Authorized = Session("RoleId") == 1,
 CustomerId = Request.Form("CustomerId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
 	Solaren.SetCmd("ListCustomer");
@@ -17,7 +17,7 @@ try {
 	var rs = Cmd.Execute();
 	Solaren.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 with (Html) {

@@ -19,7 +19,7 @@ try {
 	Cmd.Parameters.Item("UserId").value = UserId;
 	var rsUser = Solaren.Execute("GetUser", "Користувача не знадено!");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 with (rsUser) {

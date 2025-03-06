@@ -12,9 +12,9 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		} Execute(adExecuteNoRecords);
 	}
-	Solaren.SysMsg(1, "");
+	Message.Write(1, "");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {	
 	Connect.Close();
 }%>

@@ -61,7 +61,7 @@ try {
 		Close();
 	}
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 }
 
 var Period      = Month.GetPeriod(ReportMonth, 1),

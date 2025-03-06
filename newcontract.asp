@@ -21,7 +21,7 @@ try {
 	rsOperator = Solaren.Execute("SelectOperator", "Довiдник операторів пустий!"),
 	rsPerformer = Solaren.Execute("SelectPerformer", "Довiдник виконавців пустий!");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 }
 
 Html.SetPage("Новий договір", User.RoleId)%>

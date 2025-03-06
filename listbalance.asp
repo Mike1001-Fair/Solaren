@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 with (Request) {
     var OperatorId   = Form("OperatorId"),
@@ -25,7 +25,7 @@ try {
 	}
 	var rs = Solaren.Execute("ListBalance", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 var Period = Month.GetPeriod(BegMonth, 0),

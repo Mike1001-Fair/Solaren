@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 with (Request) {
 	var BegDate = String(Form("BegDate")),
@@ -27,7 +27,7 @@ try {
 	var rs = Cmd.Execute();
 	Solaren.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 var Period = BegDate.formatDate("-"),

@@ -29,7 +29,7 @@ try {
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
 	} Connect.Close();
-	Cmd.Parameters.Item("Done").value ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Помилка")
+	Cmd.Parameters.Item("Done").value ? Message.Write(1, "") : Message.Write(0, "Помилка")
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }%>

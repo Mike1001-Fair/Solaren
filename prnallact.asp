@@ -31,7 +31,7 @@ try {
 	}
 	var rs = Solaren.Execute("SelectAct", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rsInfo) {
 		var LocalityName = Fields("LocalityName").value,

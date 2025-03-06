@@ -27,7 +27,7 @@ try {
 
 	var rsBranch = Solaren.Execute("GetBranch", "Інформацію не знадено!");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rsBranch) {
 		var SortCode = Fields("SortCode").value,

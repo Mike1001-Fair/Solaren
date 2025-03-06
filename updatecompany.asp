@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <% var Authorized = Session("RoleId") >= 0 || Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 with (Request) {
 	var CompanyId     = Form("CompanyId"),
@@ -69,8 +69,8 @@ try {
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {	
 	Connect.Close();
-	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Компанія з таким кодом вже є")
+	Done ? Message.Write(1, "") : Message.Write(0, "Компанія з таким кодом вже є")
 }%>

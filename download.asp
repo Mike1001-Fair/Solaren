@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
 if (!User.ValidateRole(User.RoleId, User.GUID)) {
-	Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
+	Message.Write(2, Dictionary.Item("AuthenticationError"))
 }
 Html.SetPage("Файл", User.RoleId)%>
 <BODY CLASS="MainBody">

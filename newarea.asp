@@ -2,7 +2,7 @@
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 try {
 	Solaren.SetCmd("GetAreaSortCode");
 	with (Cmd) {
@@ -11,7 +11,7 @@ try {
 		} Execute(adExecuteNoRecords);
 	} Connect.Close();
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 var SortCode =++ Cmd.Parameters.Item("SortCode").value;

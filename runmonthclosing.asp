@@ -25,9 +25,9 @@ try {
 		var OperDate = Parameters.Item("OperDate").value,
 	}
 	Solaren.SetSessionDate(OperDate);
-	Solaren.SysMsg(1, "");
+	Message.Write(1, "");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {	
 	Connect.Close();
 }%>

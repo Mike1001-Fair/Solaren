@@ -4,7 +4,7 @@
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
 BegDate = Request.Form("BegDate");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
 	Solaren.SetCmd("ListVz");
@@ -16,7 +16,7 @@ try {
 	var rs = Cmd.Execute();
 	Solaren.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 with (Html) {

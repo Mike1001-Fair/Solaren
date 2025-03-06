@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
 <% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 with (Request) {
 	var SourceFile = Server.MapPath(Form("SourceFile"));
@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
 	} Connect.Close();
-	Cmd.Parameters.Item("Done").value ? Solaren.SysMsg(1, "Помилок не виявлено") : Solaren.SysMsg(0, "Строка №" + Cmd.Parameters.Item("ErrStr").value);
+	Cmd.Parameters.Item("Done").value ? Message.Write(1, "Помилок не виявлено") : Message.Write(0, "Строка №" + Cmd.Parameters.Item("ErrStr").value);
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }%>

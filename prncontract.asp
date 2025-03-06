@@ -7,7 +7,7 @@
 <% var Authorized = Session("RoleId") == 1,
 ContractId = Request.Form("ContractId");
 
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
 	Solaren.SetCmd("GetContractInfo");
@@ -113,7 +113,7 @@ try {
 		}
 	}
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {	
 	Connect.Close();
 	Html.SetHead("Друк договору");

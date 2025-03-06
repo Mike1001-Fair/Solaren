@@ -16,7 +16,7 @@ try {
 	}
 	var rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetPage("Перевірка актів", User.RoleId)%>

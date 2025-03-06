@@ -19,8 +19,8 @@ try {
 		} Execute(adExecuteNoRecords);
 	}
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	Connect.Close();
-	Solaren.SysMsg(1, "");
+	Message.Write(1, "");
 }%>

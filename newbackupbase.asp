@@ -10,7 +10,7 @@ try {
 	Solaren.SetCmd("GetBaseInfo");
 	var rs = Solaren.Execute("GetBaseInfo", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetPage("Резервна копія", User.RoleId)%>

@@ -8,7 +8,7 @@ if (Authorized) {
 		Menu.Write(Session("RoleId"), 0);
 	}
 } else {
-	Solaren.SysMsg(2, "Помилка авторизації")
+	Message.Write(2, "Помилка авторизації")
 }%>
 <SCRIPT>
 function ChkForm() {

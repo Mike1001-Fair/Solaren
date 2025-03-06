@@ -20,7 +20,7 @@ if (Authorized) {
 		}
 		JsonResponse += '}';
 	} catch (ex) {
-		Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+		Message.Write(3, Message.Error(ex));
 	}
 }
 

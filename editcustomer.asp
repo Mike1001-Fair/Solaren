@@ -6,7 +6,7 @@ Authorized = RoleId == 1,
 CustomerId = Request.QueryString("CustomerId");
 
 if (!Authorized) {
-	Solaren.SysMsg(2, "Помилка авторизації");
+	Message.Write(2, "Помилка авторизації");
 }
 
 try {
@@ -18,7 +18,7 @@ try {
 	}
 	var rs = Solaren.Execute("GetCustomer", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {	
 	with (rs) {
 		var CustomerCode = Fields("Code").value,

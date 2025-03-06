@@ -1,9 +1,9 @@
 ﻿<% //@ LANGUAGE = "JScript"
-var Msg = Server.CreateObject("CDO.Message"),
+var CdoMsg = Server.CreateObject("CDO.Message"),
 Email = {
 	SetConfig: function() {
 		var url = "http://schemas.microsoft.com/cdo/configuration/";
-		with (Msg.Configuration.Fields) {
+		with (CdoMsg.Configuration.Fields) {
 			Item(url + "sendusing") = 2;
 			Item(url + "smtpserver") = "epmail.slink.kiev.ua";
 			Item(url + "smtpserverport") = 465;
@@ -17,7 +17,7 @@ Email = {
 	},
 
 	WriteConfig: function() {
-		var fieldEnum = new Enumerator(Msg.Configuration.Fields);
+		var fieldEnum = new Enumerator(CdoMsg.Configuration.Fields);
 		for (var field; !fieldEnum.atEnd(); fieldEnum.moveNext()) {
 			field = fieldEnum.item();
 			Response.Write(field.Name + ": " + field.Value + "<br>");
@@ -27,7 +27,7 @@ Email = {
 
 	Send: function(Recipient, msgSubject, msgText) {
 		try {
-			with (Msg) {
+			with (CdoMsg) {
 				Bodypart.Charset = "utf-8";
 				From = '<robot@kresc.com.ua>';
 				To = Recipient;
@@ -36,7 +36,7 @@ Email = {
 				Send(); 
 			}
 		} catch (ex) {
-			Solaren.SysMsg(3, ex.name + ": " + ex.message)
+			Message.Write(3, ex.name + ": " + ex.message)
 		}
 	}
 }%>

@@ -52,7 +52,7 @@ var User = {
 					Done = Parameters.Item("Done").value;
 				}
 			} catch (ex) {
-				Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+				Message.Write(3, Message.Error(ex))
 			} finally {
 				if (Connect.State) {
 					Connect.Close();
@@ -82,7 +82,7 @@ var User = {
 		validAccess = Authorized && validMethod;
 		if (!validAccess) {
 			Resource.Load(User.ResourceFile());
-			Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"));
+			Message.Write(2, Dictionary.Item("AuthorizationError"));
 		}
 		return validAccess
 	}

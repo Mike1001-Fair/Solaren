@@ -27,7 +27,7 @@ try {
 	}
 	var rs = Solaren.Execute("ListPay", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	Html.SetPage("Список оплат", User.RoleId)
 }

@@ -20,7 +20,7 @@ try {
 			Append(CreateParameter("AreaName", adVarChar, adParamInput, 20, AreaName));
 		} Execute(adExecuteNoRecords);
 	} Connect.Close();
-	Solaren.SysMsg(1, "");
+	Message.Write(1, "");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }%>

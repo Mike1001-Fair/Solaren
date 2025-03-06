@@ -26,7 +26,7 @@ try {
 	}
 	var rs = Solaren.Execute("GetAct", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 } finally {
 	with (rs) {
 		var LocalityName = Fields("LocalityName").value,

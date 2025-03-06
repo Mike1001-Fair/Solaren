@@ -16,7 +16,7 @@ try {
 	}
 	var rsOperator = Solaren.Execute("GetOperator", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rsOperator) {
 		var SortCode = Fields("SortCode").value,

@@ -272,10 +272,16 @@ Styles = {
 	Path: "Styles/",
 	Files: ["solaren", "body", "table", "loader", "button", "menu"],
 
+	Map: function(fileName) {
+		var fullFileName = [this.Path, fileName, '.css?', Html.Version];
+		return fullFileName.join("")
+	},
+
 	Write: function() {
 		var Block = [];
 		for (var i = 0; i < this.Files.length; i++) {
-			var row = ['<LINK REL="stylesheet" HREF="', this.Path, this.Files[i], '.css?', Html.Version, '">'];
+			var FileName = this.Map(this.Files[i]),
+			row = ['<LINK REL="stylesheet" HREF="', FileName, '">'];
 			Block.push(row.join(""));
 		}
 		return Block.join("\n");
@@ -340,7 +346,7 @@ Menu = {
 				Server.Execute(ScriptName);
 			}
 		} else {
-			Solaren.SysMsg(3, "Out of range Menu.Type: RoleId = " + RoleId)
+			Message.Write(3, "Out of range Menu.Type: RoleId = " + RoleId)
 		}
 	}
 }%>

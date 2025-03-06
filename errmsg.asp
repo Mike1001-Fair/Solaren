@@ -7,7 +7,7 @@
 var Title = Dictionary.Item("Message");
 
 if (!User.ValidateRole(User.RoleId, User.GUID)) {
-	Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"))
+	Message.Write(2, Dictionary.Item("AuthenticationError"))
 }
 
 Html.SetPage(Title, User.RoleId)%>

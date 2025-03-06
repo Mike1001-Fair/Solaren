@@ -11,7 +11,7 @@ Authorized = RoleId >= 0 && RoleId < 2,
 LocalityId = Request.QueryString("LocalityId");
 
 if (!Authorized) {
-	Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"));
+	Message.Write(2, Dictionary.Item("AuthorizationError"));
 }
 
 try {
@@ -21,7 +21,7 @@ try {
 	}
 	var rs = Solaren.Execute("GetLocality", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
 		var LocalityType = Fields("LocalityType").value,

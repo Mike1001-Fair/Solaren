@@ -25,7 +25,7 @@ try {
 	var rsChief = Solaren.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
 	rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	Html.SetPage("Новий ЦОС", User.RoleId)
 }%>

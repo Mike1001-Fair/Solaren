@@ -16,7 +16,7 @@ try {
 	}
 	var rs = Solaren.Execute("SelectChief", "Довiдник керiвникiв пустий");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetPage("Бюджетний код", User.RoleId)%>

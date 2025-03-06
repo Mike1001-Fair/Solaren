@@ -32,7 +32,7 @@ try {
 	}
 	var rs = Solaren.Execute("GetAllNote", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 } finally {
 	with (rsNote) {
 		var CompanyCode = Fields("CompanyCode").value,

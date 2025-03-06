@@ -17,7 +17,7 @@ try {
 	} 
 	var rsArea = Cmd.Execute();
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rsArea) {
 		var SortCode = Fields("SortCode").value,

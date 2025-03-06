@@ -24,12 +24,12 @@ try {
 	}
 	var rs = Cmd.Execute();
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	if (rs.EOF) {
 		rs.Close();
 		Connect.Close();
-		Solaren.SysMsg(2, Dictionary.Item("AuthenticationError"));
+		Message.Write(2, Dictionary.Item("AuthenticationError"));
 	} else {
 		var RoleId = rs.Fields("RoleId").value;
 		Solaren.SetSessionVar(rs);

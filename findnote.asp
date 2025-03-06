@@ -16,7 +16,7 @@ try {
 	}
 	var rs = Solaren.Execute("SelectChief", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetPage("Службовий лист", User.RoleId)%>

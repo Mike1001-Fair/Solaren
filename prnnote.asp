@@ -94,14 +94,14 @@ try {
 		}
 	}
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 } finally {	
 	Connect.Close();
 
 }
 
 if (Solaren.Empty(PurCost)) {
-	Solaren.SysMsg(0, "Інформацію не знайдено");
+	Message.Write(0, "Інформацію не знайдено");
 } else {
 	var Period = Month.GetPeriod(ReportMonth, 1),
 	Today = new Date(),

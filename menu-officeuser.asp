@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
 if (!User.Authorize(1)) {
-	Solaren.SysMsg(2, Dictionary.Item("AuthorizationError"))
+	Message.Write(2, Dictionary.Item("AuthorizationError"))
 }%>
 <INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="<%=Session('MsgText')%>">
 <NAV class="nav">

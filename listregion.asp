@@ -17,7 +17,7 @@ try {
 	}
 	var rs = Solaren.Execute("ListRegion", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetPage("Області", User.RoleId)

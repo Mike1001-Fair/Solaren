@@ -23,8 +23,8 @@ try {
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {	
 	Connect.Close();
-	Done ? Solaren.SysMsg(1, "") : Solaren.SysMsg(0, "Така вулиця вже є");
+	Done ? Message.Write(1, "") : Message.Write(0, "Така вулиця вже є");
 }%>

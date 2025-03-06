@@ -28,7 +28,7 @@ try {
 	Solaren.SetCmd("GetParameter");
 	var rs = Solaren.Execute("GetParameter", "Iнформацiю не знайдено");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 } finally {
 	with (rs) {
 		var StartSysDate = Fields("StartSysDate").value,

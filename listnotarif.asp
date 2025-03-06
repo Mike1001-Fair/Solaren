@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
 	Solaren.SetCmd("ListNoTarif");
@@ -15,11 +15,11 @@ try {
 	}
 	var rs = Cmd.Execute();
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 if (rs.EOF) {
-	Solaren.SysMsg(1, "Помилок не виявлено");
+	Message.Write(1, "Помилок не виявлено");
 } else {
 	with (Html) {
 		SetHead("Обсяги");

@@ -58,7 +58,7 @@ try {
 	}
 	Stream.SaveToFile(fn, 2);
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex));
+	Message.Write(3, Message.Error(ex));
 } finally {
 	rsCompanyInfo.Close();
 	rs.Close();

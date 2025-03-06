@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") > 0 && Session("RoleId") < 3;
-if (!Authorized) Solaren.SysMsg(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 with (Request) {
 	var ContractId = Form("ContractId"),
@@ -26,7 +26,7 @@ try {
 	var rs = Cmd.Execute();
 	Solaren.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetHead("Звіт");

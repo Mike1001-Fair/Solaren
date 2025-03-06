@@ -24,7 +24,7 @@ try {
 	}
 	var rsChief = Solaren.Execute("GetChief", "Керівника не знайдено!");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rsChief) {
 		var TitleId    = Fields("TitleId").value,

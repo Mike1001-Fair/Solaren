@@ -17,7 +17,7 @@ try {
 	rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
 	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
 } catch (ex) {
-	Solaren.SysMsg(3, Solaren.GetErrMsg(ex))
+	Message.Write(3, Message.Error(ex))
 }
 
 Html.SetPage("Нова компанія", User.RoleId)%>
