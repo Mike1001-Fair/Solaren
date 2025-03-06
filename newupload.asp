@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% var Authorized = Session("RoleId") == 0;

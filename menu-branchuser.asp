@@ -1,5 +1,6 @@
-п»ї<%@ LANGUAGE="JScript"%> 
+<%@ LANGUAGE="JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
@@ -20,11 +21,12 @@ if (!User.Authorize(2)) {
 		</LI>
 		<LI><%=Dictionary.Item("Reports")%>
 			<UL class="submenu">
-				<LI><A href="findact.asp">РђРєС‚</A></LI>
-				<LI><A href="findvolcost.asp">Р’Р°СЂС‚icС‚СЊ</A></LI>
-				<LI><A href="findindicatorrep.asp">РџРѕРєР°Р·РЅРёРєРё</A></LI>
-				<LI><A href="listnovol.asp">Р‘РµР· РѕР±СЃСЏРіiРІ</A></LI>
+				<LI><A href="findact.asp">Акт</A></LI>
+				<LI><A href="findvolcost.asp">Вартicть</A></LI>
+				<LI><A href="findindicatorrep.asp">Показники</A></LI>
+				<LI><A href="listnovol.asp">Без обсягiв</A></LI>
 			</UL>
 		</LI>
 	</UL>
 </NAV>
+

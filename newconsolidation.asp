@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -27,4 +28,5 @@ if (User.ValidateAccess(Authorized, "GET")) {
 </DIV>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>
+
 

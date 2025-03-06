@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
@@ -66,4 +67,5 @@ Html.SetPage(Title, User.RoleId)%>
 </TABLE>
 <% if (!ViewOnly) Html.WriteEditButton(1) %>
 </FORM></BODY></HTML>
+
 

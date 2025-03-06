@@ -1,11 +1,12 @@
-ï»¿<%@ LANGUAGE = "JScript"%> 
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/httpclient.inc" -->
 <!-- #INCLUDE FILE="Include/email.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% with (Html) {
-	SetHead("ÐŸÐ¾Ð²Ñ–Ð´Ð¾Ð¼Ð»ÐµÐ½Ð½Ñ");
+	SetHead("Ïîâ³äîìëåííÿ");
 }
 /*var StartDate = "2024-09-33";
 Response.Write(StartDate.isDate() + "<br>");
@@ -22,3 +23,4 @@ for (var i=0; i<1; i++) {
 //Email.WriteConfig();
 //Email.Send("nickchernov@gmail.com", "Test", "Test");
 %>
+

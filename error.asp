@@ -1,5 +1,6 @@
-﻿<%@ LANGUAGE = "JScript"%> 
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -27,3 +28,4 @@ Html.SetHead(Dictionary.Item("Message")) %>
 		</FIGURE>
 	</FIELDSET>
 </DIV></BODY></HTML>
+

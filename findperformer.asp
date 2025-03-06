@@ -1,5 +1,6 @@
 <%@ LANGUAGE="JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
@@ -20,4 +21,5 @@ with (Html) {
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
+
 

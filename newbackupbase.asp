@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -21,3 +22,4 @@ Html.SetPage("Резервна копія", User.RoleId)%>
 Connect.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Створити</BUTTON>
 </FORM></BODY></HTML>
+

@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%>
-<!-- #INCLUDE FILE="Include/lib.inc" --> 
+<!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" --> 
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
@@ -28,3 +29,4 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }%>
+

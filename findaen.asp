@@ -1,5 +1,6 @@
 <%@LANGUAGE="JavaScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 if (Authorized) {
@@ -34,3 +35,4 @@ function SbmForm() {
 	</FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SbmForm()" DISABLED>&#128270;Пошук</BUTTON></FORM></BODY></HTML>
+

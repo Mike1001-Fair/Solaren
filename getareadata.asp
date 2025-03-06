@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <% var RoleId = Session("RoleId"),
 Authorized    = RoleId < 2,
 QueryName     = Request.QueryString("QueryName"),

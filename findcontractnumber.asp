@@ -1,5 +1,6 @@
 <%@LANGUAGE="JavaScript"%>
 <!-- #INCLUDE FILE="Include/lib.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
@@ -21,3 +22,4 @@ Html.SetPage("Кiлькiсть договорiв", User.RoleId)%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
+
