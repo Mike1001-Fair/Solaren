@@ -290,7 +290,7 @@ Styles = {
 
 Scripts = {
 	Path: "Scripts/",
-	Files: ["lib", "loader", "user", "resource", "menu", "ajax"],
+	Files: ["lib", "loader", "user", "resource", "menu", "redirect", "ajax"],
 
 	Map: function(fileName) {
 		var fullFileName = [this.Path, fileName, '.js?', Html.Version];
