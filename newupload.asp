@@ -29,6 +29,7 @@ function SbmForm() {
 		<!--SPAN CLASS="UserIcon">&#x1F4E4;</SPAN-->
 		<IMG CLASS="HeadImg" SRC="Images/upload.svg">
 		<input type="file" name="files[]" multiple>
+
 	</FIELDSET>
 </DIV>
 <BUTTON CLASS="SbmBtn"  NAME="SbmBtn" ONCLICK="return SbmForm()">&#x1F4E4;Надіслати</BUTTON>

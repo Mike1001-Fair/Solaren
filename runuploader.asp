@@ -1,8 +1,21 @@
-﻿<%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
-<!-- #INCLUDE FILE="Include/uploader.inc" -->
+﻿<!-- #INCLUDE FILE="Include/uploader.inc" -->
 <%
-	Uploader.Run();
-	//Server.Transfer("successmsg.asp");
 
+Set Upload = New FreeASPUpload
+
+' Папка, куда сохраняем файлы
+Dim SaveToFolder
+SaveToFolder = Server.MapPath("/uploads/")
+
+' Сохраняем файлы (путь передаём в метод Save, а не через свойство)
+Upload.Save SaveToFolder
+
+' Получаем имя загруженного файла
+FileName = Upload("file1").FileName
+
+' Выводим имя файла
+Response.Write "Файл загружен: " & Server.HTMLEncode(FileName)
+
+' Освобождаем объект
+Set Upload = Nothing
 %>

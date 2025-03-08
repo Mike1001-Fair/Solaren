@@ -1,5 +1,15 @@
 ﻿"use strict";
-const Ajax = {
+const Redirect = {
+	"-2": "error.asp",
+	"0": "accessdenied.asp",
+	go(id) {
+		if (this[id]) {
+			location.href = this[id];
+		}
+	}
+},
+
+Ajax = {
 	minQueryLen: 3,
 	maxQueryLen: 5,
 
@@ -26,13 +36,16 @@ const Ajax = {
 		alert(`Fetch request error: ${error.message}`)
 	},
 
-
 	GetFileList(FolderName) {
 		//console.log(`FolderName: ${FolderName}`);
 		document.body.style.cursor = "progress";
 		fetch(`getfilelist.asp?FolderName=${FolderName}`)
 		.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-		.then(data => data.files[0] == "0" ? location.href="accessdenied.asp" : this.SetFileList(data))
+		.then(data => {
+			if (!Redirect.go(data.files[0])) {
+				this.SetFileList(data)
+			}
+		})
 		.catch((error) => this.errFetchMsg(error))
 		.finally(() => document.body.style.cursor="auto");
 	},
@@ -65,7 +78,6 @@ const Ajax = {
  
 	GetCustomerList(QueryName) {
 		const queryValue = QueryName.value.trim();
-		//console.log(`GetCustomerList queryValue.length = ${queryValue.length}`);
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			CustomerId.value = -1;
 			CustomerName.title = this.errLenMsg;
@@ -75,7 +87,11 @@ const Ajax = {
 			CustomerName.style.cursor = "progress";
 			fetch(`getcustomerdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data[0].CustomerId == 0 ? location.href="accessdenied.asp" : this.SetCustomerList(data))
+			.then(data => {
+				if (!Redirect.go(data[0].CustomerId)) {
+					this.SetCustomerList(data);
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => CustomerName.style.cursor = "auto");
 		}
@@ -121,7 +137,11 @@ const Ajax = {
 			ContractName.style.cursor = "progress";
 			fetch(`getcontractdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data[0].ContractId == 0 ? location.href="accessdenied.asp" : this.SetContractList(data))
+			.then(data => {
+				if (!Redirect.go(data[0].ContractId)) {
+					this.SetContractList(data)
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => ContractName.style.cursor = "auto");
 		}
@@ -168,7 +188,11 @@ const Ajax = {
 			AreaName.style.cursor = "progress";
 			fetch(`getareadata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data[0].AreaId == 0 ? location.href="accessdenied.asp" : this.SetAreaList(data))
+			.then(data => {
+				if (!Redirect.go(data[0].AreaId)) {
+					this.SetAreaList(data)
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => AreaName.style.cursor = "auto");
 		}
@@ -213,7 +237,11 @@ const Ajax = {
 			LocalityName.style.cursor = "progress";
 			fetch(`getlocalitydata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data[0].LocalityId == 0 ? location.href="accessdenied.asp" : this.SetLocalityList(data))
+			.then(data => {
+				if (!Redirect.go(data[0].LocalityId)) {
+					this.SetLocalityList(data);
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => LocalityName.style.cursor = "auto");
 		}
@@ -238,11 +266,9 @@ const Ajax = {
 				});
 
 				if (selectedElement) {
-					//const localityType = Resource.GetItem("LocalityType"),
 					const index = selectedElement.LocalityType;
 					LocalityId.value         = selectedElement.LocalityId;
 					LocalityName.value       = selectedElement.LocalityName;
-					//LocalityType.textContent = Ajax.LocalityType[selectedElement.LocalityType];
 					LocalityType.textContent = Ajax.localityType[index];
 					LocalityName.title       = "";
 				}
@@ -262,7 +288,7 @@ const Ajax = {
 				if (data[0].LocalityId > 0) {
 					Ajax.SetLocalityInfo(data);
 				} else if (data[0].LocalityId == 0) {
-					location.href="accessdenied.asp";
+					this.accessDenied()
 				}
 			})
 			.catch((error) => this.errFetchMsg(error));
@@ -278,7 +304,7 @@ const Ajax = {
 				if (data[0].StreetId > 0) {
 					Ajax.SetStreetInfo(data);
 				} else if (data[0].StreetId == 0) {
-					location.href="accessdenied.asp";
+					this.accessDenied()
 				}
 			})
 			.catch((error) => this.errFetchMsg(error));
@@ -297,12 +323,8 @@ const Ajax = {
 			fetch(`getstreetdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
-				if (data[0].StreetId == -2) {
-					location.href="error.asp"
-				} else if (data[0].StreetId == 0) {
-					location.href="accessdenied.asp"
-				} else {
-					this.SetStreetList(data)
+				if (!Redirect.go(data[0].LocalityId)) {
+					this.SetStreetList(data);
 				}
 			})
 			.catch((error) => this.errFetchMsg(error))
@@ -352,7 +374,11 @@ const Ajax = {
 			CountryName.style.cursor = "progress";
 			fetch(`getcountrydata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data[0].CountryId == 0 ? location.href="accessdenied.asp" : this.SetCountryList(data))
+			.then(data => {
+				if (!Redirect.go(data[0].CountryId)) {
+					this.SetCountryList(data);
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => CountryName.style.cursor = "auto");
 		}
@@ -396,7 +422,7 @@ const Ajax = {
 					ResetCustomerInfo();
 					alert('Код не знайдено!');
 				} else {
-					data[0].CustomerId > 0 ? SetCustomerInfo(data) : location.href="accessdenied.asp"
+					data[0].CustomerId > 0 ? SetCustomerInfo(data) : this.accessDenied()
 				}
 			})
 		} catch (error) {
@@ -413,7 +439,7 @@ const Ajax = {
 					ResetContractInfo();
 					alert('Рахунок не знайдено!');
 				} else {
-					data[0].ContractId > 0 ? SetContractInfo(data) : location.href="accessdenied.asp"
+					data[0].ContractId > 0 ? SetContractInfo(data) : this.accessDenied()
 				}
 			})
 		} catch (error) {
@@ -427,10 +453,8 @@ const Ajax = {
 			fetch(`getmeterlist.asp?ContractId=${ContractId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
-				if (data[0].MeterId < 0) {
-					alert('Не знайдено жодного лiчильника!');
-				} else {
-					data[0].MeterId > 0 ? SetMeterList(data) : location.href="accessdenied.asp"
+				if (!Redirect.go(data[0].MeterId)) {
+					SetMeterList(data);
 				}
 			})
 			.catch((error) => this.errFetchMsg(error))
@@ -445,7 +469,11 @@ const Ajax = {
 			document.body.style.cursor="progress";
 			fetch(`getmeterinfo.asp?ReportDate=${ReportDate}&MeterId=${MeterId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
-			.then(data => data.length > 0 ? SetMeterInfo(data) : location.href="accessdenied.asp")
+			.then(data => {
+				if (!Redirect.go(data[0].MeterId)) {
+					SetMeterInfo(data);
+				}
+			})
 			.catch((error) => this.errFetchMsg(error))
 			.finally(() => document.body.style.cursor="auto");
 		} else {

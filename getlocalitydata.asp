@@ -21,7 +21,7 @@ if (Authorized) {
 		}
 	} catch (ex) {
 		JsonResponse = '[{"LocalityId":-2}]';
-		Session("ScriptName") = String(Request.ServerVariables("SCRIPT_NAME"));
+		Session("ScriptName") = Solaren.ScriptName;
 		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Connect.Close();
