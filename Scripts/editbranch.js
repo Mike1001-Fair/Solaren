@@ -1,6 +1,5 @@
-﻿const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+﻿const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditBranch) {
@@ -12,18 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			SortCode.readOnly    = readOnly;
 			BranchName1.readOnly = readOnly;
 			BranchName2.readOnly = readOnly;
+			ChkForm();
 		}
 		Ajax.GetLocalityInfo(LocalityId.value);
 	}
 });
 
-EditBranch.addEventListener('input', () => {
-	with (EditBranch) {
-		SbmBtn.disabled = !BranchName1.validity.valid || !BranchName2.validity.valid
-		|| !AreaName.validity.valid || AreaId.value == -1
-		|| !Accountant.validity.valid || LocalityId.value == -1 || !LocalityName.validity.valid;
-	}	
-});
+EditBranch.addEventListener('input', ChkForm);
 
 AreaName.addEventListener('input', function() {
 	Ajax.GetAreaList(this)
@@ -46,11 +40,19 @@ SbmBtn?.addEventListener('click', (event) => {
 DelBtn?.addEventListener('click', DelBranch);
 RestoreBtn?.addEventListener('click', DelBranch);
 
-function DelBranch() {
+function ChkForm() {
+	with (EditBranch) {
+		const valid = BranchName1.validity.valid && BranchName2.validity.valid
+			&& AreaName.validity.valid && AreaId.value != -1
+			&& Accountant.validity.valid && LocalityId.value != -1 && LocalityName.validity.valid;
+		SetDisabledButton(button, valid);
+	}
+}
+
+function DelBranch(event) {
 	if (confirm(`Ви впевненi\u2753`)) {
-		with (EditBranch) {
-			action = `delbranch.asp?BranchId=${BranchId.value}&Deleted=${Deleted.value}`;
-		}
+		EditBranch.action = `delbranch.asp`;
+		Loader.Show();
 	} else {
 		event.preventDefault();
 	}

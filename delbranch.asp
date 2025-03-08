@@ -7,8 +7,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var BranchId = QueryString("BranchId"),
-	Deleted      = QueryString("Deleted");
+	var BranchId = Form("BranchId"),
+	Deleted      = Form("Deleted");
 }
 
 try {
@@ -18,7 +18,8 @@ try {
 			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, BranchId));
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
