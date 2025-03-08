@@ -33,6 +33,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Connect.Close();
+	Solaren.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Лiчильник з таким номером вже є");
 }%>

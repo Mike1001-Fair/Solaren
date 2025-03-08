@@ -24,7 +24,7 @@ if (Authorized) {
 		Session("ScriptName") = Solaren.ScriptName;
 		Session("SysMsg") = Message.Error(ex);
 	} finally {
-		Connect.Close();
+		Solaren.Close();
 	}
 }
 

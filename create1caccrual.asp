@@ -30,5 +30,5 @@ try {
 		Flush();
 	}
 	rs.Close();
-	Connect.Close();
+	Solaren.Close();
 }%>

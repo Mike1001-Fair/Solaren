@@ -155,5 +155,5 @@ Html.SetPage(Title, User.RoleId)%>
 	</TD></TR>	
 </TABLE>
 <% Html.WriteEditButton(1);
-Connect.Close(); %>
+Solaren.Close(); %>
 </FORM></BODY></HTML>

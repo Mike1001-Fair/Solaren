@@ -18,7 +18,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage("Новий документ", User.RoleId)
 }%>
 <BODY CLASS="MainBody">

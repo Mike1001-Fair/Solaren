@@ -18,7 +18,7 @@ try {
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
 			Append(CreateParameter("AenName", adVarChar, adParamInput, 20, AenName));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

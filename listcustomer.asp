@@ -35,5 +35,5 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","LEFT") + '<A href="editcustomer.asp?CustomerId=' + rs.Fields("Id") + '">' + rs.Fields("CustomerName") + '</A>' +
 	Html.Write("TD","") + rs.Fields("Phone") + '</TD></TR>\n');
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
+} rs.Close(); Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>

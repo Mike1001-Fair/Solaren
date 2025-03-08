@@ -39,6 +39,6 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Connect.Close();
+Solaren.Close();
 ResponseText.push(Html.GetFooterRow(3, i));
 Response.Write(ResponseText.join("\n"))%>

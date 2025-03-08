@@ -34,6 +34,6 @@ for (var i=0, pdfotax; !rs.EOF; i++) {
 	Html.Write("TD","") + rs.Fields("EndDate") +
 	Html.Write("TD","RIGHT") + '<A HREF="editpdfo.asp?PdfoId=' + rs.Fields("Id") + '">' + rs.Fields("PdfoTax") + '</A></TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(3, i);
 Response.Write(ResponseText)%>

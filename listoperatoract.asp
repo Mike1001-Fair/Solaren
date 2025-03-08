@@ -51,7 +51,7 @@ for (var i=0; !rs.EOF; i++) {
 	totRetVol += rs.Fields("RetVol");
 	totSaldo += rs.Fields("Saldo");
 	rs.MoveNext()
-} rs.Close(); Connect.Close();
+} rs.Close(); Solaren.Close();
 
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i +
 Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +

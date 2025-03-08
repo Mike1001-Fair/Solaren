@@ -26,6 +26,12 @@ Solaren = {
 		return rs
 	},
 
+	Close: function() {
+		if (Connect.State) {
+			Connect.Close();
+		}
+	},
+
 	SetSessionVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
 		dbDate   = rs.Fields("OperDate").value,

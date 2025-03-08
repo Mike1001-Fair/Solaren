@@ -51,6 +51,6 @@ for (var i=0; !rs.EOF; i++) {
 	ResponseText.push(row.join(""));
 	rs.MoveNext();
 } rs.Close();
-Connect.Close();
+Solaren.Close();
 ResponseText.push(Html.GetFooterRow(8, i));
 Response.Write(ResponseText.join("\n"))%>

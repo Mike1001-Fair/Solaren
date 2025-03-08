@@ -47,7 +47,7 @@ for (var i=0; !rs.EOF; i++) {
 	totObDt   += rs.Fields("ob_dt");
 	totObCt   += rs.Fields("ob_ct");
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i +
 Html.Write("TH","RIGHT") + totPurVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totObDt.toDelimited(2) +

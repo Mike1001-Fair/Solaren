@@ -39,6 +39,6 @@ if (rs.EOF) {
 		Html.Write("TD","RIGHT") + rs.Fields("VolCost").value.toDelimited(2) +
 		Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n');
 		rs.MoveNext();
-	} rs.Close();Connect.Close();
+	} rs.Close();Solaren.Close();
 	Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="7">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
 }%>

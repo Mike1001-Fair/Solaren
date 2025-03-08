@@ -35,6 +35,6 @@ for (var i=0; !rs.EOF; i++) {
 	ResponseText += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
 	Html.Write("TD","LEFT") + '<A HREF="editarea.asp?AreaId=' + rs.Fields("Id") + '">' + rs.Fields("AreaName") + '</A></TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(2, i);
 Response.Write(ResponseText)%>

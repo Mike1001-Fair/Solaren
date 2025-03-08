@@ -31,7 +31,7 @@ try {
 			Append(CreateParameter("TrustedDocId", adVarChar, adParamInput, 10, TrustedDocId));
 			Append(CreateParameter("TrustedDocDate", adVarChar, adParamInput, 10, TrustedDocDate));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

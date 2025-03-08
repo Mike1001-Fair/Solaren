@@ -64,6 +64,6 @@ try {
 	rsCompanyInfo.Close();
 	rs.Close();
 	Stream.Close();
-	Connect.Close();
+	Solaren.Close();
 	Server.Execute("download.asp");
 }%>

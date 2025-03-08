@@ -29,13 +29,13 @@ try {
 } finally {
 	if (rs.EOF) {
 		rs.Close();
-		Connect.Close();
+		Solaren.Close();
 		Message.Write(2, Dictionary.Item("AuthenticationError"));
 	} else {
 		var RoleId = rs.Fields("RoleId").value;
 		Solaren.SetSessionVar(rs);
 		rs.Close();
-		Connect.Close();
+		Solaren.Close();
 		Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
 		Menu.Write(RoleId, 1);
 	}

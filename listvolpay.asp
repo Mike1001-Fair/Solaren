@@ -61,7 +61,7 @@ for (var i=0; !rs.EOF; i++) {
 	totPurVol += rs.Fields("PurVol");
 	totPaySum += rs.Fields("PaySum");
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 
 var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, pwr.toDelimited(2)),

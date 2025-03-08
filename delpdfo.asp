@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("PdfoId", adInteger, adParamInput, 10, PdfoId));
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");  
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

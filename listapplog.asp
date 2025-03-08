@@ -51,6 +51,6 @@ for (var i=0; !rs.EOF; i++) {
 	ResponseText += '<TR><TD>' + rs.Fields("EventDate") +
 	Html.Write("TD","")  + rs.Fields("EventText") + '</TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(2, i);
 Response.Write(ResponseText)%>

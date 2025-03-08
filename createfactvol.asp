@@ -24,7 +24,7 @@ try {
 			Append(CreateParameter("RetVol", adInteger, adParamInput, 10, RetVol));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Cmd.Parameters.Item("Done").value ? Message.Write(1, "") : Message.Write(0, "Операція вже iснує")
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

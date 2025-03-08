@@ -18,7 +18,7 @@ try {
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 			Append(CreateParameter("VzTax", adVarChar, adParamInput, 10, VzTax));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

@@ -37,5 +37,5 @@ for (var i=0; !rs.EOF; i++) {
 	Response.Write('<TR><TD>' + Street.Type[rs.Fields("StreetType")] + 
 	Html.Write("TD","") + '<A href="editstreet.asp?StreetId=' + rs.Fields("Id") + '">' + rs.Fields("StreetName") + '</A></TD></TR>\n');
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
+} rs.Close(); Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>

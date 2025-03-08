@@ -9,7 +9,7 @@ try {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

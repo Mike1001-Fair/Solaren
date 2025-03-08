@@ -27,7 +27,7 @@ try {
 		Title        = Deleted ? "Перегляд області" : "Редагування області";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

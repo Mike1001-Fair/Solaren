@@ -29,7 +29,7 @@ try {
 		Title       = Deleted ? "Перегляд ставки ВЗ" : "Редагування ставки ВЗ";
 		Close();
 	} 
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId)
 }%>
 

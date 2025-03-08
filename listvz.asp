@@ -35,6 +35,6 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","") + rs.Fields("EndDate") +
 	Html.Write("TD","RIGHT") + '<A HREF="editvz.asp?VzId=' + rs.Fields("Id") + '">' + rs.Fields("VzTax") + '</A></TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(3, i);
 Response.Write(ResponseText)%>

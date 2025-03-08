@@ -31,7 +31,7 @@ try {
 		Title            = Deleted ? "Перегляд населеного пункту" : "Редагування населеного пункту";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, RoleId)
 }%>
 <BODY CLASS="MainBody">

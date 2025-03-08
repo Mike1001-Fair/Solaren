@@ -38,7 +38,9 @@ SbmBtn?.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 DelBtn?.addEventListener('click', DelBranch);
@@ -49,5 +51,7 @@ function DelBranch() {
 		with (EditBranch) {
 			action = `delbranch.asp?BranchId=${BranchId.value}&Deleted=${Deleted.value}`;
 		}
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }

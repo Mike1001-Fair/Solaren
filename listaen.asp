@@ -32,7 +32,7 @@ try {
 		Response.Write('<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
 		Html.Write("TD","") + '<A href="editaen.asp?AenId=' + rs.Fields("AenId") + '">' + rs.Fields("AenName") + '</A></TD></TR>\n');
 		rs.MoveNext();
-	} rs.Close();Connect.Close();
+	} rs.Close();Solaren.Close();
 	Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

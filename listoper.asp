@@ -52,7 +52,7 @@ for (var i=0; !rs.EOF; i++) {
 	totVolCost  += rs.Fields("VolCost");
 	rs.MoveNext()
 } rs.Close();
-Connect.Close();
+Solaren.Close();
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i +
 Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totVolCost.toDelimited(2) + '</TH></TR>\n</TABLE></BODY></HTML>';

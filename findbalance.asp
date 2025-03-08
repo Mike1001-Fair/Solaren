@@ -31,7 +31,7 @@ Html.SetPage("Баланс", User.RoleId)%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL FOR="OperatorId">Оператор</LABEL>
 	<% Html.WriteSelect(rs, "Operator", 0, -1);
-	Connect.Close(); %>
+	Solaren.Close(); %>
 	</FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>

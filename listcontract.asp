@@ -58,7 +58,7 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Connect.Close();
+Solaren.Close();
 var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i,'</TH>',
 	Tag.Write("TH", 2, totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'
 ];

@@ -37,5 +37,5 @@ for (var i=0; !rs.EOF; i++) {
 	Response.Write('<TR><TD ALIGN="LEFT">' + Locality.Type[rs.Fields("LocalityType")] + 
 	Html.Write("TD","") + '<A href="editlocality.asp?LocalityId=' + rs.Fields("Id") + '">' + rs.Fields("LocalityName") + '</A></TD></TR>\n');
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
+} rs.Close(); Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');%>

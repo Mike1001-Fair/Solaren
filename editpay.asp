@@ -29,7 +29,7 @@ try {
 		Deleted        = Fields("Deleted").value;
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 }
 
 var ViewOnly = !Month.isPeriod(Month.Date[1], PayDate),

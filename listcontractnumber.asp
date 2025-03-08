@@ -40,7 +40,7 @@ for (var i=0; !rs.EOF; i++) {
 	totContractNumber += rs.Fields("ContractNumber");
 	totContractPower += rs.Fields("ContractPower");
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 
 ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i +
 Html.Write("TH","RIGHT") + totContractNumber.toDelimited(0) +

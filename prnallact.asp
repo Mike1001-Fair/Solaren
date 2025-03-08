@@ -99,7 +99,7 @@ for (; !rs.EOF; rs.MoveNext()) {
 	}
 }
 rs.Close();
-Connect.Close();
+Solaren.Close();
 ResponseText.push(Page.join(PageBreak));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>

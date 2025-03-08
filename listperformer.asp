@@ -39,6 +39,6 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","") + rs.Fields("Phone") +
 	Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n');
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
 %>

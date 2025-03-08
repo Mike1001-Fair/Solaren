@@ -22,7 +22,7 @@ try {
 			Append(CreateParameter("MiddleName", adVarChar, adParamInput, 20, MiddleName));
 			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Phone));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

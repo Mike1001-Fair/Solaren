@@ -28,7 +28,7 @@ try {
 		Title      = Deleted ? "Перегляд вулицi" : "Редагування вулицi";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

@@ -34,6 +34,6 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","") + rs.Fields("ContractPAN") +
 	Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n';
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
+} rs.Close(); Solaren.Close();
 ResponseText += Html.GetFooterRow(3, i);
 Response.Write(ResponseText)%>

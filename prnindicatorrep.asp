@@ -145,7 +145,7 @@ for (var i=0; i<=DoubleReport; i++) {
 	Body.push(block.join("\n"));
 }
 rs.Close();
-Connect.Close();
+Solaren.Close();
 ResponseText.push(Body.join(Divider));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join(""))%>

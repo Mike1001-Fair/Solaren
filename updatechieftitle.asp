@@ -24,7 +24,7 @@ try {
 			Append(CreateParameter("Title3", adVarChar, adParamInput, 30, Title3));
 			Append(CreateParameter("RankId", adTinyInt, adParamInput, 1, RankId));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

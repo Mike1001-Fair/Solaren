@@ -13,7 +13,7 @@ try {
 		} Execute(adExecuteNoRecords);
 	} 
 	var SortCode = Cmd.Parameters.Item("SortCode").value;
-	Connect.Close();
+	Solaren.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

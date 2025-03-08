@@ -27,7 +27,7 @@ try {
 		Title        = Deleted ? "Перегляд анкети району" : "Редагування анкети району";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

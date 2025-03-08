@@ -28,7 +28,7 @@ with (rs) {
     var ContractorName = Fields("ContractorName").value,
 	BudgetItem     = Fields("BudgetItem").value;
 	Close();
-} Connect.Close();
+} Solaren.Close();
 
 var Today = new Date(),
 ReportDate = Today.toStr(0).formatDate("-");

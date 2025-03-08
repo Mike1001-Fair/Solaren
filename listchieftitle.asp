@@ -30,6 +30,6 @@ var ResponseText = '<BODY CLASS="MainBody">\n' +
 for (var i=0; !rs.EOF; i++) {
 	ResponseText += '<TR><TD ALIGN="LEFT"><A href="editchieftitle.asp?ChiefTitleId=' + rs.Fields("Id") + '">' + rs.Fields("Title1") + '</A></TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(1, i);
 Response.Write(ResponseText)%>

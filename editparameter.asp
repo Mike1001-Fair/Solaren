@@ -46,7 +46,7 @@ try {
 		MsgText          = Fields("MsgText").value;
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 }
 Html.SetPage("Параметри", User.RoleId)%>
 <BODY CLASS="MainBody">

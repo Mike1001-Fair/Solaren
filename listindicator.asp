@@ -46,6 +46,6 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","RIGHT") + rs.Fields("RecVal").value.toDelimited(0) +
 	Html.Write("TD","RIGHT") + rs.Fields("RetVal").value.toDelimited(0) + '</TD></TR>\n';
 	rs.MoveNext();
-} rs.Close(); Connect.Close();
+} rs.Close(); Solaren.Close();
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>

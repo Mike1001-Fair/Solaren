@@ -69,6 +69,6 @@ try {
 	<TD><INPUT TYPE="date" NAME="TrustedDocDate" VALUE="<%=TrustedDocDate%>"></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Connect.Close();
+<% Solaren.Close();
 Html.WriteEditButton(1)%>
 </FORM></BODY></HTML>

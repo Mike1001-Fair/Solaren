@@ -20,7 +20,7 @@ try {
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
 			Append(CreateParameter("RegionName", adVarChar, adParamInput, 20, RegionName));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

@@ -28,7 +28,7 @@ try {
 		Title         = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

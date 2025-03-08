@@ -39,7 +39,7 @@ try {
 		Limit          = Math.pow(10, Capacity) - 1;
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 }
 
 var OperDate = Month.Date[1],

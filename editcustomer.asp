@@ -37,7 +37,7 @@ try {
 		Deleted          = Fields("Deleted").value,
 		Title            = Deleted ? "Перегляд анкети" : "Редагування анкети";
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, RoleId);
 }%>
 <BODY CLASS="MainBody">

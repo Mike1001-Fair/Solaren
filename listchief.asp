@@ -36,6 +36,6 @@ for (var i=0, row; !rs.EOF; i++) {
 	];
 	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText.push(Html.GetFooterRow(2, i));
 Response.Write(ResponseText.join(""))%>

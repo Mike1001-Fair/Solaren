@@ -93,7 +93,7 @@ for (var n = 1; !rs.EOF; n++) {
 	Note.push(block.join("\n"));
 }
 rs.Close();
-Connect.Close();
+Solaren.Close();
 ResponseText.push(Note.join(PageBreak));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>

@@ -26,6 +26,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Connect.Close();
+	Solaren.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Банк з таким кодом МФО вже є");
 }%>

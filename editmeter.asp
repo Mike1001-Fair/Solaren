@@ -34,7 +34,7 @@ try {
 		Limit          = Math.pow(10, Capacity) - 1;
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

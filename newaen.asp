@@ -10,7 +10,7 @@ try {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 	var SortCode =++ Cmd.Parameters.Item("SortCode").value;
 	with (Html) {
 		SetHead("Новий РЕМ");

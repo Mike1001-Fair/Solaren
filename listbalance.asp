@@ -52,7 +52,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Connect.Close();
+Solaren.Close();
 
 ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i +
 	Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +

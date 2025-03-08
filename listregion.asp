@@ -32,6 +32,6 @@ for (var i=0; !rs.EOF; i++) {
 	ResponseText += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
 	Html.Write("TD","LEFT") + '<A HREF="editregion.asp?RegionId=' + rs.Fields("Id") + '">' + rs.Fields("RegionName") + '</A></TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(2, i);
 Response.Write(ResponseText)%>

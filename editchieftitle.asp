@@ -26,7 +26,7 @@ try {
 		Title      = Deleted ? "Перегляд посади" : "Редагування посади";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

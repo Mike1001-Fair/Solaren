@@ -52,7 +52,7 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","LEFT") + rs.Fields("CustomerName") +
 	Html.Write("TD","") + rs.Fields("ContractPAN") + '</TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + 
 Html.Write("TH","RIGHT") + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>

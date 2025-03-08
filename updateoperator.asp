@@ -23,7 +23,7 @@ try {
 		} Execute(adExecuteNoRecords);
 	}
 	Cmd.Parameters.Item("Done").value ? Message.Write(1, "") : Message.Write(0, "Оператор з таким кодом вже є");
-	Connect.Close();
+	Solaren.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }%>

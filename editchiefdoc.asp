@@ -25,7 +25,7 @@ try {
 		Deleted      = Fields("Deleted").value,
 		Title        = Deleted ? "Перегляд документу" : "Редагування документу";
 		Close();
-	} Connect.Close();
+	} Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

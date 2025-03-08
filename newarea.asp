@@ -10,7 +10,7 @@ try {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
-	} Connect.Close();
+	} Solaren.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

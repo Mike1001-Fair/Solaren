@@ -55,7 +55,7 @@ for (var i=0; !rs.EOF; i++) {
 	totnVol   += nVol;
 	rs.MoveNext()
 } rs.Close();
-Connect.Close();
+Solaren.Close();
 
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i +
 Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +

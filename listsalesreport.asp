@@ -48,7 +48,7 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","RIGHT") + rs.Fields("Quantity") + '</TD></TR>\n';
 	totalQuantity += rs.Fields("Quantity").value;
 	rs.MoveNext();
-} rs.Close();Connect.Close();
+} rs.Close();Solaren.Close();
 ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i + 
 Html.Write("TH","RIGHT") + totalQuantity.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>

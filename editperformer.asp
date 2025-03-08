@@ -28,7 +28,7 @@ try {
 		Title        = "Редагування анкети виконавця";
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 }
 
 Html.SetPage(Title, User.RoleId)%>

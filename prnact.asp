@@ -52,7 +52,7 @@ try {
 		Accountant   = Fields("Accountant").value;
 		Close();
 	}
-	Connect.Close();
+	Solaren.Close();
 	Html.SetHead("Акт приймання-передачi");
 }
 

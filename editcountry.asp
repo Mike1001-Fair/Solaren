@@ -29,7 +29,7 @@ try {
 		Title           = Deleted ? "Перегляд країни" : "Редагування країни";
 		Close();
 	} 
-	Connect.Close();
+	Solaren.Close();
 	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">

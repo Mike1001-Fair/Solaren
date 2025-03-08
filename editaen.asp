@@ -23,7 +23,7 @@ try {
 		Deleted      = Fields("Deleted").value,
 		Title        = Deleted ? "Перегляд анкети РЕМ" : "Редагування анкети РЕМ";
 		Close();
-	} Connect.Close();
+	} Solaren.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
