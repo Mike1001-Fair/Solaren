@@ -4,11 +4,10 @@ var Street = {
 
 	WriteType: function(tagName, StreetType) {
 		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
-		selected, option;
+		selected;
 		for (var i = 0; i < this.Type.length; i++) {
 			selected = i == StreetType ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
+			ResponseText.push('<OPTION VALUE="' + i + selected + this.Type[i] + '</OPTION>');
 		}
 		ResponseText.push('</SELECT>');
 		Response.Write(ResponseText.join("\n"))
