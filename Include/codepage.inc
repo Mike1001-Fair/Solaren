@@ -1,8 +1,8 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var CodePage = {
 	List: {
-		65001: "utf-8",
-		1251: "windows-1251"
+		"65001": "utf-8",
+		"1251": "windows-1251"
 	},
 
 	Write: function() {

@@ -32,13 +32,13 @@ if (!User.Authorize(1)) {
 				<LI><A href="neworder.asp"><%=Dictionary.Item("New2")%></A></LI>
 			</UL></LI>
 
-                        <LI class="divider"><A href="newexport.asp">Експорт</A></LI>
+			<LI class="divider"><A href="newexport.asp">Експорт</A></LI>
 
 			<LI><A href="#">Показники</A>
 			<UL class="submenu">
 				<LI><A href="findindicator.asp"><%=Dictionary.Item("Search")%></A></LI>
 			</UL></LI>
-                        <LI><A href="editparameter.asp">Параметри</A></LI>
+			<LI><A href="editparameter.asp">Параметри</A></LI>
 			<LI><A href="#">Перерахунок</A>
 			<UL class="submenu">
 				<LI><A href="findoper.asp"><%=Dictionary.Item("Search")%></A></LI>
