@@ -1,12 +1,12 @@
 ﻿<%@ LANGUAGE="JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
 if (!User.Authorize(1)) {
 	Message.Write(2, Dictionary.Item("AuthorizationError"))
 }%>
-<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="<%=Session('MsgText')%>">
 <NAV class="nav">
 	<UL class="topmenu">
 		<LI><A href="#" ID="LogOut">&#x23F9;<%=Dictionary.Item("Logout")%></A></LI>

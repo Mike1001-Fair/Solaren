@@ -1,21 +1,18 @@
-﻿const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+﻿const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditArea) {
 		if (Deleted.value == "True") {
 			const Elements = document.querySelectorAll("fieldset");
 			Elements.forEach(elm => elm.disabled = true);
+		} else {
+			ChkForm();
 		}
 	}
 });
 
-EditArea.addEventListener('input', () => {
-	with (EditArea) {
-		SbmBtn.disabled = !SortCode.validity.valid || !AreaName.validity.valid;
-	}
-})
+EditArea.addEventListener('input', ChkForm);
 
 if (SbmBtn) {
 	SbmBtn.addEventListener('click', (event) => {
@@ -31,11 +28,18 @@ if (RestoreBtn) {
 	RestoreBtn.addEventListener('click', DelArea);
 }
 
+function ChkForm() {
+	with (EditArea) {
+		const valid = SortCode.validity.valid && AreaName.validity.valid;
+		SetDisabledButton(button, valid);
+	}
+}
+
 function DelArea() {
 	if (confirm(`Ви впевненi\u2753`)) {
-		with (EditArea) {
-			action = `delarea.asp?AreaId=${AreaId.value}&Deleted=${Deleted.value}`
-		}
+		EditArea.action = `delarea.asp`
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }

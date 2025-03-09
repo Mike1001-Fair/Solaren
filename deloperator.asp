@@ -1,12 +1,14 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var OperatorId = QueryString("OperatorId"),
-	Deleted        = QueryString("Deleted");
+	var OperatorId = Form("OperatorId"),
+	Deleted        = Form("Deleted");
 }
 
 try {

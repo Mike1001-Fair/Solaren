@@ -7,7 +7,6 @@
 if (!User.Authorize(0)) {
 	Message.Write(2, Dictionary.Item("AuthorizationError"))
 }%>
-<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="<%=Session('MsgText')%>">
 <NAV class="nav">
 	<UL class="topmenu">
 		<LI><A href="#" ID="LogOut">&#x23F9;<%=Dictionary.Item("Logout")%></A></LI>

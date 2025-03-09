@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			Elements.forEach(elm => elm.disabled = true);
 		} else {
 			const readOnly = ReadOnly.value == "True";
-			SortCode.readOnly    = readOnly;
-			BranchName1.readOnly = readOnly;
-			BranchName2.readOnly = readOnly;
+			[SortCode, BranchName1, BranchName2].forEach(element => element.readOnly = readOnly);
 			ChkForm();
 		}
 		Ajax.GetLocalityInfo(LocalityId.value);

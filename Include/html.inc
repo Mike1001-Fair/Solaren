@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=4.6",
+	Version: "v=1.0",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
@@ -337,9 +337,12 @@ Menu = {
 
 	Write: function(RoleId, BodyTag) {
 		if (this.Type[RoleId]) {
-			var ScriptName = "menu-" + this.Type[RoleId] + ".asp";
+			var ScriptName = "menu-" + this.Type[RoleId] + ".asp",
+			ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">',
+				'<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">'
+			];
 			if (BodyTag) {
-				Response.Write('\n<BODY CLASS="MainBody" ID="MainBody">');
+				Response.Write(ResponseText.join("\n"));
 				Server.Execute(ScriptName);
 				Response.Write('</BODY></HTML>');
 			} else {
