@@ -337,16 +337,16 @@ Menu = {
 
 	Write: function(RoleId, BodyTag) {
 		if (this.Type[RoleId]) {
-			var ScriptName = "menu-" + this.Type[RoleId] + ".asp",
-			ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">',
-				'<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">'
-			];
+			var FileName = "menu-" + this.Type[RoleId] + ".asp";
 			if (BodyTag) {
+				var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">',
+					'<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">'
+				];
 				Response.Write(ResponseText.join("\n"));
-				Server.Execute(ScriptName);
+				Server.Execute(FileName);
 				Response.Write('</BODY></HTML>');
 			} else {
-				Server.Execute(ScriptName);
+				Server.Execute(FileName);
 			}
 		} else {
 			Message.Write(3, "Out of range Menu.Type: RoleId = " + RoleId)
