@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=1.0",
+	Version: "v=1.5",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
@@ -270,7 +270,7 @@ var Html = {
 
 Styles = {
 	Path: "Styles/",
-	Files: ["solaren", "body", "table", "loader", "button", "menu"],
+	Files: ["solaren", "body", "table", "loader", "button", "menu", "alert"],
 
 	Map: function(fileName) {
 		var fullFileName = [this.Path, fileName, '.css?', Html.Version];
@@ -290,7 +290,7 @@ Styles = {
 
 Scripts = {
 	Path: "Scripts/",
-	Files: ["lib", "loader", "user", "resource", "menu", "redirect", "ajax"],
+	Files: ["lib", "loader", "user", "resource", "alert", "menu", "redirect", "ajax"],
 
 	Map: function(fileName) {
 		var fullFileName = [this.Path, fileName, '.js?', Html.Version];

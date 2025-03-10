@@ -3,14 +3,13 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead("Обсяги");
-	WriteScript();
-	Menu.Write(Session("RoleId"), 0);
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+if (User.ValidateAccess(Authorized, "GET")) {
+	Html.SetPage("Обсяги", User.RoleId)
 }%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindFactVol" ACTION="listfactvol.asp" METHOD="post" TARGET="_blank" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
