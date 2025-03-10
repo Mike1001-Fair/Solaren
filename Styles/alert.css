@@ -1,4 +1,4 @@
-﻿#custom-alert-overlay {
+﻿#alert-overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -11,7 +11,7 @@
 	z-index: 9999;
 }
 
-#custom-alert {
+#alert {
 	background: white;
 	padding: 20px;
 	border-radius: 8px;
@@ -21,13 +21,13 @@
 	width: clamp(25vw, 50vw, 75vw);
 }
 
-#custom-alert p {
+#alert p {
 	margin: 20px;
 	font-size: 16px;
 	color: #333;
 }
 
-#custom-alert-close {
+#alert-close {
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -44,7 +44,7 @@
 	transition: background 0.2s ease-in-out;
 }
 
-#custom-alert-close:hover {
+#alert-close:hover {
 	background: #e81123;
 	color: white;
 }

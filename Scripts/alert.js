@@ -1,14 +1,14 @@
 ﻿const Alert = {
 	show(msg) {
-		if (document.getElementById("custom-alert-overlay")) return;
+		if (document.getElementById("alert-overlay")) return;
 
 		// Создаём фон (затемнение)
 		this.overlay = document.createElement("div");
-		this.overlay.id = "custom-alert-overlay";
+		this.overlay.id = "alert-overlay";
 
 		// Создаём окно
 		this.alertBox = document.createElement("div");
-		this.alertBox.id = "custom-alert";
+		this.alertBox.id = "alert";
 
 		// Текст сообщения
 		const text = document.createElement("p");
@@ -16,11 +16,9 @@
 
 		// Кнопка закрытия
 		const closeBtn = document.createElement("div");
-		closeBtn.id = "custom-alert-close";
+		closeBtn.id = "alert-close";
 		closeBtn.textContent = "✖";
 		closeBtn.addEventListener("click", () => this.close());
-
-		//closeBtn.onclick = () => this.close();
 
 		// Собираем элементы
 		this.alertBox.append(closeBtn, text);
