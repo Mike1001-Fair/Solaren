@@ -1,6 +1,7 @@
 ﻿"use strict";
 document.addEventListener('DOMContentLoaded', () => {
 	const MainBody = document.getElementById('MainBody'),
+	MsgText = document.getElementById('MsgText'),
 	LogOut = document.getElementById('LogOut');
 	Resource.Load(User.FileName);
 	if (LogOut) {
@@ -18,7 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		localStorage.setItem('alertShownTime', Date.now()); // Устанавливаем временную метку показа алерта
 	}*/
 
-	if (MainBody && !Empty(MsgText.value)) alert(MsgText.value);
 	Loader.SetClick('li > a:not([href="#"])');
+	if (MsgText) {
+		alert(MsgText.value);
+	}
 });
 

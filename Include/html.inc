@@ -339,9 +339,10 @@ Menu = {
 		if (this.Type[RoleId]) {
 			var FileName = "menu-" + this.Type[RoleId] + ".asp";
 			if (BodyTag) {
-				var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">',
-					'<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">'
-				];
+				var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
+				if (Session('MsgText')) {
+					ResponseText.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">');
+				}
 				Response.Write(ResponseText.join("\n"));
 				Server.Execute(FileName);
 				Response.Write('</BODY></HTML>');
