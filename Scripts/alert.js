@@ -26,8 +26,8 @@
 			closeBtn.addEventListener("click", () => this.close());
 			
 			alertBox.append(infoBlock, text, closeBtn);
-			this.overlay.append(alertBox);
-			document.body.append(this.overlay);
+			this.overlay.appendChild(alertBox);
+			document.body.appendChild(this.overlay);
 		}
 	},
 

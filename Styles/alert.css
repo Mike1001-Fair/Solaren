@@ -12,8 +12,8 @@
 }
 
 #alert {
-	background: white;
-	padding: 20px;
+	background: #ffffff;
+	padding: 16px;
 	border: 1px #000000 solid;
 	border-radius: 8px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -25,7 +25,7 @@
 }
 
 #alert-info {
-	margin: 10px auto;
+	margin: auto;
 	font-size: 32px;
 	float: left;
 	clear: both;
@@ -33,7 +33,7 @@
 
 #alert p {
 	margin: 16px auto;
-	padding: 10px;
+	padding-top: 10px;
 	font-size: 16px;
 	color: #333;
 	overflow-wrap: break-word;
@@ -49,7 +49,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 18px;
+	font-size: 16px;
 	border-radius: 4px;
 	cursor: pointer;
 	color: #333;
