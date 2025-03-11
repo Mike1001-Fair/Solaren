@@ -7,8 +7,8 @@
 			this.overlay.id = "alert-overlay";
 
 			// Create window
-			this.alertBox = document.createElement("div");
-			this.alertBox.id = "alert";
+			const alertBox = document.createElement("div");
+			alertBox.id = "alert";
 
 			// Create infoBlock
 			const infoBlock = document.createElement("div");
@@ -25,8 +25,8 @@
 			closeBtn.textContent = "✖";
 			closeBtn.addEventListener("click", () => this.close());
 			
-			this.alertBox.append(infoBlock, closeBtn, text);
-			this.overlay.append(this.alertBox);
+			alertBox.append(infoBlock, text, closeBtn);
+			this.overlay.append(alertBox);
 			document.body.append(this.overlay);
 		}
 	},

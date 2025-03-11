@@ -27,6 +27,7 @@ EditParameter.addEventListener('submit', (event) => {
 			MsgText.value = MsgText.value.trim();
 			SysConfig.value = GetSysCfg(Inputs);
 		}
+		Loader.Show();
 	} else {
 		event.preventDefault();
 	}
