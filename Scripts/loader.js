@@ -6,9 +6,9 @@ const Loader = {
 	Show() {
 		if (!this.overlay) {
 			const loader = document.createElement('div');
-			loader.className = 'loader';
+			loader.id = 'loader';
 			this.overlay = document.createElement('div');
-			this.overlay.className = 'overlay';
+
 			this.overlay.id = 'overlay';
 			this.overlay.appendChild(loader);
 			document.body.appendChild(this.overlay);
