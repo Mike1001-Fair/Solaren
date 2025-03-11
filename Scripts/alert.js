@@ -19,13 +19,16 @@
 			const text = document.createElement("p");
 			text.textContent = msg;
 
+			const mainBox = document.createElement("div");
+			mainBox.append(infoBlock, text);
+
 			// Create closeButton
 			const closeBtn = document.createElement("div");
 			closeBtn.id = "alert-close";
 			closeBtn.textContent = "✖";
 			closeBtn.addEventListener("click", () => this.close());
-			
-			alertBox.append(infoBlock, text, closeBtn);
+
+			alertBox.append(mainBox, closeBtn);
 			this.overlay.appendChild(alertBox);
 			document.body.appendChild(this.overlay);
 		}
