@@ -1,4 +1,4 @@
-﻿#alert-overlay {
+﻿#notify-overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -11,7 +11,7 @@
 	z-index: 9;
 }
 
-#alert {
+#notify {
 	background: #ffffff;
 	padding: 16px;
 	border: 1px #000000 solid;
@@ -24,7 +24,7 @@
 	align-items: center;
 }
 
-#alert p {
+#notify p {
 	margin-top: 16px;
 	font-size: 16px;
 	color: #333;
@@ -32,12 +32,12 @@
 	text-align : justify;
 }
 
-#alert-icon {
+#notify-icon {
 	margin: auto;
 	font-size: 24px;
 }
 
-#alert-close {
+#notify-close {
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -53,7 +53,7 @@
 	transition: background 0.2s ease-in-out;
 }
 
-#alert-close:hover {
+#notify-close:hover {
 	background: #e81123;
 	color: white;
 }

@@ -270,7 +270,7 @@ var Html = {
 
 Styles = {
 	Path: "Styles/",
-	Files: ["solaren", "body", "table", "loader", "button", "menu", "alert"],
+	Files: ["solaren", "body", "table", "loader", "button", "menu", "notify"],
 
 	Map: function(fileName) {
 		var fullFileName = [this.Path, fileName, '.css?', Html.Version];
@@ -290,7 +290,7 @@ Styles = {
 
 Scripts = {
 	Path: "Scripts/",
-	Files: ["lib", "loader", "user", "resource", "alert", "menu", "redirect", "ajax"],
+	Files: ["lib", "loader", "user", "resource", "notify", "menu", "redirect", "ajax"],
 
 	Map: function(fileName) {
 		var fullFileName = [this.Path, fileName, '.js?', Html.Version];

@@ -1,30 +1,30 @@
-﻿const Alert = {
+﻿const Notify = {
 	overlay: null,
 	show(msg) {
 		if (!this.overlay) {
 			// Create overlay
 			this.overlay = document.createElement("div");
-			this.overlay.id = "alert-overlay";
+			this.overlay.id = "notify-overlay";
 
 			// Create window
-			const alertBox = document.createElement("div");
-			alertBox.id = "alert";
+			const notifyBox = document.createElement("div");
+			notifyBox.id = "notify";
 
 			// Create the single info block
 			const infoBlock = document.createElement("p"),
 			icon = document.createElement("span");
 			icon.textContent = 'ℹ️';
-			icon.id = "alert-icon";
+			icon.id = "notify-icon";
 			infoBlock.append(icon, msg);
 
 			// Create closeButton
 			const closeBtn = document.createElement("div");
-			closeBtn.id = "alert-close";
+			closeBtn.id = "notify-close";
 			closeBtn.textContent = "✖";
 			closeBtn.addEventListener("click", () => this.close());
 
-			alertBox.append(infoBlock, closeBtn);
-			this.overlay.appendChild(alertBox);
+			notifyBox.append(infoBlock, closeBtn);
+			this.overlay.appendChild(notifyBox);
 			document.body.appendChild(this.overlay);
 		}
 	},

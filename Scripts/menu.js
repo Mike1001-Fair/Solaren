@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 	Loader.SetClick('li > a:not([href="#"])');
 	if (MsgText) {
-		Alert.show(MsgText.value);
+		Notify.show(MsgText.value);
 	}
 });
 
