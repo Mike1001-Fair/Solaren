@@ -14,7 +14,6 @@
 			const infoBlock = document.createElement("p"),
 			icon = document.createElement("span");
 			icon.textContent = 'ℹ️';
-			icon.id = "notify-icon";
 			infoBlock.append(icon, msg);
 
 			// Create closeButton

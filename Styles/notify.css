@@ -19,7 +19,9 @@
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 	text-align: left;
 	position: relative;
-	width: clamp(30vw, 40vw, 50vw);
+	width: max-content;
+	min-width: 20vw;
+	max-width: 70vw;
 	flex-direction: row;
 	align-items: center;
 }
@@ -33,7 +35,7 @@
 	text-align : justify;
 }
 
-#notify-icon {
+#notify span {
 	margin: auto;
 	font-size: 24px;
 }
@@ -56,5 +58,5 @@
 
 #notify-close:hover {
 	background: #e81123;
-	color: white;
+	color: #ffffff;
 }
