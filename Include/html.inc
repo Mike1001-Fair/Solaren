@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=3.2",
+	Version: "v=3.3",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 

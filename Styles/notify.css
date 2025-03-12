@@ -25,7 +25,8 @@
 }
 
 #notify p {
-	margin-top: 16px;
+	margin-top: 16px auto;
+	padding: 0px 10px;
 	font-size: 16px;
 	color: #333;
 	overflow-wrap: break-word;
