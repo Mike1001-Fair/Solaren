@@ -24,20 +24,17 @@
 	align-items: center;
 }
 
-#alert-info {
-	margin: auto;
-	font-size: 32px;
-	float: left;
-	clear: both;
-}
-
 #alert p {
-	margin: 16px auto;
-	padding-top: 10px;
+	margin-top: 16px;
 	font-size: 16px;
 	color: #333;
 	overflow-wrap: break-word;
 	text-align : justify;
+}
+
+#alert-icon {
+	margin: auto;
+	font-size: 24px;
 }
 
 #alert-close {

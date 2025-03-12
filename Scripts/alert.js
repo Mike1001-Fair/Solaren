@@ -10,17 +10,12 @@
 			const alertBox = document.createElement("div");
 			alertBox.id = "alert";
 
-			// Create infoBlock
-			const infoBlock = document.createElement("div");
-			infoBlock.id = "alert-info";
-			infoBlock.textContent = "ℹ️";
-
-			// Create textBlock
-			const text = document.createElement("p");
-			text.textContent = msg;
-
-			const mainBox = document.createElement("div");
-			mainBox.append(infoBlock, text);
+			// Create the single info block
+			const infoBlock = document.createElement("p"),
+			icon = document.createElement("span");
+			icon.textContent = 'ℹ️';
+			icon.id = "alert-icon";
+			infoBlock.append(icon, msg);
 
 			// Create closeButton
 			const closeBtn = document.createElement("div");
@@ -28,7 +23,7 @@
 			closeBtn.textContent = "✖";
 			closeBtn.addEventListener("click", () => this.close());
 
-			alertBox.append(mainBox, closeBtn);
+			alertBox.append(infoBlock, closeBtn);
 			this.overlay.appendChild(alertBox);
 			document.body.appendChild(this.overlay);
 		}
