@@ -111,5 +111,5 @@ Html.SetPage("Нова компанія", User.RoleId)%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
 </FORM></BODY></HTML>
-<% Connect.Close() %>
+<% Solaren.Close() %>
 

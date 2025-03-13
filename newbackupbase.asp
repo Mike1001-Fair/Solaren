@@ -19,7 +19,7 @@ Html.SetPage("Резервна копія", User.RoleId)%>
 <FORM CLASS="ValidForm" NAME="BackupBase" ACTION="runbackupbase.asp" METHOD="post">
 <H3 CLASS="HeadText">Резервна копія</H3>
 <% Html.WriteBaseInfo(rs);
-Connect.Close() %>
+Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Створити</BUTTON>
 </FORM></BODY></HTML>
 

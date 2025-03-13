@@ -72,6 +72,6 @@ Html.SetPage(Title, User.RoleId)%>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <% Html.WriteEditButton(1);
-Connect.Close() %>
+Solaren.Close() %>
 </FORM></BODY></HTML>
 

@@ -20,6 +20,6 @@ Html.SetPage("Реіндексація", User.RoleId)%>
 <FORM CLASS="ValidForm" NAME="ReindexBase" ACTION="runreindexbase.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <% Html.WriteBaseInfo(rs);
-Connect.Close() %>
+Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>

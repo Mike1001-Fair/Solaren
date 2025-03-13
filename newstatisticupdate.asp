@@ -19,6 +19,6 @@ Html.SetPage("Оновлення статистики", User.RoleId)%>
 <FORM CLASS="ValidForm" NAME="StatisticUpdate" ACTION="runstatisticupdate.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <% Html.WriteBaseInfo(rs);
-Connect.Close() %>
+Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>

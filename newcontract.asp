@@ -98,7 +98,7 @@ Html.SetPage("Новий договір", User.RoleId)%>
 
 	<TR><TD ALIGN="RIGHT">Виконавець</TD>
 	<TD><%Html.WriteSelect(rsPerformer, "Performer", 0, -1);
-	Connect.Close() %></TD></TR>
+	Solaren.Close() %></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>

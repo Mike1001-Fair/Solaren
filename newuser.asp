@@ -49,7 +49,7 @@ try {
 
 	<TR><TD ALIGN="RIGHT">ЦОС</TD>
 	<TD><% Html.WriteSelect(rsBranch, "Branch", 1, -1);
-	Connect.Close()%></TD></TR>
+	Solaren.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

@@ -53,7 +53,7 @@ function SetOperatorName() {
 	<TD><SELECT NAME="OperatorId">
 	<% for (; !rs.EOF; rs.MoveNext()) {
 		Response.Write('<OPTION VALUE="' + rs.Fields("OperatorId") + '">' + rs.Fields("OperatorName") + '</OPTION>');
-	} rs.Close();Connect.Close()%>
+	} rs.Close();Solaren.Close()%>
 	</SELECT></TD></TR>
 	</TABLE></FIELDSET>
 </TABLE>

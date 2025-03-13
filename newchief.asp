@@ -39,7 +39,7 @@ Html.SetPage("Новий керiвник", User.RoleId)%>
 		<TD><INPUT TYPE="TEXT" NAME="Name3" PLACEHOLDER="ПІБ" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 
 		<TR><TD ALIGN="RIGHT">Документ</TD>
-		<TD><%Html.WriteChiefDoc(rsChiefDoc, -1); Connect.Close()%></TD></TR>
+		<TD><%Html.WriteChiefDoc(rsChiefDoc, -1); Solaren.Close()%></TD></TR>
 
 		<TR><TD ALIGN="RIGHT">Довiренiсть</TD>
 		<TD><INPUT TYPE="TEXT" NAME="TrustedDocId" SIZE="10"></TD></TR>

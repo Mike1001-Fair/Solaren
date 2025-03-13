@@ -35,7 +35,7 @@ Html.SetPage("Службовий лист", User.RoleId)%>
 
 	<TR><TD ALIGN="RIGHT">Керівник</TD>
 	<TD><%Html.WriteSelect(rs, "Chief", 0, -1);
-	Connect.Close()%></TD></TR>	
+	Solaren.Close()%></TD></TR>	
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>

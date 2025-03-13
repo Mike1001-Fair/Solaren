@@ -27,6 +27,5 @@ function ChkForm() {
 	with (EditPerformer) {
 		const valid = LastName.validity.valid && FirstName.validity.valid && MiddleName.validity.valid && Phone.validity.valid;
 		SetDisabledButton(button, valid);
-		//SbmBtn.disabled = !LastName.validity.valid || !FirstName.validity.valid || !MiddleName.validity.valid || !Phone.validity.valid;
 	}
 }

@@ -32,7 +32,7 @@ Html.SetPage("Перевірка актів", User.RoleId)%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>ЦОС
 	<% Html.WriteSelect(rsBranch, "Branch", 0, -1);
-	Connect.Close()%>
+	Solaren.Close()%>
 	</LABEL></FIELDSET>	
 	</TD></TR>
 </TABLE>

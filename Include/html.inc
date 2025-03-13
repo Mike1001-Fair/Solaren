@@ -273,8 +273,7 @@ Styles = {
 	Files: ["solaren", "body", "table", "loader", "button", "menu", "notify"],
 
 	Map: function(fileName) {
-		var fullFileName = [this.Path, fileName, '.css?', Html.Version];
-		return fullFileName.join("")
+		return this.Path + fileName + '.css?' + Html.Version
 	},
 
 	Write: function() {
@@ -311,8 +310,7 @@ Icon = {
 	Path: "Images/",
 
 	Map: function(fileName) {
-		var fullFileName = [this.Path, fileName];
-		return fullFileName.join("");
+		return this.Path + fileName
 	},
 
 	Link: function(fileName) {
