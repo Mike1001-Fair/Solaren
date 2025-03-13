@@ -25,18 +25,19 @@ try {
 		FirstName    = Fields("FirstName").value,
 		MiddleName   = Fields("MiddleName").value,
 		Phone        = Fields("Phone").value,
+		Deleted      = Fields("Deleted").value,
 		Title        = "Редагування анкети виконавця";
 		Close();
 	}
 	Solaren.Close();
-}
-
-Html.SetPage(Title, User.RoleId)%>
+	Html.SetPage(Title, User.RoleId)
+}%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditPerformer" ACTION="updateperformer.asp" METHOD="POST">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="PerformerId" VALUE="<%=PerformerId%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET><LEGEND>Параметри</LEGEND>

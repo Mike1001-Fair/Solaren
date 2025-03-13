@@ -1,15 +1,14 @@
-<%@ LANGUAGE="JScript"%> 
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 
-with (Html) {
-	SetHead("Пошук виконавця");
-	WriteScript();
-	Menu.Write(Session("RoleId"), 0);
-}%>
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Користувачi", User.RoleId)%>
+
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPerformer" ACTION="listperformer.asp" METHOD="post">
 <H3 CLASS="HeadText">Пошук виконавця</H3>

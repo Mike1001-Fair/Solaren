@@ -293,8 +293,7 @@ Scripts = {
 	Files: ["lib", "loader", "user", "resource", "notify", "menu", "redirect", "ajax"],
 
 	Map: function(fileName) {
-		var fullFileName = [this.Path, fileName, '.js?', Html.Version];
-		return fullFileName.join("")
+		return this.Path + fileName + '.js?' + Html.Version;
 	},
 
 	Write: function() {

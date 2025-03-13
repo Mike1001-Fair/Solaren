@@ -8,7 +8,6 @@ const Loader = {
 			const loader = document.createElement('div');
 			loader.id = 'loader';
 			this.overlay = document.createElement('div');
-
 			this.overlay.id = 'overlay';
 			this.overlay.appendChild(loader);
 			document.body.appendChild(this.overlay);
@@ -27,13 +26,4 @@ const Loader = {
 			if (event.target.matches(selector)) this.Show();
 		});
 	}
-
-	/*SetClick(selector) {
-		let i=0;		
-		document.querySelectorAll(selector).forEach(element => {
-			element.addEventListener('click', () => this.Show());
-			i++;
-		});
-		console.log(`i=${i}`);
-	}*/
 };

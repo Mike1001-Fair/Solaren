@@ -2,8 +2,10 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 || Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var PerformerName = Form("PerformerName"),
@@ -21,12 +23,8 @@ try {
 	var rs = Solaren.Execute("ListPerformer", "Iнформацiю не знайдено");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-with (Html) {
-	SetHead("Виконавці");
-	WriteScript();
-	Menu.Write(Session("RoleId"), 0);
+} finally {
+	Html.SetPage("Виконавці", User.RoleId);
 }
 
 Response.Write('<BODY CLASS="MainBody">\n' +
