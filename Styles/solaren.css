@@ -506,15 +506,8 @@
 .SysMsg LI {text-align: left; margin: auto;}
 .SysMsg FIGURE {margin: auto;}
 .SysMsg SPAN {margin: 0px auto 10px; font-size: 3em; display: flex; justify-content : center;}
-.SysMsg A {
-	color: #0000FF;
-	text-decoration: none;
-	margin: auto;
-}
-.SysMsg A:hover {
-	color: #FF0000;
-	/*text-decoration: underline;*/
-}
+.SysMsg A {color: #0000FF; text-decoration: none; margin: auto}
+.SysMsg A:hover {color: #FF0000;}
 
 /*----------------- стиль для блочного LABEL -----------------*/
 .BlockLabel {

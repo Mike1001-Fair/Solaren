@@ -2,23 +2,11 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = Session("RoleId") == 0;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Html) {
-	SetHead("Завантажити файл");
-	Menu.Write(Session("RoleId"), 0);
-}%>
-
-<!DOCTYPE HTML>
-<SCRIPT>
-function SbmForm() {
-	let Confirmed = confirm("Вы впевненi ?");
-	if (Confirmed) Loader.Show();
-	return Confirmed
-}
-</SCRIPT>
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 0;
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Завантажити файл", User.RoleId)%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewUpLoad" ACTION="runupload.asp" METHOD="post"  enctype="multipart/form-data">
@@ -28,9 +16,9 @@ function SbmForm() {
 		<LEGEND>Параметри</LEGEND>
 		<!--SPAN CLASS="UserIcon">&#x1F4E4;</SPAN-->
 		<IMG CLASS="HeadImg" SRC="Images/upload.svg">
-		<input type="file" name="files[]" multiple>
+		<input type="file" name="Files" multiple REQUIRED>
 
 	</FIELDSET>
 </DIV>
-<BUTTON CLASS="SbmBtn"  NAME="SbmBtn" ONCLICK="return SbmForm()">&#x1F4E4;Надіслати</BUTTON>
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#x1F4E4;Надіслати</BUTTON>
 </FORM></BODY></HTML>
