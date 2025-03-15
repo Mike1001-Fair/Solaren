@@ -11,6 +11,16 @@
 	min-height     : 100vh;
 }
 
+.MainBody {
+	display        : flex;
+	flex-direction : column; 
+	justify-content: center;
+	background     : url(../Images/f06.jpg);
+	font-family    : Arial;
+	cursor         : default;
+	padding-top    : 20px;
+}
+
 .MsgBody {
 	/*background     : linear-gradient(to top, #87CEFA 0%, #F0FFFF 100%);*/
 	background     :  url(../Images/bg.svg);
@@ -22,17 +32,6 @@
 	justify-content: center;
 	align-items    : center;
 	min-height     : 100vh;
-}
-
-
-.MainBody {
-	display        : flex;
-	flex-direction : column;
-	justify-content: center;
-	background     : url(../Images/f06.jpg);
-	font-family    : Arial;
-	cursor         : default;
-	padding-top    : 20px;
 }
 
 .PrnBody {

@@ -59,9 +59,6 @@
 	display         : block;
 	position        : absolute;
 	visibility      : hidden;
-	/*opacity         : 0;
-	transform       : translateY(10px);
-	transition      : 0.3s ease-in-out;*/
 	padding         : 8px;
 	background-color: #FFFFFF;
 	list-style-type : none;

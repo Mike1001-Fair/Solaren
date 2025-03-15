@@ -12,6 +12,7 @@
 }
 
 #notify {
+	display: flex;
 	background: #ffffff;
 	padding: 16px;
 	border: 1px #000000 solid;
@@ -27,16 +28,16 @@
 }
 
 #notify p {
-	margin-top: 16px auto;
+	margin-top: 16px;
 	padding: 0px 10px;
 	font-size: 16px;
 	color: #333;
 	overflow-wrap: break-word;
-	text-align : justify;
+	text-align: justify;
 }
 
 #notify span {
-	margin: auto;
+	display: inline-block;
 	font-size: 24px;
 }
 

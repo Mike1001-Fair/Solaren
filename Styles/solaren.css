@@ -166,7 +166,7 @@
 }
 
 /* стиль для отображения ссылок */
-.mainmenu {
+/*.mainmenu {
 	font-size   : 1em;
 	font-family : Arial;
 	font-weight : normal;
@@ -180,7 +180,7 @@
 	font-style  : normal;
 	color       : #FF0000;
 	text-decoration : underline;
-}
+}*/
 
 .BtnLink {
 	display        : inline-block;
