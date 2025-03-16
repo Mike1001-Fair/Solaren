@@ -5,8 +5,7 @@ function Application_OnStart() {
 		"Provider=MSOLEDBSQL",
 		"Server=CNC",
 		"Database=Solaren",
-		"UID=Iis_User",
-		"PWD=vmzX3pc2th",
+		"Integrated Security=SSPI",
 		"Application Name=Solaren"
 	];
 	Application("ConnectString") = dbConfig.join(";");

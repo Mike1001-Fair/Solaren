@@ -24,6 +24,7 @@ var Message = {
 			msgType = this.Page.length - 1 // if out of range - default error page
 			msgText = "Runtime Error: out of range";			
 		}
+		//Session("SysMsg") = msgText;
 		Session("SysMsg") = msgText;
 		Session("ScriptName") = Solaren.ScriptName;
 		Response.Redirect(this.Page[msgType] + ".asp");
