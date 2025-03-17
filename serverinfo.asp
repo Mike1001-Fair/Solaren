@@ -13,7 +13,8 @@ var ServerInfo = {
 		'<H3 CLASS="HeadText">&#128187;' + Title + '</H3>',
 		'<DIV CLASS="FormDiv">',
 		'<FIELDSET CLASS="FieldSet">',
-		'<LEGEND>Параметри</LEGEND><TABLE CLASS="RulesAllInfo">',
+		'<LEGEND>Параметри</LEGEND>',
+		'<TABLE CLASS="RulesAllInfo">',
 		'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'	
 	],
 
@@ -49,11 +50,7 @@ SessionInfo = {
 
 Html.SetHead(Title, 1);
 Menu.Write(User.RoleId, 0);
-
-with (ServerInfo) {
-	AddSessionInfo();
-	AddInfo();
-	Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
-}
-
+ServerInfo.AddSessionInfo();
+ServerInfo.AddInfo();
+ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 Response.Write(ServerInfo.Text.join("\n"))%>
