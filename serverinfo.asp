@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 0,
+<% var Authorized = User.RoleId == 0;
 Title = "Сервер";
 User.ValidateAccess(Authorized, "GET");
 

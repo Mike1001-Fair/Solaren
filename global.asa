@@ -29,6 +29,5 @@ function Session_OnEnd() {
 	Application.Lock();
 	Application("SesCount")--;
 	Application.UnLock();
-	Session.Abandon();
 }
 </SCRIPT>

@@ -110,6 +110,10 @@
 	cursor: pointer;
 }
 
+.RemoveBtn:hover {
+	color: #e81123;
+}
+
 .RemoveBtn:disabled {
 	cursor: not-allowed;
 }
