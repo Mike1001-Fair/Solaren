@@ -23,7 +23,7 @@ try {
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
 		}
 	}
-	var rs = Solaren.Execute("ListVolPay", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListVolPay");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

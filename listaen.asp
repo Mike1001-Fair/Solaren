@@ -1,9 +1,11 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var AenName = Form("AenName"),
@@ -18,22 +20,28 @@ try {
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
-	with (Html) {
-		SetHead("Список РЕМ");
-		Menu.Write(Session("RoleId"), 0);
-	}
-	Response.Write('<BODY CLASS="MainBody">\n' +
-		'<H3 CLASS="H3Text">Список РЕМ</H3>\n' +
-		'<TABLE CLASS="InfoTable">\n' +
-		'<TR><TH>№</TH><TH>Назва</TH></TR>\n');
-	for (var i=0; !rs.EOF; i++) {
-		Response.Write('<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
-		Html.Write("TD","") + '<A href="editaen.asp?AenId=' + rs.Fields("AenId") + '">' + rs.Fields("AenName") + '</A></TD></TR>\n');
-		rs.MoveNext();
-	} rs.Close();Solaren.Close();
-	Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
+	var rs = Solaren.Execute("ListAen");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}%>
+} finally {
+	Html.SetPage("Список РЕМ", User.RoleId)
+}
+
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">Список РЕМ</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>№</TH><TH>Назва</TH></TR>'
+];
+
+for (var i=0; !rs.EOF; i++) {
+	var url = ['<A href="editaen.asp?AenId=', rs.Fields("AenId"), '">', rs.Fields("AenName"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", 1, rs.Fields("SortCode")),
+		Tag.Write("TD", 0, url.join("")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
+	rs.MoveNext();
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(2, i));
+Response.Write(ResponseText.join("\n"))%>

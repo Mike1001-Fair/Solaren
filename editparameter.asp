@@ -27,7 +27,7 @@ function SysCfgWrite() {
 
 try {
 	Solaren.SetCmd("GetParameter");
-	var rs = Solaren.Execute("GetParameter", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetParameter");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {

@@ -1,10 +1,12 @@
-<%@ LANGUAGE = "JScript"%>
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var BegDate = String(Form("BegDate")),
@@ -21,21 +23,17 @@ try {
 	Solaren.SetCmd("ListAppLog");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 			Append(CreateParameter("EventType", adVarChar, adParamInput, 10, EventType));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListAppLog");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-with (Html) {
-	SetHead("Журнал");
-	Menu.Write(Session("RoleId"), 0);
+} finally {
+	Html.SetPage("Журнал", User.RoleId)
 }
 
 var ResponseText = '<BODY CLASS="MainBody">\n' +

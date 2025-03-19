@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("CustomerId", adInteger, adParamInput, 10, CustomerId));
 		}
 	}
-	var rs = Solaren.Execute("GetCustomer", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetCustomer");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	

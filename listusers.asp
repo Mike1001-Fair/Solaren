@@ -24,7 +24,7 @@ try {
 			Append(CreateParameter("ConnectDate", adVarChar, adParamInput, 20, ConnectDate));
 		}
 	}
-	var rs = Solaren.Execute("ListUsers", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListUsers");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

@@ -16,7 +16,7 @@ try {
     			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, MeterId))
 		}
 	} 
-	var rs = Solaren.Execute("GetMeter", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetMeter");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	

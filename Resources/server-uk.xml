@@ -48,6 +48,7 @@
 	<Item id="Author">© Микола Чернов 2016</Item>
 	<Item id="User">Користувач</Item>
 	<Item id="Password">Пароль</Item>
+	<Item id="InfoNotFound">Iнформацiю не знайдено</Item>
 	<Item id="UserTitle">Повинно містити одну велику та малу літеру та принаймні 8 символів</Item>
 	<Item id="PasswordTitle">Повинно містити щонайменше одне число та одну велику та малу літеру та 10 символів</Item>
 	<LocalityTypes>

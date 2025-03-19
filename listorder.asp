@@ -26,9 +26,10 @@ try {
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Solaren.Execute("ListOrder", "Iнформацiю не знайдено");
+	//var rs = Solaren.Execute("ListOrder");
+	var rs = Solaren.Execute("ListOrder");
 } catch (ex) {
-	//Message.Write(3, Message.Error(ex))
+	Message.Write(3, Message.Error(ex))
 } finally {
 	Html.SetPage("Список замовлень", User.RoleId);
 }

@@ -17,7 +17,7 @@ try {
  			Append(CreateParameter("IndicatorId", adInteger, adParamInput, 10, IndicatorId))
 		} 
 	}
-	var rs = Solaren.Execute("GetIndicator", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetIndicator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	

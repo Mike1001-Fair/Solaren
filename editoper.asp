@@ -18,7 +18,7 @@ try {
 			Append(CreateParameter("FactVolId", adInteger, adParamInput, 10, FactVolId));
 		}
 	}
-	var rs = Solaren.Execute("GetOper", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetOper");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

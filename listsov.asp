@@ -23,7 +23,7 @@ try {
 			Append(CreateParameter("Filter", adBoolean, adParamInput, 1, Filter));
 		}
 	}
-	var rs = Solaren.Execute("ListSov", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListSov");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

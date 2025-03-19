@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("PayId", adInteger, adParamInput, 10, PayId));
 		}
 	}
-	var rs = Solaren.Execute("GetPay", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetPay");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

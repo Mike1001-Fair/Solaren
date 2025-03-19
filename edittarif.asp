@@ -18,7 +18,7 @@ try {
 			Append(CreateParameter("TarifId", adVarChar, adParamInput, 10, TarifId));
 		}
 	}
-	var rs = Solaren.Execute("GetTarif", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetTarif");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

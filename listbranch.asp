@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("BranchName", adVarChar, adParamInput, 10, BranchName));
 		}
 	}
-	var rs = Solaren.Execute("ListBranch", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListBranch");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

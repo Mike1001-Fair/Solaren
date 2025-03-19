@@ -9,7 +9,7 @@ User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetBaseInfo");
-	var rs = Solaren.Execute("GetBaseInfo", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetBaseInfo");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

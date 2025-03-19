@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("RegionName", adVarChar, adParamInput, 10, RegionName));
 		}
 	}
-	var rs = Solaren.Execute("ListRegion", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListRegion");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

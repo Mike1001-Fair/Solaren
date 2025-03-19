@@ -22,7 +22,7 @@ try {
 			Append(CreateParameter("MeterCode", adVarChar, adParamInput, 10, MeterCode));
 		}
 	}
-	var rs = Solaren.Execute("ListMeter", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListMeter");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

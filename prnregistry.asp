@@ -23,7 +23,7 @@ try {
 			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, ChiefId));
 		}
 	}
-	var rsNote = Solaren.Execute("GetNoteData", "Iнформацiю не знайдено");
+	var rsNote = Solaren.Execute("GetNoteData");
 
 	with (Cmd) {
 		with (Parameters) {
@@ -31,7 +31,7 @@ try {
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Solaren.Execute("GetAllNote", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetAllNote");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {

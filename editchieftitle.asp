@@ -13,7 +13,7 @@ try {
 	with (Cmd) {      
 		Parameters.Append(CreateParameter("ChiefTitleId", adInteger, adParamInput, 10, ChiefTitleId));
 	}
-	var rs = Solaren.Execute("GetChiefTitle", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetChiefTitle");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

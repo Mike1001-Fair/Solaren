@@ -40,10 +40,10 @@ try {
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 		}
 	}
-	var rsInfo = Solaren.Execute("GetReportInfo", "Iнформацiю не знайдено");
+	var rsInfo = Solaren.Execute("GetReportInfo");
 
 	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
-	var rs = Solaren.Execute("GetIndicatorReport", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetIndicatorReport");
 	
 	with (rsInfo) {
 		var CustomerName     = Fields("CustomerName").value,

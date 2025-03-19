@@ -22,7 +22,7 @@ try {
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 		}
 	}
-	var rs = Solaren.Execute("ListTarif", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListTarif");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

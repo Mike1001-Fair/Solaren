@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("BankId", adInteger, adParamInput, 10, BankId));
 		}
 	}
-	var rsBank = Solaren.Execute("GetBank", "Iнформацiю не знайдено");
+	var rsBank = Solaren.Execute("GetBank");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

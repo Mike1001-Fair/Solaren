@@ -20,8 +20,8 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("List1Cexp", "Iнформацiю не знайдено"),
-	rsCompanyInfo = Solaren.Execute("GetCompanyInfo", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("List1Cexp"),
+	rsCompanyInfo = Solaren.Execute("GetCompanyInfo");
 
 	Session("FileName") = "Export/1ctopay.tsv";
 

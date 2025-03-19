@@ -15,7 +15,7 @@ try {
 			Parameters.Append(CreateParameter("DocId", adInteger, adParamInput, 10, DocId));
 		}
 	} 
-	var rs = Solaren.Execute("GetChiefDoc", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetChiefDoc");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

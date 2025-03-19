@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("RegionId", adInteger, adParamInput, 10, RegionId));
 		}
 	}
-	var rs = Solaren.Execute("GetRegion", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetRegion");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

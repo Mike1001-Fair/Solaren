@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
 		}
 	}
-	var rsOperator = Solaren.Execute("GetOperator", "Iнформацiю не знайдено");
+	var rsOperator = Solaren.Execute("GetOperator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

@@ -20,7 +20,7 @@ try {
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Solaren.Execute("ListPerformer", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListPerformer");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

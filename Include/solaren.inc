@@ -74,7 +74,9 @@ Solaren = {
 		if (rs.EOF) {
 			rs.Close();
 			this.Close();
-			Message.Write(0, msg);
+			Resource.Load(User.ResourceFile());
+			//Message.Write(0, msg);
+			Message.Write(0, Dictionary.Item("InfoNotFound"));
 		}
 	},	
 

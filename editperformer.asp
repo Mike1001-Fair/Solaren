@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, PerformerId));
 		}
 	}
-	var rs = Solaren.Execute("GetPerformer", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetPerformer");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

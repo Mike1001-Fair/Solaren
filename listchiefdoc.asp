@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("DocName", adVarChar, adParamInput, 10, DocName));
 		}
 	}
-	var rs = Solaren.Execute("ListChiefDoc", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListChiefDoc");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

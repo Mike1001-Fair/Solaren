@@ -25,7 +25,7 @@ try {
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 		}
 	}
-	var rs = Solaren.Execute("GetAct", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetAct");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {

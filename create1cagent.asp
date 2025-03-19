@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
-	var rs = Solaren.Execute("List1Cagent", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("List1Cagent");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {

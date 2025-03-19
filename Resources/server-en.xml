@@ -49,6 +49,7 @@
 	<Item id="Author">© Mykola Chernov 2016</Item>
 	<Item id="User">User</Item>
 	<Item id="Password">Password</Item>
+	<Item id="InfoNotFound">Information not found</Item>
 	<Item id="UserTitle">Must contain one uppercase and one lowercase letter and at least 8 characters</Item>
 	<Item id="PasswordTitle">Must contain at least one number and one upper and lower case letter and 10 characters</Item>
 	<LocalityTypes>

@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("BankName", adVarChar, adParamInput, 10, BankName));
 		}
 	}
-	var rs = Solaren.Execute("ListBank", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListBank");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

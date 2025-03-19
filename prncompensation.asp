@@ -23,7 +23,7 @@ try {
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Solaren.Execute("ListCompensation", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListCompensation");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

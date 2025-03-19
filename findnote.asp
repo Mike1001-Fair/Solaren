@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("SelectChief", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("SelectChief");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

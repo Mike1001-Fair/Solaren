@@ -26,7 +26,7 @@ try {
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 		}
 	}
-	var rs = Solaren.Execute("ListIndicator", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListIndicator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

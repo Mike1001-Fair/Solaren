@@ -24,7 +24,7 @@ try {
 			Append(CreateParameter("PAN", adVarChar, adParamInput, 10, PAN));
 		}
 	}
-	var rs = Solaren.Execute("ListContract", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListContract");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

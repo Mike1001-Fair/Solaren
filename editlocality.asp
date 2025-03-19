@@ -20,7 +20,7 @@ try {
 	with (Cmd) {
 		Parameters.Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, LocalityId));
 	}
-	var rs = Solaren.Execute("GetLocality", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("GetLocality");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

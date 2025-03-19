@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
 		}
 	}
-	var rsStreet = Solaren.Execute("GetStreet", "Iнформацiю не знайдено");
+	var rsStreet = Solaren.Execute("GetStreet");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

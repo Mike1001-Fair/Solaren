@@ -24,7 +24,7 @@ try {
 			Append(CreateParameter("OperatorId", adVarChar, adParamInput, 10, OperatorId));
 		}
 	}
-	var rs = Solaren.Execute("ListBalance", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListBalance");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

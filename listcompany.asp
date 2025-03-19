@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("CompanyName", adVarChar, adParamInput, 10, CompanyName));
 		}
 	}
-	var rs = Solaren.Execute("ListCompany", "Iнформацiю не знайдено");
+	var rs = Solaren.Execute("ListCompany");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
