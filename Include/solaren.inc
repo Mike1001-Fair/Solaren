@@ -70,12 +70,11 @@ Solaren = {
 		return Math.floor(rand);
 	},
 
-	EOF: function(rs, msg) {
+	EOF: function(rs) {
 		if (rs.EOF) {
 			rs.Close();
 			this.Close();
 			Resource.Load(User.ResourceFile());
-			//Message.Write(0, msg);
 			Message.Write(0, Dictionary.Item("InfoNotFound"));
 		}
 	},	
