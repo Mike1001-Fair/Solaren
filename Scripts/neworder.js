@@ -1,5 +1,4 @@
-﻿const AddBtn = document.getElementById('AddBtn'),
-SbmBtn = document.getElementById('SbmBtn');
+﻿const [SbmBtn, AddBtn] = ['SbmBtn', 'AddBtn'].map(id => document.getElementById(id));
 
 document.addEventListener('DOMContentLoaded', () => {
 	AddOrderItem();
@@ -34,9 +33,7 @@ SbmBtn.addEventListener('click', (event) => {
 	}
 });
 
-if (AddBtn) {
-	AddBtn.addEventListener('click', AddOrderItem);
-};
+AddBtn?.addEventListener('click', AddOrderItem);
 
 function AddOrderItem() {
 	const table = document.querySelector('#OrderItemsTable tbody'),
@@ -44,7 +41,6 @@ function AddOrderItem() {
 	cellContents = [
 		'<input type="text" name="ItemName" placeholder="Назва" size="20" required>',
 		'<input type="number" name="ItemQuantity" min="1" max="9999" placeholder="Кількість" required>',
-		//'<button type="button" class="RemoveBtn" onclick="RemoveOrderItem(this)" title="Видалити">&#10060;</button>'
 		'<button type="button" class="RemoveBtn" onclick="RemoveOrderItem(this)" title="Видалити">✖</button>'
 	];
 

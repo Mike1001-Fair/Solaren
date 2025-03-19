@@ -1,11 +1,12 @@
-<%@ LANGUAGE = "JScript"%>
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var BegDate = String(Form("BegDate")),
@@ -18,17 +19,18 @@ try {
 	Solaren.SetCmd("ListOrder");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListOrder", "Iнформацiю не знайдено");
 } catch (ex) {
-	Message.Write(3, Message.Error(ex))
+	//Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Список замовлень", User.RoleId);
 }
 
 var Period = BegDate.formatDate("-"),
@@ -36,23 +38,22 @@ EndDate    = EndDate.formatDate("-");
 
 if (Period != EndDate) Period += ' &ndash; ' + EndDate;
 
-var ResponseText = '<BODY CLASS="MainBody" ONLOAD="Loader.SetClick(`td > a`)">\n' +
-	'<H3 CLASS="H3Text">Список замовлень<SPAN>Період: ' + Period + '</SPAN></H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' + 
-	'<TR><TH>№</TH><TH>Дaта</TH><TH>Споживач</TH><TH>Рахунок</TH></TR>\n';
-
-with (Html) {
-	SetHead("Список замовлень");
-	Menu.Write(Session("RoleId"), 0);
-}
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">Список замовлень<SPAN>Період: ' + Period + '</SPAN></H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>№</TH><TH>Дaта</TH><TH>Споживач</TH><TH>Рахунок</TH></TR>'
+];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + '<A href="editorder.asp?OrderId=' + rs.Fields("OrderId") + '">' + rs.Fields("OrderId") + '</A>' +
-	Html.Write("TD","LEFT") + rs.Fields("OrderDate") +
-	Html.Write("TD","LEFT") + rs.Fields("CustomerName") +
-	Html.Write("TD","") + rs.Fields("ContractPAN") + '</TD></TR>\n';
+	var url = ['<A HREF="editorder.asp?OrderId=', rs.Fields("OrderId"), '">', rs.Fields("OrderId"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", -1, url.join("")),
+		Tag.Write("TD", -1, rs.Fields("OrderDate")),
+		Tag.Write("TD", -1, rs.Fields("CustomerName")),
+		Tag.Write("TD", -1, rs.Fields("ContractPAN")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
-ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + 
-Html.Write("TH","RIGHT") + '</TH></TR>\n</TABLE></BODY></HTML>';
-Response.Write(ResponseText)%>
+} rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(4, i));
+Response.Write(ResponseText.join("\n"))%>

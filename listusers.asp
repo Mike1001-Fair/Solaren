@@ -44,7 +44,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
 		Tag.Write("TD", 1, rs.Fields("UserIP")),
 		Tag.Write("TD", -1, rs.Fields("LastLogin")),
-		Tag.Write("TD", -1, rs.Fields("UserAgent"), '</TR>')
+		Tag.Write("TD", -1, rs.Fields("UserAgent")), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	rs.MoveNext();

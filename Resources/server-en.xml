@@ -40,7 +40,7 @@
 	<Item id="AuthorizationError">Authorization error</Item>
 	<Item id="RequestError">Request error</Item>
 	<Item id="AccessDenied">Access denied</Item>
-	<Item id="ServiceSuspended">Service suspended</Item>
+	<Item id="ServiceSuspended">Service temporarily unavailable</Item>
 	<Item id="Done">Done</Item>
 	<Item id="Attention">Attention</Item>
 	<Item id="Message">Message</Item>

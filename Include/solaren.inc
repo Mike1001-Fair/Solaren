@@ -73,8 +73,8 @@ Solaren = {
 	EOF: function(rs, msg) {
 		if (rs.EOF) {
 			rs.Close();
-			Connect.Close();
-			this.SysMsg(0, msg);
+			this.Close();
+			Message.Write(0, msg);
 		}
 	},	
 

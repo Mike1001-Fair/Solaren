@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=2.07",
+	Version: "v=2.08",
 	Author : "Mykola Chernov",
 	Title  : "Title",
 
@@ -231,7 +231,7 @@ var Html = {
 
 	GetFooterRow: function(ColSpan, i) {
 		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan + '">Всього: ' + i + '</TH></TR>',
-			'</TABLE></BODY></HTML>'
+			'</TABLE>','</BODY>','</HTML>'
 		];
 		return ResponseText.join("\n")
 	},
