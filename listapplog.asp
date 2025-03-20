@@ -36,19 +36,24 @@ try {
 	Html.SetPage("Журнал", User.RoleId)
 }
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-'<TABLE CLASS="H3Text">\n' + 
-'<CAPTION>Журнал</CAPTION>\n' +
-'<TR><TD ALIGN="RIGHT">Подія:</TD><TD ALIGN="LEFT">' + EventName + '</TD></TR>\n' +
-'<TR><TD ALIGN="RIGHT">Період:</TD><TD ALIGN="LEFT">' + Period + '</TD></TR>\n' +
-'</TABLE>\n' + 
-'<TABLE CLASS="InfoTable">\n' + 
-'<TR><TH>Дaта</TH><TH>Повідомлення</TH></TR>\n';
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<TABLE CLASS="H3Text">',
+	'<CAPTION>Журнал</CAPTION>',
+	'<TR><TD ALIGN="RIGHT">Подія:</TD><TD ALIGN="LEFT">' + EventName + '</TD></TR>',
+	'<TR><TD ALIGN="RIGHT">Період:</TD><TD ALIGN="LEFT">' + Period + '</TD></TR>',
+	'</TABLE>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>Дaта</TH><TH>Повідомлення</TH></TR>'
+];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("EventDate") +
-	Html.Write("TD","")  + rs.Fields("EventText") + '</TD></TR>\n';
+	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("EventDate")),
+		Tag.Write("TD", -1, rs.Fields("EventText")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
-ResponseText += Html.GetFooterRow(2, i);
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(2, i));
+Response.Write(ResponseText.join("\n"))%>
