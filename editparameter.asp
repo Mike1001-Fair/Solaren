@@ -6,24 +6,15 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<!-- #INCLUDE FILE="Include/config.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+List = {
+	NewIndicator: "Нові показники",
+	CheckCard   : "Перевіряти картку",
+	ShowDeleted : "Показувати видалене"
+};
+
 User.ValidateAccess(Authorized, "GET");
-
-function SysCfgWrite() {	
-	var ResponseText = ['<FIELDSET NAME="SysCfgSet"><LEGEND>Додаткові</LEGEND>\n'],
-	SysCfg = {
-		NewIndicator: "Нові показники",
-		CheckCard   : "Перевіряти картку",
-		ShowDeleted : "Показувати видалене"
-	};
-
-	for (var key in SysCfg) {
-		var row = ['<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="', key, '">', SysCfg[key], '</LABEL>\n'];
-		ResponseText.push(row.join(""));
-	}
-	ResponseText.push('</FIELDSET>');
-	Response.Write(ResponseText.join(""));
-}
 
 try {
 	Solaren.SetCmd("GetParameter");
@@ -47,8 +38,8 @@ try {
 		Close();
 	}
 	Solaren.Close();
-}
-Html.SetPage("Параметри", User.RoleId)%>
+	Html.SetPage("Параметри", User.RoleId);
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditParameter" ACTION="updateparameter.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="SysConfig" VALUE="<%=SysConfig%>">
@@ -82,7 +73,7 @@ Html.SetPage("Параметри", User.RoleId)%>
 	<TD><INPUT TYPE="text" NAME="TreasuryMfo" VALUE="<%=TreasuryMfo%>" SIZE="10" MAXLENGTH="10"></TD></TR></TABLE>
 	</FIELDSET>
 
-	<% SysCfgWrite() %>
+	<% Config.Write(List) %>
 
 	<FIELDSET ALIGN="CENTER">
 	<LEGEND><LABEL><INPUT TYPE="CheckBox" NAME="ShowMsg" ID="ShowMsg"<%=ShowMsg ? " CHECKED" : ""%>>Повiдомлення</LABEL></LEGEND>
