@@ -20,7 +20,9 @@ if (Authorized) {
 		}
 		JsonResponse = Cmd.Parameters.Item("ContractData").value;
 	} catch (ex) {
-		Message.Write(3, Message.Error(ex));
+		JsonResponse = '[{"ContractId":-2}]';
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}

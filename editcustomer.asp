@@ -2,13 +2,11 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized = RoleId == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
 CustomerId = Request.QueryString("CustomerId");
-
-if (!Authorized) {
-	Message.Write(2, "Помилка авторизації");
-}
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetCustomer");
@@ -38,7 +36,7 @@ try {
 		Title            = Deleted ? "Перегляд анкети" : "Редагування анкети";
 	}
 	Solaren.Close();
-	Html.SetPage(Title, RoleId);
+	Html.SetPage(Title, User.RoleId);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCustomer" ACTION="updatecustomer.asp" METHOD="POST" AUTOCOMPLETE="off">

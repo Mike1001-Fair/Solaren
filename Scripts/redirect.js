@@ -3,7 +3,7 @@ const Redirect = {
 	"-2": "error.asp",
 	"0": "accessdenied.asp",
 	go(id) {
-		if (this[id]) {
+		if (Object.prototype.hasOwnProperty.call(this, id)) {
 			location.href = this[id];
 		}
 	}
