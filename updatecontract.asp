@@ -55,7 +55,8 @@ try {
 			Append(CreateParameter("Iban", adChar, adParamInput, 29, Iban));
 			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, PerformerId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		} 
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {

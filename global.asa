@@ -10,10 +10,11 @@ function Application_OnStart() {
 	];
 	Application("ConnectString") = dbConfig.join(";");
 	Application("SesCount") = 0;
+	Application("StopApp") = 0;	
 }  
 
 function Session_OnStart() {
-	if (0) {
+	if (Application("StopApp")) {
 		Session.Abandon();
 		Server.Transfer("appsuspend.asp");
 	} else {
