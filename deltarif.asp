@@ -7,8 +7,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var TarifId = QueryString("TarifId"),
-	Deleted = QueryString("Deleted");
+	var TarifId = Form("TarifId"),
+	Deleted = Form("Deleted");
 }
 
 try {
