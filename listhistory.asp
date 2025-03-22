@@ -19,7 +19,7 @@ try {
 	Solaren.SetCmd("ListHistory");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
 			Append(CreateParameter("BegMonth", adVarChar, adParamInput, 10, BegMonth));
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));

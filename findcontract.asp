@@ -4,11 +4,9 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Договора";
-
+<% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage("Договора", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindContract" ID="FindContract" ACTION="listcontract.asp" METHOD="post" AUTOCOMPLETE="off">
