@@ -23,7 +23,8 @@ const Ajax = {
 
 	errFetchMsg(error) {
 		//console.warn(`Fetch request error: ${error.message}`);
-		alert(`Fetch request error: ${error.message}`)
+		//alert(`Fetch request error: ${error.message}`)
+		Notify.show(`Fetch request error: ${error.message}`);
 	},
 
 	GetFileList(FolderName) {
