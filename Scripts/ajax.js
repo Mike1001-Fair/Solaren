@@ -243,19 +243,15 @@ const Ajax = {
 		const found = data[0].LocalityId > 0;
 		if (found) {
 			data.forEach(element => {
-				const FullLocalityName = [element.LocalityName, Ajax.localityType[element.LocalityType].toLowerCase()],
-				option = document.createElement("option");
-				option.value = FullLocalityName.join(' ');
+				const option = document.createElement("option");
+				option.value = `${element.LocalityName} ${Ajax.localityType[element.LocalityType].toLowerCase()}`;
 				LocalityList.appendChild(option);
 			});
 
 			LocalityName.addEventListener("input", function() {
-				const selectedValue = this.value,
-				selectedElement = data.find(element => {
-					const FullLocalityName = [element.LocalityName, Ajax.localityType[element.LocalityType].toLowerCase()];
-					return FullLocalityName.join(' ') == selectedValue;
-				});
-
+				const selectedElement = data.find(element => 
+					`${element.LocalityName} ${Ajax.localityType[element.LocalityType].toLowerCase()}` == this.value
+				);
 				if (selectedElement) {
 					const index = selectedElement.LocalityType;
 					LocalityId.value         = selectedElement.LocalityId;
@@ -328,18 +324,14 @@ const Ajax = {
 		const found = data[0].StreetId > 0;
 		if (found) {
 			data.forEach(element => {
-				const FullStreetName = [element.StreetName, Ajax.streetType[element.StreetType].toLowerCase()],
-				option = document.createElement("option");
-				option.value = FullStreetName.join(' ');
+				const option = document.createElement("option");
+				option.value = `${element.StreetName} ${Ajax.streetType[element.StreetType].toLowerCase()}`;
 				StreetList.appendChild(option);
 			});
-
 			StreetName.addEventListener("input", function() {
-				const selectedValue = this.value,
-				selectedElement = data.find(element => {
-					const FullStreetName = [element.StreetName, Ajax.streetType[element.StreetType].toLowerCase()];
-					return FullStreetName.join(' ') == selectedValue;
-				});
+				const selectedElement = data.find(element => 
+					`${element.StreetName} ${Ajax.streetType[element.StreetType].toLowerCase()}` == this.value
+				);
 
 				if (selectedElement) {
 					StreetId.value         = selectedElement.StreetId;
