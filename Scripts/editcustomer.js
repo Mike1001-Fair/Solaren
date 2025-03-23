@@ -2,8 +2,18 @@
 button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
-	LoadForm();
-	ChkForm();
+	with (EditCustomer) {
+		if (Deleted.value == "True") {
+			let Elements = document.querySelectorAll("fieldset");
+			Elements.forEach(elm => elm.disabled = true);
+		} else {
+			ChkForm();
+		}
+		CodeType.checked = CustomerCode.value.length == 8;
+		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
+	}
+	Ajax.GetStreetInfo(EditCustomer.StreetId.value);
+	Ajax.GetLocalityInfo(EditCustomer.LocalityId.value);
 });
 
 EditCustomer.addEventListener('input', ChkForm);
@@ -11,6 +21,7 @@ EditCustomer.addEventListener('input', ChkForm);
 CodeType.addEventListener('click', () => {
 	with (EditCustomer) {
 		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
+		CustomerCode.maxLength = CodeType.checked ? 8 : 10;
 		CustomerCode.focus();
 	}
 });
@@ -39,19 +50,6 @@ LocalityName.addEventListener('input', function() {
 StreetName.addEventListener('input', function() {
 	Ajax.GetStreetList(this)
 });
-
-function LoadForm() {
-	with (EditCustomer) {
-		if (Deleted.value == "True") {
-			let Elements = document.querySelectorAll("fieldset");
-			Elements.forEach(elm => elm.disabled = true);
-		}
-		CodeType.checked = CustomerCode.value.length == 8;
-		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
-	}
-	Ajax.GetStreetInfo(EditCustomer.StreetId.value);
-	Ajax.GetLocalityInfo(EditCustomer.LocalityId.value);
-}
 
 function ChkForm() {
 	with (EditCustomer) {
