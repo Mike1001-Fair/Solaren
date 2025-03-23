@@ -2,11 +2,19 @@
 button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
-	ChkForm();
 	if (EditIndicator.Deleted.value == "True" || EditIndicator.ViewOnly.value == "True") {
 		const Elements = document.querySelectorAll("fieldset");
 		Elements.forEach(elm => elm.disabled = true);
-	} 
+	} else {
+		with (EditIndicator) {
+			ReportDate.min   = GetNextDate(PrevDate.value);
+			RecValPrev.title = FormateDate(PrevDate.value);
+			RetValPrev.title = FormateDate(PrevDate.value);
+			ContractName.title = "Потужність: " + ContractPower.value;
+			MeterId.title    = "Коефiцiєнт: " + Ktf.value;
+		}
+	}
+	ChkForm();
 });
 
 EditIndicator.addEventListener('input', ChkForm);
@@ -44,35 +52,38 @@ function ChkForm() {
 		Period     = (reportDate - prevDate)/msecday,
 		recval     = parseInt(RecVal.value, 10),
 		retval     = parseInt(RetVal.value, 10),
-		recvalprev =+ RecValPrev.value,
-		retvalprev =+ RetValPrev.value,
-		k          =+ Ktf.value;
+		recvalprev = +RecValPrev.value,
+		retvalprev = +RetValPrev.value,
+		k          = +Ktf.value;
 
 	    let recsaldo   = (recval - recvalprev)*k,
 		retsaldo   = (retval - retvalprev)*k,
 		totsaldo   = recsaldo - retsaldo,
 		limitsaldo = ContractPower.value * Period * HoursLimit.value,
-		isSaldo    = !isNaN(totsaldo) && (recsaldo > 0 || retsaldo > 0) && retsaldo < limitsaldo;
+		isSaldo    = !isNaN(totsaldo) && (recsaldo > 0 || retsaldo > 0) && retsaldo < limitsaldo;	
 
-		ReportDate.min   = GetNextDate(PrevDate.value);
-		RecValPrev.title = FormateDate(PrevDate.value);
-		RetValPrev.title = FormateDate(PrevDate.value);
-		ContractName.title = "Потужність: " + ContractPower.value;
-		MeterId.title    = "Коефiцiєнт: " + Ktf.value;
+		if (recsaldo < 0 && ZeroRec.checked) {
+			recsaldo += (RecVal.max + 1) * k
+		}
 
-		if (recsaldo < 0 && ZeroRec.checked) recsaldo += (RecVal.max+1)*k;
-		if (retsaldo < 0 && ZeroRet.checked) retsaldo += (RetVal.max+1)*k;
+		if (retsaldo < 0 && ZeroRet.checked) {
+			retsaldo += (RetVal.max + 1) * k;
+		}
 
 		RecSaldo.value = isNaN(recsaldo) ? "" : recsaldo;
 		RecSaldo.style.color = recsaldo < 0 ? "#FF0000" : "";		
 		ZeroRec.disabled = recval >= recvalprev || isNaN(recsaldo);
-		if (recval >= recvalprev) ZeroRec.checked = false;
+		if (recval >= recvalprev) {
+			ZeroRec.checked = false
+		}
 
 		RetSaldo.value = isNaN(retsaldo) ? "" : retsaldo;
 		RetSaldo.style.color = (retsaldo < 0 || retsaldo > limitsaldo) ? "#FF0000" : "";
 		RetSaldo.title = isNaN(limitsaldo) ? "" : "Максимум: " + limitsaldo.toFixed(0);
 		ZeroRet.disabled = retval >= retvalprev || isNaN(retsaldo);
-		if (retval >= retvalprev) ZeroRet.checked = false;
+		if (retval >= retvalprev) {
+			ZeroRet.checked = false
+		}
 
 		TotSaldo.value =  isSaldo ? Math.abs(totsaldo) : "";
 		TotSaldo.style.color = isSaldo ? "" : "#FF0000";
