@@ -1,4 +1,5 @@
-﻿const Notify = {
+﻿"use strict";
+const Notify = {
 	overlay: null,
 	show(msg) {
 		if (!this.overlay) {

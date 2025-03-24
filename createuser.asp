@@ -7,7 +7,7 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var UserId     = Form("UserId"),
+	var UserId = Form("UserId"),
 	LastName   = Form("LastName"),
 	FirstName  = Form("FirstName"),
 	MiddleName = Form("MiddleName"),

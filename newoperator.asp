@@ -2,8 +2,10 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% var Authorized = Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetOperatorSortCode");
@@ -16,16 +18,12 @@ try {
 	Solaren.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-with (Html) {
-	SetHead("Новий оператор");
-	WriteScript();
-	Menu.Write(Session("RoleId"), 0);
+} finally {
+	Html.SetPage("Новий оператор", User.RoleId)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOperator" ACTION="createoperator.asp" METHOD="post" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg">Новий оператор</H3>
+<H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 <TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Параметри</LEGEND>
