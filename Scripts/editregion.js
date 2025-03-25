@@ -1,6 +1,5 @@
-﻿const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+﻿const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditRegion) {
@@ -13,29 +12,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 EditRegion.addEventListener('input', () => {
 	with (EditRegion) {
-		SbmBtn.disabled = !SortCode.validity.valid || !RegionName.validity.valid;
+		const valid = SortCode.validity.valid && RegionName.validity.valid;
+		SetDisabledButton(button, valid);
 	}
 })
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		confirm(`Ви впевненi❓`) ? Loader.Show() : event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', (event) => {
+	if (confirm("Ви впевненi\u2753")) {
+		const Elements = document.querySelectorAll("input[type='text']");
+		Elements.forEach(elm => elm.value = elm.value.trim());
+		Loader.Show();
+	} else {
+		event.preventDefault();
+	}
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelRegion);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelRegion);
-}
+DelBtn?.addEventListener('click', DelRegion);
+RestoreBtn?.addEventListener('click', DelRegion);
 
 function DelRegion() {
 	if (confirm(`Ви впевненi❓`)) {
-		with (EditRegion) {
-			action = `delregion.asp?RegionId=${RegionId.value}&Deleted=${Deleted.value}`
-		}
+		EditRegion.action = `delregion.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }

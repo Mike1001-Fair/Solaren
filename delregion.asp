@@ -7,8 +7,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-	var RegionId = QueryString("RegionId"),
-	Deleted    = QueryString("Deleted");
+	var RegionId = Form("RegionId"),
+	Deleted    = Form("Deleted");
 }
 
 try {

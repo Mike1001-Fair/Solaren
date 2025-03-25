@@ -1,7 +1,5 @@
-const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn'),
-button       = [SbmBtn, DelBtn];
+const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (EditCompany.Deleted.value=="True") {
