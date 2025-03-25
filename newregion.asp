@@ -17,7 +17,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var SortCode =++ Cmd.Parameters.Item("SortCode").value;
+	var SortCode = ++Cmd.Parameters.Item("SortCode").value;
 	Solaren.Close();
 	Html.SetPage("Нова область", User.RoleId)
 }%>

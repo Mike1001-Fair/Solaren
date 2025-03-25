@@ -5,15 +5,14 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId > 0 && User.RoleId < 3,
-Title = "Показники лiчильника";
+<% var Authorized = User.RoleId > 0 && User.RoleId < 3;
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var ContractId   = Form("ContractId"),
-	BegDate      = Form("BegDate"),
-	EndDate      = Form("EndDate"),
-	ContractName = Form("ContractName");
+	var ContractId = Form("ContractId"),
+	BegDate        = Form("BegDate"),
+	EndDate        = Form("EndDate"),
+	ContractName   = Form("ContractName");
 }
 
 try {
@@ -29,23 +28,32 @@ try {
 	var rs = Solaren.Execute("ListIndicator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Показники лiчильника", User.RoleId);
 }
 
-Html.SetPage(Title, User.RoleId);
+var Header = ['Номер', 'Дата', 'Прийом', 'Видача'],
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<TABLE CLASS="H3Text">',
+	Tag.Write("CAPTION", -1, Html.Title),
+	'<TR><TD ALIGN="RIGHT">Споживач:</TD><TD ALIGN="LEFT">' + ContractName + '</TD></TR>',
+	'</TABLE>',
+	'<TABLE CLASS="InfoTable">',
+	Html.GetHeadRow(Header)
+];
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<TABLE CLASS="H3Text">\n' +
-	'<CAPTION>' + Title + '</CAPTION>\n' +
-	'<TR><TD ALIGN="RIGHT">Споживач:</TD><TD ALIGN="LEFT">' + ContractName + '</TD></TR>\n' + 
-	'</TABLE>\n' + 
-	'<TABLE CLASS="InfoTable">\n' + 
-	'<TR><TH>Номер</TH><TH>Дата</TH><TH>Прийом</TH><TH>Видача</TH></TR>\n';
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD ALIGN="RIGHT">' + rs.Fields("MeterCode") +
-	Html.Write("TD","RIGHT") + '<A href="editindicator.asp?IndicatorId=' + rs.Fields("Id") + '">' + rs.Fields("ReportDate") + '</A>' +
-	Html.Write("TD","RIGHT") + rs.Fields("RecVal").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("RetVal").value.toDelimited(0) + '</TD></TR>\n';
+var url = ['<A href="editindicator.asp?IndicatorId=', rs.Fields("Id"), '">', rs.Fields("ReportDate"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("MeterCode")),
+		Tag.Write("TD", -1, url.join("")),
+		Tag.Write("TD", 2, rs.Fields("RecVal").value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("RetVal").value.toDelimited(0)), '</TR>',
+		
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close(); Solaren.Close();
-ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>';
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(4, i));
+Response.Write(ResponseText.join("\n"))%>
