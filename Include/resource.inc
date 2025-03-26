@@ -5,14 +5,18 @@ Dictionary = Server.CreateObject("Scripting.Dictionary"),
 Resource = {
 	Path: "Resources/",
 
+	Map: function(fileName) {
+ 		return this.Path + fileName
+ 	},
+
 	ErrMsg: function(Msg) {
 		Session("SysMsg") = Msg;
 		Session("ScriptName") = "resources.inc";
 		Server.Transfer("error-en.asp");	
 	},
 
-	Load: function(FileName) {
-		FileName = Server.MapPath(this.Path + FileName);
+	Load: function(fileName) {
+		var FileName = Server.MapPath(this.Map(fileName));
 		if (Fso.FileExists(FileName)) {
 			try {
 				if (XmlDoc.load(FileName)) {

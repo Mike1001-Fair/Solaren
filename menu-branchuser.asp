@@ -3,7 +3,7 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% Resource.Load(User.ResourceFile(), 0);
+<% Resource.Load(User.ResourceFile());
 if (!User.Authorize(2)) {
 	Message.Write(2, Dictionary.Item("AuthorizationError"))
 }%>

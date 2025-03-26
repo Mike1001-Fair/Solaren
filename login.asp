@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% Resource.Load(User.ResourceFile(), 1);
+<% Resource.Load(User.ResourceFile());
 var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd"),
 ValidParam = User.LoginRe.test(LoginId) && User.PswdRe.test(Pswd);

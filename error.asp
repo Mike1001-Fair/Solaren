@@ -10,8 +10,7 @@ if (ScriptName.indexOf("login.asp") == -1) {
 	if (!User.ValidateRole(User.RoleId, User.GUID)) {
 		Message.Write(2, Dictionary.Item("AuthenticationError"))
 	}
-}
-Html.SetHead(Dictionary.Item("Message")) %>
+}%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>
