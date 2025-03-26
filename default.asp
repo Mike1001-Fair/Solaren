@@ -3,7 +3,7 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% Resource.Load(User.ResourceFile(), 1);
+<% Resource.Load(User.ResourceFile(), 0);
 var phUser = Dictionary.Item("User"),
 phPswd     = Dictionary.Item("Password"),
 titleUser  = Dictionary.Item("UserTitle"),

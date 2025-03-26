@@ -5,57 +5,34 @@ Dictionary = Server.CreateObject("Scripting.Dictionary"),
 Resource = {
 	Path: "Resources/",
 
-	Map: function(fileName) {
-		return this.Path + fileName
-	},
-
 	ErrMsg: function(Msg) {
 		Session("SysMsg") = Msg;
 		Session("ScriptName") = "resources.inc";
 		Server.Transfer("error-en.asp");	
 	},
 
-	Load: function(fileName, asyncMode) {
-		var FileName = Server.MapPath(this.Map(fileName));
-		XmlDoc.async = asyncMode;
+	Load: function(FileName) {
+		FileName = Server.MapPath(this.Path + FileName);
 		if (Fso.FileExists(FileName)) {
 			try {
-				if (asyncMode) {
-					XmlDoc.onreadystatechange = function() {
-						if (XmlDoc.readyState == 4) {
-							Resource.ProcessXml(FileName);
+				if (XmlDoc.load(FileName)) {
+					var itemNodes = new Enumerator(XmlDoc.selectNodes("//Item"));
+					for (var node, itemID; !itemNodes.atEnd(); itemNodes.moveNext()) {
+						node = itemNodes.item();
+						itemID = node.getAttribute("id");
+						if (!Dictionary.Exists(itemID)) {
+							Dictionary.Add(itemID, node.text);
 						}
-					};
-					XmlDoc.load(FileName);
-				} else {
-					if (XmlDoc.load(FileName)) {
-						Resource.ProcessXml(FileName);
-					} else {
-						var error = XmlDoc.parseError;
-						Resource.ErrMsg("Error: " + error.reason + "<BR>Line: " + error.line + "<BR>File: " + FileName);
 					}
+				} else {
+					var error = XmlDoc.parseError;
+					Resource.ErrMsg("Error: " + error.reason + "<BR>Line: " + error.line + "<BR>File: " + FileName);
 				}
 			} catch (ex) {
 				Resource.ErrMsg(ex.name + ": " + ex.message + "<BR>File: " + FileName);
 			}
 		} else {
 			Resource.ErrMsg("File: " + FileName + " not found");
-		}
-	},
-
-	ProcessXml: function(FileName) {
-		if (XmlDoc.parseError.errorCode == 0) {
-			var itemNodes = new Enumerator(XmlDoc.selectNodes("//Item"));
-			for (var node, itemID; !itemNodes.atEnd(); itemNodes.moveNext()) {
-				node = itemNodes.item();
-				itemID = node.getAttribute("id");
-				if (!Dictionary.Exists(itemID)) {
-					Dictionary.Add(itemID, node.text);
-				}
-			}
-		} else {
-			var error = XmlDoc.parseError;
-			Resource.ErrMsg("Error: " + error.reason + "<BR>Line: " + error.line + "<BR>File: " + FileName);
 		}
 	}
 }%>
