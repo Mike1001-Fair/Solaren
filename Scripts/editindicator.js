@@ -19,22 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 EditIndicator.addEventListener('input', ChkForm);
 
-ContractName.addEventListener('input', function() {
-	Ajax.GetContractList(this);
-});
+ContractName.addEventListener('input', () => Ajax.GetContractList(ContractName));
 
 ContractName.addEventListener('change', () => {
 	Ajax.GetMeterList(EditIndicator.ContractId.value);
 	ResetMeterInfo();
 });
 
-MeterId.addEventListener('change', function() {
-	Ajax.GetMeterInfo(this.value, EditIndicator.ReportDate.value);
-});
-
-ReportDate.addEventListener('change', function() {
-	Ajax.GetMeterInfo(EditIndicator.MeterId.value, this.value);
-});
+MeterId.addEventListener('change', () => Ajax.GetMeterInfo(MeterId.value, EditIndicator.ReportDate.value));
+ReportDate.addEventListener('change', () => Ajax.GetMeterInfo(EditIndicator.MeterId.value, ReportDate.value));
 
 SbmBtn?.addEventListener('click', () => {
 	confirm("Ви впевненi\u2753") ? Loader.Show() : event.preventDefault();

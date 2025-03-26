@@ -13,14 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 EditCompany.addEventListener('input', ChkForm);
-
-LocalityName.addEventListener('input', function() {
-	Ajax.GetLocalityList(this)
-});
-
-StreetName.addEventListener('input', function() {
-	Ajax.GetStreetList(this)
-});
+LocalityName.addEventListener('input', () => Ajax.GetLocalityList(LocalityName));
+StreetName.addEventListener('input', () => Ajax.GetStreetList(StreetName));
 
 SbmBtn?.addEventListener('click', (event) => {
 	if (confirm("Ви впевненi\u2753")) {
