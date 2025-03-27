@@ -3,7 +3,7 @@ var Message = {
 	Page: ["errmsg", "done", "accessdenied", "error"],
 
 	Map: function(index) {
-		return this.Page[index] ? this.Page[index] + ".asp" : "error.asp";
+		return [this.Page[index] || "error", "asp"].join(".");
 	},
 
 	Error: function(ex) {
