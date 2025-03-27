@@ -2,6 +2,10 @@
 var Message = { 
 	Page: ["errmsg", "done", "accessdenied", "error"],
 
+	Map: function(index) {
+		return this.Page[index] ? this.Page[index] + ".asp" : "error.asp";
+	},
+
 	Error: function(ex) {
 		var ErrMsg = [];
 		if (Solaren.ValidObject(ex)) {
@@ -19,13 +23,9 @@ var Message = {
 		return ErrMsg.join("\n")
 	},
 
-	Write: function(msgType, msgText) {
-		if (!this.Page[msgType]) {
-			msgType = this.Page.length - 1 // if out of range - default error page
-			msgText = "Runtime Error: out of range";			
-		}
-		Session("SysMsg") = msgText;
+	Write: function(index, msgText) {
+		Session("SysMsg") = this.Page[index] ? msgText : "Runtime Error: out of range";
 		Session("ScriptName") = Solaren.ScriptName;
-		Response.Redirect(this.Page[msgType] + ".asp");
+		Response.Redirect(this.Map(index));
 	}
 }%>
