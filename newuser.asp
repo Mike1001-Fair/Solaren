@@ -42,7 +42,7 @@ try {
 	<BUTTON CLASS="IconBtn" NAME="SetPswd" ID="SetPswd" TITLE="Сгенерувати">&#128273;</BUTTON>
 	<BUTTON CLASS="IconBtn" NAME="ShowPswd" ID="ShowPswd" TITLE="Показати">&#128065;</BUTTON></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>
-	<TD><%Html.WriteRole("RoleId", -1)%></TD></TR>
+	<TD><%User.WriteRole("RoleId", -1)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Компанія</TD>
 	<TD><% Html.WriteSelect(rsCompany, "Company", 0, -1)%></TD></TR>

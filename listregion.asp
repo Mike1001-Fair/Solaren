@@ -6,7 +6,6 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 RegionName = Request.Form("RegionName");
-
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -19,19 +18,25 @@ try {
 	var rs = Solaren.Execute("ListRegion");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Області")
 }
 
-Html.SetPage("Області")
-
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>№</TH><TH>Назва</TH></TR>\n';
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>№</TH><TH>Назва</TH></TR>'
+];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
-	Html.Write("TD","LEFT") + '<A HREF="editregion.asp?RegionId=' + rs.Fields("Id") + '">' + rs.Fields("RegionName") + '</A></TD></TR>\n';
+	var url = ['<A href="editregion.asp?RegionId=', rs.Fields("Id"), '">', rs.Fields("RegionName"), '</A>'],
+	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("SortCode")),
+		Tag.Write("TD", -1, url.join("")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
-ResponseText += Html.GetFooterRow(2, i);
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(2, i));
+Response.Write(ResponseText.join("\n"))%>

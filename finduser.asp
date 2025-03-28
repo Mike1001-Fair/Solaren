@@ -18,7 +18,7 @@ Html.SetPage("Користувачi")%>
 	<TABLE><TR><TD ALIGN="RIGHT">Логiн</TD>
 	<TD><INPUT TYPE="text" NAME="LoginId" SIZE="10" REQUIRED AUTOFOCUS></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>
-	<TD><%Html.WriteRole("RoleId", -1)%></TD></TR>	
+	<TD><%User.WriteRole("RoleId", -1)%></TD></TR>	
 	<TR><TD ALIGN="RIGHT">Підключився</TD>
 	<TD><INPUT TYPE="datetime-local" NAME="ConnectDate" MAX="<%=Today.toStr(1)%>" TITLE="Підключився"></TD></TR>
 	</TABLE></FIELDSET>

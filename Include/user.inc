@@ -83,5 +83,17 @@ var User = {
 			Message.Write(2, Dictionary.Item("AuthorizationError"));
 		}
 		return validAccess
+	},
+
+	WriteRole: function(tagName, RoleId) {
+		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
+		selected, option;
+		for (var i = 0; i < this.Role.length; i++) {
+			selected = i == RoleId ? '" SELECTED>' : '">';
+			option = ['<OPTION VALUE="', i, selected, this.Role[i], '</OPTION>'];
+			ResponseText.push(option.join(""));
+		}
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join("\n"))
 	}
 }%>

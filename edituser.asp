@@ -59,7 +59,7 @@ Html.SetPage(Title)%>
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="SetPswd" ID="SetPswd" TITLE="Сгенерувати">&#128273;</BUTTON>
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="ShowPswd" ID="ShowPswd" TITLE="Показати">&#128065;</BUTTON></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>
-	<TD><%Html.WriteRole("RoleId", RoleId)%></TD></TR>
+	<TD><%User.WriteRole("RoleId", RoleId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Телефон</TD>
 	<TD><INPUT TYPE="Tel" NAME="Phone" VALUE="<%=Phone%>" PATTERN="\d{3,10}" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>

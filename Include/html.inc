@@ -44,24 +44,6 @@ var Html = {
 		this.WriteScript();
 		Menu.Write(0);
 	},
-
-	Write: function(tag, align) {
-		var align = align ? ' ALIGN="' + align + '">' : '>',
-		result = ['</', tag, '><', tag, align];
-		return result.join("")
-	},
-
-	WriteRole: function(tagName, RoleId) {
-		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
-		selected, option;
-		for (var i = 0; i < User.Role.length; i++) {
-			selected = i == RoleId ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', i, selected, User.Role[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
-		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"))
-	},
 	
 	WriteBaseInfo: function(rs) {
 		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
