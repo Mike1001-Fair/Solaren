@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/session.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
@@ -51,6 +52,6 @@ try {
 	Session("HoursLimit")   = HoursLimit;
 	Session("CheckCard")    = CheckCard;
 	Session("NewIndicator") = NewIndicator;
-	Solaren.SetSessionDate(OperDate);
+	SessionManager.SetDate(OperDate);
 	Message.Write(1, "");
 }%>

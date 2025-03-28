@@ -1,5 +1,7 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var SessionManager = {
+	FlagName: ["NewIndicator", "CheckCard"],
+
 	SetVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
 		dbDate   = rs.Fields("OperDate").value,
@@ -26,10 +28,13 @@ var SessionManager = {
 		Session("NextDate") = NextDate.toStr(0);
 	},
 
-	SetFlags: function(SysCfg) {
-		var FlagName = ["NewIndicator", "CheckCard"];
-		for (var i = 0; i < FlagName.length; i++) {
-			Session(FlagName[i]) = +SysCfg[i] || 0;
+	SetFlags: function(BitFlags) {
+		if (Solaren.ValidObject(BitFlags)) {
+			for (var i = 0; i < this.FlagName.length; i++) {
+				Session(this.FlagName[i]) = +BitFlags[i] || 0;
+			}
+		} else {
+			Message.Write(3, "Invalid object: BitFlags")
 		}
 	}
 }%>
