@@ -26,6 +26,15 @@ Solaren = {
 		return rs
 	},
 
+	EOF: function(rs) {
+		if (rs.EOF) {
+			rs.Close();
+			this.Close();
+			Resource.Load(User.ResourceFile());
+			Message.Write(0, Dictionary.Item("InfoNotFound"));
+		}
+	},	
+
 	Close: function() {
 		if (Connect.State) {
 			Connect.Close();
@@ -70,14 +79,6 @@ Solaren = {
 		return Math.floor(rand);
 	},
 
-	EOF: function(rs) {
-		if (rs.EOF) {
-			rs.Close();
-			this.Close();
-			Resource.Load(User.ResourceFile());
-			Message.Write(0, Dictionary.Item("InfoNotFound"));
-		}
-	},	
 
 	Empty: function(testvar) {
 		return testvar == undefined || testvar == null;

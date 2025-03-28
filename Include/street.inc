@@ -2,14 +2,16 @@
 var Street = {
 	Type: ["вулиця", "проспект", "бульвар", "провулок", "площа", "тупік", "шоссе", "проїзд"],
 
-	WriteType: function(tagName, StreetType) {
+	WriteType: function(tagName, index) {
 		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
-		selected;
+		selected,
+		row;
 		for (var i = 0; i < this.Type.length; i++) {
-			selected = i == StreetType ? '" SELECTED>' : '">';
-			ResponseText.push('<OPTION VALUE="' + i + selected + this.Type[i] + '</OPTION>');
+			selected = i == index ? '" SELECTED>' : '">';
+			row = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
+			ResponseText.push(row.join(""));
 		}
 		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"))
+		Response.Write(ResponseText.join("\n"));
 	}
 }%>

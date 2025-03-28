@@ -1,6 +1,6 @@
 ﻿<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<% Html.SetHead("Message") %>
+<% Html.SetHead("Message", 0) %>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>
