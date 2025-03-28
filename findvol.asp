@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Обсяги", User.RoleId)%>
+Html.SetPage("Обсяги")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindVol" ACTION="listvol.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">

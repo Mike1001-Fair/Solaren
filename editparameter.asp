@@ -38,7 +38,7 @@ try {
 		Close();
 	}
 	Solaren.Close();
-	Html.SetPage("Параметри", User.RoleId);
+	Html.SetPage("Параметри");
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditParameter" ACTION="updateparameter.asp" METHOD="POST">

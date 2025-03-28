@@ -20,7 +20,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Керiвники", User.RoleId)
+Html.SetPage("Керiвники")
 
 var ResponseText = ['<BODY CLASS="MainBody">\n',
 	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n',

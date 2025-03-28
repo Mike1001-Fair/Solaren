@@ -28,7 +28,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Новий ЦОС", User.RoleId)
+	Html.SetPage("Новий ЦОС")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewBranch" ACTION="createbranch.asp" METHOD="post" AUTOCOMPLETE="off">

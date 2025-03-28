@@ -14,7 +14,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Обрізка логу", User.RoleId)%>
+Html.SetPage("Обрізка логу")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="ShrinkLog" ACTION="runshrinklog.asp" METHOD="post">

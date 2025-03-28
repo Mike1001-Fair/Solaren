@@ -21,7 +21,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))	
 } finally {
-	Html.SetPage("Реєстр", User.RoleId)
+	Html.SetPage("Реєстр")
 }%>
 
 <BODY CLASS="MainBody">

@@ -21,7 +21,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Нова компанія", User.RoleId)%>
+Html.SetPage("Нова компанія")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCompany" ACTION="createcompany.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">

@@ -20,7 +20,7 @@ try {
 	Message.Write(3, Message.Error(ex))	
 }
 
-Html.SetPage("Баланс", User.RoleId)%>
+Html.SetPage("Баланс")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBalance" ACTION="listbalance.asp" METHOD="post" TARGET="_blank">
 <INPUT TYPE="HIDDEN" NAME="OperatorName">

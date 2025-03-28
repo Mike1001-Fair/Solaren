@@ -1,6 +1,5 @@
-﻿const SbmBtn = document.getElementById('SbmBtn'),
-DelBtn       = document.getElementById('DelBtn'),
-RestoreBtn   = document.getElementById('RestoreBtn');
+﻿const [SbmBtn, DelBtn, RestoreBtn] = ['SbmBtn', 'DelBtn', 'RestoreBtn'].map(id => document.getElementById(id)),
+button = [SbmBtn, DelBtn];
 
 document.addEventListener('DOMContentLoaded', () => {
 	with (EditCountry) {
@@ -13,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 EditCountry.addEventListener('input', () => {
 	with (EditCountry) {
-		SbmBtn.disabled = !CountryName.validity.valid || !TldCode.validity.valid || !IsoCode.validity.valid || !ItuCode.validity.valid;
+		const valid = CountryName.validity.valid && TldCode.validity.valid
+				&& IsoCode.validity.valid && ItuCode.validity.valid;
+		SetDisabledButton(button, valid);
 	}
 })
 

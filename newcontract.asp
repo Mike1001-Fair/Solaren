@@ -25,7 +25,7 @@ try {
 	Message.Write(3, Message.Error(ex));
 }
 
-Html.SetPage("Новий договір", User.RoleId)%>
+Html.SetPage("Новий договір")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewContract" ACTION="createcontract.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="CustomerId" ID="CustomerId" VALUE="-1">

@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Країни", User.RoleId)
+	Html.SetPage("Країни")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindCountry" ACTION="listcountry.asp" METHOD="post" AUTOCOMPLETE="off">

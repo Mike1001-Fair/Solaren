@@ -59,7 +59,7 @@ try {
 		Title          = Deleted ? "Перегляд договору" : "Редагування договору";
 		Close();
 	}
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">

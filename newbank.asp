@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Новий банк", User.RoleId)
+	Html.SetPage("Новий банк")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewBank" ACTION="createbank.asp" METHOD="post" AUTOCOMPLETE="off">

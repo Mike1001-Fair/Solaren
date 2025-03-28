@@ -21,7 +21,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Новий керiвник", User.RoleId)%>
+Html.SetPage("Новий керiвник")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChief" METHOD="post" ACTION="createchief.asp" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><SPAN>&#128100;</SPAN><%=Html.Title%></H3>

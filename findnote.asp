@@ -20,7 +20,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Службовий лист", User.RoleId)%>
+Html.SetPage("Службовий лист")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindNote" TARGET="_blank" ACTION="prnnote.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">

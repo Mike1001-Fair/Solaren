@@ -30,7 +30,7 @@ try {
 		Close();
 	} 
 	Solaren.Close();
-	Html.SetPage(Title, User.RoleId);
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCountry" ACTION="updatecountry.asp" METHOD="POST" AUTOCOMPLETE="off">

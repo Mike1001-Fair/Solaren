@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Нова оплата", User.RoleId)
+	Html.SetPage("Нова оплата")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewPay" ACTION="createpay.asp" METHOD="post" AUTOCOMPLETE="off">

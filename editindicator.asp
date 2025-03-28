@@ -47,7 +47,7 @@ NextDate     = Month.Date[3],
 ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
 AllowDelBtn  = User.RoleId == 1,
 Title        = Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">

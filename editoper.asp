@@ -39,7 +39,7 @@ try {
 var ViewOnly = !Month.isPeriod(Month.Date[0], EndDate) || IndicatorId != "",
 Title = Deleted || ViewOnly  ? "Перегляд операції" : "Редагування операції";
 
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOper" ACTION="updateoper.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="FactVolId" VALUE="<%=FactVolId%>">

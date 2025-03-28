@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Енергозбереження", User.RoleId)
+	Html.SetPage("Енергозбереження")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindVolPay" ACTION="listvolpay.asp" METHOD="post" TARGET="_blank">

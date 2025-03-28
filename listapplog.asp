@@ -33,7 +33,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Журнал", User.RoleId)
+	Html.SetPage("Журнал")
 }
 
 var ResponseText = ['<BODY CLASS="MainBody">',

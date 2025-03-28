@@ -26,7 +26,7 @@ try {
 		Title        = Deleted ? "Перегляд документу" : "Редагування документу";
 		Close();
 	} Solaren.Close();
-	Html.SetPage(Title, User.RoleId);
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditChiefDoc" ACTION="updatechiefdoc.asp" METHOD="POST">

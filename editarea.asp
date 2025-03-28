@@ -28,7 +28,7 @@ try {
 		Close();
 	}
 	Solaren.Close();
-	Html.SetPage(Title, User.RoleId);
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditArea" ACTION="updatearea.asp" METHOD="POST" AUTOCOMPLETE="off">

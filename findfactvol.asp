@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Обсяги", User.RoleId)
+	Html.SetPage("Обсяги")
 }%>
 
 <BODY CLASS="MainBody">

@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Області", User.RoleId)
+	Html.SetPage("Області")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindRegion" ACTION="listregion.asp" METHOD="post" AUTOCOMPLETE="on">

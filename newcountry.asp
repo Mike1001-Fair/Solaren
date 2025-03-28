@@ -7,7 +7,7 @@
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Нова країна", User.RoleId)
+	Html.SetPage("Нова країна")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCountry" ACTION="createcountry.asp" METHOD="POST" AUTOCOMPLETE="off">

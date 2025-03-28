@@ -26,7 +26,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список тарифiв", User.RoleId)
+	Html.SetPage("Список тарифiв")
 }
 
 var Header = ['з', 'по', 'коп'],

@@ -14,7 +14,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Резервна копія", User.RoleId)%>
+Html.SetPage("Резервна копія")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="BackupBase" ACTION="runbackupbase.asp" METHOD="post">
 <H3 CLASS="HeadText">Резервна копія</H3>

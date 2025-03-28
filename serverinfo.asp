@@ -49,7 +49,7 @@ SessionInfo = {
 };
 
 Html.SetHead(Title, 1);
-Menu.Write(User.RoleId, 0);
+Menu.Write(0);
 ServerInfo.AddSessionInfo();
 ServerInfo.AddInfo();
 ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');

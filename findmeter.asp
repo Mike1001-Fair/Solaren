@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Лiчильники", User.RoleId)
+	Html.SetPage("Лiчильники")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindMeter" ID="FindMeter" ACTION="listmeter.asp" METHOD="post" AUTOCOMPLETE="off">

@@ -28,7 +28,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Користувачi", User.RoleId);
+	Html.SetPage("Користувачi");
 }
 
 var Header = ['Логiн', 'Роль', 'Ip', 'Пiдключився', 'Агент'],

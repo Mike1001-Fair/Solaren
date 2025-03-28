@@ -24,7 +24,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список РЕМ", User.RoleId)
+	Html.SetPage("Список РЕМ")
 }
 
 var ResponseText = ['<BODY CLASS="MainBody">',

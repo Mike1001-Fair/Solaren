@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId == 1,
 Title = "Пошук операцій";
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindOper" ACTION="listoper.asp" METHOD="post" AUTOCOMPLETE="off">

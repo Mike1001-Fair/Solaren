@@ -65,7 +65,7 @@ with (rsCompany) {
 	Close();
 }
 
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCompany" ACTION="updatecompany.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=Title%></H3>

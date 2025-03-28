@@ -19,7 +19,7 @@ try {
 } finally {
 	var SortCode = ++Cmd.Parameters.Item("SortCode").value;
 	Solaren.Close();
-	Html.SetPage("Нова область", User.RoleId)
+	Html.SetPage("Нова область")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewRegion" ACTION="createregion.asp" METHOD="post" AUTOCOMPLETE="off">

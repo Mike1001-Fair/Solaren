@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Завантажити файл", User.RoleId)%>
+Html.SetPage("Завантажити файл")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewUpLoad" ACTION="runupload.asp" METHOD="post"  enctype="multipart/form-data">

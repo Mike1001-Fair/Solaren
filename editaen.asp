@@ -28,7 +28,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditAen" ACTION="updateaen.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="AenId" VALUE="<%=AenId%>">

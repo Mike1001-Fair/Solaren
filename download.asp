@@ -8,7 +8,7 @@
 if (!User.ValidateRole(User.RoleId, User.GUID)) {
 	Message.Write(2, Dictionary.Item("AuthenticationError"))
 }
-Html.SetPage("Файл", User.RoleId)%>
+Html.SetPage("Файл")%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>		

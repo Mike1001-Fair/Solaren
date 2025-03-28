@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Нова вулиця", User.RoleId)
+	Html.SetPage("Нова вулиця")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewStreet" ACTION="createstreet.asp" METHOD="post" AUTOCOMPLETE="off">

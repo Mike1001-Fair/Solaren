@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Cтавка ПДФО", User.RoleId)
+	Html.SetPage("Cтавка ПДФО")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPdfo" ACTION="listpdfo.asp" METHOD="post">

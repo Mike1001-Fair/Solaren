@@ -29,7 +29,7 @@ try {
 		Close();
 	}
 	Solaren.Close();
-	Html.SetPage(Title, User.RoleId);
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditStreet" ACTION="updatestreet.asp" METHOD="POST" AUTOCOMPLETE="off">

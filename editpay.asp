@@ -34,7 +34,7 @@ try {
 
 var ViewOnly = !Month.isPeriod(Month.Date[1], PayDate),
 Title = Deleted || ViewOnly ? "Перегляд оплати" : "Редагування оплати";
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditPay" ACTION="updatepay.asp" METHOD="post">
 <H3 CLASS="HeadText" ID="H3Id"><BIG>&#128182;</BIG><%=Html.Title%></H3>

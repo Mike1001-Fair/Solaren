@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Обсяги по тарифам", User.RoleId)%>
+Html.SetPage("Обсяги по тарифам")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindTarifVol" ACTION="listtarifvol.asp" METHOD="post" TARGET = "_blank">

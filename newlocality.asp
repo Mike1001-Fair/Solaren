@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
 	Resource.Load(User.ResourceFile());
-	Html.SetPage("Новий пункт", User.RoleId)
+	Html.SetPage("Новий пункт")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewLocality" ACTION="createlocality.asp" METHOD="post" AUTOCOMPLETE="off">

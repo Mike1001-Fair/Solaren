@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список ЦОС", User.RoleId);
+	Html.SetPage("Список ЦОС");
 }
 
 var Header = ['№', 'Назва', 'Керiвник', 'Бухгалтер'],

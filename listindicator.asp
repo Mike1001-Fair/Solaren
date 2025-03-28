@@ -29,7 +29,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Показники лiчильника", User.RoleId);
+	Html.SetPage("Показники лiчильника");
 }
 
 var Header = ['Номер', 'Дата', 'Прийом', 'Видача'],

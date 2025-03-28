@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId == 0,
 Today = new Date();
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Користувачi", User.RoleId)%>
+Html.SetPage("Користувачi")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindUser" ACTION="listusers.asp" METHOD="post" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

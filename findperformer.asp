@@ -7,7 +7,7 @@
 
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Користувачi", User.RoleId)%>
+Html.SetPage("Користувачi")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindPerformer" ACTION="listperformer.asp" METHOD="post">

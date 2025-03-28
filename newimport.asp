@@ -9,7 +9,7 @@
 OperMonth = Month.GetMonth(1),
 Items = ["Показників", "Оплат"];
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Iмпорт", User.RoleId)
+	Html.SetPage("Iмпорт")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewImport" ACTION="loadindicator.asp" METHOD="post">

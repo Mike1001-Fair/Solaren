@@ -37,7 +37,7 @@ try {
 
 var ViewOnly = !Month.isPeriod(Month.Date[1], EndDate),
 Title = Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditTarif" ACTION="updatetarif.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="TarifId" VALUE="<%=TarifId%>">

@@ -23,7 +23,7 @@ Event = {
 };
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Події", User.RoleId)
+	Html.SetPage("Події")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindAppLog" ACTION="listapplog.asp" METHOD="post">

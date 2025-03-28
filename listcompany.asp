@@ -21,7 +21,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список компаній", User.RoleId);
+	Html.SetPage("Список компаній");
 }
 
 var Header = ['ЄДРПОУ', 'ІПН', 'Назва', 'Телефон'],

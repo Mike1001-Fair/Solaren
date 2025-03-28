@@ -9,7 +9,7 @@
 OperMonth = Month.GetMonth(1);
 
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Закриття мicяця", User.RoleId)%>
+Html.SetPage("Закриття мicяця")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMonth" ACTION="runmonthclosing.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

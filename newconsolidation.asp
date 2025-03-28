@@ -9,7 +9,7 @@
 OperMonth = Month.GetMonth(1);
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Консолiдацiя", User.RoleId)
+	Html.SetPage("Консолiдацiя")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="Consolidation" ACTION="runconsolidation.asp" METHOD="post">

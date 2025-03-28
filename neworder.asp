@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId == 1;
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Нове замовлення", User.RoleId)
+	Html.SetPage("Нове замовлення")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOrder" ID="NewOrder" ACTION="createorder.asp" METHOD="post" AUTOCOMPLETE="off">

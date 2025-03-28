@@ -7,7 +7,7 @@
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Нова посада", User.RoleId)%>
+Html.SetPage("Нова посада")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChiefTitle" ACTION="createchieftitle.asp" METHOD="post" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

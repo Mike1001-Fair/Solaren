@@ -11,7 +11,7 @@ MinMonth  = Month.GetMonth(0),
 Title = "Сальдо-оборотна вiдомость";
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindSov" ACTION="listsov.asp" METHOD="post" TARGET="_blank">

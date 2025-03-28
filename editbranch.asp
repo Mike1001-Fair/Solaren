@@ -45,7 +45,7 @@ try {
 		Title        = Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 		Close();
 	}
-	Html.SetPage(Title, User.RoleId);
+	Html.SetPage(Title);
 }%>
 
 <BODY CLASS="MainBody">

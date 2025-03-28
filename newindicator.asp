@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Нові показники", User.RoleId)
+	Html.SetPage("Нові показники")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewIndicator" ACTION="createindicator.asp" METHOD="post" AUTOCOMPLETE="off">

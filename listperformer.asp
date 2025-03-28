@@ -24,7 +24,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Виконавці", User.RoleId);
+	Html.SetPage("Виконавці");
 }
 
 Response.Write('<BODY CLASS="MainBody">\n' +

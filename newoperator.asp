@@ -19,7 +19,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Новий оператор", User.RoleId)
+	Html.SetPage("Новий оператор")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOperator" ACTION="createoperator.asp" METHOD="post" AUTOCOMPLETE="off">

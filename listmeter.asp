@@ -26,7 +26,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список лiчильникiв", User.RoleId)
+	Html.SetPage("Список лiчильникiв")
 }
 
 var Header = ['Номер', 'Монтаж', 'Р', 'К', 'Прийом', 'Видача'],

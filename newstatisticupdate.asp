@@ -14,7 +14,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Оновлення статистики", User.RoleId)%>
+Html.SetPage("Оновлення статистики")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="StatisticUpdate" ACTION="runstatisticupdate.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

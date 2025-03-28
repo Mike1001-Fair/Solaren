@@ -14,7 +14,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Реіндексація", User.RoleId)%>
+Html.SetPage("Реіндексація")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="ReindexBase" ACTION="runreindexbase.asp" METHOD="post">

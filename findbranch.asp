@@ -8,7 +8,7 @@
 User.ValidateAccess(Authorized, "GET");
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Пошук ЦОС", User.RoleId)
+	Html.SetPage("Пошук ЦОС")
 }%>
 <BODY CLASS="MainBody" >
 <FORM CLASS="ValidForm" NAME="FindBranch" ACTION="listbranch.asp" METHOD="post" AUTOCOMPLETE="off">

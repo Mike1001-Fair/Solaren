@@ -32,7 +32,7 @@ try {
 
 var ViewOnly = !Month.isPeriod(Month.Date[0], OrderDate),
 Title = Deleted || ViewOnly ? "Перегляд замовлення" : "Редагування замовлення";
-Html.SetPage(Title, User.RoleId)%>
+Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOrder" ACTION="updateorder.asp" METHOD="post">
 <H3 CLASS="HeadText" ID="H3Id">🛒<%=Html.Title%></H3>

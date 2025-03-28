@@ -19,7 +19,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	Solaren.Close();
-	Html.SetPage("Новий документ", User.RoleId)
+	Html.SetPage("Новий документ")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChiefDoc" ACTION="createchiefdoc.asp" METHOD="post" AUTOCOMPLETE="off">

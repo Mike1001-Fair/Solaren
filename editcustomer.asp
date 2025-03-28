@@ -36,7 +36,7 @@ try {
 		Title            = Deleted ? "Перегляд анкети" : "Редагування анкети";
 	}
 	Solaren.Close();
-	Html.SetPage(Title, User.RoleId);
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCustomer" ACTION="updatecustomer.asp" METHOD="POST" AUTOCOMPLETE="off">

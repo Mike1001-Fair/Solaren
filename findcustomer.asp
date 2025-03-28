@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Cпоживачі", User.RoleId)
+	Html.SetPage("Cпоживачі")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindCustomer" ID="FindCustomer" ACTION="listcustomer.asp" METHOD="post" AUTOCOMPLETE="off">

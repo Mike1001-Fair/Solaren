@@ -7,7 +7,7 @@
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Банки", User.RoleId)
+	Html.SetPage("Банки")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBank" ACTION="listbank.asp" METHOD="post" AUTOCOMPLETE="off">

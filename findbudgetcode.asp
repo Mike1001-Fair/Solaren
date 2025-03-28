@@ -20,7 +20,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Бюджетний код", User.RoleId)%>
+Html.SetPage("Бюджетний код")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBudgetCode" TARGET="_blank" ACTION="prnbudgetcode.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ChiefName">

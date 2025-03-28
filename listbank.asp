@@ -19,7 +19,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список банків", User.RoleId)
+	Html.SetPage("Список банків")
 }
 
 var Header = ['ЄДРПОУ', 'МФО', 'Найменування'],

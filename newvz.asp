@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Нова ставка ВЗ", User.RoleId)
+	Html.SetPage("Нова ставка ВЗ")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewVz" ACTION="createvz.asp" METHOD="POST">

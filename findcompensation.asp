@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Компенсація", User.RoleId)
+	Html.SetPage("Компенсація")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindCompensation" ACTION="prncompensation.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">

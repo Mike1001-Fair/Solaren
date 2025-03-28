@@ -30,7 +30,7 @@ try {
 		Close();
 	} 
 	Solaren.Close();
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage(Title)
 }%>
 
 <BODY CLASS="MainBody">

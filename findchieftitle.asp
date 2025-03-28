@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Посади", User.RoleId)
+	Html.SetPage("Посади")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindChiefTitle" ACTION="listchieftitle.asp" METHOD="post" AUTOCOMPLETE="off">

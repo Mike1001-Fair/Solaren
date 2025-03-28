@@ -52,7 +52,7 @@ Solaren = {
 		Session("Token")      = rs.Fields("Token").value;
 		Session("HoursLimit") = rs.Fields("HoursLimit").value;
 		Session("MsgText")    = Server.HTMLEncode(rs.Fields("MsgText").value);
-		Session("RoleId")     = RoleId;
+		Session("RoleId")     = rs.Fields("RoleId").value;
 
 		this.SetSessionDate(OperDate);
 		this.SetSessionFlags(SysCfg);

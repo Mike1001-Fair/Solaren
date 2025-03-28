@@ -20,7 +20,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 }
 
-Html.SetPage("Перевірка актів", User.RoleId)%>
+Html.SetPage("Перевірка актів")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindBranchAct" ACTION="listbranchact.asp" METHOD="post" TARGET="_blank">

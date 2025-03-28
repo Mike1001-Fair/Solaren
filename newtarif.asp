@@ -9,7 +9,7 @@
 <% var Authorized = User.RoleId == 1;
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Новий тариф", User.RoleId)
+	Html.SetPage("Новий тариф")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewTarif" ACTION="createtarif.asp" METHOD="post" AUTOCOMPLETE="off">

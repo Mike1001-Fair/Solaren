@@ -31,7 +31,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Html.SetPage("Список замовлень", User.RoleId);
+	Html.SetPage("Список замовлень");
 }
 
 var Period = BegDate.formatDate("-"),

@@ -8,7 +8,7 @@
 Title = "Нова операція";
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title, User.RoleId)
+	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewOper" ACTION="createoper.asp" METHOD="post">

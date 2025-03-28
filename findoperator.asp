@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage("Оператори", User.RoleId)
+	Html.SetPage("Оператори")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindOperator" ACTION="listoperator.asp" METHOD="post" AUTOCOMPLETE="off">

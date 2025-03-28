@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "GET");
-Html.SetPage("Звіт по продажам", User.RoleId)%>
+Html.SetPage("Звіт по продажам")%>
 
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindSalesReport" ACTION="listsalesreport.asp" METHOD="post" AUTOCOMPLETE="off">

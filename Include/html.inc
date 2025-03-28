@@ -39,10 +39,10 @@ var Html = {
 		Response.Write(ResponseText.join(""));
 	},
 
-	SetPage: function(Title, RoleId) {
+	SetPage: function(Title) {
 		this.SetHead(Title, 1);
 		this.WriteScript();
-		Menu.Write(RoleId, 0);
+		Menu.Write(0);
 	},
 
 	Write: function(tag, align) {
@@ -332,9 +332,9 @@ Tag = {
 Menu = {
 	Type: ["admin", "officeuser", "branchuser"],
 
-	Write: function(RoleId, BodyTag) {
-		if (this.Type[RoleId]) {
-			var FileName = "menu-" + this.Type[RoleId] + ".asp";
+	Write: function(BodyTag) {
+		if (this.Type[User.RoleId]) {
+			var FileName = "menu-" + this.Type[User.RoleId] + ".asp";
 			if (BodyTag) {
 				var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
 				if (Session('MsgText')) {
