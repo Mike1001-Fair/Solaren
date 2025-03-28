@@ -347,7 +347,7 @@ Menu = {
 				Server.Execute(FileName);
 			}
 		} else {
-			Message.Write(3, "Out of range Menu.Type: RoleId = " + RoleId)
+			Message.Write(3, "Out of range User.RoleId = " + User.RoleId)
 		}
 	}
 }%>

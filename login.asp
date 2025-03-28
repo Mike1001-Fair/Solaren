@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/session.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -33,7 +34,7 @@ try {
 		Message.Write(2, Dictionary.Item("AuthenticationError"));
 	} else {
 		User.RoleId = rs.Fields("RoleId").value;
-		Solaren.SetSessionVar(rs);
+		SessionManager.SetVar(rs);
 		rs.Close();
 		Solaren.Close();
 		Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
