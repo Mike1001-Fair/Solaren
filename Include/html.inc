@@ -44,6 +44,10 @@ var Html = {
 		this.WriteScript();
 		Menu.Write(0);
 	},
+
+	GetUrl: function (url, idName, id, value) {
+		return ['<A href="', url, '?', idName, '=', id, '">', value, '</A>'].join("")
+	},
 	
 	WriteBaseInfo: function(rs) {
 		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
@@ -296,7 +300,7 @@ Menu = {
 				Server.Execute(FileName);
 			}
 		} else {
-			Message.Write(3, "Out of range User.RoleId = " + User.RoleId)
+			Message.Write(3, "Invalid User.RoleId = " + User.RoleId)
 		}
 	}
 }%>

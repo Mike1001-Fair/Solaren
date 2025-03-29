@@ -45,8 +45,8 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("StreetName"),
 		rs.Fields("HouseId")
 	],
-	url = ['<A href="editcontract.asp?ContractId=', rs.Fields("ContractId"), '">', rs.Fields("PAN"), '</A>'],
-	row = ['<TR>', Tag.Write("TD", -1, url.join("")),
+	url = Html.GetUrl("editcontract.asp", "ContractId", rs.Fields("ContractId"), rs.Fields("PAN"));
+	row = ['<TR>', Tag.Write("TD", -1, url),
 		Tag.Write("TD", 0, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, ContractAddress.join(" ")),
 		Tag.Write("TD", -1, rs.Fields("ContractDate")),

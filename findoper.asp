@@ -5,11 +5,9 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = User.RoleId == 1,
-Title = "Пошук операцій";
-if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title)
-}%>
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
+Html.SetPage("Пошук операцій")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindOper" ACTION="listoper.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">
@@ -17,10 +15,9 @@ if (User.ValidateAccess(Authorized, "GET")) {
 
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% with (Html) {
-		WriteMonthPeriod();
-		WriteSearchSet("Договір", "Contract", "", 1);
-	}%></TD></TR>
+	<% Month.WritePeriod();
+	Html.WriteSearchSet("Договір", "Contract", "", 1);%>
+	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>

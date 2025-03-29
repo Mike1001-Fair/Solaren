@@ -15,10 +15,8 @@ Html.SetPage("Обсяги")%>
 
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% with (Html) {
-		WriteMonthPeriod();
-		WriteSearchSet("Договір", "Contract", "", 1);
-	}%>
+	<% Month.WritePeriod();
+	Html.WriteSearchSet("Договір", "Contract", "", 1);%>
 	</TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>

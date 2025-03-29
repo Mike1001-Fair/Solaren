@@ -1,6 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1 || Session("RoleId") == 2;
@@ -14,26 +15,28 @@ try {
 			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Month.Date[1]));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListNoVol");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Звіт")
 }
 
-with (Html) {
-	SetHead("Звіт");
-	Menu.Write(Session("RoleId"), 0)
-}
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">Договора без обсягiв<SPAN>' + Month.GetPeriod(Month.GetMonth(1), 0) + '</SPAN></H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>ЦОС</TH></TR>'
+];
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Договора без обсягiв<SPAN>' + Month.GetPeriod(Month.GetMonth(1), 0) + '</SPAN></H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>ЦОС</TH></TR>\n';
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("CustomerName") +
-	Html.Write("TD","") + rs.Fields("ContractPAN") +
-	Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n';
+	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CustomerName")),
+		Tag.Write("TD", -1, rs.Fields("ContractPAN")),
+		Tag.Write("TD", -1, rs.Fields("BranchName")), '</TR>'
+	];
+	ResponseText.push(row.join(""));
 	rs.MoveNext();
-} rs.Close(); Solaren.Close();
-ResponseText += Html.GetFooterRow(3, i);
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(3, i));
+Response.Write(ResponseText.join("\n"))%>
