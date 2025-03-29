@@ -14,7 +14,7 @@ Html.SetPage("Iсторiя розрахункiв")%>
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteMonthPeriod();
+	<% Month.WritePeriod();
 	Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	</TD></TR>
 </TABLE>

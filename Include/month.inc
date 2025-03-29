@@ -79,5 +79,27 @@ var Month = {
 	GetYMD: function(dbDate) {
 		var result = new Date(dbDate);
 		return result.toStr(0)
+	},
+
+	WriteDate: function() {
+		var ResponseText = ['<FIELDSET><LEGEND>Дата</LEGEND>',
+			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + Month.Date[1] +
+			'" MIN="' + Month.Date[0] + '" MAX="' + Month.Date[3] +	'" REQUIRED></LABEL>',
+			'</FIELDSET>\n'
+		];
+		Response.Write(ResponseText.join("\n"));
+	},
+
+	WritePeriod: function() {
+		var OperMonth = Month.GetMonth(1),
+		MinMonth = Month.GetMonth(0),
+		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>',
+			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth +
+			'" MIN="' + MinMonth + '" MAX="' + OperMonth + '" REQUIRED> &#8722;',
+			'<INPUT TYPE="Month" NAME="EndMonth" VALUE="' + OperMonth +
+			'" MIN="' + MinMonth  +	'" MAX="' + OperMonth +	'" REQUIRED>',
+			'</FIELDSET>\n'
+		];
+		Response.Write(ResponseText.join("\n"));
 	}
 }%>

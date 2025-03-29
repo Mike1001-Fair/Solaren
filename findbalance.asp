@@ -27,7 +27,7 @@ Html.SetPage("Баланс")%>
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteMonthPeriod() %>
+	<% Month.WritePeriod() %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL FOR="OperatorId">Оператор</LABEL>
 	<% Html.WriteSelect(rs, "Operator", 0, -1);

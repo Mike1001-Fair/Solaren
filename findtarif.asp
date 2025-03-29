@@ -16,7 +16,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDate();
+	<% Month.WriteDate();
 	Tarif.WriteGroup();
 	%></TD></TR>
 </TABLE>

@@ -28,7 +28,7 @@ Html.SetPage("Перевірка актів")%>
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteMonthPeriod() %>	
+	<% Month.WritePeriod() %>	
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>ЦОС
 	<% Html.WriteSelect(rsBranch, "Branch", 0, -1);
