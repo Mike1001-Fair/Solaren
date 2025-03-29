@@ -10,20 +10,20 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var StartSysDate    = String(Form("StartSysDate")),
-	OperMonth       = String(Form("OperMonth")),
-	HoursLimit      = String(Form("HoursLimit")),
-	PanLimit        = Form("PanLimit"),
-	BudgetItem      = Form("BudgetItem"),
-	TreasuryName    = Form("TreasuryName"),
-	TreasuryCode    = Form("TreasuryCode"),
-	TreasuryAccount = Form("TreasuryAccount"),
-	TreasuryMfo     = Form("TreasuryMfo"),
-	SysConfig       = Form("SysConfig"),
-	CheckCard       = Form("CheckCard") == "on",
-	NewIndicator    = Form("NewIndicator") == "on",
-	ShowMsg         = Form("ShowMsg") == "on",
-	MsgText         = Form("MsgText");
+	var StartSysDate = Form("StartSysDate"),
+	OperMonth        = Form("OperMonth"),
+	HoursLimit       = Form("HoursLimit"),
+	PanLimit         = Form("PanLimit"),
+	BudgetItem       = Form("BudgetItem"),
+	TreasuryName     = Form("TreasuryName"),
+	TreasuryCode     = Form("TreasuryCode"),
+	TreasuryAccount  = Form("TreasuryAccount"),
+	TreasuryMfo      = Form("TreasuryMfo"),
+	SysConfig        = Form("SysConfig"),
+	CheckCard        = Form("CheckCard") == "on",
+	NewIndicator     = Form("NewIndicator") == "on",
+	ShowMsg          = Form("ShowMsg") == "on",
+	MsgText          = Form("MsgText");
 }
 
 try {
@@ -49,7 +49,7 @@ try {
 } finally {
 	Solaren.Close();
 	var OperDate = OperMonth + "-01";
-	Session("HoursLimit")   = HoursLimit;
+	Session("HoursLimit")   = String(HoursLimit);
 	Session("CheckCard")    = CheckCard;
 	Session("NewIndicator") = NewIndicator;
 	SessionManager.SetDate(OperDate);
