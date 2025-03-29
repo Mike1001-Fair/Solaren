@@ -46,7 +46,7 @@ Html.SetPage(Title)%>
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Дiє", BegDate, EndDate, Month.Date[0], Month.Date[4]) %>
+	<% Month.WriteDatePeriod("Дiє", BegDate, EndDate, Month.Date[0], Month.Date[4]) %>
 	<FIELDSET><LEGEND>Ввод в експлуатацію</LEGEND>
 	<INPUT TYPE="date" NAME="ExpDateBeg" VALUE="<%=ExpDateBeg%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED> &#8722;
 	<INPUT TYPE="date" NAME="ExpDateEnd" VALUE="<%=ExpDateEnd%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED>

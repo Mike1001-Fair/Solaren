@@ -14,7 +14,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[4]) %>
+	<% Month.WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[4]) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>Ставка
 	<INPUT TYPE="Number" NAME="VzTax" STEP="0.1" MIN="0" MAX="99" PLACEHOLDER="%" REQUIRED></LABEL>

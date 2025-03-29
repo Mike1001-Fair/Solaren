@@ -78,17 +78,6 @@ var Html = {
 		Response.Write(ResponseText.join("\n"));
 	},
 
-	WriteDatePeriod: function(legend, begDate, endDate, minDate, maxDate) {
-		var ResponseText = ['<FIELDSET>', '<LEGEND>' + legend + '</LEGEND>',
-			'<INPUT TYPE="date" NAME="BegDate" VALUE="' + begDate +
-			'" MIN="' + minDate + '" MAX="' + maxDate + '" REQUIRED> &#8722;',
-			'<INPUT TYPE="date" NAME="EndDate" VALUE="' + endDate +
-			'" MIN="' + minDate + '" MAX="' + maxDate + '" REQUIRED>',
-			'</FIELDSET>\n'
-		];
-		Response.Write(ResponseText.join("\n"));
-	},
-
 	WriteInputDataList : function(tagName, tagValue, tagSize, autoFocus) {
 		var inputName = tagName + "Name",
 		listName = tagName + "List",

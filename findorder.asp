@@ -16,11 +16,9 @@ if (User.ValidateAccess(Authorized, "GET")) {
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% with (Html) {
-		WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[2]);
-		WriteSearchSet("Договір", "Contract", "", 1);
-	}%>
-	</TD></TR>
+	<% Month.WriteDatePeriod("Період", Month.Date[1], Month.Date[2], Month.Date[0], Month.Date[2]);
+	Html.WriteSearchSet("Договір", "Contract", "", 1);
+	%></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>

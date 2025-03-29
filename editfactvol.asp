@@ -51,7 +51,7 @@ Html.SetPage(Title)%>
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
        	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Month.Date[1], Month.Date[2]);
+	<% Month.WriteDatePeriod("Період", BegDate, EndDate, Month.Date[1], Month.Date[2]);
 	Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %> 
 
 	<FIELDSET NAME="VolSet"><LEGEND ALIGN="CENTER">Параметри</LEGEND>

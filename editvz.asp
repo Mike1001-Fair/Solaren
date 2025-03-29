@@ -41,7 +41,7 @@ try {
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteDatePeriod("Період", BegDate, EndDate, Month.Date[0], Month.Date[4]) %>
+	<% Month.WriteDatePeriod("Період", BegDate, EndDate, Month.Date[0], Month.Date[4]) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>Ставка
 	<INPUT TYPE="Number" NAME="VzTax" VALUE="<%=VzTax%>" STEP="0.1" MIN="0" MAX="99" PLACEHOLDER="%" REQUIRED></LABEL>
