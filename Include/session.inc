@@ -29,12 +29,12 @@ var SessionManager = {
 	},
 
 	SetFlags: function(BitFlags) {
-		if (Solaren.ValidObject(BitFlags)) {
+		if (BitFlags instanceof Array) {
 			for (var i = 0; i < this.FlagName.length; i++) {
 				Session(this.FlagName[i]) = +BitFlags[i] || 0;
 			}
 		} else {
-			Message.Write(3, "Invalid object: BitFlags")
+			Message.Write(3, "Invalid Array: BitFlags")
 		}
 	}
 }%>

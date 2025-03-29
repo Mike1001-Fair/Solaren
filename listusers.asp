@@ -39,8 +39,8 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = ['<A HREF="edituser.asp?UserId=', rs.Fields("Id"), '">', rs.Fields("LoginId"), '</A>'],
-	row = ['<TR>', Tag.Write("TD", -1, url.join("")),
+	var url = Html.GetLink("edituser.asp?UserId=", rs.Fields("Id"), rs.Fields("LoginId")),
+	row = ['<TR>', Tag.Write("TD", -1, url),
 		Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
 		Tag.Write("TD", 1, rs.Fields("UserIP")),
 		Tag.Write("TD", -1, rs.Fields("LastLogin")),

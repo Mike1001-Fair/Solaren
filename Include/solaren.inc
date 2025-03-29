@@ -46,7 +46,6 @@ Solaren = {
 		return Math.floor(rand);
 	},
 
-
 	Empty: function(testvar) {
 		return testvar == undefined || testvar == null;
 	},
