@@ -45,7 +45,7 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("StreetName"),
 		rs.Fields("HouseId")
 	],
-	url = Html.GetUrl("editcontract.asp", "ContractId", rs.Fields("ContractId"), rs.Fields("PAN"));
+	url = Html.GetLink("editcontract.asp?ContractId=", rs.Fields("ContractId"), rs.Fields("PAN"));
 	row = ['<TR>', Tag.Write("TD", -1, url),
 		Tag.Write("TD", 0, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, ContractAddress.join(" ")),

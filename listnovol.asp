@@ -1,17 +1,18 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = Session("RoleId") == 1 || Session("RoleId") == 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<% var Authorized = User.RoleId > 0 && User.RoleId < 3;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("ListNoVol");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Month.Date[1]));
 		}
 	}
@@ -22,10 +23,12 @@ try {
 	Html.SetPage("Звіт")
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">',
-	'<H3 CLASS="H3Text">Договора без обсягiв<SPAN>' + Month.GetPeriod(Month.GetMonth(1), 0) + '</SPAN></H3>',
+var Period = Month.GetPeriod(Month.GetMonth(1), 0),
+Header = ['Споживач', 'Рахунок', 'ЦОС'],
+ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">Договора без обсягiв<SPAN>' + Period + '</SPAN></H3>',
 	'<TABLE CLASS="InfoTable">',
-	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>ЦОС</TH></TR>'
+	Html.GetHeadRow(Header)
 ];
 
 for (var i=0; !rs.EOF; i++) {

@@ -29,9 +29,9 @@ var ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = ['<A href="editregion.asp?RegionId=', rs.Fields("Id"), '">', rs.Fields("RegionName"), '</A>'],
+	var url = Html.GetLink("editregion.asp?RegionId=", rs.Fields("Id"), rs.Fields("RegionName")),
 	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("SortCode")),
-		Tag.Write("TD", -1, url.join("")), '</TR>'
+		Tag.Write("TD", -1, url), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	rs.MoveNext();

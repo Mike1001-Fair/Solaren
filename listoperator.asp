@@ -29,7 +29,7 @@ var ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetUrl("editoperator.asp", "OperatorId", rs.Fields("OperatorId"), rs.Fields("OperatorName"));
+	var url = Html.GetLink("editoperator.asp?OperatorId=", rs.Fields("OperatorId"), rs.Fields("OperatorName"));
 	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("SortCode")),
 		Tag.Write("TD", -1, rs.Fields("EdrpoCode")),
 		Tag.Write("TD", -1, url), '</TR>'

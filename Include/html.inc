@@ -45,8 +45,8 @@ var Html = {
 		Menu.Write(0);
 	},
 
-	GetUrl: function (url, idName, id, value) {
-		return ['<A href="', url, '?', idName, '=', id, '">', value, '</A>'].join("")
+	GetLink: function (url, id, value) {
+		return ['<A href="', url, id, '">', value, '</A>'].join("")
 	},
 	
 	WriteBaseInfo: function(rs) {
