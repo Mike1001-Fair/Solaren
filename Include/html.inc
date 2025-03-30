@@ -285,9 +285,13 @@ Tag = {
 Menu = {
 	Type: ["admin", "officeuser", "branchuser"],
 
+	Map: function(RoleId) {
+		return "menu-" + this.Type[RoleId] + ".asp";
+	},
+
 	Write: function(BodyTag) {
 		if (this.Type[User.RoleId]) {
-			var FileName = "menu-" + this.Type[User.RoleId] + ".asp";
+			var FileName = this.Map(User.RoleId);
 			if (BodyTag) {
 				var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
 				if (Session('MsgText')) {
