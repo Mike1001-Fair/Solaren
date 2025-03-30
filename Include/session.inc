@@ -9,8 +9,8 @@ var SessionManager = {
 		OperDate = Month.GetYMD(dbDate);
 
 		for (var i = 0; i < this.VarName.length; i++) {
-			var xssProtected = Server.HTMLEncode(rs.Fields(this.VarName[i]).value);
-			Session(this.VarName[i]) = xssProtected;
+			var parameter = rs.Fields(this.VarName[i]).value;
+			Session(this.VarName[i]) = Server.HTMLEncode(parameter);
 		}
 		
 		this.SetDate(OperDate);
