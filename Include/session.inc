@@ -5,8 +5,7 @@ var SessionManager = {
 	SetVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
 		dbDate   = rs.Fields("OperDate").value,
-		OperDate = Month.GetYMD(dbDate),
-		SysCfg   = cfg.toString(2).padStart(3, "0").split('');
+		OperDate = Month.GetYMD(dbDate);
 
 		Session("UserGUID")   = rs.Fields("UserGUID").value;
 		Session("UserId")     = rs.Fields("UserId").value;
@@ -16,7 +15,7 @@ var SessionManager = {
 		Session("RoleId")     = rs.Fields("RoleId").value;
 
 		this.SetDate(OperDate);
-		this.SetFlags(SysCfg);
+		this.SetFlags(cfg, 3);
 	},
 
 	SetDate: function(OperDate) {
@@ -28,13 +27,10 @@ var SessionManager = {
 		Session("NextDate") = NextDate.toStr(0);
 	},
 
-	SetFlags: function(BitFlags) {
-		if (BitFlags instanceof Array) {
-			for (var i = 0; i < this.FlagName.length; i++) {
-				Session(this.FlagName[i]) = +BitFlags[i] || 0;
-			}
-		} else {
-			Message.Write(3, "Invalid Array: BitFlags")
+	SetFlags: function(cfg, flagCount) {
+		var index = flagCount - 1;
+		for (var i = 0; i < this.FlagName.length; i++) {
+			Session(this.FlagName[i]) = (cfg >> (index - i)) & 1;
 		}
 	}
 }%>
