@@ -5,14 +5,14 @@ var User = {
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}/,
 	PswdLen: 10,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
-	Ip     : Server.HTMLEncode(Request.ServerVariables("REMOTE_ADDR")) || -1,
-	Agent  : Server.HTMLEncode(Request.ServerVariables("HTTP_USER_AGENT")) || -1,
-	Method : Server.HTMLEncode(Request.ServerVariables("REQUEST_METHOD")) || -1,
-	Hal    : Server.HTMLEncode(String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE"))) || -1,
-	Id     : Server.HTMLEncode(Session("UserId")) || -1,
-	GUID   : Server.HTMLEncode(Session("UserGUID")) || -1,
-	RoleId : Server.HTMLEncode(Session("RoleId")) || -1,
-	Token  : Server.HTMLEncode(Session("Token")) || -1,
+	Ip     : Request.ServerVariables("REMOTE_ADDR") || -1,
+	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || -1,
+	Method : Request.ServerVariables("REQUEST_METHOD") || -1,
+	Hal    : String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")) || -1,
+	Id     : Session("UserId") || -1,
+	GUID   : Session("UserGUID") || -1,
+	RoleId : Session("RoleId") || -1,
+	Token  : Session("Token") || -1,
 
 	Language: function() {
 		var regionSet = this.Hal.split(",")[0];

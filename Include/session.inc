@@ -1,19 +1,18 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var SessionManager = {
 	FlagName: ["NewIndicator", "CheckCard"],
+	VarName: ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],
 
 	SetVar: function(rs) {
 		var cfg  = rs.Fields("SysConfig").value,
 		dbDate   = rs.Fields("OperDate").value,
 		OperDate = Month.GetYMD(dbDate);
 
-		Session("UserGUID")   = rs.Fields("UserGUID").value;
-		Session("UserId")     = rs.Fields("UserId").value;
-		Session("Token")      = rs.Fields("Token").value;
-		Session("HoursLimit") = rs.Fields("HoursLimit").value;
-		Session("MsgText")    = Server.HTMLEncode(rs.Fields("MsgText").value);
-		Session("RoleId")     = rs.Fields("RoleId").value;
-
+		for (var i = 0; i < this.VarName.length; i++) {
+			var xssProtected = Server.HTMLEncode(rs.Fields(this.VarName[i]).value);
+			Session(this.VarName[i]) = xssProtected;
+		}
+		
 		this.SetDate(OperDate);
 		this.SetFlags(cfg, 3);
 	},
