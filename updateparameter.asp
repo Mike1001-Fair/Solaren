@@ -42,7 +42,8 @@ try {
 			Append(CreateParameter("SysConfig", adTinyInt, adParamInput, 10, SysConfig));
 			Append(CreateParameter("ShowMsg", adBoolean, adParamInput, 1, ShowMsg));
 			Append(CreateParameter("MsgText", adVarChar, adParamInput, 800, MsgText)); 
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));

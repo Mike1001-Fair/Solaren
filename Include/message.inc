@@ -24,7 +24,7 @@ var Message = {
 	},
 
 	Write: function(index, msgText) {
-		Session("SysMsg") = this.Page[index] ? msgText : "Runtime Error: out of range";
+		Session("SysMsg") = this.Page[index] ? msgText : "Message.Write: index is out of range -" + index;
 		Session("ScriptName") = Solaren.ScriptName;
 		Response.Redirect(this.Map(index));
 	}

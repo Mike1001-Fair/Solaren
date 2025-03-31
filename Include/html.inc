@@ -179,16 +179,16 @@ var Html = {
 	},
 
 	GetHeadRow: function(header) {
-		var Row = ['<TR>'];
-		if (header && header instanceof Array && header.length > 0) {
+		var row = ['<TR>'];
+		if (header instanceof Array) {
 			for (var i = 0; i < header.length; i++) {
-				Row.push('<TH>' + header[i] + '</TH>');
+				row.push('<TH>' + header[i] + '</TH>');
 			}
 		} else {
-			Row.push('<TH>Invalid header array</TH>');
+			row.push('<TH>Invalid header array</TH>');
 		}
-		Row.push('</TR>');
-		return Row.join("");
+		row.push('</TR>');
+		return row.join("");
 	},
 
 	GetFooterRow: function(ColSpan, i) {
@@ -286,25 +286,21 @@ Menu = {
 	Type: ["admin", "officeuser", "branchuser"],
 
 	Map: function(RoleId) {
-		return "menu-" + this.Type[RoleId] + ".asp";
+		return ["menu-", this.Type[RoleId] || "empty", ".asp"].join("");
 	},
 
 	Write: function(BodyTag) {
-		if (this.Type[User.RoleId]) {
-			var FileName = this.Map(User.RoleId);
-			if (BodyTag) {
-				var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
-				if (Session('MsgText')) {
-					ResponseText.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">');
-				}
-				Response.Write(ResponseText.join("\n"));
-				Server.Execute(FileName);
-				Response.Write('</BODY></HTML>');
-			} else {
-				Server.Execute(FileName);
+		var FileName = this.Map(User.RoleId);
+		if (BodyTag) {
+			var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
+			if (Session('MsgText')) {
+				ResponseText.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">');
 			}
+			Response.Write(ResponseText.join("\n"));
+			Server.Execute(FileName);
+			Response.Write('</BODY></HTML>');
 		} else {
-			Message.Write(3, "Invalid User.RoleId = " + User.RoleId)
+			Server.Execute(FileName);
 		}
 	}
 }%>
