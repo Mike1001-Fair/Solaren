@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
+window.addEventListener("pageshow", event => {
+	//console.log(`event.persisted=${event.persisted}`);
+	if (event.persisted) {
+		Loader.Hide();
+	}
+});
+
 /* Проверяем, был ли уже показан алерт и прошло ли уже 20 минут
  localStorage.setItem('alertShown', 'true'); // Устанавливаем флаг в localStorage
 const alertShownTime = localStorage.getItem('alertShownTime');

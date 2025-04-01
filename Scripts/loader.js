@@ -15,10 +15,11 @@ const Loader = {
 	},
     
 	Hide() {
-		if (this.overlay) {
-			this.overlay.remove();
-			this.overlay = null;
+		const existingOverlay = document.getElementById('overlay');
+		if (existingOverlay) {
+			existingOverlay.remove();
 		}
+		this.overlay = null;
 	},
     
 	SetClick(selector) {
