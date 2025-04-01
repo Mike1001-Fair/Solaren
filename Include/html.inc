@@ -129,7 +129,7 @@ var Html = {
 
 	WriteList: function(tagName, list) {
 		var ResponseText = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
-		if (list && list instanceof Array && list.length > 0) {
+		if (list instanceof Array) {
 			for (var i = 0; i < list.length; i++) {
 				var option = ['<OPTION VALUE="', i, '">', list[i], '</OPTION>'];
 				ResponseText.push(option.join(""));

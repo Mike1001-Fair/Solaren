@@ -3,7 +3,7 @@
 function Application_OnStart() {
 	var dbConfig = [
 		"Provider=MSOLEDBSQL",
-		"Server=CNC",
+		"Server=Localhost",
 		"Database=Solaren",
 		"Integrated Security=SSPI",
 		"Application Name=Solaren"
