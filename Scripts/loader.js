@@ -15,16 +15,18 @@ const Loader = {
 	},
     
 	Hide() {
-		const existingOverlay = document.getElementById('overlay');
-		if (existingOverlay) {
-			existingOverlay.remove();
+		const overlay = document.getElementById('overlay');
+		if (overlay) {
+			overlay.remove();
 		}
 		this.overlay = null;
 	},
     
 	SetClick(selector) {
 		document.addEventListener('click', event => {
-			if (event.target.matches(selector)) this.Show();
+			if (event.target.matches(selector)) {
+				this.Show();
+			}
 		});
 	}
 };

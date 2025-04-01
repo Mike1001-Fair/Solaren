@@ -30,17 +30,12 @@ try {
 	Html.SetHead("Енергозбереження");
 }
 
-var Period = Month.GetPeriod(BegMonth, 0),
-pwr = totRetVol = totPurVol = totPaySum = 0;
-
-if (BegMonth != EndMonth) {
-	Period += " - " + Month.GetPeriod(EndMonth, 0);
-}
-
-var Header = ['Споживач', 'Рахунок', 'Адреса', 'Дата', 'Потужнiсть<BR>кВт', 'Видача<BR>кВт&#183;год', 'Покупка<BR>кВт&#183;год', 'Оплата<BR>&#8372;'],
+var Range = Month.GetRange(BegMonth, EndMonth),
+pwr = totRetVol = totPurVol = totPaySum = 0,
+Header = ['Споживач', 'Рахунок', 'Адреса', 'Дата', 'Потужнiсть<BR>кВт', 'Видача<BR>кВт&#183;год', 'Покупка<BR>кВт&#183;год', 'Оплата<BR>&#8372;'],
 ResponseText = ['<BODY CLASS="PrnBody">',
 	'<H3 CLASS="H3PrnTable">' + Html.Title + '</H3>',
-	'<SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+	'<SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	Html.GetHeadRow(Header)
 ];

@@ -67,6 +67,14 @@ var Month = {
 		result = [monthName, ym[0], this.YearItem];		
 		return result.join(" ");
 	},
+
+	GetRange: function(BegMonth, EndMonth) {
+		var range = [this.GetPeriod(BegMonth, 0)];
+		if (BegMonth != EndMonth) {
+			range.push(this.GetPeriod(EndMonth, 0));
+		}
+		return range.join(' &ndash; ');
+	},
 	
 	GetDate: function(dstr, caseType) {
 		var ymd = dstr.split("-"),

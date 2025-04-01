@@ -31,16 +31,10 @@ try {
 	Html.SetHead("Обсяги по тарифам");
 }
 
-var Period = [Month.GetPeriod(BegMonth, 0)],
-FinalMonth = Month.GetPeriod(EndMonth, 0),
-totPurVol = totVolCost = 0;
-
-if (BegMonth != EndMonth) {
-	Period.push(FinalMonth);
-}
-
-var ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Обсяги по тарифам</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period.join(' &ndash; ') + '</SPAN>',
+var Range = Month.GetRange(BegMonth, EndMonth),
+totPurVol = totVolCost = 0,
+ResponseText = ['<BODY CLASS="PrnBody">',
+	'<H3 CLASS="H3PrnTable">Обсяги по тарифам</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	'<TR><TH ROWSPAN="2">Дата вводу<BR>в експлуатацiю</TH><TH ROWSPAN="2">Група</TH><TH>Тариф</TH><TH>Обсяг</TH><TH>Вартiсть</TH></TR>',
 	'<TR><TH>коп</TH><TH>кВт&#183;год</TH><TH>грн</TH><TR>'

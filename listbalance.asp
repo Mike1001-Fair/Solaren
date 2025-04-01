@@ -33,17 +33,11 @@ try {
 	Html.SetHead("Баланс", 0);
 }
 
-var Period = [Month.GetPeriod(BegMonth, 0)],
-FinalMonth = Month.GetPeriod(EndMonth, 0),
-totRetVol = totPurVol = totNeedVol = 0;
-
-if (BegMonth != EndMonth) {
-	Period.push(FinalMonth);
-}
-
-var Header = ['РЕМ', 'Видача', 'Покупка', 'Потреби'],
+var Period = Month.GetRange(BegMonth, EndMonth),
+totRetVol = totPurVol = totNeedVol = 0,
+Header = ['РЕМ', 'Видача', 'Покупка', 'Потреби'],
 ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period.join(' &ndash; ') + '</SPAN>',
+	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	'<CAPTION>оператор: ' + OperatorName + '</CAPTION>',
 	Html.GetHeadRow(Header)
@@ -64,8 +58,7 @@ for (var i=0; !rs.EOF; i++) {
 rs.Close();
 Solaren.Close();
 
-var footer = [
-	'<TR><TH ALIGN="LEFT">Всього: ', i, '</TH>',
+var footer = ['<TR><TH ALIGN="LEFT">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totRetVol.toDelimited(0)),
 	Tag.Write("TH", 2, totPurVol.toDelimited(0)),
 	Tag.Write("TH", 2, totNeedVol.toDelimited(0)),

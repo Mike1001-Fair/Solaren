@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener("pageshow", event => {
-	//console.log(`event.persisted=${event.persisted}`);
 	if (event.persisted) {
 		Loader.Hide();
 	}

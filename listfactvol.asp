@@ -32,16 +32,11 @@ try {
 	Html.SetHead("Звiт", 0);
 }
 
-var Period = [Month.GetPeriod(BegMonth, 0)],
-FinalMonth = Month.GetPeriod(EndMonth, 0),
-totRetVol = 0, totRecVol = 0, totSaldo = 0, totnVol = 0;
-if (BegMonth != EndMonth) {
-	Period.push(FinalMonth);
-}
-
-var Header = ['Рахунок', 'З', 'По', 'Споживач', 'Прийом', 'Видача', 'Покупка', 'Потреби'],
+var Range = Month.GetRange(BegMonth, EndMonth),
+totRetVol = 0, totRecVol = 0, totSaldo = 0, totnVol = 0,
+Header = ['Рахунок', 'З', 'По', 'Споживач', 'Прийом', 'Видача', 'Покупка', 'Потреби'],
 ResponseText = ['\n<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period.join(' &ndash; ') + '</SPAN>',
+	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	Html.GetHeadRow(Header)
 ];
