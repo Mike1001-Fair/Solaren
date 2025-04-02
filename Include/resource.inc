@@ -6,7 +6,7 @@ Resource = {
 	Path: "Resources/",
 
 	Map: function(fileName) {
- 		return this.Path + fileName
+ 		return Server.MapPath(this.Path + fileName)
  	},
 
 	ErrMsg: function(Msg) {
@@ -16,7 +16,7 @@ Resource = {
 	},
 
 	Load: function(fileName) {
-		var FileName = Server.MapPath(this.Map(fileName));
+		var FileName = this.Map(fileName);
 		if (Fso.FileExists(FileName)) {
 			try {
 				if (XmlDoc.load(FileName)) {
