@@ -26,12 +26,13 @@ Solaren = {
 		return rs
 	},
 
-	EOF: function(rs) {
+	EOF: function(rs, msg) {
 		if (rs.EOF) {
 			rs.Close();
 			this.Close();
 			Resource.Load(User.ResourceFile());
-			Message.Write(0, Dictionary.Item("InfoNotFound"));
+			var msgText = msg || Dictionary.Item("InfoNotFound");
+			Message.Write(0, msgText);
 		}
 	},	
 
