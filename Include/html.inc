@@ -290,7 +290,7 @@ Menu = {
 	},
 
 	Write: function(BodyTag) {
-		var FileName = this.Map(User.RoleId);
+		var FileName = this.Map(Session("RoleId"));
 		if (BodyTag) {
 			var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
 			if (Session('MsgText')) {

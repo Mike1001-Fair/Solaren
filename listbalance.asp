@@ -33,11 +33,11 @@ try {
 	Html.SetHead("Баланс", 0);
 }
 
-var Period = Month.GetRange(BegMonth, EndMonth),
+var Range = Month.GetRange(BegMonth, EndMonth),
 totRetVol = totPurVol = totNeedVol = 0,
 Header = ['РЕМ', 'Видача', 'Покупка', 'Потреби'],
 ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	'<CAPTION>оператор: ' + OperatorName + '</CAPTION>',
 	Html.GetHeadRow(Header)

@@ -33,7 +33,6 @@ try {
 		Solaren.Close();
 		Message.Write(2, Dictionary.Item("AuthenticationError"));
 	} else {
-		User.RoleId = rs.Fields("RoleId").value;
 		SessionManager.SetVar(rs);
 		rs.Close();
 		Solaren.Close();

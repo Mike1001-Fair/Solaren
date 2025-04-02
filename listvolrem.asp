@@ -30,11 +30,11 @@ try {
 	Html.SetHead("Звiт", 0);
 }
 
-var Period = Month.GetRange(BegMonth, EndMonth),
+var Range = Month.GetRange(BegMonth, EndMonth),
 totVol = totVolCost = totPdfo = totVz = totPurCost = 0,
 Header = ['кВт&#183;год', 'Вартiсть', 'ПДФО', 'ВЗ', 'До сплати'],
 ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	'<TR><TH ROWSPAN="2">ЦОС</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>',
 	Html.GetHeadRow(Header)
