@@ -21,23 +21,22 @@ try {
 	var rsUser = Solaren.Execute("GetUser", "Користувача не знадено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-with (rsUser) {
-    var CompanyId  = Fields("CompanyId").value,
-	LoginId	   = Fields("LoginId").value,
-	RoleId     = Fields("RoleId").value,
-	LastName   = Fields("LastName").value,
-	FirstName  = Fields("FirstName").value,
-	MiddleName = Fields("MiddleName").value,
-	Phone      = Fields("Phone").value,
-	BranchId   = Fields("BranchId").value,
-	Deleted    = Fields("Deleted").value,
-	Title      = Deleted ? "Перегляд анкети" : "Редагування анкети";
-	Close();
-}
-
-Html.SetPage(Title)%>
+} finally {
+	with (rsUser) {
+		var CompanyId = Fields("CompanyId").value,
+		LoginId	      = Fields("LoginId").value,
+		RoleId        = Fields("RoleId").value,
+		LastName      = Fields("LastName").value,
+		FirstName     = Fields("FirstName").value,
+		MiddleName    = Fields("MiddleName").value,
+		Phone         = Fields("Phone").value,
+		BranchId      = Fields("BranchId").value,
+		Deleted       = Fields("Deleted").value,
+		Title         = Deleted ? "Перегляд анкети" : "Редагування анкети";
+		Close();
+	}
+	Html.SetPage(Title);
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditUser" ACTION="updateuser.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=UserId%>">

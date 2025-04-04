@@ -26,8 +26,7 @@ try {
 			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListVolCost");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -66,8 +65,7 @@ for (var i=0; !rs.EOF; i++) {
 rs.Close();
 Solaren.Close();
 
-var footer = [
-	'<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ', i, '</TH>',
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totVol.toDelimited(0)),
 	Tag.Write("TH", 2, totVolCost.toDelimited(2)),
 	Tag.Write("TH", 2, totPdfo.toDelimited(2)),
