@@ -7,11 +7,12 @@ var Menu = {
 	},
 
 	Write: function(BodyTag) {
-		var page = this.Map(Session("RoleId"));
+		var page = this.Map(Session("RoleId")),
+		msg = Session('MsgText');
 		if (BodyTag) {
 			var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
-			if (Session('MsgText')) {
-				ResponseText.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + Session('MsgText') + '">');
+			if (msg) {
+				ResponseText.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + msg + '">');
 			}
 			Response.Write(ResponseText.join("\n"));
 			Server.Execute(page);

@@ -179,7 +179,7 @@ var Html = {
 	},
 
 	GetHeadRow: function(header) {
-		var row = ['<TR>'];
+		var row = [];
 		if (header instanceof Array) {
 			for (var i = 0; i < header.length; i++) {
 				row.push('<TH>' + header[i] + '</TH>');
@@ -187,8 +187,7 @@ var Html = {
 		} else {
 			row.push('<TH>Invalid header array</TH>');
 		}
-		row.push('</TR>');
-		return row.join("");
+		return Tag.Write('TR', -1, row.join(""))
 	},
 
 	GetFooterRow: function(ColSpan, i) {
