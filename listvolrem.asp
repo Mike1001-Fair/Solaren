@@ -69,3 +69,4 @@ var footer = ['<TR><TH ALIGN="LEFT">Всього: ', i, '</TH>',
 ];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join("\n"))%>
+

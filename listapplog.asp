@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% var Authorized = User.RoleId == 1;
@@ -57,3 +58,4 @@ rs.Close();
 Solaren.Close();
 ResponseText.push(Html.GetFooterRow(2, i));
 Response.Write(ResponseText.join("\n"))%>
+

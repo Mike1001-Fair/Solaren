@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = Session("RoleId") < 2;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
@@ -39,3 +40,4 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 } rs.Close(); Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>
+

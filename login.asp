@@ -7,6 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <% Resource.Load(User.ResourceFile());
 var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd"),

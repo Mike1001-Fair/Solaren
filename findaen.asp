@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 if (Authorized) {
 	with (Html) {
@@ -35,4 +36,5 @@ function SbmForm() {
 	</FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SbmForm()" DISABLED>&#128270;Пошук</BUTTON></FORM></BODY></HTML>
+
 

@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 
@@ -48,3 +49,4 @@ if (rs.EOF) {
 	ResponseText += Html.GetFooterRow(7, i);
 	Response.Write(ResponseText);
 }%>
+

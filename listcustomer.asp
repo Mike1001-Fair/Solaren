@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <% var Authorized = Session("RoleId") == 1,
 CustomerId = Request.Form("CustomerId");
 
@@ -37,3 +38,4 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 } rs.Close(); Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>
+

@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") > 0 && Session("RoleId") < 3,
@@ -66,3 +67,4 @@ ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i +
 	Html.Write("TH","RIGHT") + totVz.toDelimited(2) +
 	Html.Write("TH","RIGHT") + totPurCost.toDelimited(2) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>
+

@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
@@ -41,3 +42,4 @@ if (User.ValidateAccess(Authorized, "GET")) {
 
 <BUTTON TYPE="button" CLASS="SbmBtn" NAME="TestBtn" ID="TestBtn">&#128736;Тест</BUTTON>
 <BUTTON TYPE="button" CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#11015;Завантажити</BUTTON></FORM></BODY></HTML>
+

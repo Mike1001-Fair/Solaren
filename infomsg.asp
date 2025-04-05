@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <% Html.SetHead("Важливо") %>
 
 <STYLE>	OL {text-align: left; font-size: 1em; margin: auto; padding: 0.5em 1em 1em 2em;}

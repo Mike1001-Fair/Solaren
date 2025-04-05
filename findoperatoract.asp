@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
@@ -59,3 +60,4 @@ function SetOperatorName() {
 	</TABLE></FIELDSET>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SetOperatorName()">&#128270;Пошук</BUTTON></FORM></BODY></HTML>
+

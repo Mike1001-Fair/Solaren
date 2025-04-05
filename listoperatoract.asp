@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = Session("RoleId") == 1;
@@ -58,3 +59,4 @@ Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totSaldo.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>
+

@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = Session("RoleId") == 1;
@@ -52,3 +53,4 @@ for (var i=0; !rs.EOF; i++) {
 ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i + 
 Html.Write("TH","RIGHT") + totalQuantity.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>
+

@@ -3,6 +3,7 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -75,3 +76,4 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ', i, '</TH>',
 ];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join("\n"))%>
+

@@ -1,5 +1,6 @@
-﻿<%@ LANGUAGE = "JScript"%> 
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
@@ -16,3 +17,4 @@ Html.SetHead(Msg, 0)%>
 		</FIGURE>
 	</FIELDSET>
 </DIV></BODY></HTML>
+

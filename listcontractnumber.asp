@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = Session("RoleId") == 1;
@@ -46,3 +47,4 @@ ResponseText += '<TR><TH ALIGN="LEFT">Всього: ' + i +
 Html.Write("TH","RIGHT") + totContractNumber.toDelimited(0) +
 Html.Write("TH","RIGHT") + totContractPower.toDelimited(2) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(ResponseText)%>
+

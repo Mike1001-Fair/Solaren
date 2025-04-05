@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
 BegDate = Request.Form("BegDate");
 
@@ -38,3 +39,4 @@ for (var i=0; !rs.EOF; i++) {
 } rs.Close();Solaren.Close();
 ResponseText += Html.GetFooterRow(3, i);
 Response.Write(ResponseText)%>
+

@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = Session("RoleId") == 1;
@@ -42,3 +43,4 @@ if (rs.EOF) {
 	} rs.Close();Solaren.Close();
 	Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="7">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
 }%>
+

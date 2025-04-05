@@ -30,9 +30,11 @@ Solaren = {
 		if (rs.EOF) {
 			rs.Close();
 			this.Close();
-			Resource.Load(User.ResourceFile());
-			var msgText = msg || Dictionary.Item("InfoNotFound");
-			Message.Write(0, msgText);
+			if (!msg) {
+				Resource.Load(User.ResourceFile());
+				var resourceText = Dictionary.Item("InfoNotFound");
+			}
+			Message.Write(0, msg || resourceText);
 		}
 	},	
 

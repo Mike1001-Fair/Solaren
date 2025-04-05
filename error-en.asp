@@ -1,5 +1,6 @@
-﻿<%@ LANGUAGE = "JScript"%> 
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <% Html.SetHead("Message", 0) %>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
@@ -17,3 +18,4 @@
 		</FIGURE>
 	</FIELDSET>
 </DIV></BODY></HTML>
+

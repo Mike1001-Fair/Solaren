@@ -2,6 +2,7 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
+<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 
@@ -54,3 +55,4 @@ for (var i=0; !rs.EOF; i++) {
 Solaren.Close();
 ResponseText.push(Html.GetFooterRow(8, i));
 Response.Write(ResponseText.join("\n"))%>
+

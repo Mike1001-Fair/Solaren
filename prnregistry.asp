@@ -97,3 +97,4 @@ Solaren.Close();
 ResponseText.push(Note.join(PageBreak));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
+

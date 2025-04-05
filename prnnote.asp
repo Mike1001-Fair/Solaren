@@ -143,3 +143,4 @@ OL { margin-top: 1 }</STYLE>
 <TR><TD VALIGN="BOTTOM" ALIGN="LEFT"><SUB>вик: <%=ContractorName%>, &#9990;<%=Phone%></SUB></TD>
 <TD VALIGN="TOP" ALIGN="RIGHT"><SUP><%=ReportDate.formatDate("-")%></SUP>&nbsp;<DIV CLASS="UnderLine"></DIV></TD></TR>
 </TABLE></BODY></HTML>
+
