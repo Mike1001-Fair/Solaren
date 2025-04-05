@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "POST");
-
+	
 with (Request) {
     var GroupId   = Form("GroupId"),
 	GroupName = Form("GroupName"),
@@ -39,14 +39,15 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = ['<A href="edittarif.asp?TarifId=', rs.Fields("Id"), '">', rs.Fields("Tarif").value.toDelimited(2), '</A>'],
+	var url = Html.GetLink("edittarif.asp?TarifId=", rs.Fields("Id"), rs.Fields("Tarif").value.toDelimited(2)),
 	period = [rs.Fields("ExpDateBeg"), rs.Fields("ExpDateEnd")],
-	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("BegDate")),
+	row = [Tag.Write("TD", -1, rs.Fields("BegDate")),
 		Tag.Write("TD", -1, rs.Fields("EndDate")),
 		Tag.Write("TD", -1, period.join(' &ndash; ')),
-		Tag.Write("TD", 2, url.join("")), '</TR>'
-	];
-	ResponseText.push(row.join(""));
+		Tag.Write("TD", 2, url)
+	],
+	tr = Tag.Write("TR", -1, row.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
 }
 rs.Close();
