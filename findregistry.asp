@@ -33,7 +33,7 @@ try {
 	<FIELDSET><LEGEND ALIGN="CENTER">Параметри</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT">Перiод</TD>
-	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=OperMonth%>" MIN="<%=OperMonth%>" MAX="<%=OperMonth%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=Month.GetMonth(1)%>" MIN="<%=Month.GetMonth(0)%>" MAX="<%=Month.GetMonth(1)%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Кiлькicть</TD>
 	<TD><INPUT TYPE="number" NAME="CustomerCount" VALUE="80" STEP="1" MIN="30" MAX="999" REQUIRED>
 	<TR><TD ALIGN="RIGHT">Керiвник</TD>

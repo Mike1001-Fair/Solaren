@@ -12,8 +12,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var CustomerId = String(Form("CustomerId")),
-	PAN        = String(Form("PAN"));
+    var CustomerId = Form("CustomerId"),
+	PAN = Form("PAN");
 }
 
 try {
@@ -46,15 +46,16 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("StreetName"),
 		rs.Fields("HouseId")
 	],
-	url = Html.GetLink("editcontract.asp?ContractId=", rs.Fields("ContractId"), rs.Fields("PAN"));
-	row = ['<TR>', Tag.Write("TD", -1, url),
+	url = Html.GetLink("editcontract.asp?ContractId=", rs.Fields("ContractId"), rs.Fields("PAN")),
+	row = [Tag.Write("TD", -1, url),
 		Tag.Write("TD", 0, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, ContractAddress.join(" ")),
 		Tag.Write("TD", -1, rs.Fields("ContractDate")),
 		Tag.Write("TD", -1, rs.Fields("BranchName")),
-		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1)), '</TR>'
-	];
-	ResponseText.push(row.join(""));
+		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1))
+	],
+	tr = Tag.Write("TR", -1, row.join(""));
+	ResponseText.push(tr);
 	totPwr += rs.Fields("ContractPower");
 	rs.MoveNext();
 }

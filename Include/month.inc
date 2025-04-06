@@ -68,10 +68,11 @@ var Month = {
 		return result.join(" ");
 	},
 
-	GetRange: function(BegMonth, EndMonth) {
-		var range = [this.GetPeriod(BegMonth, 0)];
-		if (BegMonth != EndMonth) {
-			range.push(this.GetPeriod(EndMonth, 0));
+	GetRange: function(BegDate, EndDate) {
+		var isDate = BegDate.isDate() && EndDate.isDate(),
+		range = [isDate ? BegDate.formatDate("-") : this.GetPeriod(BegDate, 0)];
+		if (BegDate != EndDate) {
+			range.push(isDate ? EndDate.formatDate("-") : this.GetPeriod(EndDate, 0));
 		}
 		return range.join(' &ndash; ');
 	},

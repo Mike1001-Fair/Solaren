@@ -41,13 +41,14 @@ ResponseText = ['<BODY CLASS="MainBody">',
 
 for (var i=0; !rs.EOF; i++) {
 	var url = Html.GetLink("edituser.asp?UserId=", rs.Fields("Id"), rs.Fields("LoginId")),
-	row = ['<TR>', Tag.Write("TD", -1, url),
+	row = [Tag.Write("TD", -1, url),
 		Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
 		Tag.Write("TD", 1, rs.Fields("UserIP")),
 		Tag.Write("TD", -1, rs.Fields("LastLogin")),
-		Tag.Write("TD", -1, rs.Fields("UserAgent")), '</TR>'
-	];
-	ResponseText.push(row.join(""));
+		Tag.Write("TD", -1, rs.Fields("UserAgent"))
+	],
+	tr = Tag.Write("TR", -1, row.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
 }
 rs.Close();

@@ -44,10 +44,10 @@ try {
 			Append(CreateParameter("Pdfo", adCurrency, adParamOutput, 16, 0));
 			Append(CreateParameter("Vz", adCurrency, adParamOutput, 16, 0));
 
-		        Append(CreateParameter("TreasuryName", adVarChar, adParamOutput, 50, ""));
-		        Append(CreateParameter("TreasuryCode", adVarChar, adParamOutput, 10, ""));
-		        Append(CreateParameter("TreasuryAccount", adVarChar, adParamOutput, 30, ""));
-		        Append(CreateParameter("TreasuryMfo", adVarChar, adParamOutput, 10, ""));
+	        Append(CreateParameter("TreasuryName", adVarChar, adParamOutput, 50, ""));
+	        Append(CreateParameter("TreasuryCode", adVarChar, adParamOutput, 10, ""));
+	        Append(CreateParameter("TreasuryAccount", adVarChar, adParamOutput, 30, ""));
+	        Append(CreateParameter("TreasuryMfo", adVarChar, adParamOutput, 10, ""));
 
 			Append(CreateParameter("TopChiefTitle3", adVarChar, adParamOutput, 50, ""));
 			Append(CreateParameter("TopChiefName3", adVarChar, adParamOutput, 50, ""));
@@ -143,4 +143,3 @@ OL { margin-top: 1 }</STYLE>
 <TR><TD VALIGN="BOTTOM" ALIGN="LEFT"><SUB>вик: <%=ContractorName%>, &#9990;<%=Phone%></SUB></TD>
 <TD VALIGN="TOP" ALIGN="RIGHT"><SUP><%=ReportDate.formatDate("-")%></SUP>&nbsp;<DIV CLASS="UnderLine"></DIV></TD></TR>
 </TABLE></BODY></HTML>
-

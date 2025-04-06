@@ -6,6 +6,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.ValidateAccess(Authorized, "POST");
 	
@@ -40,10 +41,14 @@ ResponseText = ['<BODY CLASS="MainBody">',
 
 for (var i=0; !rs.EOF; i++) {
 	var url = Html.GetLink("edittarif.asp?TarifId=", rs.Fields("Id"), rs.Fields("Tarif").value.toDelimited(2)),
-	period = [rs.Fields("ExpDateBeg"), rs.Fields("ExpDateEnd")],
-	row = [Tag.Write("TD", -1, rs.Fields("BegDate")),
-		Tag.Write("TD", -1, rs.Fields("EndDate")),
-		Tag.Write("TD", -1, period.join(' &ndash; ')),
+	BegDate = Month.GetYMD(rs.Fields("BegDate").value),
+	EndDate = Month.GetYMD(rs.Fields("EndDate").value),
+	ExpDateBeg = Month.GetYMD(rs.Fields("ExpDateBeg").value),
+	ExpDateEnd = Month.GetYMD(rs.Fields("ExpDateEnd").value),
+	range = Month.GetRange(ExpDateBeg, ExpDateEnd),
+	row = [Tag.Write("TD", -1, BegDate.formatDate("-")),
+		Tag.Write("TD", -1, EndDate.formatDate("-")),
+		Tag.Write("TD", -1, range),
 		Tag.Write("TD", 2, url)
 	],
 	tr = Tag.Write("TR", -1, row.join(""));
