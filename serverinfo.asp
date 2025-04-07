@@ -21,8 +21,9 @@ var ServerInfo = {
 
 	AddRow: function(Key, Value) {
 		if (Value != "") {
-			var row = ['<TR>', Tag.Write("TD", 2, Key), Tag.Write("TD", 0, Value), '</TR>'];
-			this.Text.push(row.join(""));
+			var td = [Tag.Write("TD", 2, Key), Tag.Write("TD", 0, Value)],
+			tr = Tag.Write("TR", -1, td.join(""));
+			this.Text.push(tr);
 		}
 	},
 

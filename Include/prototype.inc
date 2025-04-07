@@ -26,9 +26,7 @@ with (String) {
 		return result
 	}
 
-
 	prototype.isDate = function () {
-		//return /^(?:\d{4}-\d{2}-\d{2}|\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})$/.test(this);
 		return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2})?$/.test(this)
 	}
 

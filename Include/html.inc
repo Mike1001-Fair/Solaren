@@ -57,13 +57,14 @@ var Html = {
 			'<TABLE CLASS="RulesAllInfo">',
 			this.GetHeadRow(Header)
 		];
-		for (var row; !rs.EOF; rs.MoveNext()) {
-			row = ['<TR>', Tag.Write("TD", 0, rs.Fields("BaseName")),
+		for (; !rs.EOF; rs.MoveNext()) {
+			var row = [Tag.Write("TD", 0, rs.Fields("BaseName")),
 				Tag.Write("TD", 0, rs.Fields("FilesName")),
 				Tag.Write("TD", -1, rs.Fields("FileState")),
-				Tag.Write("TD", 2, rs.Fields("FileSize")), '</TR>'
-			];
-			ResponseText.push(row.join(""));
+				Tag.Write("TD", 2, rs.Fields("FileSize")),
+			],
+			tr = Tag.Write("TR", -1, row.join(""));
+			ResponseText.push(tr);
 		} rs.Close();
 		ResponseText.push('</TABLE></FIELDSET></DIV>');
 		Response.Write(ResponseText.join("\n"))
