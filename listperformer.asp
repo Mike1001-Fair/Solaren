@@ -28,17 +28,24 @@ try {
 	Html.SetPage("Виконавці");
 }
 
-Response.Write('<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Список виконавців</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' + 
-	'<TR><TH>Логін</TH><TH>ПIБ</TH><TH>Телефон</TH><TH>ЦОС</TH></TR>\n');
-for (var i=0; !rs.EOF; i++) {
-	Response.Write('<TR><TD><A href="editperformer.asp?PerformerId=' + rs.Fields("Id") + '">' + rs.Fields("LoginId") + '</A></TD>' + 
-	Html.Write("TD","") + rs.Fields("UserName") + 
-	Html.Write("TD","") + rs.Fields("Phone") +
-	Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n');
-	rs.MoveNext();
-} rs.Close();Solaren.Close();
-Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
-%>
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>Логін</TH><TH>ПIБ</TH><TH>Телефон</TH><TH>ЦОС</TH></TR>'
+];
 
+for (var i=0; !rs.EOF; i++) {
+	var url = Html.GetLink("editperformer.asp?PerformerId=", rs.Fields("Id"), rs.Fields("LoginId")),
+	td = [Tag.Write("TD", 0, url),
+		Tag.Write("TD", 0, rs.Fields("UserName")),
+		Tag.Write("TD", 0, rs.Fields("Phone")),
+		Tag.Write("TD", 0, rs.Fields("BranchName"))
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
+	rs.MoveNext();
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(4, i));
+Response.Write(ResponseText.join("\n"))%>

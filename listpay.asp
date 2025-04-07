@@ -34,30 +34,27 @@ try {
 	Html.SetPage("Список оплат")
 }
 
-var Period = [BegDate.formatDate("-")],
-totalPay   = 0;
-if (BegDate != EndDate) {
-	Period.push(EndDate.formatDate("-"));
-}
-
-var Header = ['Дaта', 'Сума'],
+var range = Month.GetRange(BegDate, EndDate),
+totalPay = 0,
+Header = ['Дaта', 'Сума'],
 ResponseText = ['<BODY CLASS="MainBody">',
 	'<TABLE CLASS="H3Text">',
 	Tag.Write("CAPTION", -1, Html.Title),
 	'<TR>' + Tag.Write("TD", 2, 'Споживач:') + Tag.Write("TD", 0, ContractName) + '</TR>',
-	'<TR>' + Tag.Write("TD", 2, 'Період:') + Tag.Write("TD", 0, Period.join(' &ndash; ')) + '</TR>',
+	'<TR>' + Tag.Write("TD", 2, 'Період:') + Tag.Write("TD", 0, range) + '</TR>',
 	'</TABLE>',
 	'<TABLE CLASS="InfoTable">',
 	Html.GetHeadRow(Header)
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = ['<A href="editpay.asp?PayId=', rs.Fields("PayId"), '">', rs.Fields("PaySum").value.toDelimited(2), '</A>'],
+	var url = Html.GetLink("editpay.asp?PayId=", rs.Fields("PayId"), rs.Fields("PaySum").value.toDelimited(2)),
 	PayDate = Month.GetYMD(rs.Fields("PayDate").value),
-	row = ['<TR>', Tag.Write("TD", -1, PayDate.formatDate("-")),
-		Tag.Write("TD", 2, url.join("")), '</TR>'
-	];
-	ResponseText.push(row.join(""));
+	td =  [Tag.Write("TD", -1, PayDate.formatDate("-")),
+		Tag.Write("TD", 2, url)
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	totalPay += rs.Fields("PaySum").value;
 	rs.MoveNext();
 }

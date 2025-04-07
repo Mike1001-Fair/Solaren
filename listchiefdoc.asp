@@ -19,20 +19,26 @@ try {
 	var rs = Solaren.Execute("ListChiefDoc");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Документи керівника")
 }
 
-Html.SetPage("Документи керівника")
-
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>№</TH><TH>Назва</TH></TR>\n';
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>№</TH><TH>Назва</TH></TR>'
+];
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
-	Html.Write("TD","LEFT") + '<A HREF="editchiefdoc.asp?DocId=' + rs.Fields("Id") + '">' + rs.Fields("DocName") + '</A></TD></TR>\n';
+	var url = Html.GetLink("editchiefdoc.asp?DocId=", rs.Fields("Id"), rs.Fields("DocName")),
+	td =  [Tag.Write("TD", 1, rs.Fields("SortCode")),
+		Tag.Write("TD", 0, url)
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
-ResponseText += Html.GetFooterRow(2, i);
-Response.Write(ResponseText)%>
-
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(2, i));
+Response.Write(ResponseText.join("\n"))%>

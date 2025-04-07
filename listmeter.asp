@@ -39,17 +39,18 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = ['<A href="editmeter.asp?MeterId=', rs.Fields("Id"), '">', rs.Fields("Code"), '</A>'],
-	row = ['<TR>', Tag.Write("TD", 9, rs.Fields("PAN")),
+	var url = Html.GetLink("editmeter.asp?MeterId=", rs.Fields("Id"), rs.Fields("Code")),
+	td = [Tag.Write("TD", 9, rs.Fields("PAN")),
 		Tag.Write("TD", 0, rs.Fields("CustomerName")),
-		Tag.Write("TD", 2, url.join("")),
+		Tag.Write("TD", 2, url),
 		Tag.Write("TD", -1, rs.Fields("SetDate")),
 		Tag.Write("TD", -1, rs.Fields("Capacity")),
 		Tag.Write("TD", -1, rs.Fields("kTransForm")),
 		Tag.Write("TD", -1, rs.Fields("RecVal")),
-		Tag.Write("TD", -1, rs.Fields("RetVal")), '</TR>'
+		Tag.Write("TD", -1, rs.Fields("RetVal"))
 	];
-	ResponseText.push(row.join(""));
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
 } rs.Close();
 Solaren.Close();

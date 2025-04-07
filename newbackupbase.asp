@@ -13,12 +13,12 @@ try {
 	var rs = Solaren.Execute("GetBaseInfo");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-Html.SetPage("Резервна копія")%>
+} finally {
+	Html.SetPage("Резервна копія")
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="BackupBase" ACTION="runbackupbase.asp" METHOD="post">
-<H3 CLASS="HeadText">Резервна копія</H3>
+<H3 CLASS="HeadText"><%=Html.Title%></H3>
 <% Html.WriteBaseInfo(rs);
 Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Створити</BUTTON>

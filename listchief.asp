@@ -19,25 +19,27 @@ try {
 	var rs = Solaren.Execute("ListChief");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Керiвники")
 }
 
-Html.SetPage("Керiвники")
-
-var ResponseText = ['<BODY CLASS="MainBody">\n',
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>\n',
-	'<TABLE CLASS="InfoTable">\n',
-	'<TR><TH>Посада</TH><TH>ПIБ</TH></TR>\n'
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>Посада</TH><TH>ПIБ</TH></TR>'
 ];
 
 for (var i=0, row; !rs.EOF; i++) {
-	row = ['<TR><TD>', rs.Fields("Title1"), '</TD>',
-		Html.Write("TD",""),
-		'<A href="editchief.asp?ChiefId=', rs.Fields("Id"), '">', rs.Fields("Name1"), '</A>',
-		'</TD></TR>\n'
-	];
-	ResponseText.push(row.join(""));
+	var url = Html.GetLink("editchief.asp?ChiefId=", rs.Fields("Id"), rs.Fields("Name1")),
+	td =  [Tag.Write("TD", 0, rs.Fields("Title1")),
+		Tag.Write("TD", 0, url)
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
+}
+rs.Close();
+Solaren.Close();
 ResponseText.push(Html.GetFooterRow(2, i));
-Response.Write(ResponseText.join(""))%>
+Response.Write(ResponseText.join("\n"))%>
 

@@ -3,10 +3,12 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
 BegDate = Request.Form("BegDate");
+User.ValidateAccess(Authorized, "POST");
 
-if (!Authorized) Message.Write(2, "Помилка авторизації");
 try {
 	Solaren.SetCmd("ListPdfo");
 	with (Cmd) {
@@ -14,28 +16,31 @@ try {
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListPdfo");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Ставка ПДФО");
 }
 
-with (Html) {
-	SetHead("Ставка ПДФО");
-	Menu.Write(Session("RoleId"), 0);
-}
+var ResponseText = ['<BODY CLASS="MainBody">',
+	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+	'<TABLE CLASS="InfoTable">',
+	'<TR><TH>Дiє з</TH><TH>по</TH><TH>Ставка</TH></TR>'
+];
 
-var ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Ставка ПДФО</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>Дiє з</TH><TH>по</TH><TH>Ставка</TH></TR>\n';
-
-for (var i=0, pdfotax; !rs.EOF; i++) {	
-	ResponseText += '<TR><TD ALIGN="CENTER">' + rs.Fields("BegDate") +
-	Html.Write("TD","") + rs.Fields("EndDate") +
-	Html.Write("TD","RIGHT") + '<A HREF="editpdfo.asp?PdfoId=' + rs.Fields("Id") + '">' + rs.Fields("PdfoTax") + '</A></TD></TR>\n';
+for (var i=0; !rs.EOF; i++) {	
+	var url = Html.GetLink("editpdfo.asp?PdfoId=", rs.Fields("Id"), rs.Fields("PdfoTax")),
+	td = [Tag.Write("TD", -1, rs.Fields("BegDate")),
+		Tag.Write("TD", -1, rs.Fields("EndDate")),
+		Tag.Write("TD", 2, url)
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
-ResponseText += Html.GetFooterRow(3, i);
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Solaren.Close();
+ResponseText.push(Html.GetFooterRow(3, i));
+Response.Write(ResponseText.join("\n"))%>
 
