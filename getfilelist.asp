@@ -5,28 +5,24 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 3,
-FolderName = Request.QueryString("FolderName"),
-JsonResponse = Authorized ? '{"files":' : '{"files":[0]}';
+FolderName = Request.QueryString("FolderName");
 
 if (Authorized) {
 	try {
-		//var Fso = Server.CreateObject("Scripting.FileSystemObject"),
+		var result = ['{"files":'],
 		FolderPath = Server.MapPath(FolderName);
 		if (Fso.FolderExists(FolderPath)) {			
 			var Folder = Fso.GetFolder(FolderPath);
-			JsonResponse +=	Json.toString(Folder.Files);
-			//JsonResponse = Json.stringify(Folder.Files);
+			result.push(Json.toString(Folder.Files));
 		} else {
-			JsonResponse += '[-1]';
+			result.push('[-1]');
 		}
-		JsonResponse += '}';
+		result.push('}');
+		Json.data =	result.join("");
 	} catch (ex) {
 		Message.Write(3, Message.Error(ex));
 	}
+} else {
+	Json.data = '{"files":[0]}';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
+Json.write()%>
