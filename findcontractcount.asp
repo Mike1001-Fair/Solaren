@@ -10,7 +10,7 @@
 User.ValidateAccess(Authorized, "GET")
 Html.SetPage("Кiлькiсть договорiв")%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="FindContractNumber" ACTION="listcontractnumber.asp" METHOD="post" TARGET="_blank">
+<FORM CLASS="ValidForm" NAME="FindContractCount" ACTION="listcontractcount.asp" METHOD="post" TARGET="_blank">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>

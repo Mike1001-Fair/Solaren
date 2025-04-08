@@ -65,7 +65,7 @@ if (!User.Authorize(1)) {
 			<LI class="divider"><A href="findnote.asp">Службовий лист</A></LI>
 			<LI><A href="findvolrem.asp">Вартicть по ЦОС</A></LI>
 			<LI><A href="findvolpay.asp">Енергозбереження</A></LI>
-			<LI><A href="findcontractnumber.asp">Кiлькiсть договорiв</A></LI>
+			<LI><A href="findcontractcount.asp">Кiлькiсть договорiв</A></LI>
 
 			<LI class="divider"><A href="findhistory.asp">Iсторiя розрахункiв</A></LI>
 			<LI><A href="findtarifvol.asp">Обсяги по тарифам</A></LI>
