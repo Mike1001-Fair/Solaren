@@ -3,10 +3,10 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId > 0 && User.RoleId < 3,
-QueryName     = Request.QueryString("QueryName"),
-JsonResponse  = '[{"ContractId":0}]';
+QueryName = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {
@@ -18,18 +18,15 @@ if (Authorized) {
 				Append(CreateParameter("ContractData", adVarChar, adParamOutput, 8000, ""));
 			} Execute(adExecuteNoRecords);
 		}
-		JsonResponse = Cmd.Parameters.Item("ContractData").value;
+		Json.data = Cmd.Parameters.Item("ContractData").value;
 	} catch (ex) {
-		JsonResponse = '[{"ContractId":-2}]';
+		Json.data = '[{"ContractId":-2}]';
 		Session("ScriptName") = Solaren.ScriptName;
 		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
+} else {
+	Json.data  = '[{"ContractId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
+Json.write()%>

@@ -3,10 +3,10 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-JsonResponse  = '[{"LocalityId":0}]',
-QueryName     = Request.QueryString("QueryName");
+QueryName = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {
@@ -17,19 +17,16 @@ if (Authorized) {
 				Append(CreateParameter("LocalityData", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);
-			JsonResponse = Parameters.Item("LocalityData").value;
+			Json.data = Parameters.Item("LocalityData").value;
 		}
 	} catch (ex) {
-		JsonResponse = '[{"LocalityId":-2}]';
+		Json.data = '[{"LocalityId":-2}]';
 		Session("ScriptName") = Solaren.ScriptName;
 		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
+} else {
+	Json.data  = '[{"LocalityId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
+Json.write()%>

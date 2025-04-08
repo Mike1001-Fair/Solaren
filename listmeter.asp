@@ -10,8 +10,8 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var ContractId = String(Form("ContractId")),
-	MeterCode  = String(Form("MeterCode"));
+    var ContractId = Form("ContractId"),
+	MeterCode  = Form("MeterCode");
 }
 
 try {
@@ -48,7 +48,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", -1, rs.Fields("kTransForm")),
 		Tag.Write("TD", -1, rs.Fields("RecVal")),
 		Tag.Write("TD", -1, rs.Fields("RetVal"))
-	];
+	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
 	rs.MoveNext();

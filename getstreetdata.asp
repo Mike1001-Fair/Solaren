@@ -3,10 +3,10 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-JsonResponse   = '[{"StreetId":0}]',
-QueryName      = Request.QueryString("QueryName");
+QueryName = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {
@@ -17,20 +17,17 @@ if (Authorized) {
 				Append(CreateParameter("StreetData", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);
-			JsonResponse = Parameters.Item("StreetData").value;
+			Json.data = Parameters.Item("StreetData").value;
 		}
 	} catch (ex) {
-		JsonResponse = '[{"StreetId":-2}]';
+		Json.data = '[{"StreetId":-2}]';
 		Session("ScriptName") = Solaren.ScriptName;
 		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
+} else {
+	Json.data  = '[{"StreetId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
+Json.write()%>
 

@@ -3,10 +3,10 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId == 1,
-QueryName     = Request.QueryString("QueryName"),
-JsonResponse  = '[{"CustomerId":0}]';
+QueryName     = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {
@@ -15,18 +15,18 @@ if (Authorized) {
 			with (Parameters) {
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
 				Append(CreateParameter("CustomerData", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
 		}
-		JsonResponse = Cmd.Parameters.Item("CustomerData").value;
+		Json.data = Cmd.Parameters.Item("CustomerData").value;
 	} catch (ex) {
-		Message.Write(3, Message.Error(ex));
+		Json.data = '[{"CustomerId":-2}]';
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
+} else {
+	Json.data  = '[{"CustomerId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
+Json.write()%>

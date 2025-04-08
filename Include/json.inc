@@ -1,5 +1,7 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Json = {
+	data: "",
+
 	toString: function (obj) {
 		var JsonString = ['['];		
 		if (Solaren.ValidObject(obj)) {
@@ -14,6 +16,14 @@ var Json = {
 		}
 		JsonString.push(']');
 		return JsonString.join("");
+	},
+
+	write: function() {
+		with (Response) {
+			CacheControl = "no-cache, no-store, must-revalidate";
+			AddHeader("Content-Type","application/json");
+			Write(this.data);
+		}
 	},
 
 	parse: function (text) {

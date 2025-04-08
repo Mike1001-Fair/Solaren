@@ -3,10 +3,10 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId > 0 && User.RoleId < 3,
-JsonResponse  = '[{"MeterId":0}]',
-ContractId    = Request.QueryString("ContractId");
+ContractId = Request.QueryString("ContractId");
 
 if (Authorized) {
 	try {
@@ -15,20 +15,18 @@ if (Authorized) {
 			with (Parameters) {
 				Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
 				Append(CreateParameter("MeterList", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
 		}
-		JsonResponse = Cmd.Parameters.Item("MeterList").value;
+		Json.data = Cmd.Parameters.Item("MeterList").value;
 	} catch (ex) {
-		Message.Write(3, Message.Error(ex));
+		Json.data = '[{"MeterId":-2}]';
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
+} else {
+	Json.data  = '[{"MeterId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	Expires = -9;
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
-
+Json.write()%>

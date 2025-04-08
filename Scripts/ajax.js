@@ -272,13 +272,14 @@ const Ajax = {
 			fetch(`getlocalityinfo.asp?LocalityId=${LocalityId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
-				if (data[0].LocalityId > 0) {
-					Ajax.SetLocalityInfo(data);
-				} else if (data[0].LocalityId == 0) {
-					this.accessDenied()
+				if (!Redirect.go(data[0].LocalityId)) {
+					this.SetLocalityInfo(data);
 				}
 			})
 			.catch((error) => this.errFetchMsg(error));
+		} else {
+			LocalityId.value = -1;
+			LocalityName.title = this.noDataMsg;
 		}
 		return false
 	},
@@ -288,13 +289,14 @@ const Ajax = {
 			fetch(`getstreetinfo.asp?StreetId=${StreetId}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
-				if (data[0].StreetId > 0) {
-					Ajax.SetStreetInfo(data);
-				} else if (data[0].StreetId == 0) {
-					this.accessDenied()
+				if (!Redirect.go(data[0].StreetId)) {
+					this.SetStreetInfo(data);
 				}
 			})
 			.catch((error) => this.errFetchMsg(error));
+		} else {
+			StreetId.value = -1;
+			StreetName.title = this.noDataMsg;
 		}
 		return false
 	},
@@ -310,7 +312,7 @@ const Ajax = {
 			fetch(`getstreetdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
-				if (!Redirect.go(data[0].LocalityId)) {
+				if (!Redirect.go(data[0].StreetId)) {
 					this.SetStreetList(data);
 				}
 			})

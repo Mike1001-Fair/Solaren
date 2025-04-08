@@ -3,11 +3,11 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId > 0 && User.RoleId < 3,
-JsonResponse  = '[{"MeterId":0}]',
-ReportDate    = Request.QueryString("ReportDate"),
-MeterId       = Request.QueryString("MeterId");
+ReportDate = Request.QueryString("ReportDate"),
+MeterId    = Request.QueryString("MeterId");
 
 if (Authorized) {
 	try {
@@ -17,20 +17,18 @@ if (Authorized) {
 				Append(CreateParameter("ReportDate", adVarChar, adParamInput, 10, ReportDate));
 				Append(CreateParameter("MeterId", adInteger, adParamInput, 10, MeterId));
 				Append(CreateParameter("MeterInfo", adVarChar, adParamOutput, 800, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
 		}
-		JsonResponse = Cmd.Parameters.Item("MeterInfo").value;
+		Json.data = Cmd.Parameters.Item("MeterInfo").value;
 	} catch (ex) {
-		Message.Write(3, Message.Error(ex));
+		Json.data = '[{"MeterId":-2}]';
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
+} else {
+	Json.data  = '[{"MeterId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	Expires = -9;
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
-
+Json.write()%>

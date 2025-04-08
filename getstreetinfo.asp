@@ -1,10 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized    = RoleId < 2,
-JsonResponse  = '[{"StreetId":0}]',
-StreetId      = Request.QueryString("StreetId");
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
+<%
+var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+StreetId = Request.QueryString("StreetId");
 
 if (Authorized) {
 	try {
@@ -13,21 +15,19 @@ if (Authorized) {
 			with (Parameters) {
 				Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, StreetId));
 				Append(CreateParameter("StreetInfo", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
 		}
-		JsonResponse = Cmd.Parameters.Item("StreetInfo").value;
+		Json.data = Cmd.Parameters.Item("StreetInfo").value;
 	} catch (ex) {
-		Message.Write(3, Message.Error(ex));
+		Json.data = '[{"StreetId":-2}]';
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
 } else {
-	Session("SysMsg") = "Помилка авторизації";
+	Json.data  = '[{"StreetId":0}]';
 }
+Json.write()%>
 
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	Expires = -9;
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
