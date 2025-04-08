@@ -29,6 +29,6 @@ if (Authorized) {
 		Solaren.Close();
 	}
 } else {
-	Json.data  = '[{"MeterId":0}]';
+	Json.data = '[{"MeterId":0}]';
 }
 Json.write()%>

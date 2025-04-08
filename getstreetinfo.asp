@@ -27,7 +27,7 @@ if (Authorized) {
 		Solaren.Close();
 	}
 } else {
-	Json.data  = '[{"StreetId":0}]';
+	Json.data = '[{"StreetId":0}]';
 }
 Json.write()%>
 

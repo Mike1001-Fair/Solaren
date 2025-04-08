@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId == 1,
-QueryName     = Request.QueryString("QueryName");
+QueryName = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {
@@ -27,6 +27,6 @@ if (Authorized) {
 		Solaren.Close();
 	}
 } else {
-	Json.data  = '[{"CustomerId":0}]';
+	Json.data = '[{"CustomerId":0}]';
 }
 Json.write()%>

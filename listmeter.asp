@@ -52,8 +52,8 @@ for (var i=0; !rs.EOF; i++) {
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
 	rs.MoveNext();
-} rs.Close();
+}
+rs.Close();
 Solaren.Close();
 ResponseText.push(Html.GetFooterRow(8, i));
 Response.Write(ResponseText.join("\n"))%>
-

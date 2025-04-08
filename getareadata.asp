@@ -27,6 +27,6 @@ if (Authorized) {
 		Solaren.Close();
 	}
 } else {
-	Json.data  = '[{"AreaId":0}]';
+	Json.data = '[{"AreaId":0}]';
 }
 Json.write()%>
