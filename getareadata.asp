@@ -1,10 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var RoleId = Session("RoleId"),
-Authorized    = RoleId < 2,
-QueryName     = Request.QueryString("QueryName"),
-JsonResponse  = '[{"AreaId":0}]';
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/json.inc" -->
+<%
+var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+QueryName = Request.QueryString("QueryName");
 
 if (Authorized) {
 	try {
@@ -13,20 +15,18 @@ if (Authorized) {
 			with (Parameters) {
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
 				Append(CreateParameter("AreaData", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
 		}
-		JsonResponse = Cmd.Parameters.Item("AreaData").value;
+		Json.data = Cmd.Parameters.Item("AreaData").value;
 	} catch (ex) {
-		Message.Write(3, Message.Error(ex));
+		Json.data = '[{"AreaId":-2}]';
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
 	} finally {
 		Solaren.Close();
 	}
 } else {
-	Session("SysMsg") = "Помилка авторизації";
+	Json.data  = '[{"AreaId":0}]';
 }
-
-with (Response) {
-	CacheControl = "no-cache, no-store, must-revalidate";
-	AddHeader("Content-Type","application/json");
-	Write(JsonResponse);
-}%>
+Json.write()%>

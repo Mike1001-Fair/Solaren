@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 3,
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 FolderName = Request.QueryString("FolderName");
 
 if (Authorized) {
@@ -12,8 +12,9 @@ if (Authorized) {
 		var result = ['{"files":'],
 		FolderPath = Server.MapPath(FolderName);
 		if (Fso.FolderExists(FolderPath)) {			
-			var Folder = Fso.GetFolder(FolderPath);
-			result.push(Json.toString(Folder.Files));
+			var Folder = Fso.GetFolder(FolderPath),
+			list = Json.toString(Folder.Files);
+			result.push(list);
 		} else {
 			result.push('[-1]');
 		}
