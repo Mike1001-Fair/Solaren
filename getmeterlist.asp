@@ -20,9 +20,7 @@ if (Authorized) {
 		}
 		Json.data = Cmd.Parameters.Item("MeterList").value;
 	} catch (ex) {
-		Json.data = '[{"MeterId":-2}]';
-		Session("ScriptName") = Solaren.ScriptName;
-		Session("SysMsg") = Message.Error(ex);
+		Json.error(ex, '[{"MeterId":-2}]')
 	} finally {
 		Solaren.Close();
 	}

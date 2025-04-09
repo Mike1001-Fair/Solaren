@@ -20,9 +20,7 @@ if (Authorized) {
 			Json.data = Parameters.Item("LocalityData").value;
 		}
 	} catch (ex) {
-		Json.data = '[{"LocalityId":-2}]';
-		Session("ScriptName") = Solaren.ScriptName;
-		Session("SysMsg") = Message.Error(ex);
+		Json.error(ex, '[{"LocalityId":-2}]')
 	} finally {
 		Solaren.Close();
 	}

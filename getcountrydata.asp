@@ -20,9 +20,7 @@ if (Authorized) {
 		}
 		Json.data = Cmd.Parameters.Item("CountryData").value;
 	} catch (ex) {
-		Json.data = '[{"CountryId":-2}]';
-		Session("ScriptName") = Solaren.ScriptName;
-		Session("SysMsg") = Message.Error(ex);
+		Json.error(ex, '[{"CountryId":-2}]')
 	} finally {
 		Solaren.Close();
 	}
@@ -30,4 +28,3 @@ if (Authorized) {
 	Json.data = '[{"CountryId":0}]';
 }
 Json.write()%>
-

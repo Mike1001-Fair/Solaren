@@ -20,9 +20,7 @@ if (Authorized) {
 		}
 		Json.data = Cmd.Parameters.Item("StreetInfo").value;
 	} catch (ex) {
-		Json.data = '[{"StreetId":-2}]';
-		Session("ScriptName") = Solaren.ScriptName;
-		Session("SysMsg") = Message.Error(ex);
+		Json.error(ex, '[{"StreetId":-2}]')
 	} finally {
 		Solaren.Close();
 	}

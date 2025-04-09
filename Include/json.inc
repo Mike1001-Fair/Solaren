@@ -26,6 +26,12 @@ var Json = {
 		}
 	},
 
+	error: function(ex, errCode) {
+		this.data = errCode;
+		Session("ScriptName") = Solaren.ScriptName;
+		Session("SysMsg") = Message.Error(ex);
+	},
+
 	parse: function (text) {
  		return eval("(" + text + ")");
 	},

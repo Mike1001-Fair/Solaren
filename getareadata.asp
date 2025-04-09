@@ -20,9 +20,7 @@ if (Authorized) {
 		}
 		Json.data = Cmd.Parameters.Item("AreaData").value;
 	} catch (ex) {
-		Json.data = '[{"AreaId":-2}]';
-		Session("ScriptName") = Solaren.ScriptName;
-		Session("SysMsg") = Message.Error(ex);
+		Json.error(ex, '[{"AreaId":-2}]')
 	} finally {
 		Solaren.Close();
 	}

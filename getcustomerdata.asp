@@ -20,9 +20,7 @@ if (Authorized) {
 		}
 		Json.data = Cmd.Parameters.Item("CustomerData").value;
 	} catch (ex) {
-		Json.data = '[{"CustomerId":-2}]';
-		Session("ScriptName") = Solaren.ScriptName;
-		Session("SysMsg") = Message.Error(ex);
+		Json.error(ex, '[{"CustomerId":-2}]')
 	} finally {
 		Solaren.Close();
 	}
