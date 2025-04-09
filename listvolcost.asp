@@ -46,16 +46,17 @@ ResponseText = ['<BODY CLASS="PrnBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("BegDate")),
+	var td = [Tag.Write("TD", -1, rs.Fields("BegDate")),
 		Tag.Write("TD", -1,  rs.Fields("EndDate")),
 		Tag.Write("TD", 2, rs.Fields("Tarif").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("Vol").value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("VolCost").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("Pdfo").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("Vz").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2)), '</TR>'
+		Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2))
 	];
-	ResponseText.push(row.join(""));
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	totVol     += rs.Fields("Vol");
 	totVolCost += rs.Fields("VolCost");
 	totPdfo    += rs.Fields("Pdfo");
@@ -66,14 +67,15 @@ for (var i=0; !rs.EOF; i++) {
 rs.Close();
 Solaren.Close();
 
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ', i, '</TH>',
+var th = ['<TH ALIGN="LEFT" COLSPAN="3">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totVol.toDelimited(0)),
 	Tag.Write("TH", 2, totVolCost.toDelimited(2)),
 	Tag.Write("TH", 2, totPdfo.toDelimited(2)),
 	Tag.Write("TH", 2, totVz.toDelimited(2)),
-	Tag.Write("TH", 2, totPurCost.toDelimited(2)),
-	'</TR>\n</TABLE></BODY></HTML>'
-];
-ResponseText.push(footer.join(""));
+	Tag.Write("TH", 2, totPurCost.toDelimited(2))
+],
+tr = Tag.Write("TR", -1, th.join(""));
+ResponseText.push(tr);
+ResponseText.push('</TABLE></BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
 

@@ -55,4 +55,3 @@ rs.Close();
 Solaren.Close();
 ResponseText.push(Html.GetFooterRow(5, i));
 Response.Write(ResponseText.join("\n"))%>
-
