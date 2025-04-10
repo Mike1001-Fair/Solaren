@@ -16,7 +16,8 @@ if (Authorized) {
 				Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
 				Append(CreateParameter("ContractData", adVarChar, adParamOutput, 8000, ""));
-			} Execute(adExecuteNoRecords);
+			}
+			Execute(adExecuteNoRecords);
 		}
 		Json.data = Cmd.Parameters.Item("ContractData").value;
 	} catch (ex) {
