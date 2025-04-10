@@ -33,7 +33,7 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CustomerName")),
+	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, rs.Fields("ContractPAN")),
 		Tag.Write("TD", -1, rs.Fields("BranchName")), '</TR>'
 	];

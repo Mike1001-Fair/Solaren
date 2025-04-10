@@ -1,52 +1,60 @@
-<%@ LANGUAGE = "JScript"%>
+<%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("ListNoPurVol");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Month.Date[1]));
 		}
 	}
 	var rs = Cmd.Execute();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetPage("Обсяги")
 }
 
 if (rs.EOF) {
+	rs.Close();
 	Message.Write(1, "Помилок не виявлено");
 } else {
-	var Period = Month.GetMonth(1).split("-").reverse().join("-"),
-	ResponseText = '<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Перевiрка обсягiв<SPAN>перiод:' + Period + '</SPAN></H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>З</TH><TH>По</TH></TH><TH>Прийом</TH><TH>Видача</TH><TH>ЦОС</TH></TR>\n';
-
-	with (Html) {
-		SetHead("Обсяги");
-		Menu.Write(Session("RoleId"), 0);
-	}
+	var OperDate = Month.GetMonth(1),
+	Period = Month.GetReverse(OperDate),
+	Header = ['Споживач', 'Рахунок', 'З', 'По', 'Прийом', 'Видача', 'ЦОС'],
+	ResponseText = ['<BODY CLASS="MainBody">',
+		'<H3 CLASS="H3Text">Перевiрка обсягiв<SPAN>перiод: ' + Period + '</SPAN></H3>',
+		'<TABLE CLASS="InfoTable">',
+		Html.GetHeadRow(Header)
+	];
 
 	for (var i=0; !rs.EOF; i++) {
-		ResponseText += '<TR><TD>' + rs.Fields("CustomerName") + 
-		Html.Write("TD","") + rs.Fields("ContractPAN") +
-		Html.Write("TD","") + rs.Fields("BegDate") +
-		Html.Write("TD","") + rs.Fields("EndDate") +
-		Html.Write("TD","RIGHT") + rs.Fields("RecVol").value.toDelimited(0) +
-		Html.Write("TD","RIGHT") + rs.Fields("RetVol").value.toDelimited(0) +
-		Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n';
+		var td = [Tag.Write("TD", -1, rs.Fields("CustomerName")),
+			Tag.Write("TD", -1, rs.Fields("ContractPAN")),
+			Tag.Write("TD", -1, rs.Fields("BegDate")),
+			Tag.Write("TD", -1, rs.Fields("EndDate")),
+			Tag.Write("TD", 2, rs.Fields("RecVol").value.toDelimited(0)),
+			Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
+			Tag.Write("TD", -1, rs.Fields("BranchName"))
+		],
+		tr = Tag.Write("TR", -1, td.join(""));
+		ResponseText.push(tr);
 		rs.MoveNext();
-	} rs.Close();Solaren.Close();
-	ResponseText += Html.GetFooterRow(7, i);
-	Response.Write(ResponseText);
+	}
+	rs.Close();
+	Solaren.Close();
+	ResponseText.push(Html.GetFooterRow(7, i));
+	Response.Write(ResponseText.join("\n"))
 }%>
+
 

@@ -39,7 +39,7 @@ Html.SetPage("Новий договір")%>
 	<TR><TD>
 	<FIELDSET><LEGEND>Загальні</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Споживач</TD>
-	<TD><% Html.WriteInputDataList("Customer", "", 35) %></TD></TR>
+	<TD><% Html.WriteInputDataList("Customer", "", 35, 1) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Рахунок</TD>
 	<TD><INPUT TYPE="TEXT" NAME="PAN" SIZE="9" MAXLENGTH="9" REQUIRED PATTERN="\d{9}"></TD></TR>

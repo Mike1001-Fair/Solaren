@@ -21,7 +21,7 @@ var Json = {
 	write: function() {
 		with (Response) {
 			CacheControl = "no-cache, no-store, must-revalidate";
-			AddHeader("Content-Type","application/json");
+			AddHeader("Content-Type", "application/json");
 			Write(this.data);
 		}
 	},
@@ -77,5 +77,4 @@ var Json = {
 		};
  		return str(obj);
 	}
-};
-%>
+}%>

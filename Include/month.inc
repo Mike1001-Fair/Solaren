@@ -90,6 +90,10 @@ var Month = {
 		return result.toStr(0)
 	},
 
+	GetReverse: function(mstr) {
+		return mstr.split("-").reverse().join("-")
+	},
+
 	WriteDate: function() {
 		var ResponseText = ['<FIELDSET><LEGEND>Дата</LEGEND>',
 			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + this.Date[1] +
