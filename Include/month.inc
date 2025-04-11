@@ -90,7 +90,7 @@ var Month = {
 		return result.toStr(0)
 	},
 
-	GetReverse: function(mstr) {
+	Flip: function(mstr) {
 		return mstr.split("-").reverse().join("-")
 	},
 

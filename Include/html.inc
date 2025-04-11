@@ -58,12 +58,12 @@ var Html = {
 			this.GetHeadRow(Header)
 		];
 		for (; !rs.EOF; rs.MoveNext()) {
-			var row = [Tag.Write("TD", 0, rs.Fields("BaseName")),
+			var td = [Tag.Write("TD", 0, rs.Fields("BaseName")),
 				Tag.Write("TD", 0, rs.Fields("FilesName")),
 				Tag.Write("TD", -1, rs.Fields("FileState")),
 				Tag.Write("TD", 2, rs.Fields("FileSize")),
 			],
-			tr = Tag.Write("TR", -1, row.join(""));
+			tr = Tag.Write("TR", -1, td.join(""));
 			ResponseText.push(tr);
 		} rs.Close();
 		ResponseText.push('</TABLE></FIELDSET></DIV>');

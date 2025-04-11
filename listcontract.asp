@@ -47,23 +47,24 @@ for (var i=totPwr=0; !rs.EOF; i++) {
 		rs.Fields("HouseId")
 	],
 	url = Html.GetLink("editcontract.asp?ContractId=", rs.Fields("ContractId"), rs.Fields("PAN")),
-	row = [Tag.Write("TD", -1, url),
+	td = [Tag.Write("TD", -1, url),
 		Tag.Write("TD", 0, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, ContractAddress.join(" ")),
 		Tag.Write("TD", -1, rs.Fields("ContractDate")),
 		Tag.Write("TD", -1, rs.Fields("BranchName")),
 		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1))
 	],
-	tr = Tag.Write("TR", -1, row.join(""));
+	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
 	totPwr += rs.Fields("ContractPower");
 	rs.MoveNext();
 }
 rs.Close();
 Solaren.Close();
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i,'</TH>',
-	Tag.Write("TH", 2, totPwr.toDelimited(1)), '</TR>\n</TABLE></BODY></HTML>'
+var th = ['<TH ALIGN="LEFT" COLSPAN="5">Всього: ', i,'</TH>',
+	Tag.Write("TH", 2, totPwr.toDelimited(1))
 ];
-ResponseText.push(footer.join(""));
+tr = Tag.Write("TR", -1, th.join(""));
+ResponseText.push(tr);
+ResponseText.push('</TABLE></BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
-

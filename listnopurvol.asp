@@ -1,3 +1,4 @@
+
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
@@ -21,16 +22,15 @@ try {
 	var rs = Cmd.Execute();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-} finally {
-	Html.SetPage("Обсяги")
 }
 
 if (rs.EOF) {
 	rs.Close();
+	Solaren.Close();
 	Message.Write(1, "Помилок не виявлено");
 } else {
 	var OperDate = Month.GetMonth(1),
-	Period = Month.GetReverse(OperDate),
+	Period = Month.Flip(OperDate),
 	Header = ['Споживач', 'Рахунок', 'З', 'По', 'Прийом', 'Видача', 'ЦОС'],
 	ResponseText = ['<BODY CLASS="MainBody">',
 		'<H3 CLASS="H3Text">Перевiрка обсягiв<SPAN>перiод: ' + Period + '</SPAN></H3>',
@@ -54,7 +54,6 @@ if (rs.EOF) {
 	rs.Close();
 	Solaren.Close();
 	ResponseText.push(Html.GetFooterRow(7, i));
+	Html.SetPage("Обсяги")
 	Response.Write(ResponseText.join("\n"))
 }%>
-
-
