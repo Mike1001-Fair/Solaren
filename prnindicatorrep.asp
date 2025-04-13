@@ -27,7 +27,7 @@ function getText(totSaldo) {
 }
 
 with (Request) {
-    var ReportMonth  = String(Form("ReportMonth")),
+    var ReportMonth = String(Form("ReportMonth")),
 	ContractId   = Form("ContractId"),
 	DoubleReport = Form("DoubleReport") == "on";
 }
@@ -94,7 +94,7 @@ for (var i=0; i<=DoubleReport; i++) {
 			'<TR><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
 		];
 				
-		for (var row; !rs.EOF; rs.MoveNext()) {
+		for (var tr=[]; !rs.EOF; rs.MoveNext()) {
 			var k = rs.Fields("kTransForm"),
 			c = rs.Fields("Capacity"),
 			PrevDate = Month.GetYMD(rs.Fields("PrevDate")),
@@ -109,24 +109,29 @@ for (var i=0; i<=DoubleReport; i++) {
 			periodSaldo = (recsaldo - retsaldo) * k;
 			totSaldo += periodSaldo;
 
-			row = ['<TR>' + Tag.Write("TD", 1, rs.Fields("MeterCode")),
+			var rectd = [Tag.Write("TD", 1, rs.Fields("MeterCode")),
 				Tag.Write("TD", 1, "Прийом А+"),
 				Tag.Write("TD", 2, rs.Fields("RecVal")),
 				Tag.Write("TD", 2, rs.Fields("PrevRecVal")),
 				Tag.Write("TD", 2, recsaldo),
 				Tag.Write("TD", 1, k),
-				Tag.Write("TD", 2, recsaldo * k) + '</TR>',
-				'<TR>' + Tag.Write("TD", 1, rs.Fields("MeterCode")),
+				Tag.Write("TD", 2, recsaldo * k)
+			],
+			rettd = [Tag.Write("TD", 1, rs.Fields("MeterCode")),
 				Tag.Write("TD", 1, "Видача А-"),
 				Tag.Write("TD", 2, rs.Fields("RetVal")),
 				Tag.Write("TD", 2, rs.Fields("PrevRetVal")),
 				Tag.Write("TD", 2, retsaldo),
 				Tag.Write("TD", 1,  k),
-				Tag.Write("TD", 2,  retsaldo * k) + '</TR>',
-				'<TR><TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
-				Tag.Write("TD", 2, periodSaldo) + '</TR>'
+				Tag.Write("TD", 2,  retsaldo * k)
+			],
+			tottd = ['<TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
+				Tag.Write("TD", 2, periodSaldo)			
 			];
-			block.push(row.join("\n"));
+			tr.push(Tag.Write("TR", -1, rectd.join("")));
+			tr.push(Tag.Write("TR", -1, rettd.join("")));
+			tr.push(Tag.Write("TR", -1, tottd.join("")));
+			block.push(tr.join("\n"));
 		}
 
 		var footer = ['</TABLE>', 
@@ -149,4 +154,3 @@ Solaren.Close();
 ResponseText.push(Body.join(Divider));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join(""))%>
-
