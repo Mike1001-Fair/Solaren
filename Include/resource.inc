@@ -29,8 +29,9 @@ Resource = {
 						}
 					}
 				} else {
-					var error = XmlDoc.parseError;
-					Resource.ErrMsg("Error: " + error.reason + "<BR>Line: " + error.line + "<BR>File: " + FileName);
+					var error = XmlDoc.parseError,
+					errText = ["Error: ", error.reason, "<BR>Line: ", error.line, "<BR>File: ", FileName];
+					Resource.ErrMsg(errText.join(""));
 				}
 			} catch (ex) {
 				Resource.ErrMsg(ex.name + ": " + ex.message + "<BR>File: " + FileName);
