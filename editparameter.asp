@@ -28,11 +28,11 @@ try {
 		OperMonth        = Fields("OperMonth").value,
 		HoursLimit       = Fields("HoursLimit").value,
 		PanLimit         = Fields("PanLimit").value,
-		BudgetItem	 = Fields("BudgetItem").value,
+		BudgetItem	     = Fields("BudgetItem").value,
 		TreasuryName	 = Fields("TreasuryName").value,
 		TreasuryCode	 = Fields("TreasuryCode").value,
 		TreasuryAccount	 = Fields("TreasuryAccount").value,
-		TreasuryMfo	 = Fields("TreasuryMfo").value,
+		TreasuryMfo	     = Fields("TreasuryMfo").value,
 		SysConfig        = Fields("SysConfig").value,
 		ShowMsg          = Fields("ShowMsg").value,
 		MsgText          = Fields("MsgText").value;
