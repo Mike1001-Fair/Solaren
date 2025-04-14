@@ -1,6 +1,7 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var SessionManager = {
 	FlagName: ["NewIndicator", "CheckCard"],
+	FlagCount: 3,
 	VarName: ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],
 
 	SetVar: function(rs) {
@@ -14,7 +15,7 @@ var SessionManager = {
 		}
 		
 		this.SetDate(OperDate);
-		this.SetFlags(cfg, 3);
+		this.SetFlags(cfg);
 	},
 
 	SetDate: function(OperDate) {
@@ -26,10 +27,16 @@ var SessionManager = {
 		Session("NextDate") = NextDate.toStr(0);
 	},
 
-	SetFlags: function(cfg, flagCount) {
-		var index = flagCount - 1;
+	SetFlags: function(cfg) {
+		var index = this.FlagCount - 1;
 		for (var i = 0; i < this.FlagName.length; i++) {
 			Session(this.FlagName[i]) = (cfg >> (index - i)) & 1;
 		}
 	}
+},
+
+SessionInfo = {
+	"SESSION_COUNT": Application("SesCount"),
+	"SESSION_TIMEOUT": Session.Timeout,
+	"SESSION_CODEPAGE": Session.CodePage
 }%>
