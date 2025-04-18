@@ -11,12 +11,10 @@ Solaren = {
 		Connect.Mode = this.ConnectMode;
 		Connect.ConnectionTimeout = this.ConnectionTimeout;
 		Connect.Open(Application("ConnectString"));
-		with (Cmd) {
-			CommandType      = adCmdStoredProc;
-			CommandText      = spName;
-			CommandTimeout   = this.CommandTimeout;
-			ActiveConnection = Connect;
-		}
+		Cmd.CommandType      = adCmdStoredProc;
+		Cmd.CommandText      = spName;
+		Cmd.CommandTimeout   = this.CommandTimeout;
+		Cmd.ActiveConnection = Connect;
 	},
 
 	Execute: function(spName, msg) {

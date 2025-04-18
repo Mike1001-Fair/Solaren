@@ -41,7 +41,9 @@ var Json = {
 			.replace(/"/g, "\\\"")
 			.replace(/\n/g, "\\n")
 			.replace(/\r/g, "\\r")
-			.replace(/\t/g, "\\t");
+			.replace(/\t/g, "\\t")
+			.replace(/\b/g, "\\b")
+			.replace(/\f/g, "\\f");
 	},
 
 	stringify: function (obj) {
