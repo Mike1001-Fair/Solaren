@@ -11,7 +11,7 @@
 User.ValidateAccess(Authorized, "POST");
 	
 with (Request) {
-    var GroupId   = Form("GroupId"),
+    var GroupId = Form("GroupId"),
 	GroupName = Form("GroupName"),
 	BegDate   = Form("BegDate");
 }
@@ -46,12 +46,12 @@ for (var i=0; !rs.EOF; i++) {
 	ExpDateBeg = Month.GetYMD(rs.Fields("ExpDateBeg").value),
 	ExpDateEnd = Month.GetYMD(rs.Fields("ExpDateEnd").value),
 	range = Month.GetRange(ExpDateBeg, ExpDateEnd),
-	row = [Tag.Write("TD", -1, BegDate.formatDate("-")),
+	td = [Tag.Write("TD", -1, BegDate.formatDate("-")),
 		Tag.Write("TD", -1, EndDate.formatDate("-")),
 		Tag.Write("TD", -1, range),
 		Tag.Write("TD", 2, url)
 	],
-	tr = Tag.Write("TR", -1, row.join(""));
+	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
 	rs.MoveNext();
 }
