@@ -1,8 +1,10 @@
-<%@ LANGUAGE = "JScript"%> 
+<%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<% var Authorized = Session("RoleId") == 0;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<!-- #INCLUDE FILE="Include/message.inc" --> 
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 0;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var SortCode = Form("SortCode"),

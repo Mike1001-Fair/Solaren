@@ -33,13 +33,14 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = ['<A href="editcompany.asp?CompanyId=', rs.Fields("Id"), '">', rs.Fields("CompanyName"), '</A>'],
-	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CompanyCode")),
+	var url = Html.GetLink("editcompany.asp?CompanyId=", rs.Fields("Id"), rs.Fields("CompanyName")),
+	td = [Tag.Write("TD", -1, rs.Fields("CompanyCode")),
 		Tag.Write("TD", -1, rs.Fields("TaxCode")),
-		Tag.Write("TD", -1, url.join("")),
-		Tag.Write("TD", -1, rs.Fields("Phone")), '</TR>'
-	];
-	ResponseText.push(row.join(""));
+		Tag.Write("TD", -1, url),
+		Tag.Write("TD", -1, rs.Fields("Phone"))
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	rs.MoveNext();
 }
 
