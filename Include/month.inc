@@ -27,8 +27,7 @@ var Month = {
 	},
 
 	GetMonth: function(index) {
-		var dateItem = this.Date[index];
-		return dateItem ? dateItem.slice(0, 7) : "";
+		return (this.Date[index] || "").slice(0, 7);
 	},
 
 	isPeriod: function(StartDate, EndDate) {	// StartDate, EndDate is string type yyyy-mm-dd
