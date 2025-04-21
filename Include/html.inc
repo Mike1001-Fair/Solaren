@@ -156,27 +156,27 @@ var Html = {
 	},
 
 	WriteChiefDoc: function(rs, DocId) {
-		var ResponseText = '<SELECT NAME="ChiefDocId" ID="ChiefDocId">\n';
+		var ResponseText = ['<SELECT NAME="ChiefDocId" ID="ChiefDocId">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = DocId == rs.Fields("DocId") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("DocId"), selected, rs.Fields("DocName"), '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	WriteChiefTitle: function(rs, TitleId) {
-		var ResponseText = '<SELECT NAME="ChiefTitleId" ID="ChiefTitleId">\n';
+		var ResponseText = ['<SELECT NAME="ChiefTitleId" ID="ChiefTitleId">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = TitleId == rs.Fields("TitleId") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("TitleId"), selected, rs.Fields("Title1"), '</OPTION>'];
-			ResponseText += option.join("");
+			ResponseText.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText += '</SELECT>';
-		Response.Write(ResponseText);
+		ResponseText.push('</SELECT>');
+		Response.Write(ResponseText.join("\n"));
 	},
 
 	GetHeadRow: function(header) {

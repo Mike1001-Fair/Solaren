@@ -11,7 +11,7 @@
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
-    var BegDate      = String(Form("BegDate")),
+    var BegDate  = String(Form("BegDate")),
 	EndDate      = String(Form("EndDate")),
 	ContractId   = Form("ContractId"),
 	ContractName = Form("ContractName");

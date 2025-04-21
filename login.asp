@@ -8,8 +8,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
-<% Resource.Load(User.ResourceFile());
-var LoginId = Request.Form("LoginId"),
+<% var LoginId = Request.Form("LoginId"),
 Pswd = Request.Form("Pswd"),
 ValidParam = User.LoginRe.test(LoginId) && User.PswdRe.test(Pswd);
 User.ValidateAccess(ValidParam, "POST");
@@ -29,6 +28,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
+	Resource.Load(User.ResourceFile());
 	if (rs.EOF) {
 		rs.Close();
 		Solaren.Close();
