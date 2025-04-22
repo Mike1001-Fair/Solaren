@@ -5,8 +5,6 @@ const Redirect = {
 	go(id) {
 		if (Object.prototype.hasOwnProperty.call(this, id)) {
 			location.href = this[id];
-		} else {
-			console.warn(`Redirect ID "${id}" not found.`);
 		}
 	}
 }
