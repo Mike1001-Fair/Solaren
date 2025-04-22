@@ -1,6 +1,8 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var CdoMsg = Server.CreateObject("CDO.Message"),
 Email = {
+	From: '<robot@kresc.com.ua>',
+
 	SetConfig: function() {
 		var url = "http://schemas.microsoft.com/cdo/configuration/";
 		with (CdoMsg.Configuration.Fields) {
@@ -29,7 +31,7 @@ Email = {
 		try {
 			with (CdoMsg) {
 				Bodypart.Charset = "utf-8";
-				From = '<robot@kresc.com.ua>';
+				From = this.From;
 				To = Recipient;
 				Subject = msgSubject;
 				TextBody = msgText;

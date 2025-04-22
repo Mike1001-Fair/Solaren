@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const ConfirmText = Resource.GetText("Confirm");
 		confirm(ConfirmText) ? LogOut.href = "logout.asp" : event.preventDefault();
 	});
+
 	Loader.SetClick('li > a:not([href="#"])');
 	if (MsgText) {
 		Notify.show(MsgText.value);
