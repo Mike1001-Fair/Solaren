@@ -5,19 +5,17 @@ var SessionManager = {
 	VarName: ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],
 
 	SetVar: function(rs) {
-		if (rs) {
-			var cfg  = rs.Fields("SysConfig").value,
-			dbDate   = rs.Fields("OperDate").value,
-			OperDate = Month.GetYMD(dbDate);
+		var cfg  = rs.Fields("SysConfig").value,
+		dbDate   = rs.Fields("OperDate").value,
+		OperDate = Month.GetYMD(dbDate);
 
-			for (var i = 0; i < this.VarName.length; i++) {
-				var parameter = rs.Fields(this.VarName[i]).value;
-				Session(this.VarName[i]) = Server.HTMLEncode(parameter);
-			}
-		
-			this.SetDate(OperDate);
-			this.SetFlags(cfg);
+		for (var i = 0; i < this.VarName.length; i++) {
+			var parameter = rs.Fields(this.VarName[i]).value;
+			Session(this.VarName[i]) = Server.HTMLEncode(parameter);
 		}
+		
+		this.SetDate(OperDate);
+		this.SetFlags(cfg);
 	},
 
 	SetDate: function(OperDate) {
