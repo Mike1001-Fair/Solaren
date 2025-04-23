@@ -27,7 +27,7 @@ Solaren = {
 	DelParameters: function() {
 		var count = Cmd.Parameters.Count;
 		for (var i = count - 1; i >= 0; i--) {
-			Cmd.Parameters.Delete(i);
+				Cmd.Parameters.Delete(i);
 		}
 	},
 
