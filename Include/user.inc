@@ -54,6 +54,7 @@ var User = {
 			} catch (ex) {
 				Message.Write(3, Message.Error(ex))
 			} finally {
+				//Solaren.DelParameters();
 				Solaren.Close();
 			}
 		}
