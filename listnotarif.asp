@@ -4,15 +4,17 @@
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("ListNoTarif");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
 	var rs = Cmd.Execute();
@@ -27,20 +29,29 @@ if (rs.EOF) {
 		SetHead("Обсяги");
 		Menu.Write(Session("RoleId"), 0);
 	}
-	Response.Write('<BODY CLASS="MainBody">\n' +
-	'<H3 CLASS="H3Text">Перевiрка тарифу</H3>\n' +
-	'<TABLE CLASS="InfoTable">\n' +
-	'<TR><TH>Споживач</TH><TH>Рахунок</TH><TH>З</TH><TH>По</TH></TH><TH>Обсяг<BR>кВт&#183;год</TH><TH>Вартiсть<BR>грн</TH><TH>ЦОС</TH></TR>\n');
+	var Header = ['Споживач', 'Рахунок', 'З', 'По', 'Обсяг<BR>кВт&#183;год', 'Вартiсть<BR>грн', 'ЦОС'],
+	ResponseText = ['<BODY CLASS="MainBody">',
+		'<H3 CLASS="H3Text">Перевiрка тарифу</H3>',
+		'<TABLE CLASS="InfoTable">',
+		Html.GetHeadRow(Header)
+	];
+
 	for (var i=0; !rs.EOF; i++) {
-		Response.Write('<TR><TD>' + rs.Fields("CustomerName") + 
-		Html.Write("TD","") + rs.Fields("ContractPAN") +
-		Html.Write("TD","") + rs.Fields("BegDate") +
-		Html.Write("TD","") + rs.Fields("EndDate") +
-		Html.Write("TD","RIGHT") + rs.Fields("PurVol").value.toDelimited(0) +
-		Html.Write("TD","RIGHT") + rs.Fields("VolCost").value.toDelimited(2) +
-		Html.Write("TD","") + rs.Fields("BranchName") + '</TD></TR>\n');
+		td = [Tag.Write("TD", -1, rs.Fields("CustomerName")),
+			Tag.Write("TD", -1, rs.Fields("ContractPAN")),
+			Tag.Write("TD", -1, rs.Fields("BegDate")),
+			Tag.Write("TD", -1, rs.Fields("EndDate")),
+			Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
+			Tag.Write("TD", 2, rs.Fields("VolCost").value.toDelimited(2)),
+			Tag.Write("TD", -1, rs.Fields("BranchName")),
+		],
+		tr = Tag.Write("TR", -1, td.join(""));
+		ResponseText.push(tr);
 		rs.MoveNext();
-	} rs.Close();Solaren.Close();
-	Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="7">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');
+	}
+	rs.Close();
+	Solaren.Close();
+	ResponseText.push(Html.GetFooterRow(7, i));
+	Response.Write(ResponseText.join("\n"))
 }%>
 
