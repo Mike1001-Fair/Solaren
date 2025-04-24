@@ -34,7 +34,6 @@ var User = {
 
 	Authorize: function(RoleId) {
 		var Done = this.ValidateRole(RoleId, this.GUID);
-
 		if (Done) {
 			try {
 				Solaren.SetCmd("UserAuthorize");
