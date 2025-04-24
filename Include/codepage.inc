@@ -6,10 +6,9 @@ var CodePage = {
 	},
 
 	Write: function() {
-		var ResponseText = ['<SELECT NAME="ReportCodePage">'],
-		option;
+		var ResponseText = ['<SELECT NAME="ReportCodePage">'];
 		for (var k in this.List) {
-			option = ['<OPTION VALUE="', k, '">', this.List[k], '</OPTION>'];
+			var option = ['<OPTION VALUE="', k, '">', this.List[k], '</OPTION>'];
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>');
