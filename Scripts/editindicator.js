@@ -49,8 +49,8 @@ function ChkForm() {
 		retvalprev = +RetValPrev.value,
 		k          = +Ktf.value;
 
-	    let recsaldo   = (recval - recvalprev)*k,
-		retsaldo   = (retval - retvalprev)*k,
+	    let recsaldo = (recval - recvalprev) * k,
+		retsaldo   = (retval - retvalprev) * k,
 		totsaldo   = recsaldo - retsaldo,
 		limitsaldo = ContractPower.value * Period * HoursLimit.value,
 		isSaldo    = !isNaN(totsaldo) && (recsaldo > 0 || retsaldo > 0) && retsaldo < limitsaldo;	
@@ -82,9 +82,9 @@ function ChkForm() {
 		TotSaldo.style.color = isSaldo ? "" : "#FF0000";
 
 		const valid = ReportDate.validity.valid && ContractName.value != '' && ContractId.value != -1
-				&& isSaldo && RecVal.validity.valid && RetVal.validity.valid;
+			&& isSaldo && RecVal.validity.valid && RetVal.validity.valid;
 		SetDisabledButton(button, valid);
-		Saldo.textContent = isSaldo && totsaldo ? totsaldo < 0 ? "Продаж " : "Покупка " : "Сальдо ";
+		Saldo.textContent = isSaldo && totsaldo ? totsaldo > 0 ? "Продаж " : "Покупка " : "Сальдо ";
 	}
 }
 

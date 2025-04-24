@@ -33,7 +33,7 @@ var User = {
 	},
 
 	Authorize: function(RoleId) {
-		var Done  = false,
+		var Done  = 0,
 		ValidRole = this.ValidateRole(RoleId, this.GUID);
 
 		if (ValidRole) {
@@ -48,18 +48,19 @@ var User = {
 						Append(CreateParameter("UserGUID", adGUID, adParamInput, 40, this.GUID));
 						Append(CreateParameter("Token", adChar, adParamInput, 32, this.Token));
 						Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-					} Execute(adExecuteNoRecords);
-					Done = Parameters.Item("Done").value;
+					}
+					Execute(adExecuteNoRecords);
+					Done = Parameters.Item("Done").value; 
 				}
 			} catch (ex) {
 				Message.Write(3, Message.Error(ex))
 			} finally {
-				//Solaren.DelParameters();
+				Solaren.DelParameters();
 				Solaren.Close();
 			}
 		}
 		//Response.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token + "<BR>ValidRole = " + ValidRole);
-		return Done;
+		return Done || 0;
 	},
 
 	GetPswd: function() {
