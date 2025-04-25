@@ -16,14 +16,8 @@ with (Date) {
 
 with (String) {
 	prototype.formatDate = function(delimiter) {
-		var dateParts = this.split(delimiter).reverse(),
-		result = this;
-		if (delimiter == ".") {
-			result = dateParts.join("-")
-		} else if (delimiter == "-") {
-			result = dateParts.join(".")
-		}
-		return result
+		var dateParts = this.split(delimiter).reverse();
+		return dateParts.join(delimiter == "." ? "-" : ".")
 	}
 
 	prototype.isDate = function () {
