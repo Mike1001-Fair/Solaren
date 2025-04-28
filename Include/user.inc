@@ -76,8 +76,7 @@ var User = {
 	},
 
 	ValidateAccess: function(Authorized, method) {
-		var validMethod = this.Method == method,
-		validAccess = Authorized && validMethod;
+		var	validAccess = Authorized && this.Method == method;
 		if (!validAccess) {
 			Resource.Load(User.ResourceFile());
 			Message.Write(2, Dictionary.Item("AuthorizationError"));
@@ -86,10 +85,9 @@ var User = {
 	},
 
 	WriteRole: function(tagName, RoleId) {
-		var ResponseText = ['<SELECT NAME="' + tagName + '">'],
-		selected, option;
+		var ResponseText = ['<SELECT NAME="' + tagName + '">'];
 		for (var i = 0; i < this.Role.length; i++) {
-			selected = i == RoleId ? '" SELECTED>' : '">';
+			var selected = i == RoleId ? '" SELECTED>' : '">',
 			option = ['<OPTION VALUE="', i, selected, this.Role[i], '</OPTION>'];
 			ResponseText.push(option.join(""));
 		}

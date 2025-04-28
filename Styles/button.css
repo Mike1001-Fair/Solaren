@@ -8,11 +8,31 @@
 	cursor: not-allowed;
 }
 
-.DelBtn {
-	margin: auto 2px;
+.SbmBtn {
+	margin     : auto;
+	width      : max-content;
 	font-family: inherit;
 	font-size  : 1em;
 	cursor     : pointer;
+	padding    : 4px 8px;
+}
+
+.SbmBtn:hover:enabled {
+	background-color: #4682B4;
+	color: #FFFFFF;
+}
+
+.SbmBtn:disabled {
+	cursor: not-allowed;
+}
+
+.DelBtn {
+	margin     : auto 2px;
+	width      : max-content;
+	font-family: inherit;
+	font-size  : 1em;
+	cursor     : pointer;
+	padding    : 4px 8px;
 }
 
 .DelBtn:disabled {
@@ -25,9 +45,12 @@
 }
 
 .RestoreBtn {
+	margin     : auto;
+	width      : max-content;
 	font-family: inherit;
 	font-size  : 1em;
 	cursor     : pointer;
+	padding    : 4px 8px;
 }
 
 .RestoreBtn:disabled {
@@ -40,37 +63,17 @@
 }
 
 .LoginBtn {
-	font-family        : inherit;
-	font-size          : 1em;
-	width              : 5em;
-	margin-top         : 10px;
-/*	transition-duration: 0.2s;*/
-	cursor             : pointer;
+	font-family: inherit;
+	font-size: 1em;
+	width: 5em;
+	margin-top: 10px;
+	padding: 2px 0px;
+	cursor: pointer;
 }
 
 .LoginBtn:hover:enabled {
 	background-color: #4682B4;
 	color           : #FFFFFF;
-}
-
-.SbmBtn {
-	margin     : auto;
-	width      : max-content;
-	font-family: inherit;
-	font-size  : 1em;
-	cursor     : pointer;
-	/*border-radius: 2px;
-	border: 1px solid;*/
-	padding: 2px 4px; 
-}
-
-.SbmBtn:hover:enabled {
-	background-color: #4682B4;
-	color           : #FFFFFF;
-}
-
-.SbmBtn:disabled {
-	cursor: not-allowed;
 }
 
 .FindBtn {

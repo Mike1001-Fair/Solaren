@@ -8,7 +8,6 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
-//var Authorized = User.Authorize(User.RoleId);
 User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
@@ -67,4 +66,3 @@ var footer = ['<TR><TH ALIGN="LEFT">Всього: ' + i,
 ];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join("\n"))%>
-
