@@ -12,7 +12,7 @@ var Html = {
 			'<META NAME="copyright" CONTENT="' + this.Author + '">',
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
 			Tag.Write('TITLE', -1, Title),
-			Icon.Link("sun.svg"),
+			Icon.Write("sun.svg"),
 			Styles.Write()
 		];
 		if (UseScripts) {
@@ -49,27 +49,6 @@ var Html = {
 		return ['<A href="', url, id, '">', value, '</A>'].join("")
 	},
 	
-	WriteBaseInfo: function(rs) {
-		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
-		ResponseText = ['<DIV CLASS="FormDiv">',
-			'<FIELDSET CLASS="FieldSet">',
-			'<LEGEND>Параметри</LEGEND>',
-			'<TABLE CLASS="RulesAllInfo">',
-			this.GetHeadRow(Header)
-		];
-		for (; !rs.EOF; rs.MoveNext()) {
-			var td = [Tag.Write("TD", 0, rs.Fields("BaseName")),
-				Tag.Write("TD", 0, rs.Fields("FilesName")),
-				Tag.Write("TD", -1, rs.Fields("FileState")),
-				Tag.Write("TD", 2, rs.Fields("FileSize")),
-			],
-			tr = Tag.Write("TR", -1, td.join(""));
-			ResponseText.push(tr);
-		} rs.Close();
-		ResponseText.push('</TABLE></FIELDSET></DIV>');
-		Response.Write(ResponseText.join("\n"))
-	},
-
 	WriteEditButton: function(AllowDelBtn) {
 		var ResponseText = [];
 		if (typeof Deleted != "undefined" && Deleted) {
@@ -266,7 +245,7 @@ Icon = {
 		return this.Path + fileName
 	},
 
-	Link: function(fileName) {
+	Write: function(fileName) {
 		var row = ['<LINK REL="shortcut icon" TYPE="image/svg+xml" HREF="', this.Map(fileName), '">'];
 		return row.join("");
 	}

@@ -109,7 +109,8 @@ for (var i = 0; i <= DoubleReport; i++) {
 			periodSaldo = (recsaldo - retsaldo) * k;
 			totSaldo += periodSaldo;
 
-            var td = [Tag.Write("TD", 1, rs.Fields("MeterCode")) +
+            var td = [
+				Tag.Write("TD", 1, rs.Fields("MeterCode")) +
 				Tag.Write("TD", 1, "Прийом А+") +
 				Tag.Write("TD", 2, rs.Fields("RecVal")) +
 				Tag.Write("TD", 2, rs.Fields("PrevRecVal")) +

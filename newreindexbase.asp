@@ -5,6 +5,7 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE FILE="Include/config.inc" -->
 <% var Authorized = User.RoleId == 0;
 User.ValidateAccess(Authorized, "GET");
 
@@ -20,7 +21,7 @@ Html.SetPage("Реіндексація")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="ReindexBase" ACTION="runreindexbase.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
-<% Html.WriteBaseInfo(rs);
+<% Config.DbInfo(rs);
 Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>
