@@ -79,8 +79,8 @@ ResponseText    = ['\n<BODY CLASS="ActContainer">'];
 
 Html.SetHead("Звіт про показники");
 
-for (var i=0; i<=DoubleReport; i++) {
-	if (i==0) {
+for (var i = 0; i <= DoubleReport; i++) {
+	if (i == 0) {
 		var totSaldo = 0,		
 		block = ['\n<DIV CLASS="ActText">',
 			'<TABLE CLASS="NoBorderTable">',
@@ -109,28 +109,30 @@ for (var i=0; i<=DoubleReport; i++) {
 			periodSaldo = (recsaldo - retsaldo) * k;
 			totSaldo += periodSaldo;
 
-			var rectd = [Tag.Write("TD", 1, rs.Fields("MeterCode")),
-				Tag.Write("TD", 1, "Прийом А+"),
-				Tag.Write("TD", 2, rs.Fields("RecVal")),
-				Tag.Write("TD", 2, rs.Fields("PrevRecVal")),
-				Tag.Write("TD", 2, recsaldo),
-				Tag.Write("TD", 1, k),
-				Tag.Write("TD", 2, recsaldo * k)
-			],
-			rettd = [Tag.Write("TD", 1, rs.Fields("MeterCode")),
-				Tag.Write("TD", 1, "Видача А-"),
-				Tag.Write("TD", 2, rs.Fields("RetVal")),
-				Tag.Write("TD", 2, rs.Fields("PrevRetVal")),
-				Tag.Write("TD", 2, retsaldo),
-				Tag.Write("TD", 1,  k),
-				Tag.Write("TD", 2,  retsaldo * k)
-			],
-			tottd = ['<TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>',
-				Tag.Write("TD", 2, periodSaldo)			
+            var td = [Tag.Write("TD", 1, rs.Fields("MeterCode")) +
+				Tag.Write("TD", 1, "Прийом А+") +
+				Tag.Write("TD", 2, rs.Fields("RecVal")) +
+				Tag.Write("TD", 2, rs.Fields("PrevRecVal")) +
+				Tag.Write("TD", 2, recsaldo) +
+				Tag.Write("TD", 1, k) +
+				Tag.Write("TD", 2, recsaldo * k),
+
+				Tag.Write("TD", 1, rs.Fields("MeterCode")) +
+				Tag.Write("TD", 1, "Видача А-") +
+				Tag.Write("TD", 2, rs.Fields("RetVal")) +
+				Tag.Write("TD", 2, rs.Fields("PrevRetVal")) +
+				Tag.Write("TD", 2, retsaldo) +
+				Tag.Write("TD", 1, k) +
+				Tag.Write("TD", 2, retsaldo * k),
+
+				'<TD ALIGN="LEFT" COLSPAN="6">Сальдо з ' + PrevDate.formatDate("-") + ' по ' + ReportDate.formatDate("-") + '</TD>' +
+				Tag.Write("TD", 2, periodSaldo)
 			];
-			tr.push(Tag.Write("TR", -1, rectd.join("")));
-			tr.push(Tag.Write("TR", -1, rettd.join("")));
-			tr.push(Tag.Write("TR", -1, tottd.join("")));
+
+			for (var j = 0; j < td.length; j++) {
+				tr.push(Tag.Write("TR", -1, td[j]));
+			}
+			
 			block.push(tr.join("\n"));
 		}
 

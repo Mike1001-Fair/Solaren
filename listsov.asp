@@ -11,7 +11,7 @@ User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
     var ReportMonth = String(Form("ReportMonth")),
-	Filter      = Form("Filter") == "on";
+	Filter = Form("Filter") == "on";
 }
 
 try {
