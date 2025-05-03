@@ -14,7 +14,7 @@ var Config = {
 		}
 	},
 
-	DbInfo: function(rs) {
+	WriteDbInfo: function(rs) {
 		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
 		ResponseText = ['<DIV CLASS="FormDiv">',
 			'<FIELDSET CLASS="FieldSet">',

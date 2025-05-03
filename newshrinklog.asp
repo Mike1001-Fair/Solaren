@@ -21,7 +21,7 @@ Html.SetPage("Обрізка логу")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="ShrinkLog" ACTION="runshrinklog.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
-<% Config.DbInfo(rs);
+<% Config.WriteDbInfo(rs);
 Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>

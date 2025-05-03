@@ -20,7 +20,7 @@ try {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="BackupBase" ACTION="runbackupbase.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
-<% Config.DbInfo(rs);
+<% Config.WriteDbInfo(rs);
 Solaren.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Створити</BUTTON>
 </FORM></BODY></HTML>
