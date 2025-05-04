@@ -7,6 +7,20 @@ Solaren = {
 	CommandTimeout: 20,
 	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")),
 
+	WriteConnectInfo: function() {
+		var ResponseText = [
+			"<br>ADO Version: " + Connect.Version,
+			"Connection String: " + Connect.connectionString,
+			"Connection State: " + Connect.state,
+ 			"Command Timeout: " + Connect.commandTimeout,
+ 			"Connection Timeout: " + Connect.connectionTimeout,
+  			"Provider: " + Connect.provider,
+			"Mode: " + Connect.mode,
+			"Cursor Location: " + Connect.cursorLocation
+		];
+		Response.Write(ResponseText.join("<br>"));
+	},
+
 	SetCmd: function(spName) {
 		Connect.Mode = this.ConnectMode;
 		Connect.ConnectionTimeout = this.ConnectionTimeout;
@@ -29,20 +43,6 @@ Solaren = {
 		for (var i = count - 1; i >= 0; i--) {
 				Cmd.Parameters.Delete(i);
 		}
-	},
-
-	WriteConnectInfo: function() {
-		var ResponseText = [
-			"<br>ADO Version: " + Connect.Version,
-			"Connection String: " + Connect.connectionString,
-			"Connection State: " + Connect.state,
- 			"Command Timeout: " + Connect.commandTimeout,
- 			"Connection Timeout: " + Connect.connectionTimeout,
-  			"Provider: " + Connect.provider,
-			"Mode: " + Connect.mode,
-			"Cursor Location: " + Connect.cursorLocation
-		];
-		Response.Write(ResponseText.join("<br>"));
 	},
 
 	EOF: function(rs, msg) {
