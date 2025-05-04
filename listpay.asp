@@ -60,9 +60,10 @@ for (var i=0; !rs.EOF; i++) {
 }
 rs.Close();
 Solaren.Close();
-var footer = ['<TR><TH ALIGN="LEFT">Всього: ' + i,
-	Tag.Write("TH", 2, totalPay.toDelimited(2)) + '</TR>\n',
-	'</TABLE></BODY></HTML>'
+var th = [Tag.Write("TH", 0, 'Всього: ' + i),
+	Tag.Write("TH", 2, totalPay.toDelimited(2))
 ];
-ResponseText.push(footer.join(""));
+tr = Tag.Write("TR", -1, th.join(""));
+ResponseText.push(tr);
+ResponseText.push('</TABLE></BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>

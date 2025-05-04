@@ -76,12 +76,12 @@ var User = {
 	},
 
 	ValidateAccess: function(Authorized, method) {
-		var	validAccess = Authorized && this.Method == method;
-		if (!validAccess) {
+		var	valid = Authorized && this.Method == method;
+		if (!valid) {
 			Resource.Load(User.ResourceFile());
 			Message.Write(2, Dictionary.Item("AuthorizationError"));
 		}
-		return validAccess
+		return valid
 	},
 
 	WriteRole: function(tagName, RoleId) {
