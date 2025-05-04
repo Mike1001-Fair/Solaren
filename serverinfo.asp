@@ -34,6 +34,12 @@ var ServerInfo = {
 		}
 	},
 
+	AddConnectInfo: function() {
+		for (var k in ConnectInfo) {
+			this.AddRow(k, ConnectInfo[k]);
+		}
+	},
+
 	AddInfo: function() {
 		var SrvVarName, SrvVarValue,
 		SrvVar = new Enumerator(Request.ServerVariables);
@@ -48,6 +54,7 @@ var ServerInfo = {
 Html.SetHead(Title, 1);
 Menu.Write(0);
 ServerInfo.AddSessionInfo();
+ServerInfo.AddConnectInfo();
 ServerInfo.AddInfo();
 ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 Response.Write(ServerInfo.Text.join("\n"))%>

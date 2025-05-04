@@ -35,6 +35,17 @@ var SessionManager = {
 	}
 },
 
+ConnectInfo = {
+	"ADO Version": Connect.Version,
+	"Connection String": Connect.ConnectionString,
+	"Connection State": Connect.State,
+ 	"Command Timeout": Connect.CommandTimeout,
+ 	"Connection Timeout": Connect.ConnectionTimeout,
+  	"Provider": Connect.Provider,
+	"Mode": Connect.Mode,
+	"Cursor Location": Connect.CursorLocation
+},
+
 SessionInfo = {
 	"SESSION_COUNT": Application("SesCount"),
 	"SESSION_TIMEOUT": Session.Timeout,
