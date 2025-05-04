@@ -31,6 +31,20 @@ Solaren = {
 		}
 	},
 
+	WriteConnectInfo: function() {
+		var ResponseText = [
+			"<br>ADO Version: " + Connect.Version,
+			"Connection String: " + Connect.connectionString,
+			"Connection State: " + Connect.state,
+ 			"Command Timeout: " + Connect.commandTimeout,
+ 			"Connection Timeout: " + Connect.connectionTimeout,
+  			"Provider: " + Connect.provider,
+			"Mode: " + Connect.mode,
+			"Cursor Location: " + Connect.cursorLocation
+		];
+		Response.Write(ResponseText.join("<br>"));
+	},
+
 	EOF: function(rs, msg) {
 		if (rs.EOF) {
 			rs.Close();
