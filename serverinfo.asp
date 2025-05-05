@@ -28,24 +28,18 @@ var ServerInfo = {
 		}
 	},
 
-	AddSessionInfo: function() {
-		for (var k in SessionInfo) {
-			this.AddRow(k, SessionInfo[k]);
+	AddObjInfo: function(obj) {
+		for (var k in obj) {
+			this.AddRow(k, obj[k]);
 		}
-	},
+	},	
 
-	AddConnectInfo: function() {
-		for (var k in ConnectInfo) {
-			this.AddRow(k, ConnectInfo[k]);
-		}
-	},
-
-	AddInfo: function() {
+	AddInfo: function(obj) {
 		var SrvVarName, SrvVarValue,
-		SrvVar = new Enumerator(Request.ServerVariables);
+		SrvVar = new Enumerator(obj);
 		for (; !SrvVar.atEnd(); SrvVar.moveNext()) {
 			SrvVarName = SrvVar.item();
-			SrvVarValue = Request.ServerVariables(SrvVarName);
+			SrvVarValue = obj(SrvVarName);
 			this.AddRow(SrvVarName, SrvVarValue);
 		}
 	}
@@ -53,8 +47,8 @@ var ServerInfo = {
 
 Html.SetHead(Title, 1);
 Menu.Write(0);
-ServerInfo.AddSessionInfo();
-ServerInfo.AddConnectInfo();
-ServerInfo.AddInfo();
+ServerInfo.AddObjInfo(SessionInfo);
+ServerInfo.AddObjInfo(ConnectInfo);
+ServerInfo.AddInfo(Request.ServerVariables);
 ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 Response.Write(ServerInfo.Text.join("\n"))%>
