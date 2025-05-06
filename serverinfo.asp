@@ -48,7 +48,6 @@ var ServerInfo = {
 Html.SetHead(Title, 1);
 Menu.Write(0);
 ServerInfo.AddObjInfo(SessionInfo);
-ServerInfo.AddObjInfo(ConnectInfo);
 ServerInfo.AddInfo(Request.ServerVariables);
 ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 Response.Write(ServerInfo.Text.join("\n"))%>

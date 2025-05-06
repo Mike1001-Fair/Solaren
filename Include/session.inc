@@ -1,4 +1,5 @@
 ﻿<% //@ LANGUAGE = "JScript"
+//Solaren.SetCmd("Test");
 var SessionManager = {
 	FlagName: ["NewIndicator", "CheckCard"],
 	FlagCount: 3,
@@ -35,18 +36,15 @@ var SessionManager = {
 	}
 },
 
-ConnectInfo = {
+SessionInfo = {
 	"ADO Version": Connect.Version,
 	"Connection String": Connect.ConnectionString,
 	"Connection State": Connect.State,
  	"Command Timeout": Connect.CommandTimeout,
  	"Connection Timeout": Connect.ConnectionTimeout,
   	"Provider": Connect.Provider,
-	"Mode": Connect.Mode,
-	"Cursor Location": Connect.CursorLocation
-},
-
-SessionInfo = {
+	"Connection_Mode": Connect.Mode,
+	"Cursor Location": Connect.CursorLocation,
 	"SESSION_COUNT": Application("SesCount"),
 	"SESSION_TIMEOUT": Session.Timeout,
 	"SESSION_CODEPAGE": Session.CodePage
