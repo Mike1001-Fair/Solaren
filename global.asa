@@ -1,13 +1,19 @@
 <!-- METADATA TYPE="typelib" FILE="c:\program files\common files\system\ado\msado60.tlb" -->
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
 function Application_OnStart() {
-	var dbConfig = [
+	var useSqlAuth = 0;
+	dbConfig = [
 		"Provider=MSOLEDBSQL",
 		"Server=Localhost",
 		"Database=Solaren",
-		"Integrated Security=SSPI",
 		"Application Name=Solaren"
 	];
+	if (useSqlAuth) {
+		dbConfig.push("UID=YourUsername");
+		dbConfig.push("PWD=YourPassword");
+	} else {
+		dbConfig.push("Integrated Security=SSPI");
+	}
 	Application("ConnectString") = dbConfig.join(";");
 	Application("SesCount") = 0;
 	Application("StopApp") = 0;	

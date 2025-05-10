@@ -15,17 +15,16 @@ if (User.ValidateAccess(Authorized, "GET")) {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindSov" ACTION="listsov.asp" METHOD="post" TARGET="_blank">
-
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD>
 	<FIELDSET>
-	<LEGEND>Перiод</LEGEND>
-	<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=OperMonth%>" MIN="<%=MinMonth%>" MAX="<%=OperMonth%>" REQUIRED>
+		<LEGEND>Перiод</LEGEND>
+		<INPUT TYPE="Month" NAME="ReportMonth" VALUE="<%=OperMonth%>" MIN="<%=MinMonth%>" MAX="<%=OperMonth%>" REQUIRED>
 	</FIELDSET>
 	<FIELDSET>
-	<LEGEND>Параметри</LEGEND>
-	<LABEL><INPUT TYPE="CheckBox" NAME="Filter">Часткова оплата</LABEL>
+		<LEGEND>Параметри</LEGEND>
+		<LABEL><INPUT TYPE="CheckBox" NAME="Filter">Часткова оплата</LABEL>
 	</FIELDSET>
 	</TD></TR>
 </TABLE>
