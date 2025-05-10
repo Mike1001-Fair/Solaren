@@ -35,12 +35,13 @@ try {
 
 var Range = Month.GetRange(BegMonth, EndMonth),
 totVol = totVolCost = totPdfo = totVz = totPurCost = 0,
+Header = ['коп', 'кВт&#183;год', 'Вартiсть', 'ПДФО', 'ВЗ', 'До сплати'],
 ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>' +
-	'<TABLE CLASS="PrnTable">' +
-	'<CAPTION>ЦОС:' + BranchName + '</CAPTION>' +
-	'<TR><TH ROWSPAN="2">З</TH><TH ROWSPAN="2">По</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">Рахунок</TH><TH>Тариф</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>\n' +
-	'<TR><TH>коп</TH><TH>кВт&#183;год</TH><TH>Вартiсть</TH><TH>ПДФО</TH><TH>ВЗ</TH><TH>До сплати</TH></TR>'
+	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
+	'<TABLE CLASS="PrnTable">',
+	Tag.Write("CAPTION", -1, BranchName),
+	'<TR><TH ROWSPAN="2">З</TH><TH ROWSPAN="2">По</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">Рахунок</TH><TH>Тариф</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>',
+	Html.GetHeadRow(Header)
 ];
 
 for (var i = 0; !rs.EOF; i++) {
