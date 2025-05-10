@@ -4,13 +4,14 @@ XmlDoc = Server.CreateObject("MSXML2.DOMDocument.6.0"),
 Dictionary = Server.CreateObject("Scripting.Dictionary"),
 Resource = {
 	Path: "Resources/",
+	ErrText: [],
 
 	Map: function(fileName) {
  		return Server.MapPath(this.Path + fileName)
  	},
 
-	ErrMsg: function(Msg) {
-		Session("SysMsg") = Msg;
+	WriteError: function() {
+		Session("SysMsg") = this.ErrText.join("<BR>");
 		Session("ScriptName") = "resources.inc";
 		Server.Transfer("error-en.asp");	
 	},
@@ -29,16 +30,17 @@ Resource = {
 						}
 					}
 				} else {
-					var error = XmlDoc.parseError,
-					errText = ["Error: " + error.reason, "Line: " + error.line, "File: " + FileName];
-					Resource.ErrMsg(errText.join("<BR>"));
+					var error = XmlDoc.parseError;
+					Resource.ErrText.push("Error: " + error.reason, "Line: " + error.line, "File: " + FileName);
+					Resource.WriteError();
 				}
 			} catch (ex) {
-				var errText = [ex.name + ": " + ex.message, "File: " + FileName];
-				Resource.ErrMsg(errText.join("<BR>"));
+				Resource.ErrText.push(ex.name + ": " + ex.message);
+				Resource.WriteError();
 			}
 		} else {
-			Resource.ErrMsg("File: " + FileName + " not found");
+			Resource.ErrText.push(FileName + " not found");
+			Resource.WriteError();
 		}
 	}
 }%>

@@ -11,9 +11,9 @@ Solaren = {
 		Connect.Mode = this.ConnectMode;
 		Connect.ConnectionTimeout = this.ConnectionTimeout;
 		Connect.Open(Application("ConnectString"));
-		Cmd.CommandType      = adCmdStoredProc;
-		Cmd.CommandText      = spName;
-		Cmd.CommandTimeout   = this.CommandTimeout;
+		Cmd.CommandType = adCmdStoredProc;
+		Cmd.CommandText = spName;
+		Cmd.CommandTimeout = this.CommandTimeout;
 		Cmd.ActiveConnection = Connect;
 	},
 
