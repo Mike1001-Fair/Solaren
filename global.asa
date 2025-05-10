@@ -1,4 +1,4 @@
-<!-- METADATA TYPE="typelib" FILE="c:\program files\common files\system\ado\msado60.tlb" -->
+<!-- METADATA NAME="Microsoft ActiveX Data Objects 6.0 Library"	TYPE="TypeLib" UUID="{B691E011-1797-432E-907A-4D8C69339129}" -->
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
 var Connection = {
 	Config: [
