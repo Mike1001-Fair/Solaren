@@ -2,12 +2,12 @@
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+<% var Authorized = User.RoleId == 1;
+User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var BranchId = Form("BranchId"),
@@ -20,53 +20,61 @@ try {
 	Solaren.SetCmd("ListBranchAct");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegMonth", adVarChar, adParamInput, 10, BegMonth));
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
 			Append(CreateParameter("BranchId", adVarChar, adParamInput, 10, BranchId));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("ListBranchAct");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Html.SetHead("Звiт");
 }
 
-Html.SetHead("Звiт");
-
-var Period = Month.GetPeriod(BegMonth, 0),
+var Range = Month.GetRange(BegMonth, EndMonth),
 totVol = totVolCost = totPdfo = totVz = totPurCost = 0,
-ResponseText = '<BODY CLASS="PrnBody">\n' +
-'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>\n' +
-'<TABLE CLASS="PrnTable">\n' +
-'<CAPTION>ЦОС:' + BranchName + '</CAPTION>\n' +
-'<TR><TH ROWSPAN="2">З</TH><TH ROWSPAN="2">По</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">Рахунок</TH><TH>Тариф</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>\n' +
-'<TR><TH>коп</TH><TH>кВт&#183;год</TH><TH>Вартiсть</TH><TH>ПДФО</TH><TH>ВЗ</TH><TH>До сплати</TH></TR>\n';
-if (BegMonth != EndMonth) Period += " - " + Month.GetPeriod(EndMonth, 0);
+ResponseText = ['<BODY CLASS="PrnBody">',
+	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>' +
+	'<TABLE CLASS="PrnTable">' +
+	'<CAPTION>ЦОС:' + BranchName + '</CAPTION>' +
+	'<TR><TH ROWSPAN="2">З</TH><TH ROWSPAN="2">По</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">Рахунок</TH><TH>Тариф</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>\n' +
+	'<TR><TH>коп</TH><TH>кВт&#183;год</TH><TH>Вартiсть</TH><TH>ПДФО</TH><TH>ВЗ</TH><TH>До сплати</TH></TR>'
+];
 
-for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("BegDate") +
-	Html.Write("TD","") + rs.Fields("EndDate") +
-	Html.Write("TD","") + rs.Fields("CustomerName") +
-	Html.Write("TD","") + rs.Fields("ContractPAN") +
-	Html.Write("TD","RIGHT") + rs.Fields("Tarif").value.toDelimited(2) +
-	Html.Write("TD","RIGHT") + rs.Fields("Vol").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("VolCost").value.toDelimited(2) +
-	Html.Write("TD","RIGHT") + rs.Fields("Pdfo").value.toDelimited(2) +
-	Html.Write("TD","RIGHT") + rs.Fields("Vz").value.toDelimited(2) +
-	Html.Write("TD","RIGHT") + rs.Fields("PurCost").value.toDelimited(2) + '</TD></TR>\n';
+for (var i = 0; !rs.EOF; i++) {
+	var td = [Tag.Write("TD", -1, rs.Fields("BegDate")),
+		Tag.Write("TD", -1, rs.Fields("EndDate")),
+		Tag.Write("TD", -1, rs.Fields("CustomerName")),
+		Tag.Write("TD", -1, rs.Fields("ContractPAN")),
+		Tag.Write("TD", 2, rs.Fields("Tarif").value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("Vol").value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("VolCost").value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("Pdfo").value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("Vz").value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2))
+	],
+	tr = Tag.Write("TR", -1, td.join(""));
+	ResponseText.push(tr);
 	totVol     += rs.Fields("Vol");
 	totVolCost += rs.Fields("VolCost");
 	totPdfo    += rs.Fields("Pdfo");
 	totVz      += rs.Fields("Vz");
 	totPurCost += rs.Fields("PurCost");
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
-ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ' + i +
-Html.Write("TH","RIGHT") + totVol.toDelimited(0) +
-Html.Write("TH","RIGHT") + totVolCost.toDelimited(2) +
-Html.Write("TH","RIGHT") + totPdfo.toDelimited(2) +
-Html.Write("TH","RIGHT") + totVz.toDelimited(2) +
-Html.Write("TH","RIGHT") + totPurCost.toDelimited(2) + '</TH></TR>\n</TABLE></BODY></HTML>';
-Response.Write(ResponseText)%>
+}
+rs.Close();
+Solaren.Close();
 
+var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>',
+	Tag.Write("TH", 2, totVol.toDelimited(0)),
+	Tag.Write("TH", 2, totVolCost.toDelimited(2)),
+	Tag.Write("TH", 2, totPdfo.toDelimited(2)),
+	Tag.Write("TH", 2, totVz.toDelimited(2)),
+	Tag.Write("TH", 2, totPurCost.toDelimited(2)),
+	'</TH></TR>\n</TABLE></BODY></HTML>'
+];
+
+ResponseText.push(footer.join(""));
+Response.Write(ResponseText.join("\n"))%>

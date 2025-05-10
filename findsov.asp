@@ -8,11 +8,10 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1),
-MinMonth  = Month.GetMonth(0),
-Title = "Сальдо-оборотна вiдомость";
+MinMonth  = Month.GetMonth(0);
 
 if (User.ValidateAccess(Authorized, "GET")) {
-	Html.SetPage(Title)
+	Html.SetPage("Сальдо-оборотна вiдомость")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindSov" ACTION="listsov.asp" METHOD="post" TARGET="_blank">

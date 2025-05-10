@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
-var XmlDoc = Server.CreateObject("MSXML2.DOMDocument.6.0"),
-Fso        = Server.CreateObject("Scripting.FileSystemObject"),
+var Fso = Server.CreateObject("Scripting.FileSystemObject"),
+XmlDoc = Server.CreateObject("MSXML2.DOMDocument.6.0"),
 Dictionary = Server.CreateObject("Scripting.Dictionary"),
 Resource = {
 	Path: "Resources/",
@@ -30,11 +30,12 @@ Resource = {
 					}
 				} else {
 					var error = XmlDoc.parseError,
-					errText = ["Error: ", error.reason, "<BR>Line: ", error.line, "<BR>File: ", FileName];
-					Resource.ErrMsg(errText.join(""));
+					errText = ["Error: " + error.reason, "Line: " + error.line, "File: " + FileName];
+					Resource.ErrMsg(errText.join("<BR>"));
 				}
 			} catch (ex) {
-				Resource.ErrMsg(ex.name + ": " + ex.message + "<BR>File: " + FileName);
+				var errText = [ex.name + ": " + ex.message, "File: " + FileName];
+				Resource.ErrMsg(errText.join("<BR>"));
 			}
 		} else {
 			Resource.ErrMsg("File: " + FileName + " not found");
