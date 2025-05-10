@@ -1,23 +1,23 @@
 <!-- METADATA TYPE="typelib" FILE="c:\program files\common files\system\ado\msado60.tlb" -->
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
-function GetConnectString(useSqlAuth) {
+function GetConnectString(useSSPI) {
 	var	dbConfig = [
 		"Provider=MSOLEDBSQL",
 		"Server=Localhost",
 		"Database=Solaren",
 		"Application Name=Solaren"
 	];
-	if (useSqlAuth) {
+	if (useSSPI) {
+		dbConfig.push("Integrated Security=SSPI");
+	} else {
 		dbConfig.push("UID=YourUsername");
 		dbConfig.push("PWD=YourPassword");
-	} else {
-		dbConfig.push("Integrated Security=SSPI");
 	}
 	return dbConfig.join(";")
 }
 
 function Application_OnStart() {
-	Application("ConnectString") = GetConnectString(0);
+	Application("ConnectString") = GetConnectString(1);
 	Application("SesCount") = 0;
 	Application("StopApp") = 0;	
 }  
