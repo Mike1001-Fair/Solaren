@@ -1,7 +1,7 @@
 <!-- METADATA NAME="Microsoft ActiveX Data Objects 6.0 Library"	TYPE="TypeLib" UUID="{B691E011-1797-432E-907A-4D8C69339129}" -->
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
-var Connection = {
-	Config: [
+var Config = {
+	Params: [
 		"Provider=MSOLEDBSQL",
 		"Server=Localhost",
 		"Database=Solaren",
@@ -10,17 +10,17 @@ var Connection = {
 
 	getString: function(useSSPI) {
 		if (useSSPI) {
-			this.Config.push("Integrated Security=SSPI");
+			this.Params.push("Integrated Security=SSPI");
 		} else {
-			this.Config.push("UID=YourUsername");
-			this.Config.push("PWD=YourPassword");
+			this.Params.push("UID=YourUsername");
+			this.Params.push("PWD=YourPassword");
 		}
-		return this.Config.join(";")
+		return this.Params.join(";")
 	}
 }
 
 function Application_OnStart() {
-	Application("ConnectString") = Connection.getString(1);
+	Application("ConnectString") = Config.getString(1);
 	Application("SesCount") = 0;
 	Application("StopApp") = 0;	
 }  
