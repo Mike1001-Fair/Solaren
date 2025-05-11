@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-StreetId = Request.QueryString("StreetId");
+StreetId = Request.Form("StreetId");
 
 User.ValidateAccess(Authorized, "POST");
 
