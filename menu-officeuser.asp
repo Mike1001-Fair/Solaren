@@ -59,7 +59,7 @@ if (!User.Authorize(1)) {
 			
 			<LI class="divider"><A href="findcompensation.asp">Компенсація</A></LI>
 			<LI><A href="findbudgetcode.asp">Бюджетний код</A></LI>
-			<LI><A href="findoperatoract.asp">Акт звірки ОСР</A></LI>
+			<!--LI><A href="findoperatoract.asp">Акт звірки ОСР</A></LI-->
 			<LI><A href="findbranchact.asp">Перевірка актів</A></LI>
 
 			<LI class="divider"><A href="findnote.asp">Службовий лист</A></LI>
