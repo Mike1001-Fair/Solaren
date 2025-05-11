@@ -11,7 +11,7 @@
 	border-collapse: separate;
 	border-spacing : 10px 0px;
 	border         : 2px ridge #F0F0F0;
-	width          : max-content;
+	width          : auto;
 	margin         : 10px auto;
 	/*text-align     : center;*/
 	background     : #F0F0F0;
