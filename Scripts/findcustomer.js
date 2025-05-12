@@ -5,9 +5,6 @@
 });
 
 FindCustomer.addEventListener('submit', () => {
-	with (FindCustomer) {
-		action = `editcustomer.asp?CustomerId=${CustomerId.value}`;
-	}
 	Loader.Show();
 });
 

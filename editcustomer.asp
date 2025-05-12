@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
-CustomerId = Request.QueryString("CustomerId");
+CustomerId = Request.Form("CustomerId");
 User.ValidateAccess(Authorized, "POST");
 
 try {

@@ -10,7 +10,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage("Cпоживачі")
 }%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="FindCustomer" ID="FindCustomer" ACTION="listcustomer.asp" METHOD="post" AUTOCOMPLETE="off">
+<FORM CLASS="ValidForm" NAME="FindCustomer" ID="FindCustomer" ACTION="editcustomer.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="CustomerId" ID="CustomerId" VALUE="-1">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
