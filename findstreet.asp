@@ -10,7 +10,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage("Вулицi")
 }%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="FindStreet" ACTION="liststreet.asp" METHOD="post" AUTOCOMPLETE="off">
+<FORM CLASS="ValidForm" NAME="FindStreet" ACTION="editstreet.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="StreetType" ID="StreetType" VALUE="-1">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

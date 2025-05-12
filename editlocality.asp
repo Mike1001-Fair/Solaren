@@ -6,15 +6,9 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/locality.inc" -->
-<% Resource.Load(User.ResourceFile());
-
-var RoleId = Session("RoleId"),
-Authorized = RoleId >= 0 && RoleId < 2,
-LocalityId = Request.QueryString("LocalityId");
-
-if (!Authorized) {
-	Message.Write(2, Dictionary.Item("AuthorizationError"));
-}
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+LocalityId = Request.Form("LocalityId");
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetLocality");
@@ -33,7 +27,8 @@ try {
 		Close();
 	}
 	Solaren.Close();
-	Html.SetPage(Title, RoleId)
+	Resource.Load(User.ResourceFile());
+	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditLocality" ACTION="updatelocality.asp" METHOD="POST" AUTOCOMPLETE="off">

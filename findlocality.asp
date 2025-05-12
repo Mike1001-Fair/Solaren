@@ -10,7 +10,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage("Населені пункти")
 }%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="FindLocality" ACTION="listlocality.asp" METHOD="post" AUTOCOMPLETE="off">
+<FORM CLASS="ValidForm" NAME="FindLocality" ACTION="editlocality.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityType" ID="LocalityType" VALUE="-1">
 <H3 CLASS="HeadText">&#127969;<%=Html.Title%></H3>

@@ -8,7 +8,6 @@
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 StreetId = Request.Form("StreetId");
-
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -26,7 +25,7 @@ try {
 		var StreetType = Fields("StreetType").value,
 		StreetName     = Fields("StreetName").value,
 		Deleted        = Fields("Deleted").value,
-		Title      = Deleted ? "Перегляд вулицi" : "Редагування вулицi";
+		Title          = Deleted ? "Перегляд вулицi" : "Редагування вулицi";
 		Close();
 	}
 	Solaren.Close();

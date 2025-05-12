@@ -5,7 +5,6 @@
 });
 
 FindStreet.addEventListener('submit', () => {
-	FindStreet.action = `editstreet.asp`;
 	Loader.Show();
 });
 

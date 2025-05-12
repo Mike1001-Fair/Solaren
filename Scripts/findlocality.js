@@ -5,7 +5,6 @@
 });
 
 FindLocality.addEventListener('submit', () => {
-	FindLocality.action = `editlocality.asp?LocalityId=${LocalityId.value}`;
 	Loader.Show();
 });
 
