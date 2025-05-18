@@ -13,7 +13,7 @@ User.ValidateAccess(Authorized, "POST");
 
 with (Request) {
 	var ReportMonth = String(Form("ReportMonth")),
-	DoubleAct       = Form("DoubleAct") == "on";
+	DoubleAct = Form("DoubleAct") == "on";
 }
 
 try {

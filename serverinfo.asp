@@ -34,11 +34,10 @@ var ServerInfo = {
 		}
 	},	
 
-	AddInfo: function() {
-		var SrvVarName, SrvVarValue,
-		SrvVar = new Enumerator(Request.ServerVariables);
+	AddRequestInfo: function() {
+		var SrvVar = new Enumerator(Request.ServerVariables);
 		for (; !SrvVar.atEnd(); SrvVar.moveNext()) {
-			SrvVarName = SrvVar.item();
+			var SrvVarName = SrvVar.item(),
 			SrvVarValue = Request.ServerVariables(SrvVarName);
 			this.AddRow(SrvVarName, SrvVarValue);
 		}
@@ -48,6 +47,6 @@ var ServerInfo = {
 Html.SetHead(Title, 1);
 Menu.Write(0);
 ServerInfo.AddObjInfo(SessionInfo);
-ServerInfo.AddInfo();
+ServerInfo.AddRequestInfo();
 ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
 Response.Write(ServerInfo.Text.join("\n"))%>

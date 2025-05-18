@@ -9,10 +9,8 @@ phPswd     = Dictionary.Item("Password"),
 titleUser  = Dictionary.Item("UserTitle"),
 titlePswd  = Dictionary.Item("PasswordTitle");
 
-with (Html) {
-	SetHead(Dictionary.Item("DefaultTitle"), 1);
-	WriteScript();
-}%>
+Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
+Html.WriteScript()%>
 <BODY CLASS="StartBody">
 <HEADER CLASS="HeaderDiv">
 	<H3>&#127774;<%=Html.Title%></H3>
@@ -28,7 +26,7 @@ with (Html) {
 	</FORM>
 </MAIN>
 <FOOTER CLASS="FooterDiv">
-	<A HREF="mailto:Nickolay.nickchernov@gmail.com" TITLE="Лист автору для вiдгукiв, зауважень та пропозицiй"><%=Dictionary.Item("Author")%></A>
+	<A HREF="mailto:nickchernov@gmail.com" TITLE="<%=Dictionary.Item("FeedbackSheet")%>"><%=Dictionary.Item("Author")%></A>
 </FOOTER>
 </BODY></HTML>
 
