@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-CountryId = Request.QueryString("CountryId");
+CountryId = Request.Form("CountryId");
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("CountryId", adInteger, adParamInput, 10, CountryId));
 		}
 	}
-	var rsCountry = Cmd.Execute();
+	var rsCountry = Solaren.Execute("GetCountry");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

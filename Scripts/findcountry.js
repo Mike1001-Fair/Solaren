@@ -5,9 +5,6 @@
 });
 
 FindCountry.addEventListener('submit', () => {
-	with (FindCountry) {
-		action = `editcountry.asp?CountryId=${CountryId.value}`;
-	}
 	Loader.Show();
 });
 

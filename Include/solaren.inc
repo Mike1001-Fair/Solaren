@@ -24,13 +24,6 @@ Solaren = {
 		return rs
 	},
 
-	DelParameters: function() {
-		var count = Cmd.Parameters.Count || 0;
-		for (var i = count - 1; i >= 0; i--) {
-				Cmd.Parameters.Delete(i);
-		}
-	},
-
 	EOF: function(rs, msg) {
 		if (rs.EOF) {
 			rs.Close();
@@ -48,6 +41,14 @@ Solaren = {
 			Connect.Close();
 		}
 	},
+
+	DelParameters: function() {
+		var count = Cmd.Parameters.Count || 0;
+		for (var i = count - 1; i >= 0; i--) {
+				Cmd.Parameters.Delete(i);
+		}
+	},
+
 
 	GetRandInt: function(intMin, intMax) {
 		var rand = intMin + Math.random() * (intMax + 1 - intMin);

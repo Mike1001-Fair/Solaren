@@ -54,7 +54,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("Pdfo").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("Vz").value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2))
-	];
+	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
 	totVol     += rs.Fields("Vol");

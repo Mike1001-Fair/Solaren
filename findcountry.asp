@@ -10,7 +10,7 @@ if (User.ValidateAccess(Authorized, "GET")) {
 	Html.SetPage("Країни")
 }%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="FindCountry" ACTION="listcountry.asp" METHOD="post" AUTOCOMPLETE="off">
+<FORM CLASS="ValidForm" NAME="FindCountry" ACTION="editcountry.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="CountryId" ID="CountryId" VALUE="-1">
 <H3 CLASS="HeadText">&#127757;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
