@@ -17,11 +17,11 @@ try {
 			Append(CreateParameter("CountryId", adInteger, adParamInput, 10, CountryId));
 		}
 	}
-	var rsCountry = Solaren.Execute("GetCountry");
+	var rs = Solaren.Execute("GetCountry");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	with (rsCountry) {
+	with (rs) {
 		var CountryName = Fields("CountryName").value,
 		TldCode         = Fields("TldCode").value,
 		IsoCode         = Fields("IsoCode").value,

@@ -69,7 +69,9 @@ with (Number) {
 with (Array) {
 	prototype.padZero = function() {
 		for (var i = 0; i < this.length; i++) {
-			if (this[i] < 10) this[i] = "0" + this[i];
+			if (this[i] < 10) {
+				this[i] = "0" + this[i];
+			}
 		}		
 	}
 }%>
