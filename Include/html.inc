@@ -5,13 +5,15 @@ var Html = {
 	Title  : "Title",
 
 	SetHead: function(Title, UseScripts) {
-		this.Title = Title;
+		if (typeof Title != "undefined" && Title) {
+			this.Title = Title;
+		}
 		var Head = [
 			'<META charset="utf-8">',
 			'<META NAME="author" CONTENT="' + this.Author + '">',
 			'<META NAME="copyright" CONTENT="' + this.Author + '">',
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
-			Tag.Write('TITLE', -1, Title),
+			Tag.Write('TITLE', -1, this.Title),
 			Icon.Write("sun.svg"),
 			Styles.Write()
 		];

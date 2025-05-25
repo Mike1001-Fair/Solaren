@@ -22,9 +22,9 @@ try {
 } finally {	
 	Record.Map(rs);
 	rs.Close();
-	var Title  = Record.Deleted ? "Перегляд анкети" : "Редагування анкети";
+	Html.Title  = Record.Deleted ? "Перегляд анкети" : "Редагування анкети";
 	Solaren.Close();
-	Html.SetPage(Title);
+	Html.SetPage();
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCustomer" ACTION="updatecustomer.asp" METHOD="POST" AUTOCOMPLETE="off">

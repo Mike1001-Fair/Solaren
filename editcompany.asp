@@ -30,12 +30,12 @@ try {
 } finally {	
 	Record.Map(rsCompany);
 	rsCompany.Close();
-	Record.Title = Record.Deleted ? "Перегляд компанії" : "Редагування компанії";
-	Html.SetPage(Record.Title);
+	Html.Title = Record.Deleted ? "Перегляд компанії" : "Редагування компанії";
+	Html.SetPage();
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCompany" ACTION="updatecompany.asp" METHOD="POST" AUTOCOMPLETE="off">
-<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=Record.Title%></H3>
+<H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="CompanyId" VALUE="<%=CompanyId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Record.LocalityId%>">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="<%=Record.StreetId%>">
