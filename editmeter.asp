@@ -21,57 +21,47 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	with (rs) {
-		var ContractId = Fields("ContractId").value,
-		ContractName   = Fields("ContractName").value,
-		MeterCode      = Fields("MeterCode").value,
-		SetDate        = Fields("SetDate").value,
-		Capacity       = Fields("Capacity").value,
-		kTransForm     = Fields("kTransForm").value,
-		RecVal         = Fields("RecVal").value,
-		RetVal         = Fields("RetVal").value,
-		Deleted        = Fields("Deleted").value,
-		Title          = Deleted ? "Перегляд лічильника" : "Редагування лічильника",
-		Limit          = Math.pow(10, Capacity) - 1;
-		Close();
-	}
+	var Meter = Solaren.Map(rs.Fields);
+	rs.Close();
 	Solaren.Close();
-	Html.SetPage(Title);
+	var Limit = Math.pow(10, Meter.Capacity) - 1;
+	Html.Title = Meter.Deleted ? "Перегляд лічильника" : "Редагування лічильника";
+	Html.SetPage();
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditMeter" ACTION="updatemeter.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=ContractId%>">
+<INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=Meter.ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="MeterId" VALUE="<%=MeterId%>">
-<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Meter.Deleted%>">
 
 <H3 CLASS="HeadText">
 	<IMG SRC="Images/MeterIcon.svg"><%=Html.Title%>
 </H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteSearchSet("Договір", "Contract", ContractName, 1) %>
+	<% Html.WriteSearchSet("Договір", "Contract", Meter.ContractName, 1) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Номер</TD>
-	<TD><INPUT TYPE="text" NAME="MeterCode" VALUE="<%=MeterCode%>" SIZE="12" PATTERN="^\d{8,10}$" maxLength="10" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="text" NAME="MeterCode" VALUE="<%=Meter.MeterCode%>" SIZE="12" PATTERN="^\d{8,10}$" maxLength="10" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Монтаж</TD>
-	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=SetDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="SetDate" VALUE="<%=Meter.SetDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Розряднiсть</TD>
-	<TD><INPUT TYPE="Number" NAME="Capacity" VALUE="<%=Capacity%>" MIN="5" MAX="9"  REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="Capacity" VALUE="<%=Meter.Capacity%>" MIN="5" MAX="9"  REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Коефiцiєнт</TD>
-	<TD><INPUT TYPE="Number" NAME="kTransForm" VALUE="<%=kTransForm%>" MIN="1" MAX="99" REQUIRED TITLE="трансформацiї"></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="kTransForm" VALUE="<%=Meter.kTransForm%>" MIN="1" MAX="99" REQUIRED TITLE="трансформацiї"></TD></TR>
 	</TABLE></FIELDSET>
 	
 	<FIELDSET><LEGEND>Показники</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Прийом</TD>
-	<TD><INPUT TYPE="Number" NAME="RecVal" VALUE="<%=RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="RecVal" VALUE="<%=Meter.RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Видача</TD>
-	<TD><INPUT TYPE="Number" NAME="RetVal" VALUE="<%=RetVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="RetVal" VALUE="<%=Meter.RetVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 	</TD></TR>
 </TABLE>
-<% Html.WriteEditButton(1)%>
+<% Html.WriteEditButton(1, Meter.Deleted)%>
 </FORM></BODY></HTML>
 
 

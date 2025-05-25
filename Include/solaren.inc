@@ -49,7 +49,6 @@ Solaren = {
 		}
 	},
 
-
 	GetRandInt: function(intMin, intMax) {
 		var rand = intMin + Math.random() * (intMax + 1 - intMin);
 		return Math.floor(rand);
@@ -61,16 +60,17 @@ Solaren = {
 
 	ValidObject: function(obj) {
 		return obj && typeof obj === 'object'
-	}
+	},
 
-},
-
-Record = {
-	Map: function(rs) {
-		var fields = new Enumerator(rs.Fields);
-		for (; !fields.atEnd(); fields.moveNext()) {
-			var field = fields.item();
-			this[field.Name] = field.Value;
+	Map: function(source) {
+		var result = {},
+		items = new Enumerator(source);
+		for (; !items.atEnd(); items.moveNext()) {
+			var item = items.item(),
+			key = item.Name != null ? item.Name : item,
+			value = item.Name != null ? item.Value : source(item);
+			result[key] = value;
 		}
+		return result;
 	}
 }%>

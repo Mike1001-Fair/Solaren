@@ -22,29 +22,29 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Record.Map(rs);
+	var Indicator = Solaren.Map(rs.Fields);
 	rs.Close();
 	Solaren.Close();
 }
 
 var OperDate = Month.Date[1],
-PrevDate     = Month.GetYMD(Record.PrevDate),
-ReportDate   = Month.GetYMD(Record.ReportDate),
+PrevDate     = Month.GetYMD(Indicator.PrevDate),
+ReportDate   = Month.GetYMD(Indicator.ReportDate),
 NextDate     = Month.Date[3],
 ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
-Limit        = Math.pow(10, Record.Capacity) - 1,
+Limit        = Math.pow(10, Indicator.Capacity) - 1,
 AllowDelBtn  = User.RoleId == 1;
 
-Html.Title = Record.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
+Html.Title = Indicator.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
 Html.SetPage()%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=Record.ContractId%>">
+<INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=Indicator.ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="IndicatorId" VALUE="<%=IndicatorId%>">
 <INPUT TYPE="HIDDEN" NAME="PrevDate" VALUE="<%=PrevDate%>">
-<INPUT TYPE="HIDDEN" NAME="Ktf" VALUE="<%=Record.Ktf%>">
-<INPUT TYPE="HIDDEN" NAME="ContractPower" VALUE="<%=Record.ContractPower%>">
-<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="Ktf" VALUE="<%=Indicator.Ktf%>">
+<INPUT TYPE="HIDDEN" NAME="ContractPower" VALUE="<%=Indicator.ContractPower%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Indicator.Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <INPUT TYPE="HIDDEN" NAME="OperDate" VALUE="<%=OperDate%>">
 <INPUT TYPE="HIDDEN" NAME="EndDate" VALUE="<%=Month.Date[2]%>">
@@ -55,12 +55,12 @@ Html.SetPage()%>
 
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Html.WriteSearchSet("Договір", "Contract", Record.ContractName, 1) %>
+	<% Html.WriteSearchSet("Договір", "Contract", Indicator.ContractName, 1) %>
 	<FIELDSET><LEGEND>Лiчильник</LEGEND>
 	<TABLE>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="MeterId">Номер</LABEL></TD>
 	<TD><SELECT NAME="MeterId" ID="MeterId" STYLE="width: 8em">
-	<OPTION></OPTION><OPTION VALUE="<%=Record.MeterId%>" SELECTED><%=Record.MeterCode%></OPTION></SELECT></TD></TR>
+	<OPTION></OPTION><OPTION VALUE="<%=Indicator.MeterId%>" SELECTED><%=Indicator.MeterCode%></OPTION></SELECT></TD></TR>
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="ReportDate">Дата</LABEL></TD>
 	<TD><INPUT TYPE="date" NAME="ReportDate" ID="ReportDate" VALUE="<%=ReportDate%>" MIN="<%=OperDate%>" MAX="<%=NextDate%>" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
@@ -69,14 +69,14 @@ Html.SetPage()%>
 	<TABLE CLASS="Centered"><TR><TD>&nbsp</TD><TD>Останнi</TD><TD>Попереднi</TD><TD>Рiзниця</TD><TD>&nbsp</TD></TR>
 
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="RecVal">Прийом</LABEL></TD>
-	<TD><INPUT TYPE="Number" NAME="RecVal" ID="RecVal" VALUE="<%=Record.RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
-	<TD><INPUT TYPE="text" NAME="RecValPrev" VALUE="<%=Record.PrevRecVal%>" SIZE="7" READONLY TABINDEX="-1"></TD>
+	<TD><INPUT TYPE="Number" NAME="RecVal" ID="RecVal" VALUE="<%=Indicator.RecVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
+	<TD><INPUT TYPE="text" NAME="RecValPrev" VALUE="<%=Indicator.PrevRecVal%>" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="text" NAME="RecSaldo" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="CheckBox" NAME="ZeroRec" TITLE="Перехiд через нуль"></TD></TR>
 
 	<TR><TD ALIGN="RIGHT"><LABEL FOR="RetVal">Видача</LABEL></TD>
-	<TD><INPUT TYPE="Number" NAME="RetVal" ID="RetVal" VALUE="<%=Record.RetVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
-	<TD><INPUT TYPE="text" NAME="RetValPrev" VALUE="<%=Record.PrevRetVal%>" SIZE="7" READONLY TABINDEX="-1"></TD>
+	<TD><INPUT TYPE="Number" NAME="RetVal" ID="RetVal" VALUE="<%=Indicator.RetVal%>" MIN="0" MAX="<%=Limit%>" REQUIRED></TD>
+	<TD><INPUT TYPE="text" NAME="RetValPrev" VALUE="<%=Indicator.PrevRetVal%>" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="text" NAME="RetSaldo" SIZE="7" READONLY TABINDEX="-1"></TD>
 	<TD><INPUT TYPE="CheckBox" NAME="ZeroRet" TITLE="Перехiд через нуль"></TD></TR>
 	</TABLE></FIELDSET>
@@ -86,7 +86,7 @@ Html.SetPage()%>
 	</FIELDSET>
 	</TD></TR>
 </TABLE>
-<% if (!ViewOnly) Html.WriteEditButton(AllowDelBtn, Record.Deleted)%>
+<% if (!ViewOnly) Html.WriteEditButton(AllowDelBtn, Indicator.Deleted)%>
 </FORM></BODY></HTML>
 
 
