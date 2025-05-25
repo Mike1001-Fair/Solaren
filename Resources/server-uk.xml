@@ -39,7 +39,7 @@
 	<Item id="AuthorizationError">Помилка авторизації</Item>
 	<Item id="RequestError">Помилка запиту</Item>
 	<Item id="AccessDenied">Доступ заборонено</Item>
-	<Item id="ServiceSuspended">Сервіс призупинено</Item>
+	<Item id="StopApp">Сервіс призупинено</Item>
 	<Item id="Done">Виконано</Item>
 	<Item id="Attention">Увага</Item>
 	<Item id="Message">Повідомлення</Item>

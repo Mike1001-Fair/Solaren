@@ -49,7 +49,7 @@ var Html = {
 		return ['<A href="', url, id, '">', value, '</A>'].join("")
 	},
 	
-	WriteEditButton: function(AllowDelBtn) {
+	WriteEditButton: function(AllowDelBtn, Deleted) {
 		var ResponseText = [];
 		if (typeof Deleted != "undefined" && Deleted) {
 			ResponseText.push('<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>');

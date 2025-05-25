@@ -62,4 +62,15 @@ Solaren = {
 	ValidObject: function(obj) {
 		return obj && typeof obj === 'object'
 	}
+
+},
+
+Record = {
+	Map: function(rs) {
+		var fields = new Enumerator(rs.Fields);
+		for (; !fields.atEnd(); fields.moveNext()) {
+			var field = fields.item();
+			this[field.Name] = field.Value;
+		}
+	}
 }%>

@@ -29,7 +29,7 @@ function Application_OnStart() {
 function Session_OnStart() {
 	if (Application("StopApp")) {
 		Session.Abandon();
-		Server.Transfer("appsuspend.asp");
+		Server.Transfer("stopapp.asp");
 	} else {
 		Session.CodePage = 65001;
 		Session.Timeout = 20;
