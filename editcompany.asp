@@ -30,8 +30,7 @@ try {
 } finally {	
 	var Company = Solaren.Map(rsCompany.Fields);
 	rsCompany.Close();
-	Html.Title = Company.Deleted ? "Перегляд компанії" : "Редагування компанії";
-	Html.SetPage();
+	Html.SetPage(Company.Deleted ? "Перегляд компанії" : "Редагування компанії");
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCompany" ACTION="updatecompany.asp" METHOD="POST" AUTOCOMPLETE="off">

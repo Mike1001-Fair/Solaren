@@ -35,8 +35,7 @@ ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
 Limit        = Math.pow(10, Indicator.Capacity) - 1,
 AllowDelBtn  = User.RoleId == 1;
 
-Html.Title = Indicator.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв";
-Html.SetPage()%>
+Html.SetPage(Indicator.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=Indicator.ContractId%>">

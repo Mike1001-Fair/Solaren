@@ -25,8 +25,7 @@ try {
 	rs.Close();
 	Solaren.Close();
 	var Limit = Math.pow(10, Meter.Capacity) - 1;
-	Html.Title = Meter.Deleted ? "Перегляд лічильника" : "Редагування лічильника";
-	Html.SetPage();
+	Html.SetPage(Meter.Deleted ? "Перегляд лічильника" : "Редагування лічильника");
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditMeter" ACTION="updatemeter.asp" METHOD="POST" AUTOCOMPLETE="off">

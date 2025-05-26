@@ -35,8 +35,7 @@ try {
 } finally {
 	var Contract = Solaren.Map(rsContract.Fields);
 	rsContract.Close();
-	Html.Title = Contract.Deleted ? "Перегляд договору" : "Редагування договору";
-	Html.SetPage();
+	Html.SetPage(Contract.Deleted ? "Перегляд договору" : "Редагування договору");
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">
