@@ -44,38 +44,23 @@ try {
 
 	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 	var rs = Solaren.Execute("GetIndicatorReport");
-	
-	with (rsInfo) {
-		var CustomerName     = Fields("CustomerName").value,
-		ContractLocalityType = Fields("ContractLocalityType").value,
-		ContractLocalityName = Fields("ContractLocalityName").value,
-		ContractStreetType   = Fields("ContractStreetType").value,
-		ContractStreetName   = Fields("ContractStreetName").value,
-		HouseId              = Fields("HouseId").value,
-		ContractDate         = Month.GetYMD(Fields("ContractDate").value),
-		ContractPAN          = Fields("ContractPAN").value,
-		BranchName           = Fields("BranchName").value,
-		ChiefTitle           = Fields("ChiefTitle").value,
-		ChiefName            = Fields("ChiefName").value,
-		BranchLocalityType   = Fields("BranchLocalityType").value,
-		BranchLocalityName   = Fields("BranchLocalityName").value;
-		Close();
-	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 }
 
-var Period      = Month.GetPeriod(ReportMonth, 1),
-EndDate         = Month.GetLastDay(ReportMonth),
-LocalityType    = Locality.Type[ContractLocalityType],
-StreetType      = Street.Type[ContractStreetType],
-ContractAddress = [LocalityType, ContractLocalityName + ", ", StreetType, ContractStreetName, HouseId],
-BranchLocality  = [Locality.Type[BranchLocalityType],  BranchLocalityName],
-DocRef          = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
-Body            = [],
-Caption         = ['Споживач: ' + CustomerName, 'Рахунок: ' + ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
-Divider         = '<DIV CLASS="BlockDivider"></DIV>',
-ResponseText    = ['\n<BODY CLASS="ActContainer">'];
+var Report   = Solaren.Map(rsInfo.Fields),
+ContractDate = Month.GetYMD(Report.ContractDate),
+Period       = Month.GetPeriod(ReportMonth, 1),
+EndDate      = Month.GetLastDay(ReportMonth),
+LocalityType = Locality.Type[Report.ContractLocalityType],
+StreetType   = Street.Type[Report.ContractStreetType],
+ContractAddress = [LocalityType, Report.ContractLocalityName + ", ", StreetType, Report.ContractStreetName, Report.HouseId],
+BranchLocality  = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
+DocRef  = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
+Body    = [],
+Caption = ['Споживач: ' + Report.CustomerName, 'Рахунок: ' + Report.ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
+Divider = '<DIV CLASS="BlockDivider"></DIV>',
+ResponseText = ['\n<BODY CLASS="ActContainer">'];
 
 Html.SetHead("Звіт про показники");
 
@@ -141,8 +126,8 @@ for (var i = 0; i <= DoubleReport; i++) {
 			Tag.Write('P', -1, getText(totSaldo)),
 			'<TABLE CLASS="NoBorderTable">',
 			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>',
-			'<TR><TD STYLE="padding: 10px 0px 0px">' + BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + CustomerName + '</TD></TR>',
-			'<TR><TD>' + ChiefTitle + ' ' + ChiefName + '</TD><TD></TD></TR>',
+            '<TR><TD STYLE="padding: 10px 0px 0px">' + Report.BranchName + ' ЦОС</TD><TD STYLE="padding: 10px 0px 0px">' + Report.CustomerName + '</TD></TR>',
+            '<TR><TD>' + Report.ChiefTitle + ' ' + Report.ChiefName + '</TD><TD></TD></TR>',
 			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD>',
 			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>',
 			'</TABLE>',

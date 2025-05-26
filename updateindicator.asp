@@ -1,35 +1,28 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var Authorized = Session("RoleId") == 1 || Session("RoleId") == 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-	var IndicatorId = Form("IndicatorId"),
-	ReportDate      = Form("ReportDate"),
-	MeterId         = Form("MeterId"),
-	RecVal          = Form("RecVal"),
-	RetVal          = Form("RetVal"),
-	PrevDate        = Form("PrevDate"),
-	RecSaldo        = Form("RecSaldo"),
-	RetSaldo        = Form("RetSaldo");
-}
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId >= 1 && User.RoleId <= 2,
+Indicator = Solaren.Map(Request.Form);
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("UpdateIndicator");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("IndicatorId", adInteger, adParamInput,10, IndicatorId));
-			Append(CreateParameter("ReportDate", adVarChar, adParamInput, 10, ReportDate));
-			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, MeterId));
-			Append(CreateParameter("RecVal", adInteger, adParamInput, 10, RecVal));
-			Append(CreateParameter("RetVal", adInteger, adParamInput, 10, RetVal));
-			Append(CreateParameter("PrevDate", adVarChar, adParamInput, 10, PrevDate));
-			Append(CreateParameter("RecSaldo", adInteger, adParamInput, 10, RecSaldo));
-			Append(CreateParameter("RetSaldo", adInteger, adParamInput, 10, RetSaldo));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
+			Append(CreateParameter("IndicatorId", adInteger, adParamInput,10, Indicator.IndicatorId));
+			Append(CreateParameter("ReportDate", adVarChar, adParamInput, 10, Indicator.ReportDate));
+			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, Indicator.MeterId));
+			Append(CreateParameter("RecVal", adInteger, adParamInput, 10, Indicator.RecVal));
+			Append(CreateParameter("RetVal", adInteger, adParamInput, 10, Indicator.RetVal));
+			Append(CreateParameter("PrevDate", adVarChar, adParamInput, 10, Indicator.PrevDate));
+			Append(CreateParameter("RecSaldo", adInteger, adParamInput, 10, Indicator.RecSaldo));
+			Append(CreateParameter("RetSaldo", adInteger, adParamInput, 10, Indicator.RetSaldo));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		} 
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
