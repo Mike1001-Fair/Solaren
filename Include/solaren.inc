@@ -71,6 +71,7 @@ Solaren = {
 				key = item.Name != null ? item.Name : item,
 				value = item.Name != null ? item.Value : source(item);
 				result[key] = value;
+				//Response.Write("key:" + key + ", value=" + value + "<br>");
 			}
 		} catch (ex) {
 			Message.Write(3, Message.Error(ex))
