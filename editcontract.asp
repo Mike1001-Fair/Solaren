@@ -33,18 +33,18 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Record.Map(rsContract);
+	var Contract = Solaren.Map(rsContract.Fields);
 	rsContract.Close();
-	Html.Title = Record.Deleted ? "Перегляд договору" : "Редагування договору";
+	Html.Title = Contract.Deleted ? "Перегляд договору" : "Редагування договору";
 	Html.SetPage();
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="CustomerId" ID="CustomerId" VALUE="<%=Record.CustomerId%>">
+<INPUT TYPE="HIDDEN" NAME="CustomerId" ID="CustomerId" VALUE="<%=Contract.CustomerId%>">
 <INPUT TYPE="HIDDEN" NAME="ContractId" VALUE="<%=ContractId%>">
-<INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Record.LocalityId%>">
-<INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=Record.StreetId%>">
-<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Contract.LocalityId%>">
+<INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=Contract.StreetId%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Contract.Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="CheckCard" VALUE="<%=Session("CheckCard")%>">
 
 <H3 CLASS="HeadText"><BIG>&#128214;</BIG><%=Html.Title%></H3>
@@ -52,68 +52,66 @@ try {
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Загальні</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Споживач</TD>
-	<TD><% Html.WriteInputDataList("Customer", Record.CustomerName, 35) %></TD></TR>
+	<TD><% Html.WriteInputDataList("Customer", Contract.CustomerName, 35) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Рахунок</TD>
-	<TD><INPUT TYPE="TEXT" NAME="PAN" VALUE="<%=Record.PAN%>" SIZE="9" MAXLENGTH="9" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="PAN" VALUE="<%=Contract.PAN%>" SIZE="9" MAXLENGTH="9" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">EIC</TD>
-	<TD><INPUT TYPE="TEXT" NAME="EICode" VALUE="<%=Record.EICode%>" SIZE="16" MAXLENGTH="16" PATTERN="[A-Z0-9]{16}" REQUIRED></TD></TR></TABLE></FIELDSET>
+	<TD><INPUT TYPE="TEXT" NAME="EICode" VALUE="<%=Contract.EICode%>" SIZE="16" MAXLENGTH="16" PATTERN="[A-Z0-9]{16}" REQUIRED></TD></TR></TABLE></FIELDSET>
 
-	<FIELDSET><LEGEND><LABEL><INPUT TYPE="CheckBox" NAME="Pay" <%=Record.Pay ? "CHECKED" : ""%>>Сплачувати</LABEL></LEGEND>
+	<FIELDSET><LEGEND><LABEL><INPUT TYPE="CheckBox" NAME="Pay" <%=Contract.Pay ? "CHECKED" : ""%>>Сплачувати</LABEL></LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Банк</TD>
-	<TD><%Html.WriteBank(rsBank, Record.MfoCode)%></TD></TR>
+	<TD><%Html.WriteBank(rsBank, Contract.MfoCode)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Рахунок</TD>
-	<TD><INPUT TYPE="TEXT" NAME="BankAccount" VALUE="<%=Record.BankAccount%>" SIZE="16" maxLength="16" PATTERN="^\d{1,16}$" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="BankAccount" VALUE="<%=Contract.BankAccount%>" SIZE="16" maxLength="16" PATTERN="^\d{1,16}$" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Картка</TD>
-	<TD><INPUT TYPE="TEXT" NAME="CardId" VALUE="<%=Record.CardId%>" SIZE="16" maxLength="16" PATTERN="^\d{1,16}$">
+	<TD><INPUT TYPE="TEXT" NAME="CardId" VALUE="<%=Contract.CardId%>" SIZE="16" maxLength="16" PATTERN="^\d{1,16}$">
 	<INPUT TYPE="CheckBox" NAME="Account" TITLE="Рахунок"></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET><LEGEND>Договір</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">ЦОС</TD>
-	<TD><% Html.WriteSelect(rsBranch, "Branch", 0, Record.BranchId)%></TD></TR>
+	<TD><% Html.WriteSelect(rsBranch, "Branch", 0, Contract.BranchId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата</TD>
-	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=Record.ContractDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ContractDate" VALUE="<%=Contract.ContractDate%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">IBAN</TD>
-	<TD><INPUT TYPE="TEXT" NAME="Iban" SIZE="29" VALUE="<%=Record.Iban%>" MAXLENGTH="29" PATTERN="[A-Z0-9]{29}" REQUIRED>
+	<TD><INPUT TYPE="TEXT" NAME="Iban" SIZE="29" VALUE="<%=Contract.Iban%>" MAXLENGTH="29" PATTERN="[A-Z0-9]{29}" REQUIRED>
 	<INPUT TYPE="CheckBox" NAME="IbanBox" ID="IbanBox" TITLE="Сгенерувати"></TD></TR></TABLE></FIELDSET></TD>
 
 	<TD><FIELDSET><LEGEND>Адреса</LEGEND>
 	<TABLE><TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
-	<TD><% Html.WriteInputDataList("Locality", Record.LocalityName, 30) %></TD></TR>
+	<TD><% Html.WriteInputDataList("Locality", Contract.LocalityName, 30) %></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><% Html.WriteInputDataList("Street", Record.StreetName, 30) %></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", Contract.StreetName, 30) %></TD></TR>
 	
 	<TR><TD ALIGN="RIGHT">Будинок</TD>
-	<TD><INPUT TYPE="TEXT" NAME="HouseId" VALUE="<%=Record.HouseId%>" SIZE="20" MAXLENGTH="15" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="HouseId" VALUE="<%=Contract.HouseId%>" SIZE="20" MAXLENGTH="15" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET><LEGEND ALIGN="CENTER">Електроустановка</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Потужнiсть</TD>
-	<TD><INPUT TYPE="Number" NAME="ContractPower" VALUE="<%=Record.ContractPower%>" STEP="0.01" MIN="0" MAX="50" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="ContractPower" VALUE="<%=Contract.ContractPower%>" STEP="0.01" MIN="0" MAX="50" REQUIRED></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
-	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Record.ExpDate%>" SIZE="10" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Contract.ExpDate%>" SIZE="10" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
-	<TD><%Tarif.Write("TarifGroupId", Record.TarifGroupId)%></TD></TR>
+	<TD><%Tarif.Write("TarifGroupId", Contract.TarifGroupId)%></TD></TR>
 	</TABLE></FIELDSET>
 
 	<FIELDSET><LEGEND>Інше</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">РЕМ</TD>
-	<TD><%Html.WriteSelect(rsAen, "Aen", 0, Record.AenId)%></TD></TR>
+	<TD><%Html.WriteSelect(rsAen, "Aen", 0, Contract.AenId)%></TD></TR>
 	
 	<TR><TD ALIGN="RIGHT">Оператор</TD>
-	<TD><%Html.WriteSelect(rsOperator, "Operator", 0, Record.OperatorId)%></TD></TR>
+	<TD><%Html.WriteSelect(rsOperator, "Operator", 0, Contract.OperatorId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Виконавець</TD>
-	<TD><%Html.WriteSelect(rsPerformer, "Performer", 0, Record.PerformerId)%></TD></TR>
+	<TD><%Html.WriteSelect(rsPerformer, "Performer", 0, Contract.PerformerId)%></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Html.WriteEditButton(1, Record.Deleted);
+<% Html.WriteEditButton(1, Contract.Deleted);
 Solaren.Close();%>
 </FORM></BODY></HTML>
-
-

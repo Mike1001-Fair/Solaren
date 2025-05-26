@@ -63,13 +63,17 @@ Solaren = {
 	},
 
 	Map: function(source) {
-		var result = {},
-		items = new Enumerator(source);
-		for (; !items.atEnd(); items.moveNext()) {
-			var item = items.item(),
-			key = item.Name != null ? item.Name : item,
-			value = item.Name != null ? item.Value : source(item);
-			result[key] = value;
+		var result = {};
+		try {
+			var items = new Enumerator(source);
+			for (; !items.atEnd(); items.moveNext()) {
+				var item = items.item(),
+				key = item.Name != null ? item.Name : item,
+				value = item.Name != null ? item.Value : source(item);
+				result[key] = value;
+			}
+		} catch (ex) {
+			Message.Write(3, Message.Error(ex))
 		}
 		return result;
 	}
