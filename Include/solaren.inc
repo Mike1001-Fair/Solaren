@@ -64,14 +64,14 @@ Solaren = {
 
 	Map: function(source) {
 		var result = {};
-		try {
-			var items = new Enumerator(source);
-			for (; !items.atEnd(); items.moveNext()) {
+		try {			
+			for (var items = new Enumerator(source); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
-				key = item.Name != null ? item.Name : item,
-				value = item.Name != null ? item.Value : source(item);
+				hasName = typeof item.Name !== "undefined",
+				key = hasName ? item.Name : item;
+				value = hasName ? item.Value : source(item);
 				result[key] = value;
-				//Response.Write("key:" + key + ", value=" + value + "<br>");
+				//Response.Write("key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name + "<br>" );
 			}
 		} catch (ex) {
 			Message.Write(3, Message.Error(ex))
