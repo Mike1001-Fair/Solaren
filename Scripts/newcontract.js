@@ -9,7 +9,7 @@
 		SbmBtn.disabled = !HouseId.validity.valid || !PAN.validity.valid
 		|| !isEICode(EICode.value) || !Iban.validity.valid || StreetId.value == -1
 		|| LocalityId.value == -1 || !LocalityName.validity.valid
-		|| !isAccount(BankAccount.value, MfoCode.value) || (CheckCard.value && !Account.checked && !isCard(CardId.value))
+		|| !isAccount(BankAccount.value, MfoCode.value) || (CheckCard.value && !Account.checked && !isCreditCard(CardId.value))
 		|| (CheckCard.value && Account.checked  && !isAccount(CardId.value, MfoCode.value))
 		|| !ExpDate.validity.valid || !ContractDate.validity.valid
 		|| !ContractPower.validity.valid || CustomerId.value == -1;

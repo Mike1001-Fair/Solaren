@@ -28,7 +28,7 @@ try {
 
 Html.SetPage("Новий договір")%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="NewContract" ACTION="createcontract.asp" METHOD="post" AUTOCOMPLETE="off">
+<FORM CLASS="ValidForm" NAME="NewContract" ACTION="createcontract.asp" METHOD="post" AUTOCOMPLETE="off" TARGET="_blank">
 <INPUT TYPE="HIDDEN" NAME="CustomerId" ID="CustomerId" VALUE="-1">
 <INPUT TYPE="HIDDEN" NAME="CheckCard" VALUE="<%=Session("CheckCard")%>">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
