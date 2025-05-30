@@ -18,10 +18,12 @@ NewCompany.addEventListener('input', () => {
 
 SbmBtn.addEventListener('click', () => {
 	if (confirm("Ви впевненi\u2753")) {
-		let Elements = document.querySelectorAll("input[type='text']");
+		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		 event.preventDefault();
+	}
 });
 
 LocalityName.addEventListener('input', function() {

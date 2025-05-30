@@ -24,7 +24,7 @@ try {
 
 Html.SetPage("Нова компанія")%>
 <BODY CLASS="MainBody">
-<FORM CLASS="ValidForm" NAME="NewCompany" ACTION="createcompany.asp" METHOD="post" AUTOCOMPLETE="off">
+<FORM CLASS="ValidForm" NAME="NewCompany" ACTION="createcompany.asp" METHOD="post" AUTOCOMPLETE="off" TARGET="_blank">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
 <INPUT TYPE="hidden" NAME="LocalityId" ID="LocalityId" VALUE="-1">
 <H3 CLASS="HeadText"><IMG SRC="Images/office.svg"><%=Html.Title%></H3>
@@ -78,12 +78,10 @@ Html.SetPage("Нова компанія")%>
 	<TD><INPUT TYPE="TEXT" NAME="HouseId" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><INPUT TYPE="search" NAME="StreetName" ID="StreetName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="StreetList" REQUIRED>
-	<DATALIST ID="StreetList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", "", 30) %></TD></TR>
 
-	<TR><TD ALIGN="RIGHT" ID="LocalityType">Мiсто</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
+	<TD><% Html.WriteInputDataList("Locality", "", 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Область</TD>
 	<TD><% Html.WriteSelect(rsRegion, "Region", 0, -1)%></TD></TR>

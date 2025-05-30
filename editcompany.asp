@@ -87,12 +87,10 @@ try {
 	<TD><INPUT TYPE="TEXT" NAME="HouseId" VALUE="<%=Company.HouseId%>" SIZE="10" MAXLENGTH="10" REQUIRED></TD></TR>
 
 	<TR><TD ID="StreetType" ALIGN="RIGHT">Вулиця</TD>
-	<TD><INPUT TYPE="search" NAME="StreetName" ID="StreetName" VALUE="<%=Company.StreetName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="StreetList" REQUIRED>
-	<DATALIST ID="StreetList"></DATALIST></TD></TR>
+	<TD><% Html.WriteInputDataList("Street", Company.StreetName, 30) %></TD></TR>
 
-	<TR><TD ALIGN="RIGHT" ID="LocalityType">Місто</TD>
-	<TD><INPUT TYPE="search" NAME="LocalityName" ID="LocalityName" VALUE="<%=Company.LocalityName%>" PLACEHOLDER="Пошук по літерам" SIZE="30" LIST="LocalityList" REQUIRED>
-	<DATALIST ID="LocalityList"></DATALIST></TD></TR>
+	<TR><TD ID="LocalityType" ALIGN="RIGHT">Пункт</TD>
+	<TD><% Html.WriteInputDataList("Locality", Company.LocalityName, 30) %></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Область</TD>
 	<TD><%Html.WriteSelect(rsRegion, "Region", 0, Company.RegionId)%></TD></TR>
