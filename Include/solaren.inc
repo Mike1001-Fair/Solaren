@@ -62,14 +62,14 @@ Solaren = {
 		return obj && typeof obj === 'object'
 	},
 
-	Map: function(source) {
+	Map: function(Collection) {
 		var result = {};
 		try {			
-			for (var items = new Enumerator(source); !items.atEnd(); items.moveNext()) {
+			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
-				hasName = typeof item.Name !== "undefined",
+				hasName = item && typeof item.Name === "string",
 				key = hasName ? item.Name : item;
-				value = hasName ? item.Value : source(item);
+				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
 				//Response.Write("key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name + "<br>" );
 			}

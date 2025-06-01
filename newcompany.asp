@@ -20,9 +20,9 @@ try {
 	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-Html.SetPage("Нова компанія")%>
+} finally {
+	Html.SetPage("Нова компанія")
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCompany" ACTION="createcompany.asp" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="-1">
@@ -111,5 +111,3 @@ Html.SetPage("Нова компанія")%>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
 </FORM></BODY></HTML>
 <% Solaren.Close() %>
-
-
