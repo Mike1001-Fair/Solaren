@@ -5,6 +5,8 @@ var User = {
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}/,
 	PswdLen: 10,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
+	LoginId: Request.Form("LoginId") || -1,
+	Pswd   : Request.Form("Pswd") || -1,
 	Ip     : Request.ServerVariables("REMOTE_ADDR") || -1,
 	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || -1,
 	Method : Request.ServerVariables("REQUEST_METHOD") || -1,
@@ -25,6 +27,10 @@ var User = {
 		LanguageCode = LanguageSet.indexOf(UserLanguage) > -1 ? UserLanguage : "en",	//default to English
 		FileName     = ["server-", LanguageCode, ".xml"];
 		return FileName.join("")
+	},
+
+	ValidateCredentials: function() {
+		return this.LoginRe.test(User.LoginId) && this.PswdRe.test(User.Pswd);
 	},
 
 	ValidateRole: function(RoleId, UserGUID) {
