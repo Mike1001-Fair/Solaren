@@ -1,25 +1,23 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-	var ContractId = Form("ContractId"),
-	PayDate        = Form("PayDate"),
-	PaySum         = Form("PaySum");
-}
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
+Payment = Solaren.Map(Request.Form);
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("NewPay");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("PayDate", adVarChar, adParamInput, 10, PayDate));
-			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
-			Append(CreateParameter("PaySum", adVarChar, adParamInput, 20, PaySum));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
+			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Payment.ContractId));
+			Append(CreateParameter("PayDate", adVarChar, adParamInput, 10, Payment.PayDate));
+			Append(CreateParameter("PaySum", adVarChar, adParamInput, 20, Payment.PaySum));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {

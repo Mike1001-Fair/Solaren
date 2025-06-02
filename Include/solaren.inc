@@ -71,7 +71,7 @@ Solaren = {
 				key = hasName ? item.Name : item;
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
-				//Response.Write("key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name + "<br>" );
+				//Response.Write("<br>key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name);
 			}
 		} catch (ex) {
 			Message.Write(3, Message.Error(ex))

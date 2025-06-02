@@ -3,25 +3,19 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Payment = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
-
-with (Request) {
-	var ContractId = Form("ContractId"),
-	PayId          = Form("PayId"),
-	PayDate        = Form("PayDate"),
-	PaySum         = Form("PaySum");
-}
 
 try {
 	Solaren.SetCmd("UpdatePay");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
-			Append(CreateParameter("PayId", adInteger, adParamInput, 10, PayId));
-			Append(CreateParameter("PayDate", adVarChar, adParamInput, 10, PayDate));
-			Append(CreateParameter("PaySum", adVarChar, adParamInput, 20, PaySum));
+			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Payment.ContractId));
+			Append(CreateParameter("PayId", adInteger, adParamInput, 10, Payment.PayId));
+			Append(CreateParameter("PayDate", adVarChar, adParamInput, 10, Payment.PayDate));
+			Append(CreateParameter("PaySum", adVarChar, adParamInput, 20, Payment.PaySum));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} 
 		Execute(adExecuteNoRecords);
