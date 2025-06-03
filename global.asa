@@ -21,6 +21,7 @@ var Config = {
 }
 
 function Application_OnStart() {
+	Application("AppName") = "Solaren";
 	Application("ConnectString") = Config.getString();
 	Application("SesCount") = 0;
 	Application("StopApp") = 0;	
