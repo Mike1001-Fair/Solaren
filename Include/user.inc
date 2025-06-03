@@ -2,7 +2,7 @@
 var Referer = {
 	Value: String(Request.ServerVariables("HTTP_REFERER") || "").toLowerCase(),
 
-	Is: function(keyword) {
+	Match: function(keyword) {
 		//Response.Write('<br>' + this.Value);
 		return this.Value.indexOf(keyword.toLowerCase()) > -1;
 	}
@@ -14,8 +14,8 @@ User = {
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}/,
 	PswdLen: 10,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
-	LoginId: Referer.Is(Application("AppName")) ? Request.Form("LoginId") : -1,
-	Pswd   : Referer.Is(Application("AppName")) ? Request.Form("Pswd")    : -1,
+	LoginId: Referer.Match(Application("AppName")) ? Request.Form("LoginId") : -1,
+	Pswd   : Referer.Match(Application("AppName")) ? Request.Form("Pswd")    : -1,
 	Ip     : Request.ServerVariables("REMOTE_ADDR") || -1,
 	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || -1,
 	Method : Request.ServerVariables("REQUEST_METHOD") || -1,
