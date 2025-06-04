@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
@@ -42,4 +43,5 @@ if (User.ValidateAccess(Authorized, "GET")) {
 
 <BUTTON TYPE="button" CLASS="SbmBtn" NAME="TestBtn" ID="TestBtn">&#128736;Тест</BUTTON>
 <BUTTON TYPE="button" CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#11015;Завантажити</BUTTON></FORM></BODY></HTML>
+
 

@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
@@ -44,3 +45,4 @@ rs.Close();
 Solaren.Close();
 ResponseText.push(Html.GetFooterRow(3, i));
 Response.Write(ResponseText.join("\n"))%>
+

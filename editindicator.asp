@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
@@ -87,5 +88,6 @@ Html.SetPage(Indicator.Deleted || ViewOnly ? "Перегляд показникi
 </TABLE>
 <% if (!ViewOnly) Html.WriteEditButton(AllowDelBtn, Indicator.Deleted)%>
 </FORM></BODY></HTML>
+
 
 

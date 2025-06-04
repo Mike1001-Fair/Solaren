@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
@@ -62,3 +63,4 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ', i, '</TH>',
 ];
 ResponseText.push(footer.join(""));
 Response.Write(ResponseText.join("\n"))%>
+

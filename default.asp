@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -29,4 +30,5 @@ Html.WriteScript()%>
 	<A HREF="mailto:nickchernov@gmail.com" TITLE="<%=Dictionary.Item("FeedbackSheet")%>"><%=Dictionary.Item("Author")%></A>
 </FOOTER>
 </BODY></HTML>
+
 

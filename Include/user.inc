@@ -1,14 +1,5 @@
 ﻿<% //@ LANGUAGE = "JScript"
-var Referer = {
-	Value: String(Request.ServerVariables("HTTP_REFERER")),
-
-	Match: function(keyword) {
-		//Response.Write("<br>Referer.Value=" + Referer.Value);
-		return this.Value.indexOf(keyword) > -1;
-	}
-},
-
-User = {
+var User = {
 	Role   : ["Адмiнiстратор", "Виконавець", "Технік ЦОС"],
 	LoginRe: /(?=.*[a-z])(?=.*[A-Z]).{8,10}/,
 	PswdRe : /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}/,

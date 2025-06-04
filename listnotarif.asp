@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
@@ -54,4 +55,5 @@ if (rs.EOF) {
 	ResponseText.push(Html.GetFooterRow(7, i));
 	Response.Write(ResponseText.join("\n"))
 }%>
+
 

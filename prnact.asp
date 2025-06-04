@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
@@ -88,4 +89,5 @@ for (var i = 0; i <= DoubleAct; i++) {
 ResponseText.push(Body.join(Divider));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
+
 

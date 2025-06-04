@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
@@ -38,4 +39,5 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 } rs.Close(); Solaren.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>
+
 

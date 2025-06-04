@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
@@ -31,3 +32,4 @@ try {
 	Solaren.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Користувач з таким логіном вже є");
 }%>
+

@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
@@ -40,3 +41,4 @@ try {
 	Solaren.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Споживач з таким кодом вже є")
 }%>
+

@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
@@ -251,4 +252,5 @@ LI {margin: 0px}</STYLE>
 <TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></TD>
 <TD><DIV CLASS="UnderLine"></DIV></TD></TR>
 </TABLE></BODY></HTML>
+
 

@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
@@ -68,3 +69,4 @@ tr = Tag.Write("TR", -1, th.join(""));
 ResponseText.push(tr);
 ResponseText.push('</TABLE></BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
+

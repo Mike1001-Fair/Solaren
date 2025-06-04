@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
@@ -97,4 +98,5 @@ Solaren.Close();
 ResponseText.push(Note.join(PageBreak));
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
+
 

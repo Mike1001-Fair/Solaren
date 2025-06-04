@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/session.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
@@ -40,3 +41,4 @@ try {
 	SessionManager.SetDate(OperDate);
 	Message.Write(1, "");
 }%>
+

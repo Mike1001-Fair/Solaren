@@ -1,5 +1,6 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/httpclient.inc" -->
@@ -24,4 +25,5 @@ for (var i=0; i<1000; i++) {
 //Email.WriteConfig();
 //Email.Send("nickchernov@gmail.com", "Test", "Test");
 %>
+
 
