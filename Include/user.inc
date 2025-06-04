@@ -3,7 +3,7 @@ var Referer = {
 	Value: String(Request.ServerVariables("HTTP_REFERER")),
 
 	Match: function(keyword) {
-		//Response.Write('<br>' + this.Value);
+		//Response.Write("<br>Referer.Value=" + Referer.Value);
 		return this.Value.indexOf(keyword) > -1;
 	}
 },
@@ -91,7 +91,7 @@ User = {
 	},
 
 	ValidateAccess: function(Authorized, method) {
-		var	valid = Authorized && this.Method == method;
+		var	valid = Authorized && this.Method == method && Referer.Match(Application("AppName"));
 		if (!valid) {
 			Resource.Load(User.ResourceFile());
 			Message.Write(2, Dictionary.Item("AuthorizationError"));
