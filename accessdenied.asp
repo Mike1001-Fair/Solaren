@@ -1,4 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
+<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->

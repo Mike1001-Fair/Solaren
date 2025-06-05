@@ -2,7 +2,7 @@
 var Referer = {
 	Value: String(Request.ServerVariables("HTTP_REFERER")),
 
-	Match: function(keyword) {
-		return this.Value.indexOf(keyword) > -1;
+	Match: function(key) {
+		return this.Value.indexOf(key) > -1;
 	}
 }%>
