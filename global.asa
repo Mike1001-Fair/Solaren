@@ -2,6 +2,7 @@
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
 var Config = {
 	AppName: "solaren",
+	StopApp: 0,
 	Mode: "SSPI",
 	Params: [
 		"Provider=MSOLEDBSQL",
@@ -25,11 +26,11 @@ function Application_OnStart() {
 	Application("AppName") = Config.AppName;
 	Application("ConnectString") = Config.getString();
 	Application("SesCount") = 0;
-	Application("StopApp") = 0;	
+	//Application("StopApp") = 0;	
 }  
 
 function Session_OnStart() {
-	if (Application("StopApp")) {
+	if (Config.StopApp) {
 		Session.Abandon();
 		Server.Transfer("stopapp.asp");
 	} else {
