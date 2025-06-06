@@ -26,7 +26,6 @@ function Application_OnStart() {
 	Application("AppName") = Config.AppName;
 	Application("ConnectString") = Config.getString();
 	Application("SesCount") = 0;
-	//Application("StopApp") = 0;	
 }  
 
 function Session_OnStart() {
