@@ -5,7 +5,8 @@ Solaren = {
 	ConnectMode: adModeRead,
 	ConnectionTimeout: 10,
 	CommandTimeout: 20,
-	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")),
+	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")) || "",
+	Referer: String(Request.ServerVariables("HTTP_REFERER")) || "",
 
 	SetCmd: function(spName) {
 		Connect.Mode = this.ConnectMode;
@@ -77,5 +78,9 @@ Solaren = {
 			Message.Write(3, Message.Error(ex))
 		}
 		return result;
+	},
+
+	Match: function(key) {
+		return this.Referer.indexOf(key) > -1;
 	}
 }%>

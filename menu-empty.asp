@@ -1,1 +1,1 @@
-﻿<%@ LANGUAGE="JScript"%>
+<%@ LANGUAGE="JScript"%>

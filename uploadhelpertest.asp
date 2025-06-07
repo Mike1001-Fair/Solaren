@@ -1,4 +1,4 @@
-﻿<!-- #include file="uploadhelper.asp" -->
+<!-- #include file="uploadhelper.asp" -->
 <!DOCTYPE html>
 <html lang="en">
   <head>

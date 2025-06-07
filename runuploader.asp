@@ -1,21 +1,21 @@
-ï»¿<!-- #INCLUDE FILE="Include/uploader.inc" -->
+<!-- #INCLUDE FILE="Include/uploader.inc" -->
 <%
 
 Set Upload = New FreeASPUpload
 
-' ÐŸÐ°Ð¿ÐºÐ°, ÐºÑƒÐ´Ð° ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÐµÐ¼ Ñ„Ð°Ð¹Ð»Ñ‹
+' Ïàïêà, êóäà ñîõðàíÿåì ôàéëû
 Dim SaveToFolder
 SaveToFolder = Server.MapPath("/uploads/")
 
-' Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÑÐµÐ¼ Ñ„Ð°Ð¹Ð»Ñ‹ (Ð¿ÑƒÑ‚ÑŒ Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‘Ð¼ Ð² Ð¼ÐµÑ‚Ð¾Ð´ Save, Ð° Ð½Ðµ Ñ‡ÐµÑ€ÐµÐ· ÑÐ²Ð¾Ð¹ÑÑ‚Ð²Ð¾)
+' Ñîõðàíÿåì ôàéëû (ïóòü ïåðåäà¸ì â ìåòîä Save, à íå ÷åðåç ñâîéñòâî)
 Upload.Save SaveToFolder
 
-' ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð¸Ð¼Ñ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°
+' Ïîëó÷àåì èìÿ çàãðóæåííîãî ôàéëà
 FileName = Upload("file1").FileName
 
-' Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ Ð¸Ð¼Ñ Ñ„Ð°Ð¹Ð»Ð°
-Response.Write "Ð¤Ð°Ð¹Ð» Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½: " & Server.HTMLEncode(FileName)
+' Âûâîäèì èìÿ ôàéëà
+Response.Write "Ôàéë çàãðóæåí: " & Server.HTMLEncode(FileName)
 
-' ÐžÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°ÐµÐ¼ Ð¾Ð±ÑŠÐµÐºÑ‚
+' Îñâîáîæäàåì îáúåêò
 Set Upload = Nothing
 %>

@@ -1,6 +1,5 @@
 <%@LANGUAGE="JavaScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/referer.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
