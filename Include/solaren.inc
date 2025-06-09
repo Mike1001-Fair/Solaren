@@ -81,7 +81,7 @@ Solaren = {
 	},
 
 	Match: function(key) {
-		Response.Write('<br>' + key);
+		//Response.Write('<br>' + key);
 		return this.Referer.indexOf(key) > -1;
 	}
 }%>
