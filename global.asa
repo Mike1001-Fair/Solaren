@@ -10,6 +10,10 @@ var Config = {
 		"Application Name=solaren"
 	],
 
+	AppName: function() {
+		return this.Params[3].split("=")[1]
+	},
+
 	ConnectString: function() {
 		if (this.Mode == "SSPI") {
 			this.Params.push("Integrated Security=SSPI");
@@ -22,8 +26,7 @@ var Config = {
 }
 
 function Application_OnStart() {
-	var appName = Config.Params[3].split("=");
-	Application("AppName") = appName[1];
+	Application("AppName") = Config.AppName();
 	Application("ConnectString") = Config.ConnectString();
 	Application("SesCount") = 0;
 }  
