@@ -1,14 +1,13 @@
 <!-- METADATA NAME="Microsoft ActiveX Data Objects 6.0 Library"	TYPE="TypeLib" UUID="{B691E011-1797-432E-907A-4D8C69339129}" -->
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
 var Config = {
-	AppName: "solaren",
 	StopApp: 0,
 	Mode: "SSPI",
 	Params: [
 		"Provider=MSOLEDBSQL",
-		"Server=Localhost",
-		"Database=Solaren",
-		"Application Name=Solaren"
+		"Server=localhost",
+		"Database=solaren",
+		"Application Name=solaren"
 	],
 
 	ConnectString: function() {
@@ -23,7 +22,8 @@ var Config = {
 }
 
 function Application_OnStart() {
-	Application("AppName") = Config.AppName;
+	var appName = Config.Params[3].split("=");
+	Application("AppName") = appName[1];
 	Application("ConnectString") = Config.ConnectString();
 	Application("SesCount") = 0;
 }  
