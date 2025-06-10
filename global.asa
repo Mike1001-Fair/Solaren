@@ -2,10 +2,10 @@
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
 var Config = {
 	StopApp: 0,
-	Mode: "SSPI",
+	Mode: "sspi",
 	Params: [
 		"Application Name=solaren",
-		"Provider=MSOLEDBSQL",
+		"Provider=msoledbsql",
 		"Server=localhost",
 		"Database=solaren",
 	],
@@ -15,8 +15,8 @@ var Config = {
 	},
 
 	ConnectString: function() {
-		if (this.Mode == "SSPI") {
-			this.Params.push("Integrated Security=SSPI");
+		if (this.Mode == "sspi") {
+			this.Params.push("Integrated Security=sspi");
 		} else {
 			this.Params.push("UID=YourUsername");
 			this.Params.push("PWD=YourPassword");
