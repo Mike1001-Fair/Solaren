@@ -68,10 +68,19 @@ ReportDate.addEventListener('change', function() {
 });
 
 function SetMeterList(data) {
-	with (NewIndicator.MeterId) {
-		options.length = 1;
-		data.forEach(element => options[options.length] = new Option(element.MeterCode, element.MeterId));
-		disabled = false;
+	if (data[0].MeterId == -1) {
+		ResetMeterInfo();
+		with (NewIndicator.MeterId) {
+			options.length = 0;
+			disabled = true;
+		}
+		Notify.show('Не знайдено жодного лiчильника❗');
+	} else {
+		with (NewIndicator.MeterId) {
+			options.length = 1;
+			data.forEach(element => options[options.length] = new Option(element.MeterCode, element.MeterId));
+			disabled = false;
+		}
 	}
 }
 

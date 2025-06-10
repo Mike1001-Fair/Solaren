@@ -4,14 +4,14 @@ var Config = {
 	StopApp: 0,
 	Mode: "SSPI",
 	Params: [
+		"Application Name=solaren",
 		"Provider=MSOLEDBSQL",
 		"Server=localhost",
 		"Database=solaren",
-		"Application Name=solaren"
 	],
 
 	AppName: function() {
-		return this.Params[3].split("=")[1]
+		return this.Params[0].split("=")[1]
 	},
 
 	ConnectString: function() {
