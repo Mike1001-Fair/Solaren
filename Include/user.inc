@@ -34,7 +34,7 @@ var User = {
 	},
 
 	ValidateRole: function(RoleId, UserGUID) {
-		//Response.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
+		//Solaren.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return RoleId == this.RoleId && this.Role[RoleId] && this.GuidRe.test(UserGUID) 
 	},
 
@@ -63,7 +63,7 @@ var User = {
 				Solaren.Close();
 			}
 		}
-		//Response.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token + "<BR>ValidRole = " + ValidRole);
+		//Solaren.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return Done || 0;
 	},
 

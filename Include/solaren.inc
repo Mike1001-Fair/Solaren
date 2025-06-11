@@ -72,7 +72,7 @@ Solaren = {
 				key = hasName ? item.Name : item;
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
-				//Response.Write("<br>key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name);
+				//this.Write("<br>key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name);
 			}
 		} catch (ex) {
 			Message.Write(3, Message.Error(ex))
@@ -80,8 +80,15 @@ Solaren = {
 		return result;
 	},
 
+	Write: function(info) {
+			with (Response) {
+				Charset = "utf-8";
+				Write(info);
+			}		
+	},
+
 	Match: function(key) {
-		//Response.Write('<br>' + key);
+		//this.Write('<br>' + key);
 		return this.Referer.indexOf(key) > -1;
 	}
 }%>

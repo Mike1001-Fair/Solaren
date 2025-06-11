@@ -20,6 +20,5 @@ var Menu = {
 		} else {
 			Server.Execute(page);
 		}
-		//Response.Write("<br>User.LoginId=" + User.LoginId);
 	}
 }%>
