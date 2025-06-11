@@ -81,10 +81,8 @@ Solaren = {
 	},
 
 	Write: function(info) {
-			with (Response) {
-				Charset = "utf-8";
-				Write(info);
-			}		
+		Response.Charset = "utf-8";
+		Response.Write(info);
 	},
 
 	Match: function(key) {
