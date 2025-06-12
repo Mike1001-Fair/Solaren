@@ -3,24 +3,20 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
-
-with (Request) {
-	var StreetId = Form("StreetId"),
-	StreetType   = Form("StreetType"),
-	StreetName   = Form("StreetName");
-}
 
 try {
 	Solaren.SetCmd("UpdateStreet");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
-			Append(CreateParameter("StreetType", adTinyInt, adParamInput, 10, StreetType));
-			Append(CreateParameter("StreetName", adVarChar, adParamInput, 30, StreetName));
+			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, Form.StreetId));
+			Append(CreateParameter("StreetType", adTinyInt, adParamInput, 10, Form.StreetType));
+			Append(CreateParameter("StreetName", adVarChar, adParamInput, 30, Form.StreetName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {

@@ -64,9 +64,10 @@ Solaren = {
 	},
 
 	Map: function(Collection) {
-		var result = {};
+		var items = new Enumerator(Collection),
+		result = {};
 		try {			
-			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
+			for (; !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
 				key = hasName ? item.Name : item;

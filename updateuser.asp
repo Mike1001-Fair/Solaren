@@ -4,23 +4,23 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
-Person = Solaren.Map(Request.Form);
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("UpdateUser");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Person.UserId));
-			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, Person.LastName));
-			Append(CreateParameter("FirstName", adVarChar, adParamInput, 20, Person.FirstName));
-			Append(CreateParameter("MiddleName", adVarChar, adParamInput, 20, Person.MiddleName));
-			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Person.Phone));
-			Append(CreateParameter("LoginId", adVarChar, adParamInput, 10, Person.LoginId));
-			Append(CreateParameter("Pswd", adVarChar, adParamInput, 10, Person.Pswd));
-			Append(CreateParameter("RoleId", adVarChar, adParamInput, 10, Person.RoleId));
-			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Person.CompanyId));
-			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, Person.BranchId));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Form.UserId));
+			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, Form.LastName));
+			Append(CreateParameter("FirstName", adVarChar, adParamInput, 20, Form.FirstName));
+			Append(CreateParameter("MiddleName", adVarChar, adParamInput, 20, Form.MiddleName));
+			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Form.Phone));
+			Append(CreateParameter("LoginId", adVarChar, adParamInput, 10, Form.LoginId));
+			Append(CreateParameter("Pswd", adVarChar, adParamInput, 10, Form.Pswd));
+			Append(CreateParameter("RoleId", adVarChar, adParamInput, 10, Form.RoleId));
+			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Form.CompanyId));
+			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, Form.BranchId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		}
 		Execute(adExecuteNoRecords);

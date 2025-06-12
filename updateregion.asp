@@ -4,16 +4,16 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Region = Solaren.Map(Request.Form);
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("UpdateRegion");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("RegionId", adInteger, adParamInput, 10, Region.RegionId));
-			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, Region.SortCode));
-			Append(CreateParameter("RegionName", adVarChar, adParamInput, 20, Region.RegionName));
+			Append(CreateParameter("RegionId", adInteger, adParamInput, 10, Form.RegionId));
+			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, Form.SortCode));
+			Append(CreateParameter("RegionName", adVarChar, adParamInput, 20, Form.RegionName));
 		}
 		Execute(adExecuteNoRecords);
 	}
