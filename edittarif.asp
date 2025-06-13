@@ -23,46 +23,37 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	with (rs) {
-		var GroupId = Fields("GroupId").value,
-		BegDate     = Fields("BegDate").value,
-		EndDate     = Fields("EndDate").value,
-		ExpDateBeg  = Fields("ExpDateBeg").value,
-		ExpDateEnd  = Fields("ExpDateEnd").value,
-		TarifVal    = Fields("Tarif").value,
-		Deleted     = Fields("Deleted").value;
-		Close();
-	}
+	var Record = Solaren.Map(rs.Fields),
+	ViewOnly = !Month.isPeriod(Month.Date[1], Record.EndDate),
+	Title = Record.Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
+	rs.Close();
 	Solaren.Close();
-}
-
-var ViewOnly = !Month.isPeriod(Month.Date[1], EndDate),
-Title = Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
-Html.SetPage(Title)%>
+	Html.SetPage(Title)
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditTarif" ACTION="updatetarif.asp" METHOD="POST">
 <INPUT TYPE="HIDDEN" NAME="TarifId" VALUE="<%=TarifId%>">
-<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
-	<% Month.WriteDatePeriod("Дiє", BegDate, EndDate, Month.Date[0], Month.Date[4]) %>
+	<% Month.WriteDatePeriod("Дiє", Record.BegDate, Record.EndDate, Month.Date[0], Month.Date[4]) %>
 	<FIELDSET><LEGEND>Ввод в експлуатацію</LEGEND>
-	<INPUT TYPE="date" NAME="ExpDateBeg" VALUE="<%=ExpDateBeg%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED> &#8722;
-	<INPUT TYPE="date" NAME="ExpDateEnd" VALUE="<%=ExpDateEnd%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED>
+	<INPUT TYPE="date" NAME="ExpDateBeg" VALUE="<%=Record.ExpDateBeg%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED> &#8722;
+	<INPUT TYPE="date" NAME="ExpDateEnd" VALUE="<%=Record.ExpDateEnd%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[4]%>" REQUIRED>
 	</FIELDSET>
 
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Група</TD>
-	<TD><%Tarif.Write("GroupId", GroupId)%></TD></TR>
+	<TD><%Tarif.Write("GroupId", Record.GroupId)%></TD></TR>
 
 	<TR><TD ALIGN="RIGHT">Тариф</TD>
-	<TD><INPUT TYPE="Number" NAME="Tarif" VALUE="<%=TarifVal%>" STEP="0.01" MIN="0" MAX="999999" REQUIRED TITLE="коп"></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="Tarif" VALUE="<%=Record.Tarif%>" STEP="0.01" MIN="0" MAX="999999" REQUIRED TITLE="коп"></TD></TR>
 	</TABLE></FIELDSET>                                                
 	</TD></TR>
 </TABLE>
-<% if (!ViewOnly) Html.WriteEditButton(1) %>
+<% if (!ViewOnly) {
+	Html.WriteEditButton(1, Record.Deleted)
+}%>
 </FORM></BODY></HTML>
-
-

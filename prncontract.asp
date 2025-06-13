@@ -5,16 +5,17 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/locality.inc" -->
 <!-- #INCLUDE FILE="Include/street.inc" -->
-<% var Authorized = Session("RoleId") == 1,
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
 ContractId = Request.Form("ContractId");
-
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetContractInfo");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId"))),
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id)),
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId)),
 			Append(CreateParameter("ContractPAN", adVarChar, adParamOutput, 10, "")),
 			Append(CreateParameter("ContractDate", adVarChar, adParamOutput, 10, "")),
@@ -25,14 +26,14 @@ try {
 			Append(CreateParameter("CustomerPhone", adVarChar, adParamOutput, 10, "")),
 	
 			Append(CreateParameter("CompanyRegion", adVarChar, adParamOutput, 20, 0)),
-		        Append(CreateParameter("AreaName", adVarChar, adParamOutput, 30, 0)),
+			Append(CreateParameter("AreaName", adVarChar, adParamOutput, 30, 0)),
 			Append(CreateParameter("LocalityType", adTinyInt, adParamOutput, 10, 0)),
 			Append(CreateParameter("LocalityName", adVarChar, adParamOutput, 30, 0)),
 			Append(CreateParameter("StreetType", adTinyInt, adParamOutput, 10, 0)),
 			Append(CreateParameter("StreetName", adVarChar, adParamOutput, 30, 0)),
 			Append(CreateParameter("HouseId", adVarChar, adParamOutput, 20, "")),
 
-		        Append(CreateParameter("ContractAreaName", adVarChar, adParamOutput, 30, 0)),
+			Append(CreateParameter("ContractAreaName", adVarChar, adParamOutput, 30, 0)),
 			Append(CreateParameter("ContractLocalityName", adVarChar, adParamOutput, 30, 0)),
 			Append(CreateParameter("ContractStreetType", adTinyInt, adParamOutput, 10, 0)),
 			Append(CreateParameter("ContractStreetName", adVarChar, adParamOutput, 30, 0)),
@@ -58,77 +59,41 @@ try {
 			Append(CreateParameter("ChiefName2", adVarChar, adParamOutput, 30, "")),
 			Append(CreateParameter("TrustedDocId", adVarChar, adParamOutput, 10, "")),
 			Append(CreateParameter("TrustedDocDate", adVarChar, adParamOutput, 10, "")),
-			//Append(CreateParameter("ContractorName", adVarChar, adParamOutput, 20, "")),
 			Append(CreateParameter("Phone", adVarChar, adParamOutput, 10, ""));
-		} Execute(adExecuteNoRecords);
-
-		with (Parameters) {
-			var UserId   = Item("UserId").value,
-			ContractId   = Item("ContractId").value,
-			ContractPAN  = Item("ContractPAN").value,
-			ContractDate = Item("ContractDate").value,
-			ExpDate      = Item("ExpDate").value,
-
-			CustomerCode  = Item("CustomerCode").value,
-			CustomerName  = Item("CustomerName").value,
-			CustomerPhone = Item("CustomerPhone").value,
-
-			CompanyRegion = Item("CompanyRegion").value,
-			AreaName      = Item("AreaName").value,
-			LocalityType  = Item("StreetType").value,
-			LocalityName  = Item("LocalityName").value,
-			StreetType    = Item("StreetType").value,
-			StreetName    = Item("StreetName").value,
-			HouseId       = Item("HouseId").value,
-
-			ContractAreaName     = Item("ContractAreaName").value,
-			ContractLocalityName = Item("ContractLocalityName").value,
-			ContractStreetType   = Item("ContractStreetType").value,
-			ContractStreetName   = Item("ContractStreetName").value,
-			ContractHouseId      = Item("ContractHouseId").value,
-			ContractPower        = Item("ContractPower").value,
-
-			CardId      = Item("CardId").value,
-			BankAccount = Item("BankAccount").value,
-			MfoCode     = Item("MfoCode").value,
-			BankName    = Item("BankName").value,
-
-			CompanyName        = Item("CompanyName").value,
-			CompanyTown        = Item("CompanyTown").value,
-			CompanyAdress      = Item("CompanyAdress").value,
-			CompanyPhone       = Item("CompanyPhone").value,
-			CompanyCode        = Item("CompanyCode").value,
-			CompanyBank        = Item("CompanyBank").value,
-			CompanyBankAccount = Item("CompanyBankAccount").value,
-
-			ChiefTitle  = Item("ChiefTitle").value,
-			ChiefName   = Item("ChiefName").value,
-			ChiefTitle2 = Item("ChiefTitle2").value,
-			ChiefName2  = Item("ChiefName2").value,
-
-			TrustedDocId   = Item("TrustedDocId").value,
-			TrustedDocDate = Item("TrustedDocDate").value,
-
-			//ContractorName = Item("ContractorName").value,
-			Phone          = Item("Phone").value;
 		}
+		Execute(adExecuteNoRecords);
 	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
+	var Item = Solaren.Map(Cmd.Parameters);
 	Solaren.Close();
+
+	Item.AreaName = Item.AreaName ? Item.AreaName + " район," : "";
+	Item.ContractAreaName = Item.ContractAreaName ? Item.ContractAreaName + " район," : "";
+	Item.HouseId += ",";
+	Item.ContractHouseId += ",";
+	Item.LocalityName += ",";
+	Item.CompanyRegion += " область";
+
+	Item.CustomerAddress = [
+			Street.Type[Item.StreetType],
+			Item.StreetName,
+			Item.HouseId,
+			Locality.Type[Item.LocalityType],
+			Item.LocalityName,
+			Item.AreaName,
+			Item.CompanyRegion
+	],
+	Item.ContrtactAddress = [
+		Street.Type[Item.ContractStreetType],
+		Item.ContractStreetName,
+		Item.ContractHouseId,
+		Item.ContractLocalityName,
+		Item.ContractAreaName,
+		Item.CompanyRegion
+	];
 	Html.SetHead("Друк договору");
-
-	AreaName = AreaName ? AreaName + " район," : "";
-	ContractAreaName = ContractAreaName ? ContractAreaName + " район," : "";
-	HouseId	+= ",";
-	ContractHouseId += ",";
-	LocalityName += ",";
-	CompanyRegion += " область";
-
-	var CustomerAddress = [Street.Type[StreetType], StreetName, HouseId, Locality.Type[LocalityType], LocalityName, AreaName, CompanyRegion],
-	ContrtactAddress = [Street.Type[ContractStreetType], ContractStreetName, ContractHouseId, ContractLocalityName, ContractAreaName, CompanyRegion];
-
 }%>
 <STYLE>P {text-align: justify; line-height: 1.2; text-indent: 40px; margin: 5px 0px 0px 0px}
 UL {list-style: disc; margin: 0px; line-height: 1.2; text-align: justify; }
@@ -136,17 +101,17 @@ LI {margin: 0px}</STYLE>
 <BODY CLASS="PrnBody">
 
 <TABLE CLASS="NoBorderTable" WIDTH="100%" STYLE="margin: 0px 0px 20px 0px">
-<TR><TD ALIGN="LEFT" WIDTH="50%">&nbsp</TD><TD STYLE="font-size: 12px" ALIGN="LEFT" WIDTH="50%">Додаток 3 до договору про постачання електричної енергії  споживачу №<%=ContractPAN%></TD></TR>
+<TR><TD ALIGN="LEFT" WIDTH="50%">&nbsp</TD><TD STYLE="font-size: 12px" ALIGN="LEFT" WIDTH="50%">Додаток 3 до договору про постачання електричної енергії  споживачу №<%=Item.ContractPAN%></TD></TR>
 <TR><TD ALIGN="CENTER" COLSPAN="2"><H3 STYLE="margin: 10px 0px 0px 0px">Договiр</H3></TD></TR>
 <TR><TD ALIGN="CENTER" COLSPAN="2">про купiвлю-продаж електричної енергiї за "зеленим" тарифом приватним домогосподарством</TD></TR>
-<TR><TD ALIGN="LEFT" WIDTH="50%"><%=CompanyTown%></TD><TD ALIGN="RIGHT" WIDTH="50%"><SUB><%=Month.GetDate(ContractDate, 2)%></SUB></TD></TR>
+<TR><TD ALIGN="LEFT" WIDTH="50%"><%=Item.CompanyTown%></TD><TD ALIGN="RIGHT" WIDTH="50%"><SUB><%=Month.GetDate(Item.ContractDate, 2)%></SUB></TD></TR>
 </TABLE>
 
-<P><%=CompanyName%> в особi <%=ChiefTitle2 + ' '%><%=ChiefName2.replace(/ /g,"&nbsp")%>, дiючого на пiдставi Статуту (далі - Постачальник універсальних послуг), з однiєї сторони, та <B><%=CustomerName%></B>, 
-що проживає за адресою: <%=CustomerAddress.join(" ")%> (далi – Споживач), з iншої сторони (далi - Сторони),
+<P><%=Item.CompanyName%> в особi <%=Item.ChiefTitle2 + ' '%><%=Item.ChiefName2.replace(/ /g,"&nbsp")%>, дiючого на пiдставi Статуту (далі - Постачальник універсальних послуг), з однiєї сторони, та <B><%=Item.CustomerName%></B>, 
+що проживає за адресою: <%=Item.CustomerAddress.join(" ")%> (далi – Споживач), з iншої сторони (далi - Сторони),
 уклали договiр про купiвлю-продаж електричної енергiї за "зеленим" тарифом (далі - Договір) приватним домогосподарством, який є додатком до договору про постачання електричної енергії Постачальника універсальних
 послуг за місцезнаходженням приватного домогосподарства Споживача, на якому електрична енергія використовується для задоволення побутових потреб. Місцезнаходження приватного домогосподарства:
-<%=ContrtactAddress.join(" ")%> (далі - приватне домогосподарство).</P>
+<%=Item.ContrtactAddress.join(" ")%> (далі - приватне домогосподарство).</P>
 <P>Під час виконання умов цього договору сторони зобов'язуються діяти відповідно до чинного законодавства, Закону України "Про ринок електричної енергії", Кодексу комерційного обліку, Кодексу розподілу, Правил роздрібного ринку електричної енергії.</P>
 
 <P><B>1. Предмет договору</B></P>
@@ -230,26 +195,24 @@ LI {margin: 0px}</STYLE>
 <P><B>8. Реквізити Сторін</B></P>
 
 <UL STYLE="margin: 5px 0px;">
-<U STYLE="margin: 5px 0px;">Постачальник унiверсальних послуг</U>: <%=CompanyName%>
-<LI>Адреса: <%=CompanyAdress%></LI>
-<LI>Телефон: <%=CompanyPhone%></LI>
-<LI>Код ЄДРПОУ: <%=CompanyCode%></LI>
-<LI>Банк: <%=CompanyBank%></LI>
-<LI>Рахунок: <%=CompanyBankAccount%></LI></UL>
+<U STYLE="margin: 5px 0px;">Постачальник унiверсальних послуг</U>: <%=Item.CompanyName%>
+<LI>Адреса: <%=Item.CompanyAdress%></LI>
+<LI>Телефон: <%=Item.CompanyPhone%></LI>
+<LI>Код ЄДРПОУ: <%=Item.CompanyCode%></LI>
+<LI>Банк: <%=Item.CompanyBank%></LI>
+<LI>Рахунок: <%=Item.CompanyBankAccount%></LI></UL>
 
 <UL STYLE="margin: 10px 0px 20px 0px">
-<U>Споживач</U>: <%=CustomerName%>
-<LI>Адреса: <%=CustomerAddress.join(" ")%></LI>
-<LI>Телефон: <%=CustomerPhone%></LI>
-<LI>ІПН: <%=CustomerCode%></LI>
-<LI>Банк: <%=BankName%></LI>
-<LI>Рахунок: <%=BankAccount%></LI></UL>
+<U>Споживач</U>: <%=Item.CustomerName%>
+<LI>Адреса: <%=Item.CustomerAddress.join(" ")%></LI>
+<LI>Телефон: <%=Item.CustomerPhone%></LI>
+<LI>ІПН: <%=Item.CustomerCode%></LI>
+<LI>Банк: <%=Item.BankName%></LI>
+<LI>Рахунок: <%=Item.BankAccount%></LI></UL>
 
 <TABLE WIDTH="100%">
 <TR ALIGN="CENTER"><TD WIDTH="50%">Постачальник унiверсальних послуг:</TD><TD WIDTH="50%">Споживач:</TD></TR>
-<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px"><%=ChiefTitle%><BR><%=ChiefName%></TD><TD><%=CustomerName%></TD></TR>
+<TR ALIGN="CENTER"><TD STYLE="padding: 10px 0px 0px 0px"><%=Item.ChiefTitle%><BR><%=Item.ChiefName%></TD><TD><%=Item.CustomerName%></TD></TR>
 <TR ALIGN="CENTER"><TD><DIV CLASS="UnderLine"></TD>
 <TD><DIV CLASS="UnderLine"></DIV></TD></TR>
 </TABLE></BODY></HTML>
-
-
