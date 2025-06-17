@@ -9,10 +9,9 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
 Form = Solaren.Map(Request.Form);
-User.ValidateAccess(Authorized, "POST");
-
 Form.ReportMonth = String(Form.ReportMonth);
 Form.DoubleAct = Form.DoubleAct == "on";
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetAct");

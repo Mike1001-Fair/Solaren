@@ -16,6 +16,7 @@
 	flex-direction : column; 
 	justify-content: center;
 	background     : url(../Images/f06.jpg);
+	/*background-color: #e0e0e0;*/
 	font-family    : Arial;
 	cursor         : default;
 	padding-top    : 20px;
