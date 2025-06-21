@@ -9,9 +9,9 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.Map(Request.Form);
-Form.ReportMonth = String(Form.ReportMonth);
-Form.DoubleReport = Form.DoubleReport == "on";
+Form = Solaren.Map(Request.Form),
+ReportMonth = String(Form.ReportMonth);
+DoubleReport = Form.DoubleReport == "on";
 User.ValidateAccess(Authorized, "POST");
 
 function getText(totSaldo) {
@@ -39,15 +39,15 @@ try {
 	}
 	var rsInfo = Solaren.Execute("GetReportInfo");
 
-	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, Form.ReportMonth));
+	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 	var rs = Solaren.Execute("GetIndicatorReport");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
 	var Report   = Solaren.Map(rsInfo.Fields),
 	ContractDate = Month.GetYMD(Report.ContractDate),
-	Period       = Month.GetPeriod(Form.ReportMonth, 1),
-	EndDate      = Month.GetLastDay(Form.ReportMonth),
+	Period       = Month.GetPeriod(ReportMonth, 1),
+	EndDate      = Month.GetLastDay(ReportMonth),
 	LocalityType = Locality.Type[Report.ContractLocalityType],
 	StreetType   = Street.Type[Report.ContractStreetType],
 	ContractAddress = [LocalityType, Report.ContractLocalityName + ", ", StreetType, Report.ContractStreetName, Report.HouseId],
@@ -60,7 +60,7 @@ try {
 	Html.SetHead("Звіт про показники");
 }
 
-for (var i = 0; i <= Form.DoubleReport; i++) {
+for (var i = 0; i <= DoubleReport; i++) {
 	if (i == 0) {
 		var totSaldo = 0,		
 		block = ['\n<DIV CLASS="ActText">',

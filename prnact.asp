@@ -8,9 +8,10 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.Map(Request.Form);
-Form.ReportMonth = String(Form.ReportMonth);
-Form.DoubleAct = Form.DoubleAct == "on";
+Form = Solaren.Map(Request.Form),
+ReportMonth = String(Form.ReportMonth),
+DoubleAct = Form.DoubleAct == "on";
+
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -18,7 +19,7 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, Form.ReportMonth));
+			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Form.ContractId));
 		}
 	}
@@ -27,8 +28,8 @@ try {
 	Message.Write(3, Message.Error(ex));
 } finally {
 	var Record = Solaren.Map(rs.Fields),
-	Period = Month.GetPeriod(Form.ReportMonth, 1),
-	ActDate = Month.GetLastDay(Form.ReportMonth),
+	Period = Month.GetPeriod(ReportMonth, 1),
+	ActDate = Month.GetLastDay(ReportMonth),
 	WordSum = Money.toWord(Record.ActSum),
 	Body    = [],
 	Divider = '\n<DIV CLASS="BlockDivider"></DIV>\n',
@@ -40,7 +41,7 @@ try {
 	Html.SetHead("Акт приймання-передачi");
 }
 
-for (var i = 0; i <= Form.DoubleAct; i++) {
+for (var i = 0; i <= DoubleAct; i++) {
 	if (i == 0) {
 		var block = ['<DIV CLASS="ActText">',
 			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
