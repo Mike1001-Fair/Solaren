@@ -10,8 +10,9 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
 Form = Solaren.Map(Request.Form),
-ReportMonth = String(Form.ReportMonth);
+ReportMonth = String(Form.ReportMonth),
 DoubleReport = Form.DoubleReport == "on";
+
 User.ValidateAccess(Authorized, "POST");
 
 function getText(totSaldo) {
