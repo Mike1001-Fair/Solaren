@@ -1,22 +1,21 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-	var PayId = QueryString("PayId"),
-	Deleted   = QueryString("Deleted");
-}
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Map(Request.Form);
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("DelPay");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("PayId", adInteger, adParamInput, 10, PayId));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
+			Append(CreateParameter("PayId", adInteger, adParamInput, 10, Form.PayId));
+			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Form.Deleted));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
