@@ -9,8 +9,6 @@ var User = {
 	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || -1,
 	Method : Request.ServerVariables("REQUEST_METHOD") || -1,
 	Hal    : String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")) || -1,
-	LoginId: Solaren.Match(Application("AppName")) ? Request.Form("LoginId") : -1,
-	Pswd   : Solaren.Match(Application("AppName")) ? Request.Form("Pswd")    : -1,
 	Id     : Session("UserId") || -1,
 	GUID   : Session("UserGUID") || -1,
 	RoleId : Session("RoleId") || -1,
@@ -29,8 +27,8 @@ var User = {
 		return FileName.join("")
 	},
 
-	ValidateCredentials: function() {
-		return this.LoginRe.test(User.LoginId) && this.PswdRe.test(User.Pswd);
+	ValidateCredentials: function(LoginId, Pswd) {
+		return this.LoginRe.test(LoginId) && this.PswdRe.test(Pswd);
 	},
 
 	ValidateRole: function(RoleId, UserGUID) {

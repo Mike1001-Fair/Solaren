@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
-Payment = Solaren.Map(Request.Form);
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -12,9 +12,9 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Payment.ContractId));
-			Append(CreateParameter("PayDate", adVarChar, adParamInput, 10, Payment.PayDate));
-			Append(CreateParameter("PaySum", adVarChar, adParamInput, 20, Payment.PaySum));
+			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Form.ContractId));
+			Append(CreateParameter("PayDate", adVarChar, adParamInput, 10, Form.PayDate));
+			Append(CreateParameter("PaySum", adVarChar, adParamInput, 20, Form.PaySum));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		}
 		Execute(adExecuteNoRecords);
