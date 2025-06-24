@@ -5,24 +5,19 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 0;
+<% var Authorized = User.RoleId == 0,
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
-
-with (Request) {
-	var LoginId = Form("LoginId"),
-	RoleId      = Form("RoleId"),
-	ConnectDate = Form("ConnectDate");
-}
 
 try {
 	Solaren.SetCmd("ListUsers");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("LoginId", adVarChar, adParamInput, 20, LoginId));
-			Append(CreateParameter("RoleId", adVarChar, adParamInput, 10, RoleId));
+			Append(CreateParameter("UserName", adVarChar, adParamInput, 20, Form.UserName));
+			Append(CreateParameter("RoleId", adVarChar, adParamInput, 10, Form.RoleId));
 			Append(CreateParameter("SessionId", adInteger, adParamInput, 10, Session.SessionID));
-			Append(CreateParameter("ConnectDate", adVarChar, adParamInput, 20, ConnectDate));
+			Append(CreateParameter("ConnectDate", adVarChar, adParamInput, 20, Form.ConnectDate));
 		}
 	}
 	var rs = Solaren.Execute("ListUsers");
@@ -40,7 +35,7 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("edituser.asp?UserId=", rs.Fields("Id"), rs.Fields("LoginId")),
+	var url = Html.GetLink("edituser.asp?UserId=", rs.Fields("Id"), rs.Fields("UserName")),
 	td = [Tag.Write("TD", -1, url),
 		Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
 		Tag.Write("TD", 1, rs.Fields("UserIP")),

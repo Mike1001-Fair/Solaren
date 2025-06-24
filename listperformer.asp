@@ -5,20 +5,15 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
-
-with (Request) {
-	var PerformerName = Form("PerformerName"),
-	Deleted           = Form("Deleted") == "on";
-}
 
 try {
 	Solaren.SetCmd("ListPerformer");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("PerformerName", adVarChar, adParamInput, 10, PerformerName));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
+			Append(CreateParameter("PerformerName", adVarChar, adParamInput, 10, Form.PerformerName));
 		}
 	}
 	var rs = Solaren.Execute("ListPerformer");
@@ -35,9 +30,9 @@ var ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("editperformer.asp?PerformerId=", rs.Fields("Id"), rs.Fields("LoginId")),
+	var url = Html.GetLink("editperformer.asp?PerformerId=", rs.Fields("Id"), rs.Fields("UserName")),
 	td = [Tag.Write("TD", 0, url),
-		Tag.Write("TD", 0, rs.Fields("UserName")),
+		Tag.Write("TD", 0, rs.Fields("FullName")),
 		Tag.Write("TD", 0, rs.Fields("Phone")),
 		Tag.Write("TD", 0, rs.Fields("BranchName"))
 	],

@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-var phUser = Dictionary.Item("User"),
+var phUserName = Dictionary.Item("UserName"),
 phPswd     = Dictionary.Item("Password"),
 titleUser  = Dictionary.Item("UserTitle"),
 titlePswd  = Dictionary.Item("PasswordTitle");
@@ -19,7 +19,7 @@ Html.WriteScript()%>
 	<FORM CLASS="FormDiv" NAME="Login" ID="Login" ACTION="login.asp" METHOD="post">
 	<FIELDSET><LEGEND>&#128274;<%=Dictionary.Item("Authenticate")%></LEGEND>	
 	<IMG SRC="Images/user.svg">
-	<INPUT TYPE="text" NAME="LoginId" PLACEHOLDER="<%=phUser%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="15" MAXLENGTH="10" AUTOFOCUS REQUIRED TITLE="<%=titleUser%>">
+	<INPUT TYPE="text" NAME="UserName" PLACEHOLDER="<%=phUserName%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="15" MAXLENGTH="10" AUTOFOCUS REQUIRED TITLE="<%=titleUser%>">
 	<INPUT TYPE="password" NAME="Pswd" PLACEHOLDER="<%=phPswd%>" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" SIZE="15" MAXLENGTH="10" REQUIRED TITLE="<%=titlePswd%>">
 	</FIELDSET>
 	<BUTTON TYPE="submit" CLASS="LoginBtn" NAME="SbmBtn">Ok</BUTTON>

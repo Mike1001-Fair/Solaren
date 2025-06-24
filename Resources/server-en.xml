@@ -47,7 +47,7 @@
 	<Item id="Error">Error</Item>
 	<Item id="WebAdminMessage">Contact the web server administrator!</Item>
 	<Item id="Author">© Mykola Chernov 2016</Item>
-	<Item id="User">User</Item>
+	<Item id="UserName">User</Item>
 	<Item id="Password">Password</Item>
 	<Item id="InfoNotFound">Information not found</Item>
 	<Item id="UserTitle">Must contain one uppercase and one lowercase letter and at least 8 characters</Item>

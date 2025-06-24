@@ -42,7 +42,7 @@ try {
 	<TR><TD ALIGN="RIGHT">По батьковi</TD>
 	<TD><INPUT TYPE="TEXT" NAME="MiddleName" VALUE="<%=Record.MiddleName%>" SIZE="20" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Логiн</TD>
-	<TD><INPUT TYPE="TEXT" NAME="LoginId" VALUE="<%=Record.LoginId%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="20" MAXLENGTH="10" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="UserName" VALUE="<%=Record.UserName%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="20" MAXLENGTH="10" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Пароль</TD>
 	<TD><INPUT TYPE="password" NAME="Pswd" VALUE="" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" SIZE="20" MAXLENGTH="10" REQUIRED AUTOCOMPLETE="new-password">
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="SetPswd" ID="SetPswd" TITLE="Сгенерувати">&#128273;</BUTTON>

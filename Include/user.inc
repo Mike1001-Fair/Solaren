@@ -27,8 +27,8 @@ var User = {
 		return FileName.join("")
 	},
 
-	ValidateCredentials: function(LoginId, Pswd) {
-		return this.LoginRe.test(LoginId) && this.PswdRe.test(Pswd);
+	ValidateCredentials: function(Creds) {
+		return this.LoginRe.test(Creds.UserName) && this.PswdRe.test(Creds.Pswd);
 	},
 
 	ValidateRole: function(RoleId, UserGUID) {

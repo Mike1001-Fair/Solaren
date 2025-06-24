@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <% var Form = Solaren.Match(Application("AppName")) ? Solaren.Map(Request.Form) : {},
-validCreds = User.ValidateCredentials(Form.LoginId, Form.Pswd);
+validCreds = User.ValidateCredentials(Form);
 
 User.ValidateAccess(validCreds, "POST");
 
@@ -17,7 +17,7 @@ try {
 	Solaren.SetCmd("Login");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("LoginId", adVarChar, adParamInput, 10, Form.LoginId));
+			Append(CreateParameter("UserName", adVarChar, adParamInput, 10, Form.UserName));
 			Append(CreateParameter("Pswd", adVarChar, adParamInput, 10, Form.Pswd));
 			Append(CreateParameter("UserIp", adVarChar, adParamInput, 15, User.Ip));
 			Append(CreateParameter("UserAgent", adVarChar, adParamInput, 130, User.Agent));

@@ -17,7 +17,7 @@ Html.SetPage("Користувачi")%>
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Логiн</TD>
-	<TD><INPUT TYPE="text" NAME="LoginId" SIZE="10" REQUIRED AUTOFOCUS></TD></TR>
+	<TD><INPUT TYPE="text" NAME="UserName" SIZE="10" REQUIRED AUTOFOCUS></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>
 	<TD><%User.WriteRole("RoleId", -1)%></TD></TR>	
 	<TR><TD ALIGN="RIGHT">Підключився</TD>

@@ -1,6 +1,6 @@
 ﻿FindUser.addEventListener('input', () => {
 	with (FindUser) {
-		SbmBtn.disabled = !LoginId.validity.valid;
+		SbmBtn.disabled = !UserName.validity.valid;
 	}
 });
 
