@@ -39,7 +39,7 @@ RestoreBtn?.addEventListener('click', DelUser);
 function ChkForm() {
 	with (EditUser) {
 		const valid = LastName.validity.valid && FirstName.validity.valid && MiddleName.validity.valid
-			&& LoginId.validity.valid && Pswd.validity.valid;
+			&& UserName.validity.valid && Pswd.validity.valid;
 		SetDisabledButton(button, valid);
 	}
 }

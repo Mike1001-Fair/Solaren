@@ -5,9 +5,9 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
 var phUserName = Dictionary.Item("UserName"),
-phPswd     = Dictionary.Item("Password"),
-titleUser  = Dictionary.Item("UserTitle"),
-titlePswd  = Dictionary.Item("PasswordTitle");
+phPswd    = Dictionary.Item("Password"),
+titleUser = Dictionary.Item("UserTitle"),
+titlePswd = Dictionary.Item("PasswordTitle");
 
 Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
 Html.WriteScript()%>

@@ -1,7 +1,7 @@
 ﻿NewUser.addEventListener('input', () => {
 	with (NewUser) {
 		SbmBtn.disabled = !LastName.validity.valid || !FirstName.validity.valid || !MiddleName.validity.valid
-		|| !LoginId.validity.valid || !Pswd.validity.valid;
+		|| !UserName.validity.valid || !Pswd.validity.valid;
 	}
 });
 
@@ -22,5 +22,7 @@ SbmBtn.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
