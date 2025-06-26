@@ -8,7 +8,7 @@
 <% Resource.Load(User.ResourceFile());
 var Title = Dictionary.Item("Message");
 
-if (!User.ValidateRole(User.RoleId, User.GUID)) {
+if (!User.ValidateRole(User.RoleId)) {
 	Message.Write(2, Dictionary.Item("AuthenticationError"))
 }
 

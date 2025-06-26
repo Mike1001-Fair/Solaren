@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-if (!User.ValidateRole(User.RoleId, User.GUID)) {
+if (!User.ValidateRole(User.RoleId)) {
 	Message.Write(2, Dictionary.Item("AuthenticationError"))
 }
 Html.SetPage("Файл")%>

@@ -31,13 +31,13 @@ var User = {
 		return this.LoginRe.test(Creds.UserName) && this.PswdRe.test(Creds.Pswd);
 	},
 
-	ValidateRole: function(RoleId, UserGUID) {
+	ValidateRole: function(RoleId) {
 		//Solaren.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
-		return RoleId == this.RoleId && this.Role[RoleId] && this.GuidRe.test(UserGUID) 
+		return RoleId == this.RoleId && this.Role[RoleId] 
 	},
 
 	Authorize: function(RoleId) {
-		var Done = this.ValidateRole(RoleId, this.GUID);
+		var Done = this.ValidateRole(RoleId) && this.GuidRe.test(this.GUID);
 		if (Done) {
 			try {
 				Solaren.SetCmd("UserAuthorize");
