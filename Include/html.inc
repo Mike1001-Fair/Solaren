@@ -2,12 +2,9 @@
 var Html = {
 	Version: "v=2.23",
 	Author : "Mykola Chernov",
-	Title  : "Title",
 
 	SetHead: function(Title, UseScripts) {
-		if (typeof Title != "undefined" && Title) {
-			this.Title = Title;
-		}
+		this.Title = Title || "Title";
 		var Head = [
 			'<META charset="utf-8">',
 			'<META NAME="author" CONTENT="' + this.Author + '">',

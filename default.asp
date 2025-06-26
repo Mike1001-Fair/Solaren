@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
 var phUserName = Dictionary.Item("UserName"),
-phPswd    = Dictionary.Item("Password"),
+phPswd = Dictionary.Item("Password"),
 titleUser = Dictionary.Item("UserTitle"),
 titlePswd = Dictionary.Item("PasswordTitle");
 
