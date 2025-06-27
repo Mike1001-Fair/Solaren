@@ -45,7 +45,8 @@ var Html = {
 	},
 
 	GetLink: function (url, id, value) {
-		return ['<A href="', url, id, '">', value, '</A>'].join("")
+		var ResponseText = ['<A href="', url, id, '">', value, '</A>'];
+		return ResponseText.join("")
 	},
 	
 	WriteEditButton: function(AllowDelBtn, Deleted) {
