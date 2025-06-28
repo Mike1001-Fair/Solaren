@@ -10,8 +10,9 @@ var Config = {
 		"Database=solaren",
 	],
 
-	AppName: function() {
-		return this.Params[0].split("=")[1]
+	GetParameter: function(index) {
+		var parameter = this.Params[index].split("=");
+		return parameter[1]
 	},
 
 	ConnectString: function() {
@@ -26,7 +27,7 @@ var Config = {
 }
 
 function Application_OnStart() {
-	Application("AppName") = Config.AppName();
+	Application("AppName") = Config.GetParameter(0);
 	Application("ConnectString") = Config.ConnectString();
 	Application("SesCount") = 0;
 }  
