@@ -24,11 +24,11 @@ var ServerInfo = {
 	},	
 
 	AddRequestInfo: function() {
-		var SrvVar = new Enumerator(Request.ServerVariables);
-		for (; !SrvVar.atEnd(); SrvVar.moveNext()) {
-			var SrvVarName = SrvVar.item(),
-			SrvVarValue = Request.ServerVariables(SrvVarName);
-			this.AddRow(SrvVarName, SrvVarValue);
+		var srvEnum = new Enumerator(Request.ServerVariables);
+		for (; !srvEnum.atEnd(); srvEnum.moveNext()) {
+			var key = srvEnum.item(),
+			value = Request.ServerVariables(key);
+			this.AddRow(key, value);
 		}
 	}
 }%>
