@@ -20,7 +20,8 @@ try {
 			Append(CreateParameter("RecVal", adInteger, adParamInput, 10, Form.RecVal));
 			Append(CreateParameter("RetVal", adInteger, adParamInput, 10, Form.RetVal));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
