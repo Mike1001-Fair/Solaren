@@ -66,12 +66,14 @@ var User = {
 	},
 
 	GetPswd: function() {
-		var maxAttempts = 9,				
+		var maxAttempts = 9,
+		charCodeMin = 33,
+		charCodeMax = 126;
 		valid = false;
 		for (var i = 0; i < maxAttempts && !valid; i++) {
 			var Chars = new Array(this.PswdLen);
 			for (var j = 0; j < this.PswdLen; j++) {
-				Chars[j] = String.fromCharCode(Solaren.GetRandInt(33, 126));
+				Chars[j] = String.fromCharCode(Solaren.GetRandInt(charCodeMin, charCodeMax));
 			}
 			var Pswd = Chars.join("");
 			valid = this.PswdRe.test(Pswd);
