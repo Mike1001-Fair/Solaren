@@ -19,32 +19,27 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	with (rs) {
-		var LocalityType = Fields("LocalityType").value,
-		LocalityName     = Fields("LocalityName").value,
-		Deleted          = Fields("Deleted").value,
-		Title            = Deleted ? "Перегляд населеного пункту" : "Редагування населеного пункту";
-		Close();
-	}
+	var Record = Solaren.Map(rs.Fields);
+	rs.Close();
 	Solaren.Close();
 	Resource.Load(User.ResourceFile());
-	Html.SetPage(Title)
+	Html.SetPage(Record.Deleted ? "Перегляд анкети" : "Редагування анкети");
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditLocality" ACTION="updatelocality.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><SPAN>&#127969;</SPAN><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="LocalityId" VALUE="<%=LocalityId%>">
-<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>
 	<FIELDSET NAME="LocalitySet"><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">Тип</TD>
-	<TD><%Locality.WriteType("LocalityType", LocalityType)%></TD></TR>
+	<TD><%Locality.WriteType("LocalityType", Record.LocalityType)%></TD></TR>
 	<TR><TD ALIGN="RIGHT">Назва</TD>
-	<TD><INPUT TYPE="TEXT" NAME="LocalityName" VALUE="<%=LocalityName%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="LocalityName" VALUE="<%=Record.LocalityName%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Html.WriteEditButton(1)%>
+<% Html.WriteEditButton(1, Record.Deleted)%>
 </FORM></BODY></HTML>
 
 

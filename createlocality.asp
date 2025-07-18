@@ -3,23 +3,26 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Map(Request.Form);
+
 User.ValidateAccess(Authorized, "POST");
 
-with (Request) {
+/*with (Request) {
 	var LocalityType = Form("LocalityType"),
 	LocalityName     = Form("LocalityName");
-}
+}*/
 
 try {
 	Solaren.SetCmd("NewLocality");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("LocalityType", adTinyInt, adParamInput, 10, LocalityType));
-			Append(CreateParameter("LocalityName", adVarChar, adParamInput, 30, LocalityName));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
+			Append(CreateParameter("LocalityType", adTinyInt, adParamInput, 10, Form.LocalityType));
+			Append(CreateParameter("LocalityName", adVarChar, adParamInput, 30, Form.LocalityName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		} 
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
