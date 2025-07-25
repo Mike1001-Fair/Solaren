@@ -51,7 +51,7 @@ var Html = {
 	
 	WriteEditButton: function(AllowDelBtn, Deleted) {
 		var ResponseText = [];
-		if (typeof Deleted != "undefined" && Deleted) {
+		if (Deleted) {
 			ResponseText.push('<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>');
 		} else {
 			ResponseText.push('<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>');
