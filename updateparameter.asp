@@ -7,25 +7,25 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Parameter = Solaren.Map(Request.Form);
+Form = Solaren.Map(Request.Form);
 User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("UpdateParameter");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("StartSysDate", adDBDate, adParamInput, 10, Parameter.StartSysDate));
-			Append(CreateParameter("OperMonth", adVarChar, adParamInput, 10, Parameter.OperMonth));
-			Append(CreateParameter("HoursLimit", adVarChar, adParamInput, 10, Parameter.HoursLimit));
-			Append(CreateParameter("PanLimit", adVarChar, adParamInput, 10, Parameter.PanLimit));
-			Append(CreateParameter("BudgetItem", adVarChar, adParamInput, 10, Parameter.BudgetItem));
-			Append(CreateParameter("TreasuryName", adVarChar, adParamInput, 50, Parameter.TreasuryName));
-			Append(CreateParameter("TreasuryCode", adVarChar, adParamInput, 10, Parameter.TreasuryCode));
-			Append(CreateParameter("TreasuryAccount", adVarChar, adParamInput, 30, Parameter.TreasuryAccount));
-			Append(CreateParameter("TreasuryMfo", adVarChar, adParamInput, 10, Parameter.TreasuryMfo));
-			Append(CreateParameter("SysConfig", adTinyInt, adParamInput, 10, Parameter.SysConfig));
-			Append(CreateParameter("ShowMsg", adBoolean, adParamInput, 1, Parameter.ShowMsg == "on"));
-			Append(CreateParameter("MsgText", adVarChar, adParamInput, 800, Parameter.MsgText)); 
+			Append(CreateParameter("StartSysDate", adDBDate, adParamInput, 10, Form.StartSysDate));
+			Append(CreateParameter("OperMonth", adVarChar, adParamInput, 10, Form.OperMonth));
+			Append(CreateParameter("HoursLimit", adVarChar, adParamInput, 10, Form.HoursLimit));
+			Append(CreateParameter("PanLimit", adVarChar, adParamInput, 10, Form.PanLimit));
+			Append(CreateParameter("BudgetItem", adVarChar, adParamInput, 10, Form.BudgetItem));
+			Append(CreateParameter("TreasuryName", adVarChar, adParamInput, 50, Form.TreasuryName));
+			Append(CreateParameter("TreasuryCode", adVarChar, adParamInput, 10, Form.TreasuryCode));
+			Append(CreateParameter("TreasuryAccount", adVarChar, adParamInput, 30, Form.TreasuryAccount));
+			Append(CreateParameter("TreasuryMfo", adVarChar, adParamInput, 10, Form.TreasuryMfo));
+			Append(CreateParameter("SysConfig", adTinyInt, adParamInput, 10, Form.SysConfig));
+			Append(CreateParameter("ShowMsg", adBoolean, adParamInput, 1, Form.ShowMsg == "on"));
+			Append(CreateParameter("MsgText", adVarChar, adParamInput, 800, Form.MsgText)); 
 		}
 		Execute(adExecuteNoRecords);
 	}
@@ -33,10 +33,10 @@ try {
 	Message.Write(3, Message.Error(ex));
 } finally {
 	Solaren.Close();
-	var OperDate = Parameter.OperMonth + "-01";
-	Session("HoursLimit")   = String(Parameter.HoursLimit);
-	Session("CheckCard")    = Parameter.CheckCard == "on";
-	Session("NewIndicator") = Parameter.NewIndicator == "on";
+	var OperDate = Form.OperMonth + "-01";
+	Session("HoursLimit")   = String(Form.HoursLimit);
+	Session("CheckCard")    = Form.CheckCard == "on";
+	Session("NewIndicator") = Form.NewIndicator == "on";
 	SessionManager.SetDate(OperDate);
 	Message.Write(1, "");
 }%>
