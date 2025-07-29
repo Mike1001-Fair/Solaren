@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-var Title = Dictionary.Item("Message");
+var Title = Dictionary.Item("Message") || "Message";
 
 if (!User.ValidateRole(User.RoleId)) {
 	Message.Write(2, Dictionary.Item("AuthenticationError"))

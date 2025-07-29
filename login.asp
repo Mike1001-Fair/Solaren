@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
-<% var Form = Solaren.Match(Application("AppName")) ? Solaren.Map(Request.Form) : {},
+<% var Form = Solaren.Form();
 validCreds = User.ValidateCredentials(Form);
 
 User.ValidateAccess(validCreds, "POST");

@@ -85,5 +85,9 @@ Solaren = {
 	Match: function(key) {
 		//this.Write('<br>' + key);
 		return this.Referer.indexOf(key) > -1;
+	},
+
+	Form: function() {
+		return this.Match(Application("AppName")) ? this.Map(Request.Form) : {}
 	}
 }%>
