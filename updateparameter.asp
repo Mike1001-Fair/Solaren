@@ -7,9 +7,8 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Form = Solaren.Map(Request.Form);
+Form = Solaren.Form();
 User.ValidateAccess(Authorized, "POST");
-Response.End();
 
 try {
 	Solaren.SetCmd("UpdateParameter");
