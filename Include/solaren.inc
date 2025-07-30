@@ -7,6 +7,7 @@ Solaren = {
 	CommandTimeout: 20,
 	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")) || "",
 	Referer: String(Request.ServerVariables("HTTP_REFERER")) || "",
+	Method : String(Request.ServerVariables("REQUEST_METHOD")) || -1,
 
 	SetCmd: function(spName) {
 		Connect.Mode = this.ConnectMode;
@@ -87,7 +88,15 @@ Solaren = {
 		return this.Referer.indexOf(key) > -1;
 	},
 
-	Form: function() {
-		return this.Match(Application("AppName")) ? this.Map(Request.Form) : {}
+	Request: function() {
+		var result = {};
+		if (this.Match(Application("AppName"))) {
+			switch (this.Method) {				
+				case "POST": result = this.Map(Request.Form); break;
+				case "GET" : result = this.Map(Request.QueryString); break;
+				//default: this.Write("<br>Unsupported method");
+			}
+		}
+		return result		
 	}
 }%>

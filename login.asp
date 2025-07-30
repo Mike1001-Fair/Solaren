@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
-<% var Form = Solaren.Form();
+<% var Form = Solaren.Request(),
 validCreds = User.ValidateCredentials(Form);
 
 User.ValidateAccess(validCreds, "POST");

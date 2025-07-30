@@ -7,7 +7,6 @@ var User = {
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
 	Ip     : Request.ServerVariables("REMOTE_ADDR") || -1,
 	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || -1,
-	Method : Request.ServerVariables("REQUEST_METHOD") || -1,
 	Hal    : String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")) || -1,
 	Id     : Session("UserId") || -1,
 	GUID   : Session("UserGUID") || -1,
@@ -82,7 +81,7 @@ var User = {
 	},
 
 	ValidateAccess: function(Authorized, method) {
-		var	valid = Authorized && this.Method == method && Solaren.Match(Application("AppName"));
+		var	valid = Authorized && Solaren.Method == method && Solaren.Match(Application("AppName"));
 		if (!valid) {
 			Resource.Load(User.ResourceFile());
 			Message.Write(2, Dictionary.Item("AuthorizationError"));
