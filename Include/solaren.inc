@@ -89,14 +89,7 @@ Solaren = {
 	},
 
 	Request: function() {
-		var result = {};
-		if (this.Match(Application("AppName"))) {
-			switch (this.Method) {				
-				case "POST": result = this.Map(Request.Form); break;
-				case "GET" : result = this.Map(Request.QueryString); break;
-				//default: this.Write("<br>Unsupported method");
-			}
-		}
-		return result		
+			var collection = this.Method == "POST" ? Request.Form : Request.QueryString;
+		return this.Match(Application("AppName")) ? this.Map(collection) : {};
 	}
 }%>
