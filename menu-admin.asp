@@ -12,7 +12,7 @@ if (!User.Authorize(0)) {
 		<LI><A href="#" ID="LogOut">&#x23F9;<%=Dictionary.Item("Logout")%></A></LI>
 		<LI><%=Dictionary.Item("Work")%>
 		<UL class="submenu">
-                        <LI><A href="editparameter.asp"><%=Dictionary.Item("Parameters")%></A></LI>
+			<LI><A href="editparameter.asp"><%=Dictionary.Item("Parameters")%></A></LI>
 			<LI><A href="newreindexbase.asp"><%=Dictionary.Item("Reindexing")%></A></LI>
 			<LI><A href="newshrinklog.asp"><%=Dictionary.Item("ShrinkLog")%></A></LI>
 			<LI><A href="newbackupbase.asp"><%=Dictionary.Item("Backup")%></A></LI>
@@ -99,4 +99,3 @@ if (!User.Authorize(0)) {
 		</UL></LI>
 	</UL>
 </NAV>
-
