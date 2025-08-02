@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Form = Solaren.Request();
+Form = Solaren.Parse();
 User.ValidateAccess(Authorized, "POST");
 
 try {

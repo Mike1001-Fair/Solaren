@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.ParseRequest(),
+Form = Solaren.Parse(),
 ReportMonth = String(Form.ReportMonth),
 DoubleReport = Form.DoubleReport == "on";
 

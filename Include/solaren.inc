@@ -88,7 +88,7 @@ Solaren = {
 		return this.Referer.indexOf(key) > -1;
 	},
 
-	ParseRequest: function() {
+	Parse: function() {
 			var collection = this.Method == "POST" ? Request.Form : Request.QueryString;
 		return this.Match(Application("AppName")) ? this.Map(collection) : {};
 	}
