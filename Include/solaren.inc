@@ -89,7 +89,7 @@ Solaren = {
 	},
 
 	Parse: function() {
-			var collection = this.Method == "POST" ? Request.Form : Request.QueryString;
+		var collection = this.Method == "POST" ? Request.Form : Request.QueryString;
 		return this.Match(Application("AppName")) ? this.Map(collection) : {};
 	}
 }%>
