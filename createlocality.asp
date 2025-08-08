@@ -4,15 +4,9 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Form = Solaren.Map(Request.Form);
+Form = Solaren.Parse();
 
 User.ValidateAccess(Authorized, "POST");
-
-/*with (Request) {
-	var LocalityType = Form("LocalityType"),
-	LocalityName     = Form("LocalityName");
-}*/
-
 try {
 	Solaren.SetCmd("NewLocality");
 	with (Cmd) {
