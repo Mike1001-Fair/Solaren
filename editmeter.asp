@@ -21,10 +21,10 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	var Meter = Solaren.Map(rs.Fields);
+	var Meter = Solaren.Map(rs.Fields),
+	Limit = Math.pow(10, Meter.Capacity) - 1;
 	rs.Close();
 	Solaren.Close();
-	var Limit = Math.pow(10, Meter.Capacity) - 1;
 	Html.SetPage(Meter.Deleted ? "Перегляд лічильника" : "Редагування лічильника");
 }%>
 <BODY CLASS="MainBody">
