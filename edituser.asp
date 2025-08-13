@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 0,
-UserId = Request.QueryString("UserId");
+Query = Solaren.Parse();
 User.ValidateAccess(Authorized, "GET");
 
 try {
@@ -18,7 +18,7 @@ try {
 	}
 	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
 	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
-	Cmd.Parameters.Item("UserId").value = UserId;
+	Cmd.Parameters.Item("UserId").value = Query.UserId;
 	var rsUser = Solaren.Execute("GetUser", "Користувача не знадено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
@@ -29,7 +29,7 @@ try {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditUser" ACTION="updateuser.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=UserId%>">
+<INPUT TYPE="HIDDEN" NAME="UserId" VALUE="<%=Record.UserId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <H3 CLASS="HeadText" ID="H3Id">&#128100;<%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
