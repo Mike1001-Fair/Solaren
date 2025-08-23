@@ -22,8 +22,7 @@ Solaren = {
 	Execute: function(spName, msg) {
 		Cmd.CommandText = spName;
 		var rs = Cmd.Execute();
-		this.EOF(rs, msg);
-		return rs
+		return rs.EOF ? this.EOF(rs, msg) : rs
 	},
 
 	EOF: function(rs, msg) {
