@@ -5,13 +5,13 @@ var User = {
 	PswdRe : /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}$/,
 	PswdLen: 10,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
-	Ip     : Request.ServerVariables("REMOTE_ADDR") || -1,
-	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || -1,
-	Hal    : String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")) || -1,
-	Id     : Session("UserId") || -1,
-	GUID   : Session("UserGUID") || -1,
-	RoleId : Session("RoleId") || -1,
-	Token  : Session("Token") || -1,
+	Ip     : Request.ServerVariables("REMOTE_ADDR") || "",
+	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || "",
+	Hal    : String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")) || "",
+	Id     : Session("UserId") || "",
+	GUID   : Session("UserGUID") || "",
+	RoleId : Session("RoleId") || "",
+	Token  : Session("Token") || "",
 
 	Language: function() {
 		var regionSet = this.Hal.split(",")[0];
