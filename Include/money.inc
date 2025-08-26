@@ -1,17 +1,21 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Money = {
-	ones    : ["од", "дв", "три", "чотир", "п'ят", "шiст", "сiм", "вiсiм", "дев'ят"],
-	Hundreds: ["сто", "двiстi", "триста", "чотириста", "п'ятсот", "шiстсот", "сiмсот", "вiсiмсот", "дев'ятсот"],
-	milion  : ["трильйон", "мiльярд", "мiльйон", "тисяч"],
+	ones    : ["од", "дв", "три", "чотир", "п'ят", "шіст", "сім", "вісім", "дев'ят"],
+	Hundreds: ["сто", "двісті", "триста", "чотириста", "п'ятсот", "шістсот", "сімсот", "вісімсот", "дев'ятсот"],
+	milion  : ["трильйон", "мільярд", "мільйон", "тисяч"],
 	anDan   : ["", "", "", "сорок", "", "", "", "", "дев'яносто"],
-	Сurrency: "грн.",
+	Currency: "грн.",
 	Penny   : "коп.",
 	Zero    : "нуль",
 	Limit   : 999999999999999,
 	errMsg  : "Поза діапазоном або не є числом",
 
+	inRange: function(num) {
+		return !isNaN(num) && num >= 0 && num <= this.Limit
+	},
+
 	toWord: function(num) {
-		var inRange = !isNaN(num) && num >= 0 && num <= this.Limit,
+		var inRange = this.inRange(num),
 		result;
 		if (inRange) {
 			var numParts = typeof(num) == "number" ? num.toFixed(2).split(".") : num.split("."),
@@ -26,7 +30,7 @@ var Money = {
 				numParts[0] = Math.floor(numParts[0] / 1000);
 				cycle--;
 			} while (numParts[0] > 0); 
-			result = [word.length > 0 ? word.reverse().join(" ") : this.Zero, this.Сurrency, numParts[1], this.Penny];
+			result = [word.length > 0 ? word.reverse().join(" ") : this.Zero, this.Currency, numParts[1], this.Penny];
 		}
 		return inRange ? result.join(" ") : this.errMsg
 	},
@@ -54,14 +58,14 @@ var Money = {
 			(cycle == 3 ? "на" :
 			(cycle < 4 ? (ed == 2 ? "а" :
 			(ed == 4 ? "и" : "")) : "на"))) :
-			(ed == 2 ? "i" : (ed == 4 ? "и" : "")))
+			(ed == 2 ? "і" : (ed == 4 ? "и" : "")))
 		
 	},
 
 	getGroupSuffix: function(des, ed, cycle) {
-		return des == 1 ? (cycle < 3 ? "iв" : "") :
-			(cycle < 3 ? (ed == 1 ? "" : ed > 1 && ed < 5 ? "а" : "iв") :
-			(ed == 1 ? "а" : ed > 1 && ed < 5 ? "i" : ""))
+		return des == 1 ? (cycle < 3 ? "ів" : "") :
+			(cycle < 3 ? (ed == 1 ? "" : ed > 1 && ed < 5 ? "а" : "ів") :
+			(ed == 1 ? "а" : ed > 1 && ed < 5 ? "і" : ""))
 	},
 
 	getTensText: function(des, forDes) {

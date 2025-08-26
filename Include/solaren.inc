@@ -64,15 +64,17 @@ Solaren = {
 	},
 
 	Map: function(Collection) {
-		var items = new Enumerator(Collection),
-		result = {};
-		for (; !items.atEnd(); items.moveNext()) {
-			var item = items.item(),
-			hasName = item && typeof item.Name === "string",
-			key = hasName ? item.Name : item;
-			value = hasName ? item.Value : Collection(item);
-			result[key] = value;
-			//this.Write("<br>key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name);
+		var result = {};
+		if (this.ValidObject(Collection)) {
+			var items = new Enumerator(Collection);
+			for (; !items.atEnd(); items.moveNext()) {
+				var item = items.item(),
+				hasName = item && typeof item.Name === "string",
+				key = hasName ? item.Name : item;
+				value = hasName ? item.Value : Collection(item);
+				result[key] = value;
+				//this.Write("<br>key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name);
+			}
 		}
 		return result;
 	},
