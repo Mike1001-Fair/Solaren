@@ -17,12 +17,12 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Record = Solaren.Map(rs.Fields),
-	List = {
+	var List = {
 		NewIndicator: "Нові показники",
 		CheckCard   : "Перевіряти картку",
 		ShowDeleted : "Показувати видалене"
-	};
+	},
+	Record = Solaren.Map(rs.Fields);
 	rs.Close();
 	Solaren.Close();
 	Html.SetPage("Параметри");
