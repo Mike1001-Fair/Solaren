@@ -40,7 +40,7 @@ var Table = {
 				rs.Fields("StreetName"),
 				rs.Fields("HouseId")
 			],
-			url = url = Html.GetLink("editcontract.asp?ContractId=", rs.Fields("ContractId"), rs.Fields("PAN")),
+			url = Html.GetLink("editcontract.asp?ContractId=", rs.Fields("ContractId"), rs.Fields("PAN")),
             td = [Tag.Write("TD", -1, url),
 				Tag.Write("TD", 0, rs.Fields("CustomerName")),
 				Tag.Write("TD", -1, ContractAddress.join(" ")),
