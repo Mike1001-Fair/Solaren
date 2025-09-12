@@ -58,7 +58,7 @@ var Table = {
 
 	Render: function(rs) {
         var rows = this.GetRows(rs),
-		th = ['<TH ALIGN="LEFT" COLSPAN="5">Всього: ', rows.length,'</TH>',
+		footer = ['<TH ALIGN="LEFT" COLSPAN="5">Всього: ', rows.length,'</TH>',
 			Tag.Write("TH", 2, this.TotPower.toDelimited(1))
 		],
 		body = [
@@ -67,7 +67,7 @@ var Table = {
             '<TABLE CLASS="InfoTable">',
             Html.GetHeadRow(this.Header),
             rows.join("\n"),
-			Tag.Write("TR", -1, th.join(""))
+			Tag.Write("TR", -1, footer.join(""))
         ];
         return body.join("\n");
 	}
