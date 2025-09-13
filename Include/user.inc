@@ -36,8 +36,8 @@ var User = {
 	},
 
 	Authorize: function(RoleId) {
-		var Done = this.ValidateRole(RoleId) && this.GuidRe.test(this.GUID);
-		if (Done) {
+		var validParams = this.ValidateRole(RoleId) && this.GuidRe.test(this.GUID);
+		if (validParams) {
 			try {
 				Solaren.SetCmd("UserAuthorize");
 				with (Cmd) {
@@ -51,7 +51,7 @@ var User = {
 						Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 					}
 					Execute(adExecuteNoRecords);
-					Done = Parameters.Item("Done").value; 
+					var Done = Parameters.Item("Done").value; 
 				}
 			} catch (ex) {
 				Message.Write(3, Message.Error(ex))
