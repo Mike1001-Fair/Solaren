@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Form.Phone));
 			Append(CreateParameter("UserName", adVarChar, adParamInput, 10, Form.UserName));
 			Append(CreateParameter("Pswd", adVarChar, adParamInput, 10, Form.Pswd));
-			Append(CreateParameter("RoleId", adVarChar, adParamInput, 3, Form.RoleId));
+			Append(CreateParameter("RoleId", adVarChar, adParamInput, 10, Form.RoleId));
 			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Form.CompanyId));
 			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, Form.BranchId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
