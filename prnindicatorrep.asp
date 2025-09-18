@@ -49,20 +49,29 @@ var Doc = {
 	Divider: '<DIV CLASS="BlockDivider"></DIV>',
 
 	getText: function(totSaldo) {
-	var resultText = ["За результатами знятих показникiв: "],
-	s = " електроенергiю, згiдно умов договору ";
-	if (totSaldo) {
-		if (totSaldo < 0) {
-			totSaldo = Math.abs(totSaldo);
-			resultText.push("Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї")
-		} else {
-			resultText.push("Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї");
+		var resultText = ["За результатами знятих показникiв: "],
+		s = " електроенергiю, згiдно умов договору ";
+		if (totSaldo) {
+			if (totSaldo < 0) {
+				totSaldo = Math.abs(totSaldo);
+				resultText.push("Постачальник оплачує Споживачу" + s + "купiвлі-продажу електричної енергiї")
+			} else {
+				resultText.push("Споживач оплачує Постачальнику" + s + "про постачання електричної енергiї");
+			}
+			resultText.push(", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год.")
 		}
-		resultText.push(", в обсязi " + totSaldo.toDelimited(0) + " кВт&#183;год.")
-	}
-	return resultText.join("")
-}
+		return resultText.join("")
+	},
 
+	Render:  function(DoubleReport) {
+		for (var i = 0; i <= DoubleReport; i++) {
+			if (i == 0) {
+				var Output = Table.Render(rs);
+			}
+			Doc.Body.push(Output);	
+		}
+		return Doc.Body.join(Doc.Divider)
+	}
 },
 
 Table = {
@@ -140,17 +149,12 @@ Table = {
 		Table.Body.push(footer.join("\n"));
         return Table.Body.join("\n");
 	}
-};
+},
 
-for (var i = 0; i <= DoubleReport; i++) {
-	if (i == 0) {
-		var Output = Table.Render(rs);
-	}
-	Doc.Body.push(Output);
-}
+Output = Doc.Render(DoubleReport);
 
 rs.Close();
 Solaren.Close();
-ResponseText.push(Doc.Body.join(Doc.Divider));
+ResponseText.push(Output);
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join(""))%>
