@@ -63,7 +63,7 @@ var Doc = {
 		return resultText.join("")
 	},
 
-	Render:  function(DoubleReport) {
+	Render: function(DoubleReport) {
 		for (var i = 0; i <= DoubleReport; i++) {
 			if (i == 0) {
 				var Output = Table.Render(rs);

@@ -31,38 +31,46 @@ try {
 	Period = Month.GetPeriod(ReportMonth, 1),
 	ActDate = Month.GetLastDay(ReportMonth),
 	WordSum = Money.toWord(Record.ActSum),
-	Body    = [],
-	Divider = '\n<DIV CLASS="BlockDivider"></DIV>\n',
 	ResponseText = ['<BODY CLASS="ActContainer">'];
-
 	Record.ContractDate = Month.GetYMD(Record.ContractDate);
 	Record.CustomerName = Record.CustomerName.replace(/ /g,"&nbsp");
-	Solaren.Close();
 	Html.SetHead("Акт приймання-передачi");
 }
 
-for (var i = 0; i <= DoubleAct; i++) {
-	if (i == 0) {
-		var block = ['<DIV CLASS="ActText">',
-			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
-			'<TABLE CLASS="NoBorderTable">',
-			'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
-			'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
-			'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' +
-			Record.ContractDate.formatDate("-") + ' року, особовий рахунок №' + Record.ContractPAN + ': ' +
-			Record.CompanyName + ' (Постачальник) в особi ' + Record.ChiefTitle2 + ' ' + Record.BranchName2 + ' ЦОС ' + Record.ChiefName2 +
-			', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + Record.CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
-			'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + Record.FactVol + '</B> кВт&#183;год ' +
-			'на суму <B>' + Record.VolCost + '</B> грн., ПДФО <B>' + Record.Pdfo + '</B> грн., вiйськовий збiр <B>' + Record.Vz + '</B> грн., всього <B>' + Record.ActSum.toDelimited(2) +
-			'</B> грн. (' +	WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
-			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
-			'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
-			'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + Record.CustomerName + '</TD></TR>',
-			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
-		].join("\n");
+var Doc = {
+	Body: [],
+	Divider: '<DIV CLASS="BlockDivider"></DIV>',
+
+	Render: function(DoubleAct) {
+		for (var i = 0; i <= DoubleAct; i++) {
+			if (i == 0) {
+				var block = ['<DIV CLASS="ActText">',
+					'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
+					'<TABLE CLASS="NoBorderTable">',
+					'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
+					'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
+					'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' +
+					Record.ContractDate.formatDate("-") + ' року, особовий рахунок №' + Record.ContractPAN + ': ' +
+					Record.CompanyName + ' (Постачальник) в особi ' + Record.ChiefTitle2 + ' ' + Record.BranchName2 + ' ЦОС ' + Record.ChiefName2 +
+					', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + Record.CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
+					'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + Record.FactVol + '</B> кВт&#183;год ' +
+					'на суму <B>' + Record.VolCost + '</B> грн., ПДФО <B>' + Record.Pdfo + '</B> грн., вiйськовий збiр <B>' + Record.Vz + '</B> грн., всього <B>' + Record.ActSum.toDelimited(2) +
+					'</B> грн. (' +	WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
+					'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
+					'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
+					'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + Record.CustomerName + '</TD></TR>',
+					'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
+				].join("\n");
+			}
+			Doc.Body.push(block);
+		}
+		return Doc.Body.join(Doc.Divider)
 	}
-	Body.push(block);
-}
-ResponseText.push(Body.join(Divider));
+},
+Output = Doc.Render(DoubleAct);
+
+rs.Close();
+Solaren.Close();
+ResponseText.push(Output);
 ResponseText.push('</BODY></HTML>');
 Response.Write(ResponseText.join("\n"))%>
