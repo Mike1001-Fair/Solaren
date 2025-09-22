@@ -30,7 +30,6 @@ try {
 	var Record = Solaren.Map(rs.Fields),
 	Period = Month.GetPeriod(ReportMonth, 1),
 	ActDate = Month.GetLastDay(ReportMonth),
-	WordSum = Money.toWord(Record.ActSum),
 	ResponseText = ['<BODY CLASS="ActContainer">'];
 	Record.ContractDate = Month.GetYMD(Record.ContractDate);
 	Record.CustomerName = Record.CustomerName.replace(/ /g,"&nbsp");
@@ -44,7 +43,13 @@ var Doc = {
 	Render: function(DoubleAct) {
 		for (var i = 0; i <= DoubleAct; i++) {
 			if (i == 0) {
-				var block = ['<DIV CLASS="ActText">',
+				var FactVol = Record.FactVol.toDelimited(0),
+				VolCost = Record.VolCost.toDelimited(2),
+				Pdfo = Record.Pdfo.toDelimited(2),
+				Vz = Record.Vz.toDelimited(2),
+				ActSum = Record.ActSum.toDelimited(2),
+				WordSum = Money.toWord(Record.ActSum),
+				block = ['<DIV CLASS="ActText">',
 					'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
 					'<TABLE CLASS="NoBorderTable">',
 					'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
@@ -53,9 +58,9 @@ var Doc = {
 					Record.ContractDate.formatDate("-") + ' року, особовий рахунок №' + Record.ContractPAN + ': ' +
 					Record.CompanyName + ' (Постачальник) в особi ' + Record.ChiefTitle2 + ' ' + Record.BranchName2 + ' ЦОС ' + Record.ChiefName2 +
 					', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + Record.CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
-					'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + Record.FactVol.toDelimited(0) + '</B> кВт&#183;год ' +
-					'на суму <B>' + Record.VolCost.toDelimited(2) + '</B> грн., ПДФО <B>' + Record.Pdfo.toDelimited(2) + '</B> грн., вiйськовий збiр <B>' + Record.Vz.toDelimited(2) +
-					'</B> грн., всього <B>' + Record.ActSum.toDelimited(2) + '</B> грн. (' +	WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
+					'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol + '</B> кВт&#183;год ' +
+					'на суму <B>' + VolCost + '</B> грн., ПДФО <B>' + Pdfo + '</B> грн., вiйськовий збiр <B>' + Vz +
+					'</B> грн., всього <B>' + ActSum + '</B> грн. (' +	WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
 					'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
 					'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
 					'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + Record.CustomerName + '</TD></TR>',
