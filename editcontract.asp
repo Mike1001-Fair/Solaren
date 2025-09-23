@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/tarif.inc" -->
 <% var Authorized = User.RoleId == 1,
-ContractId = Request.QueryString("ContractId");
+Query = Solaren.Parse();
 User.ValidateAccess(Authorized, "GET");
 
 try {
@@ -26,7 +26,7 @@ try {
 
 	with (Cmd) {
 		with (Parameters) {
-    			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
+    			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Query.ContractId));
 		}
 	}
 	var rsContract = Solaren.Execute("GetContract", "Договір не знайдено!");
@@ -40,7 +40,7 @@ try {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="CustomerId" ID="CustomerId" VALUE="<%=Contract.CustomerId%>">
-<INPUT TYPE="HIDDEN" NAME="ContractId" VALUE="<%=ContractId%>">
+<INPUT TYPE="HIDDEN" NAME="ContractId" VALUE="<%=Query.ContractId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Contract.LocalityId%>">
 <INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=Contract.StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Contract.Deleted%>">
