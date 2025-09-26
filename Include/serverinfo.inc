@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var ServerInfo = {
-	Text: ['\n<BODY CLASS="MainBody">',
+	Body: ['\n<BODY CLASS="MainBody">',
 		'<H3 CLASS="HeadText">&#128187;Сервер</H3>',
 		'<DIV CLASS="FormDiv">',
 		'<FIELDSET CLASS="FieldSet">',
@@ -13,7 +13,7 @@ var ServerInfo = {
 		if (Value != "") {
 			var td = [Tag.Write("TD", 2, Key), Tag.Write("TD", 0, Value)],
 			tr = Tag.Write("TR", -1, td.join(""));
-			this.Text.push(tr);
+			this.Body.push(tr);
 		}
 	},
 

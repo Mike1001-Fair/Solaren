@@ -13,5 +13,5 @@ Html.SetHead("Сервер", 1);
 Menu.Write(0);
 ServerInfo.AddObjInfo(SessionInfo);
 ServerInfo.AddRequestInfo();
-ServerInfo.Text.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
-Response.Write(ServerInfo.Text.join("\n"))%>
+ServerInfo.Body.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
+Response.Write(ServerInfo.Body.join("\n"))%>
