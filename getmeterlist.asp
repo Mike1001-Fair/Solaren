@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId > 0 && User.RoleId < 3,
-ContractId = Request.QueryString("ContractId");
+Query = Solaren.Parse();
 
 if (Authorized) {
 	try {
 		Solaren.SetCmd("GetMeterList");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
+				Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Query.ContractId));
 				Append(CreateParameter("MeterList", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);

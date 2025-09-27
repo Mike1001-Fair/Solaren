@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId == 1,
-QueryName = Request.QueryString("QueryName");
+Query = Solaren.Parse();
 
 if (Authorized) {
 	try {
 		Solaren.SetCmd("GetCustomerData");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
+				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, Query.QueryName));
 				Append(CreateParameter("CustomerData", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);

@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-QueryName = Request.QueryString("QueryName");
+Query = Solaren.Parse();
 
 if (Authorized) {
 	try {
 		Solaren.SetCmd("GetAreaData");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
+				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, Query.QueryName));
 				Append(CreateParameter("AreaData", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);

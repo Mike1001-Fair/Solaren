@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId > 0 && User.RoleId < 3,
-QueryName = Request.QueryString("QueryName");
+Query = Solaren.Parse();
 
 if (Authorized) {
 	try {
@@ -14,7 +14,7 @@ if (Authorized) {
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
-				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, QueryName));
+				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, Query.QueryName));
 				Append(CreateParameter("ContractData", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);

@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-StreetId = Request.QueryString("StreetId");
+Query = Solaren.Parse();
 
 if (Authorized) {
 	try {
 		Solaren.SetCmd("GetStreetInfo");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, StreetId));
+				Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, Query.StreetId));
 				Append(CreateParameter("StreetInfo", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);
