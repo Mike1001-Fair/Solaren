@@ -165,23 +165,6 @@
 	margin     : 6px auto;
 }
 
-/* стиль для отображения ссылок */
-/*.mainmenu {
-	font-size   : 1em;
-	font-family : Arial;
-	font-weight : normal;
-	color       : #0000FF;
-	font-style  : normal;
-	text-decoration : none;
-}
-.mainmenu:hover {
-	font-family : Arial;
-	font-weight : normal;
-	font-style  : normal;
-	color       : #FF0000;
-	text-decoration : underline;
-}*/
-
 .BtnLink {
 	display        : inline-block;
 	outline        : none;
