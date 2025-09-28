@@ -49,7 +49,7 @@ var Doc = {
 				Vz = Record.Vz.toDelimited(2),
 				ActSum = Record.ActSum.toDelimited(2),
 				WordSum = Money.toWord(Record.ActSum),
-				block = ['<DIV CLASS="ActText">',
+				div = ['<DIV CLASS="ActText">',
 					'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
 					'<TABLE CLASS="NoBorderTable">',
 					'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
@@ -67,7 +67,7 @@ var Doc = {
 					'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
 				].join("\n");
 			}
-			Doc.Body.push(block);
+			Doc.Body.push(div);
 		}
 		return Doc.Body.join(Doc.Divider)
 	}
