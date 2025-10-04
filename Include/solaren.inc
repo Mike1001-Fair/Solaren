@@ -89,8 +89,12 @@ Solaren = {
 		return this.Referer.indexOf(key) > -1;
 	},
 
+	Collection: function() {
+		return this.Method == "POST" ? Request.Form : Request.QueryString;
+	},
+
 	Parse: function() {
-		var collection = this.Method == "POST" ? Request.Form : Request.QueryString;
+		var collection = this.Collection();
 		return this.Match(Application("AppName")) ? this.Map(collection) : {};
 	}
 }%>
