@@ -26,7 +26,6 @@ Solaren = {
 	},
 
 	EOF: function(rs, msg) {
-		//if (rs.EOF) {
 		rs.Close();
 		this.Close();
 		if (!msg) {
@@ -34,7 +33,6 @@ Solaren = {
 			var resourceText = Dictionary.Item("InfoNotFound");
 		}
 		Message.Write(0, msg || resourceText);
-		//}
 	},	
 
 	Close: function() {
