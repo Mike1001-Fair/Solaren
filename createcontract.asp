@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
-Contract = Solaren.Map(Request.Form);
+Form = Solaren.Parse();
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -12,25 +12,25 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
-			Append(CreateParameter("CustomerId", adInteger, adParamInput, 10, Contract.CustomerId));
-			Append(CreateParameter("PAN", adVarChar, adParamInput, 20, Contract.PAN));
-			Append(CreateParameter("EICode", adVarChar, adParamInput, 20, Contract.EICode));
-			Append(CreateParameter("Pay", adBoolean, adParamInput, 1, Contract.Pay == "on"));
-			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Contract.LocalityId));
-			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, Contract.StreetId));
-			Append(CreateParameter("HouseId", adVarChar, adParamInput, 15, Contract.HouseId));
-			Append(CreateParameter("ContractPower", adVarChar, adParamInput, 10, Contract.ContractPower));
-			Append(CreateParameter("ExpDate", adVarChar, adParamInput, 10, Contract.ExpDate));
-			Append(CreateParameter("ContractDate", adVarChar, adParamInput, 10, Contract.ContractDate));
-			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, Contract.MfoCode));
-			Append(CreateParameter("BankAccount", adVarChar, adParamInput, 20, Contract.BankAccount));
-			Append(CreateParameter("CardId", adVarChar, adParamInput, 20, Contract.CardId));
-			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, Contract.BranchId));
-			Append(CreateParameter("AenId", adInteger, adParamInput, 10, Contract.AenId));
-			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, Contract.OperatorId));
-			Append(CreateParameter("TarifGroupId", adTinyInt, adParamInput, 1, Contract.TarifGroupId));
-			Append(CreateParameter("Iban", adChar, adParamInput, 29, Contract.Iban));
-			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, Contract.PerformerId));
+			Append(CreateParameter("CustomerId", adInteger, adParamInput, 10, Form.CustomerId));
+			Append(CreateParameter("PAN", adVarChar, adParamInput, 20, Form.PAN));
+			Append(CreateParameter("EICode", adVarChar, adParamInput, 20, Form.EICode));
+			Append(CreateParameter("Pay", adBoolean, adParamInput, 1, Form.Pay == "on"));
+			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Form.LocalityId));
+			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, Form.StreetId));
+			Append(CreateParameter("HouseId", adVarChar, adParamInput, 15, Form.HouseId));
+			Append(CreateParameter("ContractPower", adVarChar, adParamInput, 10, Form.ContractPower));
+			Append(CreateParameter("ExpDate", adVarChar, adParamInput, 10, Form.ExpDate));
+			Append(CreateParameter("ContractDate", adVarChar, adParamInput, 10, Form.ContractDate));
+			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, Form.MfoCode));
+			Append(CreateParameter("BankAccount", adVarChar, adParamInput, 20, Form.BankAccount));
+			Append(CreateParameter("CardId", adVarChar, adParamInput, 20, Form.CardId));
+			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, Form.BranchId));
+			Append(CreateParameter("AenId", adInteger, adParamInput, 10, Form.AenId));
+			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, Form.OperatorId));
+			Append(CreateParameter("TarifGroupId", adTinyInt, adParamInput, 1, Form.TarifGroupId));
+			Append(CreateParameter("Iban", adChar, adParamInput, 29, Form.Iban));
+			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, Form.PerformerId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} 
 		Execute(adExecuteNoRecords);
