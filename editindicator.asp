@@ -8,14 +8,14 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
-IndicatorId = Request.QueryString("IndicatorId");
+Query = Solaren.Parse();
 User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetIndicator");
 	with (Cmd) {
 		with (Parameters) {
- 			Append(CreateParameter("IndicatorId", adInteger, adParamInput, 10, IndicatorId))
+ 			Append(CreateParameter("IndicatorId", adInteger, adParamInput, 10, Query.IndicatorId))
 		} 
 	}
 	var rs = Solaren.Execute("GetIndicator");
@@ -23,23 +23,22 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {	
 	var Indicator = Solaren.Map(rs.Fields);
+	OperDate     = Month.Date[1],
+	PrevDate     = Month.GetYMD(Indicator.PrevDate),
+	ReportDate   = Month.GetYMD(Indicator.ReportDate),
+	NextDate     = Month.Date[3],
+	ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
+	Limit        = Math.pow(10, Indicator.Capacity) - 1,
+	Title        = Indicator.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв",
+	AllowDelBtn  = User.RoleId == 1;
 	rs.Close();
 	Solaren.Close();
-}
-
-var OperDate = Month.Date[1],
-PrevDate     = Month.GetYMD(Indicator.PrevDate),
-ReportDate   = Month.GetYMD(Indicator.ReportDate),
-NextDate     = Month.Date[3],
-ViewOnly     = !Month.isPeriod(OperDate, ReportDate),
-Limit        = Math.pow(10, Indicator.Capacity) - 1,
-AllowDelBtn  = User.RoleId == 1;
-
-Html.SetPage(Indicator.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв")%>
+	Html.SetPage(Title);
+}%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditIndicator" ACTION="updateindicator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=Indicator.ContractId%>">
-<INPUT TYPE="HIDDEN" NAME="IndicatorId" VALUE="<%=IndicatorId%>">
+<INPUT TYPE="HIDDEN" NAME="IndicatorId" VALUE="<%=Query.IndicatorId%>">
 <INPUT TYPE="HIDDEN" NAME="PrevDate" VALUE="<%=PrevDate%>">
 <INPUT TYPE="HIDDEN" NAME="Ktf" VALUE="<%=Indicator.Ktf%>">
 <INPUT TYPE="HIDDEN" NAME="ContractPower" VALUE="<%=Indicator.ContractPower%>">
@@ -85,8 +84,7 @@ Html.SetPage(Indicator.Deleted || ViewOnly ? "Перегляд показникi
 	</FIELDSET>
 	</TD></TR>
 </TABLE>
-<% if (!ViewOnly) Html.WriteEditButton(AllowDelBtn, Indicator.Deleted)%>
+<% if (!ViewOnly) {
+	Html.WriteEditButton(AllowDelBtn, Indicator.Deleted)
+}%>
 </FORM></BODY></HTML>
-
-
-

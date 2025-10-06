@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-CompanyId = Request.QueryString("CompanyId");
+Query = Solaren.Parse();
 User.ValidateAccess(Authorized, "GET");
 
 try {
@@ -21,21 +21,22 @@ try {
 	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
+			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Query.CompanyId));
 		}
 	}
 	var rsCompany = Solaren.Execute("GetCompany", "Компанію не знайдено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {	
-	var Company = Solaren.Map(rsCompany.Fields);
+	var Company = Solaren.Map(rsCompany.Fields),
+	Title = Company.Deleted ? "Перегляд компанії" : "Редагування компанії";
 	rsCompany.Close();
-	Html.SetPage(Company.Deleted ? "Перегляд компанії" : "Редагування компанії");
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCompany" ACTION="updatecompany.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=Html.Title%></H3>
-<INPUT TYPE="HIDDEN" NAME="CompanyId" VALUE="<%=CompanyId%>">
+<INPUT TYPE="HIDDEN" NAME="CompanyId" VALUE="<%=Query.CompanyId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Company.LocalityId%>">
 <INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="<%=Company.StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Company.Deleted%>">
