@@ -63,9 +63,8 @@ Solaren = {
 
 	Map: function(Collection) {
 		var result = {};
-		if (this.ValidObject(Collection)) {
-			var items = new Enumerator(Collection);
-			for (; !items.atEnd(); items.moveNext()) {
+		if (this.ValidObject(Collection)) {			
+			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
 				key = hasName ? item.Name : item;
