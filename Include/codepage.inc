@@ -1,5 +1,5 @@
 ﻿<% //@ LANGUAGE = "JScript"
-var	CPList = {
+var	CpList = {
 	"65001": "utf-8",
 	"1251": "windows-1251"
 },
@@ -7,8 +7,8 @@ var	CPList = {
 CodePage = {
 	Write: function() {
 		var ResponseText = ['<SELECT NAME="ReportCodePage">'];
-		for (var k in CPList) {
-			var option = ['<OPTION VALUE="', k, '">', CPList[k], '</OPTION>'];
+		for (var k in CpList) {
+			var option = ['<OPTION VALUE="', k, '">', CpList[k], '</OPTION>'];
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT>');

@@ -3,6 +3,7 @@ var Month = {
 	Name: ["сiч", "лют", "берез", "квiт", "трав", "черв", "лип", "серп", "верес", "жовт", "листопад", "груд"],
 	Date: ["2015-01-01", Session("OperDate"), Session("EndDate"), Session("NextDate"), "9999-12-31"],
 	YearItem: "року",
+	Today: new Date(),
 
 	Quarter: function() {
 		var Quarter = [];

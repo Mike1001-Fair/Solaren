@@ -10,7 +10,6 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <% var Form = Solaren.Parse(),
 validCreds = User.ValidateCredentials(Form);
-
 User.ValidateAccess(validCreds, "POST");
 
 try {

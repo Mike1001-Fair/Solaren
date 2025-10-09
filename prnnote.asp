@@ -105,8 +105,7 @@ if (Solaren.Empty(PurCost)) {
 	Message.Write(0, "Інформацію не знайдено");
 } else {
 	var Period = Month.GetPeriod(ReportMonth, 1),
-	Today = new Date(),
-	ReportDate = Today.toStr(0);
+	ReportDate = Month.Today.toStr(0);
 	Html.SetHead("Службовий лист");
 }%>
 

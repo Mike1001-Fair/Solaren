@@ -6,8 +6,8 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = User.RoleId == 0,
-Today = new Date();
+<!-- #INCLUDE FILE="Include/month.inc" -->
+<% var Authorized = User.RoleId == 0;
 User.ValidateAccess(Authorized, "GET");
 Html.SetPage("Користувачi")%>
 <BODY CLASS="MainBody">
@@ -21,7 +21,7 @@ Html.SetPage("Користувачi")%>
 	<TR><TD ALIGN="RIGHT">Роль</TD>
 	<TD><%User.WriteRole("RoleId", -1)%></TD></TR>	
 	<TR><TD ALIGN="RIGHT">Підключився</TD>
-	<TD><INPUT TYPE="datetime-local" NAME="ConnectDate" MAX="<%=Today.toStr(1)%>" TITLE="Підключився"></TD></TR>
+	<TD><INPUT TYPE="datetime-local" NAME="ConnectDate" MAX="<%=Month.Today.toStr(1)%>" TITLE="Підключився"></TD></TR>
 	</TABLE></FIELDSET>
 </TD></TR>
 </TABLE>
