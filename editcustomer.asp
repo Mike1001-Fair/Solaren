@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1,
-CustomerId = Request.Form("CustomerId");
+Query = Solaren.Parse();
 User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetCustomer");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("CustomerId", adInteger, adParamInput, 10, CustomerId));
+			Append(CreateParameter("CustomerId", adInteger, adParamInput, 10, Query.CustomerId));
 		}
 	}
 	var rs = Solaren.Execute("GetCustomer");
@@ -27,7 +27,7 @@ try {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditCustomer" ACTION="updatecustomer.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="CustomerId" VALUE="<%=CustomerId%>">
+<INPUT TYPE="HIDDEN" NAME="CustomerId" VALUE="<%=Query.CustomerId%>">
 <INPUT TYPE="HIDDEN" NAME="AreaId" ID="AreaId" VALUE="<%=Customer.AreaId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Customer.LocalityId%>">
 <INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=Customer.StreetId%>">

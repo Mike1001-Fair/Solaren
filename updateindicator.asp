@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 1 && User.RoleId <= 2,
-Indicator = Solaren.Map(Request.Form);
+Form = Solaren.Parse();
 User.ValidateAccess(Authorized, "POST");
 
 try {
@@ -12,14 +12,14 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
-			Append(CreateParameter("IndicatorId", adInteger, adParamInput,10, Indicator.IndicatorId));
-			Append(CreateParameter("ReportDate", adVarChar, adParamInput, 10, Indicator.ReportDate));
-			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, Indicator.MeterId));
-			Append(CreateParameter("RecVal", adInteger, adParamInput, 10, Indicator.RecVal));
-			Append(CreateParameter("RetVal", adInteger, adParamInput, 10, Indicator.RetVal));
-			Append(CreateParameter("PrevDate", adVarChar, adParamInput, 10, Indicator.PrevDate));
-			Append(CreateParameter("RecSaldo", adInteger, adParamInput, 10, Indicator.RecSaldo));
-			Append(CreateParameter("RetSaldo", adInteger, adParamInput, 10, Indicator.RetSaldo));
+			Append(CreateParameter("IndicatorId", adInteger, adParamInput,10, Form.IndicatorId));
+			Append(CreateParameter("ReportDate", adVarChar, adParamInput, 10, Form.ReportDate));
+			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, Form.MeterId));
+			Append(CreateParameter("RecVal", adInteger, adParamInput, 10, Form.RecVal));
+			Append(CreateParameter("RetVal", adInteger, adParamInput, 10, Form.RetVal));
+			Append(CreateParameter("PrevDate", adVarChar, adParamInput, 10, Form.PrevDate));
+			Append(CreateParameter("RecSaldo", adInteger, adParamInput, 10, Form.RecSaldo));
+			Append(CreateParameter("RetSaldo", adInteger, adParamInput, 10, Form.RetSaldo));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} 
 		Execute(adExecuteNoRecords);

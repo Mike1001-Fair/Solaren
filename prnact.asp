@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.Map(Request.Form),
+Form = Solaren.Parse(),
 ReportMonth = String(Form.ReportMonth),
 DoubleAct = Form.DoubleAct == "on";
 

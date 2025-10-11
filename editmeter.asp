@@ -7,14 +7,14 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
-MeterId = Request.QueryString("MeterId");
+Query = Solaren.Parse();
 User.ValidateAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetMeter");
 	with (Cmd) {
 		with (Parameters) {
-    			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, MeterId))
+    			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, Query.MeterId))
 		}
 	} 
 	var rs = Solaren.Execute("GetMeter");
@@ -30,7 +30,7 @@ try {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditMeter" ACTION="updatemeter.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="ContractId" ID="ContractId" VALUE="<%=Meter.ContractId%>">
-<INPUT TYPE="HIDDEN" NAME="MeterId" VALUE="<%=MeterId%>">
+<INPUT TYPE="HIDDEN" NAME="MeterId" VALUE="<%=Query.MeterId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Meter.Deleted%>">
 
 <H3 CLASS="HeadText">
