@@ -3,24 +3,23 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
+<!-- #INCLUDE FILE="Include/user.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+User.ValidateAccess(Authorized, "GET");
 try {
 	Solaren.SetCmd("GetAreaSortCode");
 	with (Cmd) {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
-		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+		}
+		Execute(adExecuteNoRecords);
+	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-var SortCode =++ Cmd.Parameters.Item("SortCode").value;
-with (Html) {
-	SetHead("Новий район");
-	WriteScript();
-	Menu.Write(Session("RoleId"), 0);
+} finally {
+	var SortCode = ++Cmd.Parameters.Item("SortCode").value;
+	Solaren.Close();
+	Html.SetPage("Новий район")
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewArea" ACTION="createarea.asp" METHOD="post" AUTOCOMPLETE="off">
