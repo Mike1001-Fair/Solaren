@@ -30,7 +30,8 @@ var Config = {
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
 			ResponseText.push(tr);
-		} rs.Close();
+		}
+		rs.Close();
 		ResponseText.push('</TABLE></FIELDSET></DIV>');
 		Response.Write(ResponseText.join("\n"))
 	}
