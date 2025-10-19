@@ -23,7 +23,7 @@ try {
 		CharSet  = Form.ReportCharSet;
 		CodePage = Form.ReportCodePage;
 		ContentType = "text/csv";
-		AddHeader("Content-Disposition", "inline;filename=1cagent.tsv");
+		AddHeader("Content-Disposition", "attachment;filename=1cagent.tsv");
 		Write(rs.GetString());
 		Flush();
 	}
