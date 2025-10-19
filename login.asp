@@ -9,8 +9,8 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <% var Form = Solaren.Parse(),
-validCreds = User.ValidateCredentials(Form);
-User.ValidateAccess(validCreds, "POST");
+isCreds = User.ValidateCredentials(Form);
+User.ValidateAccess(isCreds, "POST");
 
 try {
 	Solaren.SetCmd("Login");
