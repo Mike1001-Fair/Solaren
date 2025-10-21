@@ -18,13 +18,12 @@ try {
 	Message.Write(3, Message.Error(ex));
 } finally {
 	with (Response) {
-		Buffer = true;
+		//Buffer = true;
 		CharSet  = Form.ReportCharSet;
 		CodePage = Form.ReportCodePage;
 		ContentType = "text/csv";
-		AddHeader("Content-Disposition", "attachment;filename=1cagent.tsv");
+		AddHeader("Content-Disposition", "attachment;filename=1caccrual.tsv");
 		Write(rs.GetString());
-		Flush();
 	}
 	rs.Close();
 	Solaren.Close();

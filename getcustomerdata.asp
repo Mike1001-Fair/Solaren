@@ -8,7 +8,7 @@
 var Authorized = User.RoleId == 1,
 Query = Solaren.Parse();
 
-if (Authorized) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	try {
 		Solaren.SetCmd("GetCustomerData");
 		with (Cmd) {

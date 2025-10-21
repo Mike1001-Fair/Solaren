@@ -8,7 +8,7 @@
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 LocalityId = Request.QueryString("LocalityId");
 
-if (Authorized) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	try {
 		Solaren.SetCmd("GetLocalityInfo");
 		with (Cmd) {

@@ -8,7 +8,7 @@
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Query = Solaren.Parse();
 
-if (Authorized) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	try {
 		Solaren.SetCmd("GetStreetInfo");
 		with (Cmd) {

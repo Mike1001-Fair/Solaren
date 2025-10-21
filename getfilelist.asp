@@ -7,7 +7,7 @@
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 FolderName = Request.QueryString("FolderName");
 
-if (Authorized) {
+if (User.ValidateAccess(Authorized, "GET")) {
 	try {
 		var result = ['{"files":'],
 		FolderPath = Server.MapPath(FolderName);
