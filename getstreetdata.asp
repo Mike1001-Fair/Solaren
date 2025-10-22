@@ -6,9 +6,10 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <%
 var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Query = Solaren.Parse();
+Query = Solaren.Parse(),
+ValidRequest = User.ValidateAccess(Authorized, "GET");
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (ValidRequest) {
 	try {
 		Solaren.SetCmd("GetStreetData");
 		with (Cmd) {

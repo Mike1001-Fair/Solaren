@@ -2,14 +2,13 @@
 	with (NewCustomer) {
 		if (CodeType.checked) {
 			CustomerCode.style.color = CustomerCode.value.replace(/\s/g,"").length > 7 ? "#000000" : "#FF0000";
-		} else CustomerCode.style.color = isPersonTaxCode(CustomerCode.value) ? "#000000" : "#FF0000";
+		} else {
+			CustomerCode.style.color = isPersonTaxCode(CustomerCode.value) ? "#000000" : "#FF0000";
+		}
 
-		SbmBtn.disabled = !LastName.validity.valid || !FirstName.validity.valid
-		|| !ThirdName.validity.valid || (!CodeType.checked && !isPersonTaxCode(CustomerCode.value)) 
-		|| AreaId.value == -1 || LocalityId.value == -1 || StreetId.value == -1
-		|| !AreaName.validity.valid || !LocalityName.validity.valid || StreetName.validity.valid
-		|| !(CustomerCode.value.replace(/\s/g,"").length > 7) || !Phone.validity.valid || !HouseId.validity.valid;
-		//console.log(`AreaId = ${AreaId.value}`);
+		SbmBtn.disabled = !(LastName.validity.valid && FirstName.validity.valid && ThirdName.validity.valid
+				&& (CodeType.checked ? CustomerCode.value.replace(/\s/g,"").length > 7 : isPersonTaxCode(CustomerCode.value)) 
+				&& Phone.validity.valid && AreaId.value != -1 && LocalityId.value != -1 && StreetId.value != -1 && HouseId.validity.valid);
 	}
 
 });

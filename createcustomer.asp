@@ -1,37 +1,29 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE FILE="Include/solaren.inc" -->
 <!-- #INCLUDE FILE="Include/message.inc" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-	var CustomerCode = Form("CustomerCode"),
-	Phone            = Form("Phone"),
-	LastName         = Form("LastName"),
-	FirstName        = Form("FirstName"),
-	ThirdName        = Form("ThirdName"),
-	HouseId          = Form("HouseId"),
-	StreetId         = Form("StreetId"),
-	LocalityId       = Form("LocalityId"),
-	AreaId           = Form("AreaId");
-}
+<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE FILE="Include/resource.inc" -->
+<% var Authorized = Session("RoleId") == 1,
+Form = Solaren.Parse();
+User.ValidateAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("NewCustomer");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("CustomerCode", adVarChar, adParamInput, 10, CustomerCode));
-			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Phone));
-			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, LastName));
-			Append(CreateParameter("FirstName", adVarChar, adParamInput, 20, FirstName));
-			Append(CreateParameter("ThirdName", adVarChar, adParamInput, 20, ThirdName));
-			Append(CreateParameter("HouseId", adVarChar, adParamInput, 20, HouseId));
-			Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, StreetId));
-			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, LocalityId));
-			Append(CreateParameter("AreaId", adVarChar, adParamInput, 10, AreaId));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
+			Append(CreateParameter("CustomerCode", adVarChar, adParamInput, 10, Form.CustomerCode));
+			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Form.Phone));
+			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, Form.LastName));
+			Append(CreateParameter("FirstName", adVarChar, adParamInput, 20, Form.FirstName));
+			Append(CreateParameter("ThirdName", adVarChar, adParamInput, 20, Form.ThirdName));
+			Append(CreateParameter("HouseId", adVarChar, adParamInput, 20, Form.HouseId));
+			Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, Form.StreetId));
+			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Form.LocalityId));
+			Append(CreateParameter("AreaId", adVarChar, adParamInput, 10, Form.AreaId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").value;
 	}
 } catch (ex) {
