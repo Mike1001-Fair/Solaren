@@ -15,7 +15,7 @@ Html.SetPage("Друк акту")%>
 <H3 CLASS="HeadText"><IMG CLASS="H3Img" SRC="Images/printer.svg"><%=Html.Title%></H3>
 
 <TABLE CLASS="MarkupTable">
-       	<TR><TD ALIGN="CENTER">
+	<TR><TD ALIGN="CENTER">
 	<% Html.WriteSearchSet("Договір", "Contract", "", 1) %>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<TABLE>

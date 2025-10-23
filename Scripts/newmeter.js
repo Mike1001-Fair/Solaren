@@ -1,9 +1,10 @@
 ﻿NewMeter.addEventListener('input', () => {
 	with (NewMeter) {
-		const limit = Math.pow(10, Capacity.value) - 1;
+		const limit = Math.pow(10, Capacity.value) - 1,
+		valid = MeterCode.validity.valid && SetDate.validity.valid && RecVal.validity.valid && RetVal.validity.valid && ContractId.value == -1
 		RecVal.max = limit;
 		RetVal.max = limit;
-		SbmBtn.disabled = !MeterCode.validity.valid || !SetDate.validity.valid || !RecVal.validity.valid || !RetVal.validity.valid || ContractId.value == -1;
+		SbmBtn.disabled = !valid;
 	}
 });
 
@@ -12,7 +13,9 @@ SbmBtn.addEventListener('click', (event) => {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 
