@@ -17,7 +17,9 @@ SbmBtn.addEventListener('click', () => {
 	if (confirm("Ви впевненi\u2753")) {
 		const Elements = document.querySelectorAll("input[type='text']");
 		Elements.forEach(elm => elm.value = elm.value.trim());
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 });
 
 AreaName.addEventListener('input', function() {

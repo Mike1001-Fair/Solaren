@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else {
 			ChkForm();
 		}
-		CodeType.checked = CustomerCode.value.length == 8;
+		CodeType.checked = CustomerCode.value.length > 7;
 		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
 	}
 	Ajax.GetStreetInfo(EditCustomer.StreetId.value);
