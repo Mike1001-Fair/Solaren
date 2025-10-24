@@ -78,6 +78,7 @@ Solaren = {
 
 	Write: function(info) {
 		Response.Charset = "utf-8";
+		Response.ContentType = "text/html";
 		Response.Write(info);
 	},
 
