@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Обсяги")
 }%>
 

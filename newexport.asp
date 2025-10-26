@@ -11,7 +11,7 @@
 Items = ["Контрагенти", "Нарахування", "До сплати"],
 OperMonth = Month.GetMonth(1);
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Eкспорт")
 }%>
 <BODY CLASS="MainBody">

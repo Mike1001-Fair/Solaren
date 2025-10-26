@@ -4,16 +4,16 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/json.inc" -->
-<%
-var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-LocalityId = Request.QueryString("LocalityId");
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Query = Solaren.Parse(),
+ValidRequest = User.CheckAccess(Authorized, "GET");
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (ValidRequest) {
 	try {
 		Solaren.SetCmd("GetLocalityInfo");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("LocalityId", adVarChar, adParamInput, 10, LocalityId));
+				Append(CreateParameter("LocalityId", adVarChar, adParamInput, 10, Query.LocalityId));
 				Append(CreateParameter("LocalityInfo", adVarChar, adParamOutput, 100, ""));
 			}
 			Execute(adExecuteNoRecords);

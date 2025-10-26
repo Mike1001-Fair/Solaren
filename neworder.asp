@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Нове замовлення")
 }%>
 <BODY CLASS="MainBody">

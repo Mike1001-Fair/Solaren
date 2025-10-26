@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 TitleName = Request.Form("TitleName");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListChiefTitle");

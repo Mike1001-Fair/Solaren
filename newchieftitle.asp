@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Нова посада")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewChiefTitle" ACTION="createchieftitle.asp" METHOD="post" AUTOCOMPLETE="off">

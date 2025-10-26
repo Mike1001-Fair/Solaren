@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 ReportDate = String(Request.Form("ReportDate"));
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListContractCount");

@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2,
 Title = "Звiт про показники";
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage(Title)%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicatorRep" ACTION="prnindicatorrep.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">

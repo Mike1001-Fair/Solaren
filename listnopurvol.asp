@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("ListNoPurVol");

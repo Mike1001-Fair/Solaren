@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 try {
 	Solaren.SetCmd("GetAreaSortCode");
 	with (Cmd) {

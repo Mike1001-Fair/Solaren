@@ -4,11 +4,11 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/json.inc" -->
-<%
-var Authorized = User.RoleId == 1,
-Query = Solaren.Parse();
+<% var Authorized = User.RoleId == 1,
+Query = Solaren.Parse(),
+ValidRequest = User.HasAccess(Authorized, "GET");
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (ValidRequest) {
 	try {
 		Solaren.SetCmd("GetCustomerData");
 		with (Cmd) {

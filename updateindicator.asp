@@ -5,7 +5,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 1 && User.RoleId <= 2,
 Form = Solaren.Parse();
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("UpdateIndicator");

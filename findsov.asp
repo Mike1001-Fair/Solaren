@@ -10,7 +10,7 @@
 OperMonth = Month.GetMonth(1),
 MinMonth  = Month.GetMonth(0);
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Сальдо-оборотна вiдомость")
 }%>
 <BODY CLASS="MainBody">

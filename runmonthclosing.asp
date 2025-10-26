@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 function SetSessionDate(OperDate) {
 	var ymd  = OperDate.split("-"),

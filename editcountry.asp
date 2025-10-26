@@ -8,7 +8,7 @@
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 CountryId = Request.Form("CountryId");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetCountry");

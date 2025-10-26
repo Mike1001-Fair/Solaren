@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Iсторiя розрахункiв")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindHistory" ACTION="listhistory.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">

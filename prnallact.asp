@@ -12,7 +12,7 @@
 Form = Solaren.Map(Request.Form);
 Form.ReportMonth = String(Form.ReportMonth);
 Form.DoubleAct = Form.DoubleAct == "on";
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetInfoAct");

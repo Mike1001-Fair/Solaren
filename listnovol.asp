@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("ListNoVol");

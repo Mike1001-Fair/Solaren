@@ -80,13 +80,17 @@ var User = {
 		return valid ? Pswd : ""
 	},
 
-	ValidateAccess: function(Authorized, method) {
-		var	valid = Authorized && Solaren.Method == method && Solaren.Match(Application("AppName"));
+	HasAccess: function(Authorized, method) {
+		return Authorized && Solaren.Method == method && Solaren.Match(Application("AppName"));
+	},
+
+	CheckAccess: function(Authorized, method) {
+		var valid = this.HasAccess(Authorized, method);
 		if (!valid) {
 			Resource.Load(User.ResourceFile());
 			Message.Write(2, Dictionary.Item("AuthorizationError"));
 		}
-		return valid
+		return valid;
 	},
 
 	WriteRole: function(tagName, RoleId) {

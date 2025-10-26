@@ -12,7 +12,7 @@ Form = Solaren.Parse(),
 ReportMonth = String(Form.ReportMonth),
 DoubleAct = Form.DoubleAct == "on";
 
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetAct");

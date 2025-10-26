@@ -8,7 +8,7 @@
 
 <% var Authorized = User.RoleId == 0,
 Form = Solaren.Parse();
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListUsers");

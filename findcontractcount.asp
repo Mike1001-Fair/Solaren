@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET")
+User.CheckAccess(Authorized, "GET")
 Html.SetPage("Кiлькiсть договорiв")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindContractCount" ACTION="listcontractcount.asp" METHOD="post" TARGET="_blank">

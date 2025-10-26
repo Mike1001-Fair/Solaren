@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 ChiefTitleId = Request.QueryString("ChiefTitleId");
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetChiefTitle");

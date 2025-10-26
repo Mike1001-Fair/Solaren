@@ -9,7 +9,7 @@
 
 <% var Authorized = User.RoleId == 1,
 VzId = Request.QueryString("VzId");
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetVz");

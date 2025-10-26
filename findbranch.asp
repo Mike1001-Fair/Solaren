@@ -6,9 +6,9 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Пошук ЦОС")
 }%>
 <BODY CLASS="MainBody" >

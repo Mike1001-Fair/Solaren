@@ -11,7 +11,7 @@
 <% var Authorized = User.RoleId == 1,
 Form = Solaren.Parse();
 
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListContract");

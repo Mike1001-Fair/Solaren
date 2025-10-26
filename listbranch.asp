@@ -8,7 +8,7 @@
 
 <% var Authorized = User.RoleId < 2,
 BranchName = Request.Form("BranchName");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListBranch");

@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Новий споживач")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewCustomer" ACTION="createcustomer.asp" METHOD="post" AUTOCOMPLETE="off">

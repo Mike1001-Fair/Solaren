@@ -9,7 +9,7 @@
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1);
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Консолiдацiя")
 }%>
 <BODY CLASS="MainBody">

@@ -8,7 +8,7 @@
 
 <% var Authorized = User.RoleId < 2,
 CompanyName = Request.Form("CompanyName");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListCompany");

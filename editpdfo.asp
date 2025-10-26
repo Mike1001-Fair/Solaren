@@ -9,7 +9,7 @@
 
 <% var Authorized = User.RoleId == 1,
 PdfoId = Request.QueryString("PdfoId");
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetPdfo");

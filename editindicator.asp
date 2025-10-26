@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Query = Solaren.Parse();
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetIndicator");

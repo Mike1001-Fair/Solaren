@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Друк договору")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="PrintContract" TARGET="_blank" ACTION="prncontract.asp" METHOD="post" AUTOCOMPLETE="off">

@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/tarif.inc" -->
 <% var Authorized = User.RoleId == 1;
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Тариф")
 }%>
 <BODY CLASS="MainBody">

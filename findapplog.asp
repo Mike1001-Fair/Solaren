@@ -12,10 +12,9 @@ Event = {
 	Write: function() {
 		var ResponseText = ['<FIELDSET><LEGEND>Подія</LEGEND>',
 			'<SELECT NAME="EventType">'
-		],
-		option;
+		];
 		for (var i = 0; i < this.Name.length; i++) {
-			option = ['<OPTION VALUE="', i, '">', this.Name[i], '</OPTION>'];
+			var option = ['<OPTION VALUE="', i, '">', this.Name[i], '</OPTION>'];
 			ResponseText.push(option.join(""));
 		}
 		ResponseText.push('</SELECT></FIELDSET>');
@@ -23,7 +22,7 @@ Event = {
 	}
 };
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Події")
 }%>
 <BODY CLASS="MainBody">

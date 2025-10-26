@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 StreetId = Request.Form("StreetId");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetStreet");

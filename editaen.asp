@@ -8,7 +8,7 @@
 
 <% var Authorized = User.RoleId == 1,
 AenId = Request.QueryString("AenId");
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetAen");

@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 OperatorName = Request.Form("OperatorName");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListOperator");

@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 Form = Solaren.Parse();
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("List1Caccrual");

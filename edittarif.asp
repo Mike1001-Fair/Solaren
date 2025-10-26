@@ -10,7 +10,7 @@
 <!-- #INCLUDE FILE="Include/tarif.inc" -->
 <% var Authorized = User.RoleId == 1,
 TarifId = Request.QueryString("TarifId");
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetTarif");

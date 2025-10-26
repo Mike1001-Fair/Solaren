@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 0;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Користувачi")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindUser" ACTION="listusers.asp" METHOD="post" AUTOCOMPLETE="off">

@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Показники")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicator" ID="FindIndicator" ACTION="listindicator.asp" METHOD="post" AUTOCOMPLETE="off">

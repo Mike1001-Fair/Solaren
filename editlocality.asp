@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/locality.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 LocalityId = Request.Form("LocalityId");
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetLocality");

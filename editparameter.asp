@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/config.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetParameter");

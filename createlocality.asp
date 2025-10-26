@@ -6,7 +6,7 @@
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Form = Solaren.Parse();
 
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 try {
 	Solaren.SetCmd("NewLocality");
 	with (Cmd) {

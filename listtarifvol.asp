@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/tarif.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 with (Request) {
 	BegMonth = String(Form("BegMonth")),

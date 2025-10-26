@@ -8,7 +8,7 @@
 
 <% var Authorized = User.RoleId == 1,
 PerformerId = Request.QueryString("PerformerId");
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetPerformer");

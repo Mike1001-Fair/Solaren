@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Вартicть по ЦОС")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindVolRem" ACTION="listvolrem.asp" METHOD="post" TARGET="_blank">

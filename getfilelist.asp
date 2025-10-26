@@ -4,10 +4,11 @@
 <!-- #INCLUDE FILE="Include/json.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-FolderName = Request.QueryString("FolderName");
+<% var Authorized = User.RoleId == 1,
+Query = Solaren.Parse(),
+ValidRequest = User.HasAccess(Authorized, "GET");
 
-if (User.ValidateAccess(Authorized, "GET")) {
+if (ValidRequest) {
 	try {
 		var result = ['{"files":'],
 		FolderPath = Server.MapPath(FolderName);

@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 
 <% var Authorized = User.RoleId == 1;
-User.ValidateAccess(Authorized, "POST");
+User.CheckAccess(Authorized, "POST");
 
 with (Request) {
     var ContractId = Form("ContractId"),

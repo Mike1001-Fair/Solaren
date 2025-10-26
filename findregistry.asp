@@ -9,7 +9,7 @@
 
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1);
-User.ValidateAccess(Authorized, "GET")
+User.CheckAccess(Authorized, "GET")
 
 try {
 	Solaren.SetCmd("SelectChief");

@@ -8,7 +8,7 @@
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 BranchId = Request.QueryString("BranchId");
 
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("SelectChiefBranch");

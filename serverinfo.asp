@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/session.inc" -->
 <!-- #INCLUDE FILE="Include/serverinfo.inc" -->
 <% var Authorized = User.RoleId == 0;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetHead("Сервер", 1);
 Menu.Write(0);
 ServerInfo.AddObjInfo(SessionInfo);

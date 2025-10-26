@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 2;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Друк акту")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindAct" ACTION="prnact.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">

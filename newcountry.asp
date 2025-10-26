@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
-if (User.ValidateAccess(Authorized, "GET")) {
+if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Нова країна")
 }%>
 <BODY CLASS="MainBody">

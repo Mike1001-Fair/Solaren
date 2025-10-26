@@ -7,7 +7,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3;
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Вартicть по споживачу")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindVolCost" ACTION="listvolcost.asp" METHOD="post" TARGET="_blank" AUTOCOMPLETE="off">

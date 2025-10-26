@@ -9,7 +9,7 @@
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1);
 
-User.ValidateAccess(Authorized, "GET");
+User.CheckAccess(Authorized, "GET");
 Html.SetPage("Закриття мicяця")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="NewMonth" ACTION="runmonthclosing.asp" METHOD="post">
