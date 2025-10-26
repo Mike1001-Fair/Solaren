@@ -57,7 +57,6 @@ var User = {
 			Solaren.DelParameters();
 			Solaren.Close();
 		}
-		//}
 		//Solaren.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return Done || 0;
 	},
