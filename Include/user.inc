@@ -36,32 +36,41 @@ var User = {
 	},
 
 	Authorize: function(RoleId) {
-		var validParams = this.ValidateRole(RoleId) && this.GuidRe.test(this.GUID);
-		if (validParams) {
-			try {
-				Solaren.SetCmd("UserAuthorize");
-				with (Cmd) {
-					with (Parameters) {
-						Append(CreateParameter("SessionId", adInteger, adParamInput, 10, Session.SessionID));
-						Append(CreateParameter("UserId", adInteger, adParamInput, 10, this.Id));
-						Append(CreateParameter("RoleId", adTinyInt, adParamInput, 10, RoleId));
-						Append(CreateParameter("UserIp", adVarChar, adParamInput, 15, this.Ip));
-						Append(CreateParameter("UserGUID", adGUID, adParamInput, 40, this.GUID));
-						Append(CreateParameter("Token", adChar, adParamInput, 32, this.Token));
-						Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-					}
-					Execute(adExecuteNoRecords);
-					var Done = Parameters.Item("Done").value; 
+		try {
+			Solaren.SetCmd("UserAuthorize");
+			with (Cmd) {
+				with (Parameters) {
+					Append(CreateParameter("SessionId", adInteger, adParamInput, 10, Session.SessionID));
+					Append(CreateParameter("UserId", adInteger, adParamInput, 10, this.Id));
+					Append(CreateParameter("RoleId", adTinyInt, adParamInput, 10, RoleId));
+					Append(CreateParameter("UserIp", adVarChar, adParamInput, 15, this.Ip));
+					Append(CreateParameter("UserGUID", adGUID, adParamInput, 40, this.GUID));
+					Append(CreateParameter("Token", adChar, adParamInput, 32, this.Token));
+					Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 				}
-			} catch (ex) {
-				Message.Write(3, Message.Error(ex))
-			} finally {
-				Solaren.DelParameters();
-				Solaren.Close();
+				Execute(adExecuteNoRecords);
+				var Done = Parameters.Item("Done").value; 
 			}
+		} catch (ex) {
+			Message.Write(3, Message.Error(ex))
+		} finally {
+			Solaren.DelParameters();
+			Solaren.Close();
 		}
+		//}
 		//Solaren.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return Done || 0;
+	},
+
+	CheckAuthorize: function(RoleId) {
+		var validParams = this.ValidateRole(RoleId) && this.GuidRe.test(this.GUID);
+		if (validParams) {
+			if (!this.Authorize(RoleId)) {
+				Message.Write(2, Dictionary.Item("AuthorizationError"))
+			}
+		} else {
+			Message.Write(2, Dictionary.Item("AuthenticationError"));
+		}
 	},
 
 	GetPswd: function() {

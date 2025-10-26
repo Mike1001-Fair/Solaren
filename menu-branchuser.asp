@@ -4,9 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-if (!User.Authorize(2)) {
-	Message.Write(2, Dictionary.Item("AuthorizationError"))
-}%>
+User.CheckAuthorize(2) %>
 <NAV class="nav">
 	<UL class="topmenu">
 		<LI><A href="#" ID="LogOut">&#x23F9;<%=Dictionary.Item("Logout")%></A></LI>
