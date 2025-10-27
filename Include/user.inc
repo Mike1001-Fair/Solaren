@@ -2,7 +2,7 @@
 var User = {
 	Role   : ["Адмiнiстратор", "Виконавець", "Технік ЦОС"],
 	LoginRe: /^(?=.*[a-z])(?=.*[A-Z]).{8,10}$/,
-	PswdRe : /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}$/,
+	PswdRe: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}$/,
 	PswdLen: 10,
 	GuidRe : /^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$/,
 	Ip     : Request.ServerVariables("REMOTE_ADDR") || "",
@@ -36,6 +36,7 @@ var User = {
 	},
 
 	Authorize: function(RoleId) {
+		var Done = 0;
 		try {
 			Solaren.SetCmd("UserAuthorize");
 			with (Cmd) {
@@ -49,7 +50,7 @@ var User = {
 					Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 				}
 				Execute(adExecuteNoRecords);
-				var Done = Parameters.Item("Done").value; 
+				Done = Parameters.Item("Done").Value; 
 			}
 		} catch (ex) {
 			Message.Write(3, Message.Error(ex))
@@ -58,7 +59,7 @@ var User = {
 			Solaren.Close();
 		}
 		//Solaren.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
-		return Done || 0;
+		return Done;
 	},
 
 	CheckAuthorize: function(RoleId) {
@@ -68,7 +69,7 @@ var User = {
 				Message.Write(2, Dictionary.Item("AuthorizationError"))
 			}
 		} else {
-			Message.Write(2, Dictionary.Item("AuthenticationError"));
+			Message.Write(2, Dictionary.Item("AuthenticationError"))
 		}
 	},
 
