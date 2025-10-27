@@ -29,8 +29,7 @@ try {
 } finally {
 	var Record = Solaren.Map(rs.Fields),
 	Period = Month.GetPeriod(ReportMonth, 1),
-	ActDate = Month.GetLastDay(ReportMonth),
-	ResponseText = ['<BODY CLASS="ActContainer">'];
+	ActDate = Month.GetLastDay(ReportMonth);
 	Record.ContractDate = Month.GetYMD(Record.ContractDate);
 	Record.CustomerName = Record.CustomerName.replace(/ /g,"&nbsp");
 	Html.SetHead("Акт приймання-передачi");
@@ -38,7 +37,7 @@ try {
 
 var Doc = {
 	Body: [],
-	Divider: '<DIV CLASS="BlockDivider"></DIV>',
+	Divider: '<DIV CLASS="BlockDivider"></DIV>\n',
 
 	Render: function(DoubleAct) {
 		for (var i = 0; i <= DoubleAct; i++) {
@@ -72,10 +71,11 @@ var Doc = {
 		return Doc.Body.join(Doc.Divider)
 	}
 },
-Output = Doc.Render(DoubleAct);
+Output = ['\n<BODY CLASS="ActContainer">',
+	Doc.Render(DoubleAct),
+	'</BODY></HTML>'
+];
 
 rs.Close();
 Solaren.Close();
-ResponseText.push(Output);
-ResponseText.push('</BODY></HTML>');
-Response.Write(ResponseText.join("\n"))%>
+Response.Write(Output.join("\n"))%>

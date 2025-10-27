@@ -46,7 +46,7 @@ var Doc = {
 	Ref: ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
 	Body: [],
 	Caption: ['Споживач: ' + Report.CustomerName, 'Рахунок: ' + Report.ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
-	Divider: '<DIV CLASS="BlockDivider"></DIV>',
+	Divider: '<DIV CLASS="BlockDivider"></DIV>\n',
 
 	getText: function(totSaldo) {
 		var resultText = ["За результатами знятих показникiв: "],
@@ -75,7 +75,7 @@ var Doc = {
 },
 
 Table = {
-	Body: ['\n<DIV CLASS="ActText">',
+	Body: ['<DIV CLASS="ActText">',
 		'<TABLE CLASS="NoBorderTable">',
 		'<TR><TD></TD><TD CLASS="ReportTitle">' + Doc.Ref.join("") + '</TD></TR>',
 		'</TABLE>',
@@ -151,10 +151,11 @@ Table = {
 	}
 },
 
-Output = Doc.Render(DoubleReport);
+Output = ['\n<BODY CLASS="ActContainer">',
+	Doc.Render(DoubleReport),
+	'</BODY></HTML>'
+];
 
 rs.Close();
 Solaren.Close();
-ResponseText.push(Output);
-ResponseText.push('</BODY></HTML>');
-Response.Write(ResponseText.join(""))%>
+Response.Write(Output.join("\n"))%>
