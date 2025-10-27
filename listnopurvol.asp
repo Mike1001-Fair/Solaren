@@ -43,8 +43,8 @@ if (rs.EOF) {
 			Tag.Write("TD", -1, rs.Fields("ContractPAN")),
 			Tag.Write("TD", -1, rs.Fields("BegDate")),
 			Tag.Write("TD", -1, rs.Fields("EndDate")),
-			Tag.Write("TD", 2, rs.Fields("RecVol").value.toDelimited(0)),
-			Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
+			Tag.Write("TD", 2, rs.Fields("RecVol").Value.toDelimited(0)),
+			Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
 			Tag.Write("TD", -1, rs.Fields("BranchName"))
 		],
 		tr = Tag.Write("TR", -1, td.join(""));

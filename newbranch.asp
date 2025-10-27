@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute();
 	} 
-	var SortCode =++ Cmd.Parameters.Item("SortCode").value;
+	var SortCode =++ Cmd.Parameters.Item("SortCode").Value;
 
 	with (Cmd) {
 		CommandText = "SelectChiefBranch";

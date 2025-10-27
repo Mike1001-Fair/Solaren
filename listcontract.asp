@@ -46,7 +46,7 @@ var Table = {
 				Tag.Write("TD", -1, ContractAddress.join(" ")),
 				Tag.Write("TD", -1, rs.Fields("ContractDate")),
 				Tag.Write("TD", -1, rs.Fields("BranchName")),
-				Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(1))
+				Tag.Write("TD", 2, rs.Fields("ContractPower").Value.toDelimited(1))
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
 			rows.push(tr);

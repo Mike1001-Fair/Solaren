@@ -46,10 +46,10 @@ for (var i=0; !rs.EOF; i++) {
 	ExpDateEnd = Month.GetYMD(rs.Fields("ExpDateEnd")),
 	ExpPeriod = [ExpDateBeg.formatDate("-"), ExpDateEnd.formatDate("-")],
 	row = ['<TR>', Tag.Write("TD", -1, ExpPeriod.join(' &ndash; ')),
-		Tag.Write("TD", 1, Tarif.Group[rs.Fields("GroupId").value]),
-		Tag.Write("TD", 2, rs.Fields("Tarif").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("VolCost").value.toDelimited(2)), '</TR>',
+		Tag.Write("TD", 1, Tarif.Group[rs.Fields("GroupId").Value]),
+		Tag.Write("TD", 2, rs.Fields("Tarif").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("VolCost").Value.toDelimited(2)), '</TR>',
 	];
 	ResponseText.push(row.join(""));
 	totPurVol += rs.Fields("PurVol");

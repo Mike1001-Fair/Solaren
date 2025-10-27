@@ -43,11 +43,11 @@ var ResponseText = '<BODY CLASS="PrnBody">\n' +
 for (var i=0; !rs.EOF; i++) {
 	ResponseText += '<TR><TD>' + rs.Fields("EICode") +
 	Html.Write("TD","RIGHT") + rs.Fields("MeterCode") +
-	Html.Write("TD","RIGHT") + rs.Fields("RecVal").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("RetVal").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("RecVol").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("RetVol").value.toDelimited(0) +
-	Html.Write("TD","RIGHT") + rs.Fields("Saldo").value.toDelimited(0) + '</TD></TR>\n';
+	Html.Write("TD","RIGHT") + rs.Fields("RecVal").Value.toDelimited(0) +
+	Html.Write("TD","RIGHT") + rs.Fields("RetVal").Value.toDelimited(0) +
+	Html.Write("TD","RIGHT") + rs.Fields("RecVol").Value.toDelimited(0) +
+	Html.Write("TD","RIGHT") + rs.Fields("RetVol").Value.toDelimited(0) +
+	Html.Write("TD","RIGHT") + rs.Fields("Saldo").Value.toDelimited(0) + '</TD></TR>\n';
 	totRecVol += rs.Fields("RecVol");
 	totRetVol += rs.Fields("RetVol");
 	totSaldo += rs.Fields("Saldo");

@@ -18,7 +18,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("StreetInfo").value;
+		Json.data = Cmd.Parameters.Item("StreetInfo").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"StreetId":-2}]')
 	} finally {

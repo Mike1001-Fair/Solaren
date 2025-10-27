@@ -60,38 +60,38 @@ try {
 		} Execute(adExecuteNoRecords);
 
 		with (Parameters) {
-			var CompanyCode = Item("CompanyCode").value,
-			CompanyName     = Item("CompanyName").value,
-			CustomerCode    = Item("CustomerCode").value,
-			CustomerName    = Item("CustomerName").value,
+			var CompanyCode = Item("CompanyCode").Value,
+			CompanyName     = Item("CompanyName").Value,
+			CustomerCode    = Item("CustomerCode").Value,
+			CustomerName    = Item("CustomerName").Value,
 
-			CardId          = Item("CardId").value,
-			BankId          = Item("BankId").value,
-			BankAccount     = Item("BankAccount").value,
-			EdrpoBank       = Item("EdrpoBank").value,
-			MfoCode         = Item("MfoCode").value,
-			BankName        = Item("BankName").value,
+			CardId          = Item("CardId").Value,
+			BankId          = Item("BankId").Value,
+			BankAccount     = Item("BankAccount").Value,
+			EdrpoBank       = Item("EdrpoBank").Value,
+			MfoCode         = Item("MfoCode").Value,
+			BankName        = Item("BankName").Value,
 
-			ContractPAN     = Item("ContractPAN").value,
-			ContractDate    = Item("ContractDate").value,
-			PurCost         = Item("PurCost").value,
-			Pdfo            = Item("Pdfo").value,
-			Vz              = Item("Vz").value,
+			ContractPAN     = Item("ContractPAN").Value,
+			ContractDate    = Item("ContractDate").Value,
+			PurCost         = Item("PurCost").Value,
+			Pdfo            = Item("Pdfo").Value,
+			Vz              = Item("Vz").Value,
 
-			TreasuryName    = Item("TreasuryName").value,
-			TreasuryCode    = Item("TreasuryCode").value,
-			TreasuryAccount = Item("TreasuryAccount").value,
-			TreasuryMfo     = Item("TreasuryMfo").value,
+			TreasuryName    = Item("TreasuryName").Value,
+			TreasuryCode    = Item("TreasuryCode").Value,
+			TreasuryAccount = Item("TreasuryAccount").Value,
+			TreasuryMfo     = Item("TreasuryMfo").Value,
 
-			TopChiefTitle3  = Item("TopChiefTitle3").value,
-			TopChiefName3   = Item("TopChiefName3").value,
-			ChiefTitle      = Item("ChiefTitle").value,
-			ChiefName       = Item("ChiefName").value,
-			ChiefTitle2     = Item("ChiefTitle2").value,
-			ChiefName2      = Item("ChiefName2").value,
+			TopChiefTitle3  = Item("TopChiefTitle3").Value,
+			TopChiefName3   = Item("TopChiefName3").Value,
+			ChiefTitle      = Item("ChiefTitle").Value,
+			ChiefName       = Item("ChiefName").Value,
+			ChiefTitle2     = Item("ChiefTitle2").Value,
+			ChiefName2      = Item("ChiefName2").Value,
 
-			ContractorName  = Item("ContractorName").value,
-			Phone           = Item("Phone").value;
+			ContractorName  = Item("ContractorName").Value,
+			Phone           = Item("Phone").Value;
 		}
 	}
 } catch (ex) {

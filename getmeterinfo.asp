@@ -19,7 +19,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("MeterInfo").value;
+		Json.data = Cmd.Parameters.Item("MeterInfo").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"MeterId":-2}]')
 	} finally {

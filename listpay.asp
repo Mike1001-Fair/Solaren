@@ -48,14 +48,14 @@ ResponseText = ['<BODY CLASS="MainBody">',
 ];
 
 for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("editpay.asp?PayId=", rs.Fields("PayId"), rs.Fields("PaySum").value.toDelimited(2)),
-	PayDate = Month.GetYMD(rs.Fields("PayDate").value),
+	var url = Html.GetLink("editpay.asp?PayId=", rs.Fields("PayId"), rs.Fields("PaySum").Value.toDelimited(2)),
+	PayDate = Month.GetYMD(rs.Fields("PayDate").Value),
 	td =  [Tag.Write("TD", -1, PayDate.formatDate("-")),
 		Tag.Write("TD", 2, url)
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
-	totalPay += rs.Fields("PaySum").value;
+	totalPay += rs.Fields("PaySum").Value;
 	rs.MoveNext();
 }
 rs.Close();

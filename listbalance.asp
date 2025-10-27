@@ -46,9 +46,9 @@ ResponseText = ['<BODY CLASS="PrnBody">',
 
 for (var i=0; !rs.EOF; i++) {
 	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("AenName")),
-		Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("NeedVol").value.toDelimited(0)), '</TR>'
+		Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("NeedVol").Value.toDelimited(0)), '</TR>'
 	];
 	ResponseText.push(row.join(""));
 	totRetVol += rs.Fields("RetVol");

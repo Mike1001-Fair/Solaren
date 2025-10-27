@@ -44,16 +44,16 @@ try {
 }
 
 for (; !rs.EOF; rs.MoveNext()) {
-	var ContractDate = Month.GetYMD(rs.Fields("ContractDate").value),
+	var ContractDate = Month.GetYMD(rs.Fields("ContractDate").Value),
 	ContractPAN = rs.Fields("ContractPAN"),
-	CustomerName = rs.Fields("CustomerName").value.replace(/ /g,"&nbsp"),
+	CustomerName = rs.Fields("CustomerName").Value.replace(/ /g,"&nbsp"),
 	ChiefName2 = Record.ChiefName2.replace(/ /g,"&nbsp"),
-	Vz      = rs.Fields("Vz").value.toDelimited(2),
-	FactVol	= rs.Fields("FactVol").value.toDelimited(0),
-	VolCost = rs.Fields("VolCost").value.toDelimited(2),
-	Pdfo    = rs.Fields("Pdfo").value.toDelimited(2),
-	ActSum  = rs.Fields("ActSum").value.toDelimited(2),
-	WordSum = Money.toWord(rs.Fields("ActSum").value);
+	Vz      = rs.Fields("Vz").Value.toDelimited(2),
+	FactVol	= rs.Fields("FactVol").Value.toDelimited(0),
+	VolCost = rs.Fields("VolCost").Value.toDelimited(2),
+	Pdfo    = rs.Fields("Pdfo").Value.toDelimited(2),
+	ActSum  = rs.Fields("ActSum").Value.toDelimited(2),
+	WordSum = Money.toWord(rs.Fields("ActSum").Value);
 
 	for (var i = 0; i <= Form.DoubleAct; i++) {
 		if (i == 0) {

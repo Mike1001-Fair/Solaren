@@ -18,7 +18,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("LocalityInfo").value;
+		Json.data = Cmd.Parameters.Item("LocalityInfo").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"LocalityId":-2}]')
 	} finally {

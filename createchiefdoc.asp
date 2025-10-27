@@ -19,7 +19,7 @@ try {
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
 	} Solaren.Close();
-	Cmd.Parameters.Item("Done").value ? Message.Write(1, "") : Message.Write(0, "Документ з таким номером вже є");
+	Cmd.Parameters.Item("Done").Value ? Message.Write(1, "") : Message.Write(0, "Документ з таким номером вже є");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }%>

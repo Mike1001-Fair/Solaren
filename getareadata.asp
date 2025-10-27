@@ -18,7 +18,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("AreaData").value;
+		Json.data = Cmd.Parameters.Item("AreaData").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"AreaId":-2}]')
 	} finally {

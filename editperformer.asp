@@ -22,11 +22,11 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
-		var LastName = Fields("LastName").value,
-		FirstName    = Fields("FirstName").value,
-		MiddleName   = Fields("MiddleName").value,
-		Phone        = Fields("Phone").value,
-		Deleted      = Fields("Deleted").value,
+		var LastName = Fields("LastName").Value,
+		FirstName    = Fields("FirstName").Value,
+		MiddleName   = Fields("MiddleName").Value,
+		Phone        = Fields("Phone").Value,
+		Deleted      = Fields("Deleted").Value,
 		Title        = "Редагування анкети виконавця";
 		Close();
 	}

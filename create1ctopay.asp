@@ -27,19 +27,19 @@ try {
 var Report = {
 	Write: function(rs) {
 		var Period  = Month.GetPeriod(Month.GetMonth(1), 1),
-		CompanyCode = rsCompanyInfo.Fields("CompanyCode").value,	
-		BudgetItem  = "\t" + rsCompanyInfo.Fields("BudgetItem").value + "\t",	
+		CompanyCode = rsCompanyInfo.Fields("CompanyCode").Value,	
+		BudgetItem  = "\t" + rsCompanyInfo.Fields("BudgetItem").Value + "\t",	
 		dmy         = Month.Today.toStr(0).formatDate("-"),
 		fn          = Server.MapPath(Session("FileName"));
 		DataStream.Open(Form.ReportCharSet, 2);
 		for (; !rs.EOF; rs.MoveNext()) {
 			var Block = [],
-			CardText  = rs.Fields("CardId").value.length > 0 ? ". Для поп КР " + rs.Fields("CardId").value + " " : " ",
+			CardText  = rs.Fields("CardId").Value.length > 0 ? ". Для поп КР " + rs.Fields("CardId").Value + " " : " ",
 			BegText   = rs.Fields("CustomerCode") + "\t" + rs.Fields("ContractPAN") + "\t" + dmy + "\t" ,
 			EndText   = "\tкод-11011000" + BudgetItem,
-			PurCost   = rs.Fields("PurCost").value.toFixed(2).replace(/\D/, ","),
-			Pdfo      = rs.Fields("Pdfo").value.toFixed(2).replace(/\D/, ","),
-			Vz        = rs.Fields("Vz").value.toFixed(2).replace(/\D/, ",");
+			PurCost   = rs.Fields("PurCost").Value.toFixed(2).replace(/\D/, ","),
+			Pdfo      = rs.Fields("Pdfo").Value.toFixed(2).replace(/\D/, ","),
+			Vz        = rs.Fields("Vz").Value.toFixed(2).replace(/\D/, ",");
 
 			CardText += rs.Fields("CustomerName") + ", згiдно с.л. вiд " + dmy + ". Без ПДВ.";
 

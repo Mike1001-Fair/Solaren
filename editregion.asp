@@ -22,9 +22,9 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
-		var SortCode = Fields("SortCode").value,
-		RegionName   = Fields("RegionName").value,
-		Deleted      = Fields("Deleted").value,
+		var SortCode = Fields("SortCode").Value,
+		RegionName   = Fields("RegionName").Value,
+		Deleted      = Fields("Deleted").Value,
 		Title        = Deleted ? "Перегляд області" : "Редагування області";
 		Close();
 	}

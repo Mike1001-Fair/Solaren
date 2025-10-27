@@ -23,10 +23,10 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
-		var BegDate = Fields("BegDate").value,
-		EndDate     = Fields("EndDate").value,
-		PdfoTax     = Fields("PdfoTax").value,
-		Deleted     = Fields("Deleted").value,
+		var BegDate = Fields("BegDate").Value,
+		EndDate     = Fields("EndDate").Value,
+		PdfoTax     = Fields("PdfoTax").Value,
+		Deleted     = Fields("Deleted").Value,
 		Title       = Deleted ? "Перегляд ставки пдфо" : "Редагування ставки пдфо";
 		Close();
 	} 

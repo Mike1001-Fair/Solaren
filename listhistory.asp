@@ -43,10 +43,10 @@ totPurVol = totObDt = totObCt = 0;
 
 for (var i=0; !rs.EOF; i++) {
 	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("ReportPeriod")),
-		Tag.Write("TD", 2, rs.Fields("s").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("ob_dt").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("ob_ct").value.toDelimited(2)), '</TR>'
+		Tag.Write("TD", 2, rs.Fields("s").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)), '</TR>'
 	]
 	ResponseText.push(row.join(""));
 	totPurVol += rs.Fields("PurVol");

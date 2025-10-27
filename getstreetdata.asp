@@ -17,7 +17,7 @@ if (ValidRequest) {
 				Append(CreateParameter("StreetData", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);
-			Json.data = Parameters.Item("StreetData").value;
+			Json.data = Parameters.Item("StreetData").Value;
 		}
 	} catch (ex) {
 		Json.error(ex, '[{"StreetId":-2}]')

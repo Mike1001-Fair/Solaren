@@ -35,7 +35,7 @@ function ChkForm() {
 function SetOperatorName() {
 	with (FindOperatorAct) {
 		let selectedOption = OperatorId.options[OperatorId.selectedIndex];
-		OperatorName.value = selectedOption.text;
+		OperatorName.Value = selectedOption.text;
 	}
 }
 </SCRIPT>

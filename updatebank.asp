@@ -23,7 +23,7 @@ try {
 			Append(CreateParameter("BankName", adVarChar, adParamInput, 30, BankName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute();
-		var Done = Parameters.Item("Done").value;
+		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

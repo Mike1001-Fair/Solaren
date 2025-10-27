@@ -18,7 +18,7 @@ try {
 	}
 	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
 	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
-	Cmd.Parameters.Item("UserId").value = Query.UserId;
+	Cmd.Parameters.Item("UserId").Value = Query.UserId;
 	var rsUser = Solaren.Execute("GetUser", "Користувача не знадено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

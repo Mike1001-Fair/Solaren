@@ -19,9 +19,9 @@ try {
 	}
 	var rs = Cmd.Execute();
 	with (rs) {
-		var SortCode = Fields("SortCode").value,
-		AenName      = Fields("AenName").value,
-		Deleted      = Fields("Deleted").value,
+		var SortCode = Fields("SortCode").Value,
+		AenName      = Fields("AenName").Value,
+		Deleted      = Fields("Deleted").Value,
 		Title        = Deleted ? "Перегляд анкети РЕМ" : "Редагування анкети РЕМ";
 		Close();
 	} Solaren.Close();

@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
 	} 
-	var SortCode = Cmd.Parameters.Item("SortCode").value;
+	var SortCode = Cmd.Parameters.Item("SortCode").Value;
 	Solaren.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

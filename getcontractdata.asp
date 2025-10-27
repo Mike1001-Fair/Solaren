@@ -19,7 +19,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("ContractData").value;
+		Json.data = Cmd.Parameters.Item("ContractData").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"ContractId":-2}]')
 	} finally {

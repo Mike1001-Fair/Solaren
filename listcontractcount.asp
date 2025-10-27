@@ -36,8 +36,8 @@ ResponseText = ['<BODY CLASS="PrnBody">',
 
 for (var i=0; !rs.EOF; i++) {
 	var td = [Tag.Write("TD", -1, rs.Fields("BranchName")),
-		Tag.Write("TD", 2, rs.Fields("ContractNumber").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("ContractPower").value.toDelimited(2))
+		Tag.Write("TD", 2, rs.Fields("ContractNumber").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("ContractPower").Value.toDelimited(2))
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);

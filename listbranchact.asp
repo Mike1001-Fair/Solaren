@@ -49,12 +49,12 @@ for (var i = 0; !rs.EOF; i++) {
 		Tag.Write("TD", -1, rs.Fields("EndDate")),
 		Tag.Write("TD", -1, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, rs.Fields("ContractPAN")),
-		Tag.Write("TD", 2, rs.Fields("Tarif").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("Vol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("VolCost").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("Pdfo").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("Vz").value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2))
+		Tag.Write("TD", 2, rs.Fields("Tarif").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("Vol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("VolCost").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("Pdfo").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("Vz").Value.toDelimited(2)),
+		Tag.Write("TD", 2, rs.Fields("PurCost").Value.toDelimited(2))
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);

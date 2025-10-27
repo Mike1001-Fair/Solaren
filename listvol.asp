@@ -46,9 +46,9 @@ for (var i=0; !rs.EOF; i++) {
 	url = Html.GetLink("editfactvol.asp?FactVolId=", rs.Fields("Id"), rs.Fields("BegDate")),
 	row = ['<TR>', Tag.Write("TD", -1, url),
 		Tag.Write("TD", -1, rs.Fields("EndDate")),
-		Tag.Write("TD", 2, rs.Fields("RecVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("RetVol").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("RecVol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 		Tag.Write("TD", 2, nVol.toDelimited(0)), '</TR>'
 	];
 	ResponseText.push(row.join(""));

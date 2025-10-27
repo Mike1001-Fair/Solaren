@@ -23,7 +23,7 @@ try {
 		with (Parameters) {
 			Append(CreateParameter("OperDate", adVarChar, adParamOutput, 10, ""));
 		} Execute();
-		var OperDate = Parameters.Item("OperDate").value,
+		var OperDate = Parameters.Item("OperDate").Value,
 	}
 	Solaren.SetSessionDate(OperDate);
 	Message.Write(1, "");

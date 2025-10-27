@@ -21,7 +21,7 @@ function ChkForm() {
 
 function SbmForm() {
 	with (FindAen) {
-		AenName.value = AenName.value.trim();
+		AenName.Value = AenName.Value.trim();
 	}
 }
 </SCRIPT>

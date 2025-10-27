@@ -18,7 +18,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("CountryData").value;
+		Json.data = Cmd.Parameters.Item("CountryData").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"CountryId":-2}]')
 	} finally {

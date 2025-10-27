@@ -12,7 +12,7 @@ try {
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
 	} Solaren.Close();
-	var SortCode =++ Cmd.Parameters.Item("SortCode").value;
+	var SortCode =++ Cmd.Parameters.Item("SortCode").Value;
 	with (Html) {
 		SetHead("Новий РЕМ");
 		Menu.Write(Session("RoleId"), 0);
@@ -29,7 +29,7 @@ function LoadForm() {
 function SbmForm() {
 	let Confirmed = confirm("Ви впевненi\u2753");
 	if (Confirmed) {
-		NewAen.AenName.value = NewAen.AenName.value.trim();
+		NewAen.AenName.Value = NewAen.AenName.Value.trim();
 	} return Confirmed
 }
 

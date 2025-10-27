@@ -25,8 +25,8 @@ try {
 }
 
 with (rs) {
-    var ContractorName = Fields("ContractorName").value,
-	BudgetItem     = Fields("BudgetItem").value;
+    var ContractorName = Fields("ContractorName").Value,
+	BudgetItem     = Fields("BudgetItem").Value;
 	Close();
 } Solaren.Close();
 

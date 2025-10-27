@@ -22,7 +22,7 @@ try {
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} 
 		Execute(adExecuteNoRecords);
-		var Done = Parameters.Item("Done").value;
+		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

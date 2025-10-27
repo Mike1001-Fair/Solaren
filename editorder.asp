@@ -20,11 +20,11 @@ try {
 	}
 	var rsOrder = Cmd.Execute();
 	with (rsOrder) {
-	    var ContractId   = Fields("ContractId").value,
-		ContractName = Fields("ContractName").value,
-		OrderDate    = Fields("OrderDate").value,
-		JsonData     = Fields("JsonData").value,
-		Deleted      = Fields("Deleted").value;
+	    var ContractId   = Fields("ContractId").Value,
+		ContractName = Fields("ContractName").Value,
+		OrderDate    = Fields("OrderDate").Value,
+		JsonData     = Fields("JsonData").Value,
+		Deleted      = Fields("Deleted").Value;
 		Close();
 	}
 } catch (ex) {

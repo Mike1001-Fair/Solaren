@@ -36,16 +36,16 @@ try {
 	Message.Write(3, Message.Error(ex));
 } finally {
 	with (rsNote) {
-		var CompanyCode = Fields("CompanyCode").value,
-		CompanyName     = Fields("CompanyName").value,
-		TopChiefTitle3  = Fields("TopChiefTitle3").value,
-		TopChiefName3   = Fields("TopChiefName3").value,
-		ChiefTitle      = Fields("ChiefTitle").value,
-		ChiefName       = Fields("ChiefName").value,
-		ChiefTitle2     = Fields("ChiefTitle2").value,
-		ChiefName2      = Fields("ChiefName2").value,
-		ContractorName  = Fields("ContractorName").value,
-		Phone           = Fields("Phone").value;
+		var CompanyCode = Fields("CompanyCode").Value,
+		CompanyName     = Fields("CompanyName").Value,
+		TopChiefTitle3  = Fields("TopChiefTitle3").Value,
+		TopChiefName3   = Fields("TopChiefName3").Value,
+		ChiefTitle      = Fields("ChiefTitle").Value,
+		ChiefName       = Fields("ChiefName").Value,
+		ChiefTitle2     = Fields("ChiefTitle2").Value,
+		ChiefName2      = Fields("ChiefName2").Value,
+		ContractorName  = Fields("ContractorName").Value,
+		Phone           = Fields("Phone").Value;
 		Close();
 	}
 	Html.SetHead("Реєстр");
@@ -69,17 +69,17 @@ for (var n = 1; !rs.EOF; n++) {
 	];
 
 	for (var i = 0; i < CustomerCount && !rs.EOF; i++) {
-		var cardText = rs.Fields("CardId").value.length > 0 ? ". Для поп КР " : ".",
+		var cardText = rs.Fields("CardId").Value.length > 0 ? ". Для поп КР " : ".",
 		customerInfo = [rs.Fields("CustomerName"), rs.Fields("ContractPAN")],
-		details = [rs.Fields("CustomerCode").value.toDelimited(), 'Код МФО: ' + rs.Fields("MfoCode"), rs.Fields("BankAccount"), rs.Fields("BankName")],
+		details = [rs.Fields("CustomerCode").Value.toDelimited(), 'Код МФО: ' + rs.Fields("MfoCode"), rs.Fields("BankAccount"), rs.Fields("BankName")],
 		noteText = ['За вироблену електроенергію в ', Period, cardText, rs.Fields("CardId")],
 		row = ['<TR>', Tag.Write("TD", -1,  customerInfo.join('<BR>')),
 			Tag.Write("TD", -1, 'ІПН: ' + details.join('<BR>')),
 			Tag.Write("TD", -1, noteText.join('')),
-			Tag.Write("TD", 2, rs.Fields("PurCost").value.toDelimited(2)), '</TR>'
+			Tag.Write("TD", 2, rs.Fields("PurCost").Value.toDelimited(2)), '</TR>'
 		];
 		block.push(row.join(""));
-		totPurCost += rs.Fields("PurCost").value;
+		totPurCost += rs.Fields("PurCost").Value;
 		rs.MoveNext();		
 	}
 

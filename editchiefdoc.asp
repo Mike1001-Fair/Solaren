@@ -21,9 +21,9 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
-		var SortCode = Fields("SortCode").value,
-		DocName      = Fields("DocName").value,
-		Deleted      = Fields("Deleted").value,
+		var SortCode = Fields("SortCode").Value,
+		DocName      = Fields("DocName").Value,
+		Deleted      = Fields("Deleted").Value,
 		Title        = Deleted ? "Перегляд документу" : "Редагування документу";
 		Close();
 	} Solaren.Close();

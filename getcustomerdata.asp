@@ -18,7 +18,7 @@ if (ValidRequest) {
 			}
 			Execute(adExecuteNoRecords);
 		}
-		Json.data = Cmd.Parameters.Item("CustomerData").value;
+		Json.data = Cmd.Parameters.Item("CustomerData").Value;
 	} catch (ex) {
 		Json.error(ex, '[{"CustomerId":-2}]')
 	} finally {

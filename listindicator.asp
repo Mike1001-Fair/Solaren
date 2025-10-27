@@ -47,8 +47,8 @@ for (var i=0; !rs.EOF; i++) {
 	var url = Html.GetLink("editindicator.asp?IndicatorId=", rs.Fields("Id"), rs.Fields("ReportDate")),
 	td = [Tag.Write("TD", -1, rs.Fields("MeterCode")),
 		Tag.Write("TD", -1, url),
-		Tag.Write("TD", 2, rs.Fields("RecVal").value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("RetVal").value.toDelimited(0))		
+		Tag.Write("TD", 2, rs.Fields("RecVal").Value.toDelimited(0)),
+		Tag.Write("TD", 2, rs.Fields("RetVal").Value.toDelimited(0))		
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);

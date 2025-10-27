@@ -45,7 +45,7 @@ for (var i=0; !rs.EOF; i++) {
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
 	ResponseText.push(tr);
-	totalQuantity += rs.Fields("Quantity").value;
+	totalQuantity += rs.Fields("Quantity").Value;
 	rs.MoveNext();
 }
 rs.Close();

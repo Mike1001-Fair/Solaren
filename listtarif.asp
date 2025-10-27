@@ -30,11 +30,11 @@ var Table = {
 	Header: ['з', 'по', 'коп'],
 	GetRows: function(rs) {
 		for (var rows = []; !rs.EOF;) {
-			var url = Html.GetLink("edittarif.asp?TarifId=", rs.Fields("Id"), rs.Fields("Tarif").value.toDelimited(2)),
-			BegDate = Month.GetYMD(rs.Fields("BegDate").value),
-			EndDate = Month.GetYMD(rs.Fields("EndDate").value),
-			ExpDateBeg = Month.GetYMD(rs.Fields("ExpDateBeg").value),
-			ExpDateEnd = Month.GetYMD(rs.Fields("ExpDateEnd").value),
+			var url = Html.GetLink("edittarif.asp?TarifId=", rs.Fields("Id"), rs.Fields("Tarif").Value.toDelimited(2)),
+			BegDate = Month.GetYMD(rs.Fields("BegDate").Value),
+			EndDate = Month.GetYMD(rs.Fields("EndDate").Value),
+			ExpDateBeg = Month.GetYMD(rs.Fields("ExpDateBeg").Value),
+			ExpDateEnd = Month.GetYMD(rs.Fields("ExpDateEnd").Value),
 			range = Month.GetRange(ExpDateBeg, ExpDateEnd),
 			td = [Tag.Write("TD", -1, BegDate.formatDate("-")),
 				Tag.Write("TD", -1, EndDate.formatDate("-")),

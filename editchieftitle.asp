@@ -19,11 +19,11 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
-		var Title1 = Fields("Title1").value,
-		Title2     = Fields("Title2").value,
-		Title3     = Fields("Title3").value,
-		RankId     = Fields("RankId").value,
-		Deleted    = Fields("Deleted").value,
+		var Title1 = Fields("Title1").Value,
+		Title2     = Fields("Title2").Value,
+		Title3     = Fields("Title3").Value,
+		RankId     = Fields("RankId").Value,
+		Deleted    = Fields("Deleted").Value,
 		Title      = Deleted ? "Перегляд посади" : "Редагування посади";
 		Close();
 	}

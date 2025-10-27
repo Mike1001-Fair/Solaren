@@ -21,10 +21,10 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rsOperator) {
-		var SortCode = Fields("SortCode").value,
-		EdrpoCode    = Fields("EdrpoCode").value,
-		OperatorName = Fields("OperatorName").value,
-		Deleted      = Fields("Deleted").value,
+		var SortCode = Fields("SortCode").Value,
+		EdrpoCode    = Fields("EdrpoCode").Value,
+		OperatorName = Fields("OperatorName").Value,
+		Deleted      = Fields("Deleted").Value,
 		Title        = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}

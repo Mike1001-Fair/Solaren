@@ -24,14 +24,14 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	with (rs) {
-		var ContractId = Fields("ContractId").value,
-		ContractName   = Fields("ContractName").value,
-		BegDate        = Fields("BegDate").value,
-		EndDate        = Fields("EndDate").value,
-		RetVol         = Fields("RetVol").value,
-		VolCost        = Fields("VolCost").value,
-		IndicatorId    = Fields("IndicatorId").value,
-		Deleted        = Fields("Deleted").value;
+		var ContractId = Fields("ContractId").Value,
+		ContractName   = Fields("ContractName").Value,
+		BegDate        = Fields("BegDate").Value,
+		EndDate        = Fields("EndDate").Value,
+		RetVol         = Fields("RetVol").Value,
+		VolCost        = Fields("VolCost").Value,
+		IndicatorId    = Fields("IndicatorId").Value,
+		Deleted        = Fields("Deleted").Value;
 		Close();
 	}
 	Solaren.Close();
