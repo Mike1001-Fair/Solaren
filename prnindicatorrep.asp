@@ -147,7 +147,7 @@ Table = {
 		];
 		Table.Body.push(tr.join("\n"));
 		Table.Body.push(footer.join("\n"));
-        return Table.Body.join("\n");
+		return Table.Body.join("\n");
 	}
 },
 
