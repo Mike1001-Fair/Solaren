@@ -37,14 +37,14 @@ var Config = {
 			},
 
 			Render: function(rs) {
-        		var tr = this.GetRows(rs);
+        		var tr = this.GetRows(rs),
+				footer = '</TABLE></FIELDSET></DIV>';
 				this.Body.push(tr.join("\n"));
+				this.Body.push(footer);
 				return Table.Body.join("\n");
 			}
 		},
-		Output = [Table.Render(rs),
-			'</TABLE></FIELDSET></DIV>'
-		];
-		Response.Write(Output.join("\n"))
+		Output = Table.Render(rs);
+		Response.Write(Output);
 	}
 }%>
