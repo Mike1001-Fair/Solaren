@@ -8,18 +8,18 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1;
-Form = Solaren.Parse();
+Form = Solaren.Parse(),
+BegDate = String(Form.BegDate),
+EndDate = String(Form.EndDate);
 User.CheckAccess(Authorized, "POST");
-Form.BegDate = String(Form.BegDate);
-Form.EndDate = String(Form.EndDate);
 
 try {
 	Solaren.SetCmd("ListPay");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
-			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, Form.BegDate));
-			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, Form.EndDate));
+			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
+			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Form.ContractId));
 		}
 	}
@@ -50,7 +50,7 @@ var Table = {
 	},
 
 	Render: function(rs) {
-		var range = Month.GetRange(Form.BegDate, Form.EndDate),
+		var range = Month.GetRange(BegDate, EndDate),
 		rows = this.GetRows(rs),
 		th = [Tag.Write("TH", 0, 'Всього: ' + rows.length),
 			Tag.Write("TH", 2, this.TotSum.toDelimited(2))
