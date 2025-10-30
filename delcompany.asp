@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Form = Solaren.Map(Request.Form);
+Form = Solaren.Parse();
 
 User.CheckAccess(Authorized, "POST");
 try {

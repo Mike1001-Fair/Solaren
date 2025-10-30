@@ -9,7 +9,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.Map(Request.Form);
+Form = Solaren.Parse();
 Form.ReportMonth = String(Form.ReportMonth);
 Form.DoubleAct = Form.DoubleAct == "on";
 User.CheckAccess(Authorized, "POST");
