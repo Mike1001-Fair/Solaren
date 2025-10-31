@@ -48,15 +48,15 @@ var Doc = {
 
 	Build: function(rs, DoubleAct) {
 		for (; !rs.EOF; rs.MoveNext()) {
-			this.ContractDate = Month.GetYMD(rs.Fields("ContractDate").Value),
-			this.ContractPAN  = rs.Fields("ContractPAN"),
-			this.CustomerName = rs.Fields("CustomerName").Value.replace(/ /g,"&nbsp"),
-			this.ChiefName2   = Record.ChiefName2.replace(/ /g,"&nbsp"),
-			this.Vz           = rs.Fields("Vz").Value.toDelimited(2),
-			this.FactVol	  = rs.Fields("FactVol").Value.toDelimited(0),
-			this.VolCost      = rs.Fields("VolCost").Value.toDelimited(2),
-			this.Pdfo         = rs.Fields("Pdfo").Value.toDelimited(2),
-			this.ActSum       = rs.Fields("ActSum").Value.toDelimited(2),
+			this.ContractDate = Month.GetYMD(rs.Fields("ContractDate").Value);
+			this.ContractPAN  = rs.Fields("ContractPAN");
+			this.CustomerName = rs.Fields("CustomerName").Value.replace(/ /g,"&nbsp");
+			this.ChiefName2   = Record.ChiefName2.replace(/ /g,"&nbsp");
+			this.Vz           = rs.Fields("Vz").Value.toDelimited(2);
+			this.FactVol	  = rs.Fields("FactVol").Value.toDelimited(0);
+			this.VolCost      = rs.Fields("VolCost").Value.toDelimited(2);
+			this.Pdfo         = rs.Fields("Pdfo").Value.toDelimited(2);
+			this.ActSum       = rs.Fields("ActSum").Value.toDelimited(2);
 			this.WordSum      = Money.toWord(rs.Fields("ActSum").Value);
 			this.Render(DoubleAct);
 			if (this.Body.length == 2) {
