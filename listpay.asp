@@ -38,7 +38,7 @@ var Table = {
 		for (var rows = []; !rs.EOF;) {
 			var url = Html.GetLink("editpay.asp?PayId=", rs.Fields("PayId"), rs.Fields("PaySum").Value.toDelimited(2)),
 			PayDate = Month.GetYMD(rs.Fields("PayDate").Value),
-			td =  [Tag.Write("TD", -1, PayDate.formatDate("-")),
+			td = [Tag.Write("TD", -1, PayDate.formatDate("-")),
 				Tag.Write("TD", 2, url)
 			],
 			tr = Tag.Write("TR", -1, td.join(""));

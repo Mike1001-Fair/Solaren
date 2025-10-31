@@ -191,6 +191,6 @@ function SetDisabledButton(buttonList, valid) {
 	if (Array.isArray(buttonList)) {
 		buttonList.forEach(btn => btn && (btn.disabled = !valid));
 	} else {
-		throw new TypeError("buttonList  must be an array");
+		throw new TypeError("buttonList must be an array");
 	}
 }
