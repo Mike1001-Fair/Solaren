@@ -7,7 +7,6 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-
 <% var Authorized = User.RoleId == 2,
 Form = Solaren.Parse(),
 ReportMonth = String(Form.ReportMonth),
