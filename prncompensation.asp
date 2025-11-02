@@ -6,14 +6,11 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse(),
+ReportMonth = String(Form.ReportMonth),
+AveragePrice = String(Form.AveragePrice);
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var ReportMonth = String(Form("ReportMonth")),
-	AveragePrice    = String(Form("AveragePrice")),
-	ChiefId         = Form("ChiefId");
-}
 
 try {
 	Solaren.SetCmd("ListCompensation");
@@ -31,7 +28,6 @@ try {
 }
 
 var Doc = {
-	Body: [],
 	TotRetVol: 0,
 	TotRecVol: 0,
 	TotPurVol: 0,
