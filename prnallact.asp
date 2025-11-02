@@ -33,7 +33,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Solaren.Map(rsInfo.Fields),
-	Period  = Month.GetPeriod(ReportMonth, 1),
+	Period = Month.GetPeriod(ReportMonth, 1),
 	ActDate = Month.GetLastDay(ReportMonth);
 	Html.SetHead("Акт приймання-передачi");
 	rsInfo.Close();
@@ -70,7 +70,7 @@ var Doc = {
 	Render: function(DoubleAct) {
 		for (var i = 0; i <= DoubleAct; i++) {
 			if (i == 0) {
-				var block = ['<DIV CLASS="ActText">',
+				var div = ['<DIV CLASS="ActText">',
 					'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
 					'<TABLE CLASS="NoBorderTable">',
 					'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
@@ -86,9 +86,9 @@ var Doc = {
 					'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
 					'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + this.CustomerName + '</TD></TR>',
 					'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
-				].join("\n");
+				];
 			}
-			this.Body.push(block);
+			this.Body.push(div.join("\n"));
 		}
 	}
 },

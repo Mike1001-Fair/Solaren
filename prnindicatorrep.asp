@@ -30,7 +30,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Report   = Solaren.Map(rsInfo.Fields);
+	var Report = Solaren.Map(rsInfo.Fields);
 	rsInfo.Close();
 	Html.SetHead("Звіт про показники");
 }
