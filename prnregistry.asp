@@ -42,7 +42,7 @@ var Doc = {
 	TotPurCost: 0,
 
 	Render: function(rs, CustomerCount) {
-		var	Header = ['Контрагент', 'Реквiзити', 'Призначення', 'Сума &#8372;'],
+		var Header = ['Контрагент', 'Реквiзити', 'Призначення', 'Сума &#8372;'],
 		TopTitle = [Record.TopChiefTitle3, Record.CompanyName, Record.TopChiefName3, Record.ChiefTitle2, Record.ChiefName2],
 		PageBreak = '\n<P CLASS="PageBreak"></P>\n';
 
@@ -67,7 +67,7 @@ var Doc = {
 	},
 
 	GetRows: function(CustomerCount) {
-		for (var tr = []; tr.length < CustomerCount && !rs.EOF;) {
+		for (var tr = []; tr.length < CustomerCount && !rs.EOF; rs.MoveNext()) {
 			var cardText = rs.Fields("CardId").Value.length > 0 ? ". Для поп КР " : ".",
 			customerInfo = [rs.Fields("CustomerName"), rs.Fields("ContractPAN")],
 			details = [rs.Fields("CustomerCode").Value.toDelimited(), 'Код МФО: ' + rs.Fields("MfoCode"), rs.Fields("BankAccount"), rs.Fields("BankName")],
@@ -78,8 +78,7 @@ var Doc = {
 				Tag.Write("TD", 2, rs.Fields("PurCost").Value.toDelimited(2)), '</TR>'
 			];
 			tr.push(row.join(""));
-			this.TotPurCost += rs.Fields("PurCost").Value;
-			rs.MoveNext();
+			this.TotPurCost += rs.Fields("PurCost").Value;			
 		}
 		return tr.join("\n")
 	}
