@@ -42,10 +42,11 @@ try {
 var Doc = {
 	Body: [],
 	Page: [],
-	Divider: '\n<DIV CLASS="BlockDivider" STYLE="margin: 120px 0px 40px"></DIV>\n',
-	PageBreak: '\n<SPAN CLASS="PageBreak"></SPAN>',
 
 	Build: function(rs, DoubleAct) {
+		var Divider = '\n<DIV CLASS="BlockDivider" STYLE="margin: 120px 0px 40px"></DIV>\n',
+		PageBreak = '\n<SPAN CLASS="PageBreak"></SPAN>';
+
 		for (; !rs.EOF; rs.MoveNext()) {
 			this.ContractDate = Month.GetYMD(rs.Fields("ContractDate").Value);
 			this.ContractPAN  = rs.Fields("ContractPAN");
@@ -59,11 +60,11 @@ var Doc = {
 			this.WordSum      = Money.toWord(rs.Fields("ActSum").Value);
 			this.Render(DoubleAct);
 			if (this.Body.length == 2) {
-				this.Page.push(this.Body.join(this.Divider));
+				this.Page.push(this.Body.join(Divider));
 				this.Body.length = 0;
 			}
 		}
-		return this.Page.join(this.PageBreak)
+		return this.Page.join(PageBreak)
 	},
 
 	Render: function(DoubleAct) {
