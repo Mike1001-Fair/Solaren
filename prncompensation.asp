@@ -30,50 +30,69 @@ try {
 	Html.SetHead("Компенсація");
 }
 
-var Period = Month.GetPeriod(ReportMonth, 0),
-Compensation = totRetVol = totRecVol = totPurVol = totCompensation = 0,
-Caption = ['Середньозважена ціна: ', AveragePrice.replace(".", ","), ' коп.'],
-Header   = ['З', 'По', 'коп', 'Видача', 'Потреби', 'Покупка', '&#8372;'],
-ResponseText = ['\n<BODY CLASS="PrnBody">',
-		'<H3 CLASS="H3PrnTable">Компенсація</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
-		'<TABLE CLASS="PrnTable">',
-		Tag.Write("CAPTION", -1, Caption.join("")),
-		'<TR><TH ROWSPAN="2">Рахунок</TH><TH COLSPAN="2">Період</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">EIC</TH><TH>Тариф</TH>	<TH COLSPAN="3">кВт&#183;год</TH><TH>Компенсація</TH></TR>',
-		Html.GetHeadRow(Header)
-];
+var Doc = {
+	Body: [],
+	TotRetVol: 0,
+	TotRecVol: 0,
+	TotPurVol: 0,
+	TotCompensation: 0,
 
-for (var i=0; !rs.EOF; i++) {
-	Compensation = Math.round(rs.Fields("PurVol") * (rs.Fields("Tarif") - AveragePrice))/100;
-	var row = ['<TR>', Tag.Write("TD", 2, rs.Fields("ContractPAN")),
-		Tag.Write("TD", -1, rs.Fields("BegDate")),
-		Tag.Write("TD", -1, rs.Fields("EndDate")),
-		Tag.Write("TD", -1, rs.Fields("CustomerName")),
-		Tag.Write("TD", -1, rs.Fields("EICode")),
+	GetRows: function(rs) {
+		for (var tr = []; !rs.EOF; rs.MoveNext()) {
+			var Compensation = Math.round(rs.Fields("PurVol") * (rs.Fields("Tarif") - AveragePrice))/100,
+			row = ['<TR>', Tag.Write("TD", 2, rs.Fields("ContractPAN")),
+				Tag.Write("TD", -1, rs.Fields("BegDate")),
+				Tag.Write("TD", -1, rs.Fields("EndDate")),
+				Tag.Write("TD", -1, rs.Fields("CustomerName")),
+				Tag.Write("TD", -1, rs.Fields("EICode")),
 
-		Tag.Write("TD", 2, rs.Fields("Tarif").Value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("RecVol").Value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
-		Tag.Write("TD", 2, Compensation.toDelimited(2)), '</TR>'
-	];
-	ResponseText.push(row.join(""));
-	totRetVol += rs.Fields("RetVol");
-	totRecVol += rs.Fields("RecVol");
-	totPurVol += rs.Fields("PurVol");
-	totCompensation += Compensation;
-	rs.MoveNext();
-}
+				Tag.Write("TD", 2, rs.Fields("Tarif").Value.toDelimited(2)),
+				Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, rs.Fields("RecVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, Compensation.toDelimited(2)), '</TR>'
+			];
+            tr.push(row.join(""));
+			this.TotRetVol += rs.Fields("RetVol");
+			this.TotRecVol += rs.Fields("RecVol");
+			this.TotPurVol += rs.Fields("PurVol");
+			this.TotCompensation += Compensation;
+		}
+		return tr
+	},
+
+	GetFooter: function(count) {
+		var th = ['<TH ALIGN="LEFT" COLSPAN="6">Всього: ' + count,
+			Tag.Write("TH", 2, this.TotRetVol.toDelimited(0)),
+			Tag.Write("TH", 2, this.TotRecVol.toDelimited(0)),
+			Tag.Write("TH", 2, this.TotPurVol.toDelimited(0)),
+			Tag.Write("TH", 2, this.TotCompensation.toDelimited(2))
+		],
+		tr = Tag.Write("TR", -1, th.join("")),
+		footer = [tr, '</TABLE></BODY></HTML>'];
+		return footer.join("\n")
+	},
+
+	Render: function(rs) {
+		var Period = Month.GetPeriod(ReportMonth, 0),
+		Caption = ['Середньозважена ціна: ', AveragePrice.replace(".", ","), ' коп.'],
+		Header   = ['З', 'По', 'коп', 'Видача', 'Потреби', 'Покупка', '&#8372;'],
+		tr = this.GetRows(rs),
+		Body = ['\n<BODY CLASS="PrnBody">',
+			'<H3 CLASS="H3PrnTable">Компенсація</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+			'<TABLE CLASS="PrnTable">',
+			Tag.Write("CAPTION", -1, Caption.join("")),
+			'<TR><TH ROWSPAN="2">Рахунок</TH><TH COLSPAN="2">Період</TH><TH ROWSPAN="2">Споживач</TH><TH ROWSPAN="2">EIC</TH><TH>Тариф</TH>	<TH COLSPAN="3">кВт&#183;год</TH><TH>Компенсація</TH></TR>',
+			Html.GetHeadRow(Header),
+			tr.join("\n"),
+			this.GetFooter(tr.length),
+		];
+		return Body.join("\n")
+	}
+},
+Output = Doc.Render(rs);
 rs.Close();
 Solaren.Close();
-
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="6">Всього: ' + i,
-	Tag.Write("TH", 2, totRetVol.toDelimited(0)),
-	Tag.Write("TH", 2, totRecVol.toDelimited(0)),
-	Tag.Write("TH", 2, totPurVol.toDelimited(0)),
-	Tag.Write("TH", 2, totCompensation.toDelimited(2)),
-	'</TR>\n</TABLE></BODY></HTML>'
-];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Response.Write(Output)%>
 
 
