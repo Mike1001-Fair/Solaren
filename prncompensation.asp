@@ -38,27 +38,27 @@ var Doc = {
 	TotCompensation: 0,
 
 	GetRows: function(rs) {
-		for (var tr = []; !rs.EOF; rs.MoveNext()) {
+		for (var row = []; !rs.EOF; rs.MoveNext()) {
 			var Compensation = Math.round(rs.Fields("PurVol") * (rs.Fields("Tarif") - AveragePrice))/100,
-			row = ['<TR>', Tag.Write("TD", 2, rs.Fields("ContractPAN")),
+			td = [Tag.Write("TD", 2, rs.Fields("ContractPAN")),
 				Tag.Write("TD", -1, rs.Fields("BegDate")),
 				Tag.Write("TD", -1, rs.Fields("EndDate")),
 				Tag.Write("TD", -1, rs.Fields("CustomerName")),
 				Tag.Write("TD", -1, rs.Fields("EICode")),
-
 				Tag.Write("TD", 2, rs.Fields("Tarif").Value.toDelimited(2)),
 				Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("RecVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
-				Tag.Write("TD", 2, Compensation.toDelimited(2)), '</TR>'
-			];
-            tr.push(row.join(""));
+				Tag.Write("TD", 2, Compensation.toDelimited(2))
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+            row.push(tr);
 			this.TotRetVol += rs.Fields("RetVol");
 			this.TotRecVol += rs.Fields("RecVol");
 			this.TotPurVol += rs.Fields("PurVol");
 			this.TotCompensation += Compensation;
 		}
-		return tr
+		return row
 	},
 
 	GetFooter: function(count) {
@@ -94,5 +94,3 @@ Output = Doc.Render(rs);
 rs.Close();
 Solaren.Close();
 Response.Write(Output)%>
-
-
