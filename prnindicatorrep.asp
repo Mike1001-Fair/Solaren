@@ -30,24 +30,12 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Report   = Solaren.Map(rsInfo.Fields),
-	ContractDate = Month.GetYMD(Report.ContractDate),
-	Period       = Month.GetPeriod(ReportMonth, 1),
-	EndDate      = Month.GetLastDay(ReportMonth),
-	LocalityType = Locality.Type[Report.ContractLocalityType],
-	StreetType   = Street.Type[Report.ContractStreetType],
-	ContractAddress = [LocalityType, Report.ContractLocalityName + ", ", StreetType, Report.ContractStreetName, Report.HouseId],
-	BranchLocality  = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
-	ResponseText = ['\n<BODY CLASS="ActContainer">'];
+	var Report   = Solaren.Map(rsInfo.Fields);
+	rsInfo.Close();
 	Html.SetHead("Звіт про показники");
 }
 
 var Doc = {
-	Ref: ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
-	Body: [],
-	Caption: ['Споживач: ' + Report.CustomerName, 'Рахунок: ' + Report.ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
-	Divider: '<DIV CLASS="BlockDivider"></DIV>\n',
-
 	getText: function(totSaldo) {
 		var resultText = ["За результатами знятих показникiв: "],
 		s = " електроенергiю, згiдно умов договору ";
@@ -64,28 +52,20 @@ var Doc = {
 	},
 
 	Render: function(DoubleReport) {
+		var Body = [],
+		Divider = '<DIV CLASS="BlockDivider"></DIV>\n';
+
 		for (var i = 0; i <= DoubleReport; i++) {
 			if (i == 0) {
 				var Output = Table.Render(rs);
 			}
-			Doc.Body.push(Output);	
+			Body.push(Output);	
 		}
-		return Doc.Body.join(Doc.Divider)
+		return Body.join(Divider)
 	}
 },
 
 Table = {
-	Body: ['<DIV CLASS="ActText">',
-		'<TABLE CLASS="NoBorderTable">',
-		'<TR><TD></TD><TD CLASS="ReportTitle">' + Doc.Ref.join("") + '</TD></TR>',
-		'</TABLE>',
-		'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>',
-		'<TABLE CLASS="ActTable">',
-		Tag.Write('CAPTION', -1, Doc.Caption.join('<BR>')),
-		'<TR><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>' +
-		'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>',
-		'<TR><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>'
-	],
 	totSaldo: 0,
 
 	GetRows: function(rs) {
@@ -133,8 +113,17 @@ Table = {
 	},
 
 	Render: function(rs) {
-        var tr = this.GetRows(rs),
-		footer = ['</TABLE>', 
+		var ContractDate = Month.GetYMD(Report.ContractDate),
+		Period       = Month.GetPeriod(ReportMonth, 1),
+		EndDate      = Month.GetLastDay(ReportMonth),
+		LocalityType = Locality.Type[Report.ContractLocalityType],
+		StreetType   = Street.Type[Report.ContractStreetType],
+		ContractAddress = [LocalityType, Report.ContractLocalityName + ", ", StreetType, Report.ContractStreetName, Report.HouseId],
+		BranchLocality  = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
+		Caption = ['Споживач: ' + Report.CustomerName, 'Рахунок: ' + Report.ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
+		Ref = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
+		tr = this.GetRows(rs),
+		footer = ['</TABLE>',
 			Tag.Write('P', -1, Doc.getText(this.totSaldo)),
 			'<TABLE CLASS="NoBorderTable">',
 			'<TR><TD WIDTH="50%">Постачальник:</TD><TD WIDTH="50%">Споживач:</TD></TR>',
@@ -144,10 +133,21 @@ Table = {
 			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>',
 			'</TABLE>',
 			'<DIV CLASS="EventInfo">' + BranchLocality.join(" ") + ', ' + EndDate + '</DIV></DIV>'
+		],
+		body = ['<DIV CLASS="ActText">',
+			'<TABLE CLASS="NoBorderTable">',
+			'<TR><TD></TD><TD CLASS="ReportTitle">' + Ref.join("") + '</TD></TR>',
+			'</TABLE>',
+			'<H3 CLASS="H3PrnTable">Звiт</H3><SPAN>про показники лiчильника, обсяги та напрямки перетокiв електричної енергiї в ' + Period + '</SPAN>',
+			'<TABLE CLASS="ActTable">',
+			Tag.Write('CAPTION', -1, Caption.join('<BR>')),
+			'<TR><TD ROWSPAN="2">№<BR>лiчильника</TD><TD ROWSPAN="2">Вид<BR>вимiрювання</TD><TD COLSPAN="2">Показники</TD>' +
+			'<TD ROWSPAN="2">Рiзниця</TD><TD ROWSPAN="2">Коефiцiєнт<BR>трансформацiї</TD><TD>Всього</TD></TR>',
+			'<TR><TD>останнi</TD><TD>попереднi</TD><TD>кВт&#183;год</TD></TR>',
+			tr.join("\n"),
+			footer.join("\n")
 		];
-		Table.Body.push(tr.join("\n"));
-		Table.Body.push(footer.join("\n"));
-		return Table.Body.join("\n");
+		return body.join("\n");
 	}
 },
 
