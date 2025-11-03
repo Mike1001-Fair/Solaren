@@ -27,19 +27,19 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Record = Solaren.Map(rs.Fields),
-	Period = Month.GetPeriod(ReportMonth, 1),
-	ActDate = Month.GetLastDay(ReportMonth);
-	Record.ContractDate = Month.GetYMD(Record.ContractDate);
-	Record.CustomerName = Record.CustomerName.replace(/ /g,"&nbsp");
+	var Record = Solaren.Map(rs.Fields);
 	Html.SetHead("Акт приймання-передачi");
 }
 
 var Doc = {
-	Body: [],
-	Divider: '<DIV CLASS="BlockDivider"></DIV>\n',
-
 	Render: function(DoubleAct) {
+		var Body = [],
+		Period = Month.GetPeriod(ReportMonth, 1),
+		ActDate = Month.GetLastDay(ReportMonth),
+		ContractDate = Month.GetYMD(Record.ContractDate),
+		CustomerName = Record.CustomerName.replace(/ /g,"&nbsp"),
+		Divider = '<DIV CLASS="BlockDivider"></DIV>\n';
+
 		for (var i = 0; i <= DoubleAct; i++) {
 			if (i == 0) {
 				var FactVol = Record.FactVol.toDelimited(0),
@@ -54,9 +54,9 @@ var Doc = {
 					'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
 					'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
 					'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' +
-					Record.ContractDate.formatDate("-") + ' року, особовий рахунок №' + Record.ContractPAN + ': ' +
+					ContractDate.formatDate("-") + ' року, особовий рахунок №' + Record.ContractPAN + ': ' +
 					Record.CompanyName + ' (Постачальник) в особi ' + Record.ChiefTitle2 + ' ' + Record.BranchName2 + ' ЦОС ' + Record.ChiefName2 +
-					', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + Record.CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
+					', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
 					'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + FactVol + '</B> кВт&#183;год ' +
 					'на суму <B>' + VolCost + '</B> грн., ПДФО <B>' + Pdfo + '</B> грн., вiйськовий збiр <B>' + Vz +
 					'</B> грн., всього <B>' + ActSum + '</B> грн. (' +	WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
@@ -64,11 +64,11 @@ var Doc = {
 					'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
 					'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + Record.CustomerName + '</TD></TR>',
 					'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
-				].join("\n");
+				];
 			}
-			Doc.Body.push(div);
+			Body.push(div.join("\n"));
 		}
-		return Doc.Body.join(Doc.Divider)
+		return Body.join(Divider)
 	}
 },
 Output = ['\n<BODY CLASS="ActContainer">',

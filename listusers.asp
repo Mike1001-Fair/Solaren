@@ -29,9 +29,8 @@ try {
 }
 
 var Table = {
-	Header: ['Логiн', 'Роль', 'Ip', 'Пiдключився', 'Агент'],
 	GetRows: function(rs) {
-		for (var rows = []; !rs.EOF;) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
 			var url = Html.GetLink("edituser.asp?UserId=", rs.Fields("Id"), rs.Fields("UserName")),
 			td = [Tag.Write("TD", -1, url),
 				Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
@@ -40,21 +39,21 @@ var Table = {
 				Tag.Write("TD", -1, rs.Fields("UserAgent"))
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
-			rows.push(tr);
-			rs.MoveNext();
+			rows.push(tr);			
 		}
 		return rows;
 	},
 
 	Render: function(rs) {
 		var rows = this.GetRows(rs),
+		Header = ['Логiн', 'Роль', 'Ip', 'Пiдключився', 'Агент'],
 		body = [
 			'<BODY CLASS="MainBody">',
 			'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
 			'<TABLE CLASS="InfoTable">',
-			Html.GetHeadRow(this.Header),
+			Html.GetHeadRow(Header),
 			rows.join("\n"),
-			Html.GetFooterRow(this.Header.length, rows.length)
+			Html.GetFooterRow(Header.length, rows.length)
 		];
 		return body.join("\n");
 	}

@@ -10,7 +10,6 @@
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId == 1,
 Form = Solaren.Parse();
-
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -30,10 +29,9 @@ try {
 }
 
 var Table = {
-	Header: ['Рахунок', 'Споживач', 'Адреса', 'Дата', 'ЦОС', 'Потужнiсть'],
 	TotPower: 0,
 	GetRows: function(rs) {
-		for (var rows = []; !rs.EOF;) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
 			var ContractAddress = [Locality.Type[rs.Fields("LocalityType")],
 				rs.Fields("LocalityName") + ",",
 				Street.Type[rs.Fields("StreetType")],
@@ -50,14 +48,14 @@ var Table = {
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
 			rows.push(tr);
-			this.TotPower += rs.Fields("ContractPower");
- 			rs.MoveNext();
+			this.TotPower += rs.Fields("ContractPower"); 			
 		}
 		return rows;
 	},
 
 	Render: function(rs) {
         var rows = this.GetRows(rs),
+		Header = ['Рахунок', 'Споживач', 'Адреса', 'Дата', 'ЦОС', 'Потужнiсть'],
 		footer = ['<TH ALIGN="LEFT" COLSPAN="5">Всього: ', rows.length,'</TH>',
 			Tag.Write("TH", 2, this.TotPower.toDelimited(1))
 		],
@@ -65,7 +63,7 @@ var Table = {
             '<BODY CLASS="MainBody">',
             '<H3 CLASS="H3Text">' + Html.Title + '</H3>',
             '<TABLE CLASS="InfoTable">',
-            Html.GetHeadRow(this.Header),
+            Html.GetHeadRow(Header),
             rows.join("\n"),
 			Tag.Write("TR", -1, footer.join(""))
         ];
