@@ -7,23 +7,17 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3;
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var ContractId = Form("ContractId"),
-	BegDate        = Form("BegDate"),
-	EndDate        = Form("EndDate"),
-	ContractName   = Form("ContractName");
-}
 
 try {
 	Solaren.SetCmd("ListIndicator");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
-			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
-			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
+			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, Form.ContractId));
+			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, Form.BegDate));
+			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, Form.EndDate));
 		}
 	}
 	var rs = Solaren.Execute("ListIndicator");
@@ -33,30 +27,40 @@ try {
 	Html.SetPage("Показники лiчильника");
 }
 
-var Header = ['Номер', 'Дата', 'Прийом', 'Видача'],
-ResponseText = ['<BODY CLASS="MainBody">',
-	'<TABLE CLASS="H3Text">',
-	Tag.Write("CAPTION", -1, Html.Title),
-	'<TR><TD ALIGN="RIGHT">Споживач:</TD><TD ALIGN="LEFT">' + ContractName + '</TD></TR>',
-	'</TABLE>',
-	'<TABLE CLASS="InfoTable">',
-	Html.GetHeadRow(Header)
-];
+var Table = {
+	GetRows: function(rs) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
+			var url = Html.GetLink("editindicator.asp?IndicatorId=", rs.Fields("Id"), rs.Fields("ReportDate")),
+			td = [Tag.Write("TD", -1, rs.Fields("MeterCode")),
+				Tag.Write("TD", -1, url),
+				Tag.Write("TD", 2, rs.Fields("RecVal").Value.toDelimited(0)),
+				Tag.Write("TD", 2, rs.Fields("RetVal").Value.toDelimited(0))		
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+			rows.push(tr);
+		}
+		return rows;
+	},
 
-for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("editindicator.asp?IndicatorId=", rs.Fields("Id"), rs.Fields("ReportDate")),
-	td = [Tag.Write("TD", -1, rs.Fields("MeterCode")),
-		Tag.Write("TD", -1, url),
-		Tag.Write("TD", 2, rs.Fields("RecVal").Value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("RetVal").Value.toDelimited(0))		
-	],
-	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
-	rs.MoveNext();
-}
+	Render: function(rs) {
+		var rows = this.GetRows(rs),
+		Header = ['Номер', 'Дата', 'Прийом', 'Видача'],
+		Body = ['<BODY CLASS="MainBody">',
+			'<TABLE CLASS="H3Text">',
+			Tag.Write("CAPTION", -1, Html.Title),
+			'<TR><TD ALIGN="RIGHT">Споживач:</TD><TD ALIGN="LEFT">' + Form.ContractName + '</TD></TR>',
+			'</TABLE>',
+			'<TABLE CLASS="InfoTable">',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			Html.GetFooterRow(Header.length, rows.length)
+		];
+		return Body.join("\n");		
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(4, i));
-Response.Write(ResponseText.join("\n"))%>
+Response.Write(Output)%>
 
 
