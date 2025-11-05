@@ -55,7 +55,7 @@ var Table = {
 			rows.join("\n"),
 			Html.GetFooterRow(Header.length, rows.length)
 		];
-		return Body.join("\n");		
+		return Body.join("\n");
 	}
 },
 Output = Table.Render(rs);

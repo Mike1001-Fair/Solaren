@@ -31,11 +31,10 @@ try {
 }
 
 var Table = {
-	Header: ['Дaта', 'Сума'],
 	TotSum: 0,
 
 	GetRows: function(rs) {
-		for (var rows = []; !rs.EOF;) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
 			var url = Html.GetLink("editpay.asp?PayId=", rs.Fields("PayId"), rs.Fields("PaySum").Value.toDelimited(2)),
 			PayDate = Month.GetYMD(rs.Fields("PayDate").Value),
 			td = [Tag.Write("TD", -1, PayDate.formatDate("-")),
@@ -44,13 +43,13 @@ var Table = {
 			tr = Tag.Write("TR", -1, td.join(""));
 			rows.push(tr);
 			this.TotSum += rs.Fields("PaySum").Value;
-			rs.MoveNext();
 		}
 		return rows;
 	},
 
 	Render: function(rs) {
-		var range = Month.GetRange(BegDate, EndDate),
+		var Header = ['Дaта', 'Сума'],
+		range = Month.GetRange(BegDate, EndDate),
 		rows = this.GetRows(rs),
 		th = [Tag.Write("TH", 0, 'Всього: ' + rows.length),
 			Tag.Write("TH", 2, this.TotSum.toDelimited(2))
@@ -63,7 +62,7 @@ var Table = {
 			'<TR>' + Tag.Write("TD", 2, 'Період:') + Tag.Write("TD", 0, range) + '</TR>',
 			'</TABLE>',
 			'<TABLE CLASS="InfoTable">',
-			Html.GetHeadRow(this.Header),
+			Html.GetHeadRow(Header),
 			rows.join("\n"),
 			footer,
 			'</TABLE></BODY></HTML>'
@@ -74,4 +73,4 @@ var Table = {
 Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-Response.Write(Output);%>
+Response.Write(Output)%>
