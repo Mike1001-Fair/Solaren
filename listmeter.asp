@@ -26,8 +26,6 @@ try {
 }
 
 var Table = {
-	TotSum: 0,
-
 	GetRows: function(rs) {
 		for (var rows = []; !rs.EOF; rs.MoveNext()) {
 			var url = Html.GetLink("editmeter.asp?MeterId=", rs.Fields("Id"), rs.Fields("Code")),
