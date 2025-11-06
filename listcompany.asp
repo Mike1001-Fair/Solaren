@@ -5,9 +5,8 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-
 <% var Authorized = User.RoleId < 2,
-CompanyName = Request.Form("CompanyName");
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -15,7 +14,7 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-			Append(CreateParameter("CompanyName", adVarChar, adParamInput, 10, CompanyName));
+			Append(CreateParameter("CompanyName", adVarChar, adParamInput, 10, Form.CompanyName));
 		}
 	}
 	var rs = Solaren.Execute("ListCompany");
@@ -25,28 +24,36 @@ try {
 	Html.SetPage("Список компаній");
 }
 
-var Header = ['ЄДРПОУ', 'ІПН', 'Назва', 'Телефон'],
-ResponseText = ['<BODY CLASS="MainBody">',
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
-	'<TABLE CLASS="InfoTable">',
-	Html.GetHeadRow(Header)
-];
+var Table = {
+	GetRows: function(rs) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
+			var url = Html.GetLink("editcompany.asp?CompanyId=", rs.Fields("Id"), rs.Fields("CompanyName")),
+			td = [Tag.Write("TD", -1, rs.Fields("CompanyCode")),
+				Tag.Write("TD", -1, rs.Fields("TaxCode")),
+				Tag.Write("TD", -1, url),
+				Tag.Write("TD", -1, rs.Fields("Phone"))
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+			rows.push(tr);
+		}
+		return rows;
+	},
 
-for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("editcompany.asp?CompanyId=", rs.Fields("Id"), rs.Fields("CompanyName")),
-	td = [Tag.Write("TD", -1, rs.Fields("CompanyCode")),
-		Tag.Write("TD", -1, rs.Fields("TaxCode")),
-		Tag.Write("TD", -1, url),
-		Tag.Write("TD", -1, rs.Fields("Phone"))
-	],
-	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
-	rs.MoveNext();
-}
-
+	Render: function(rs) {
+        var rows = this.GetRows(rs),
+		Header = ['ЄДРПОУ', 'ІПН', 'Назва', 'Телефон'],
+		Body = ['<BODY CLASS="MainBody">',
+			'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+			'<TABLE CLASS="InfoTable">',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			Html.GetFooterRow(Header.length, rows.length)
+		];
+        return Body.join("\n");
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(4, i));
-Response.Write(ResponseText.join("\n"))%>
-
+Response.Write(Output);
 

@@ -27,9 +27,8 @@ try {
 }
 
 var Table = {
-	Header: ['з', 'по', 'коп'],
 	GetRows: function(rs) {
-		for (var rows = []; !rs.EOF;) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
 			var url = Html.GetLink("edittarif.asp?TarifId=", rs.Fields("Id"), rs.Fields("Tarif").Value.toDelimited(2)),
 			BegDate = Month.GetYMD(rs.Fields("BegDate").Value),
 			EndDate = Month.GetYMD(rs.Fields("EndDate").Value),
@@ -43,21 +42,21 @@ var Table = {
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
 			rows.push(tr);
-			rs.MoveNext();
 		}
 		return rows;
 	},
 
 	Render: function(rs) {
         var rows = this.GetRows(rs),
+		Header = ['з', 'по', 'коп'],
 		body = [
 			'<BODY CLASS="MainBody">',
 			'<H3 CLASS="H3Text">Список тарифiв<SPAN>Група: ' + Form.GroupName + '</SPAN></H3>',
 			'<TABLE CLASS="InfoTable">',
 			'<TR><TH COLSPAN="2">Дiє</TH><TH ROWSPAN="2">Дата вводу в<BR>експлуатацiю</TH><TH>Тариф</TH></TR>',
- 			Html.GetHeadRow(this.Header),
+ 			Html.GetHeadRow(Header),
 			rows.join("\n"),
-			Html.GetFooterRow(this.Header.length + 1, rows.length)
+			Html.GetFooterRow(4, rows.length)
 		];
         return body.join("\n");
 	}
