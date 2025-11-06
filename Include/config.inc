@@ -15,15 +15,7 @@ var Config = {
 	},
 
 	WriteDbInfo: function(rs) {
-		var Header = ['Назва', 'Файл', 'Стан', 'Розмір'],
-		Table = {
-			Body: ['<DIV CLASS="FormDiv">',
-				'<FIELDSET CLASS="FieldSet">',
-				'<LEGEND>Параметри</LEGEND>',
-				'<TABLE CLASS="RulesAllInfo">',
-				Html.GetHeadRow(Header)
-			],
-
+		var Table = {
 			GetRows: function(rs) {
 				for (var tr=[]; !rs.EOF; rs.MoveNext()) {
 					var td = [Tag.Write("TD", 0, rs.Fields("BaseName")),
@@ -37,11 +29,17 @@ var Config = {
 			},
 
 			Render: function(rs) {
-        		var tr = this.GetRows(rs),
-				footer = '</TABLE></FIELDSET></DIV>';
-				this.Body.push(tr.join("\n"));
-				this.Body.push(footer);
-				return Table.Body.join("\n");
+        		var rows = this.GetRows(rs),
+				header = ['Назва', 'Файл', 'Стан', 'Розмір'],
+				body = ['<DIV CLASS="FormDiv">',
+					'<FIELDSET CLASS="FieldSet">',
+					'<LEGEND>Параметри</LEGEND>',
+					'<TABLE CLASS="RulesAllInfo">',
+					Html.GetHeadRow(header),
+					rows.join("\n"),
+					'</TABLE></FIELDSET></DIV>',
+				];
+				return body.join("\n");
 			}
 		},
 		Output = Table.Render(rs);

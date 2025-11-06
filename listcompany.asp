@@ -55,5 +55,5 @@ var Table = {
 Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-Response.Write(Output);
+Response.Write(Output)%>
 

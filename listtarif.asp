@@ -47,7 +47,7 @@ var Table = {
 	},
 
 	Render: function(rs) {
-        var rows = this.GetRows(rs),
+		var rows = this.GetRows(rs),
 		Header = ['з', 'по', 'коп'],
 		body = [
 			'<BODY CLASS="MainBody">',
