@@ -6,14 +6,10 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse(),
+ReportMonth = String(Form.ReportMonth);
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var ReportMonth = String(Form("ReportMonth")),
-	ContractId      = Form("ContractId"),
-	ChiefId         = Form("ChiefId");
-}
 
 try {
 	Solaren.SetCmd("GetNote");
@@ -21,9 +17,9 @@ try {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
-			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, ContractId));
+			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Form.ContractId));
 
-			Append(CreateParameter("ChiefId", adVarChar, adParamInput, 10, ChiefId));
+			Append(CreateParameter("ChiefId", adVarChar, adParamInput, 10, Form.ChiefId));
 			Append(CreateParameter("CompanyCode", adVarChar, adParamOutput, 10, ""));
 			Append(CreateParameter("CompanyName", adVarChar, adParamOutput, 50, ""));
 
@@ -98,15 +94,13 @@ try {
 	Message.Write(3, Message.Error(ex));
 } finally {	
 	Solaren.Close();
-
-}
-
-if (Solaren.Empty(PurCost)) {
-	Message.Write(0, "Інформацію не знайдено");
-} else {
-	var Period = Month.GetPeriod(ReportMonth, 1),
-	ReportDate = Month.Today.toStr(0);
-	Html.SetHead("Службовий лист");
+	if (Solaren.Empty(PurCost)) {
+		Message.Write(0, "Інформацію не знайдено");
+	} else {
+		var Period = Month.GetPeriod(ReportMonth, 1),
+		ReportDate = Month.Today.toStr(0);
+		Html.SetHead("Службовий лист");
+	}
 }%>
 
 <STYLE>P { text-align: justify; line-height: 1.5; text-indent: 1cm; margin-bottom: 1}
