@@ -6,13 +6,11 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse(),
+ReportMonth = String(Form.ReportMonth),
+Filter = Form.Filter == "on";
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-    var ReportMonth = String(Form("ReportMonth")),
-	Filter = Form("Filter") == "on";
-}
 
 try {
 	Solaren.SetCmd("ListSov");
@@ -30,42 +28,63 @@ try {
 	Html.SetHead("Баланс");
 }
 
-var Header = ["Споживач", "Рахунок", "Сальдо<BR>на початок", "Обсяг<BR>кВт&#183;год", "Вартiсть", "Оплата", "Сальдо<BR>на кiнець"],
-Period = Month.GetPeriod(ReportMonth, 0),
-tot_s = tot_PurVol = tot_ob_dt = tot_ob_ct = tot_s_end = 0,
-ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">' + Html.Title + '</H3>',
-	'<SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
-	'<TABLE CLASS="PrnTable">',
-	Html.GetHeadRow(Header)
-];
-	
-for (var i=0; !rs.EOF; i++) {
-	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("CustomerName")),
-		Tag.Write("TD", 2, rs.Fields("ContractPAN")),
-		Tag.Write("TD", 2, rs.Fields("s").Value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)),
-		Tag.Write("TD", 2, rs.Fields("s_end").Value.toDelimited(2)), '</TR>'
-	];
-	ResponseText.push(row.join(""));
-	tot_s      += rs.Fields("s").Value;
-	tot_PurVol += rs.Fields("PurVol").Value;
-	tot_ob_dt  += rs.Fields("ob_dt").Value;
-	tot_ob_ct  += rs.Fields("ob_ct").Value;
-	tot_s_end  += rs.Fields("s_end").Value;
-	rs.MoveNext()
-}
+var Table = {
+	TotS: 0,
+	TotObDt: 0,
+	TotObCt: 0,
+	TotPurVol: 0,
+	TotSEnd:0,
+
+	GetRows: function(rs) {
+		for (var row = []; !rs.EOF; rs.MoveNext()) {
+			var td = [Tag.Write("TD", -1, rs.Fields("CustomerName")),
+				Tag.Write("TD", 2, rs.Fields("ContractPAN")),
+				Tag.Write("TD", 2, rs.Fields("s").Value.toDelimited(2)),
+				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
+				Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)),
+				Tag.Write("TD", 2, rs.Fields("s_end").Value.toDelimited(2))
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+            row.push(tr);
+			this.TotS      += rs.Fields("s").Value;
+			this.TotPurVol += rs.Fields("PurVol").Value;
+			this.TotObDt   += rs.Fields("ob_dt").Value;
+			this.TotObCt   += rs.Fields("ob_ct").Value;
+			this.TotSEnd   += rs.Fields("s_end").Value;
+		}
+		return row
+	},
+
+	GetFooter: function(total) {
+		var th = ['<TH ALIGN="LEFT" COLSPAN="2">Всього: ' + total, '</TH>',
+			Tag.Write("TH", 2, this.TotS.toDelimited(2)),
+			Tag.Write("TH", 2, this.TotPurVol.toDelimited(0)),
+			Tag.Write("TH", 2, this.TotObDt.toDelimited(2)),
+			Tag.Write("TH", 2, this.TotObCt.toDelimited(2)),
+			Tag.Write("TH", 2, this.TotSEnd.toDelimited(2)),
+		],
+		tr = Tag.Write("TR", -1, th.join("")),
+		footer = [tr, '</TABLE></BODY></HTML>'];
+		return footer.join("\n")
+	},
+
+	Render: function(rs) {
+		var Header = ["Споживач", "Рахунок", "Сальдо<BR>на початок", "Обсяг<BR>кВт&#183;год", "Вартiсть", "Оплата", "Сальдо<BR>на кiнець"],
+		Period = Month.GetPeriod(ReportMonth, 0),
+		rows = this.GetRows(rs),
+		Body = ['<BODY CLASS="PrnBody">',
+			'<H3 CLASS="H3PrnTable">' + Html.Title + '</H3>',
+			'<SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>',
+			'<TABLE CLASS="PrnTable">',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			this.GetFooter(rows.length)
+		];
+		return Body.join("\n")
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ', i, '</TH>',
-	Tag.Write("TH", 2, tot_s.toDelimited(2)),
-	Tag.Write("TH", 2, tot_PurVol.toDelimited(0)),
-	Tag.Write("TH", 2, tot_ob_dt.toDelimited(2)),
-	Tag.Write("TH", 2, tot_ob_ct.toDelimited(2)),
-	Tag.Write("TH", 2, tot_s_end.toDelimited(2)),
-	'</TR>\n</TABLE></BODY></HTML>'
-];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Response.Write(Output)%>
