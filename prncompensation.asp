@@ -57,8 +57,8 @@ var Doc = {
 		return row
 	},
 
-	GetFooter: function(count) {
-		var th = ['<TH ALIGN="LEFT" COLSPAN="6">Всього: ' + count,
+	GetFooter: function(total) {
+		var th = ['<TH ALIGN="LEFT" COLSPAN="6">Всього: ' + total,
 			Tag.Write("TH", 2, this.TotRetVol.toDelimited(0)),
 			Tag.Write("TH", 2, this.TotRecVol.toDelimited(0)),
 			Tag.Write("TH", 2, this.TotPurVol.toDelimited(0)),
