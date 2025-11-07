@@ -10,7 +10,7 @@ Resource = {
  		return Server.MapPath(this.Path + fileName)
  	},
 
-	WriteError: function() {
+	Error: function() {
 		Session("SysMsg") = this.ErrText;
 		Session("ScriptName") = "resources.inc";
 		Server.Transfer("error-en.asp");	
@@ -33,15 +33,15 @@ Resource = {
 					var error = XmlDoc.parseError,
 					errText = ["Error: " + error.reason, "Line: " + error.line, "File: " + FileName];
 					Resource.ErrText = errText.join("<BR>");
-					Resource.WriteError();
+					Resource.Error();
 				}
 			} catch (ex) {
 				Resource.ErrText = ex.name + ": " + ex.message;
-				Resource.WriteError();
+				Resource.Error();
 			}
 		} else {
 			Resource.ErrText = FileName + " not found";
-			Resource.WriteError();
+			Resource.Error();
 		}
 	},
 

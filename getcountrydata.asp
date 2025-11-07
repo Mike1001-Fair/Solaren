@@ -4,7 +4,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/json.inc" -->
-<% var Authorized = User.RoleId == 1,
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Query = Solaren.Parse(),
 ValidRequest = User.HasAccess(Authorized, "GET");
 

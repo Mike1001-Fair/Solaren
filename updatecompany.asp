@@ -42,7 +42,8 @@ try {
 			Append(CreateParameter("PerformerTitle", adVarChar, adParamInput, 30, Form.PerformerTitle));
 			Append(CreateParameter("PerformerName", adVarChar, adParamInput, 30, Form.PerformerName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		} 
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {
