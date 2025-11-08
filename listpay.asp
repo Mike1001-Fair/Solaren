@@ -54,7 +54,8 @@ var Table = {
 		th = [Tag.Write("TH", 0, 'Всього: ' + rows.length),
 			Tag.Write("TH", 2, this.TotSum.toDelimited(2))
 		],
-		footer = Tag.Write("TR", -1, th.join("")),
+		tr = Tag.Write("TR", -1, th.join("")),
+		footer = [tr, '</TABLE></BODY></HTML>'],
 		body = ['<BODY CLASS="MainBody">',
 			'<TABLE CLASS="H3Text">',
 			Tag.Write("CAPTION", -1, Html.Title),
@@ -64,8 +65,7 @@ var Table = {
 			'<TABLE CLASS="InfoTable">',
 			Html.GetHeadRow(Header),
 			rows.join("\n"),
-			footer,
-			'</TABLE></BODY></HTML>'
+			footer.join("\n")
 		];
 		return body.join("\n");
 	}
