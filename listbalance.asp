@@ -3,19 +3,14 @@
 <!-- #INCLUDE FILE="Include/message.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse(),
+BegMonth = String(Form.BegMonth),
+EndMonth = String(Form.EndMonth);
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-    var OperatorId   = Form("OperatorId"),
-	OperatorName = Form("OperatorName"),
-	BegMonth     = String(Form("BegMonth")),
-	EndMonth     = String(Form("EndMonth"));
-}
 
 try {
 	Solaren.SetCmd("ListBalance");
@@ -24,7 +19,7 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegMonth", adVarChar, adParamInput, 10, BegMonth));
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
-			Append(CreateParameter("OperatorId", adVarChar, adParamInput, 10, OperatorId));
+			Append(CreateParameter("OperatorId", adVarChar, adParamInput, 10, Form.OperatorId));
 		}
 	}
 	var rs = Solaren.Execute("ListBalance");
@@ -34,37 +29,55 @@ try {
 	Html.SetHead("Баланс", 0);
 }
 
-var Range = Month.GetRange(BegMonth, EndMonth),
-totRetVol = totPurVol = totNeedVol = 0,
-Header = ['РЕМ', 'Видача', 'Покупка', 'Потреби'],
-ResponseText = ['<BODY CLASS="PrnBody">',
-	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
-	'<TABLE CLASS="PrnTable">',
-	'<CAPTION>оператор: ' + OperatorName + '</CAPTION>',
-	Html.GetHeadRow(Header)
-]
+var Table = {
+	TotRetVol: 0,
+	TotPurVol: 0,
+	TotNeedVol: 0,
 
-for (var i=0; !rs.EOF; i++) {
-	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("AenName")),
-		Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
-		Tag.Write("TD", 2, rs.Fields("NeedVol").Value.toDelimited(0)), '</TR>'
-	];
-	ResponseText.push(row.join(""));
-	totRetVol += rs.Fields("RetVol");
-	totPurVol += rs.Fields("PurVol");
-	totNeedVol += rs.Fields("NeedVol");
-	rs.MoveNext();
-}
+	GetRows: function(rs) {
+		for (var row = []; !rs.EOF; rs.MoveNext()) {
+			var td = [Tag.Write("TD", -1, rs.Fields("AenName")),
+				Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, rs.Fields("NeedVol").Value.toDelimited(0))
+			];
+			tr = Tag.Write("TR", -1, td.join(""));
+            row.push(tr);
+			this.TotRetVol += rs.Fields("RetVol");
+			this.TotPurVol += rs.Fields("PurVol");
+			this.TotNeedVol += rs.Fields("NeedVol");
+		}
+		return row
+	},
+
+	GetFooter: function(total) {
+		var th = ['<TH ALIGN="LEFT">Всього: ' + total, '</TH>',
+			Tag.Write("TH", 2, this.TotRetVol.toDelimited(0)),
+			Tag.Write("TH", 2, this.TotPurVol.toDelimited(0)),
+			Tag.Write("TH", 2, this.TotNeedVol.toDelimited(0)),
+		],
+		tr = Tag.Write("TR", -1, th.join("")),
+		footer = [tr, '</TABLE></BODY></HTML>'];
+		return footer.join("\n")
+	},
+
+	Render: function(rs) {
+		var Header = ['РЕМ', 'Видача', 'Покупка', 'Потреби'],
+		Range = Month.GetRange(BegMonth, EndMonth),
+		rows = this.GetRows(rs),
+		Body = ['<BODY CLASS="PrnBody">',
+			'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
+			'<TABLE CLASS="PrnTable">',
+			'<CAPTION>оператор: ' + Form.OperatorName + '</CAPTION>',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			this.GetFooter(rows.length)
+		];
+		return Body.join("\n")
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-
-var footer = ['<TR><TH ALIGN="LEFT">Всього: ', i, '</TH>',
-	Tag.Write("TH", 2, totRetVol.toDelimited(0)),
-	Tag.Write("TH", 2, totPurVol.toDelimited(0)),
-	Tag.Write("TH", 2, totNeedVol.toDelimited(0)),
-	'</TR>\n</TABLE></BODY></HTML>'
-];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Response.Write(Output)%>
 
