@@ -5,16 +5,15 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-
 <% var Authorized = User.RoleId < 2,
-BranchName = Request.Form("BranchName");
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListBranch");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("BranchName", adVarChar, adParamInput, 10, BranchName));
+			Append(CreateParameter("BranchName", adVarChar, adParamInput, 10, Form.BranchName));
 		}
 	}
 	var rs = Solaren.Execute("ListBranch");
@@ -24,27 +23,38 @@ try {
 	Html.SetPage("Список ЦОС");
 }
 
-var Header = ['№', 'Назва', 'Керiвник', 'Бухгалтер'],
-ResponseText = ['<BODY CLASS="MainBody">',
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
-	'<TABLE CLASS="InfoTable">',
-	Html.GetHeadRow(Header)
-];
+var Table = {
+	GetRows: function(rs) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
+			var url = ['<A href="editbranch.asp?BranchId=', rs.Fields("BranchId"), '">', rs.Fields("BranchName"), '</A>'],
+			td = [Tag.Write("TD", 2, rs.Fields("SortCode")),
+				Tag.Write("TD", -1, url.join("")),
+				Tag.Write("TD", -1, rs.Fields("ChiefName")),
+				Tag.Write("TD", -1, rs.Fields("Accountant"))
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+			rows.push(tr);
+		}
+		return rows;
+	},
 
-for (var i=0; !rs.EOF; i++) {
-	var url = ['<A href="editbranch.asp?BranchId=', rs.Fields("BranchId"), '">', rs.Fields("BranchName"), '</A>'],
-	row = ['<TR>', Tag.Write("TD", 2, rs.Fields("SortCode")),
-		Tag.Write("TD", -1, url.join("")),
-		Tag.Write("TD", -1, rs.Fields("ChiefName")),
-		Tag.Write("TD", -1, rs.Fields("Accountant")), '</TR>'
-	];
-	ResponseText.push(row.join(""));
-	rs.MoveNext();
-}
+	Render: function(rs) {
+		var rows = this.GetRows(rs),
+		Header = ['№', 'Назва', 'Керiвник', 'Бухгалтер'],
+		body = [
+			'<BODY CLASS="MainBody">',
+			'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+			'<TABLE CLASS="InfoTable">',
+ 			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			Html.GetFooterRow(Header.length, rows.length)
+		];
+        return body.join("\n");
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(4, i));
-Response.Write(ResponseText.join("\n"));
-%>
+Response.Write(Output)%>
 
 
