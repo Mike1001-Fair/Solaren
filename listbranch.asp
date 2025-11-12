@@ -26,9 +26,9 @@ try {
 var Table = {
 	GetRows: function(rs) {
 		for (var rows = []; !rs.EOF; rs.MoveNext()) {
-			var url = ['<A href="editbranch.asp?BranchId=', rs.Fields("BranchId"), '">', rs.Fields("BranchName"), '</A>'],
+			var url = Html.GetLink("editbranch.asp?BranchId=", rs.Fields("BranchId"), rs.Fields("BranchName")),
 			td = [Tag.Write("TD", 2, rs.Fields("SortCode")),
-				Tag.Write("TD", -1, url.join("")),
+				Tag.Write("TD", -1, url),
 				Tag.Write("TD", -1, rs.Fields("ChiefName")),
 				Tag.Write("TD", -1, rs.Fields("Accountant"))
 			],
