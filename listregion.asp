@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-RegionName = Request.Form("RegionName");
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("ListRegion");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("RegionName", adVarChar, adParamInput, 10, RegionName));
+			Append(CreateParameter("RegionName", adVarChar, adParamInput, 10, Form.RegionName));
 		}
 	}
 	var rs = Solaren.Execute("ListRegion");
@@ -23,23 +23,36 @@ try {
 	Html.SetPage("Області")
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">',
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
-	'<TABLE CLASS="InfoTable">',
-	'<TR><TH>№</TH><TH>Назва</TH></TR>'
-];
+var Table = {
+	GetRows: function(rs) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
+			var url = Html.GetLink("editregion.asp?RegionId=", rs.Fields("Id"), rs.Fields("RegionName")),
+			td = [Tag.Write("TD", -1, rs.Fields("SortCode")),
+				Tag.Write("TD", -1, url)
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+			rows.push(tr);
+		}
+		return rows;
+	},
 
-for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("editregion.asp?RegionId=", rs.Fields("Id"), rs.Fields("RegionName")),
-	row = ['<TR>', Tag.Write("TD", -1, rs.Fields("SortCode")),
-		Tag.Write("TD", -1, url), '</TR>'
-	];
-	ResponseText.push(row.join(""));
-	rs.MoveNext();
-}
+	Render: function(rs) {
+		var rows = this.GetRows(rs),
+		Header = ['№', 'Назва'],
+		body = [
+			'<BODY CLASS="MainBody">',
+			'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+			'<TABLE CLASS="InfoTable">',
+ 			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			Html.GetFooterRow(Header.length, rows.length)
+		];
+        return body.join("\n");
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(2, i));
-Response.Write(ResponseText.join("\n"))%>
+Response.Write(Output)%>
 
 

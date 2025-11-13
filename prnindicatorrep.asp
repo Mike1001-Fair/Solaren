@@ -54,7 +54,6 @@ var Doc = {
 	Render: function(DoubleReport) {
 		var Body = [],
 		Divider = '<DIV CLASS="BlockDivider"></DIV>\n';
-
 		for (var i = 0; i <= DoubleReport; i++) {
 			if (i == 0) {
 				var Output = Table.Render(rs);
