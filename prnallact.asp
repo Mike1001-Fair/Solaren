@@ -42,6 +42,7 @@ try {
 var Doc = {
 	Body: [],
 	Page: [],
+	MaxPerPage: 2,
 
 	Build: function(rs, DoubleAct) {
 		var Divider = '\n<DIV CLASS="BlockDivider" STYLE="margin: 120px 0px 40px"></DIV>\n',
@@ -59,7 +60,7 @@ var Doc = {
 			this.ActSum       = rs.Fields("ActSum").Value.toDelimited(2);
 			this.WordSum      = Money.toWord(rs.Fields("ActSum").Value);
 			this.Render(DoubleAct);
-			if (this.Body.length == 2) {
+			if (this.Body.length == this.MaxPerPage) {
 				this.Page.push(this.Body.join(Divider));
 				this.Body.length = 0;
 			}
@@ -68,26 +69,25 @@ var Doc = {
 	},
 
 	Render: function(DoubleAct) {
-		for (var i = 0; i <= DoubleAct; i++) {
-			if (i == 0) {
-				var div = ['<DIV CLASS="ActText">',
-					'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
-					'<TABLE CLASS="NoBorderTable">',
-					'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
-					'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
-					'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' +
-					this.ContractDate.formatDate("-") + ' року, особовий рахунок №' + this.ContractPAN + ': ' +
-					Record.CompanyName + ' (Постачальник) в особi ' + Record.ChiefTitle2 + ' ' + Record.BranchName2 + ' ЦОС ' + Record.ChiefName2 +
-					', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + this.CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
-					'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + this.FactVol + '</B> кВт&#183;год ' +
-					'на суму <B>' + this.VolCost + '</B> грн., ПДФО <B>' + this.Pdfo + '</B> грн., вiйськовий збiр <B>' + this.Vz + '</B> грн., всього <B>' + this.ActSum +
-					'</B> грн. (' + this.WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
-					'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
-					'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
-					'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + this.CustomerName + '</TD></TR>',
-					'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
-				];
-			}
+		var div = ['<DIV CLASS="ActText">',
+			'<H3 CLASS="H3PrnTable">Акт<SPAN>приймання-передачi електричної енергiї</SPAN></H3>',
+			'<TABLE CLASS="NoBorderTable">',
+			'<TR><TD ALIGN="LEFT" WIDTH="50%">' + Record.LocalityName + '</TD><TD ALIGN="RIGHT" WIDTH="50%">' + ActDate + '</TD></TR>',
+			'<TR><TD COLSPAN="2" STYLE="padding: 10px 0px">',
+			'<P>Сторони по договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ' +
+			this.ContractDate.formatDate("-") + ' року, особовий рахунок №' + this.ContractPAN + ': ' +
+			Record.CompanyName + ' (Постачальник) в особi ' + Record.ChiefTitle2 + ' ' + Record.BranchName2 + ' ЦОС ' + Record.ChiefName2 +
+			', що дiє на пiдставi довiреностi, з однiєї сторони, та ' + this.CustomerName + ' (Споживач), з iншої сторони склали даний акт про наступне.</P>',
+			'<P>У ' + Period + ' Споживачем передано, а Постачальником прийнято електричну енергiю (товар) в обсязi <B>' + this.FactVol + '</B> кВт&#183;год ' +
+			'на суму <B>' + this.VolCost + '</B> грн., ПДФО <B>' + this.Pdfo + '</B> грн., вiйськовий збiр <B>' + this.Vz + '</B> грн., всього <B>' + this.ActSum +
+			'</B> грн. (' + this.WordSum + '). Постачальник не має жодних претензiй до прийнятого ним товару.</P>',
+			'<P>Цей акт складений у двох примiрниках - по одному для кожної зi сторiн, що його пiдписали.</P></TD></TR>',
+			'<TR><TD>Постачальник:</TD><TD>Споживач:</TD></TR>',
+			'<TR><TD STYLE="padding: 10px 0px 0px 0px">' + Record.ChiefTitle + ' ' + Record.ChiefName + '</TD><TD>' + this.CustomerName + '</TD></TR>',
+			'<TR><TD><DIV CLASS="UnderLine"></DIV></TD><TD><DIV CLASS="UnderLine"></DIV></TD></TR></TABLE></DIV>'
+		],
+		copies = DoubleAct ? 2 : 1;
+		for (var i = 1; i <= copies; i++) {
 			this.Body.push(div.join("\n"));
 		}
 	}
