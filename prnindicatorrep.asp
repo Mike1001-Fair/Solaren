@@ -109,7 +109,7 @@ Table = {
 	},
 
 	GetFooter: function() {
-		var	BranchLocality  = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
+		var	BranchLocality = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
 		EndDate = Month.GetLastDay(ReportMonth),
 		footer = ['</TABLE>',
 			Tag.Write('P', -1, Doc.getText(this.totSaldo)),
@@ -126,8 +126,8 @@ Table = {
 	},
 
 	Render: function(rs) {
-		var ContractDate = Month.GetYMD(Report.ContractDate),
-		Period       = Month.GetPeriod(ReportMonth, 1),
+		var Period   = Month.GetPeriod(ReportMonth, 1),
+		ContractDate = Month.GetYMD(Report.ContractDate),		
 		EndDate      = Month.GetLastDay(ReportMonth),
 		LocalityType = Locality.Type[Report.ContractLocalityType],
 		StreetType   = Street.Type[Report.ContractStreetType],
