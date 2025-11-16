@@ -12,7 +12,6 @@
 Form = Solaren.Parse(),
 ReportMonth = String(Form.ReportMonth),
 DoubleReport = Form.DoubleReport == "on";
-
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -24,7 +23,6 @@ try {
 		}
 	}
 	var rsInfo = Solaren.Execute("GetReportInfo");
-
 	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 	var rs = Solaren.Execute("GetIndicatorReport");
 } catch (ex) {
