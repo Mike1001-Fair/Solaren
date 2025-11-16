@@ -53,12 +53,11 @@ var Doc = {
 
 	Render: function(DoubleReport) {
 		var Body = [],
-		Divider = '<DIV CLASS="BlockDivider"></DIV>\n';
-		for (var i = 0; i <= DoubleReport; i++) {
-			if (i == 0) {
-				var Output = Table.Render(rs);
-			}
-			Body.push(Output);	
+		Divider = '<DIV CLASS="BlockDivider"></DIV>\n',
+		Output = Table.Render(rs),
+		copies = DoubleReport ? 2 : 1;
+		while (Body.length < copies) {
+			Body.push(Output)
 		}
 		return Body.join(Divider)
 	}
@@ -111,17 +110,9 @@ Table = {
 		return tr;
 	},
 
-	Render: function(rs) {
-		var ContractDate = Month.GetYMD(Report.ContractDate),
-		Period       = Month.GetPeriod(ReportMonth, 1),
-		EndDate      = Month.GetLastDay(ReportMonth),
-		LocalityType = Locality.Type[Report.ContractLocalityType],
-		StreetType   = Street.Type[Report.ContractStreetType],
-		ContractAddress = [LocalityType, Report.ContractLocalityName + ", ", StreetType, Report.ContractStreetName, Report.HouseId],
-		BranchLocality  = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
-		Caption = ['Споживач: ' + Report.CustomerName, 'Рахунок: ' + Report.ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
-		Ref = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
-		tr = this.GetRows(rs),
+	GetFooter: function() {
+		var	BranchLocality  = [Locality.Type[Report.BranchLocalityType], Report.BranchLocalityName],
+		EndDate = Month.GetLastDay(ReportMonth),
 		footer = ['</TABLE>',
 			Tag.Write('P', -1, Doc.getText(this.totSaldo)),
 			'<TABLE CLASS="NoBorderTable">',
@@ -132,7 +123,21 @@ Table = {
 			'<TD><DIV CLASS="UnderLine"></DIV></TD></TR>',
 			'</TABLE>',
 			'<DIV CLASS="EventInfo">' + BranchLocality.join(" ") + ', ' + EndDate + '</DIV></DIV>'
-		],
+		];
+		return footer
+	},
+
+	Render: function(rs) {
+		var ContractDate = Month.GetYMD(Report.ContractDate),
+		Period       = Month.GetPeriod(ReportMonth, 1),
+		EndDate      = Month.GetLastDay(ReportMonth),
+		LocalityType = Locality.Type[Report.ContractLocalityType],
+		StreetType   = Street.Type[Report.ContractStreetType],
+		ContractAddress = [LocalityType, Report.ContractLocalityName + ", ", StreetType, Report.ContractStreetName, Report.HouseId],
+		Caption = ['Споживач: ' + Report.CustomerName, 'Рахунок: ' + Report.ContractPAN, 'Адреса: ' + ContractAddress.join(" ")],
+		Ref = ['Додаток до договору купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством вiд ', ContractDate.formatDate("-"), ' р.'],
+		tr = this.GetRows(rs),
+		footer = this.GetFooter(),
 		body = ['<DIV CLASS="ActText">',
 			'<TABLE CLASS="NoBorderTable">',
 			'<TR><TD></TD><TD CLASS="ReportTitle">' + Ref.join("") + '</TD></TR>',
