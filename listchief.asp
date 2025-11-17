@@ -23,7 +23,7 @@ try {
 	Html.SetPage("Керiвники")
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">',
+var Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
 	'<TABLE CLASS="InfoTable">',
 	'<TR><TH>Посада</TH><TH>ПIБ</TH></TR>'
@@ -35,12 +35,12 @@ for (var i=0, row; !rs.EOF; i++) {
 		Tag.Write("TD", 0, url)
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
+	Output.push(tr);
 	rs.MoveNext();
 }
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(2, i));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(Html.GetFooterRow(2, i));
+Response.Write(Output.join("\n"))%>
 
 

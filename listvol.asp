@@ -35,7 +35,7 @@ try {
 
 var nVol = totRetVol = totRecVol = totSaldo = totnVol = 0,
 Header = ['З', 'По', 'Прийом', 'Видача', 'Покупка', 'Потреби'],
-ResponseText = ['<BODY CLASS="MainBody">',
+Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">' + Html.Title + '<SPAN>Договор: ' + ContractName + '</SPAN></H3>',
 	'<TABLE CLASS="InfoTable">',
 	Html.GetHeadRow(Header)
@@ -51,7 +51,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 		Tag.Write("TD", 2, nVol.toDelimited(0)), '</TR>'
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	totRecVol += rs.Fields("RecVol");
 	totRetVol += rs.Fields("RetVol");
 	totSaldo  += rs.Fields("PurVol");
@@ -67,6 +67,6 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totnVol.toDelimited(0)),
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(footer.join(""));
+Response.Write(Output.join("\n"))%>
 

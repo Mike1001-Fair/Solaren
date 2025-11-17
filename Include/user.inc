@@ -103,13 +103,13 @@ var User = {
 	},
 
 	WriteRole: function(tagName, RoleId) {
-		var ResponseText = ['<SELECT NAME="' + tagName + '">'];
+		var Output = ['<SELECT NAME="' + tagName + '">'];
 		for (var i = 0; i < this.Role.length; i++) {
 			var selected = i == RoleId ? '" SELECTED>' : '">',
 			option = ['<OPTION VALUE="', i, selected, this.Role[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"))
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"))
 	}
 }%>

@@ -28,7 +28,7 @@ try {
 	Html.SetPage("Список РЕМ")
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">',
+var Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">Список РЕМ</H3>',
 	'<TABLE CLASS="InfoTable">',
 	'<TR><TH>№</TH><TH>Назва</TH></TR>'
@@ -39,11 +39,11 @@ for (var i=0; !rs.EOF; i++) {
 	row = ['<TR>', Tag.Write("TD", 1, rs.Fields("SortCode")),
 		Tag.Write("TD", 0, url.join("")), '</TR>'
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	rs.MoveNext();
 }
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(2, i));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(Html.GetFooterRow(2, i));
+Response.Write(Output.join("\n"))%>
 

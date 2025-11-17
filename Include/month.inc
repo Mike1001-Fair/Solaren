@@ -95,35 +95,35 @@ var Month = {
 	},
 
 	WriteDate: function() {
-		var ResponseText = ['<FIELDSET><LEGEND>Дата</LEGEND>',
+		var Output = ['<FIELDSET><LEGEND>Дата</LEGEND>',
 			'<LABEL>З <INPUT TYPE="date" NAME="BegDate" VALUE="' + this.Date[1] +
 			'" MIN="' + this.Date[0] + '" MAX="' + this.Date[3] +	'" REQUIRED></LABEL>',
 			'</FIELDSET>\n'
 		];
-		Response.Write(ResponseText.join("\n"));
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteDatePeriod: function(legend, begDate, endDate, minDate, maxDate) {
-		var ResponseText = ['<FIELDSET>', '<LEGEND>' + legend + '</LEGEND>',
+		var Output = ['<FIELDSET>', '<LEGEND>' + legend + '</LEGEND>',
 			'<INPUT TYPE="date" NAME="BegDate" VALUE="' + begDate +
 			'" MIN="' + minDate + '" MAX="' + maxDate + '" REQUIRED> &#8722;',
 			'<INPUT TYPE="date" NAME="EndDate" VALUE="' + endDate +
 			'" MIN="' + minDate + '" MAX="' + maxDate + '" REQUIRED>',
 			'</FIELDSET>\n'
 		];
-		Response.Write(ResponseText.join("\n"));
+		Response.Write(Output.join("\n"));
 	},
 
 	WritePeriod: function() {
 		var OperMonth = this.GetMonth(1),
 		MinMonth = this.GetMonth(0),
-		ResponseText = ['<FIELDSET><LEGEND>Перioд</LEGEND>',
+		Output = ['<FIELDSET><LEGEND>Перioд</LEGEND>',
 			'<INPUT TYPE="Month" NAME="BegMonth" VALUE="' + OperMonth +
 			'" MIN="' + MinMonth + '" MAX="' + OperMonth + '" REQUIRED> &#8722;',
 			'<INPUT TYPE="Month" NAME="EndMonth" VALUE="' + OperMonth +
 			'" MIN="' + MinMonth  +	'" MAX="' + OperMonth +	'" REQUIRED>',
 			'</FIELDSET>\n'
 		];
-		Response.Write(ResponseText.join("\n"));
+		Response.Write(Output.join("\n"));
 	}
 }%>

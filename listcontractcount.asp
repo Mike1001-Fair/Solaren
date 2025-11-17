@@ -28,7 +28,7 @@ try {
 
 var totContractNumber = totContractPower = 0,
 Header = ['ЦОС', 'Кiлькiсть', 'Потужнiсть'],
-ResponseText = ['<BODY CLASS="PrnBody">',
+Output = ['<BODY CLASS="PrnBody">',
 	'<H3 CLASS="H3PrnTable">' + Html.Title + '</H3><SPAN CLASS="H3PrnTable">станом на: ' + ReportDate.formatDate("-") + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	Html.GetHeadRow(Header)
@@ -40,7 +40,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("ContractPower").Value.toDelimited(2))
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
+	Output.push(tr);
 	totContractNumber += rs.Fields("ContractNumber");
 	totContractPower += rs.Fields("ContractPower");
 	rs.MoveNext();
@@ -52,6 +52,6 @@ var th = [Tag.Write("TH", 0, "Всього: " + i),
 	Tag.Write("TH", 2, totContractPower.toDelimited(2))
 ],
 tr = Tag.Write("TR", -1, th.join(""));
-ResponseText.push(tr);
-ResponseText.push('</TABLE></BODY></HTML>');
-Response.Write(ResponseText.join("\n"))%>
+Output.push(tr);
+Output.push('</TABLE></BODY></HTML>');
+Response.Write(Output.join("\n"))%>

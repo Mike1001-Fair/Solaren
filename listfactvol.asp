@@ -36,7 +36,7 @@ try {
 var Range = Month.GetRange(BegMonth, EndMonth),
 totRetVol = 0, totRecVol = 0, totSaldo = 0, totnVol = 0,
 Header = ['Рахунок', 'З', 'По', 'Споживач', 'Прийом', 'Видача', 'Покупка', 'Потреби'],
-ResponseText = ['\n<BODY CLASS="PrnBody">',
+Output = ['\n<BODY CLASS="PrnBody">',
 	'<H3 CLASS="H3PrnTable">Баланс</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	Html.GetHeadRow(Header)
@@ -53,7 +53,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 		Tag.Write("TD", 2, nVol.toDelimited(0)), '</TR>'
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	totRecVol += rs.Fields("RecVol");
 	totRetVol += rs.Fields("RetVol");
 	totSaldo  += rs.Fields("PurVol");
@@ -71,6 +71,6 @@ var footer = [
 	Tag.Write("TH", 2, totnVol.toDelimited(0)),
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(footer.join(""));
+Response.Write(Output.join("\n"))%>
 

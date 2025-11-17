@@ -10,15 +10,15 @@
 Event = {
 	Name: ["Завантаження показників", "Завантаження оплат", "Апдейт договору"],
 	Write: function() {
-		var ResponseText = ['<FIELDSET><LEGEND>Подія</LEGEND>',
+		var Output = ['<FIELDSET><LEGEND>Подія</LEGEND>',
 			'<SELECT NAME="EventType">'
 		];
 		for (var i = 0; i < this.Name.length; i++) {
 			var option = ['<OPTION VALUE="', i, '">', this.Name[i], '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
-		ResponseText.push('</SELECT></FIELDSET>');
-		Response.Write(ResponseText.join("\n"))
+		Output.push('</SELECT></FIELDSET>');
+		Response.Write(Output.join("\n"))
 	}
 };
 

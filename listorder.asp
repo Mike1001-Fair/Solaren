@@ -40,7 +40,7 @@ EndDate    = EndDate.formatDate("-");
 
 if (Period != EndDate) Period += ' &ndash; ' + EndDate;
 
-var ResponseText = ['<BODY CLASS="MainBody">',
+var Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">Список замовлень<SPAN>Період: ' + Period + '</SPAN></H3>',
 	'<TABLE CLASS="InfoTable">',
 	'<TR><TH>№</TH><TH>Дaта</TH><TH>Споживач</TH><TH>Рахунок</TH></TR>'
@@ -53,11 +53,11 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", -1, rs.Fields("CustomerName")),
 		Tag.Write("TD", -1, rs.Fields("ContractPAN")), '</TR>'
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	rs.MoveNext();
 } rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(4, i));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(Html.GetFooterRow(4, i));
+Response.Write(Output.join("\n"))%>
 
 

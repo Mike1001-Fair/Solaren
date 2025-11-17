@@ -32,7 +32,7 @@ if (rs.EOF) {
 	var OperDate = Month.GetMonth(1),
 	Period = Month.Flip(OperDate),
 	Header = ['Споживач', 'Рахунок', 'З', 'По', 'Прийом', 'Видача', 'ЦОС'],
-	ResponseText = ['<BODY CLASS="MainBody">',
+	Output = ['<BODY CLASS="MainBody">',
 		'<H3 CLASS="H3Text">Перевiрка обсягiв<SPAN>перiод: ' + Period + '</SPAN></H3>',
 		'<TABLE CLASS="InfoTable">',
 		Html.GetHeadRow(Header)
@@ -48,12 +48,12 @@ if (rs.EOF) {
 			Tag.Write("TD", -1, rs.Fields("BranchName"))
 		],
 		tr = Tag.Write("TR", -1, td.join(""));
-		ResponseText.push(tr);
+		Output.push(tr);
 		rs.MoveNext();
 	}
 	rs.Close();
 	Solaren.Close();
-	ResponseText.push(Html.GetFooterRow(7, i));
+	Output.push(Html.GetFooterRow(7, i));
 	Html.SetPage("Обсяги")
-	Response.Write(ResponseText.join("\n"))
+	Response.Write(Output.join("\n"))
 }%>

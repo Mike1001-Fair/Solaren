@@ -27,17 +27,17 @@ with (Html) {
 	Menu.Write(Session("RoleId"), 0);
 }
 
-var ResponseText = '<BODY CLASS="MainBody" ONLOAD="Loader.SetClick(`td > a`)">\n' +
+var Output = '<BODY CLASS="MainBody" ONLOAD="Loader.SetClick(`td > a`)">\n' +
 	'<H3 CLASS="H3Text">' + Title + '</H3>\n' +
 	'<TABLE CLASS="InfoTable">\n' +
 	'<TR><TH>№</TH><TH>Назва</TH></TR>\n';
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
+	Output += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
 	Html.Write("TD","LEFT") + '<A HREF="editarea.asp?AreaId=' + rs.Fields("Id") + '">' + rs.Fields("AreaName") + '</A></TD></TR>\n';
 	rs.MoveNext();
 } rs.Close();Solaren.Close();
-ResponseText += Html.GetFooterRow(2, i);
-Response.Write(ResponseText)%>
+Output += Html.GetFooterRow(2, i);
+Response.Write(Output)%>
 
 

@@ -37,7 +37,7 @@ try {
 	Html.SetPage("Журнал")
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">',
+var Output = ['<BODY CLASS="MainBody">',
 	'<TABLE CLASS="H3Text">',
 	'<CAPTION>Журнал</CAPTION>',
 	'<TR><TD ALIGN="RIGHT">Подія:</TD><TD ALIGN="LEFT">' + EventName + '</TD></TR>',
@@ -51,12 +51,12 @@ for (var i=0; !rs.EOF; i++) {
 	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("EventDate")),
 		Tag.Write("TD", -1, rs.Fields("EventText")), '</TR>'
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	rs.MoveNext();
 }
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(2, i));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(Html.GetFooterRow(2, i));
+Response.Write(Output.join("\n"))%>
 
 

@@ -17,7 +17,7 @@ var Html = {
 		if (UseScripts) {
 			Head.push(Scripts.Write());
 		}
-		var ResponseText = [
+		var Output = [
 			'<!DOCTYPE html>',
 			'<HTML LANG="en">',
 			Tag.Write('HEAD', -1, Head.join("\n"))
@@ -26,7 +26,7 @@ var Html = {
 			CacheControl = "no-cache, no-store;";
 			AddHeader("X-Content-Type-Options", "nosniff");
 			Charset = "utf-8";
-			Write(ResponseText.join("\n"));
+			Write(Output.join("\n"));
 		}
 	},
 
@@ -34,8 +34,8 @@ var Html = {
 		var ScriptName = Solaren.ScriptName.split("/").pop(),
 		FileParts      = ScriptName.split('.'),
 		FileName       = Scripts.Map(FileParts[0].toLowerCase()),
-		ResponseText   = ['\n<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
-		Response.Write(ResponseText.join(""));
+		Output   = ['\n<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
+		Response.Write(Output.join(""));
 	},
 
 	SetPage: function(Title) {
@@ -45,41 +45,41 @@ var Html = {
 	},
 
 	GetLink: function (url, id, value) {
-		var ResponseText = ['<A href="', url, id, '">', value, '</A>'];
-		return ResponseText.join("")
+		var Output = ['<A href="', url, id, '">', value, '</A>'];
+		return Output.join("")
 	},
 	
 	WriteEditButton: function(AllowDelBtn, Deleted) {
-		var ResponseText = [];
+		var Output = [];
 		if (Deleted) {
-			ResponseText.push('<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>');
+			Output.push('<BUTTON CLASS="RestoreBtn" ID="RestoreBtn">&#9851;Вiдновити</BUTTON>');
 		} else {
-			ResponseText.push('<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>');
+			Output.push('<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON>');
 			if (AllowDelBtn) {
-				ResponseText.push('<BUTTON CLASS="DelBtn" ID="DelBtn">&#128465;Видалити</BUTTON>');
+				Output.push('<BUTTON CLASS="DelBtn" ID="DelBtn">&#128465;Видалити</BUTTON>');
 			}
 		}
-		Response.Write(ResponseText.join("\n"));
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteInputDataList : function(tagName, tagValue, tagSize, autoFocus) {
 		var inputName = tagName + "Name",
 		listName = tagName + "List",
 		tagAttribute = autoFocus ? ' AUTOFOCUS>' : '>',
-		ResponseText = ['<INPUT TYPE="search" NAME="' + inputName +
+		Output = ['<INPUT TYPE="search" NAME="' + inputName +
 			'" ID="' + inputName + '" VALUE="' + tagValue +
 			'" PLACEHOLDER="Пошук" SIZE="' + tagSize +
 			'" LIST="' + listName + '" REQUIRED' + tagAttribute,
 			'<DATALIST ID="' + listName + '"></DATALIST>'
 		];
-		Response.Write(ResponseText.join("\n"));
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteSearchSet: function(title, tagName, tagValue, tagRequired) {
 		var inputName = tagName + "Name",
 		listName = tagName + "List",
 		required = tagRequired ? " REQUIRED" : "",
-		ResponseText = [
+		Output = [
 			'<FIELDSET><LEGEND>' + title + '</LEGEND>',
 			'<INPUT TYPE="search" NAME="' + inputName + '" ID="' + inputName +
 			'" VALUE="' + tagValue + '" PLACEHOLDER="Пошук" SIZE=35"' +
@@ -87,75 +87,75 @@ var Html = {
 			'<DATALIST ID="' + listName + '"></DATALIST>',
 			'</FIELDSET>'
 		];
-		Response.Write(ResponseText.join("\n"));
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteSelect: function(rs, objName, blankOption, elementId) {
 		var tagId = objName + "Id",
 		tagName  = objName + "Name",
-		ResponseText = ['<SELECT NAME="' + tagId + '" ID="' + tagId + '">'];
+		Output = ['<SELECT NAME="' + tagId + '" ID="' + tagId + '">'];
 		if (blankOption) {
-			ResponseText.push('<OPTION VALUE="0"></OPTION>');
+			Output.push('<OPTION VALUE="0"></OPTION>');
 		}
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = elementId == rs.Fields(tagId) ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields(tagId), selected, rs.Fields(tagName), '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"));
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteList: function(tagName, list) {
-		var ResponseText = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
+		var Output = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
 		if (list instanceof Array) {
 			for (var i = 0; i < list.length; i++) {
 				var option = ['<OPTION VALUE="', i, '">', list[i], '</OPTION>'];
-				ResponseText.push(option.join(""));
+				Output.push(option.join(""));
 			}
 		} else {
 			var option = ['<OPTION VALUE="', -1, '">', 'Invalid array', '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"));
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteBank: function(rs, MfoCode) {
-		var ResponseText = ['<SELECT NAME="MfoCode" ID="MfoCode">'];
+		var Output = ['<SELECT NAME="MfoCode" ID="MfoCode">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = MfoCode == rs.Fields("MfoCode") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("MfoCode"), selected, rs.Fields("BankName"), '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"));
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteChiefDoc: function(rs, DocId) {
-		var ResponseText = ['<SELECT NAME="ChiefDocId" ID="ChiefDocId">'];
+		var Output = ['<SELECT NAME="ChiefDocId" ID="ChiefDocId">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = DocId == rs.Fields("DocId") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("DocId"), selected, rs.Fields("DocName"), '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"));
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	},
 
 	WriteChiefTitle: function(rs, TitleId) {
-		var ResponseText = ['<SELECT NAME="ChiefTitleId" ID="ChiefTitleId">'];
+		var Output = ['<SELECT NAME="ChiefTitleId" ID="ChiefTitleId">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
 			selected = TitleId == rs.Fields("TitleId") ? '" SELECTED>' : '">';
 			option = ['<OPTION VALUE="', rs.Fields("TitleId"), selected, rs.Fields("Title1"), '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
 		rs.Close();
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"));
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	},
 
 	GetHeadRow: function(header) {
@@ -171,16 +171,16 @@ var Html = {
 	},
 
 	GetFooterRow: function(ColSpan, i) {
-		var ResponseText = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan + '">Всього: ' + i + '</TH></TR>',
+		var Output = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan + '">Всього: ' + i + '</TH></TR>',
 			'</TABLE>','</BODY>','</HTML>'
 		];
-		return ResponseText.join("\n")
+		return Output.join("\n")
 	},
 
 	WriteFileList: function(FolderName) {
 		//var Fso = Server.CreateObject("Scripting.FileSystemObject"),
 		var FolderPath = Server.MapPath(FolderName),
-		ResponseText = '<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">\n';
+		Output = '<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">\n';
 		if (Fso.FolderExists(FolderPath)) {
 			var Folder = Fso.GetFolder(FolderPath),
 			Files = new Enumerator(Folder.Files);
@@ -188,15 +188,15 @@ var Html = {
 				for (var fileName, option; !Files.atEnd(); Files.moveNext()) {
 					fileName = Files.item().Name;
 					option = ['<OPTION VALUE="', fileName, '">', fileName, '</OPTION>'];
-					ResponseText += option.join("");
+					Output += option.join("");
 				}
 			} else {
-				ResponseText += '<OPTION>Folder is empty</OPTION>';
+				Output += '<OPTION>Folder is empty</OPTION>';
 			}
 		} else {
-			ResponseText += '<OPTION>Folder not exists</OPTION>';
+			Output += '<OPTION>Folder not exists</OPTION>';
 		}
-		Response.Write(ResponseText + '</SELECT>');
+		Response.Write(Output + '</SELECT>');
 	}
 },
 

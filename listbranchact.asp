@@ -36,7 +36,7 @@ try {
 var Range = Month.GetRange(BegMonth, EndMonth),
 totVol = totVolCost = totPdfo = totVz = totPurCost = 0,
 Header = ['коп', 'кВт&#183;год', 'Вартiсть', 'ПДФО', 'ВЗ', 'До сплати'],
-ResponseText = ['<BODY CLASS="PrnBody">',
+Output = ['<BODY CLASS="PrnBody">',
 	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	Tag.Write("CAPTION", -1, BranchName),
@@ -57,7 +57,7 @@ for (var i = 0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("PurCost").Value.toDelimited(2))
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
+	Output.push(tr);
 	totVol     += rs.Fields("Vol");
 	totVolCost += rs.Fields("VolCost");
 	totPdfo    += rs.Fields("Pdfo");
@@ -77,5 +77,5 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>',
 	'</TH></TR>\n</TABLE></BODY></HTML>'
 ];
 
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(footer.join(""));
+Response.Write(Output.join("\n"))%>

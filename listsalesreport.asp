@@ -33,7 +33,7 @@ try {
 
 var range = Month.GetRange(BegDate, EndDate),
 totalQuantity = 0,
-ResponseText = ['<BODY CLASS="MainBody">',
+Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">Звіт<SPAN>Період: ' + range + '</SPAN></H3>',
 	'<TABLE CLASS="InfoTable">',
 	'<TR><TH>Назва</TH><TH>Кількість</TH></TR>'
@@ -44,13 +44,13 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("Quantity"))
 	],
 	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
+	Output.push(tr);
 	totalQuantity += rs.Fields("Quantity").Value;
 	rs.MoveNext();
 }
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(2, i));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(Html.GetFooterRow(2, i));
+Response.Write(Output.join("\n"))%>
 
 

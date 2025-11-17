@@ -33,7 +33,7 @@ var Period = Month.GetPeriod(ReportMonth, 0),
 totRecVol = 0, totRetVol = 0, totSaldo = 0;
 Html.SetHead("Звiт");
 
-var ResponseText = '<BODY CLASS="PrnBody">\n' +
+var Output = '<BODY CLASS="PrnBody">\n' +
 '<H3 CLASS="H3PrnTable">Акт звірки</H3><SPAN CLASS="H3PrnTable">перiод: ' + Period + '</SPAN>\n' +
 '<TABLE CLASS="PrnTable">\n' +
 '<CAPTION>оператор:  ' + OperatorName + '</CAPTION>\n' +
@@ -41,7 +41,7 @@ var ResponseText = '<BODY CLASS="PrnBody">\n' +
 '<TR><TH>А+</TH><TH>А-</TH><TH>Прийом</TH><TH>Видача</TH><TH>Сальдо</TH></TR>\n';
 
 for (var i=0; !rs.EOF; i++) {
-	ResponseText += '<TR><TD>' + rs.Fields("EICode") +
+	Output += '<TR><TD>' + rs.Fields("EICode") +
 	Html.Write("TD","RIGHT") + rs.Fields("MeterCode") +
 	Html.Write("TD","RIGHT") + rs.Fields("RecVal").Value.toDelimited(0) +
 	Html.Write("TD","RIGHT") + rs.Fields("RetVal").Value.toDelimited(0) +
@@ -54,10 +54,10 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext()
 } rs.Close(); Solaren.Close();
 
-ResponseText += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i +
+Output += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i +
 Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totSaldo.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
-Response.Write(ResponseText)%>
+Response.Write(Output)%>
 
 

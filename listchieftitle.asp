@@ -23,7 +23,7 @@ try {
 	Html.SetPage("Посади")
 }
 
-var ResponseText = ['<BODY CLASS="MainBody">',
+var Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
 	'<TABLE CLASS="InfoTable">',
 	'<TR><TH>Посада</TH></TR>'
@@ -33,11 +33,11 @@ for (var i=0; !rs.EOF; i++) {
 	var url = Html.GetLink("editchieftitle.asp?ChiefTitleId=", rs.Fields("Id"), rs.Fields("Title1")),
 	td =  [Tag.Write("TD", 0, url)],
 	tr = Tag.Write("TR", -1, td.join(""));
-	ResponseText.push(tr);
+	Output.push(tr);
 	rs.MoveNext();
 }
 rs.Close();
 Solaren.Close();
-ResponseText.push(Html.GetFooterRow(1, i));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(Html.GetFooterRow(1, i));
+Response.Write(Output.join("\n"))%>
 

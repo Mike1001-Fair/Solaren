@@ -30,7 +30,7 @@ if (rs.EOF) {
 		Menu.Write(Session("RoleId"), 0);
 	}
 	var Header = ['Споживач', 'Рахунок', 'З', 'По', 'Обсяг<BR>кВт&#183;год', 'Вартiсть<BR>грн', 'ЦОС'],
-	ResponseText = ['<BODY CLASS="MainBody">',
+	Output = ['<BODY CLASS="MainBody">',
 		'<H3 CLASS="H3Text">Перевiрка тарифу</H3>',
 		'<TABLE CLASS="InfoTable">',
 		Html.GetHeadRow(Header)
@@ -46,13 +46,13 @@ if (rs.EOF) {
 			Tag.Write("TD", -1, rs.Fields("BranchName")),
 		],
 		tr = Tag.Write("TR", -1, td.join(""));
-		ResponseText.push(tr);
+		Output.push(tr);
 		rs.MoveNext();
 	}
 	rs.Close();
 	Solaren.Close();
-	ResponseText.push(Html.GetFooterRow(7, i));
-	Response.Write(ResponseText.join("\n"))
+	Output.push(Html.GetFooterRow(7, i));
+	Response.Write(Output.join("\n"))
 }%>
 
 

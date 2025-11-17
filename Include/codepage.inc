@@ -6,12 +6,12 @@ var	CpList = {
 
 CodePage = {
 	Write: function() {
-		var ResponseText = ['<SELECT NAME="ReportCodePage">'];
+		var Output = ['<SELECT NAME="ReportCodePage">'];
 		for (var k in CpList) {
 			var option = ['<OPTION VALUE="', k, '">', CpList[k], '</OPTION>'];
-			ResponseText.push(option.join(""));
+			Output.push(option.join(""));
 		}
-		ResponseText.push('</SELECT>');
-		Response.Write(ResponseText.join("\n"));
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	}
 }%>

@@ -10,11 +10,11 @@ var Menu = {
 		var page = this.Map(Session("RoleId")),
 		msg = Session('MsgText');
 		if (BodyTag) {
-			var ResponseText = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
+			var Output = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
 			if (msg) {
-				ResponseText.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + msg + '">');
+				Output.push('<INPUT TYPE="HIDDEN" NAME="MsgText" ID="MsgText" VALUE="' + msg + '">');
 			}
-			Response.Write(ResponseText.join("\n"));
+			Response.Write(Output.join("\n"));
 			Server.Execute(page);
 			Response.Write('</BODY></HTML>');
 		} else {

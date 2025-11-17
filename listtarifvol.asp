@@ -34,7 +34,7 @@ try {
 
 var Range = Month.GetRange(BegMonth, EndMonth),
 totPurVol = totVolCost = 0,
-ResponseText = ['<BODY CLASS="PrnBody">',
+Output = ['<BODY CLASS="PrnBody">',
 	'<H3 CLASS="H3PrnTable">Обсяги по тарифам</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	'<TR><TH ROWSPAN="2">Дата вводу<BR>в експлуатацiю</TH><TH ROWSPAN="2">Група</TH><TH>Тариф</TH><TH>Обсяг</TH><TH>Вартiсть</TH></TR>',
@@ -51,7 +51,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("VolCost").Value.toDelimited(2)), '</TR>',
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	totPurVol += rs.Fields("PurVol");
 	totVolCost += rs.Fields("VolCost");
 	rs.MoveNext();
@@ -64,7 +64,7 @@ var footer = [
 	Tag.Write("TH", 2, totVolCost.toDelimited(2)),
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(footer.join(""));
+Response.Write(Output.join("\n"))%>
 
 

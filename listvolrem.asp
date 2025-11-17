@@ -33,7 +33,7 @@ try {
 var Range = Month.GetRange(BegMonth, EndMonth),
 totVol = totVolCost = totPdfo = totVz = totPurCost = 0,
 Header = ['кВт&#183;год', 'Вартiсть', 'ПДФО', 'ВЗ', 'До сплати'],
-ResponseText = ['<BODY CLASS="PrnBody">',
+Output = ['<BODY CLASS="PrnBody">',
 	'<H3 CLASS="H3PrnTable">Вартiсть купiвлi електричної енергiї</H3><SPAN CLASS="H3PrnTable">перiод: ' + Range + '</SPAN>',
 	'<TABLE CLASS="PrnTable">',
 	'<TR><TH ROWSPAN="2">ЦОС</TH><TH>Обсяг</TH><TH COLSPAN="4">грн</TH></TR>',
@@ -48,7 +48,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("Vz").Value.toDelimited(2)),
 		Tag.Write("TD", 2, rs.Fields("PurCost").Value.toDelimited(2)), '</TR>'
 	]
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	totVol     += rs.Fields("Vol");
 	totVolCost += rs.Fields("VolCost");
 	totPdfo    += rs.Fields("Pdfo");
@@ -67,7 +67,7 @@ var footer = ['<TR><TH ALIGN="LEFT">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totPurCost.toDelimited(2)),
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(footer.join(""));
+Response.Write(Output.join("\n"))%>
 
 

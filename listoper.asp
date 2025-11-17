@@ -36,7 +36,7 @@ try {
 }
 
 var totRetVol = totVolCost = 0,
-ResponseText = ['<BODY CLASS="MainBody">',
+Output = ['<BODY CLASS="MainBody">',
 	'<H3 CLASS="H3Text">Операції<SPAN>Договор: ' + ContractName + '</SPAN></H3>',
 	'<TABLE CLASS="InfoTable">',
 	'<TR><TH>З</TH><TH>По</TH><TH>Видача</TH><TH>Вартість</TH></TR>'
@@ -49,7 +49,7 @@ for (var i=0; !rs.EOF; i++) {
 		Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
 		Tag.Write("TD", 2, rs.Fields("VolCost").Value.toDelimited(2)), '</TR>'
 	];
-	ResponseText.push(row.join(""));
+	Output.push(row.join(""));
 	totRetVol += rs.Fields("RetVol");
 	totVolCost += rs.Fields("VolCost");
 	rs.MoveNext()
@@ -60,6 +60,6 @@ var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totVolCost.toDelimited(2)),
 	'</TR>\n</TABLE></BODY></HTML>'
 ];
-ResponseText.push(footer.join(""));
-Response.Write(ResponseText.join("\n"))%>
+Output.push(footer.join(""));
+Response.Write(Output.join("\n"))%>
 
