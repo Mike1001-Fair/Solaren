@@ -6,19 +6,13 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse(),
+BegDate = String(Form.BegDate),
+EndDate = String(Form.EndDate),
+Period  = BegDate.formatDate("-"),
+FinalDate = EndDate.formatDate("-");
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var BegDate = String(Form("BegDate")),
-	EndDate     = String(Form("EndDate")),
-	EventType   = Form("EventType"),
-	EventName   = Form("EventName"),
-	Period      = BegDate.formatDate("-"),
-	FinalDate   = EndDate.formatDate("-");
-}
-
-if (Period != FinalDate) Period += ' &ndash; ' + FinalDate;
 
 try {
 	Solaren.SetCmd("ListAppLog");
@@ -27,36 +21,51 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
-			Append(CreateParameter("EventType", adVarChar, adParamInput, 10, EventType));
+			Append(CreateParameter("EventType", adVarChar, adParamInput, 10, Form.EventType));
 		}
 	}
 	var rs = Solaren.Execute("ListAppLog");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
+	if (Period != FinalDate) {
+		Period += ' &ndash; ' + FinalDate
+	}
 	Html.SetPage("Журнал")
 }
 
-var Output = ['<BODY CLASS="MainBody">',
-	'<TABLE CLASS="H3Text">',
-	'<CAPTION>Журнал</CAPTION>',
-	'<TR><TD ALIGN="RIGHT">Подія:</TD><TD ALIGN="LEFT">' + EventName + '</TD></TR>',
-	'<TR><TD ALIGN="RIGHT">Період:</TD><TD ALIGN="LEFT">' + Period + '</TD></TR>',
-	'</TABLE>',
-	'<TABLE CLASS="InfoTable">',
-	'<TR><TH>Дaта</TH><TH>Повідомлення</TH></TR>'
-];
+var Table = {
+	GetRows: function(rs) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
+			var td = [Tag.Write("TD", -1, rs.Fields("EventDate")),
+				Tag.Write("TD", -1, rs.Fields("EventText"))
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+			rows.push(tr);			
+		}
+		return rows;
+	},
 
-for (var i=0; !rs.EOF; i++) {
-	var row = ['<TR>', Tag.Write("TD", -1, rs.Fields("EventDate")),
-		Tag.Write("TD", -1, rs.Fields("EventText")), '</TR>'
-	];
-	Output.push(row.join(""));
-	rs.MoveNext();
-}
+	Render: function(rs) {
+		var rows = this.GetRows(rs),
+		Header = ['Дaта', 'Повідомлення'],
+		body = ['<BODY CLASS="MainBody">',
+			'<TABLE CLASS="H3Text">',
+			'<CAPTION>Журнал</CAPTION>',
+			'<TR><TD ALIGN="RIGHT">Подія:</TD><TD ALIGN="LEFT">' + Form.EventName + '</TD></TR>',
+			'<TR><TD ALIGN="RIGHT">Період:</TD><TD ALIGN="LEFT">' + Period + '</TD></TR>',
+			'</TABLE>',
+			'<TABLE CLASS="InfoTable">',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			Html.GetFooterRow(Header.length, rows.length)
+		];
+		return body.join("\n");
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-Output.push(Html.GetFooterRow(2, i));
-Response.Write(Output.join("\n"))%>
+Response.Write(Output)%>
 
 
