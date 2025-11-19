@@ -6,12 +6,12 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
+<!-- #INCLUDE FILE="Include/month.inc" -->
 <% var Authorized = User.RoleId == 1,
 Form = Solaren.Parse(),
 BegDate = String(Form.BegDate),
 EndDate = String(Form.EndDate),
-Period  = BegDate.formatDate("-"),
-FinalDate = EndDate.formatDate("-");
+Period  = Month.GetRange(BegDate, EndDate);
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -28,9 +28,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	if (Period != FinalDate) {
-		Period += ' &ndash; ' + FinalDate
-	}
 	Html.SetPage("Журнал")
 }
 
