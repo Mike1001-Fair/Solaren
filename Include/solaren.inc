@@ -70,20 +70,26 @@ Solaren = {
 				key = hasName ? item.Name : item,
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
-				/*var Output = ["<p>key: " + key,
-					"value: " + value,
-					"typeof key: " + typeof item.Name					
-				];
-				this.Write(Output.join("<br>"))*/
+				//this.Debug(key, value);
 			}
 		}
 		return result;
 	},
 
+	Debug: function(key, value) {
+		var Output = ["<p>key: " + key,
+			"value: " + value,
+			//"typeof key: " + typeof key
+		];
+		this.Write(Output.join("<br>"))
+	},
+
 	Write: function(Output) {
-		Response.Charset = "utf-8";
-		Response.ContentType = "text/html";
-		Response.Write(Output);
+		with (Response) {
+			Charset = "utf-8";
+			ContentType = "text/html";
+			Write(Output);
+		}
 	},
 
 	Match: function(key) {
