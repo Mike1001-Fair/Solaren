@@ -67,19 +67,23 @@ Solaren = {
 			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
-				key = hasName ? item.Name : item;
+				key = hasName ? item.Name : item,
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
-				//this.Write("<br>key:" + key + ", value:" + value + ", typeof item.Name:" + typeof item.Name);
+				/*var Output = ["<p>key: " + key,
+					"value: " + value,
+					"typeof key: " + typeof item.Name					
+				];
+				this.Write(Output.join("<br>"))*/
 			}
 		}
 		return result;
 	},
 
-	Write: function(info) {
+	Write: function(Output) {
 		Response.Charset = "utf-8";
 		Response.ContentType = "text/html";
-		Response.Write(info);
+		Response.Write(Output);
 	},
 
 	Match: function(key) {
