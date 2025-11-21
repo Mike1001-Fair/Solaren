@@ -63,7 +63,7 @@ Solaren = {
 
 	Map: function(Collection) {
 		var result = {};
-		if (this.ValidObject(Collection)) {
+		try {
 			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
@@ -71,12 +71,15 @@ Solaren = {
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
 			}
+		} catch (ex) {
+			Message.Write(3, Message.Error(ex))
 		}
 		return result;
 	},
 
 	Debug: function(obj) {
-		var Table = ['<DIV CLASS="FormDiv">',
+		var Table = ['<H3 CLASS="HeadText">🐛Дебаг</H3>',
+			'<DIV CLASS="FormDiv">',
 			'<FIELDSET CLASS="FieldSet">',
 			'<LEGEND>Параметри</LEGEND>',
 			'<TABLE CLASS="RulesAllInfo">',
