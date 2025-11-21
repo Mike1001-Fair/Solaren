@@ -60,11 +60,11 @@ var Table = {
 			Tag.Write("TH", 2, this.TotPower.toDelimited(1))
 		],
 		body = [
-            '<BODY CLASS="MainBody">',
-            '<H3 CLASS="H3Text">' + Html.Title + '</H3>',
-            '<TABLE CLASS="InfoTable">',
-            Html.GetHeadRow(Header),
-            rows.join("\n"),
+			'<BODY CLASS="MainBody">',
+			'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+			'<TABLE CLASS="InfoTable">',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
 			Tag.Write("TR", -1, footer.join(""))
         ];
         return body.join("\n");

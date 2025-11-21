@@ -82,20 +82,19 @@ Solaren = {
 			'<TABLE CLASS="RulesAllInfo">',
 			'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'
 		];
-
-		if (this.ValidObject(obj)) {
+		try {
 			for (var key in obj) {
 				var td = [Tag.Write("TD", 1, key),
 					Tag.Write("TD", 1, obj[key])
 				],
 				tr = Tag.Write("TR", -1, td.join(""));
-				Table.push(tr);
+				Table.push(tr);	
 			}
-		} else {
-			Table.push('<TR><TD COLSPAN="2">Invalid object</TD></TR>');
+			Table.push("</TABLE></FIELDSET></DIV>");
+			this.Write(Table.join("\n"))
+		} catch (ex) {
+			Message.Write(3, Message.Error(ex))
 		}
-		Table.push("</TABLE></FIELDSET></DIV>");
-		this.Write(Table.join("\n"))
 	},
 
 	Write: function(Output) {

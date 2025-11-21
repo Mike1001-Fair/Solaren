@@ -160,14 +160,16 @@ var Html = {
 
 	GetHeadRow: function(header) {
 		var row = [];
-		if (header instanceof Array) {
+		try {
 			for (var i = 0; i < header.length; i++) {
-				row.push('<TH>' + header[i] + '</TH>');
+				var th = Tag.Write('TH', -1, header[i])
+				row.push(th);
 			}
-		} else {
-			row.push('<TH>Invalid header array</TH>');
+		} catch (ex) {
+			Message.Write(3, Message.Error(ex))
 		}
-		return Tag.Write('TR', -1, row.join(""))
+		var tr = Tag.Write('TR', -1, row.join(""));
+		return tr
 	},
 
 	GetFooterRow: function(ColSpan, i) {
