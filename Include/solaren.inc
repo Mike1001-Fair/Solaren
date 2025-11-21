@@ -63,7 +63,7 @@ Solaren = {
 
 	Map: function(Collection) {
 		var result = {};
-		try {
+		if (this.ValidObject(Collection)) {
 			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
@@ -71,10 +71,8 @@ Solaren = {
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
 			}
-		} catch (ex) {
-			Message.Write(3, Message.Error(ex))
 		}
-		return result;
+		return result
 	},
 
 	Debug: function(obj) {
@@ -85,7 +83,7 @@ Solaren = {
 			'<TABLE CLASS="RulesAllInfo">',
 			'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'
 		];
-		try {
+		if (this.ValidObject(obj)) {
 			for (var key in obj) {
 				var td = [Tag.Write("TD", 1, key),
 					Tag.Write("TD", 1, obj[key])
@@ -93,11 +91,11 @@ Solaren = {
 				tr = Tag.Write("TR", -1, td.join(""));
 				Table.push(tr);	
 			}
-			Table.push("</TABLE></FIELDSET></DIV>");
-			this.Write(Table.join("\n"))
-		} catch (ex) {
-			Message.Write(3, Message.Error(ex))
+		} else {
+			Table.push('<TR><TD COLSPAN="2">Invalid input object</TD></TR>');
 		}
+		Table.push("</TABLE></FIELDSET></DIV>");
+		this.Write(Table.join("\n"))
 	},
 
 	Write: function(Output) {
