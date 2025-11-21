@@ -63,25 +63,39 @@ Solaren = {
 
 	Map: function(Collection) {
 		var result = {};
-		if (this.ValidObject(Collection)) {			
+		if (this.ValidObject(Collection)) {
 			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
 				key = hasName ? item.Name : item,
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
-				//this.Debug(key, value);
 			}
 		}
 		return result;
 	},
 
-	Debug: function(key, value) {
-		var Output = ["<p>key: " + key,
-			"value: " + value,
-			//"typeof key: " + typeof key
+	Debug: function(obj) {
+		var Table = ['<DIV CLASS="FormDiv">',
+			'<FIELDSET CLASS="FieldSet">',
+			'<LEGEND>Параметри</LEGEND>',
+			'<TABLE CLASS="RulesAllInfo">',
+			'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'
 		];
-		this.Write(Output.join("<br>"))
+
+		if (this.ValidObject(obj)) {
+			for (var key in obj) {
+				var td = [Tag.Write("TD", 1, key),
+					Tag.Write("TD", 1, obj[key])
+				],
+				tr = Tag.Write("TR", -1, td.join(""));
+				Table.push(tr);
+			}
+			Table.push("</TABLE></FIELDSET></DIV>");
+		} else {
+			Table.push('<TR><TD COLSPAN="2">Invalid object</TD></TR>');
+		}
+		this.Write(Table.join("\n"))
 	},
 
 	Write: function(Output) {
