@@ -160,15 +160,16 @@ var Html = {
 
 	GetHeadRow: function(header) {
 		var row = [];
-		try {
+		if (header instanceof Array) {
 			for (var i = 0; i < header.length; i++) {
 				var th = Tag.Write('TH', -1, header[i])
 				row.push(th);
 			}
-		} catch (ex) {
-			Message.Write(3, Message.Error(ex))
+		} else {
+			var th = Tag.Write('TH', -1, 'Invalid input array')
+			row.push(th);
 		}
-		var tr = Tag.Write('TR', -1, row.join(""));
+		var tr = Tag.Write('TR', -1, row.join(""))
 		return tr
 	},
 
