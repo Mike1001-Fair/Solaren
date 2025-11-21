@@ -91,10 +91,10 @@ Solaren = {
 				tr = Tag.Write("TR", -1, td.join(""));
 				Table.push(tr);
 			}
-			Table.push("</TABLE></FIELDSET></DIV>");
 		} else {
 			Table.push('<TR><TD COLSPAN="2">Invalid object</TD></TR>');
 		}
+		Table.push("</TABLE></FIELDSET></DIV>");
 		this.Write(Table.join("\n"))
 	},
 
