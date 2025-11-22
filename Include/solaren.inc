@@ -76,7 +76,7 @@ Solaren = {
 	},
 
 	Debug: function(obj) {
-		var Table = ['<H3 CLASS="HeadText">🐛Дебаг</H3>',
+		var Output = ['<H3 CLASS="HeadText">🐛Дебаг</H3>',
 			'<DIV CLASS="FormDiv">',
 			'<FIELDSET CLASS="FieldSet">',
 			'<LEGEND>Параметри</LEGEND>',
@@ -89,13 +89,13 @@ Solaren = {
 					Tag.Write("TD", 1, obj[key])
 				],
 				tr = Tag.Write("TR", -1, td.join(""));
-				Table.push(tr);	
+				Output.push(tr);	
 			}
 		} else {
-			Table.push('<TR><TD COLSPAN="2">Invalid input object</TD></TR>');
+			Output.push('<TR><TD COLSPAN="2">Invalid input object</TD></TR>');
 		}
-		Table.push("</TABLE></FIELDSET></DIV>");
-		this.Write(Table.join("\n"))
+		Output.push("</TABLE></FIELDSET></DIV>");
+		this.Write(Output.join("\n"))
 	},
 
 	Write: function(Output) {
