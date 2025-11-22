@@ -175,7 +175,7 @@ var Html = {
 
 	GetFooterRow: function(ColSpan, i) {
 		var Output = ['<TR><TH ALIGN="LEFT" COLSPAN="' + ColSpan + '">Всього: ' + i + '</TH></TR>',
-			'</TABLE>','</BODY>','</HTML>'
+			'</TABLE></BODY></HTML>'
 		];
 		return Output.join("\n")
 	},
@@ -183,23 +183,24 @@ var Html = {
 	WriteFileList: function(FolderName) {
 		//var Fso = Server.CreateObject("Scripting.FileSystemObject"),
 		var FolderPath = Server.MapPath(FolderName),
-		Output = '<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">\n';
+		Output = ['<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">'];
 		if (Fso.FolderExists(FolderPath)) {
 			var Folder = Fso.GetFolder(FolderPath),
 			Files = new Enumerator(Folder.Files);
 			if (Folder.Files.Count > 0) {
-				for (var fileName, option; !Files.atEnd(); Files.moveNext()) {
-					fileName = Files.item().Name;
+				for (; !Files.atEnd(); Files.moveNext()) {
+					var fileName = Files.item().Name,
 					option = ['<OPTION VALUE="', fileName, '">', fileName, '</OPTION>'];
-					Output += option.join("");
+					Output.push(option.join(""));
 				}
 			} else {
-				Output += '<OPTION>Folder is empty</OPTION>';
+				Output.push('<OPTION>Folder is empty</OPTION>');
 			}
 		} else {
-			Output += '<OPTION>Folder not exists</OPTION>';
+			Output.push('<OPTION>Folder not exists</OPTION>');
 		}
-		Response.Write(Output + '</SELECT>');
+		Output.push('</SELECT>');
+		Response.Write(Output.join("\n"));
 	}
 },
 
