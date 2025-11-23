@@ -76,14 +76,14 @@ Solaren = {
 	},
 
 	Debug: function(obj) {
-		var Output = ['<H3 CLASS="HeadText">🐛Дебаг</H3>',
-			'<DIV CLASS="FormDiv">',
-			'<FIELDSET CLASS="FieldSet">',
-			'<LEGEND>Параметри</LEGEND>',
-			'<TABLE CLASS="RulesAllInfo">',
-			'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'
-		];
 		if (this.ValidObject(obj)) {
+			var Output = ['<H3 CLASS="HeadText">🐛Дебаг</H3>',
+				'<DIV CLASS="FormDiv">',
+				'<FIELDSET CLASS="FieldSet">',
+				'<LEGEND>Параметри</LEGEND>',
+				'<TABLE CLASS="RulesAllInfo">',
+				'<TR><TH>Ключ</TH><TH>Значення</TH></TR>'
+			];
 			for (var key in obj) {
 				var td = [Tag.Write("TD", 1, key),
 					Tag.Write("TD", 1, obj[key])
@@ -91,11 +91,11 @@ Solaren = {
 				tr = Tag.Write("TR", -1, td.join(""));
 				Output.push(tr);	
 			}
+			Output.push("</TABLE></FIELDSET></DIV>");
+			this.Write(Output.join("\n"))
 		} else {
-			Output.push('<TR><TD COLSPAN="2">Invalid input object</TD></TR>');
+			Message.Write(3, 'Invalid input object');
 		}
-		Output.push("</TABLE></FIELDSET></DIV>");
-		this.Write(Output.join("\n"))
 	},
 
 	Write: function(Output) {

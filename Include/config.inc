@@ -10,7 +10,7 @@ var Config = {
 			Output.push('</FIELDSET>');
 			Response.Write(Output.join("\n"));	
 		} else {
-			Message.Write(3, "Invalid object: List")
+			Message.Write(3, "Invalid input object")
 		}
 	},
 
