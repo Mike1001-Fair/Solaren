@@ -108,18 +108,17 @@ var Html = {
 	},
 
 	WriteList: function(tagName, list) {
-		var Output = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
 		if (list instanceof Array) {
+			var Output = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
 			for (var i = 0; i < list.length; i++) {
 				var option = ['<OPTION VALUE="', i, '">', list[i], '</OPTION>'];
 				Output.push(option.join(""));
 			}
+			Output.push('</SELECT>');
+			Response.Write(Output.join("\n"));
 		} else {
-			var option = ['<OPTION VALUE="', -1, '">', 'Invalid array', '</OPTION>'];
-			Output.push(option.join(""));
+			Message.Write(3, 'Invalid input array');
 		}
-		Output.push('</SELECT>');
-		Response.Write(Output.join("\n"));
 	},
 
 	WriteBank: function(rs, MfoCode) {
@@ -182,40 +181,40 @@ var Html = {
 
 	WriteFileList: function(FolderName) {
 		//var Fso = Server.CreateObject("Scripting.FileSystemObject"),
-		var FolderPath = Server.MapPath(FolderName),
-		Output = ['<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">'];
+		var FolderPath = Server.MapPath(FolderName);
 		if (Fso.FolderExists(FolderPath)) {
 			var Folder = Fso.GetFolder(FolderPath),
 			Files = new Enumerator(Folder.Files);
 			if (Folder.Files.Count > 0) {
+				var Output = ['<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">'];				
 				for (; !Files.atEnd(); Files.moveNext()) {
 					var fileName = Files.item().Name,
 					option = ['<OPTION VALUE="', fileName, '">', fileName, '</OPTION>'];
 					Output.push(option.join(""));
 				}
+				Output.push('</SELECT>');
+				Response.Write(Output.join("\n"));
 			} else {
-				Output.push('<OPTION>Folder is empty</OPTION>');
+				Message.Write(3, 'Folder is empty');
 			}
 		} else {
-			Output.push('<OPTION>Folder not exists</OPTION>');
+			Message.Write(3, 'Folder not exists');
 		}
-		Output.push('</SELECT>');
-		Response.Write(Output.join("\n"));
 	}
 },
 
 Styles = {
-	Path: "Styles/",
-	Files: ["solaren", "body", "table", "loader", "button", "menu", "notify"],
-
 	Map: function(fileName) {
-		return this.Path + fileName + '.css?' + Html.Version
+		var Path = "Styles/",
+		fullName = [Path, fileName, '.css?', Html.Version];
+		return fullName.join("")
 	},
 
 	Write: function() {
-		var Block = [];
-		for (var i = 0; i < this.Files.length; i++) {
-			var FileName = this.Map(this.Files[i]),
+		var Files = ["solaren", "body", "table", "loader", "button", "menu", "notify"],
+		Block = [];
+		for (var i = 0; i < Files.length; i++) {
+			var FileName = this.Map(Files[i]),
 			row = ['<LINK REL="stylesheet" HREF="', FileName, '">'];
 			Block.push(row.join(""));
 		}
@@ -224,17 +223,17 @@ Styles = {
 },
 
 Scripts = {
-	Path: "Scripts/",
-	Files: ["lib", "loader", "user", "resource", "notify", "menu", "redirect", "ajax"],
-
 	Map: function(fileName) {
-		return this.Path + fileName + '.js?' + Html.Version;
+		var Path = "Scripts/",
+		fullName = [Path, fileName, '.js?', Html.Version];
+		return fullName.join("")
 	},
 
 	Write: function() {
-		var Block = [];
-		for (var i = 0; i < this.Files.length; i++) {
-			var FileName = this.Map(this.Files[i]),
+		var Files = ["lib", "loader", "user", "resource", "notify", "menu", "redirect", "ajax"],
+		Block = [];
+		for (var i = 0; i < Files.length; i++) {
+			var FileName = this.Map(Files[i]),
 			row = ['<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
 			Block.push(row.join(""));
 		}
@@ -243,10 +242,10 @@ Scripts = {
 },
 
 Icon = {
-	Path: "Images/",
-
 	Map: function(fileName) {
-		return this.Path + fileName
+		var Path = "Images/",
+		fullName = [Path, fileName];
+		return fullName.join("")
 	},
 
 	Write: function(fileName) {
@@ -256,10 +255,9 @@ Icon = {
 },
 
 Tag = {
-	Align: ["LEFT", "CENTER", "RIGHT"],
-
 	Write: function(tagName, index, tagValue) {
-		var tagAttribute = this.Align[index] ? ' ALIGN="' + this.Align[index] + '">' : '>',
+		var Align = ["LEFT", "CENTER", "RIGHT"],
+		tagAttribute = Align[index] ? ' ALIGN="' + Align[index] + '">' : '>',
 		result = ['<', tagName, tagAttribute, tagValue, '</', tagName, '>'];
 		return result.join("")
 	}
