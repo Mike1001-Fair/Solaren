@@ -1,14 +1,14 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
 	Version: "v=2.25",
-	Author : "Mykola Chernov",
 
 	SetHead: function(Title, UseScripts) {
 		this.Title = Title || "Title";
-		var Head = [
+		var Author = "Mykola Chernov",
+		Head = [
 			'<META charset="utf-8">',
-			'<META NAME="author" CONTENT="' + this.Author + '">',
-			'<META NAME="copyright" CONTENT="' + this.Author + '">',
+			'<META NAME="author" CONTENT="' + Author + '">',
+			'<META NAME="copyright" CONTENT="' + Author + '">',
 			'<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">',
 			Tag.Write('TITLE', -1, this.Title),
 			Icon.Write("sun.svg"),

@@ -3,11 +3,11 @@ var Fso = Server.CreateObject("Scripting.FileSystemObject"),
 XmlDoc = Server.CreateObject("MSXML2.DOMDocument.6.0"),
 Dictionary = Server.CreateObject("Scripting.Dictionary"),
 Resource = {
-	Path: "Resources/",
 	ErrText: "",
 
 	Map: function(fileName) {
- 		return Server.MapPath(this.Path + fileName)
+		var Path = "Resources/";
+ 		return Server.MapPath(Path + fileName)
  	},
 
 	Error: function() {

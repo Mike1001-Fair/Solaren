@@ -1,9 +1,9 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Menu = {
-	Type: ["admin", "officeuser", "branchuser"],
-
 	Map: function(RoleId) {
-		return ["menu-", this.Type[RoleId] || "empty", ".asp"].join("");
+		var Type = ["admin", "officeuser", "branchuser"],
+		fullName = ["menu-", Type[RoleId] || "empty", ".asp"];
+		return fullName.join("");
 	},
 
 	Write: function(BodyTag) {

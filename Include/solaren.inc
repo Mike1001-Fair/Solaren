@@ -54,7 +54,7 @@ Solaren = {
 	},
 
 	Empty: function(testvar) {
-		return testvar == undefined || testvar == null;
+		return testvar == undefined || testvar == null || testvar == "";
 	},
 
 	ValidObject: function(obj) {

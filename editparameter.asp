@@ -8,7 +8,7 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/config.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = !Solaren.Empty(User.RoleId) && User.RoleId >= 0 && User.RoleId < 2;
 User.CheckAccess(Authorized, "GET");
 
 try {
