@@ -34,7 +34,7 @@ var Html = {
 		var ScriptName = Solaren.ScriptName.split("/").pop(),
 		FileParts      = ScriptName.split('.'),
 		FileName       = Scripts.Map(FileParts[0].toLowerCase()),
-		Output   = ['\n<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
+		Output         = ['\n<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];
 		Response.Write(Output.join(""));
 	},
 
@@ -141,10 +141,10 @@ var Html = {
 
 	WriteChiefDoc: function(rs, DocId) {
 		var Output = ['<SELECT NAME="ChiefDocId" ID="ChiefDocId">'];
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = DocId == rs.Fields("DocId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("DocId"), selected, rs.Fields("DocName"), '</OPTION>'];
-			Output.push(option.join(""));
+		for (; !rs.EOF; rs.MoveNext()) {
+			var selected = DocId == rs.Fields("DocId"),
+			option = this.GetOption(rs.Fields("DocId"), selected, rs.Fields("DocName"));
+			Output.push(option);
 		}
 		rs.Close();
 		Output.push('</SELECT>');
@@ -154,9 +154,9 @@ var Html = {
 	WriteChiefTitle: function(rs, TitleId) {
 		var Output = ['<SELECT NAME="ChiefTitleId" ID="ChiefTitleId">'];
 		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = TitleId == rs.Fields("TitleId") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("TitleId"), selected, rs.Fields("Title1"), '</OPTION>'];
-			Output.push(option.join(""));
+			var selected = TitleId == rs.Fields("TitleId"),
+			option = this.GetOption(rs.Fields("TitleId"), selected, rs.Fields("Title1"));
+			Output.push(option);
 		}
 		rs.Close();
 		Output.push('</SELECT>');
