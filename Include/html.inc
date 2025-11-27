@@ -48,6 +48,12 @@ var Html = {
 		var Output = ['<A href="', url, id, '">', value, '</A>'];
 		return Output.join("")
 	},
+
+	GetOption: function(value, selected, text) {
+		var Selected = selected ? '" SELECTED>' : '">';
+		option = ['<OPTION VALUE="', value, Selected, text, '</OPTION>'];
+		return option.join("")
+	},
 	
 	WriteEditButton: function(AllowDelBtn, Deleted) {
 		var Output = [];
@@ -97,10 +103,10 @@ var Html = {
 		if (blankOption) {
 			Output.push('<OPTION VALUE="0"></OPTION>');
 		}
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = elementId == rs.Fields(tagId) ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields(tagId), selected, rs.Fields(tagName), '</OPTION>'];
-			Output.push(option.join(""));
+		for (; !rs.EOF; rs.MoveNext()) {
+			var selected = elementId == rs.Fields(tagId),
+			option = this.GetOption(rs.Fields(tagId), selected, rs.Fields(tagName));
+			Output.push(option);
 		}
 		rs.Close();
 		Output.push('</SELECT>');
@@ -123,10 +129,10 @@ var Html = {
 
 	WriteBank: function(rs, MfoCode) {
 		var Output = ['<SELECT NAME="MfoCode" ID="MfoCode">'];
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
-			selected = MfoCode == rs.Fields("MfoCode") ? '" SELECTED>' : '">';
-			option = ['<OPTION VALUE="', rs.Fields("MfoCode"), selected, rs.Fields("BankName"), '</OPTION>'];
-			Output.push(option.join(""));
+		for (; !rs.EOF; rs.MoveNext()) {
+			var selected = MfoCode == rs.Fields("MfoCode"),
+			option = this.GetOption(rs.Fields("MfoCode"), selected, rs.Fields("BankName"));
+			Output.push(option);
 		}
 		rs.Close();
 		Output.push('</SELECT>');
