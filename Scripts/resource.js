@@ -1,13 +1,15 @@
 ﻿"use strict";
 const Resource = {
-	Version: "v=2.2",
-	Path: "Resources/",
 	JsonData: null,
 	ErrMsg: ["JSON data is not loaded", "Item not found"], 
 
 	Load(fileName) {
+		const Version = "v=2.2",
+		Path = "Resources/",
+		fullName = `${Path}${fileName}?${Version}`;
+
 		document.body.style.cursor = "progress";
-		fetch(`${this.Path}${fileName}?${this.Version}`)
+		fetch(fullName)
 		.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 		.then(jsondata => this.JsonData = jsondata)
 		.catch(error => console.warn(`Fetch request error: ${error.message}`))

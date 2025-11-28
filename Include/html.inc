@@ -117,8 +117,8 @@ var Html = {
 		if (list instanceof Array) {
 			var Output = ['<SELECT NAME="' + tagName + '" ID="' + tagName + '">'];
 			for (var i = 0; i < list.length; i++) {
-				var option = ['<OPTION VALUE="', i, '">', list[i], '</OPTION>'];
-				Output.push(option.join(""));
+				var option = this.GetOption(i, 0, list[i]);
+				Output.push(option);
 			}
 			Output.push('</SELECT>');
 			Response.Write(Output.join("\n"));
@@ -195,8 +195,8 @@ var Html = {
 				var Output = ['<SELECT NAME="FileSet" ID="FileSet" STYLE="width: 20em">'];				
 				for (; !Files.atEnd(); Files.moveNext()) {
 					var fileName = Files.item().Name,
-					option = ['<OPTION VALUE="', fileName, '">', fileName, '</OPTION>'];
-					Output.push(option.join(""));
+					option = this.GetOption(fileName, 0, fileName);
+					Output.push(option);
 				}
 				Output.push('</SELECT>');
 				Response.Write(Output.join("\n"));
