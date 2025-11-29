@@ -3,6 +3,10 @@ const Resource = {
 	JsonData: null,
 	ErrMsg: ["JSON data is not loaded", "Item not found"], 
 
+	get Msg() {
+		return this.ErrMsg[this.JsonData ? 1 : 0]
+	},
+
 	Load(fileName) {
 		const Version = "v=2.2",
 		Path = "Resources/",
@@ -17,10 +21,10 @@ const Resource = {
 	},
 
 	GetText(id) {
-		return this.JsonData?.Items?.[id] || console.warn(this.ErrMsg[this.JsonData ? 1 : 0]);
+		return this.JsonData?.Items?.[id] ?? console.warn(this.Msg);
 	},
 
 	GetItem(key) {
-		return this.JsonData?.[key] || console.warn(this.ErrMsg[this.JsonData ? 1 : 0]);
+		return this.JsonData?.[key] ?? console.warn(this.Msg);
 	}
 };
