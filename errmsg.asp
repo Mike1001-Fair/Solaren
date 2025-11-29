@@ -6,13 +6,11 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% Resource.Load(User.ResourceFile());
-var Title = Dictionary.Item("Message") || "Message";
-
-if (!User.ValidateRole(User.RoleId)) {
+if (User.ValidateRole(User.RoleId)) {
+	Html.SetPage(Dictionary.Item("Message"))
+} else {
 	Message.Write(2, Dictionary.Item("AuthenticationError"))
-}
-
-Html.SetPage(Title)%>
+}%>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">
 	<FIELDSET>		

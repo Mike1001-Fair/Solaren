@@ -5,9 +5,8 @@
 <!-- #INCLUDE FILE="Include/menu.inc" -->
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-BranchId = Request.QueryString("BranchId");
-
+<% var Authorized = !Solaren.Empty(User.RoleId) && User.RoleId >= 0 && User.RoleId < 2,
+Query = Solaren.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -22,21 +21,21 @@ try {
 
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, BranchId));
+			Append(CreateParameter("BranchId", adInteger, adParamInput, 10, Query.BranchId));
 		}
 	}
-
 	var rsBranch = Solaren.Execute("GetBranch", "Інформацію не знадено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Branch = Solaren.Map(rsBranch.Fields);
+	var Branch = Solaren.Map(rsBranch.Fields),
+	Title = Branch.Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 	rsBranch.Close();
-	Html.SetPage(Branch.Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС");
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditBranch" ACTION="updatebranch.asp" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="BranchId" VALUE="<%=BranchId%>">
+<INPUT TYPE="HIDDEN" NAME="BranchId" VALUE="<%=Query.BranchId%>">
 <INPUT TYPE="HIDDEN" NAME="AreaId" ID="AreaId" VALUE="<%=Branch.AreaId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Branch.LocalityId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Branch.Deleted%>">
