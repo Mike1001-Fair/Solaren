@@ -1,9 +1,9 @@
 ﻿"use strict";
 const Resource = {
 	JsonData: null,
-	ErrMsg: ["JSON data is not loaded", "Item not found"], 
+	ErrText: ["JSON data is not loaded", "Item not found"], 
 
-	get Msg() {
+	get ErrMsg() {
 		return this.ErrMsg[this.JsonData ? 1 : 0]
 	},
 
@@ -21,10 +21,10 @@ const Resource = {
 	},
 
 	GetText(id) {
-		return this.JsonData?.Items?.[id] ?? console.warn(this.Msg);
+		return this.JsonData?.Items?.[id] ?? console.warn(this.ErrMsg);
 	},
 
 	GetItem(key) {
-		return this.JsonData?.[key] ?? console.warn(this.Msg);
+		return this.JsonData?.[key] ?? console.warn(this.ErrMsg);
 	}
 };
