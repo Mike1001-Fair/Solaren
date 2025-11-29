@@ -4,7 +4,8 @@ const Resource = {
 	ErrText: ["JSON data is not loaded", "Item not found"], 
 
 	get ErrMsg() {
-		return this.ErrMsg[this.JsonData ? 1 : 0]
+		const index = this.JsonData ? 1 : 0;
+		return this.ErrText[index]
 	},
 
 	Load(fileName) {
