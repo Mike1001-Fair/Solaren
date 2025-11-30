@@ -1,17 +1,14 @@
 ﻿<% //@ LANGUAGE = "JScript"
 //Solaren.SetCmd("Test");
 var SessionManager = {
-	FlagName: ["NewIndicator", "CheckCard"],
-	FlagCount: 3,
-	VarName: ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],
-
 	SetVar: function(rs) {
-		var Config = Solaren.Map(rs.Fields),
+		var Parameter = ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],
+		Config = Solaren.Map(rs.Fields),
 		OperDate = Month.GetYMD(Config.OperDate);
 
-		for (var i = 0; i < this.VarName.length; i++) {
-			var parameter = Config[this.VarName[i]];
-			Session(this.VarName[i]) = Server.HTMLEncode(parameter);
+		for (var i = 0; i < Parameter.length; i++) {
+			var parameter = Config[Parameter[i]];
+			Session(Parameter[i]) = Server.HTMLEncode(parameter);
 		}
 		
 		this.SetDate(OperDate);
@@ -28,9 +25,11 @@ var SessionManager = {
 	},
 
 	SetFlags: function(cfg) {
-		var index = this.FlagCount - 1;
-		for (var i = 0; i < this.FlagName.length; i++) {
-			Session(this.FlagName[i]) = (cfg >> (index - i)) & 1;
+		var FlagName = ["NewIndicator", "CheckCard"],
+		FlagCount = 3,
+		index = FlagCount - 1;
+		for (var i = 0; i < FlagName.length; i++) {
+			Session(FlagName[i]) = (cfg >> (index - i)) & 1;
 		}
 	}
 },

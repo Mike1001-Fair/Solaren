@@ -26,7 +26,7 @@ const Money = {
 				numParts[0] = Math.floor(numParts[0] / 1000);
 				cycle--;
 			} while (numParts[0] > 0); 
-			result = [word.length > 0 ? word.join(" ") : this.Zero, this.Сurrency, numParts[1], this.Penny];
+			result = [word.length > 0 ? word.join(" ") : this.Zero, this.Currency, numParts[1], this.Penny];
 		}
 		return inRange ? result.join(" ") : this.errMsg
 	},
