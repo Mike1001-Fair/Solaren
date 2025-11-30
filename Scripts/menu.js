@@ -19,13 +19,3 @@ window.addEventListener("pageshow", event => {
 		Loader.Hide();
 	}
 });
-
-/* Проверяем, был ли уже показан алерт и прошло ли уже 20 минут
- localStorage.setItem('alertShown', 'true'); // Устанавливаем флаг в localStorage
-const alertShownTime = localStorage.getItem('alertShownTime');
-if (MainBody && !Empty(MsgText.value) && (!alertShownTime || (Date.now() - alertShownTime > 20 * 60 * 1000))) {
-	alert(MsgText.value);
-	localStorage.setItem('alertShownTime', Date.now()); // Устанавливаем временную метку показа алерта
-}*/
-
-
