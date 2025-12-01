@@ -25,11 +25,11 @@ var SessionManager = {
 	},
 
 	SetFlags: function(cfg) {
-		var FlagName = ["NewIndicator", "CheckCard"],
+		var Flags = ["NewIndicator", "CheckCard"],
 		FlagCount = 3,
 		index = FlagCount - 1;
-		for (var i = 0; i < FlagName.length; i++) {
-			Session(FlagName[i]) = (cfg >> (index - i)) & 1;
+		for (var i = 0; i < Flags.length; i++) {
+			Session(Flags[i]) = (cfg >> (index - i)) & 1;
 		}
 	}
 },
