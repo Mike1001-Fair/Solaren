@@ -23,25 +23,36 @@ try {
 	Html.SetPage("Виконавці");
 }
 
-var Output = ['<BODY CLASS="MainBody">',
-	'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
-	'<TABLE CLASS="InfoTable">',
-	'<TR><TH>Логін</TH><TH>ПIБ</TH><TH>Телефон</TH><TH>ЦОС</TH></TR>'
-];
+var Table = {
+	GetRows: function(rs) {
+		for (var rows = []; !rs.EOF; rs.MoveNext()) {
+			var url = Html.GetLink("editperformer.asp?PerformerId=", rs.Fields("Id"), rs.Fields("UserName")),
+			td = [Tag.Write("TD", 0, url),
+				Tag.Write("TD", 0, rs.Fields("FullName")),
+				Tag.Write("TD", 0, rs.Fields("Phone")),
+				Tag.Write("TD", 0, rs.Fields("BranchName"))
+			],
+			tr = Tag.Write("TR", -1, td.join(""));
+			rows.push(tr);
+		}
+		return rows;
+	},
 
-for (var i=0; !rs.EOF; i++) {
-	var url = Html.GetLink("editperformer.asp?PerformerId=", rs.Fields("Id"), rs.Fields("UserName")),
-	td = [Tag.Write("TD", 0, url),
-		Tag.Write("TD", 0, rs.Fields("FullName")),
-		Tag.Write("TD", 0, rs.Fields("Phone")),
-		Tag.Write("TD", 0, rs.Fields("BranchName"))
-	],
-	tr = Tag.Write("TR", -1, td.join(""));
-	Output.push(tr);
-	rs.MoveNext();
-}
+	Render: function(rs) {
+        var rows = this.GetRows(rs),
+		Header = ['Логін', 'ПIБ', 'Телефон', 'ЦОС'],
+		Body = ['<BODY CLASS="MainBody">',
+			'<H3 CLASS="H3Text">' + Html.Title + '</H3>',
+			'<TABLE CLASS="InfoTable">',
+			Html.GetHeadRow(Header),
+			rows.join("\n"),
+			Html.GetFooterRow(Header.length, rows.length)
+		];
+        return Body.join("\n");
+	}
+},
+Output = Table.Render(rs);
 rs.Close();
 Solaren.Close();
-Output.push(Html.GetFooterRow(4, i));
-Response.Write(Output.join("\n"))%>
+Response.Write(Output)%>
 
