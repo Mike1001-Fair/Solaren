@@ -21,11 +21,6 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	rs.EOF ? Message.Write(1, "Помилок не виявлено") : Html.SetPage("Обсяги");
-	/*if (rs.EOF) 
-		Message.Write(1, "Помилок не виявлено");
-	} else {
-		Html.SetPage("Обсяги");
-	}*/
 }
 
 var Table = {
