@@ -8,8 +8,8 @@ CodePage = {
 	Write: function() {
 		var Output = ['<SELECT NAME="ReportCodePage">'];
 		for (var k in CpList) {
-			var option = ['<OPTION VALUE="', k, '">', CpList[k], '</OPTION>'];
-			Output.push(option.join(""));
+			var option = Html.GetOption(k, 0, CpList[k]);
+			Output.push(option);
 		}
 		Output.push('</SELECT>');
 		Response.Write(Output.join("\n"));
