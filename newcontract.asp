@@ -86,7 +86,7 @@ try {
 	<TD><INPUT TYPE="Number" NAME="ContractPower" STEP="0.01" MIN="0" MAX="50" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
 	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Month.Date[1]%>" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
-	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
+	<TR><TD ALIGN="RIGHT">Група</TD>
 	<TD><%Tarif.Write("TarifGroupId", -1)%></TD></TR>
 	</TABLE></FIELDSET>
 

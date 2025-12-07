@@ -96,7 +96,7 @@ try {
 
 	<TR><TD ALIGN="RIGHT">Дата вводу</TD>
 	<TD><INPUT TYPE="date" NAME="ExpDate" VALUE="<%=Contract.ExpDate%>" SIZE="10" MIN="<%=Month.Date[0]%>" MAX="<%=Month.Date[2]%>" REQUIRED></TD></TR>
-	<TR><TD ALIGN="RIGHT">Тарифна група</TD>
+	<TR><TD ALIGN="RIGHT">Група</TD>
 	<TD><%Tarif.Write("TarifGroupId", Contract.TarifGroupId)%></TD></TR>
 	</TABLE></FIELDSET>
 
