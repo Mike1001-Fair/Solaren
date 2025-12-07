@@ -5,9 +5,9 @@ var Street = {
 	WriteType: function(tagName, index) {
 		var Output = ['<SELECT NAME="' + tagName + '">'];
 		for (var i = 0; i < this.Type.length; i++) {
-			var selected = i == index ? '" SELECTED>' : '">',
-			option = ['<OPTION VALUE="', i, selected, this.Type[i], '</OPTION>'];
-			Output.push(option.join(""));
+			var selected = i == index,
+			option = Html.GetOption(i, selected, this.Type[i]);
+			Output.push(option);
 		}
 		Output.push('</SELECT>');
 		Response.Write(Output.join("\n"));

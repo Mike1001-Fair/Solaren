@@ -8,9 +8,9 @@ var Locality = {
 		for (; !itemNodes.atEnd(); itemNodes.moveNext()) {
 			var node = itemNodes.item(),
 			itemId = node.getAttribute("id"),
-			selected = itemId == index ? '" SELECTED>' : '">',
-			option = ['<OPTION VALUE="', itemId, selected, node.text, '</OPTION>'];
-			Output.push(option.join(""));
+			selected = itemId == index,
+			option = Html.GetOption(itemId, selected, node.text);
+			Output.push(option);
 		}
 		Output.push('</SELECT>');
 		Response.Write(Output.join("\n"));
