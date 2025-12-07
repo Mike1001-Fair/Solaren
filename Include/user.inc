@@ -8,10 +8,10 @@ var User = {
 	Ip     : Request.ServerVariables("REMOTE_ADDR") || "",
 	Agent  : Request.ServerVariables("HTTP_USER_AGENT") || "",
 	Hal    : String(Request.ServerVariables("HTTP_ACCEPT_LANGUAGE")) || "",
-	Id     : Session("UserId") || "",
-	GUID   : Session("UserGUID") || "",
-	RoleId : Session("RoleId") || "",
-	Token  : Session("Token") || "",
+	Id     : Session("UserId"),
+	GUID   : Session("UserGUID"),
+	RoleId : Session("RoleId"),
+	Token  : Session("Token"),
 
 	Language: function() {
 		var regionSet = this.Hal.split(",")[0];
