@@ -9,14 +9,14 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/tarif.inc" -->
 <% var Authorized = User.RoleId == 1,
-TarifId = Request.QueryString("TarifId");
+Query = Solaren.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetTarif");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("TarifId", adVarChar, adParamInput, 10, TarifId));
+			Append(CreateParameter("TarifId", adVarChar, adParamInput, 10, Query.TarifId));
 		}
 	}
 	var rs = Solaren.Execute("GetTarif");
@@ -32,7 +32,7 @@ try {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditTarif" ACTION="updatetarif.asp" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="TarifId" VALUE="<%=TarifId%>">
+<INPUT TYPE="HIDDEN" NAME="TarifId" VALUE="<%=Query.TarifId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <INPUT TYPE="HIDDEN" NAME="ViewOnly" VALUE="<%=ViewOnly%>">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>

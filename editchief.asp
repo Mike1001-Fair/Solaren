@@ -6,7 +6,7 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-ChiefId = Request.QueryString("ChiefId");
+Query = Solaren.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -21,7 +21,7 @@ try {
 
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, ChiefId));
+			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, Query.ChiefId));
 		}
 	}
 	var rsChief = Solaren.Execute("GetChief", "Керівника не знайдено!");
@@ -36,7 +36,7 @@ try {
 <FORM CLASS="ValidForm" NAME="EditChief" ACTION="updatechief.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 
-<INPUT TYPE="HIDDEN" NAME="ChiefId" VALUE="<%=ChiefId%>">
+<INPUT TYPE="HIDDEN" NAME="ChiefId" VALUE="<%=Query.ChiefId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>

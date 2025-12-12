@@ -6,14 +6,14 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-BankId = Request.QueryString("BankId");
+Query = Solaren.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
 	Solaren.SetCmd("GetBank");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("BankId", adInteger, adParamInput, 10, BankId));
+			Append(CreateParameter("BankId", adInteger, adParamInput, 10, Query.BankId));
 		}
 	}
 	var rs = Solaren.Execute("GetBank");
@@ -27,7 +27,7 @@ try {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditBank" ACTION="updatebank.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="BankId" VALUE="<%=BankId%>">
+<INPUT TYPE="HIDDEN" NAME="BankId" VALUE="<%=Query.BankId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 
 <H3 CLASS="HeadText" ID="H3Id"><SPAN>&#127974;</SPAN><%=Html.Title%></H3>

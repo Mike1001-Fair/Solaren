@@ -9,6 +9,6 @@ FXRate = {
 		var OkText = "Server response: " + XmlHttp.responseText,
 		ErrText = "An error occurred: " + XmlHttp.status + " - " + XmlHttp.statusText,
 		Output = XmlHttp.status == 200 ? OkText : ErrText;
-		//Response.Write(Output);
+		Response.Write(Output);
 	}
 }%>

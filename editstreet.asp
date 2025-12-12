@@ -7,14 +7,14 @@
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <!-- #INCLUDE FILE="Include/street.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-StreetId = Request.Form("StreetId");
+Query = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetStreet");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
+			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, Query.StreetId));
 		}
 	}
 	var rs = Solaren.Execute("GetStreet");
@@ -29,7 +29,7 @@ try {
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditStreet" ACTION="updatestreet.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText"><SPAN>&#128678;</SPAN><%=Html.Title%></H3>
-<INPUT TYPE="HIDDEN" NAME="StreetId" VALUE="<%=StreetId%>">
+<INPUT TYPE="HIDDEN" NAME="StreetId" VALUE="<%=Query.StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>

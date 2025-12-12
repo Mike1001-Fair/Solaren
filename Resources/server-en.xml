@@ -21,7 +21,7 @@
 	<Item id="Contracts">Contracts</Item>
 	<Item id="Meters">Meters</Item>
 	<Item id="Tariffs">Tariffs</Item>
-	<Item id="Logout">Main</Item>
+	<Item id="Logout">Home</Item>
 	<Item id="Indicator">🕗Indicators</Item>
 	<Item id="Parameters">Parameters</Item>
 	<Item id="Reindexing">Reindexing</Item>
