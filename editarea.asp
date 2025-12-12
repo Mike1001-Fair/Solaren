@@ -6,29 +6,30 @@
 <!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/resource.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-AreaId = Request.QueryString("AreaId");
+Query = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetArea");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("AreaId", adInteger, adParamInput, 10, AreaId));
+			Append(CreateParameter("AreaId", adInteger, adParamInput, 10, Query.AreaId));
 		}
 	} 
 	var rs = Solaren.Execute("GetArea");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Record = Solaren.Map(rs.Fields);
+	var Record = Solaren.Map(rs.Fields),
+	Title = Record.Deleted ? "Перегляд анкети району" : "Редагування анкети району";
 	rs.Close();
 	Solaren.Close();
-	Html.SetPage(Record.Deleted ? "Перегляд анкети району" : "Редагування анкети району");
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditArea" ACTION="updatearea.asp" METHOD="POST" AUTOCOMPLETE="off">
 <H3 CLASS="HeadText" ID="H3Id"><%=Html.Title%></H3>
-<INPUT TYPE="HIDDEN" NAME="AreaId" VALUE="<%=AreaId%>">
+<INPUT TYPE="HIDDEN" NAME="AreaId" VALUE="<%=Query.AreaId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 <TABLE CLASS="MarkupTable">
 	<TR ALIGN="CENTER"><TD>
