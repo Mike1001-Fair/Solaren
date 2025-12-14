@@ -96,7 +96,7 @@ Solaren = {
 			Output.push("</TABLE></FIELDSET></DIV>");
 			this.Write(Output.join("\n"))
 		} else {
-			Message.Write(3, 'Invalid input object');
+			Message.Write(3, 'Debug: Invalid input object');
 		}
 	},
 
