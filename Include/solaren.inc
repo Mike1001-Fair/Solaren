@@ -63,7 +63,7 @@ Solaren = {
 
 	Map: function(Collection) {
 		var result = {};
-		if (this.ValidObject(Collection)) {
+		if (this.ValidObject(Collection)) {			
 			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
 				var item = items.item(),
 				hasName = item && typeof item.Name === "string",
@@ -71,6 +71,8 @@ Solaren = {
 				value = hasName ? item.Value : Collection(item);
 				result[key] = value;
 			}
+		} else {
+			Message.Write(3, 'Map: Invalid input object');
 		}
 		return result
 	},
