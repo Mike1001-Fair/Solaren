@@ -45,13 +45,13 @@ var Html = {
 	},
 
 	GetLink: function (url, id, value) {
-		var Output = ['<A href="', url, id, '">', value, '</A>'];
+		var Output = ['<A href="', url, id, '">', Server.HTMLEncode(value), '</A>'];
 		return Output.join("")
 	},
 
 	GetOption: function(value, selected, text) {
 		var Selected = selected ? '" SELECTED>' : '">';
-		option = ['<OPTION VALUE="', value, Selected, text, '</OPTION>'];
+		option = ['<OPTION VALUE="', Server.HTMLEncode(value), Selected, text, '</OPTION>'];
 		return option.join("")
 	},
 	
