@@ -18,27 +18,22 @@ EditChief.addEventListener('input', () => {
 
 })
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
+SbmBtn?.addEventListener('click', (event) => {
 		if (confirm("Ви впевненi\u2753")) {
 			Loader.Show();
-		} else event.preventDefault();
-	});
-}
+		} else {
+			event.preventDefault();
+		}
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelChief);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelChief);
-}
+DelBtn?.addEventListener('click', DelChief);
+RestoreBtn?.addEventListener('click', DelChief);
 
 function DelChief() {
 	if (confirm(`Ви впевненi\u2753`)) {
-		with (EditChief) {
-			action = `delchief.asp?ChiefId=${ChiefId.value}&Deleted=${Deleted.value}`
-		}
+		EditChief.action = `delchief.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }
