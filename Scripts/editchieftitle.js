@@ -28,7 +28,8 @@ DelBtn?.addEventListener('click', DelChief);
 RestoreBtn?.addEventListener('click', DelChief);
 
 function DelChief() {
-	if (confirm(`Ви впевненi\u2753`)) {
+	const ConfirmText = Resource.GetText("Confirm");
+	if (confirm(ConfirmText) {
 		EditChiefTitle.action = `delchieftitle.asp`;
 		Loader.Show();
 	} else {
