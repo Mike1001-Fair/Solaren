@@ -20,7 +20,8 @@ EditChiefTitle.addEventListener('input', () => {
 })
 
 SbmBtn?.addEventListener('click', (event) => {
-	confirm("Ви впевненi\u2753") ? Loader.Show() : event.preventDefault();
+	const ConfirmText = Resource.GetText("Confirm");
+	confirm(ConfirmText) ? Loader.Show() : event.preventDefault();
 });
 
 DelBtn?.addEventListener('click', DelChief);
