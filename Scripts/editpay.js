@@ -37,9 +37,7 @@ function ChkForm() {
 function DelPay() {
 	const MsgText = EditPay.Deleted.value == "True" ? "відновлено" : "видалено";
 	if (confirm(`Оплату буде ${MsgText}❗ Ви впевненi\u2753`)) {
-		with (EditPay) {
-			action = `delpay.asp?PayId=${PayId.value}&Deleted=${Deleted.value}`
-		}
+		EditPay.action = `delpay.asp`
 	} else {
 		event.preventDefault()
 	}

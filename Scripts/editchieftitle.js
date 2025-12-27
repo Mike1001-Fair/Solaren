@@ -19,25 +19,18 @@ EditChiefTitle.addEventListener('input', () => {
 
 })
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		confirm("Ви впевненi\u2753") ? Loader.Show() : event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', (event) => {
+	confirm("Ви впевненi\u2753") ? Loader.Show() : event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelChief);
-}
-
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelChief);
-}
+DelBtn?.addEventListener('click', DelChief);
+RestoreBtn?.addEventListener('click', DelChief);
 
 function DelChief() {
 	if (confirm(`Ви впевненi\u2753`)) {
-		with (EditChiefTitle) {
-			action = `delchieftitle.asp?ChiefTitleId=${ChiefTitleId.value}&Deleted=${Deleted.value}`
-		}
+		EditChiefTitle.action = `delchieftitle.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }

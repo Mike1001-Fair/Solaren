@@ -17,27 +17,21 @@ EditChiefDoc.addEventListener('input', () => {
 	}
 });
 
-if (SbmBtn) {
-	SbmBtn.addEventListener('click', (event) => {
-		const ConfirmText = Resource.GetText("Confirm");
-		confirm(ConfirmText) ? Loader.Show() : event.preventDefault();
-	});
-}
+SbmBtn?.addEventListener('click', (event) => {
+	const ConfirmText = Resource.GetText("Confirm");
+	confirm(ConfirmText) ? Loader.Show() : event.preventDefault();
+});
 
-if (DelBtn) {
-	DelBtn.addEventListener('click', DelChiefDoc);
-}
+DelBtn?.addEventListener('click', DelChiefDoc);
+RestoreBtn?.addEventListener('click', DelChiefDoc);
 
-if (RestoreBtn) {
-	RestoreBtn.addEventListener('click', DelChiefDoc);
-}
 
 function DelChiefDoc() {
 	const ConfirmText = Resource.GetText("Confirm");
 	if (confirm(ConfirmText)) {
-		with (EditChiefDoc) {
-			action = `delchiefdoc.asp?DocId=${DocId.value}&Deleted=${Deleted.value}`;
-		}
+		EditChiefDoc.action = `delchiefdoc.asp`;
 		Loader.Show();
-	} else event.preventDefault();
+	} else {
+		event.preventDefault();
+	}
 }
