@@ -350,11 +350,11 @@ const Ajax = {
 	},
 
 	GetCountryList(QueryName) {
-		const queryValue = QueryName.value.trim();
+		const queryValue = QueryName.value.trim();		
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			CountryId.value = -1;
 			CountryName.title = this.errLenMsg;
-		} else {		
+		} else {
 			CountryList.textContent = "";
 			CountryName.style.cursor = "progress";
 			fetch(`getcountrydata.asp?QueryName=${queryValue}`)
