@@ -172,15 +172,15 @@ const Ajax = {
 
 	GetAreaList(QueryName) {
 		const queryValue = QueryName.value.trim();
-		//console.log(`GetAreaList queryValue.length = ${queryValue.length}`);
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			AreaId.value = -1;
 			AreaName.title = this.errLenMsg;
-		} else {		
+		} else {
+			const fullName = `${this.path}getareadata.asp?QueryName=${queryValue}`;
 			AreaList.textContent = "";
 			AreaName.title = "";
 			AreaName.style.cursor = "progress";
-			fetch(`getareadata.asp?QueryName=${queryValue}`)
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].AreaId)) {
@@ -227,9 +227,11 @@ const Ajax = {
 			LocalityId.value = -1;
 			LocalityName.title = this.errLenMsg;
 		} else {		
+			const fullName = `${this.path}getlocalitydata.asp?QueryName=${queryValue}`;
 			LocalityList.textContent = "";
 			LocalityName.style.cursor = "progress";
-			fetch(`getlocalitydata.asp?QueryName=${queryValue}`)
+
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].LocalityId)) {
@@ -272,14 +274,17 @@ const Ajax = {
 
 	GetLocalityInfo(LocalityId) {
 		if (isDigit(LocalityId)) {
-			fetch(`getlocalityinfo.asp?LocalityId=${LocalityId}`)
+			const fullName = `${this.path}getlocalityinfo.asp?LocalityId=${LocalityId}`;
+			LocalityName.style.cursor = "progress";
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].LocalityId)) {
 					this.SetLocalityInfo(data);
 				}
 			})
-			.catch((error) => this.errFetchMsg(error));
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => LocalityName.style.cursor = "auto");
 		} else {
 			LocalityId.value = -1;
 			LocalityName.title = this.noDataMsg;
@@ -289,14 +294,17 @@ const Ajax = {
 
 	GetStreetInfo(StreetId) {
 		if (isDigit(StreetId)) {
-			fetch(`getstreetinfo.asp?StreetId=${StreetId}`)
+			const fullName = `${this.path}getstreetinfo.asp?StreetId=${StreetId}`;
+			StreetName.style.cursor = "progress";
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].StreetId)) {
 					this.SetStreetInfo(data);
 				}
 			})
-			.catch((error) => this.errFetchMsg(error));
+			.catch((error) => this.errFetchMsg(error))
+			.finally(() => StreetName.style.cursor = "auto");
 		} else {
 			StreetId.value = -1;
 			StreetName.title = this.noDataMsg;
@@ -309,10 +317,11 @@ const Ajax = {
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			StreetId.value = -1;
 			StreetName.title = this.errLenMsg;
-		} else {		
+		} else {
+			const fullName = `${this.path}getstreetdata.asp?QueryName=${queryValue}`;
 			StreetList.textContent = "";
 			StreetName.style.cursor = "progress";
-			fetch(`getstreetdata.asp?QueryName=${queryValue}`)
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].StreetId)) {
