@@ -1,5 +1,4 @@
 ﻿<% //@ LANGUAGE = "JScript"
-//Solaren.SetCmd("Test");
 var SessionManager = {
 	SetVar: function(rs) {
 		var Parameter = ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],

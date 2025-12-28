@@ -1,5 +1,6 @@
 ﻿"use strict";
 const Ajax = {
+	path: "Api/",
 	minQueryLen: 3,
 	maxQueryLen: 5,
 
@@ -122,11 +123,13 @@ const Ajax = {
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			ContractId.value = -1;		
 			ContractName.title = this.errLenMsg;
-		} else {		
+		} else {
+			const fullName = `${this.path}getcontractdata.asp?QueryName=${queryValue}`;
 			ContractList.textContent = "";
 			ContractName.title = "";
 			ContractName.style.cursor = "progress";
-			fetch(`getcontractdata.asp?QueryName=${queryValue}`)
+			//fetch(`getcontractdata.asp?QueryName=${queryValue}`)
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].ContractId)) {
@@ -355,9 +358,10 @@ const Ajax = {
 			CountryId.value = -1;
 			CountryName.title = this.errLenMsg;
 		} else {
+			const fullName = `${this.path}getcountrydata.asp?QueryName=${queryValue}`;
 			CountryList.textContent = "";
 			CountryName.style.cursor = "progress";
-			fetch(`getcountrydata.asp?QueryName=${queryValue}`)
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].CountryId)) {
