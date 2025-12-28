@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (FileList) {
-		//console.log(`FileList.dataset.foldername: ${FileList.dataset.foldername}`);
+		console.log(`FileList.dataset.foldername: ${FileList.dataset.foldername}`);
 		Ajax.GetFileList(FileList.dataset.foldername);
 	}
 });

@@ -1,9 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/json.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="/Solaren/Include/api.inc" -->
 <% var Authorized = User.RoleId == 1,
 Query = Solaren.Parse(),
 ValidRequest = User.HasAccess(Authorized, "GET");
@@ -11,7 +7,7 @@ ValidRequest = User.HasAccess(Authorized, "GET");
 if (ValidRequest) {
 	try {
 		var result = ['{"files":'],
-		FolderPath = Server.MapPath(Query.FolderName);
+		FolderPath = Server.MapPath("..") + Query.FolderName;
 		if (Fso.FolderExists(FolderPath)) {			
 			var Folder = Fso.GetFolder(FolderPath),
 			list = Json.toString(Folder.Files);

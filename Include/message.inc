@@ -1,9 +1,10 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Message = { 
+	Path: '',
 	Page: ["errmsg", "done", "accessdenied", "error"],
 
 	Map: function(index) {
-		return [this.Page[index] || "error", "asp"].join(".");
+		return this.Path + [this.Page[index] || "error", "asp"].join(".");
 	},
 
 	Error: function(ex) {

@@ -32,6 +32,7 @@ const Ajax = {
 		//console.log(`FolderName: ${FolderName}`);
 		const url = `${this.path}getfilelist.asp?FolderName=${FolderName}`;
 		document.body.style.cursor = "progress";
+		//fetch(`getfilelist.asp?FolderName=${FolderName}`)
 		fetch(url)
 		.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 		.then(data => {
