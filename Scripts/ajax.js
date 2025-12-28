@@ -79,7 +79,6 @@ const Ajax = {
 			CustomerName.title = "";
 			CustomerName.style.cursor = "progress";
 			fetch(fullName)
-			//fetch(`getcustomerdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].CustomerId)) {
@@ -130,7 +129,6 @@ const Ajax = {
 			ContractList.textContent = "";
 			ContractName.title = "";
 			ContractName.style.cursor = "progress";
-			//fetch(`getcontractdata.asp?QueryName=${queryValue}`)
 			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
@@ -440,8 +438,9 @@ const Ajax = {
 
 	GetMeterList(ContractId) {
 		if (isDigit(ContractId)) {
+			const fullName = `${this.path}getmeterlist.asp?ContractId=${ContractId}`;
 			document.body.style.cursor="progress";
-			fetch(`getmeterlist.asp?ContractId=${ContractId}`)
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].MeterId)) {
@@ -457,8 +456,9 @@ const Ajax = {
 
 	GetMeterInfo(MeterId, ReportDate) {
 		if (isDigit(MeterId)) {
+			const fullName = `${this.path}getmeterinfo.asp?ReportDate=${ReportDate}&MeterId=${MeterId}`;
 			document.body.style.cursor="progress";
-			fetch(`getmeterinfo.asp?ReportDate=${ReportDate}&MeterId=${MeterId}`)
+			fetch(fullName)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].MeterId)) {

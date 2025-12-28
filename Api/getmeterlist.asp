@@ -1,9 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/json.inc" -->
+<!-- #INCLUDE VIRTUAL="/Solaren/Include/api.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Query = Solaren.Parse(),
 ValidRequest = User.HasAccess(Authorized, "GET");
