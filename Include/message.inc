@@ -4,7 +4,9 @@ var Message = {
 	Page: ["errmsg", "done", "accessdenied", "error"],
 
 	Map: function(index) {
-		return this.Path + [this.Page[index] || "error", "asp"].join(".");
+		var page = [this.Page[index] || "error", "asp"].join("."),
+		fullName = [this.Path, page];
+		return fullName.join("")
 	},
 
 	Error: function(ex) {
