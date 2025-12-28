@@ -73,11 +73,13 @@ const Ajax = {
 		if (queryValue.length < this.minQueryLen || queryValue.length > this.maxQueryLen) {
 			CustomerId.value = -1;
 			CustomerName.title = this.errLenMsg;
-		} else {		
+		} else {
+			const fullName = `${this.path}getcustomerdata.asp?QueryName=${queryValue}`;
 			CustomerList.textContent = "";
 			CustomerName.title = "";
 			CustomerName.style.cursor = "progress";
-			fetch(`getcustomerdata.asp?QueryName=${queryValue}`)
+			fetch(fullName)
+			//fetch(`getcustomerdata.asp?QueryName=${queryValue}`)
 			.then(response => response.ok ? response.json() : Promise.reject(new Error(`${response.status}`)))
 			.then(data => {
 				if (!Redirect.go(data[0].CustomerId)) {
