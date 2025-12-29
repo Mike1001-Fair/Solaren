@@ -1,14 +1,18 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Menu = {
+	Path: './',
 	Map: function(RoleId) {
 		var Type = ["admin", "officeuser", "branchuser"],
-		fullName = ["menu-", Type[RoleId] || "empty", ".asp"];
-		return fullName.join("");
+		page = ["menu-" + (Type[RoleId] || "empty"), "asp"],
+		url = [this.Path, page.join(".")];
+		return url.join("");
 	},
 
 	Write: function(BodyTag) {
 		var page = this.Map(Session("RoleId")),
 		msg = Session('MsgText');
+
+		//Response.Write(page);
 		if (BodyTag) {
 			var Output = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
 			if (msg) {

@@ -13,7 +13,7 @@ Resource = {
 	Error: function() {
 		Session("SysMsg") = this.ErrText;
 		Session("ScriptName") = "resources.inc";
-		Server.Transfer("error-en.asp");	
+		//Server.Transfer("error-en.asp");	
 	},
 
 	Load: function(fileName) {

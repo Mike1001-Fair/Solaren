@@ -1,12 +1,12 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Message = { 
-	Path: '',
+	Path: './',
 	Page: ["errmsg", "done", "accessdenied", "error"],
 
 	Map: function(index) {
-		var page = [this.Page[index] || "error", "asp"].join("."),
-		fullName = [this.Path, page];
-		return fullName.join("")
+		var page = [this.Page[index] || "error", "asp"],
+		url = [this.Path, page.join(".")];
+		return url.join("")
 	},
 
 	Error: function(ex) {

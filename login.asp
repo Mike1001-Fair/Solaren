@@ -11,7 +11,6 @@
 <% var Form = Solaren.Parse(),
 isCreds = User.ValidateCredentials(Form);
 User.CheckAccess(isCreds, "POST");
-//Solaren.Debug(Form);
 try {
 	Solaren.SetCmd("Login");
 	with (Cmd) {
