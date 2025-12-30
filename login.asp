@@ -1,13 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/session.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
-<!-- #INCLUDE FILE="Include/month.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/login.inc" -->
 <% var Form = Solaren.Parse(),
 isCreds = User.ValidateCredentials(Form);
 User.CheckAccess(isCreds, "POST");
