@@ -1,8 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/default.inc" -->
 <% Resource.Load(User.ResourceFile());
 var phUserName = Dictionary.Item("UserName"),
 phPswd = Dictionary.Item("Password"),

@@ -1,26 +1,17 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var CountryName = Form("CountryName"),
-	TldCode         = Form("TldCode"),
-	IsoCode         = Form("IsoCode"),
-	ItuCode         = Form("ItuCode");
-}
 
 try {
 	Solaren.SetCmd("NewCountry");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("CountryName", adVarChar, adParamInput, 30, CountryName));    
-			Append(CreateParameter("TldCode", adVarChar, adParamInput, 10, TldCode));
-			Append(CreateParameter("IsoCode", adVarChar, adParamInput, 10, IsoCode));
-			Append(CreateParameter("ItuCode", adVarChar, adParamInput, 10, ItuCode));
+			Append(CreateParameter("CountryName", adVarChar, adParamInput, 30, Form.CountryName));
+			Append(CreateParameter("TldCode", adVarChar, adParamInput, 10, Form.TldCode));
+			Append(CreateParameter("IsoCode", adVarChar, adParamInput, 10, Form.IsoCode));
+			Append(CreateParameter("ItuCode", adVarChar, adParamInput, 10, Form.ItuCode));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} 
 		Execute(adExecuteNoRecords);
