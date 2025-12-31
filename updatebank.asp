@@ -1,26 +1,17 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var BankId = Form("BankId"),
-	EdrpoCode  = Form("EdrpoCode"),
-	MfoCode    = Form("MfoCode"),
-	BankName   = Form("BankName");
-}
 
 try {
 	Solaren.SetCmd("UpdateBank");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("BankId", adInteger, adParamInput, 10, BankId));
-			Append(CreateParameter("EdrpoCode", adVarChar, adParamInput, 10, EdrpoCode));
-			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, MfoCode));
-			Append(CreateParameter("BankName", adVarChar, adParamInput, 30, BankName));
+			Append(CreateParameter("BankId", adInteger, adParamInput, 10, Form.BankId));
+			Append(CreateParameter("EdrpoCode", adVarChar, adParamInput, 10, Form.EdrpoCode));
+			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, Form.MfoCode));
+			Append(CreateParameter("BankName", adVarChar, adParamInput, 30, Form.BankName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute();
 		var Done = Parameters.Item("Done").Value;

@@ -1,8 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
 <% var Authorized = User.RoleId >= 1 && User.RoleId <= 2,
 Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
@@ -31,4 +28,3 @@ try {
 	Solaren.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Показники з такою датою вже є")
 }%>
-

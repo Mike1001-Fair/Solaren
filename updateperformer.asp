@@ -1,6 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
 
