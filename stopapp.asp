@@ -1,8 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/msg.inc" -->
 <% Resource.Load(User.ResourceFile());
 var Legend = Dictionary.Item("Message") || "Message",
 Msg = Dictionary.Item("StopApp") || "Service temporarily unavailable";

@@ -1,9 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/msg.inc" -->
 <% Resource.Load(User.ResourceFile());
 var AccessDenied = Dictionary.Item("AccessDenied"),
 Msg = Session("SysMsg") || Dictionary.Item("AuthenticationError");
