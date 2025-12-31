@@ -1,9 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
 <!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
 <!-- #INCLUDE FILE="Include/datastream.inc" -->
 <% var Authorized = User.RoleId == 1,
 Form = Solaren.Parse();

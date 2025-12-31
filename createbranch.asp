@@ -1,31 +1,21 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
-<% var Authorized = User.RoleId == 0;
+<% var Authorized = User.RoleId == 0,
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var SortCode = Form("SortCode"),
-	BranchName1  = Form("BranchName1"),
-	BranchName2  = Form("BranchName2"),
-	AreaId       = Form("AreaId").Count == 1 ? Form("AreaId") : 0,
-	LocalityId   = Form("LocalityId"),
-	ChiefId      = Form("ChiefId"),
-	Accountant   = Form("Accountant"),
-	CompanyId    = Form("CompanyId");
-}
 
 try {
 	Solaren.SetCmd("NewBranch");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("SortCode", adVarChar, adParamInput, 10, SortCode));
-			Append(CreateParameter("BranchName", adVarChar, adParamInput, 30, BranchName));
-			Append(CreateParameter("BranchName2", adVarChar, adParamInput, 30, BranchName2));
-			Append(CreateParameter("AreaId", adVarChar, adParamInput, 10, AreaId));
-			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, LocalityId));
-			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, ChiefId));
-			Append(CreateParameter("Accountant", adVarChar, adParamInput, 30, Accountant));
-			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, CompanyId));
+			Append(CreateParameter("SortCode", adInteger, adParamInput, 10, Form.SortCode));
+			Append(CreateParameter("BranchName1", adVarChar, adParamInput, 50, Form.BranchName1));
+			Append(CreateParameter("BranchName2", adVarChar, adParamInput, 50, Form.BranchName2));
+			Append(CreateParameter("AreaId", adVarChar, adParamInput, 10, Form.AreaId));
+			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Form.LocalityId));
+			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, Form.ChiefId));
+			Append(CreateParameter("Accountant", adVarChar, adParamInput, 30, Form.Accountant));
+			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Form.CompanyId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
