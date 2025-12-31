@@ -1,8 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
 AreaName = Request.Form("AreaName"),
 Title = "Райони";

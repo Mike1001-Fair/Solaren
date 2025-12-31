@@ -1,13 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/locality.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
 <!-- #INCLUDE FILE="Include/street.inc" -->
+<!-- #INCLUDE FILE="Include/locality.inc" -->
 <% var Authorized = User.RoleId == 1,
 Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");

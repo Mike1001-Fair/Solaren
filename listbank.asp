@@ -1,10 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
