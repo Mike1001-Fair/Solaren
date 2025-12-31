@@ -6,3 +6,6 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Include/user.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/resource.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/month.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/street.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/locality.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/money.inc" -->

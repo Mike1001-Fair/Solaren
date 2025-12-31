@@ -1,13 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
-<!-- #INCLUDE FILE="Include/locality.inc" -->
-<!-- #INCLUDE FILE="Include/street.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
 <% var Authorized = User.RoleId == 2,
 Form = Solaren.Parse(),
 ReportMonth = String(Form.ReportMonth),
