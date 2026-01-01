@@ -1,12 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
-<!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/edit.inc" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
 Query = Solaren.Parse();
 User.CheckAccess(Authorized, "GET");
