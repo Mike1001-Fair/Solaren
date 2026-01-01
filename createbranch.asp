@@ -17,7 +17,8 @@ try {
 			Append(CreateParameter("Accountant", adVarChar, adParamInput, 30, Form.Accountant));
 			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Form.CompanyId));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		} 
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {

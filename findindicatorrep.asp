@@ -1,15 +1,8 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/month.inc" -->
-<% var Authorized = User.RoleId == 2,
-Title = "Звiт про показники";
+<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
+<% var Authorized = User.RoleId == 2;
 User.CheckAccess(Authorized, "GET");
-Html.SetPage(Title)%>
+Html.SetPage("Звiт про показники")%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="FindIndicatorRep" ACTION="prnindicatorrep.asp" TARGET="_blank" METHOD="post" AUTOCOMPLETE="off">
 <INPUT TYPE="hidden" NAME="ContractId" ID="ContractId" VALUE="-1">

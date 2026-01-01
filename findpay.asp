@@ -1,11 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
-<!-- #INCLUDE FILE="Include/month.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
 <% var Authorized = User.RoleId == 1;
 if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Оплата")

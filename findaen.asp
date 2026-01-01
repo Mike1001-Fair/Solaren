@@ -1,8 +1,5 @@
 <%@LANGUAGE="JavaScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 if (Authorized) {
 	with (Html) {

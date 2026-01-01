@@ -1,23 +1,19 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var EdrpoCode = Form("EdrpoCode"),
-	MfoCode       = Form("MfoCode"),
-	BankName      = Form("BankName");
-}
 
 try {
 	Solaren.SetCmd("NewBank");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("EdrpoCode", adVarChar, adParamInput, 10, EdrpoCode));
-			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, MfoCode));
-			Append(CreateParameter("BankName", adVarChar, adParamInput, 30, BankName));
+			Append(CreateParameter("EdrpoCode", adVarChar, adParamInput, 10, Form.EdrpoCode));
+			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, Form.MfoCode));
+			Append(CreateParameter("BankName", adVarChar, adParamInput, 30, Form.BankName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {
