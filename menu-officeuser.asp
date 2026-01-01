@@ -1,8 +1,5 @@
 ﻿<%@ LANGUAGE="JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
 <% Resource.Load(User.ResourceFile());
 User.CheckAuthorize(1) %>
 <NAV class="nav">
