@@ -1,9 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/html.inc" -->
-<!-- #INCLUDE FILE="Include/menu.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/new.inc" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 User.CheckAccess(Authorized, "GET");
 try {
