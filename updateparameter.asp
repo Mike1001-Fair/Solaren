@@ -1,7 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Include/upsert.inc" -->
-<!-- #INCLUDE FILE="Include/session.inc" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");

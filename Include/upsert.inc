@@ -2,3 +2,5 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Include/message.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/user.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/session.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/prototype.inc" -->
