@@ -1,6 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<!-- #INCLUDE FILE="Include/prototype.inc" -->
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/datastream.inc" -->
 <% var Authorized = User.RoleId == 1,

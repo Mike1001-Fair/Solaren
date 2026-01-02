@@ -1,45 +1,36 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
-
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-	var ChiefName = Form("ChiefName");
-}
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse();
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("GetBudgetCode");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	var rs = Solaren.Execute("GetBudgetCode");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
-}
-
-with (rs) {
-    var ContractorName = Fields("ContractorName").Value,
-	BudgetItem     = Fields("BudgetItem").Value;
-	Close();
-} Solaren.Close();
-
-var Today = new Date(),
-ReportDate = Today.toStr(0).formatDate("-");
-Html.SetHead("Бюджетний код")%>
+} finally {
+	var Record = Solaren.Map(rs.Fields),
+	ReportDate = Month.Today.toStr(0).formatDate("-");
+	rs.Close();
+	Solaren.Close();
+	Html.SetHead("Бюджетний код");
+}%>
 
 <BODY CLASS="PrnBody">
 <DIV ALIGN="CENTER">
-<H4 STYLE="margin: 0 0 10 0">Код статтi видаткiв: <%=BudgetItem%>, прiоритет: П-1</H4>
+<H4 STYLE="margin: 0 0 10 0">Код статтi видаткiв: <%=Record.BudgetItem%>, прiоритет: П-1</H4>
 <TABLE CLASS="PrnTable">
-<TR ALIGN="CENTER"><TD>Дата</TD><TD>ПIБ</TD><TD>Пiдпис</TD></TR>
-<TR ALIGN="CENTER"><TD><%=ReportDate%></TD><TD><%=ChiefName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
-<TR ALIGN="CENTER"><TD><%=ReportDate%></TD><TD><%=ContractorName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
-<TR><TD COLSPAN="3" ALIGN="CENTER">Вiддiл бюджетного планування i контролю</TD></TR>
-<TR><TD ALIGN="CENTER">&nbsp</TD><TD STYLE="width: 200">&nbsp</TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
+	<TR ALIGN="CENTER"><TD>Дата</TD><TD>ПIБ</TD><TD>Пiдпис</TD></TR>
+	<TR ALIGN="CENTER"><TD><%=ReportDate%></TD><TD><%=Form.ChiefName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
+	<TR ALIGN="CENTER"><TD><%=ReportDate%></TD><TD><%=Record.ContractorName%></TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
+	<TR><TD COLSPAN="3" ALIGN="CENTER">Вiддiл бюджетного планування i контролю</TD></TR>
+	<TR><TD ALIGN="CENTER">&nbsp</TD><TD STYLE="width: 200">&nbsp</TD><TD STYLE="width: 100; padding: 9 0 9 0">&nbsp</TD></TR>
 </TABLE></DIV></BODY></HTML>
 
 
