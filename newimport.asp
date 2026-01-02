@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/new.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/new.set" -->
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1),
 Items = ["Показників", "Оплат"];

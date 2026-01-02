@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%>
-<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <!-- #INCLUDE FILE="Include/tarif.inc" -->
 <% var Authorized = User.RoleId == 1;
 User.CheckAccess(Authorized, "POST");

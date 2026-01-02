@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 ChiefName = Request.Form("ChiefName");
 User.CheckAccess(Authorized, "POST");

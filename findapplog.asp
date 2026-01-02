@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/find.set" -->
 <% var Authorized = User.RoleId == 1,
 Event = {
 	Name: ["Завантаження показників", "Завантаження оплат", "Апдейт договору"],

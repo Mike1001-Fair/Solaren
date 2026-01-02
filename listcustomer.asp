@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/list.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = Session("RoleId") == 1,
 CustomerId = Request.Form("CustomerId");
 

@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/edit.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 RegionId = Request.QueryString("RegionId");
 

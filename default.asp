@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/default.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/default.set" -->
 <% Resource.Load(User.ResourceFile());
 var phUserName = Dictionary.Item("UserName"),
 phPswd = Dictionary.Item("Password"),

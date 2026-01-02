@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/msg.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/msg.set" -->
 <% Resource.Load(User.ResourceFile());
 var ScriptName = Session("ScriptName") || "";
 if (ScriptName.indexOf("login.asp") == -1) {

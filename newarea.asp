@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/new.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/new.set" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 User.CheckAccess(Authorized, "GET");
 try {

@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/find.set" -->
 <% var Authorized = Session("RoleId") == 1;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
 

@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/msg.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/msg.set" -->
 <% Resource.Load(User.ResourceFile());
 if (!User.ValidateRole(User.RoleId)) {
 	Message.Write(2, Dictionary.Item("AuthenticationError"))

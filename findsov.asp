@@ -1,5 +1,5 @@
 <%@LANGUAGE="JavaScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/find.set" -->
 <% var Authorized = User.RoleId == 1,
 OperMonth = Month.GetMonth(1),
 MinMonth  = Month.GetMonth(0);

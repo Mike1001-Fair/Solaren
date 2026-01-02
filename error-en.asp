@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/msg.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/msg.set" -->
 <% Html.SetHead("Message", 0) %>
 <BODY CLASS="MainBody">
 <DIV CLASS="SysMsg">

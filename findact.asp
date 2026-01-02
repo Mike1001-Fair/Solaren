@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/find.set" -->
 <% var Authorized = User.RoleId == 2;
 User.CheckAccess(Authorized, "GET");
 Html.SetPage("Друк акту")%>

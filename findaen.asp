@@ -1,5 +1,5 @@
 <%@LANGUAGE="JavaScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/find.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/find.set" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 if (Authorized) {
 	with (Html) {

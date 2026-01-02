@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/new.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/new.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
 if (User.CheckAccess(Authorized, "GET")) {
 	Html.SetPage("Новий банк")

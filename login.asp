@@ -1,5 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Include/login.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/login.set" -->
 <% var Form = Solaren.Parse(),
 isCreds = User.ValidateCredentials(Form);
 User.CheckAccess(isCreds, "POST");
