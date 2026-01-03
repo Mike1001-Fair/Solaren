@@ -1,12 +1,10 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
-<% var Authorized = User.RoleId == 1;
+<% var Authorized = User.RoleId == 1,
+Form = Solaren.Parse(),
+BegMonth = String(Form.BegMonth),
+EndMonth = String(Form.EndMonth);
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-    var BegMonth = String(Form("BegMonth")),
-	EndMonth = String(Form("EndMonth"));
-}
 
 try {
 	Solaren.SetCmd("ListVolPay");
