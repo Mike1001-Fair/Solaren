@@ -61,22 +61,6 @@ Solaren = {
 		return obj && typeof obj === 'object'
 	},
 
-	Map: function(Collection) {
-		var result = {};
-		if (this.ValidObject(Collection)) {			
-			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
-				var item = items.item(),
-				hasName = item && typeof item.Name === "string",
-				key = hasName ? item.Name : item,
-				value = hasName ? item.Value : Collection(item);
-				result[key] = value;
-			}
-		} else {
-			Message.Write(3, 'Map: Invalid input object');
-		}
-		return result
-	},
-
 	Debug: function(obj) {
 		if (this.ValidObject(obj)) {
 			var Output = ['<H3 CLASS="HeadText">🐛Дебаг</H3>',
@@ -108,9 +92,25 @@ Solaren = {
 		}
 	},
 
+	Map: function(Collection) {
+		var result = {};
+		if (this.ValidObject(Collection)) {			
+			for (var items = new Enumerator(Collection); !items.atEnd(); items.moveNext()) {
+				var item = items.item(),
+				hasName = item && typeof item.Name === "string",
+				key = hasName ? item.Name : item,
+				value = hasName ? item.Value : Collection(item);
+				result[key] = value;
+			}
+		} else {
+			Message.Write(3, 'Map: Invalid input object');
+		}
+		return result
+	},
+
 	Match: function(key) {
 		//this.Write('<br>' + key);
-		return this.Referer.indexOf(key) > -1;
+		return  this.Referer && this.Referer.indexOf(key) > -1;
 	},
 
 	Collection: function() {
