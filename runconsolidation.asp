@@ -1,8 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
-<!-- #INCLUDE FILE="Include/solaren.inc" -->
-<!-- #INCLUDE FILE="Include/message.inc" -->
-<!-- #INCLUDE FILE="Include/user.inc" -->
-<!-- #INCLUDE FILE="Include/resource.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
 <% var Authorized = User.RoleId == 1;
 User.CheckAccess(Authorized, "POST");
 
@@ -11,7 +8,8 @@ try {
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 	}
 	Message.Write(1, "");
 } catch (ex) {
