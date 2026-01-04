@@ -153,7 +153,7 @@ var Html = {
 
 	WriteChiefTitle: function(rs, TitleId) {
 		var Output = ['<SELECT NAME="ChiefTitleId" ID="ChiefTitleId">'];
-		for (var selected, option; !rs.EOF; rs.MoveNext()) {
+		for (; !rs.EOF; rs.MoveNext()) {
 			var selected = TitleId == rs.Fields("TitleId"),
 			option = this.GetOption(rs.Fields("TitleId"), selected, rs.Fields("Title1"));
 			Output.push(option);
