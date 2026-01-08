@@ -12,11 +12,15 @@ try {
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, Form.SortCode));
 			Append(CreateParameter("AenName", adVarChar, adParamInput, 20, Form.AenName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
-	Cmd.Parameters.Item("Done").Value ? Message.Write(1, "") : Message.Write(0, "РЕМ з таким номером вже є");
+		}
+		Execute(adExecuteNoRecords);
+		var Done = Parameters.Item("Done").Value;
+	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Solaren.Close();
+	Done ? Message.Write(1, "") : Message.Write(0, "РЕМ з таким номером вже є");
 }%>
 
 
