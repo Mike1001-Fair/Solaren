@@ -1,22 +1,19 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var StreetType = Form("StreetType"),
-	StreetName     = Form("StreetName");
-}
 
 try {
 	Solaren.SetCmd("NewStreet");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("StreetType", adTinyInt, adParamInput, 10, StreetType));
-			Append(CreateParameter("StreetName", adVarChar, adParamInput, 30, StreetName));    
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
+			Append(CreateParameter("StreetType", adTinyInt, adParamInput, 10, Form.StreetType));
+			Append(CreateParameter("StreetName", adVarChar, adParamInput, 30, Form.StreetName));    
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {

@@ -12,7 +12,7 @@ try {
 	Solaren.SetCmd("NewChiefDoc");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
 			Append(CreateParameter("DocName", adVarChar, adParamInput, 20, DocName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));

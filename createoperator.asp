@@ -13,12 +13,13 @@ try {
 	Solaren.SetCmd("NewOperator");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
 			Append(CreateParameter("EdrpoCode", adVarChar, adParamInput, 10, EdrpoCode));
 			Append(CreateParameter("OperatorName", adVarChar, adParamInput, 30, OperatorName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {

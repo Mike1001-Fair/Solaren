@@ -1,22 +1,19 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-	var SortCode = Form("SortCode"),
-	RegionName   = Form("RegionName");
-}
+<% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
+Form = Solaren.Parse();
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Solaren.SetCmd("NewRegion");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
-			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
-			Append(CreateParameter("RegionName", adVarChar, adParamInput, 20, RegionName));
+			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
+			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, Form.SortCode));
+			Append(CreateParameter("RegionName", adVarChar, adParamInput, 20, Form.RegionName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {

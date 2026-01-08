@@ -17,7 +17,7 @@ try {
 	Solaren.SetCmd("NewChief");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("ChiefTitleId", adInteger, adParamInput, 10, ChiefTitleId));
 			Append(CreateParameter("Name1", adVarChar, adParamInput, 30, Name1));
 			Append(CreateParameter("Name2", adVarChar, adParamInput, 30, Name2));

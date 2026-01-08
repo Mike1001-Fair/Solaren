@@ -15,7 +15,7 @@ try {
 	Solaren.SetCmd("NewFactVol");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("ContractId", adSmallInt, adParamInput, 10, ContractId));
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
