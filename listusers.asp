@@ -1,6 +1,5 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
-
 <% var Authorized = User.RoleId == 0,
 Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
@@ -54,7 +53,6 @@ var Table = {
 	}
 },
 Output = Table.Render(rs);
-
 rs.Close();
 Solaren.Close();
 Response.Write(Output)%>

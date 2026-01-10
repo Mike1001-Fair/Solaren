@@ -40,15 +40,19 @@ var Table = {
 		return rows;
 	},
 
-	Render: function(rs) {
-		var Header = ['Дaта', 'Сума'],
-		range = Month.GetRange(BegDate, EndDate),
-		rows = this.GetRows(rs),
-		th = [Tag.Write("TH", 0, 'Всього: ' + rows.length),
+	GetFooter: function(total) {
+		var th = [Tag.Write("TH", 0, 'Всього: ' + total),
 			Tag.Write("TH", 2, this.TotSum.toDelimited(2))
 		],
 		tr = Tag.Write("TR", -1, th.join("")),
-		footer = [tr, '</TABLE></BODY></HTML>'],
+		footer = [tr, '</TABLE></BODY></HTML>'];
+		return footer.join("\n")
+	},
+
+	Render: function(rs) {
+		var Header = ['Дaта', 'Сума'],
+		range = Month.GetRange(BegDate, EndDate),
+		rows = this.GetRows(rs),		
 		body = ['<BODY CLASS="MainBody">',
 			'<TABLE CLASS="H3Text">',
 			Tag.Write("CAPTION", -1, Html.Title),
@@ -58,7 +62,7 @@ var Table = {
 			'<TABLE CLASS="InfoTable">',
 			Html.GetHeadRow(Header),
 			rows.join("\n"),
-			footer.join("\n")
+			this.GetFooter(rows.length)
 		];
 		return body.join("\n");
 	}
