@@ -13,7 +13,8 @@ try {
 			Append(CreateParameter("MfoCode", adVarChar, adParamInput, 10, Form.MfoCode));
 			Append(CreateParameter("BankName", adVarChar, adParamInput, 30, Form.BankName));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute();
+		}
+		Execute();
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {
