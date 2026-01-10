@@ -1,21 +1,18 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Solaren.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var LocalityId = QueryString("LocalityId"),
-	Deleted        = QueryString("Deleted");
-}
 
 try {
 	Solaren.SetCmd("DelLocality");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, LocalityId));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
+			Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Form.LocalityId));
+			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Form.Deleted));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
-		} Execute(adExecuteNoRecords);
+		}
+		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
 } catch (ex) {
