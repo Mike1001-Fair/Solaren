@@ -1,12 +1,12 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/default.set" -->
 <% Resource.Load(User.ResourceFile());
-var phUserName = Dictionary.Item("UserName"),
+var titlePage =  Dictionary.Item("DefaultTitle"),
+phUserName = Dictionary.Item("UserName"),
 phPswd = Dictionary.Item("Password"),
 titleUser = Dictionary.Item("UserTitle"),
 titlePswd = Dictionary.Item("PasswordTitle");
-
-Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
+Html.SetHead(titlePage, 1);
 Html.WriteScript()%>
 <BODY CLASS="StartBody">
 <HEADER CLASS="HeaderDiv">
