@@ -9,3 +9,4 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Include/street.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/locality.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/money.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/tarif.inc" -->
