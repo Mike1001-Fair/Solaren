@@ -1,5 +1,19 @@
 ﻿<% //@ LANGUAGE = "JScript"
-var ServerInfo = {
+var SessionInfo = {
+	"ADO Version": Connect.Version,
+	"Connection String": Connect.ConnectionString,
+	"Connection State": Connect.State,
+ 	"Command Timeout": Connect.CommandTimeout,
+ 	"Connection Timeout": Connect.ConnectionTimeout,
+  	"Provider": Connect.Provider,
+	"Connection_Mode": Connect.Mode,
+	"Cursor Location": Connect.CursorLocation,
+	"SESSION_COUNT": Application("SesCount"),
+	"SESSION_TIMEOUT": Session.Timeout,
+	"SESSION_CODEPAGE": Session.CodePage
+},
+
+ServerInfo = {
 	Body: ['\n<BODY CLASS="MainBody">',
 		'<H3 CLASS="HeadText">&#128187;Сервер</H3>',
 		'<DIV CLASS="FormDiv">',
