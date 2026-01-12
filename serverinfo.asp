@@ -11,7 +11,4 @@
 User.CheckAccess(Authorized, "GET");
 Html.SetHead("Сервер", 1);
 Menu.Write(0);
-ServerInfo.AddObjInfo(SessionInfo);
-ServerInfo.AddRequestInfo();
-ServerInfo.Body.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
-Response.Write(ServerInfo.Body.join("\n"))%>
+ServerInfo.Render() %>

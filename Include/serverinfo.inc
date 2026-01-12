@@ -30,5 +30,12 @@ var ServerInfo = {
 			value = Request.ServerVariables(key);
 			this.AddRow(key, value);
 		}
+	},
+
+	Render: function() {
+		this.AddObjInfo(SessionInfo);
+		this.AddRequestInfo();
+		this.Body.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
+		Response.Write(ServerInfo.Body.join("\n"))
 	}
 }%>
