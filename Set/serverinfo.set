@@ -4,5 +4,4 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Include/menu.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/user.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/resource.inc" -->
-<!-- #INCLUDE VIRTUAL="Solaren/Include/session.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/serverinfo.inc" -->
