@@ -14,7 +14,7 @@ var SessionInfo = {
 },
 
 ServerInfo = {
-	Body: ['\n<BODY CLASS="MainBody">',
+	Doc: ['\n<BODY CLASS="MainBody">',
 		'<H3 CLASS="HeadText">&#128187;Сервер</H3>',
 		'<DIV CLASS="FormDiv">',
 		'<FIELDSET CLASS="FieldSet">',
@@ -27,7 +27,7 @@ ServerInfo = {
 		if (Value != "") {
 			var td = [Tag.Write("TD", 2, Key), Tag.Write("TD", 0, Value)],
 			tr = Tag.Write("TR", -1, td.join(""));
-			this.Body.push(tr);
+			this.Doc.push(tr);
 		}
 	},
 
@@ -49,7 +49,7 @@ ServerInfo = {
 	Render: function() {
 		this.AddObjInfo(SessionInfo);
 		this.AddRequestInfo();
-		this.Body.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
-		return this.Body.join("\n")
+		this.Doc.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
+		return this.Doc.join("\n")
 	}
 }%>
