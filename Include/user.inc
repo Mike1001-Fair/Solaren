@@ -92,7 +92,7 @@ var User = {
 	HasAccess: function(Authorized, method) {
 		//Response.Write(Application("ServerName") + '<br>' + Solaren.ServerName);
 		//Response.End();
-		return Authorized && Solaren.Method == method && Solaren.Match(Application("AppName")) && Application("WebServer") == Solaren.WebServer;
+		return Authorized && Solaren.Method == method && Solaren.Match(Application("AppName"));
 	},
 
 	CheckAccess: function(Authorized, method) {
