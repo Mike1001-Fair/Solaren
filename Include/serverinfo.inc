@@ -46,10 +46,14 @@ ServerInfo = {
 		}
 	},
 
+	AddFooter: function() {
+		this.Doc.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
+	},
+
 	Render: function() {
 		this.AddObjInfo(SessionInfo);
 		this.AddRequestInfo();
-		this.Doc.push('</TABLE></FIELDSET></DIV></BODY></HTML>');
+		this.AddFooter();
 		return this.Doc.join("\n")
 	}
 }%>
