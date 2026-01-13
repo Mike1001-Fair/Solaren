@@ -5,6 +5,7 @@ Solaren = {
 	ConnectMode: adModeRead,
 	ConnectionTimeout: 10,
 	CommandTimeout: 20,
+	WebServer: String(Request.ServerVariables("SERVER_NAME")) || "",
 	ScriptName: String(Request.ServerVariables("SCRIPT_NAME")) || "",
 	Referer: String(Request.ServerVariables("HTTP_REFERER")) || "",
 	Method : String(Request.ServerVariables("REQUEST_METHOD")) || "",
