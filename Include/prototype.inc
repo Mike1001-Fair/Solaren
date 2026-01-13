@@ -25,13 +25,13 @@ with (String) {
 	}
 
 	prototype.toDate = function() {
-		var dt   = this.split('T'),
-		DateOnly = dt.length == 1,
-		ymd      = dt[0].split('-');
-		if (!DateOnly) {
+		var dt  = this.split('T'),
+		hasTime = dt.length == 2,
+		ymd     = dt[0].split('-');
+		if (hasTime) {
 			var hms = dt[1].split(':');
 		}
-		return DateOnly ? new Date(ymd[0], ymd[1] - 1, ymd[2]) : new Date(ymd[0], ymd[1]-1, ymd[2], hms[0], hms[1], hms[2])
+		return hasTime ? new Date(ymd[0], ymd[1]-1, ymd[2], hms[0], hms[1], hms[2]) : new Date(ymd[0], ymd[1] - 1, ymd[2])
 	}
 
 	prototype.padStart = function(targetLen, padChar) {
