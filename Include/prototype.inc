@@ -1,11 +1,11 @@
 ﻿<% //@ LANGUAGE = "JScript"
 with (Date) {
-	prototype.toStr = function(includeTime) {
+	prototype.toStr = function(hasTime) {
 		var ymd = [this.getFullYear(), this.getMonth() + 1, this.getDate()],
 		result = [];
 		ymd.padZero();
 		result.push(ymd.join("-"));
-		if (includeTime) {
+		if (hasTime) {
 			var hms = [this.getHours(), this.getMinutes(), this.getSeconds()];
  			hms.padZero();
 			result.push(hms.join(":"));
