@@ -111,7 +111,7 @@ Solaren = {
 
 	Match: function(key) {
 		//this.Write('<br>' + key);
-		return  this.Referer && this.Referer.indexOf(key) > -1 && Application("WebServer") == Solaren.WebServer;
+		return  this.Referer && this.Referer.indexOf(key) > -1 && Application("WebServer") == this.WebServer;
 	},
 
 	Collection: function() {
