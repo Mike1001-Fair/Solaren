@@ -109,7 +109,7 @@ Solaren = {
 		return result
 	},
 
-	Match: function(key) {
+	Filter: function(key) {
 		var ServerList = { "localhost":1, "127.0.0.1":1 };
 		return this.Referer && this.Referer.indexOf(key) > -1 && ServerList[this.WebServer]
 	},
@@ -120,6 +120,6 @@ Solaren = {
 
 	Parse: function() {
 		var collection = this.Collection();
-		return this.Match(Application("AppName")) ? this.Map(collection) : {};
+		return this.Filter(Application("AppName")) ? this.Map(collection) : {};
 	}
 }%>
