@@ -110,8 +110,8 @@ Solaren = {
 	},
 
 	Match: function(key) {
-		var ServerList = "localhost"
-		return  this.Referer && this.Referer.indexOf(key) > -1 && ServerList.indexOf(this.WebServer) > -1;
+		var ServerList = { "localhost":1, "127.0.0.1":1 };
+		return this.Referer && this.Referer.indexOf(key) > -1 && ServerList[this.WebServer]
 	},
 
 	Collection: function() {
