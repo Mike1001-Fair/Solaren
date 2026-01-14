@@ -110,8 +110,8 @@ Solaren = {
 	},
 
 	Match: function(key) {
-		//this.Write('<br>' + key);
-		return  this.Referer && this.Referer.indexOf(key) > -1 && Application("WebServer") == this.WebServer;
+		var ServerList = "localhost"
+		return  this.Referer && this.Referer.indexOf(key) > -1 && ServerList.indexOf(this.WebServer) > -1;
 	},
 
 	Collection: function() {

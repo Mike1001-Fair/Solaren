@@ -27,7 +27,6 @@ var Config = {
 }
 
 function Application_OnStart() {
-	Application("WebServer") = "localhost";
 	Application("AppName") = Config.GetParameter(0);
 	Application("ConnectString") = Config.ConnectString();
 	Application("SesCount") = 0;
