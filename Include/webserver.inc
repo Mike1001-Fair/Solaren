@@ -62,7 +62,8 @@ var Webserver = {
 
 	Filter: function(key) {
 		var ServerList = {
-			"localhost": 1
+			"localhost": 1,
+			"192.168.31.77": 1
 		};
 		return ServerList[this.Name] && this.Referer && this.Referer.indexOf(key) > -1 
 	},
@@ -74,5 +75,10 @@ var Webserver = {
 	Parse: function() {
 		var collection = this.Collection();
 		return this.Filter(Application("AppName")) ? this.Map(collection) : {};
+	},
+
+	GetRandInt: function(intMin, intMax) {
+		var rand = intMin + Math.random() * (intMax + 1 - intMin);
+		return Math.floor(rand);
 	}
 }%>

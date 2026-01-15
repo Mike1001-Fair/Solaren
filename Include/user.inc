@@ -81,7 +81,7 @@ var User = {
 		for (var i = 0; i < maxAttempts && !valid; i++) {
 			var Chars = new Array(this.PswdLen);
 			for (var j = 0; j < this.PswdLen; j++) {
-				Chars[j] = String.fromCharCode(Solaren.GetRandInt(charCodeMin, charCodeMax));
+				Chars[j] = String.fromCharCode(Webserver.GetRandInt(charCodeMin, charCodeMax));
 			}
 			var Pswd = Chars.join("");
 			valid = this.PswdRe.test(Pswd);

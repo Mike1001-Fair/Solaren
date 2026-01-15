@@ -39,10 +39,5 @@ Solaren = {
 		for (var i = count - 1; i >= 0; i--) {
 			Cmd.Parameters.Delete(i);
 		}
-	},
-
-	GetRandInt: function(intMin, intMax) {
-		var rand = intMin + Math.random() * (intMax + 1 - intMin);
-		return Math.floor(rand);
 	}
 }%>

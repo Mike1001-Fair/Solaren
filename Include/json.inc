@@ -28,7 +28,7 @@ var Json = {
 
 	error: function(ex, errCode) {
 		this.data = errCode;
-		Session("ScriptName") = Solaren.ScriptName;
+		Session("ScriptName") = Webserver.Script;
 		Session("SysMsg") = Message.Error(ex);
 	},
 
