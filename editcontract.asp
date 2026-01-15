@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId == 1,
-Query = Solaren.Parse();
+Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -26,7 +26,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Contract = Solaren.Map(rsContract.Fields);
+	var Contract = Webserver.Map(rsContract.Fields);
 	rsContract.Close();
 	Html.SetPage(Contract.Deleted ? "Перегляд договору" : "Редагування договору");
 }%>

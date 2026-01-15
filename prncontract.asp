@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId == 1,
-Form = Solaren.Parse();
+Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -59,7 +59,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	var Item = Solaren.Map(Cmd.Parameters);
+	var Item = Webserver.Map(Cmd.Parameters);
 	Solaren.Close();
 
 	Item.AreaName = Item.AreaName ? Item.AreaName + " район," : "";

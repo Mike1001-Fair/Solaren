@@ -1,7 +1,7 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Config = {
 	Write: function(List) {
-		if (Solaren.ValidObject(List)) {
+		if (Webserver.ValidObject(List)) {
 			var Output = ['<FIELDSET NAME="SysCfgSet"><LEGEND>Додаткові</LEGEND>'];
 			for (var k in List) {
 				var row = ['<LABEL CLASS="BlockLabel"><INPUT TYPE="CheckBox" NAME="', k, '">', List[k], '</LABEL>'];

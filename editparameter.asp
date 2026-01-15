@@ -1,6 +1,6 @@
 <%@ LANGUAGE = "JavaScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
-<% var Authorized = !Solaren.Empty(User.RoleId) && User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = !Webserver.Empty(User.RoleId) && User.RoleId >= 0 && User.RoleId < 2;
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -14,7 +14,7 @@ try {
 		CheckCard   : "Перевіряти картку",
 		ShowDeleted : "Показувати видалене"
 	},
-	Record = Solaren.Map(rs.Fields);
+	Record = Webserver.Map(rs.Fields);
 	rs.Close();
 	Solaren.Close();
 	Html.SetPage("Параметри");

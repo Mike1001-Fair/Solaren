@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
-<% var Authorized = !Solaren.Empty(User.RoleId) && User.RoleId >= 0 && User.RoleId < 2,
-Query = Solaren.Parse();
+<% var Authorized = !Webserver.Empty(User.RoleId) && User.RoleId >= 0 && User.RoleId < 2,
+Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -23,7 +23,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Branch = Solaren.Map(rsBranch.Fields),
+	var Branch = Webserver.Map(rsBranch.Fields),
 	Title = Branch.Deleted ? "Перегляд анкети ЦОС" : "Редагування анкети ЦОС";
 	rsBranch.Close();
 	Html.SetPage(Title);

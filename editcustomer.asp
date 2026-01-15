@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId == 1,
-Query = Solaren.Parse();
+Query = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -15,7 +15,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	var Customer = Solaren.Map(rs.Fields);
+	var Customer = Webserver.Map(rs.Fields);
 	rs.Close();
 	Solaren.Close();
 	Html.SetPage(Customer.Deleted ? "Перегляд анкети" : "Редагування анкети");

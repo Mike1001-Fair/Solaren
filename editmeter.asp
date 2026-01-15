@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId == 1,
-Query = Solaren.Parse();
+Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -15,7 +15,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	var Meter = Solaren.Map(rs.Fields),
+	var Meter = Webserver.Map(rs.Fields),
 	Limit = Math.pow(10, Meter.Capacity) - 1;
 	rs.Close();
 	Solaren.Close();

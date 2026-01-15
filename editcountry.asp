@@ -16,7 +16,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Record = Solaren.Map(rs.Fields);
+	var Record = Webserver.Map(rs.Fields);
 	rs.Close();
 	Solaren.Close();
 	Html.SetPage(Record.Deleted ? "Перегляд анкети" : "Редагування анкети");

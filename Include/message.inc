@@ -11,7 +11,7 @@ var Message = {
 
 	Error: function(ex) {
 		var ErrMsg = [];
-		if (Solaren.ValidObject(ex)) {
+		if (Webserver.ValidObject(ex)) {
 			if (Connect.Errors.Count) {
 				for (var i = 0; i < Connect.Errors.Count; i++) {
 					var row = [Connect.Errors(i).number, Connect.Errors(i).description];

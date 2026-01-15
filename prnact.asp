@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.Parse(),
+Form = Webserver.Parse(),
 ReportMonth = String(Form.ReportMonth),
 DoubleAct = Form.DoubleAct == "on";
 
@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Record = Solaren.Map(rs.Fields);
+	var Record = Webserver.Map(rs.Fields);
 	Html.SetHead("Акт приймання-передачi");
 }
 

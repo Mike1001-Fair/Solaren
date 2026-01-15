@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId > 0 && User.RoleId < 3,
-Query = Solaren.Parse();
+Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
@@ -15,7 +15,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	var Indicator = Solaren.Map(rs.Fields);
+	var Indicator = Webserver.Map(rs.Fields);
 	OperDate     = Month.Date[1],
 	PrevDate     = Month.GetYMD(Indicator.PrevDate),
 	ReportDate   = Month.GetYMD(Indicator.ReportDate),

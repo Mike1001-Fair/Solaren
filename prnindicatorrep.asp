@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId == 2,
-Form = Solaren.Parse(),
+Form = Webserver.Parse(),
 ReportMonth = String(Form.ReportMonth),
 DoubleReport = Form.DoubleReport == "on";
 User.CheckAccess(Authorized, "POST");
@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Report = Solaren.Map(rsInfo.Fields);
+	var Report = Webserver.Map(rsInfo.Fields);
 	rsInfo.Close();
 	Html.SetHead("Звіт про показники");
 }

@@ -3,7 +3,7 @@
 <!-- #INCLUDE FILE="Include/month.inc" -->
 <!-- #INCLUDE FILE="Include/datastream.inc" -->
 <% var Authorized = User.RoleId == 1,
-Form = Solaren.Parse();
+Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {

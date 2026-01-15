@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2,
-Form = Solaren.Parse();
+Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {

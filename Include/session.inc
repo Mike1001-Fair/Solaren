@@ -2,7 +2,7 @@
 var SessionManager = {
 	SetVar: function(rs) {
 		var Parameter = ["UserGUID", "UserId", "Token", "HoursLimit", "MsgText", "RoleId"],
-		Config = Solaren.Map(rs.Fields),
+		Config = Webserver.Map(rs.Fields),
 		OperDate = Month.GetYMD(Config.OperDate);
 
 		for (var i = 0; i < Parameter.length; i++) {

@@ -4,7 +4,7 @@ var Json = {
 
 	toString: function (obj) {
 		var result = ['['];		
-		if (Solaren.ValidObject(obj)) {
+		if (Webserver.ValidObject(obj)) {
 			var Items = new Enumerator(obj);
 			for (var itemSet = []; !Items.atEnd(); Items.moveNext()) {
 				var itemName = ['"', Items.item().Name, '"'];

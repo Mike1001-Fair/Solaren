@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId == 1,
-Form = Solaren.Parse(),
+Form = Webserver.Parse(),
 ReportMonth = String(Form.ReportMonth);
 User.CheckAccess(Authorized, "POST");
 
@@ -25,7 +25,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	var Record = Solaren.Map(rsNote.Fields),
+	var Record = Webserver.Map(rsNote.Fields),
 	Period = Month.GetPeriod(ReportMonth, 1);
 	rsNote.Close();
 	Html.SetHead("Реєстр");

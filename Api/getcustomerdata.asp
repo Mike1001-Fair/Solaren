@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/api.set" -->
 <% var Authorized = User.RoleId == 1,
-Query = Solaren.Parse(),
+Query = Webserver.Parse(),
 ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {

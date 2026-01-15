@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId == 1,
-Query = Solaren.Parse();
+Query = Webserver.Parse();
 
 User.CheckAccess(Authorized, "GET");
 try {
@@ -15,7 +15,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Payment = Solaren.Map(rs.Fields),
+	var Payment = Webserver.Map(rs.Fields),
 	ViewOnly = !Month.isPeriod(Month.Date[1], Payment.PayDate),
 	Title = Payment.Deleted || ViewOnly ? "Перегляд оплати" : "Редагування оплати";
 	rs.Close();

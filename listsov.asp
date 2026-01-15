@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId == 1,
-Form = Solaren.Parse(),
+Form = Webserver.Parse(),
 ReportMonth = String(Form.ReportMonth),
 Filter = Form.Filter == "on";
 User.CheckAccess(Authorized, "POST");

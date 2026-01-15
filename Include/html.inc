@@ -31,7 +31,7 @@ var Html = {
 	},
 
 	WriteScript: function() {
-		var ScriptName = Solaren.ScriptName.split("/").pop(),
+		var ScriptName = Webserver.Script.split("/").pop(),
 		FileParts      = ScriptName.split('.'),
 		FileName       = Scripts.Map(FileParts[0].toLowerCase()),
 		Output         = ['\n<SCRIPT DEFER SRC="', FileName, '"></SCRIPT>'];

@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/list.set" -->
 <% var Authorized = User.RoleId == 1,
-Form = Solaren.Parse();
+Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
@@ -15,7 +15,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Record = Solaren.Map(rs.Fields),
+	var Record = Webserver.Map(rs.Fields),
 	ReportDate = Month.Today.toStr(0).formatDate("-");
 	rs.Close();
 	Solaren.Close();
