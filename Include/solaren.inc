@@ -111,8 +111,7 @@ Solaren = {
 
 	Filter: function(key) {
 		var ServerList = {
-			"localhost": 1,
-			"127.0.0.1": 1 
+			"localhost": 1
 		};
 		return ServerList[this.WebServer] && this.Referer && this.Referer.indexOf(key) > -1 
 	},
