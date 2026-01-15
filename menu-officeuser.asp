@@ -1,5 +1,5 @@
 ﻿<%@ LANGUAGE="JScript"%> 
-<!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Set/menu.set" -->
 <% Resource.Load(User.ResourceFile());
 User.CheckAuthorize(1) %>
 <NAV class="nav">
