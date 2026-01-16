@@ -17,7 +17,6 @@ try {
 		Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;
 	}
-	Db.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
