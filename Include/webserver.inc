@@ -61,7 +61,7 @@ var Webserver = {
 	},
 
 	Filter: function(key) {
-		return AllowedHosts[this.Name] && this.Referer && this.Referer.indexOf(key) > -1 
+		return Hosts[this.Name] && this.Referer && this.Referer.indexOf(key) > -1 
 	},
 
 	Collection: function() {
@@ -79,7 +79,7 @@ var Webserver = {
 	}
 },
 
-AllowedHosts = {
+Hosts = {
 	"localhost": 1,
 	"192.168.31.77": 1
 }%>
