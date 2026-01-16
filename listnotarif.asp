@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("ListNoTarif");
+	Db.SetCmd("ListNoTarif");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -49,7 +49,7 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>
 
 

@@ -6,7 +6,7 @@ ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {
 	try {
-		Solaren.SetCmd("GetStreetInfo");
+		Db.SetCmd("GetStreetInfo");
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, Query.StreetId));
@@ -18,7 +18,7 @@ if (ValidRequest) {
 	} catch (ex) {
 		Json.error(ex, '[{"StreetId":-2}]')
 	} finally {
-		Solaren.Close();
+		Db.Close();
 	}
 } else {
 	Json.data = '[{"StreetId":0}]';

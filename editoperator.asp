@@ -5,13 +5,13 @@ OperatorId = Request.QueryString("OperatorId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetOperator");
+	Db.SetCmd("GetOperator");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
 		}
 	}
-	var rsOperator = Solaren.Execute("GetOperator");
+	var rsOperator = Db.Execute("GetOperator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -23,7 +23,7 @@ try {
 		Title        = Deleted ? "Перегляд анкети" : "Редагування анкети";
 		Close();
 	}
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">

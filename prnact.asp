@@ -8,7 +8,7 @@ DoubleAct = Form.DoubleAct == "on";
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetAct");
+	Db.SetCmd("GetAct");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -16,7 +16,7 @@ try {
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Form.ContractId));
 		}
 	}
-	var rs = Solaren.Execute("GetAct");
+	var rs = Db.Execute("GetAct");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -68,5 +68,5 @@ Output = ['\n<BODY CLASS="ActContainer">',
 ];
 
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output.join("\n"))%>

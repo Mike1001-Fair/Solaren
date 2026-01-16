@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("UpdateTarif");
+	Db.SetCmd("UpdateTarif");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("TarifId", adSmallInt, adParamInput,10, Form.TarifId));
@@ -23,6 +23,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Помилка")
 }%>

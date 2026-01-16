@@ -4,8 +4,8 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetBaseInfo");
-	var rs = Solaren.Execute("GetBaseInfo");
+	Db.SetCmd("GetBaseInfo");
+	var rs = Db.Execute("GetBaseInfo");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -16,7 +16,7 @@ Html.SetPage("Реіндексація")%>
 <FORM CLASS="ValidForm" NAME="ReindexBase" ACTION="runreindexbase.asp" METHOD="post">
 <H3 CLASS="HeadText"><%=Html.Title%></H3>
 <% Config.WriteDbInfo(rs);
-Solaren.Close() %>
+Db.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>
 

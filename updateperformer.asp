@@ -12,7 +12,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("UpdatePerformer");
+	Db.SetCmd("UpdatePerformer");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, PerformerId));
@@ -21,7 +21,7 @@ try {
 			Append(CreateParameter("MiddleName", adVarChar, adParamInput, 20, MiddleName));
 			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Phone));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

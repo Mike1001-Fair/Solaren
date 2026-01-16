@@ -3,7 +3,7 @@
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 User.CheckAccess(Authorized, "GET");
 try {
-	Solaren.SetCmd("GetAreaSortCode");
+	Db.SetCmd("GetAreaSortCode");
 	with (Cmd) {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
@@ -14,7 +14,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var SortCode = ++Cmd.Parameters.Item("SortCode").Value;
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage("Новий район")
 }%>
 <BODY CLASS="MainBody">

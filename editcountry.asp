@@ -6,19 +6,19 @@ CountryId = Request.Form("CountryId");
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetCountry");
+	Db.SetCmd("GetCountry");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("CountryId", adInteger, adParamInput, 10, CountryId));
 		}
 	}
-	var rs = Solaren.Execute("GetCountry");
+	var rs = Db.Execute("GetCountry");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields);
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Record.Deleted ? "Перегляд анкети" : "Редагування анкети");
 }%>
 <BODY CLASS="MainBody">

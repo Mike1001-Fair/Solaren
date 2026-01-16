@@ -1,7 +1,7 @@
 <% //@ LANGUAGE = "JScript"
 var Cmd = Server.CreateObject("ADODB.Command"),
 Connect = Server.CreateObject("ADODB.Connection"),
-Solaren = {
+Db = {
 	SetCmd: function(spName) {
 		Connect.Mode = adModeRead;
 		Connect.ConnectionTimeout = 10;

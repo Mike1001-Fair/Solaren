@@ -13,7 +13,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("UpdateFactVol");
+	Db.SetCmd("UpdateFactVol");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
@@ -30,7 +30,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Помилка")
 }%>
 

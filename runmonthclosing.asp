@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("RunMonthClosing");
+	Db.SetCmd("RunMonthClosing");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("OperDate", adVarChar, adParamOutput, 10, ""));
@@ -17,6 +17,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 }%>
 

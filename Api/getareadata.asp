@@ -6,7 +6,7 @@ ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {
 	try {
-		Solaren.SetCmd("GetAreaData");
+		Db.SetCmd("GetAreaData");
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, Query.QueryName));
@@ -18,7 +18,7 @@ if (ValidRequest) {
 	} catch (ex) {
 		Json.error(ex, '[{"AreaId":-2}]')
 	} finally {
-		Solaren.Close();
+		Db.Close();
 	}
 } else {
 	Json.data = '[{"AreaId":0}]';

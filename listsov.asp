@@ -7,7 +7,7 @@ Filter = Form.Filter == "on";
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListSov");
+	Db.SetCmd("ListSov");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("Filter", adBoolean, adParamInput, 1, Filter));
 		}
 	}
-	var rs = Solaren.Execute("ListSov");
+	var rs = Db.Execute("ListSov");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -80,5 +80,5 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>

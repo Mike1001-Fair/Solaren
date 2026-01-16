@@ -6,13 +6,13 @@ OperMonth = Month.GetMonth(1);
 User.CheckAccess(Authorized, "GET")
 
 try {
-	Solaren.SetCmd("SelectChief");
+	Db.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("SelectChief", "Довiдник керiвникiв пустий");
+	var rs = Db.Execute("SelectChief", "Довiдник керiвникiв пустий");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))	
 } finally {

@@ -5,7 +5,7 @@ Form = Webserver.Parse(),
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListMeter");
+	Db.SetCmd("ListMeter");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -13,7 +13,7 @@ try {
 			Append(CreateParameter("MeterCode", adVarChar, adParamInput, 10, Form.MeterCode));
 		}
 	}
-	var rs = Solaren.Execute("ListMeter");
+	var rs = Db.Execute("ListMeter");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -55,5 +55,5 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>

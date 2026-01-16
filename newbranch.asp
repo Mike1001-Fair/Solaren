@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetBranchSortCode");
+	Db.SetCmd("GetBranchSortCode");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
@@ -19,8 +19,8 @@ try {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsChief = Solaren.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
-	rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!");
+	var rsChief = Db.Execute("SelectChiefBranch", "Довiдник керівників пустий!"),
+	rsCompany = Db.Execute("SelectCompany", "Довiдник підприємств пустий!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

@@ -5,13 +5,13 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListPerformer");
+	Db.SetCmd("ListPerformer");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("PerformerName", adVarChar, adParamInput, 10, Form.PerformerName));
 		}
 	}
-	var rs = Solaren.Execute("ListPerformer");
+	var rs = Db.Execute("ListPerformer");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -48,6 +48,6 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>
 

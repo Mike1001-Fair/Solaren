@@ -5,13 +5,13 @@ BegDate = Request.Form("BegDate");
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListVz");
+	Db.SetCmd("ListVz");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 		}
 	}
-	var rs = Solaren.Execute("ListVz");
+	var rs = Db.Execute("ListVz");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -35,7 +35,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(3, i));
 Response.Write(Output.join("\n"))%>
 

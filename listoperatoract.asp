@@ -10,7 +10,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListOperatorAct");
+	Db.SetCmd("ListOperatorAct");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
@@ -19,7 +19,7 @@ try {
 		}
 	}
 	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	Db.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -47,7 +47,7 @@ for (var i=0; !rs.EOF; i++) {
 	totRetVol += rs.Fields("RetVol");
 	totSaldo += rs.Fields("Saldo");
 	rs.MoveNext()
-} rs.Close(); Solaren.Close();
+} rs.Close(); Db.Close();
 
 Output += '<TR><TH ALIGN="LEFT" COLSPAN="4">Всього: ' + i +
 Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +

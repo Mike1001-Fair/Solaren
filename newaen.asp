@@ -3,12 +3,12 @@
 <% var Authorized = Session("RoleId") >= 0 && Session("RoleId") < 2;
 if (!Authorized) Message.Write(2, "Помилка авторизації");
 try {
-	Solaren.SetCmd("GetAenSortCode");
+	Db.SetCmd("GetAenSortCode");
 	with (Cmd) {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	var SortCode =++ Cmd.Parameters.Item("SortCode").Value;
 	with (Html) {
 		SetHead("Новий РЕМ");

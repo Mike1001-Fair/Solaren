@@ -31,14 +31,14 @@ var User = {
 	},
 
 	ValidateRole: function(RoleId) {
-		//Solaren.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
+		//Db.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return RoleId == this.RoleId && this.Role[RoleId] 
 	},
 
 	Authorize: function(RoleId) {
 		var Done = 0;
 		try {
-			Solaren.SetCmd("UserAuthorize");
+			Db.SetCmd("UserAuthorize");
 			with (Cmd) {
 				with (Parameters) {
 					Append(CreateParameter("SessionId", adInteger, adParamInput, 10, Session.SessionID));
@@ -55,10 +55,10 @@ var User = {
 		} catch (ex) {
 			Message.Write(3, Message.Error(ex))
 		} finally {
-			Solaren.DelParameters();
-			Solaren.Close();
+			Db.DelParameters();
+			Db.Close();
 		}
-		//Solaren.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
+		//Db.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return Done;
 	},
 
@@ -90,7 +90,7 @@ var User = {
 	},
 
 	HasAccess: function(Authorized, method) {
-		//Response.Write(Application("ServerName") + '<br>' + Solaren.WebServer);
+		//Response.Write(Application("ServerName") + '<br>' + Db.WebServer);
 		return Authorized && Webserver.Method == method && Webserver.Filter(Application("AppName"));
 	},
 

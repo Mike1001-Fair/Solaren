@@ -9,7 +9,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("DelOperator");
+	Db.SetCmd("DelOperator");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
@@ -21,7 +21,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Помилка");
 }%>
 

@@ -7,14 +7,14 @@ AveragePrice = String(Form.AveragePrice);
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListCompensation");
+	Db.SetCmd("ListCompensation");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Solaren.Execute("ListCompensation");
+	var rs = Db.Execute("ListCompensation");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -82,5 +82,5 @@ var Doc = {
 },
 Output = Doc.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>

@@ -7,7 +7,7 @@ EndMonth = String(Form.EndMonth);
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListVolPay");
+	Db.SetCmd("ListVolPay");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
 		}
 	}
-	var rs = Solaren.Execute("ListVolPay");
+	var rs = Db.Execute("ListVolPay");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -78,7 +78,7 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>
 
 

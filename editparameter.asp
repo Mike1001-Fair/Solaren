@@ -4,8 +4,8 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetParameter");
-	var rs = Solaren.Execute("GetParameter");
+	Db.SetCmd("GetParameter");
+	var rs = Db.Execute("GetParameter");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -16,7 +16,7 @@ try {
 	},
 	Record = Webserver.Map(rs.Fields);
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage("Параметри");
 }%>
 <BODY CLASS="MainBody">

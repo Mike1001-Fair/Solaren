@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 
 User.CheckAccess(Authorized, "POST");
 try {
-	Solaren.SetCmd("DelCompany");
+	Db.SetCmd("DelCompany");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("CompanyId", adInteger, adParamInput, 10, Form.CompanyId));
@@ -18,7 +18,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Помилка");
 }%>
 

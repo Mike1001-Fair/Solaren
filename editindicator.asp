@@ -5,13 +5,13 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetIndicator");
+	Db.SetCmd("GetIndicator");
 	with (Cmd) {
 		with (Parameters) {
  			Append(CreateParameter("IndicatorId", adInteger, adParamInput, 10, Query.IndicatorId))
 		} 
 	}
-	var rs = Solaren.Execute("GetIndicator");
+	var rs = Db.Execute("GetIndicator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
@@ -25,7 +25,7 @@ try {
 	Title        = Indicator.Deleted || ViewOnly ? "Перегляд показникiв" : "Редагування показникiв",
 	AllowDelBtn  = User.RoleId == 1;
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">

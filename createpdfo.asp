@@ -10,14 +10,14 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("NewPdfo");
+	Db.SetCmd("NewPdfo");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 			Append(CreateParameter("PdfoTax", adVarChar, adParamInput, 10, PdfoTax));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

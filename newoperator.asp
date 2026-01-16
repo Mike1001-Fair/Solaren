@@ -4,14 +4,14 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetOperatorSortCode");
+	Db.SetCmd("GetOperatorSortCode");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
 		} Execute(adExecuteNoRecords);
 	} 
 	var SortCode = Cmd.Parameters.Item("SortCode").Value;
-	Solaren.Close();
+	Db.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {

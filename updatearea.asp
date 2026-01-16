@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("UpdateArea");
+	Db.SetCmd("UpdateArea");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("AreaId", adInteger, adParamInput, 10, Form.AreaId));
@@ -13,7 +13,7 @@ try {
 			Append(CreateParameter("AreaName", adVarChar, adParamInput, 20, Form.AreaName));
 		} Execute(adExecuteNoRecords);
 	}
-	Solaren.Close();
+	Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

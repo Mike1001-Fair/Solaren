@@ -11,7 +11,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("UpdateVz");
+	Db.SetCmd("UpdateVz");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("VzId", adVarChar, adParamInput, 20, VzId));
@@ -19,7 +19,7 @@ try {
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 20, EndDate));
 			Append(CreateParameter("VzTax", adVarChar, adParamInput, 10, VzTax));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

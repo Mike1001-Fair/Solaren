@@ -5,13 +5,13 @@ Query = Webserver.Parse();
 
 User.CheckAccess(Authorized, "GET");
 try {
-	Solaren.SetCmd("GetPay");
+	Db.SetCmd("GetPay");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("PayId", adInteger, adParamInput, 10, Query.PayId));
 		}
 	}
-	var rs = Solaren.Execute("GetPay");
+	var rs = Db.Execute("GetPay");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -19,7 +19,7 @@ try {
 	ViewOnly = !Month.isPeriod(Month.Date[1], Payment.PayDate),
 	Title = Payment.Deleted || ViewOnly ? "Перегляд оплати" : "Редагування оплати";
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">

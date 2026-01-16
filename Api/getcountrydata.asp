@@ -6,7 +6,7 @@ ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {
 	try {
-		Solaren.SetCmd("GetCountryData");
+		Db.SetCmd("GetCountryData");
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("QueryName", adVarChar, adParamInput, 10, Query.QueryName));
@@ -18,7 +18,7 @@ if (ValidRequest) {
 	} catch (ex) {
 		Json.error(ex, '[{"CountryId":-2}]')
 	} finally {
-		Solaren.Close();
+		Db.Close();
 	}
 } else {
 	Json.data = '[{"CountryId":0}]';

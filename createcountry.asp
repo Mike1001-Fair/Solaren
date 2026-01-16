@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("NewCountry");
+	Db.SetCmd("NewCountry");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("CountryName", adVarChar, adParamInput, 30, Form.CountryName));
@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Країна з таким кодом " + IsoCode + " вже є");
 }%>
 

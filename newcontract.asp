@@ -4,17 +4,17 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectBank");
+	Db.SetCmd("SelectBank");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
-	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!"),
-	rsAen =	Solaren.Execute("SelectAen", "Довiдник РЕМ пустий!"),
-	rsOperator = Solaren.Execute("SelectOperator", "Довiдник операторів пустий!"),
-	rsPerformer = Solaren.Execute("SelectPerformer", "Довiдник виконавців пустий!");
+	var rsBank = Db.Execute("SelectBank", "Довідник банкiв пустий!"),
+	rsBranch = Db.Execute("SelectBranch", "Довiдник ЦОС пустий!"),
+	rsAen =	Db.Execute("SelectAen", "Довiдник РЕМ пустий!"),
+	rsOperator = Db.Execute("SelectOperator", "Довiдник операторів пустий!"),
+	rsPerformer = Db.Execute("SelectPerformer", "Довiдник виконавців пустий!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -92,7 +92,7 @@ try {
 
 	<TR><TD ALIGN="RIGHT">Виконавець</TD>
 	<TD><%Html.WriteSelect(rsPerformer, "Performer", 0, -1);
-	Solaren.Close() %></TD></TR>
+	Db.Close() %></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>

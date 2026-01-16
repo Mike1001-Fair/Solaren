@@ -5,7 +5,7 @@ VzId = Request.QueryString("VzId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetVz");
+	Db.SetCmd("GetVz");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("VzId", adInteger, adParamInput, 10, VzId));
@@ -23,7 +23,7 @@ try {
 		Title       = Deleted ? "Перегляд ставки ВЗ" : "Редагування ставки ВЗ";
 		Close();
 	} 
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title)
 }%>
 

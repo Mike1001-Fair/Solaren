@@ -10,14 +10,14 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("UpdateAen");
+	Db.SetCmd("UpdateAen");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("AenId", adInteger, adParamInput, 10, AenId));
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
 			Append(CreateParameter("AenName", adVarChar, adParamInput, 20, AenName));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

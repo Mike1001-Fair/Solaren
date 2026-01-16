@@ -4,7 +4,7 @@
 isCreds = User.ValidateCredentials(Form);
 User.CheckAccess(isCreds, "POST");
 try {
-	Solaren.SetCmd("Login");
+	Db.SetCmd("Login");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserName", adVarChar, adParamInput, 10, Form.UserName));
@@ -21,12 +21,12 @@ try {
 	Resource.Load(User.ResourceFile());
 	if (rs.EOF) {
 		rs.Close();
-		Solaren.Close();
+		Db.Close();
 		Message.Write(2, Dictionary.Item("AuthenticationError"));
 	} else {
 		SessionManager.SetVar(rs);
 		rs.Close();
-		Solaren.Close();
+		Db.Close();
 		Html.SetHead(Dictionary.Item("DefaultTitle"), 1);
 		Menu.Write(1);
 	}

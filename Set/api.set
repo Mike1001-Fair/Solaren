@@ -1,5 +1,5 @@
 ﻿<!-- #INCLUDE VIRTUAL="Solaren/Include/webserver.inc" -->
-<!-- #INCLUDE VIRTUAL="Solaren/Include/solaren.inc" -->
+<!-- #INCLUDE VIRTUAL="Solaren/Include/db.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/message.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/user.inc" -->
 <!-- #INCLUDE VIRTUAL="Solaren/Include/resource.inc" -->

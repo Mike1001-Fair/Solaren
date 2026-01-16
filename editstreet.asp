@@ -5,19 +5,19 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetStreet");
+	Db.SetCmd("GetStreet");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, Query.StreetId));
 		}
 	}
-	var rs = Solaren.Execute("GetStreet");
+	var rs = Db.Execute("GetStreet");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields);
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Record.Deleted ? "Перегляд вулицi" : "Редагування вулицi");
 }%>
 <BODY CLASS="MainBody">

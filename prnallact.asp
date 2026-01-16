@@ -8,20 +8,20 @@ DoubleAct = Form.DoubleAct == "on";
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetInfoAct");
+	Db.SetCmd("GetInfoAct");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}	
-	var rsInfo = Solaren.Execute("GetInfoAct", "Параметри не знайдено");
+	var rsInfo = Db.Execute("GetInfoAct", "Параметри не знайдено");
 
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Solaren.Execute("SelectAct");
+	var rs = Db.Execute("SelectAct");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -91,5 +91,5 @@ Output = ['\n<BODY CLASS="ActContainer">',
 ];
 
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output.join("\n"))%>

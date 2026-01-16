@@ -4,14 +4,14 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectChiefTitle");
+	Db.SetCmd("SelectChiefTitle");
 	with (Cmd) {
 		with (Parameters) {	
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsChiefTitle = Solaren.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
-	rsChiefDoc = Solaren.Execute("SelectChiefDoc", "Довiдник документів керівника пустий!");
+	var rsChiefTitle = Db.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
+	rsChiefDoc = Db.Execute("SelectChiefDoc", "Довiдник документів керівника пустий!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -34,7 +34,7 @@ Html.SetPage("Новий керiвник")%>
 		<TD><INPUT TYPE="TEXT" NAME="Name3" PLACEHOLDER="ПІБ" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 
 		<TR><TD ALIGN="RIGHT">Документ</TD>
-		<TD><%Html.WriteChiefDoc(rsChiefDoc, -1); Solaren.Close()%></TD></TR>
+		<TD><%Html.WriteChiefDoc(rsChiefDoc, -1); Db.Close()%></TD></TR>
 
 		<TR><TD ALIGN="RIGHT">Довiренiсть</TD>
 		<TD><INPUT TYPE="TEXT" NAME="TrustedDocId" SIZE="10"></TD></TR>

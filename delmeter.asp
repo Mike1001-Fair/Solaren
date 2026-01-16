@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("DelMeter");
+	Db.SetCmd("DelMeter");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, Form.MeterId));
@@ -18,7 +18,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Помилка");
 }%>
 

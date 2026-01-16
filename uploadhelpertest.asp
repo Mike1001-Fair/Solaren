@@ -23,10 +23,10 @@ If Request("cmd")="upload" Then
             Response.Write("file name: "&objUpload.File(x).FileName&"<br />")
             Response.Write("file type: "&objUpload.File(x).ContentType&"<br />")
             Response.Write("file size: "&objUpload.File(x).Size&"<br />")
-            Response.Write("Saved at: E:\AspApp\Solaren\Uploads<br />")
+            Response.Write("Saved at: E:\AspApp\Db\Uploads<br />")
             'If want to convert the virtual path to physical path then use MapPath
             'Call objUpload.File(x).SaveToDisk(Server.MapPath("/public"), "")
-            Call objUpload.File(x).SaveToDisk("E:\AspApp\Solaren\Uploads", "")
+            Call objUpload.File(x).SaveToDisk("E:\AspApp\Db\Uploads", "")
             Response.Write("file saved successfully!")
             Response.Write("<hr />")
         Next            

@@ -6,7 +6,7 @@ ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {
 	try {
-		Solaren.SetCmd("GetMeterInfo");
+		Db.SetCmd("GetMeterInfo");
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("ReportDate", adVarChar, adParamInput, 10, Query.ReportDate));
@@ -19,7 +19,7 @@ if (ValidRequest) {
 	} catch (ex) {
 		Json.error(ex, '[{"MeterId":-2}]')
 	} finally {
-		Solaren.Close();
+		Db.Close();
 	}
 } else {
 	Json.data = '[{"MeterId":0}]';

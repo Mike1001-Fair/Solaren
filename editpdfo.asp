@@ -6,7 +6,7 @@ PdfoId = Request.QueryString("PdfoId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetPdfo");
+	Db.SetCmd("GetPdfo");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("PdfoId", adInteger, adParamInput, 10, PdfoId));
@@ -24,7 +24,7 @@ try {
 		Title       = Deleted ? "Перегляд ставки пдфо" : "Редагування ставки пдфо";
 		Close();
 	} 
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title)
 }%>
 

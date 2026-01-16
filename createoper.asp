@@ -12,7 +12,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("NewOper");
+	Db.SetCmd("NewOper");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, Session("UserId")));
@@ -23,7 +23,7 @@ try {
 			Append(CreateParameter("VolCost", adInteger, adParamInput, 10, VolCost));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Cmd.Parameters.Item("Done").Value ? Message.Write(1, "") : Message.Write(0, "Операція вже iснує")
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

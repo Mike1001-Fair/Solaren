@@ -11,7 +11,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListVolCost");
+	Db.SetCmd("ListVolCost");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -20,7 +20,7 @@ try {
 			Append(CreateParameter("ContractId", adVarChar, adParamInput, 10, ContractId));
 		}
 	}
-	var rs = Solaren.Execute("ListVolCost");
+	var rs = Db.Execute("ListVolCost");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -58,7 +58,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 
 var th = ['<TH ALIGN="LEFT" COLSPAN="3">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totVol.toDelimited(0)),

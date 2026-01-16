@@ -5,17 +5,17 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetLocality");
+	Db.SetCmd("GetLocality");
 	with (Cmd) {
 		Parameters.Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Query.LocalityId));
 	}
-	var rs = Solaren.Execute("GetLocality");
+	var rs = Db.Execute("GetLocality");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields);
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Resource.Load(User.ResourceFile());
 	Html.SetPage(Record.Deleted ? "Перегляд анкети" : "Редагування анкети");
 }%>

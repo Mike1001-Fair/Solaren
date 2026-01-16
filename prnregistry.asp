@@ -6,14 +6,14 @@ ReportMonth = String(Form.ReportMonth);
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetNoteData");
+	Db.SetCmd("GetNoteData");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, Form.ChiefId));
 		}
 	}
-	var rsNote = Solaren.Execute("GetNoteData");
+	var rsNote = Db.Execute("GetNoteData");
 
 	with (Cmd) {
 		with (Parameters) {
@@ -21,7 +21,7 @@ try {
 			Append(CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
 		}
 	}
-	var rs = Solaren.Execute("GetAllNote");
+	var rs = Db.Execute("GetAllNote");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -82,5 +82,5 @@ Output = ['\n<BODY CLASS="PrnBody">',
 	'</BODY></HTML>'
 ];
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output.join("\n"))%>

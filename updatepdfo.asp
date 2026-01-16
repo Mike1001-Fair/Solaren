@@ -11,7 +11,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("UpdatePdfo");
+	Db.SetCmd("UpdatePdfo");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("PdfoId", adVarChar, adParamInput, 20, PdfoId));
@@ -19,7 +19,7 @@ try {
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 20, EndDate));
 			Append(CreateParameter("PdfoTax", adVarChar, adParamInput, 10, PdfoTax));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

@@ -6,13 +6,13 @@ FactVolId = Request.QueryString("FactVolId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetFactVol");
+	Db.SetCmd("GetFactVol");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("FactVolId", adInteger, adParamInput, 10, FactVolId));
 		}
 	}
-	var rs = Solaren.Execute("GetFactVol");
+	var rs = Db.Execute("GetFactVol");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -27,7 +27,7 @@ try {
 		Deleted        = Fields("Deleted").Value;
 		Close();
 	}
-	Solaren.Close();
+	Db.Close();
 }
 
 var ViewOnly = !Month.isPeriod(Month.Date[1], EndDate) || IndicatorId != "",

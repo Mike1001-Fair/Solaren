@@ -10,14 +10,14 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("NewVz");
+	Db.SetCmd("NewVz");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("BegDate", adVarChar, adParamInput, 10, BegDate));
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 			Append(CreateParameter("VzTax", adVarChar, adParamInput, 10, VzTax));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

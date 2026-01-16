@@ -6,7 +6,7 @@ ValidRequest = User.CheckAccess(Authorized, "GET");
 
 if (ValidRequest) {
 	try {
-		Solaren.SetCmd("GetLocalityInfo");
+		Db.SetCmd("GetLocalityInfo");
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("LocalityId", adVarChar, adParamInput, 10, Query.LocalityId));
@@ -18,7 +18,7 @@ if (ValidRequest) {
 	} catch (ex) {
 		Json.error(ex, '[{"LocalityId":-2}]')
 	} finally {
-		Solaren.Close();
+		Db.Close();
 	}
 } else {
 	Json.data = '[{"LocalityId":0}]';

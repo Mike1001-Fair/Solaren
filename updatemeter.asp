@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("UpdateMeter");
+	Db.SetCmd("UpdateMeter");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("MeterId", adVarChar, adParamInput, 10, Form.MeterId));
@@ -24,7 +24,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Лiчильник з таким номером вже є");
 }%>
 

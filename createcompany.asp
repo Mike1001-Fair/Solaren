@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("NewCompany");
+	Db.SetCmd("NewCompany");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("CompanyName", adVarChar, adParamInput, 50, Form.CompanyName));
@@ -45,7 +45,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Компанія з таким кодом вже є")
 }%>
 

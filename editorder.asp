@@ -5,7 +5,7 @@ OrderId = Request.QueryString("OrderId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetOrder");
+	Db.SetCmd("GetOrder");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("OrderId", adInteger, adParamInput, 10, OrderId));

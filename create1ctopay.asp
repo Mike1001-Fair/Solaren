@@ -7,14 +7,14 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("List1Cexp");
+	Db.SetCmd("List1Cexp");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("List1Cexp"),
-	rsCompanyInfo = Solaren.Execute("GetCompanyInfo");
+	var rs = Db.Execute("List1Cexp"),
+	rsCompanyInfo = Db.Execute("GetCompanyInfo");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -59,6 +59,6 @@ Report.Write(rs);
 rsCompanyInfo.Close();
 rs.Close();
 Stream.Close();
-Solaren.Close();
+Db.Close();
 Server.Execute("download.asp");
 %>

@@ -6,13 +6,13 @@ PerformerId = Request.QueryString("PerformerId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetPerformer");
+	Db.SetCmd("GetPerformer");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, PerformerId));
 		}
 	}
-	var rs = Solaren.Execute("GetPerformer");
+	var rs = Db.Execute("GetPerformer");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -25,7 +25,7 @@ try {
 		Title        = "Редагування анкети виконавця";
 		Close();
 	}
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title)
 }%>
 

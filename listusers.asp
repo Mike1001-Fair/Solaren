@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListUsers");
+	Db.SetCmd("ListUsers");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -15,7 +15,7 @@ try {
 			Append(CreateParameter("ConnectDate", adVarChar, adParamInput, 20, Form.ConnectDate));
 		}
 	}
-	var rs = Solaren.Execute("ListUsers");
+	var rs = Db.Execute("ListUsers");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -54,5 +54,5 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>

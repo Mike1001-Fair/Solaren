@@ -10,7 +10,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListBranchAct");
+	Db.SetCmd("ListBranchAct");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -19,7 +19,7 @@ try {
 			Append(CreateParameter("BranchId", adVarChar, adParamInput, 10, BranchId));
 		}
 	}
-	var rs = Solaren.Execute("ListBranchAct");
+	var rs = Db.Execute("ListBranchAct");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -59,7 +59,7 @@ for (var i = 0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 
 var footer = ['<TR><TH ALIGN="LEFT" COLSPAN="5">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totVol.toDelimited(0)),

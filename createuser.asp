@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("NewUser");
+	Db.SetCmd("NewUser");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, Form.LastName));
@@ -25,6 +25,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Користувач з таким логіном вже є");
 }%>

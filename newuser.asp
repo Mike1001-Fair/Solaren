@@ -4,14 +4,14 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectCompany");
+	Db.SetCmd("SelectCompany");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
-	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
+	var rsCompany = Db.Execute("SelectCompany", "Довiдник підприємств пустий!"),
+	rsBranch = Db.Execute("SelectBranch", "Довiдник ЦОС пустий!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -45,7 +45,7 @@ try {
 
 	<TR><TD ALIGN="RIGHT">ЦОС</TD>
 	<TD><% Html.WriteSelect(rsBranch, "Branch", 1, -1);
-	Solaren.Close()%></TD></TR>
+	Db.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

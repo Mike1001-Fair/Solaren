@@ -10,7 +10,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListLocality");
+	Db.SetCmd("ListLocality");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("LocalityName", adVarChar, adParamInput, 10, LocalityName));
@@ -18,7 +18,7 @@ try {
 		}
 	}
 	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	Db.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -35,7 +35,7 @@ for (var i=0; !rs.EOF; i++) {
 	Response.Write('<TR><TD ALIGN="LEFT">' + Locality.Type[rs.Fields("LocalityType")] + 
 	Html.Write("TD","") + '<A href="editlocality.asp?LocalityId=' + rs.Fields("Id") + '">' + rs.Fields("LocalityName") + '</A></TD></TR>\n');
 	rs.MoveNext();
-} rs.Close(); Solaren.Close();
+} rs.Close(); Db.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>');%>
 
 

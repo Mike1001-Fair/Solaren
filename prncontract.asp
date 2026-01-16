@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetContractInfo");
+	Db.SetCmd("GetContractInfo");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id)),
@@ -60,7 +60,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {	
 	var Item = Webserver.Map(Cmd.Parameters);
-	Solaren.Close();
+	Db.Close();
 
 	Item.AreaName = Item.AreaName ? Item.AreaName + " район," : "";
 	Item.ContractAreaName = Item.ContractAreaName ? Item.ContractAreaName + " район," : "";

@@ -5,13 +5,13 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("List1Caccrual");
+	Db.SetCmd("List1Caccrual");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("List1Caccrual");
+	var rs = Db.Execute("List1Caccrual");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -24,6 +24,6 @@ try {
 		Write(rs.GetString());
 	}
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 }%>
 

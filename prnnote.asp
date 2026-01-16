@@ -6,7 +6,7 @@ ReportMonth = String(Form.ReportMonth);
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetNote");
+	Db.SetCmd("GetNote");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
@@ -54,7 +54,7 @@ try {
 	Message.Write(3, Message.Error(ex));
 } finally {
 	var Item = Webserver.Map(Cmd.Parameters);
-	Solaren.Close();
+	Db.Close();
 	if (Webserver.Empty(Item.PurCost)) {
 		Message.Write(0, "Інформацію не знайдено");
 	} else {

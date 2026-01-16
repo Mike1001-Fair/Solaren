@@ -4,13 +4,13 @@
 User.CheckAccess(Authorized, "GET")
 
 try {
-	Solaren.SetCmd("SelectBranch");
+	Db.SetCmd("SelectBranch");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий");
+	var rsBranch = Db.Execute("SelectBranch", "Довiдник ЦОС пустий");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -27,7 +27,7 @@ Html.SetPage("Перевірка актів")%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL>ЦОС
 	<% Html.WriteSelect(rsBranch, "Branch", 0, -1);
-	Solaren.Close()%>
+	Db.Close()%>
 	</LABEL></FIELDSET>	
 	</TD></TR>
 </TABLE>

@@ -9,13 +9,13 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("DelFactVol");
+	Db.SetCmd("DelFactVol");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("FactVolId", adInteger, adParamInput, 10, FactVolId));
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

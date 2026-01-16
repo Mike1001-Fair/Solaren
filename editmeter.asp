@@ -5,20 +5,20 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetMeter");
+	Db.SetCmd("GetMeter");
 	with (Cmd) {
 		with (Parameters) {
     			Append(CreateParameter("MeterId", adInteger, adParamInput, 10, Query.MeterId))
 		}
 	} 
-	var rs = Solaren.Execute("GetMeter");
+	var rs = Db.Execute("GetMeter");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
 	var Meter = Webserver.Map(rs.Fields),
 	Limit = Math.pow(10, Meter.Capacity) - 1;
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Meter.Deleted ? "Перегляд лічильника" : "Редагування лічильника");
 }%>
 <BODY CLASS="MainBody">

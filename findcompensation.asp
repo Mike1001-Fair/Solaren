@@ -5,13 +5,13 @@
 User.CheckAccess(Authorized, "GET")
 
 try {
-	Solaren.SetCmd("SelectChief");
+	Db.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("SelectChief", "Довiдник керiвникiв пустий");
+	var rs = Db.Execute("SelectChief", "Довiдник керiвникiв пустий");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -31,7 +31,7 @@ try {
 	<TD><INPUT TYPE="Number" NAME="AveragePrice" VALUE="1" STEP="0.000001" MIN="0" MAX="99999" REQUIRED AUTOFOCUS PLACEHOLDER="коп">
 	<TR><TD ALIGN="RIGHT">Керівник</TD>
 	<TD><%Html.WriteSelect(rs, "Chief", 0, -1);
-	Solaren.Close()%></TD></TR>
+	Db.Close()%></TD></TR>
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>

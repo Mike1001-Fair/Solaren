@@ -5,7 +5,7 @@ ReportDate = String(Request.Form("ReportDate"));
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListContractCount");
+	Db.SetCmd("ListContractCount");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -13,7 +13,7 @@ try {
 
 		}
 	}
-	var rs = Solaren.Execute("ListContractCount");
+	var rs = Db.Execute("ListContractCount");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -40,7 +40,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 var th = [Tag.Write("TH", 0, "Всього: " + i),
 	Tag.Write("TH", 2, totContractNumber.toDelimited(0)),
 	Tag.Write("TH", 2, totContractPower.toDelimited(2))

@@ -5,14 +5,14 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListCompany");
+	Db.SetCmd("ListCompany");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("CompanyName", adVarChar, adParamInput, 10, Form.CompanyName));
 		}
 	}
-	var rs = Solaren.Execute("ListCompany");
+	var rs = Db.Execute("ListCompany");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -49,6 +49,6 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>
 

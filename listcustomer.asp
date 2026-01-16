@@ -6,7 +6,7 @@ CustomerId = Request.Form("CustomerId");
 if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
-	Solaren.SetCmd("ListCustomer");
+	Db.SetCmd("ListCustomer");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
@@ -14,7 +14,7 @@ try {
 		}
 	}
 	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	Db.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -33,7 +33,7 @@ for (var i=0; !rs.EOF; i++) {
 	Html.Write("TD","LEFT") + '<A href="editcustomer.asp?CustomerId=' + rs.Fields("Id") + '">' + rs.Fields("CustomerName") + '</A>' +
 	Html.Write("TD","") + rs.Fields("Phone") + '</TD></TR>\n');
 	rs.MoveNext();
-} rs.Close(); Solaren.Close();
+} rs.Close(); Db.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>
 
 

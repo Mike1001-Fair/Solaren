@@ -4,14 +4,14 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("ListNoVol");
+	Db.SetCmd("ListNoVol");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("OperDate", adVarChar, adParamInput, 10, Month.Date[1]));
 		}
 	}
-	var rs = Solaren.Execute("ListNoVol");
+	var rs = Db.Execute("ListNoVol");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -35,7 +35,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(3, i));
 Response.Write(Output.join("\n"))%>
 

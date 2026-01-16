@@ -5,20 +5,20 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetRegion");
+	Db.SetCmd("GetRegion");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("RegionId", adInteger, adParamInput, 10, Query.RegionId));
 		}
 	}
-	var rs = Solaren.Execute("GetRegion");
+	var rs = Db.Execute("GetRegion");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields),
 	Title = Record.Deleted ? "Перегляд області" : "Редагування області";
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">

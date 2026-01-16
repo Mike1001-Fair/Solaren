@@ -9,7 +9,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListSalesReport");
+	Db.SetCmd("ListSalesReport");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("EndDate", adVarChar, adParamInput, 10, EndDate));
 		}
 	}
-	var rs = Solaren.Execute("ListSalesReport");
+	var rs = Db.Execute("ListSalesReport");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -42,7 +42,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(2, i));
 Response.Write(Output.join("\n"))%>
 

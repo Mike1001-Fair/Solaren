@@ -5,13 +5,13 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetTarif");
+	Db.SetCmd("GetTarif");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("TarifId", adVarChar, adParamInput, 10, Query.TarifId));
 		}
 	}
-	var rs = Solaren.Execute("GetTarif");
+	var rs = Db.Execute("GetTarif");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -19,7 +19,7 @@ try {
 	ViewOnly = !Month.isPeriod(Month.Date[1], Record.EndDate),
 	Title = Record.Deleted || ViewOnly ? "Перегляд тарифу" : "Редагування тарифу";
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">

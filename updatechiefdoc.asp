@@ -10,14 +10,14 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("UpdateChiefDoc");
+	Db.SetCmd("UpdateChiefDoc");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("DocId", adInteger, adParamInput, 10, DocId));
 			Append(CreateParameter("SortCode", adTinyInt, adParamInput, 10, SortCode));
 			Append(CreateParameter("DocName", adVarChar, adParamInput, 40, DocName));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Message.Write(1, "");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))

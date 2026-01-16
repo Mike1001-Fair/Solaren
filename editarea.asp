@@ -5,20 +5,20 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetArea");
+	Db.SetCmd("GetArea");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("AreaId", adInteger, adParamInput, 10, Query.AreaId));
 		}
 	} 
-	var rs = Solaren.Execute("GetArea");
+	var rs = Db.Execute("GetArea");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields),
 	Title = Record.Deleted ? "Перегляд анкети району" : "Редагування анкети району";
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">

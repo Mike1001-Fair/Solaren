@@ -6,7 +6,7 @@ AenId = Request.QueryString("AenId");
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetAen");
+	Db.SetCmd("GetAen");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("AenId", adInteger, adParamInput, 10, AenId));
@@ -19,7 +19,7 @@ try {
 		Deleted      = Fields("Deleted").Value,
 		Title        = Deleted ? "Перегляд анкети РЕМ" : "Редагування анкети РЕМ";
 		Close();
-	} Solaren.Close();
+	} Db.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }

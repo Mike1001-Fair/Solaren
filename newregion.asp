@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetRegionSortCode");
+	Db.SetCmd("GetRegionSortCode");
 	with (Cmd) {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
@@ -15,7 +15,7 @@ try {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var SortCode = ++Cmd.Parameters.Item("SortCode").Value;
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage("Нова область")
 }%>
 <BODY CLASS="MainBody">

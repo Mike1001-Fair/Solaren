@@ -9,7 +9,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListStreet");
+	Db.SetCmd("ListStreet");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
@@ -17,7 +17,7 @@ try {
 		}
 	}
 	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	Db.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -34,7 +34,7 @@ for (var i=0; !rs.EOF; i++) {
 	Response.Write('<TR><TD>' + Street.Type[rs.Fields("StreetType")] + 
 	Html.Write("TD","") + '<A href="editstreet.asp?StreetId=' + rs.Fields("Id") + '">' + rs.Fields("StreetName") + '</A></TD></TR>\n');
 	rs.MoveNext();
-} rs.Close(); Solaren.Close();
+} rs.Close(); Db.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="2">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>
 
 

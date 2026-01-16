@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("UpdateBank");
+	Db.SetCmd("UpdateBank");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("BankId", adInteger, adParamInput, 10, Form.BankId));
@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Такий банк вже є");
 }%>
 

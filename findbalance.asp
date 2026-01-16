@@ -4,13 +4,13 @@
 User.CheckAccess(Authorized, "GET")
 
 try {
-	Solaren.SetCmd("SelectOperator");
+	Db.SetCmd("SelectOperator");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("SelectOperator");
+	var rs = Db.Execute("SelectOperator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))	
 }
@@ -26,7 +26,7 @@ Html.SetPage("Баланс")%>
 	<FIELDSET><LEGEND>Параметри</LEGEND>
 	<LABEL FOR="OperatorId">Оператор</LABEL>
 	<% Html.WriteSelect(rs, "Operator", 0, -1);
-	Solaren.Close(); %>
+	Db.Close(); %>
 	</FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>

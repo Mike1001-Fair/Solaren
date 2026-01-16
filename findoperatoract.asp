@@ -4,14 +4,14 @@
 if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
-	Solaren.SetCmd("SelectOperator");
+	Db.SetCmd("SelectOperator");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, Session("UserId")));
 		}
 	}
 	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Довiдник операторiв пустий');
+	Db.EOF(rs, 'Довiдник операторiв пустий');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -50,7 +50,7 @@ function SetOperatorName() {
 	<TD><SELECT NAME="OperatorId">
 	<% for (; !rs.EOF; rs.MoveNext()) {
 		Response.Write('<OPTION VALUE="' + rs.Fields("OperatorId") + '">' + rs.Fields("OperatorName") + '</OPTION>');
-	} rs.Close();Solaren.Close()%>
+	} rs.Close();Db.Close()%>
 	</SELECT></TD></TR>
 	</TABLE></FIELDSET>
 </TABLE>

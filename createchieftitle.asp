@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("NewChiefTitle");
+	Db.SetCmd("NewChiefTitle");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("Title1", adVarChar, adParamInput, 30, Form.Title1));
@@ -20,7 +20,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Помилка");;
 }%>
 

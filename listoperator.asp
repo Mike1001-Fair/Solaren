@@ -5,14 +5,14 @@ OperatorName = Request.Form("OperatorName");
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListOperator");
+	Db.SetCmd("ListOperator");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("OperatorName", adVarChar, adParamInput, 10, OperatorName));
 		}
 	}
-	var rs = Solaren.Execute("ListOperator");
+	var rs = Db.Execute("ListOperator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -35,7 +35,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(3, i));
 Response.Write(Output.join("\n"))%>
 

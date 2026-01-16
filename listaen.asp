@@ -9,14 +9,14 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListAen");
+	Db.SetCmd("ListAen");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("AenName", adVarChar, adParamInput, 10, AenName));
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Solaren.Execute("ListAen");
+	var rs = Db.Execute("ListAen");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -38,7 +38,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(2, i));
 Response.Write(Output.join("\n"))%>
 

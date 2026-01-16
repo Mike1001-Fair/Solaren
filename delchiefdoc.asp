@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("DelChiefDoc");
+	Db.SetCmd("DelChiefDoc");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("DocId", adInteger, adParamInput, 10, Form.DocId));
@@ -16,7 +16,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Message.Write(1, "");
 }%>
 

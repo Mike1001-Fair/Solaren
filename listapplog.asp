@@ -8,7 +8,7 @@ Period  = Month.GetRange(BegDate, EndDate);
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListAppLog");
+	Db.SetCmd("ListAppLog");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("EventType", adVarChar, adParamInput, 10, Form.EventType));
 		}
 	}
-	var rs = Solaren.Execute("ListAppLog");
+	var rs = Db.Execute("ListAppLog");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -55,7 +55,7 @@ var Table = {
 },
 Output = Table.Render(rs);
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output)%>
 
 

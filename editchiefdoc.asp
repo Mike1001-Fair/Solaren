@@ -5,20 +5,20 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetChiefDoc");
+	Db.SetCmd("GetChiefDoc");
 	with (Cmd) {
 		with (Parameters) {
 			Parameters.Append(CreateParameter("DocId", adInteger, adParamInput, 10, Query.DocId));
 		}
 	} 
-	var rs = Solaren.Execute("GetChiefDoc");
+	var rs = Db.Execute("GetChiefDoc");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields),
 	Title = Record.Deleted ? "Перегляд документу" : "Редагування документу";
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">

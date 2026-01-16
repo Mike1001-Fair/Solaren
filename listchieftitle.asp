@@ -5,13 +5,13 @@ TitleName = Request.Form("TitleName");
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("ListChiefTitle");
+	Db.SetCmd("ListChiefTitle");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("TitleName", adVarChar, adParamInput, 10, TitleName));
 		}
 	}
-	var rs = Solaren.Execute("ListChiefTitle");
+	var rs = Db.Execute("ListChiefTitle");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -32,7 +32,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(1, i));
 Response.Write(Output.join("\n"))%>
 

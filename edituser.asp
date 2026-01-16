@@ -5,16 +5,16 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectCompany");
+	Db.SetCmd("SelectCompany");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsCompany = Solaren.Execute("SelectCompany", "Довiдник підприємств пустий!"),
-	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!");
+	var rsCompany = Db.Execute("SelectCompany", "Довiдник підприємств пустий!"),
+	rsBranch = Db.Execute("SelectBranch", "Довiдник ЦОС пустий!");
 	Cmd.Parameters.Item("UserId").Value = Query.UserId;
-	var rsUser = Solaren.Execute("GetUser", "Користувача не знадено!");
+	var rsUser = Db.Execute("GetUser", "Користувача не знадено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -56,5 +56,5 @@ try {
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <% Html.WriteEditButton(1, Record.Deleted);
-Solaren.Close() %>
+Db.Close() %>
 </FORM></BODY></HTML>

@@ -5,19 +5,19 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetBank");
+	Db.SetCmd("GetBank");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("BankId", adInteger, adParamInput, 10, Query.BankId));
 		}
 	}
-	var rs = Solaren.Execute("GetBank");
+	var rs = Db.Execute("GetBank");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields);
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage(Record.Deleted ? "Перегляд анкети" : "Редагування анкети");
 }%>
 <BODY CLASS="MainBody">

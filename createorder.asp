@@ -10,7 +10,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("NewOrder");
+	Db.SetCmd("NewOrder");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adSmallInt, adParamInput, 10, Session("UserId")));
@@ -19,7 +19,7 @@ try {
 			Append(CreateParameter("JsonData", adVarChar, adParamInput, 8000, JsonData));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
-	} Solaren.Close();
+	} Db.Close();
 	Cmd.Parameters.Item("Done").Value ? Message.Write(1, "") : Message.Write(0, "Помилка");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));

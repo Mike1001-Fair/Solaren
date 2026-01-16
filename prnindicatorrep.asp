@@ -7,16 +7,16 @@ DoubleReport = Form.DoubleReport == "on";
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetReportInfo");
+	Db.SetCmd("GetReportInfo");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Form.ContractId));
 		}
 	}
-	var rsInfo = Solaren.Execute("GetReportInfo");
+	var rsInfo = Db.Execute("GetReportInfo");
 	Cmd.Parameters.Append(Cmd.CreateParameter("ReportMonth", adVarChar, adParamInput, 10, ReportMonth));
-	var rs = Solaren.Execute("GetIndicatorReport");
+	var rs = Db.Execute("GetIndicatorReport");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
@@ -151,5 +151,5 @@ Output = ['\n<BODY CLASS="ActContainer">',
 ];
 
 rs.Close();
-Solaren.Close();
+Db.Close();
 Response.Write(Output.join("\n"))%>

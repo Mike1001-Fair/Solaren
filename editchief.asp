@@ -5,21 +5,21 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectChiefTitle");
+	Db.SetCmd("SelectChiefTitle");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 3, User.Id));
 		}
 	}
-	var rsChiefTitle = Solaren.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
-	rsChiefDoc = Solaren.Execute("SelectChiefDoc", "Довiдник документів керівника пустий!");
+	var rsChiefTitle = Db.Execute("SelectChiefTitle", "Довiдник посад пустий!"),
+	rsChiefDoc = Db.Execute("SelectChiefDoc", "Довiдник документів керівника пустий!");
 
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("ChiefId", adInteger, adParamInput, 10, Query.ChiefId));
 		}
 	}
-	var rsChief = Solaren.Execute("GetChief", "Керівника не знайдено!");
+	var rsChief = Db.Execute("GetChief", "Керівника не знайдено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -55,7 +55,7 @@ try {
 	<TD><INPUT TYPE="date" NAME="TrustedDocDate" VALUE="<%=Record.TrustedDocDate%>"></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Solaren.Close();
+<% Db.Close();
 Html.WriteEditButton(1, Record.Deleted)%>
 </FORM></BODY></HTML>
 

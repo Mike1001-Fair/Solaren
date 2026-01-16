@@ -4,15 +4,15 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectChief");
+	Db.SetCmd("SelectChief");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsChief = Solaren.Execute("SelectChief", "Довiдник керівників пустий!"),
-	rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
-	rsRegion = Solaren.Execute("SelectRegion", "Довiдник областей пустий!");
+	var rsChief = Db.Execute("SelectChief", "Довiдник керівників пустий!"),
+	rsBank = Db.Execute("SelectBank", "Довідник банкiв пустий!"),
+	rsRegion = Db.Execute("SelectRegion", "Довiдник областей пустий!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -105,4 +105,4 @@ try {
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
 </FORM></BODY></HTML>
-<% Solaren.Close() %>
+<% Db.Close() %>

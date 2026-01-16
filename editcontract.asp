@@ -5,24 +5,24 @@ Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("SelectBank");
+	Db.SetCmd("SelectBank");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
 		}
 	}
-	var rsBank = Solaren.Execute("SelectBank", "Довідник банкiв пустий!"),
-	rsBranch = Solaren.Execute("SelectBranch", "Довiдник ЦОС пустий!"),
-	rsAen =	Solaren.Execute("SelectAen", "Довiдник РЕМ пустий!"),
-	rsOperator = Solaren.Execute("SelectOperator", "Довiдник операторів пустий!"),
-	rsPerformer = Solaren.Execute("SelectPerformer", "Довiдник виконавців пустий!");
+	var rsBank = Db.Execute("SelectBank", "Довідник банкiв пустий!"),
+	rsBranch = Db.Execute("SelectBranch", "Довiдник ЦОС пустий!"),
+	rsAen =	Db.Execute("SelectAen", "Довiдник РЕМ пустий!"),
+	rsOperator = Db.Execute("SelectOperator", "Довiдник операторів пустий!"),
+	rsPerformer = Db.Execute("SelectPerformer", "Довiдник виконавців пустий!");
 
 	with (Cmd) {
 		with (Parameters) {
     			Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Query.ContractId));
 		}
 	}
-	var rsContract = Solaren.Execute("GetContract", "Договір не знайдено!");
+	var rsContract = Db.Execute("GetContract", "Договір не знайдено!");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -105,5 +105,5 @@ try {
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <% Html.WriteEditButton(1, Contract.Deleted);
-Solaren.Close();%>
+Db.Close();%>
 </FORM></BODY></HTML>

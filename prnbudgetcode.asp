@@ -5,20 +5,20 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("GetBudgetCode");
+	Db.SetCmd("GetBudgetCode");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 		}
 	}
-	var rs = Solaren.Execute("GetBudgetCode");
+	var rs = Db.Execute("GetBudgetCode");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
 	var Record = Webserver.Map(rs.Fields),
 	ReportDate = Month.Today.toStr(0).formatDate("-");
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Html.SetHead("Бюджетний код");
 }%>
 

@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("RunConsolidation");
+	Db.SetCmd("RunConsolidation");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -15,6 +15,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 }%>
 

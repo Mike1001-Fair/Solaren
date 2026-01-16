@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("GetChiefDocSortCode");
+	Db.SetCmd("GetChiefDocSortCode");
 	with (Cmd) {
 		with (Parameters) {	
 			Append(CreateParameter("SortCode", adTinyInt, adParamOutput, 10, 0));
@@ -14,7 +14,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Solaren.Close();
+	Db.Close();
 	Html.SetPage("Новий документ")
 }%>
 <BODY CLASS="MainBody">

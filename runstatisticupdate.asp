@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("RunStatisticUpdate");
+	Db.SetCmd("RunStatisticUpdate");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
@@ -12,7 +12,7 @@ try {
 		Execute(adExecuteNoRecords);
 	}
 	Message.Write(1, "");
-	Solaren.Close();
+	Db.Close();
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }%>

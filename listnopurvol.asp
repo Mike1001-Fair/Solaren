@@ -4,7 +4,7 @@
 User.CheckAccess(Authorized, "GET");
 
 try {
-	Solaren.SetCmd("ListNoPurVol");
+	Db.SetCmd("ListNoPurVol");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -18,7 +18,7 @@ try {
 
 if (rs.EOF) {
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Message.Write(1, "Помилок не виявлено");
 } else {
 	var OperDate = Month.GetMonth(1),
@@ -44,7 +44,7 @@ if (rs.EOF) {
 		rs.MoveNext();
 	}
 	rs.Close();
-	Solaren.Close();
+	Db.Close();
 	Output.push(Html.GetFooterRow(7, i));
 	Html.SetPage("Обсяги")
 	Response.Write(Output.join("\n"))

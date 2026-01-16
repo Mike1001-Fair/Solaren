@@ -7,14 +7,14 @@ Title = "Райони";
 if (!Authorized) Message.Write(2, "Помилка авторизації");
 
 try {
-	Solaren.SetCmd("ListArea");
+	Db.SetCmd("ListArea");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("AreaName", adVarChar, adParamInput, 10, AreaName));
 		}
 	}
 	var rs = Cmd.Execute();
-	Solaren.EOF(rs, 'Iнформацiю не знайдено');
+	Db.EOF(rs, 'Iнформацiю не знайдено');
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }
@@ -33,7 +33,7 @@ for (var i=0; !rs.EOF; i++) {
 	Output += '<TR><TD ALIGN="CENTER">' + rs.Fields("SortCode") +
 	Html.Write("TD","LEFT") + '<A HREF="editarea.asp?AreaId=' + rs.Fields("Id") + '">' + rs.Fields("AreaName") + '</A></TD></TR>\n';
 	rs.MoveNext();
-} rs.Close();Solaren.Close();
+} rs.Close();Db.Close();
 Output += Html.GetFooterRow(2, i);
 Response.Write(Output)%>
 

@@ -5,7 +5,7 @@ Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("UpdateParameter");
+	Db.SetCmd("UpdateParameter");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("StartSysDate", adDBDate, adParamInput, 10, Form.StartSysDate));
@@ -26,7 +26,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex));
 } finally {
-	Solaren.Close();
+	Db.Close();
 	var OperDate = Form.OperMonth + "-01";
 	Session("HoursLimit")   = String(Form.HoursLimit);
 	Session("CheckCard")    = Form.CheckCard == "on";

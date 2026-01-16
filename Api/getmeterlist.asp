@@ -6,7 +6,7 @@ ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {
 	try {
-		Solaren.SetCmd("GetMeterList");
+		Db.SetCmd("GetMeterList");
 		with (Cmd) {
 			with (Parameters) {
 				Append(CreateParameter("ContractId", adInteger, adParamInput, 10, Query.ContractId));
@@ -18,7 +18,7 @@ if (ValidRequest) {
 	} catch (ex) {
 		Json.error(ex, '[{"MeterId":-2}]')
 	} finally {
-		Solaren.Close();
+		Db.Close();
 	}
 } else {
 	Json.data = '[{"MeterId":0}]';

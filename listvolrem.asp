@@ -9,7 +9,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListVolRem");
+	Db.SetCmd("ListVolRem");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -17,7 +17,7 @@ try {
 			Append(CreateParameter("EndMonth", adVarChar, adParamInput, 10, EndMonth));
 		}
 	}
-	var rs = Solaren.Execute("ListVolRem");
+	var rs = Db.Execute("ListVolRem");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -51,7 +51,7 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 }
 rs.Close();
-Solaren.Close();
+Db.Close();
 
 var footer = ['<TR><TH ALIGN="LEFT">Всього: ', i, '</TH>',
 	Tag.Write("TH", 2, totVol.toDelimited(0)),

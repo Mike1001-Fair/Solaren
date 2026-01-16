@@ -5,7 +5,7 @@ Form = Webserver.Map(Request.Form);
 User.CheckAccess(Authorized, "POST");
 
 try {
-	Solaren.SetCmd("UpdateCountry");
+	Db.SetCmd("UpdateCountry");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("CountryId", adInteger, adParamInput, 10, Form.CountryId));
@@ -21,7 +21,7 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {	
-	Solaren.Close();
+	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Така країна вже є");
 }%>
 

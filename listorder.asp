@@ -11,7 +11,7 @@ with (Request) {
 }
 
 try {
-	Solaren.SetCmd("ListOrder");
+	Db.SetCmd("ListOrder");
 	with (Cmd) {
 		with (Parameters) {
 			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
@@ -21,7 +21,7 @@ try {
 			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
 		}
 	}
-	var rs = Solaren.Execute("ListOrder");
+	var rs = Db.Execute("ListOrder");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
@@ -49,7 +49,7 @@ for (var i=0; !rs.EOF; i++) {
 	Output.push(row.join(""));
 	rs.MoveNext();
 } rs.Close();
-Solaren.Close();
+Db.Close();
 Output.push(Html.GetFooterRow(4, i));
 Response.Write(Output.join("\n"))%>
 
