@@ -2,6 +2,7 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Set/login.set" -->
 <% var Form = Webserver.Parse(),
 isCreds = User.ValidateCredentials(Form);
+Resource.Load(User.ResourceFile());
 User.CheckAccess(isCreds, "POST");
 try {
 	Db.SetCmd("Login");
@@ -18,7 +19,6 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	Resource.Load(User.ResourceFile());
 	if (rs.EOF) {
 		rs.Close();
 		Db.Close();
