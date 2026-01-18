@@ -105,9 +105,9 @@ var User = {
 
 	WriteRole: function(tagName, RoleId) {
 		var Output = ['<SELECT NAME="' + tagName + '">'];
-		for (var i = 0; i < User.Role.length; i++) {
+		for (var i = 0; i < this.Role.length; i++) {
 			var selected = i == RoleId,
-			option = Html.GetOption(i, selected, User.Role[i]);
+			option = Html.GetOption(i, selected, this.Role[i]);
 			Output.push(option);
 		}
 		Output.push('</SELECT>');
