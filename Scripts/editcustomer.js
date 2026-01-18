@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else {
 			ChkForm();
 		}
-		CodeType.checked = CustomerCode.value.length > 7;
+		CodeType.checked = !isPersonTaxCode(CustomerCode.value);
 		DocType.textContent = CodeType.checked ? "Паспорт" : "РНОКПП";
 	}
 	Ajax.GetStreetInfo(EditCustomer.StreetId.value);
