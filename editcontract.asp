@@ -26,9 +26,10 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Contract = Webserver.Map(rsContract.Fields);
+	var Contract = Webserver.Map(rsContract.Fields),
+	Title = Contract.Deleted ? "Перегляд договору" : "Редагування договору";
 	rsContract.Close();
-	Html.SetPage(Contract.Deleted ? "Перегляд договору" : "Редагування договору");
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditContract" ACTION="updatecontract.asp" METHOD="POST" AUTOCOMPLETE="off">
