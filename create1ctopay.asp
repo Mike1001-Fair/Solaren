@@ -56,9 +56,8 @@ var Report = {
 }
 	
 Report.Write(rs);
+Stream.Close();
 rsCompanyInfo.Close();
 rs.Close();
-Stream.Close();
 Db.Close();
-Server.Execute("download.asp");
-%>
+Server.Execute("download.asp")%>
