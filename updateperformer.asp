@@ -1,29 +1,27 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
-
-with (Request) {
-    var PerformerId = Form("PerformerId"),
-	LastName    = Form("LastName"),
-	FirstName   = Form("FirstName"),
-	MiddleName  = Form("MiddleName"),
-	Phone       = Form("Phone");
-}
+<% var Authorized = User.RoleId == 1,
+Form = Webserver.Parse();
+User.CheckAccess(Authorized, "POST");
 
 try {
 	Db.SetCmd("UpdatePerformer");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, PerformerId));
-			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, LastName));
-			Append(CreateParameter("FirstName", adVarChar, adParamInput, 20, FirstName));
-			Append(CreateParameter("MiddleName", adVarChar, adParamInput, 20, MiddleName));
-			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Phone));
-		} Execute(adExecuteNoRecords);
-	} Db.Close();
-	Message.Write(1, "");
+			Append(CreateParameter("PerformerId", adInteger, adParamInput, 10, Form.PerformerId));
+			Append(CreateParameter("LastName", adVarChar, adParamInput, 20, Form.LastName));
+			Append(CreateParameter("FirstName", adVarChar, adParamInput, 20, Form.FirstName));
+			Append(CreateParameter("MiddleName", adVarChar, adParamInput, 20, Form.MiddleName));
+			Append(CreateParameter("Phone", adVarChar, adParamInput, 10, Form.Phone));
+			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
+		}
+		Execute(adExecuteNoRecords);
+		var Done = Parameters.Item("Done").Value;
+	} 
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {	
+	Db.Close();
+	Done ? Message.Write(1, "") : Message.Write(0, "Помилка")
 }%>
 
