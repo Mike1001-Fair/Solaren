@@ -65,7 +65,11 @@ var Webserver = {
 	},
 
 	Collection: function() {
-		return this.Method == "POST" ? Request.Form : Request.QueryString;
+		var map = {
+			"GET": Request.QueryString,
+			"POST": Request.Form
+		};
+    	return map[this.Method] || Request.QueryString;
 	},
 
 	Parse: function() {
