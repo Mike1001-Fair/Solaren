@@ -61,15 +61,19 @@ var Webserver = {
 	},
 
 	Filter: function(key) {
+		var Host = {
+			"localhost": 1,
+			"192.168.31.77": 1
+		};
 		return Host[this.Name] && this.Referer && this.Referer.indexOf(key) > -1 
 	},
 
 	Collection: function() {
-		var map = {
+		var Map = {
 			"GET": Request.QueryString,
 			"POST": Request.Form
 		};
-    	return map[this.Method] || Request.QueryString;
+    	return Map[this.Method] || Request.QueryString;
 	},
 
 	Parse: function() {
@@ -81,9 +85,4 @@ var Webserver = {
 		var rand = intMin + Math.random() * (intMax + 1 - intMin);
 		return Math.floor(rand);
 	}
-},
-
-Host = {
-	"localhost": 1,
-	"192.168.31.77": 1
 }%>
