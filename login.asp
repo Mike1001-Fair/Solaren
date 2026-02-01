@@ -8,8 +8,8 @@ try {
 	Db.SetCmd("Login");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserName", adVarChar, adParamInput, 10, Form.UserName));
-			Append(CreateParameter("Pswd", adVarChar, adParamInput, 10, Form.Pswd));
+			Append(CreateParameter("UserName", adVarChar, adParamInput, 20, Form.UserName));
+			Append(CreateParameter("Pswd", adVarChar, adParamInput, 20, Form.Pswd));
 			Append(CreateParameter("UserIp", adVarChar, adParamInput, 15, User.Ip));
 			Append(CreateParameter("UserAgent", adVarChar, adParamInput, 130, User.Agent));
 			Append(CreateParameter("SessionId", adInteger, adParamInput, 10, Session.SessionID));

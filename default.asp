@@ -16,8 +16,8 @@ Html.WriteScript()%>
 	<FORM CLASS="FormDiv" NAME="Login" ID="Login" ACTION="login.asp" METHOD="post">
 	<FIELDSET><LEGEND>&#128274;<%=Dictionary.Item("Authenticate")%></LEGEND>	
 	<IMG SRC="Images/user.svg">
-	<INPUT TYPE="text" NAME="UserName" PLACEHOLDER="<%=phUserName%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="15" MAXLENGTH="10" AUTOFOCUS REQUIRED TITLE="<%=titleUser%>">
-	<INPUT TYPE="password" NAME="Pswd" PLACEHOLDER="<%=phPswd%>" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" SIZE="15" MAXLENGTH="10" REQUIRED TITLE="<%=titlePswd%>">
+	<INPUT TYPE="text" NAME="UserName" PLACEHOLDER="<%=phUserName%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="16" MAXLENGTH="16" AUTOFOCUS REQUIRED TITLE="<%=titleUser%>">
+	<INPUT TYPE="password" NAME="Pswd" PLACEHOLDER="<%=phPswd%>" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,16}" SIZE="16" MAXLENGTH="16" REQUIRED TITLE="<%=titlePswd%>">
 	</FIELDSET>
 	<BUTTON TYPE="submit" CLASS="LoginBtn" NAME="SbmBtn">Ok</BUTTON>
 	</FORM>

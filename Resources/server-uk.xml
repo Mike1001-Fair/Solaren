@@ -50,7 +50,7 @@
 	<Item id="Password">Пароль</Item>
 	<Item id="InfoNotFound">Iнформацiю не знайдено</Item>
 	<Item id="UserTitle">Повинно містити одну велику та малу літеру та принаймні 8 символів</Item>
-	<Item id="PasswordTitle">Повинно містити щонайменше одне число та одну велику та малу літеру та 10 символів</Item>
+	<Item id="PasswordTitle">Повинно містити щонайменше одне число та одну велику та малу літеру, всього 16 символів</Item>
 	<Item id="FeedbackSheet">Лист автору для вiдгукiв, зауважень та пропозицiй</Item>
 	<LocalityTypes>
 		<LocalityType id="0">місто</LocalityType>

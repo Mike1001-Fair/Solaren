@@ -51,7 +51,7 @@
 	<Item id="Password">Password</Item>
 	<Item id="InfoNotFound">Information not found</Item>
 	<Item id="UserTitle">Must contain one uppercase and one lowercase letter and at least 8 characters</Item>
-	<Item id="PasswordTitle">Must contain at least one number and one upper and lower case letter and 10 characters</Item>
+	<Item id="PasswordTitle">Must contain at least one number and one uppercase and one lowercase letter, for a total of 16 characters.</Item>
 	<Item id="FeedbackSheet">Sheet for the author’s feedback, comments, and suggestions.</Item>
 	<LocalityTypes>
 		<LocalityType id="0">city</LocalityType>

@@ -18,9 +18,10 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	var Record = Webserver.Map(rsUser.Fields);
+	var Record = Webserver.Map(rsUser.Fields),
+	Title = Record.Deleted ? "Перегляд анкети" : "Редагування анкети";
 	rsUser.Close();
-	Html.SetPage(Record.Deleted ? "Перегляд анкети" : "Редагування анкети");
+	Html.SetPage(Title);
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditUser" ACTION="updateuser.asp" METHOD="POST" AUTOCOMPLETE="off">
@@ -37,9 +38,9 @@ try {
 	<TR><TD ALIGN="RIGHT">По батьковi</TD>
 	<TD><INPUT TYPE="TEXT" NAME="MiddleName" VALUE="<%=Record.MiddleName%>" SIZE="20" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Логiн</TD>
-	<TD><INPUT TYPE="TEXT" NAME="UserName" VALUE="<%=Record.UserName%>" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" SIZE="20" MAXLENGTH="10" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="UserName" VALUE="<%=Record.UserName%>" PATTERN="^(?=.*[a-z])(?=.*[A-Z]).{8,12}$" SIZE="20" MAXLENGTH="16" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Пароль</TD>
-	<TD><INPUT TYPE="password" NAME="Pswd" VALUE="" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" SIZE="20" MAXLENGTH="10" REQUIRED AUTOCOMPLETE="new-password">
+	<TD><INPUT TYPE="password" NAME="Pswd" VALUE="" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{16}" SIZE="20" MAXLENGTH="16" REQUIRED AUTOCOMPLETE="new-password">
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="SetPswd" ID="SetPswd" TITLE="Сгенерувати">&#128273;</BUTTON>
 	<BUTTON TYPE="button" CLASS="IconBtn" NAME="ShowPswd" ID="ShowPswd" TITLE="Показати">&#128065;</BUTTON></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>

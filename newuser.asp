@@ -32,9 +32,9 @@ try {
 	<TR><TD ALIGN="RIGHT">Телефон</TD>
 	<TD><INPUT TYPE="tel" NAME="Phone" PATTERN="\d{3,10}" SIZE="10" maxLength="10" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Логiн</TD>
-	<TD><INPUT TYPE="TEXT" NAME="UserName" SIZE="20"  maxLength="10" PATTERN="(?=.*[a-z])(?=.*[A-Z]).{8,10}" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="UserName" SIZE="20"  maxLength="16" PATTERN="^(?=.*[a-z])(?=.*[A-Z]).{8,12}$" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Пароль</TD>
-	<TD><INPUT TYPE="password" NAME="Pswd" SIZE="20" maxLength="10" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}" REQUIRED AUTOCOMPLETE="new-password">
+	<TD><INPUT TYPE="password" NAME="Pswd" SIZE="20" maxLength="16" PATTERN="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{16}" REQUIRED AUTOCOMPLETE="new-password">
 	<BUTTON CLASS="IconBtn" NAME="SetPswd" ID="SetPswd" TITLE="Сгенерувати">&#128273;</BUTTON>
 	<BUTTON CLASS="IconBtn" NAME="ShowPswd" ID="ShowPswd" TITLE="Показати">&#128065;</BUTTON></TD></TR>
 	<TR><TD ALIGN="RIGHT">Роль</TD>

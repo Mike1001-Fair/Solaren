@@ -1,29 +1,52 @@
 ﻿"use strict";
+
 const User = {
-	LoginRe: /^(?=.*[a-z])(?=.*[A-Z]).{8,10}$/,
-	PswdLen: 10,
-	PswdRe : /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10}$/,
+    LoginRe: /^(?=.*[a-z])(?=.*[A-Z]).{8,12}$/,
+	PswdRe: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{16}$/,
+    PswdLen: 16,
+    
+    get Pswd() {
+        const sets = [
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            "abcdefghijklmnopqrstuvwxyz",
+            "0123456789",
+            "!@#$%^&*"
+        ],
+		allChars = sets.join("");
+		let pswd = [];
 
-	get Pswd() {
-		const maxAttempts = 9,
-		charCodeMin = 33,
-		charCodeMax = 126;
+		// 1. По одному обязательному символу из каждого набора
+		sets.forEach(s => pswd.push(this.pick(s)));
 
-		let pswd = "",
-		valid = false;
-
-		for (let i = 0; i < maxAttempts && !valid; i++) {
-			const chars = new Array(this.PswdLen).fill().map(() => String.fromCharCode(randInt(charCodeMin, charCodeMax)));
-			pswd = chars.join("");
-			valid = this.PswdRe.test(pswd);
+		// 2. Остальное — любыми символами
+		while (pswd.length < this.PswdLen) {
+			pswd.push(this.pick(allChars));
 		}
-		return valid ? pswd : "";
+
+		// 3. Перемешиваем
+		return this.shuffle(pswd).join("");
+    },
+
+	pick(str) {
+		const r = new Uint32Array(1);
+		window.crypto.getRandomValues(r);
+		return str[r[0] % str.length];
+	},
+
+	shuffle(arr) {
+		for (let i = arr.length - 1; i > 0; i--) {
+			const r = new Uint32Array(1);
+			window.crypto.getRandomValues(r);
+			const j = r[0] % (i + 1);
+			[arr[i], arr[j]] = [arr[j], arr[i]];
+		}
+		return arr;
 	},
 
 	get FileName() {
 		const languageSet = ['uk'],
-		userLanguage = navigator.language,
-		languageCode = languageSet.includes(userLanguage) ? userLanguage : "en";
-		return `client-${languageCode}.json`;
-	}
+		userLang = navigator.language.split('-')[0],
+		code = languageSet.includes(userLang) ? userLang : "en";
+        return `client-${code}.json`;
+    }
 };

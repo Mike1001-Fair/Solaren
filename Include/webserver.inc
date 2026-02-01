@@ -69,11 +69,11 @@ var Webserver = {
 	},
 
 	Collection: function() {
-		var Map = {
+		var Source = {
 			"GET": Request.QueryString,
 			"POST": Request.Form
 		};
-    	return Map[this.Method] || Request.QueryString;
+		return Source[this.Method] || Request.QueryString;
 	},
 
 	Parse: function() {
