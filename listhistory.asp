@@ -32,7 +32,8 @@ var Table = {
 				Tag.Write("TD", 2, rs.Fields("s").Value.toDelimited(2)),
 				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2))
+				Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)),
+				Tag.Write("TD", 2, rs.Fields("s_final").Value.toDelimited(2)),
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
             row.push(tr);
@@ -55,7 +56,7 @@ var Table = {
 	},
 
 	Render: function(rs) {
-		var Header = ['Перiод', 'Сальдо', 'Обсяг', 'Вартiсть', 'Оплата'],
+		var Header = ['Перiод', 'Сальдо<BR>на початок', 'Обсяг', 'Вартiсть', 'Оплата', 'Сальдо<BR>на кiнець'],
 		rows = this.GetRows(rs),
 		Body = ['<BODY CLASS="PrnBody">',
 			'<H3 CLASS="H3PrnTable">Iсторiя розрахункiв</H3><SPAN CLASS="H3PrnTable">' + Form.ContractName + '</SPAN>',
