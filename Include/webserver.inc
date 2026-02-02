@@ -71,9 +71,12 @@ var Webserver = {
 	Collection: function() {
 		var Source = {
 			"GET": Request.QueryString,
-			"POST": Request.Form
+			"POST": Request.Form,
+			"PUT": Request.Form,
+			"DELETE": Request.QueryString,
+			"DEFAULT": Request.QueryString
 		};
-		return Source[this.Method] || Request.QueryString;
+		return Source[this.Method] || Source.DEFAULT;
 	},
 
 	Parse: function() {
