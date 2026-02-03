@@ -45,7 +45,7 @@ var Table = {
 			this.TotPurVol += rs.Fields("PurVol").Value;
 			this.TotObDt   += rs.Fields("ob_dt").Value;
 			this.TotObCt   += rs.Fields("ob_ct").Value;
-			this.TotSFinal   += rs.Fields("s_end").Value;			
+			this.TotSEnd   += rs.Fields("s_end").Value;			
 		}
 		return row
 	},
