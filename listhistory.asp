@@ -33,7 +33,7 @@ var Table = {
 				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
 				Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("s_final").Value.toDelimited(2)),
+				Tag.Write("TD", 2, rs.Fields("s_end").Value.toDelimited(2)),
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
             row.push(tr);

@@ -27,7 +27,7 @@ var Table = {
 	TotObDt: 0,
 	TotObCt: 0,
 	TotPurVol: 0,
-	TotSFinal:0,
+	TotSEnd:0,
 
 	GetRows: function(rs) {
 		for (var row = []; !rs.EOF; rs.MoveNext()) {
@@ -37,7 +37,7 @@ var Table = {
 				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
 				Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("s_final").Value.toDelimited(2))
+				Tag.Write("TD", 2, rs.Fields("s_end").Value.toDelimited(2))
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
             row.push(tr);
@@ -45,7 +45,7 @@ var Table = {
 			this.TotPurVol += rs.Fields("PurVol").Value;
 			this.TotObDt   += rs.Fields("ob_dt").Value;
 			this.TotObCt   += rs.Fields("ob_ct").Value;
-			this.TotSFinal   += rs.Fields("s_final").Value;			
+			this.TotSFinal   += rs.Fields("s_end").Value;			
 		}
 		return row
 	},
@@ -56,7 +56,7 @@ var Table = {
 			Tag.Write("TH", 2, this.TotPurVol.toDelimited(0)),
 			Tag.Write("TH", 2, this.TotObDt.toDelimited(2)),
 			Tag.Write("TH", 2, this.TotObCt.toDelimited(2)),
-			Tag.Write("TH", 2, this.TotSFinal.toDelimited(2)),
+			Tag.Write("TH", 2, this.TotSEnd.toDelimited(2)),
 		],
 		tr = Tag.Write("TR", -1, th.join("")),
 		footer = [tr, '</TABLE></BODY></HTML>'];
