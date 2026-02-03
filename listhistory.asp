@@ -56,7 +56,7 @@ var Table = {
 	},
 
 	Render: function(rs) {
-		var Header = ['Перiод', 'Сальдо<BR>на початок', 'Обсяг', 'Вартiсть', 'Оплата', 'Сальдо<BR>на кiнець'],
+		var Header = ['Перiод', 'Сальдо<BR>на початок', 'Обсяг<BR>кВт&#183;год', 'Вартiсть', 'Оплата', 'Сальдо<BR>на кiнець'],
 		rows = this.GetRows(rs),
 		Body = ['<BODY CLASS="PrnBody">',
 			'<H3 CLASS="H3PrnTable">Iсторiя розрахункiв</H3><SPAN CLASS="H3PrnTable">' + Form.ContractName + '</SPAN>',
