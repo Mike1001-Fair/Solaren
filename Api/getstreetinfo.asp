@@ -2,6 +2,7 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Set/api.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Query = Webserver.Parse(),
+StreetId = parseInt(Query.StreetId, 10);
 ValidRequest = User.HasAccess(Authorized, "GET");
 
 if (ValidRequest) {
@@ -9,7 +10,7 @@ if (ValidRequest) {
 		Db.SetCmd("GetStreetInfo");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("StreetId", adVarChar, adParamInput, 10, Query.StreetId));
+				Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
 				Append(CreateParameter("StreetInfo", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);

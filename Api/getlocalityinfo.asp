@@ -2,6 +2,7 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Set/api.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Query = Webserver.Parse(),
+LocalityId = parseInt(Query.LocalityId, 10);
 ValidRequest = User.CheckAccess(Authorized, "GET");
 
 if (ValidRequest) {
@@ -9,7 +10,7 @@ if (ValidRequest) {
 		Db.SetCmd("GetLocalityInfo");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("LocalityId", adVarChar, adParamInput, 10, Query.LocalityId));
+				Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, LocalityId));
 				Append(CreateParameter("LocalityInfo", adVarChar, adParamOutput, 100, ""));
 			}
 			Execute(adExecuteNoRecords);
