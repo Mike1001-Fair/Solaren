@@ -80,8 +80,9 @@ var Webserver = {
 	},
 
 	Parse: function() {
-		var collection = this.Collection();
-		return this.Filter(Application("AppName")) ? this.Map(collection) : {};
+		var collection = this.Collection(),
+		filter = this.Filter(Application("AppName"));
+		return filter ? this.Map(collection) : {};
 	},
 
 	GetRandInt: function(intMin, intMax) {
