@@ -7,7 +7,7 @@ try {
 	Db.SetCmd("RunMonthClosing");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("UserId", adVarChar, adParamInput, 10, User.Id));
+			Append(CreateParameter("UserId", adInteger, adParamInput, 10, User.Id));
 			Append(CreateParameter("OperDate", adVarChar, adParamOutput, 10, ""));
 		}
 		Execute(adExecuteNoRecords);
