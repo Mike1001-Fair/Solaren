@@ -18,8 +18,8 @@
 }
 
 .SbmBtn:hover:enabled {
-	background-color: #4682B4;
-	color: #FFFFFF;
+	/*background-color: #4682B4;
+	color: #FFFFFF;*/
 }
 
 .SbmBtn:disabled {

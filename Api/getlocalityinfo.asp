@@ -1,16 +1,17 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/api.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Query = Webserver.Parse();
-ValidRequest = User.CheckAccess(Authorized, "GET");
+Query = Webserver.Parse(),
+LocalityId = parseInt(Query.LocalityId, 10); 
+ValidRequest = User.CheckAccess(Authorized, "GET") && !isNaN(LocalityId);
 
 if (ValidRequest) {
 	try {
 		Db.SetCmd("GetLocalityInfo");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, Query.LocalityId));
-				Append(CreateParameter("LocalityInfo", adVarChar, adParamOutput, 100, ""));
+				Append(CreateParameter("LocalityId", adInteger, adParamInput, 10, LocalityId));
+				Append(CreateParameter("LocalityInfo", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);
 		}

@@ -12,7 +12,6 @@ var Menu = {
 		var page = this.Map(Session("RoleId")),
 		msg = Session('MsgText');
 
-		//Response.Write(page);
 		if (BodyTag) {
 			var Output = ['\n<BODY CLASS="MainBody" ID="MainBody">'];
 			if (msg) {

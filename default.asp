@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/default.set" -->
 <% Resource.Load(User.ResourceFile());
-var titlePage =  Dictionary.Item("DefaultTitle"),
+var titlePage = Dictionary.Item("DefaultTitle"),
 phUserName = Dictionary.Item("UserName"),
 phPswd = Dictionary.Item("Password"),
 titleUser = Dictionary.Item("UserTitle"),
