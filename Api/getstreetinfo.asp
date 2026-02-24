@@ -1,15 +1,16 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/api.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
-Query = Webserver.Parse();
-ValidRequest = User.HasAccess(Authorized, "GET");
+Query = Webserver.Parse(),
+StreetId = parseInt(Query.StreetId, 10);
+ValidRequest = User.HasAccess(Authorized, "GET") && !isNaN(StreetId);
 
 if (ValidRequest) {
 	try {
 		Db.SetCmd("GetStreetInfo");
 		with (Cmd) {
 			with (Parameters) {
-				Append(CreateParameter("StreetId", adInteger, adParamInput, 10, Query.StreetId));
+				Append(CreateParameter("StreetId", adInteger, adParamInput, 10, StreetId));
 				Append(CreateParameter("StreetInfo", adVarChar, adParamOutput, 8000, ""));
 			}
 			Execute(adExecuteNoRecords);

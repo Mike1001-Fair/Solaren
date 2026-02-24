@@ -2,7 +2,7 @@
 <!-- #INCLUDE VIRTUAL="Solaren/Set/api.set" -->
 <% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
 Query = Webserver.Parse(),
-LocalityId = parseInt(Query.LocalityId, 10); 
+LocalityId = parseInt(Query.LocalityId, 10);
 ValidRequest = User.CheckAccess(Authorized, "GET") && !isNaN(LocalityId);
 
 if (ValidRequest) {
