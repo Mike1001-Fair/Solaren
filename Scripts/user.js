@@ -31,10 +31,11 @@ const User = {
     },
 
 	shuffle(arr) {
+		const randomValues = new Uint32Array(arr.length);
+		window.crypto.getRandomValues(randomValues);
+
 		for (let i = arr.length - 1; i > 0; i--) {
-			const r = new Uint32Array(1);
-			window.crypto.getRandomValues(r);
-			const j = r[0] % (i + 1);
+			const j = randomValues[i] % (i + 1);
 			[arr[i], arr[j]] = [arr[j], arr[i]];
 		}
 		return arr;
