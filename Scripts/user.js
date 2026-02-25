@@ -12,8 +12,8 @@ const User = {
             "abcdefghijklmnopqrstuvwxyz",
             "0123456789",
             "!@#$%^&*"
-        ];
-		const allChars = sets.join(""),
+        ],
+		allChars = sets.join(""),
 		pswd = [],
 		randomValues = new Uint32Array(this.PswdLen);
 		window.crypto.getRandomValues(randomValues);
