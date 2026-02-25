@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "*.inc": "javascript"
+        "*.inc": "javascript",
+		"*.asa": "javascript"
     }
 }
