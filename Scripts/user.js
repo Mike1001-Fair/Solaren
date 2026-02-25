@@ -12,27 +12,25 @@ const User = {
             "abcdefghijklmnopqrstuvwxyz",
             "0123456789",
             "!@#$%^&*"
-        ],
-		allChars = sets.join("");
-		let pswd = [];
+        ];
+		const allChars = sets.join("");
+		const pswd = [];
 
-		// 1. По одному обязательному символу из каждого набора
-		sets.forEach(s => pswd.push(this.pick(s)));
+		// Получаем необходимое количество случайных значений за раз
+		const randomValues = new Uint32Array(this.PswdLen);
+		window.crypto.getRandomValues(randomValues);
 
-		// 2. Остальное — любыми символами
-		while (pswd.length < this.PswdLen) {
-			pswd.push(this.pick(allChars));
+		// По одному обязательному символу из каждого набора
+		sets.forEach((set, i) => pswd.push(set[randomValues[i] % set.length]));
+
+		// Остальное — любыми символами
+		for (let i = pswd.length; i < this.PswdLen; i++) {
+			pswd.push(allChars[randomValues[i] % allChars.length]);
 		}
 
-		// 3. Перемешиваем
+		// Перемешиваем
 		return this.shuffle(pswd).join("");
     },
-
-	pick(str) {
-		const r = new Uint32Array(1);
-		window.crypto.getRandomValues(r);
-		return str[r[0] % str.length];
-	},
 
 	shuffle(arr) {
 		for (let i = arr.length - 1; i > 0; i--) {
