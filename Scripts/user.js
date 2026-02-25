@@ -13,11 +13,9 @@ const User = {
             "0123456789",
             "!@#$%^&*"
         ];
-		const allChars = sets.join("");
-		const pswd = [];
-
-		// Получаем необходимое количество случайных значений за раз
-		const randomValues = new Uint32Array(this.PswdLen);
+		const allChars = sets.join(""),
+		pswd = [],
+		randomValues = new Uint32Array(this.PswdLen);
 		window.crypto.getRandomValues(randomValues);
 
 		// По одному обязательному символу из каждого набора
