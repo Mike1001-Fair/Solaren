@@ -76,7 +76,7 @@ var User = {
 	GetPswd: function() {
 		var maxAttempts = 9,
 		charCodeMin = 33,
-		charCodeMax = 126;
+		charCodeMax = 126,
 		valid = false;
 		for (var i = 0; i < maxAttempts && !valid; i++) {
 			var Chars = new Array(this.PswdLen);
