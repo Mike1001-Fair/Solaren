@@ -1,6 +1,6 @@
 ﻿<% //@ LANGUAGE = "JScript"
 var Html = {
-	Version: "v=2.34",
+	Version: "v=2.35",
 
 	SetHead: function(Title, UseScripts) {
 		this.Title = Title || "Title";
