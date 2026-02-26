@@ -27,4 +27,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Показники з такою або<br>бiльш новою датою вже є")
 }%>
-

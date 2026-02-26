@@ -22,4 +22,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Документ з таким номером вже є");
 }%>
-

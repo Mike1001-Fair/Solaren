@@ -51,4 +51,3 @@ Output = Table.Render(rs);
 rs.Close();
 Db.Close();
 Response.Write(Output)%>
-

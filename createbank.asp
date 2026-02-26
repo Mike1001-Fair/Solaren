@@ -22,4 +22,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Банк з таким кодом МФО вже є");
 }%>
-

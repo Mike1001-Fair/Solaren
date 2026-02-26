@@ -26,5 +26,3 @@ Html.WriteScript()%>
 	<A HREF="mailto:nickchernov@gmail.com" TITLE="<%=Dictionary.Item("FeedbackSheet")%>"><%=Dictionary.Item("Author")%></A>
 </FOOTER>
 </BODY></HTML>
-
-

@@ -26,4 +26,3 @@ try {
 	rs.Close();
 	Db.Close();
 }%>
-

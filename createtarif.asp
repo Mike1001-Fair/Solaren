@@ -25,4 +25,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Тариф вже iснує");
 }%>
-

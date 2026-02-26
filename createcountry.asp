@@ -23,4 +23,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Країна з таким кодом " + IsoCode + " вже є");
 }%>
-

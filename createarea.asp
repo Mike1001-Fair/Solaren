@@ -22,5 +22,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Район з таким номером вже є");
 }%>
-
-

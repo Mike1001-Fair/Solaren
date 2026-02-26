@@ -17,4 +17,3 @@ Html.SetHead(AccessDenied)%>
 		</A>
 	</FIELDSET>
 </DIV></BODY></HTML>
-
