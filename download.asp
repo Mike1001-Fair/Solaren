@@ -16,5 +16,3 @@ Html.SetPage("Файл")%>
 		</FIGURE></A>
 	</FIELDSET>
 </DIV></BODY></HTML>
-
-

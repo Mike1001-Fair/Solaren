@@ -19,4 +19,3 @@ try {
 	Db.Close();
 	Message.Write(1, "");
 }%>
-

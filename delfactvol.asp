@@ -1,7 +1,7 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
 <% var Authorized = Session("RoleId") == 1;
-if (!Authorized) Message.Write(2, "Помилка авторизації");
+if (!Authorized) Message.Write(2, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
 
 with (Request) {
 	var FactVolId = QueryString("FactVolId");
@@ -20,4 +20,3 @@ try {
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 }%>
-

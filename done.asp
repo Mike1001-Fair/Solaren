@@ -17,5 +17,3 @@ Html.SetPage(Dictionary.Item("Message"))%>
 		</FIGURE></A>
 	</FIELDSET>
 </DIV></BODY></HTML>
-
-
