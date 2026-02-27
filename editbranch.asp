@@ -66,5 +66,3 @@ try {
 <% Html.WriteEditButton(1, Branch.Deleted);
 Db.Close() %>
 </FORM></BODY></HTML>
-
-

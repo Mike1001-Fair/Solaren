@@ -48,5 +48,3 @@ try {
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128190;Зберегти</BUTTON></FORM></BODY></HTML>
-
-

@@ -57,6 +57,3 @@ Html.SetPage(Title)%>
 </TABLE>
 <% if (!ViewOnly) Html.WriteEditButton(1) %>
 </FORM></BODY></HTML>
-
-
-

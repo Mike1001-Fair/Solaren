@@ -18,6 +18,3 @@ if (User.ValidateRole(User.RoleId)) {
 		</FIGURE></A>
 	</FIELDSET>
 </DIV></BODY></HTML>
-
-
-

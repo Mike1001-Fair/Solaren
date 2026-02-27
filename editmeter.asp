@@ -56,6 +56,3 @@ try {
 </TABLE>
 <% Html.WriteEditButton(1, Meter.Deleted)%>
 </FORM></BODY></HTML>
-
-
-

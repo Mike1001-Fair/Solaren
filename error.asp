@@ -24,6 +24,3 @@ Html.SetHead(Dictionary.Item("Message"), 0)%>
 		</FIGURE>
 	</FIELDSET>
 </DIV></BODY></HTML>
-
-
-

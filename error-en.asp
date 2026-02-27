@@ -17,4 +17,3 @@
 		</FIGURE>
 	</FIELDSET>
 </DIV></BODY></HTML>
-

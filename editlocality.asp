@@ -35,5 +35,3 @@ try {
 </TABLE>
 <% Html.WriteEditButton(1, Record.Deleted)%>
 </FORM></BODY></HTML>
-
-
