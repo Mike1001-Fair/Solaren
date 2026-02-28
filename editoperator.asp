@@ -1,14 +1,14 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/edit.set" -->
 <% var Authorized = User.RoleId == 1,
-OperatorId = Request.QueryString("OperatorId");
+Query = Webserver.Parse();
 User.CheckAccess(Authorized, "GET");
 
 try {
 	Db.SetCmd("GetOperator");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
+			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, Query.OperatorId));
 		}
 	}
 	var rs = Db.Execute("GetOperator");
@@ -23,7 +23,7 @@ try {
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOperator" ACTION="updateoperator.asp" METHOD="POST" AUTOCOMPLETE="off">
-<INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=OperatorId%>">
+<INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=Query.OperatorId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 
 <H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=Html.Title%></H3>
