@@ -34,4 +34,3 @@ try {
 	SessionManager.SetDate(OperDate);
 	Message.Write(1, "");
 }%>
-
