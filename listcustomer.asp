@@ -35,5 +35,3 @@ for (var i=0; !rs.EOF; i++) {
 	rs.MoveNext();
 } rs.Close(); Db.Close();
 Response.Write('<TR><TH ALIGN="LEFT" COLSPAN="3">Всього: ' + i + '</TH></TR>\n</TABLE></BODY></HTML>')%>
-
-

@@ -16,6 +16,3 @@ Html.SetPage("Обсяги")%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
-
-
-

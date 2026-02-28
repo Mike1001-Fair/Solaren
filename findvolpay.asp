@@ -11,5 +11,3 @@ if (User.CheckAccess(Authorized, "GET")) {
 <TR><TD><%Month.WritePeriod()%></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-

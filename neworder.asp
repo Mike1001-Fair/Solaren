@@ -29,6 +29,3 @@ if (User.CheckAccess(Authorized, "GET")) {
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
 </FORM></BODY></HTML>
-
-
-

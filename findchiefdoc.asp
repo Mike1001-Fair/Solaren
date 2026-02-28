@@ -13,7 +13,5 @@ if (User.CheckAccess(Authorized, "GET")) {
 	<INPUT TYPE="search" NAME="DocName" SIZE="20" maxLength="10" REQUIRED AUTOFOCUS>
 	</FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
+</FORM></BODY></HTML>

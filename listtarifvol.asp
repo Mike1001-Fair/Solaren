@@ -58,5 +58,3 @@ var footer = [
 ];
 Output.push(footer.join(""));
 Response.Write(Output.join("\n"))%>
-
-

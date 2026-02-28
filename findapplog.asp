@@ -31,5 +31,3 @@ if (User.CheckAccess(Authorized, "GET")) {
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
-
-

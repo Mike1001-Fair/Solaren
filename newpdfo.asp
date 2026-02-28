@@ -15,6 +15,5 @@ if (User.CheckAccess(Authorized, "GET")) {
 	<INPUT TYPE="Number" NAME="PdfoTax" STEP="0.1" MIN="0" MAX="99" PLACEHOLDER="%" REQUIRED></LABEL>
 	</FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON></FORM></BODY></HTML>
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
+</FORM></BODY></HTML>

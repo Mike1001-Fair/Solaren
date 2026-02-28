@@ -31,5 +31,3 @@ try {
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
 </FORM></BODY></HTML>
-
-

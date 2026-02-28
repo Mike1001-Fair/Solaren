@@ -36,5 +36,3 @@ for (var i=0; !rs.EOF; i++) {
 } rs.Close();Db.Close();
 Output += Html.GetFooterRow(2, i);
 Response.Write(Output)%>
-
-

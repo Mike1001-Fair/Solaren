@@ -17,5 +17,3 @@ Html.SetPage("Звіт по продажам")%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
-
-

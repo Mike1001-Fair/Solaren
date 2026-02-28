@@ -26,7 +26,5 @@ if (User.CheckAccess(Authorized, "GET")) {
 
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn">Створити</BUTTON></FORM></BODY></HTML>
-
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn">Створити</BUTTON>
+</FORM></BODY></HTML>

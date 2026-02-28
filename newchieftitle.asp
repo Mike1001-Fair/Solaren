@@ -20,6 +20,5 @@ Html.SetPage("Нова посада")%>
 	<TD><INPUT TYPE="Number" NAME="RankId" VALUE="1" MIN="1" MAX="4" TITLE="1-найвища посада" REQUIRED></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON></FORM></BODY></HTML>
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
+</FORM></BODY></HTML>

@@ -20,8 +20,5 @@ if (User.CheckAccess(Authorized, "GET")) {
 	<TD><INPUT TYPE="Number" NAME="VolCost" STEP="0.01" MIN="0" MAX="99999999" PLACEHOLDER="&#8372;" REQUIRED></TD></TR>
 	</TABLE></FIELDSET>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON></FORM></BODY></HTML>
-
-
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>Створити</BUTTON>
+</FORM></BODY></HTML>

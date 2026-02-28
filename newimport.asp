@@ -35,6 +35,5 @@ if (User.CheckAccess(Authorized, "GET")) {
 </TABLE>
 
 <BUTTON TYPE="button" CLASS="SbmBtn" NAME="TestBtn" ID="TestBtn">&#128736;Тест</BUTTON>
-<BUTTON TYPE="button" CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#11015;Завантажити</BUTTON></FORM></BODY></HTML>
-
-
+<BUTTON TYPE="button" CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#11015;Завантажити</BUTTON>
+</FORM></BODY></HTML>

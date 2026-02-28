@@ -54,6 +54,5 @@ function SetOperatorName() {
 	</SELECT></TD></TR>
 	</TABLE></FIELDSET>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SetOperatorName()">&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SetOperatorName()">&#128270;Пошук</BUTTON>
+</FORM></BODY></HTML>

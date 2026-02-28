@@ -35,6 +35,3 @@ Html.SetPage("Службовий лист")%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
-
-
-

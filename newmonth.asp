@@ -21,5 +21,3 @@ Html.SetPage("Закриття мicяця")%>
 </DIV>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Виконати</BUTTON>
 </FORM></BODY></HTML>
-
-

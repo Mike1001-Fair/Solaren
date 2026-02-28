@@ -50,5 +50,3 @@ function ChkForm() {
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="return SbmForm()" DISABLED>Створити</BUTTON></FORM></BODY></HTML>
-
-

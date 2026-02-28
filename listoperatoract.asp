@@ -54,5 +54,3 @@ Html.Write("TH","RIGHT") + totRecVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totRetVol.toDelimited(0) +
 Html.Write("TH","RIGHT") + totSaldo.toDelimited(0) + '</TH></TR>\n</TABLE></BODY></HTML>';
 Response.Write(Output)%>
-
-

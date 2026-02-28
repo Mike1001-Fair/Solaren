@@ -18,5 +18,3 @@ Html.SetPage("Завантажити файл")%>
 </DIV>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#x1F4E4;Надіслати</BUTTON>
 </FORM></BODY></HTML>
-
-

@@ -17,6 +17,3 @@ Html.SetPage("Кiлькiсть договорiв")%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
-
-
-

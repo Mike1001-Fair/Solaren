@@ -23,6 +23,3 @@ Html.SetPage("Друк акту")%>
 </TABLE>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
 </FORM></BODY></HTML>
-
-
-

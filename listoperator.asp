@@ -38,5 +38,3 @@ rs.Close();
 Db.Close();
 Output.push(Html.GetFooterRow(3, i));
 Response.Write(Output.join("\n"))%>
-
-

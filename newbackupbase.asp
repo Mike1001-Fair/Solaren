@@ -18,6 +18,3 @@ try {
 Db.Close() %>
 <BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn">&#9989;Створити</BUTTON>
 </FORM></BODY></HTML>
-
-
-

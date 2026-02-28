@@ -71,5 +71,3 @@ tr = Tag.Write("TR", -1, th.join(""));
 Output.push(tr);
 Output.push('</TABLE></BODY></HTML>');
 Response.Write(Output.join("\n"))%>
-
-

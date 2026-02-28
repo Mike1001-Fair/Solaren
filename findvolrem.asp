@@ -9,7 +9,5 @@ Html.SetPage("Вартicть по ЦОС")%>
 <TABLE CLASS="MarkupTable">
 	<TR><TD><% Month.WritePeriod() %></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON>
+</FORM></BODY></HTML>

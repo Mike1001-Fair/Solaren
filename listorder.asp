@@ -52,5 +52,3 @@ for (var i=0; !rs.EOF; i++) {
 Db.Close();
 Output.push(Html.GetFooterRow(4, i));
 Response.Write(Output.join("\n"))%>
-
-

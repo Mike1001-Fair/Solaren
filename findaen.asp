@@ -32,7 +32,5 @@ function SbmForm() {
 	<INPUT TYPE="TEXT" NAME="AenName" PLACEHOLDER="Назва" SIZE="20" maxLength="10" REQUIRED AUTOFOCUS>
 	</FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SbmForm()" DISABLED>&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ONCLICK="SbmForm()" DISABLED>&#128270;Пошук</BUTTON>
+</FORM></BODY></HTML>

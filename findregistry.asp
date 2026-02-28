@@ -34,6 +34,5 @@ try {
 	<TD><%Html.WriteSelect(rs, "Chief", 0, -1)%></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn">&#128270;Пошук</BUTTON>
+</FORM></BODY></HTML>

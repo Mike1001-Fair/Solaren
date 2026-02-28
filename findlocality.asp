@@ -17,7 +17,5 @@ if (User.CheckAccess(Authorized, "GET")) {
 	</FIELDSET>	
 	</TD></TR>
 </TABLE>
-<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON></FORM></BODY></HTML>
-
-
-
+<BUTTON CLASS="SbmBtn" NAME="SbmBtn" ID="SbmBtn" DISABLED>&#128270;Пошук</BUTTON>
+</FORM></BODY></HTML>
