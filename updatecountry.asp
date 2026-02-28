@@ -24,4 +24,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Така країна вже є");
 }%>
-

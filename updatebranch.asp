@@ -28,4 +28,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "ЦОС з таким номером вже є");
 }%>
-

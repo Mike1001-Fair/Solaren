@@ -1,30 +1,26 @@
 <%@ LANGUAGE = "JScript"%>
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var ChiefTitleId = Form("ChiefTitleId"),
-	Title1   = Form("Title1"),
-	Title2   = Form("Title2"),
-	Title3   = Form("Title3"),
-	RankId   = Form("RankId");
-}
 
 try {
 	Db.SetCmd("UpdateChiefTitle");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("ChiefTitleId", adInteger, adParamInput, 10, ChiefTitleId));
-			Append(CreateParameter("Title1", adVarChar, adParamInput, 30, Title1));
-			Append(CreateParameter("Title2", adVarChar, adParamInput, 30, Title2));
-			Append(CreateParameter("Title3", adVarChar, adParamInput, 30, Title3));
-			Append(CreateParameter("RankId", adTinyInt, adParamInput, 1, RankId));
-		} Execute(adExecuteNoRecords);
-	} Db.Close();
-	Message.Write(1, "");
+			Append(CreateParameter("ChiefTitleId", adInteger, adParamInput, 10, Form.ChiefTitleId));
+			Append(CreateParameter("Title1", adVarChar, adParamInput, 30, Form.Title1));
+			Append(CreateParameter("Title2", adVarChar, adParamInput, 30, Form.Title2));
+			Append(CreateParameter("Title3", adVarChar, adParamInput, 30, Form.Title3));
+			Append(CreateParameter("RankId", adTinyInt, adParamInput, 1, Form.RankId));
+			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
+		} 
+		Execute(adExecuteNoRecords);
+		var Done = Parameters.Item("Done").Value;
+	}
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
+} finally {
+	Db.Close();
+	Done ? Message.Write(1, "") : Message.Write(0, "Така посада вже є");
 }%>
-
-

@@ -14,4 +14,3 @@ Html.SetHead(Legend, 0)%>
 		</FIGURE>
 	</FIELDSET>
 </DIV></BODY></HTML>
-

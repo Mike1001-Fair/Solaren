@@ -29,4 +29,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Споживач з таким кодом вже є")
 }%>
-

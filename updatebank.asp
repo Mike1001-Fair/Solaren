@@ -23,4 +23,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Такий банк вже є");
 }%>
-

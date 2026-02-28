@@ -40,4 +40,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Договiр з таким<br>особовим рахунком вже є")
 }%>
-

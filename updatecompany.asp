@@ -49,4 +49,3 @@ try {
 	Db.Close();
 	Done ? Message.Write(1, "") : Message.Write(0, "Компанія з таким кодом вже є")
 }%>
-
