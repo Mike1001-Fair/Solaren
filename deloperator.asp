@@ -1,19 +1,15 @@
 <%@ LANGUAGE = "JScript"%> 
 <!-- #INCLUDE VIRTUAL="Solaren/Set/upsert.set" -->
-<% var Authorized = User.RoleId >= 0 && User.RoleId < 2;
+<% var Authorized = User.RoleId >= 0 && User.RoleId < 2,
+Form = Webserver.Parse();
 User.CheckAccess(Authorized, "POST");
-
-with (Request) {
-	var OperatorId = Form("OperatorId"),
-	Deleted        = Form("Deleted");
-}
 
 try {
 	Db.SetCmd("DelOperator");
 	with (Cmd) {
 		with (Parameters) {
-			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
-			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Deleted));
+			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, Form.OperatorId));
+			Append(CreateParameter("Deleted", adBoolean, adParamInput, 1, Form.Deleted));
 			Append(CreateParameter("Done", adBoolean, adParamOutput, 1, 0));
 		} Execute(adExecuteNoRecords);
 		var Done = Parameters.Item("Done").Value;

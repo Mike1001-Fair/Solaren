@@ -11,37 +11,32 @@ try {
 			Append(CreateParameter("OperatorId", adInteger, adParamInput, 10, OperatorId));
 		}
 	}
-	var rsOperator = Db.Execute("GetOperator");
+	var rs = Db.Execute("GetOperator");
 } catch (ex) {
 	Message.Write(3, Message.Error(ex))
 } finally {
-	with (rsOperator) {
-		var SortCode = Fields("SortCode").Value,
-		EdrpoCode    = Fields("EdrpoCode").Value,
-		OperatorName = Fields("OperatorName").Value,
-		Deleted      = Fields("Deleted").Value,
-		Title        = Deleted ? "Перегляд анкети" : "Редагування анкети";
-		Close();
-	}
+	var Record = Webserver.Map(rs.Fields),
+	Title = Record.Deleted ? "Перегляд анкети" : "Редагування анкети";
+	rs.Close();
 	Db.Close();
 	Html.SetPage(Title)
 }%>
 <BODY CLASS="MainBody">
 <FORM CLASS="ValidForm" NAME="EditOperator" ACTION="updateoperator.asp" METHOD="POST" AUTOCOMPLETE="off">
 <INPUT TYPE="HIDDEN" NAME="OperatorId" VALUE="<%=OperatorId%>">
-<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Deleted%>">
+<INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Record.Deleted%>">
 
 <H3 CLASS="HeadText"><IMG SRC="Images/OperatorIcon.svg"><%=Html.Title%></H3>
 <TABLE CLASS="MarkupTable">
 	<TR><TD ALIGN="CENTER">
 	<FIELDSET NAME="OperatorSet"><LEGEND>Параметри</LEGEND>
 	<TABLE><TR><TD ALIGN="RIGHT">№</TD>
-	<TD><INPUT TYPE="Number" NAME="SortCode" VALUE="<%=SortCode%>" MIN="1" MAX="99" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="Number" NAME="SortCode" VALUE="<%=Record.SortCode%>" MIN="1" MAX="99" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Код</TD>
-	<TD><INPUT TYPE="TEXT" NAME="EdrpoCode" PLACEHOLDER="ЄДРПОУ" VALUE="<%=EdrpoCode%>" SIZE="9" MAXLENGTH="8" PATTERN="\d{8}" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="EdrpoCode" PLACEHOLDER="ЄДРПОУ" VALUE="<%=Record.EdrpoCode%>" SIZE="9" MAXLENGTH="8" PATTERN="\d{8}" REQUIRED></TD></TR>
 	<TR><TD ALIGN="RIGHT">Назва</TD>
-	<TD><INPUT TYPE="TEXT" NAME="OperatorName" PLACEHOLDER="Коротка без лапок" VALUE="<%=OperatorName%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
+	<TD><INPUT TYPE="TEXT" NAME="OperatorName" PLACEHOLDER="Коротка без лапок" VALUE="<%=Record.OperatorName%>" SIZE="30" MAXLENGTH="30" REQUIRED></TD></TR>
 	</TABLE></FIELDSET></TD></TR>
 </TABLE>
-<% Html.WriteEditButton(1)%>
+<% Html.WriteEditButton(1, Record.Deleted)%>
 </FORM></BODY></HTML>
