@@ -165,25 +165,6 @@
 	margin     : 6px auto;
 }
 
-.BtnLink {
-	display        : inline-block;
-	outline        : none;
-	font-family    : inherit;
-	color          : #0000FF;
-	text-decoration: none;
-	border         : 1px solid #0000FF;
-	border-radius  : 4px;
-	padding        : 4px;
-	box-shadow     : 0px 2px 4px 0px rgba(0,0,0,0.3);
-}
-
-.BtnLink:hover {
-	border          : 1px solid #000000;
-	background-color: #4682B4;
-	color           : #FFFFFF;
-	box-shadow     : 0px 2px 4px 0px rgba(0,0,0,0.3);
-}
-
 
 /* стиль для отображения текста */
 .text {
@@ -283,9 +264,6 @@
 .FSInline {
 	display: inline;
 }
-
-
-
 
 /* стиль для отображения заголовков */
 .H3menu {
