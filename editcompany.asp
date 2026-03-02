@@ -33,7 +33,7 @@ try {
 <H3 CLASS="HeadText" ID="H3Id"><IMG SRC="images/office.svg"><%=Html.Title%></H3>
 <INPUT TYPE="HIDDEN" NAME="CompanyId" VALUE="<%=Query.CompanyId%>">
 <INPUT TYPE="HIDDEN" NAME="LocalityId" ID="LocalityId" VALUE="<%=Company.LocalityId%>">
-<INPUT TYPE="hidden" NAME="StreetId" ID="StreetId" VALUE="<%=Company.StreetId%>">
+<INPUT TYPE="HIDDEN" NAME="StreetId" ID="StreetId" VALUE="<%=Company.StreetId%>">
 <INPUT TYPE="HIDDEN" NAME="Deleted" VALUE="<%=Company.Deleted%>">
 
 <TABLE CLASS="MarkupTable">

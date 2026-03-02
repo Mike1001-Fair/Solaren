@@ -33,7 +33,7 @@
 	<Item id="Company">Компанія</Item>
 	<Item id="Chiefs">Керiвники</Item>
 	<Item id="Documents">Документи</Item>
-	<Item id="DefaultTitle">Сонячна енергiя</Item>
+	<Item id="DefaultTitle">Solaren</Item>
 	<Item id="Authenticate">Автентифікація</Item>
 	<Item id="AuthenticationError">Помилка автентифiкацiї</Item>
 	<Item id="AuthorizationError">Помилка авторизації</Item>

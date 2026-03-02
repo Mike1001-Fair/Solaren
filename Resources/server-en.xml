@@ -34,7 +34,7 @@
 	<Item id="Company">Company</Item>
 	<Item id="Chiefs">Chiefs</Item>
 	<Item id="Documents">Documents</Item>
-	<Item id="DefaultTitle">Solar energy</Item>
+	<Item id="DefaultTitle">Solaren</Item>
 	<Item id="Authenticate">Authentication</Item>
 	<Item id="AuthenticationError">Authentication error</Item>
 	<Item id="AuthorizationError">Authorization error</Item>
