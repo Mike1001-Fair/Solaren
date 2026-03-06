@@ -2,12 +2,11 @@
 <SCRIPT LANGUAGE="JScript" RUNAT="Server">
 var Config = {
 	StopApp: 0,
-	Security: "SSPI",
 	Params: [
-		"Application Name=solaren",
-		"Provider=msoledbsql",
+		"Provider=msoledbsql",		
 		"Server=localhost",
 		"Database=solaren",
+		"Application Name=solaren"
 	],
 
 	GetParameter: function(index) {
@@ -15,8 +14,8 @@ var Config = {
 		return parameter[1]
 	},
 
-	ConnectString: function() {
-		if (this.Security == "SSPI") {
+	ConnectString: function(securityMode) {
+		if (securityMode == "SSPI") {
 			this.Params.push("Integrated Security=SSPI");
 		} else {
 			this.Params.push("UID=YourUsername");
@@ -27,8 +26,8 @@ var Config = {
 }
 
 function Application_OnStart() {
-	Application("AppName") = Config.GetParameter(0);
-	Application("ConnectString") = Config.ConnectString();
+	Application("AppName") = Config.GetParameter(3);
+	Application("ConnectString") = Config.ConnectString("SSPI");
 	Application("SesCount") = 0;
 }  
 
