@@ -47,7 +47,7 @@ var Doc = {
 				'<P>Прошу здiйснити оплату по договорам купiвлi-продажу електричної енергiї за "зеленим" тарифом приватним домогосподарством, згiдно актiв приймання-передачi електричної енергiї в ' + Period + '</P>',
 				'<TABLE CLASS="PrnTable" WIDTH="100%">',
 				Html.GetHeadRow(Header),
-				this.GetRows(CustomerCount),
+				this.GetRows(rs, CustomerCount),
 				'</TABLE>',
 				'<TABLE CLASS="NoBorderTable">',
 				'<TR><TD><B>Всього: ' + this.TotPurCost.toDelimited(2) + '</B></TD>',
@@ -60,19 +60,20 @@ var Doc = {
 		return this.Body.join(PageBreak)
 	},
 
-	GetRows: function(CustomerCount) {
+	GetRows: function(rs, CustomerCount) {
+		var f = rs.Fields;
 		for (var tr = []; tr.length < CustomerCount && !rs.EOF; rs.MoveNext()) {
-			var cardText = rs.Fields("CardId").Value.length > 0 ? ". Для поп КР " : ".",
-			customerInfo = [rs.Fields("CustomerName"), rs.Fields("ContractPAN")],
-			details = [rs.Fields("CustomerCode").Value.toDelimited(), 'Код МФО: ' + rs.Fields("MfoCode"), rs.Fields("BankAccount"), rs.Fields("BankName")],
-			noteText = ['За вироблену електроенергію в ', Period, cardText, rs.Fields("CardId")],
+			var cardText = f("CardId").Value.length > 0 ? ". Для поп КР " : ".",
+			customerInfo = [f("CustomerName").Value, f("ContractPAN").Value],
+			details = [f("CustomerCode").Value.toDelimited(), 'Код МФО: ' + f("MfoCode").Value, f("BankAccount").Value, f("BankName").Value],
+			noteText = ['За вироблену електроенергію в ', Period, cardText, f("CardId").Value],
 			row = ['<TR>', Tag.Write("TD", -1,  customerInfo.join('<BR>')),
 				Tag.Write("TD", -1, 'ІПН: ' + details.join('<BR>')),
 				Tag.Write("TD", -1, noteText.join('')),
-				Tag.Write("TD", 2, rs.Fields("PurCost").Value.toDelimited(2)), '</TR>'
+				Tag.Write("TD", 2, f("PurCost").Value.toDelimited(2)), '</TR>'
 			];
 			tr.push(row.join(""));
-			this.TotPurCost += rs.Fields("PurCost").Value;			
+			this.TotPurCost += f("PurCost").Value;			
 		}
 		return tr.join("\n")
 	}
