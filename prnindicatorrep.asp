@@ -46,8 +46,8 @@ var Doc = {
 		Divider = '<DIV CLASS="BlockDivider"></DIV>\n',
 		Output = Table.Render(rs),
 		copies = DoubleReport ? 2 : 1;
-		while (Body.length < copies) {
-			Body.push(Output)
+		for (var i = 0; i < copies; i++) {
+ 			Body.push(Output);
 		}
 		return Body.join(Divider)
 	}
@@ -57,13 +57,14 @@ Table = {
 	totSaldo: 0,
 
 	GetRows: function(rs) {
+		var f = rs.Fields;
 		for (var tr=[]; !rs.EOF; rs.MoveNext()) {
-			var k = rs.Fields("kTransForm"),
-			c = rs.Fields("Capacity"),
-			PrevDate = Month.GetYMD(rs.Fields("PrevDate")),
-			ReportDate = Month.GetYMD(rs.Fields("ReportDate")),
-			recsaldo = rs.Fields("RecVal") - rs.Fields("PrevRecVal"),
-			retsaldo = rs.Fields("RetVal") - rs.Fields("PrevRetVal"),
+			var k = f("kTransForm").Value,
+			c = f("Capacity").Value,
+			PrevDate = Month.GetYMD(f("PrevDate").Value),
+			ReportDate = Month.GetYMD(f("ReportDate").Value),
+			recsaldo = f("RecVal").Value - f("PrevRecVal").Value,
+			retsaldo = f("RetVal").Value - f("PrevRetVal").Value,
 			periodSaldo;
 
 			if (recsaldo < 0) recsaldo += Math.pow(10, c);
@@ -73,18 +74,18 @@ Table = {
 			this.totSaldo += periodSaldo;
 
             var td = [
-				Tag.Write("TD", 1, rs.Fields("MeterCode")) +
+				Tag.Write("TD", 1, f("MeterCode").Value) +
 				Tag.Write("TD", 1, "Прийом А+") +
-				Tag.Write("TD", 2, rs.Fields("RecVal")) +
-				Tag.Write("TD", 2, rs.Fields("PrevRecVal")) +
+				Tag.Write("TD", 2, f("RecVal").Value) +
+				Tag.Write("TD", 2, f("PrevRecVal").Value) +
 				Tag.Write("TD", 2, recsaldo) +
 				Tag.Write("TD", 1, k) +
 				Tag.Write("TD", 2, recsaldo * k),
 
-				Tag.Write("TD", 1, rs.Fields("MeterCode")) +
+				Tag.Write("TD", 1, f("MeterCode").Value) +
 				Tag.Write("TD", 1, "Видача А-") +
-				Tag.Write("TD", 2, rs.Fields("RetVal")) +
-				Tag.Write("TD", 2, rs.Fields("PrevRetVal")) +
+				Tag.Write("TD", 2, f("RetVal").Value) +
+				Tag.Write("TD", 2, f("PrevRetVal").Value) +
 				Tag.Write("TD", 2, retsaldo) +
 				Tag.Write("TD", 1, k) +
 				Tag.Write("TD", 2, retsaldo * k),
