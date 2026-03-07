@@ -30,22 +30,23 @@ var Table = {
 	TotSEnd:0,
 
 	GetRows: function(rs) {
+		var f = rs.Fields;
 		for (var row = []; !rs.EOF; rs.MoveNext()) {
-			var td = [Tag.Write("TD", -1, rs.Fields("CustomerName")),
-				Tag.Write("TD", 2, rs.Fields("ContractPAN")),
-				Tag.Write("TD", 2, rs.Fields("s").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
-				Tag.Write("TD", 2, rs.Fields("ob_dt").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("ob_ct").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("s_end").Value.toDelimited(2))
+			var td = [Tag.Write("TD", -1, f("CustomerName").Value),
+				Tag.Write("TD", 2, f("ContractPAN").Value),
+				Tag.Write("TD", 2, f("s").Value.toDelimited(2)),
+				Tag.Write("TD", 2, f("PurVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, f("ob_dt").Value.toDelimited(2)),
+				Tag.Write("TD", 2, f("ob_ct").Value.toDelimited(2)),
+				Tag.Write("TD", 2, f("s_end").Value.toDelimited(2))
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
             row.push(tr);
-			this.TotS      += rs.Fields("s").Value;
-			this.TotPurVol += rs.Fields("PurVol").Value;
-			this.TotObDt   += rs.Fields("ob_dt").Value;
-			this.TotObCt   += rs.Fields("ob_ct").Value;
-			this.TotSEnd   += rs.Fields("s_end").Value;			
+			this.TotS      += f("s").Value;
+			this.TotPurVol += f("PurVol").Value;
+			this.TotObDt   += f("ob_dt").Value;
+			this.TotObCt   += f("ob_ct").Value;
+			this.TotSEnd   += f("s_end").Value;			
 		}
 		return row
 	},

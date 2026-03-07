@@ -38,20 +38,21 @@ var Doc = {
 	MaxPerPage: 2,
 
 	Build: function(rs, DoubleAct) {
-		var Divider = '\n<DIV CLASS="BlockDivider" STYLE="margin: 120px 0px 40px"></DIV>\n',
+		var f = rs.Fields,
+		Divider = '\n<DIV CLASS="BlockDivider" STYLE="margin: 120px 0px 40px"></DIV>\n',
 		PageBreak = '\n<SPAN CLASS="PageBreak"></SPAN>';
 
 		for (; !rs.EOF; rs.MoveNext()) {
-			this.ContractDate = Month.GetYMD(rs.Fields("ContractDate").Value);
-			this.ContractPAN  = rs.Fields("ContractPAN");
-			this.CustomerName = rs.Fields("CustomerName").Value.replace(/ /g,"&nbsp");
+			this.ContractDate = Month.GetYMD(f("ContractDate").Value);
+			this.ContractPAN  = f("ContractPAN").Value;
+			this.CustomerName = f("CustomerName").Value.replace(/ /g,"&nbsp");
 			this.ChiefName2   = Record.ChiefName2.replace(/ /g,"&nbsp");
-			this.Vz           = rs.Fields("Vz").Value.toDelimited(2);
-			this.FactVol	  = rs.Fields("FactVol").Value.toDelimited(0);
-			this.VolCost      = rs.Fields("VolCost").Value.toDelimited(2);
-			this.Pdfo         = rs.Fields("Pdfo").Value.toDelimited(2);
-			this.ActSum       = rs.Fields("ActSum").Value.toDelimited(2);
-			this.WordSum      = Money.toWord(rs.Fields("ActSum").Value);
+			this.Vz           = f("Vz").Value.toDelimited(2);
+			this.FactVol	  = f("FactVol").Value.toDelimited(0);
+			this.VolCost      = f("VolCost").Value.toDelimited(2);
+			this.Pdfo         = f("Pdfo").Value.toDelimited(2);
+			this.ActSum       = f("ActSum").Value.toDelimited(2);
+			this.WordSum      = Money.toWord(f("ActSum").Value);
 			this.Render(DoubleAct);
 			if (this.Body.length == this.MaxPerPage) {
 				this.Page.push(this.Body.join(Divider));
