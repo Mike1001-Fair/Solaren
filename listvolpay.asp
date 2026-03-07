@@ -29,22 +29,23 @@ var Table = {
 	TotPaySum: 0,
 
 	GetRows: function(rs) {
+		var f = rs.Fields;
 		for (var rows = []; !rs.EOF; rs.MoveNext()) {
-			var	td = [Tag.Write("TD", -1, rs.Fields("CustomerName")),
-				Tag.Write("TD", -1, rs.Fields("ContractPAN")),
-				Tag.Write("TD", -1, rs.Fields("CustomerAddress")),
-				Tag.Write("TD", -1, rs.Fields("ContractDate")),
-				Tag.Write("TD", 2, rs.Fields("ContractPower").Value.toDelimited(2)),
-				Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
-				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
-				Tag.Write("TD", 2, rs.Fields("PaySum").Value.toDelimited(2))
+			var	td = [Tag.Write("TD", -1, f("CustomerName").Value),
+				Tag.Write("TD", -1, f("ContractPAN").Value),
+				Tag.Write("TD", -1, f("CustomerAddress").Value),
+				Tag.Write("TD", -1, f("ContractDate").Value),
+				Tag.Write("TD", 2, f("ContractPower").Value.toDelimited(2)),
+				Tag.Write("TD", 2, f("RetVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, f("PurVol").Value.toDelimited(0)),
+				Tag.Write("TD", 2, f("PaySum").Value.toDelimited(2))
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
 			rows.push(tr);
-			this.TotPwr    += rs.Fields("ContractPower");
-			this.TotRetVol += rs.Fields("RetVol");
-			this.TotPurVol += rs.Fields("PurVol");
-			this.TotPaySum += rs.Fields("PaySum");
+			this.TotPwr    += f("ContractPower").Value;
+			this.TotRetVol += f("RetVol").Value;
+			this.TotPurVol += f("PurVol").Value;
+			this.TotPaySum += f("PaySum").Value;
 		}
 		return rows;
 	},
