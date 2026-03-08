@@ -24,13 +24,14 @@ try {
 
 var Table = {
 	GetRows: function(rs) {
+		var f = rs.Fields;
 		for (var rows = []; !rs.EOF; rs.MoveNext()) {
-			var url = Html.GetLink("edituser.asp?UserId=", rs.Fields("Id"), rs.Fields("UserName")),
+			var url = Html.GetLink("edituser.asp?UserId=", f("Id").Value, f("UserName").Value),
 			td = [Tag.Write("TD", -1, url),
-				Tag.Write("TD", -1, User.Role[rs.Fields("RoleId")]),
-				Tag.Write("TD", 1, rs.Fields("UserIP")),
-				Tag.Write("TD", -1, rs.Fields("LastLogin")),
-				Tag.Write("TD", -1, rs.Fields("UserAgent"))
+				Tag.Write("TD", -1, User.Role[f("RoleId").Value]),
+				Tag.Write("TD", 1, f("UserIP").Value),
+				Tag.Write("TD", -1, f("LastLogin").Value),
+				Tag.Write("TD", -1, f("UserAgent").Value)
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
 			rows.push(tr);			
