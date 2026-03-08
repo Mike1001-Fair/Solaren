@@ -24,4 +24,3 @@ if (ValidRequest) {
 	Json.data = '[{"LocalityId":0}]';
 }
 Json.write()%>
-

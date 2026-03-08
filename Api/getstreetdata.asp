@@ -24,5 +24,3 @@ if (ValidRequest) {
 	Json.data = '[{"StreetId":0}]';
 }
 Json.write()%>
-
-

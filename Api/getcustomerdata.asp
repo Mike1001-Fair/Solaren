@@ -24,4 +24,3 @@ if (ValidRequest) {
 	Json.data = '[{"CustomerId":0}]';
 }
 Json.write()%>
-

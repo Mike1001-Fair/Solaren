@@ -25,4 +25,3 @@ if (ValidRequest) {
 	Json.data = '[{"MeterId":0}]';
 }
 Json.write()%>
-

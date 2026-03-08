@@ -24,4 +24,3 @@ if (ValidRequest) {
 	Json.data = '[{"AreaId":0}]';
 }
 Json.write()%>
-
