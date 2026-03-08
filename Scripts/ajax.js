@@ -75,7 +75,7 @@ const Ajax = {
 			CustomerId.value = -1;
 			CustomerName.title = this.errLenMsg;
 		} else {
-			const url = `${this.path}getcustomerdata.asp?QueryName=${queryValue}`;
+			const url = `${this.path}getcustomerdata.asp?QueryName=${encodeURIComponent(queryValue)}`;
 			CustomerList.textContent = "";
 			CustomerName.title = "";
 			CustomerName.style.cursor = "progress";

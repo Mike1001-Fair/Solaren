@@ -37,7 +37,8 @@ var Webserver = {
 	},
 
 	Write: function(Output) {
-		with (Response) {
+		with (Response) {			
+			CodePage = 65001;
 			Charset = "utf-8";
 			ContentType = "text/html";
 			Write(Output);
