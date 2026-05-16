@@ -34,7 +34,7 @@ var Table = {
 				Tag.Write("TD", 2, rs.Fields("RetVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("PurVol").Value.toDelimited(0)),
 				Tag.Write("TD", 2, rs.Fields("NeedVol").Value.toDelimited(0))
-			];
+			],
 			tr = Tag.Write("TR", -1, td.join(""));
             row.push(tr);
 			this.TotRetVol += rs.Fields("RetVol");
