@@ -37,15 +37,15 @@ var Table = {
 			],
 			tr = Tag.Write("TR", -1, td.join(""));
             row.push(tr);
-			this.TotRetVol += rs.Fields("RetVol");
-			this.TotPurVol += rs.Fields("PurVol");
-			this.TotNeedVol += rs.Fields("NeedVol");
+			this.TotRetVol += rs.Fields("RetVol").Value;
+			this.TotPurVol += rs.Fields("PurVol").Value;
+			this.TotNeedVol += rs.Fields("NeedVol").Value;
 		}
 		return row
 	},
 
-	GetFooter: function(total) {
-		var th = ['<TH ALIGN="LEFT">Всього: ' + total, '</TH>',
+	GetFooter: function(rowCount) {
+		var th = ['<TH ALIGN="LEFT">Всього: ' + rowCount, '</TH>',
 			Tag.Write("TH", 2, this.TotRetVol.toDelimited(0)),
 			Tag.Write("TH", 2, this.TotPurVol.toDelimited(0)),
 			Tag.Write("TH", 2, this.TotNeedVol.toDelimited(0)),
