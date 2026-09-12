@@ -31,7 +31,7 @@ var User = {
 	},
 
 	ValidateRole: function(RoleId) {
-		//Db.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
+		//Webserver.Write("<BR>Authenticate: RoleId=" + RoleId + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return RoleId == this.RoleId && this.Role[RoleId] 
 	},
 
@@ -58,7 +58,7 @@ var User = {
 			Db.DelParameters();
 			Db.Close();
 		}
-		//Db.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
+		//Webserver.Write("<BR>Authorize: RoleId=" + User.RoleId + "<BR>SessionID=" + Session.SessionID + "<BR>UserGUID=" + User.GUID + "<BR>Token=" + User.Token);
 		return Done;
 	},
 
